@@ -1,38 +1,30 @@
-# Palco MIDI — Stage Synth
+# Palco MIDI · Stage Synth
 
-Projeto independente recuperado a partir dos arquivos fornecidos pelo proprietário. Este repositório **não substitui e não altera o site Palco MIDI anterior**.
+Versão **1.1.0** — estabilização e recuperação do aplicativo Palco MIDI, usando o código fornecido pelo proprietário. O antigo site do Palco MIDI permanece independente.
 
-## Site
+**Site (GitHub Pages):** <https://estevaofurt.github.io/palco-midi-stage-synth/>
 
-Quando o GitHub Pages estiver habilitado para a branch `main`, usando a pasta `/ (root)`, o endereço será:
+## Recursos implementados e testados
 
-`https://estevaofurt.github.io/palco-midi-stage-synth/`
+- Cenas, camadas dos quatro motores, volumes independentes e seleção de timbres
+- Piano acústico sintetizado, piano elétrico, órgão com drawbars e sintetizador
+- Teclado na tela, oitavas, sustain, comando de pânico e entrada MIDI Web MIDI (quando disponível)
+- Editor de timbres com presets e preferências salvas localmente
+- Interface responsiva, incluindo uma oitava de teclado em telas estreitas
 
-> Esse endereço só funciona depois que o repositório existir, os arquivos forem enviados e o GitHub Pages for ativado.
+## Instalação / desenvolvimento
 
-## Recursos recuperados
+É um site estático. Hospede a pasta na raiz de um servidor HTTPS, como o GitHub Pages (`main` / `root`). Para executar em um computador com Python instalado: `python -m http.server 8000` e abra `http://localhost:8000` no Chrome ou Edge. Abrir `index.html` por `file://` pode bloquear os módulos ES JavaScript.
 
-- Interface e estilo visual originais (`index.html`, `panel.css`)
-- Controle de cenas, teclado virtual e MIDI (`app.js`, `patches.js`)
-- Motor de áudio (`stage.js`, `voice.js`)
-- Instrumentos piano acústico/elétrico, órgão e synth
-- Editor de timbres (`panel.js`)
+**Testes de lógica:** instale Node.js 22+ e execute `npm test`.
 
-## Executar
+**Testes com navegador:** a revisão funcional foi realizada com Chromium/Playwright, incluindo inicialização, teclado na tela, os quatro motores e layout móvel. Um teclado MIDI físico ainda precisa ser testado.
 
-Hospede em HTTPS (GitHub Pages é adequado). Para testar localmente: `python -m http.server 8000`, abrindo `http://localhost:8000` no Chrome/Edge. Abrir diretamente `index.html` usando `file://` pode bloquear imports JavaScript e MIDI.
+## Informações importantes
 
-## Limitações conhecidas
+- **Biblioteca de piano ausente:** faltam os arquivos `piano/banco.json`, `piano/ataques.ogg` e gravações complementares. Por isso o motor acústico usa síntese de fallback. Não são feitas tentativas repetidas após constatar a ausência do banco.
+- Não há dependências externas de bibliotecas de áudio para os quatro motores incluídos. Para carregar bibliotecas reais e estender o projeto com SF2/SFZ será necessária implementação específica.
+- O módulo de efeitos avançados, o leitor SoundFont, o looper e o arpejador pertencem ao plano de expansão, **não** a esta versão estável.
+- Conexões MIDI exigem navegador com suporte Web MIDI, permissão do usuário e controlador compatível.
 
-- As amostras opcionais do piano, normalmente disponíveis na pasta `piano/`, **não foram recuperadas**. O motor utiliza síntese alternativa.
-- A conexão MIDI depende do navegador, permissões e hardware do usuário.
-- Os seis módulos expandidos da futura versão Stage Synth ainda **não** estão incluídos neste projeto recuperado.
-- Não houve validação final com teclado MIDI físico.
-
-## Publicação
-
-No GitHub, acesse **Settings → Pages**, selecione **Deploy from a branch**, escolha `main` e `/ (root)` e salve. Mantenha o repositório público caso o plano GitHub exija isso para Pages.
-
-## Preservação
-
-O arquivo `creditos.html` descreve a procedência e as limitações do áudio. Arquivos originais do projeto antigo não são modificados.
+Consulte [CHANGELOG.md](CHANGELOG.md) para as correções e limites verificados.

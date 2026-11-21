@@ -2,7 +2,7 @@ import {engines,scenes,loadState,saveState} from './patches.js';
 import {Stage} from './stage.js';
 import {Panel,addOption} from './panel.js';
 const byId=id=>document.getElementById(id);
-let storage;try{storage=localStorage}catch{}
+let storage;try{storage=localStorage}catch{storage=null}
 const state=loadState(storage);
 let ctx,stage,access,panel,saveTimer,previewTimer,previewToken=0;
 let frame=0,lastMeter=0;
@@ -100,7 +100,7 @@ function paintKeys(){
   for(const [key,button] of keyboardButtons)button.classList.toggle('down',held.has(key));
 }
 function paintPedal(){
-  const touch=stage?.groups.get('touch/0')?.pedal||false;
+  const touch=Boolean(stage?.groups.get('touch/0')?.pedal);
   const any=stage&&[...stage.groups.values()].some(g=>g.pedal);
   byId('pedal').setAttribute('aria-pressed',String(touch));byId('pedal').classList.toggle('on',Boolean(any));
 }
@@ -143,13 +143,16 @@ function setKeys(){
   paintKeys();
 }
 async function press(pointer,button,velocity){
-  const key=Number(button.dataset.note);const slot={key,id:null};
+  const key=Number(button.dataset.note);
+  if(!Number.isInteger(key))return;
+  lift(pointer);
+  const slot={key,id:null};
   activePointers.set(pointer,slot);
   try{
-    if(!stage||ctx.state!=='running')await startAudio();
+    if(!stage||ctx?.state!=='running')await startAudio();
     if(activePointers.get(pointer)!==slot)return;
     slot.id=stage.startNote('touch',0,key,velocity);
-  }catch(e){report(e.message)}
+  }catch(e){activePointers.delete(pointer);report(e.message)}
 }
 function lift(pointer){
   const slot=activePointers.get(pointer);if(!slot)return;
@@ -160,7 +163,9 @@ byId('oct-up').onclick=()=>{if(octave<6)octave++;setKeys()};
 const keys=byId('keys');
 keys.onpointerdown=e=>{
   const k=e.target.closest('button.key');if(!k||e.button!==0)return;
-  e.preventDefault();keys.setPointerCapture(e.pointerId);press(e.pointerId,k,94);
+  e.preventDefault();
+  try{keys.setPointerCapture(e.pointerId)}catch{}
+  press(e.pointerId,k,94);
 };
 keys.onpointermove=e=>{
   const slot=activePointers.get(e.pointerId);if(!slot)return;
@@ -182,7 +187,7 @@ function bindMIDI(){
   byId('midi').lastChild.textContent=names.length?'MIDI ligado':'Conectar MIDI';
 }
 byId('midi').onclick=async()=>{try{
-  if(!navigator.requestMIDIAccess)throw Error('MIDI indisponível neste navegador. Abra o link no Chrome.');
+  if(!navigator.requestMIDIAccess)throw Error('MIDI indisponível neste navegador. Abra a versão HTTPS no Chrome para computador.');
   const [allowed]=await Promise.all([navigator.requestMIDIAccess({sysex:false}),startAudio()]);
   access=allowed;access.onstatechange=e=>{
     if(e.port.type==='input'&&e.port.state==='disconnected'){

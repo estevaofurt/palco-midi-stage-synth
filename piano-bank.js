@@ -10,13 +10,16 @@ export class PianoBank {
     this.pending=new Set();this.failed=new Map();this.queue=[];this.active=0;this.bytes=0;
   }
   async load(){
-    if(this.atlas||this.loading)return this.loading;
+    if(this.atlas||this.unavailable)return;
+    if(this.loading)return this.loading;
     this.status('Carregando as gravações do piano…');
     this.loading=(async()=>{
       try{
         const options=typeof AbortSignal.timeout==='function'?{signal:AbortSignal.timeout(20000)}:{};
-        const [manifest,audio]=await Promise.all([fetch(new URL('banco.json',base),options),fetch(new URL('ataques.ogg',base),options)]);
-        if(!manifest.ok||!audio.ok)throw Error('banco indisponível');
+        const manifest=await fetch(new URL('banco.json',base),options);
+        if(!manifest.ok)throw Error('banco indisponível');
+        const audio=await fetch(new URL('ataques.ogg',base),options);
+        if(!audio.ok)throw Error('áudio do banco indisponível');
         const [index,encoded]=await Promise.all([manifest.json(),audio.arrayBuffer()]);
         const Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
         this.decoder=Offline?new Offline(2,1,32000):this.ctx;
@@ -25,7 +28,12 @@ export class PianoBank {
         for(const record of index)this.records.set(record.file,record);
         this.atlas=buffer;
         this.status('Cauda estéreo · 3 camadas de toque');
-      }catch{this.status('Piano de síntese ativo · toque no botão de áudio para tentar novamente.')}
+      }catch{
+        // A publicação pode não incluir as gravações licenciadas.
+        // Neste caso, usar o gerador de piano existente sem requisições repetidas.
+        this.unavailable=true;
+        this.status('Piano de síntese ativo · gravações não incluídas nesta versão');
+      }
       finally{this.loading=null}
     })();
     return this.loading;

@@ -1,5 +1,3 @@
-@font-face{font-family:Barlow;src:url('fonts/barlow.woff') format('woff');font-weight:100 900;font-display:swap}
-@font-face{font-family:'Barlow Condensed';src:url('fonts/barlow-condensed.woff') format('woff');font-weight:100 900;font-display:swap}
 :root{color-scheme:dark;--paper:#f2efea;--muted:#c0bfc1;--soft:#a2a3a9;--red:#da5849;--red-hi:#ff8d74;--amber:#f4c27f;--panel:#242528;--body:Barlow,system-ui,sans-serif;--cond:'Barlow Condensed','Arial Narrow',sans-serif;--mono:ui-monospace,'Courier New',monospace}
 *{box-sizing:border-box}
 body{margin:0;background:radial-gradient(ellipse at 50% 0,#28282a 0,#131315 68%,#101012);color:var(--paper);font:1rem/1.35 var(--body);min-height:100vh}

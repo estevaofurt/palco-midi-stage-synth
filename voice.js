@@ -41,7 +41,7 @@ export class Part {
     if(param)this.expression.signal.connect(param);
     this.sources.set(source,until);
     source.onended=()=>{
-      if(param)this.expression.signal.disconnect(param);
+      if(param){try{this.expression.signal.disconnect(param)}catch{}}
       source.disconnect();this.sources.delete(source);
       if(!this.sources.size){
         this.ended=true;
@@ -61,6 +61,9 @@ export class Part {
     if(gate.cancelAndHoldAtTime)gate.cancelAndHoldAtTime(now);
     else {const current=gate.value;gate.cancelScheduledValues(now);gate.setValueAtTime(current,now)}
     gate.setTargetAtTime(0,now,Math.max(.002,duration/6));
-    for(const [source,scheduled] of this.sources)source.stop(Math.min(now+duration,scheduled));
+    for(const [source,scheduled] of this.sources){
+      try{source.stop(Math.min(now+duration,scheduled))}
+      catch(error){if(error.name!=='InvalidStateError')throw error}
+    }
   }
 }

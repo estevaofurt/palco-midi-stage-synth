@@ -48,7 +48,7 @@ export class Stage {
     return this.groups.get(id);
   }
   startNote(source,channel,key,velocity,forced){
-    if(this.ctx.state==='suspended'||this.ctx.state==='closed')return;
+    if(this.ctx.state!=='running'||!Number.isInteger(key)||key<0||key>127||!Number.isFinite(velocity)||velocity<=0)return;
     const mask=forced??maskForChannel(this.state,channel);
     if(!mask)return;
     const group=this.group(source,channel);
@@ -67,8 +67,19 @@ export class Stage {
         v.parts.delete(name);
         if(!v.parts.size){this.voices.delete(v.id);if(v.held)this.noteChanged()}
       });
-      v.parts.set(name,part);instrument.play(part,key,velocity,p,group,legato);
+      v.parts.set(name,part);
+      try{
+        instrument.play(part,key,velocity,p,group,legato);
+      }catch(error){
+        // A faulty voice must never leave a stuck MIDI note or take down the app.
+        part.release(true);v.parts.delete(name);
+        console.error('Falha no instrumento '+name,error);
+      }
+      if(!part.sources.size){
+        part.gate.disconnect();v.parts.delete(name);
+      }
     }
+    if(!v.parts.size){this.voices.delete(v.id);this.noteChanged();return;}
     this.noteChanged();
     return v.id;
   }
