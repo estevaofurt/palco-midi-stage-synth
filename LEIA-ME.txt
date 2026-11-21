@@ -1,0 +1,10 @@
+PALCO MIDI / STAGE SYNTH — PRONTO PARA GITHUB PAGES
+
+Projeto independente. O site antigo permanece inalterado.
+
+1. Crie o repositório publico palco-midi-stage-synth na conta GitHub.
+2. Envie os arquivos desta pasta para a raiz da branch main.
+3. No GitHub: Settings > Pages > Deploy from a branch > main > / (root).
+4. Acesse https://estevaofurt.github.io/palco-midi-stage-synth/ apos a publicacao.
+
+As amostras opcionais do piano nao estao inclusas.

@@ -1,0 +1,77 @@
+import {filter,gain,hz,smooth} from './voice.js';
+import {PianoBank} from './piano-bank.js';
+
+function stringResponse(ctx){
+  const rate=ctx.sampleRate, length=Math.round(rate*.72);
+  const buffer=ctx.createBuffer(1,length,rate), data=buffer.getChannelData(0);
+  for(let key=40;key<88;key++){
+    const tau=.22+(88-key)*.003, r=Math.exp(-1/(tau*rate));
+    const phase=2*Math.PI*hz(key)/rate, a=2*r*Math.cos(phase);
+    let last=0,before=-Math.sin(phase)*2/(rate*tau);
+    for(let i=0;i<length;i++){
+      const next=a*last-r*r*before;
+      data[i]+=next;before=last;last=next;
+    }
+  }
+  for(let i=0;i<length;i++)data[i]*=Math.min(1,i/(rate*.008),(length-i)/(rate*.08));
+  return buffer;
+}
+function roomResponse(ctx){
+  const rate=ctx.sampleRate, buffer=ctx.createBuffer(2,Math.round(rate*.64),rate);
+  let seed=9133;
+  for(let ch=0;ch<2;ch++){
+    const a=buffer.getChannelData(ch);let low=0;
+    for(let i=Math.round(rate*.014);i<a.length;i++){
+      seed=(1664525*seed+1013904223)>>>0;low=.63*low+.37*(seed/2147483648-1);
+      a[i]=low*Math.exp(-i/(rate*.087));
+    }
+    for(const [j,delay] of [.017,.027,.039,.058].entries())a[Math.round((delay+ch*.0009)*rate)]+=(j%2?-.9:1)/(1+j*.3);
+  }
+  return buffer;
+}
+export class Acoustic {
+  constructor(ctx,bus,status){
+    this.ctx=ctx;this.bank=new PianoBank(ctx,status);
+    this.input=filter(ctx,'highshelf',2450);this.lid=filter(ctx,'lowpass',14000);
+    this.input.connect(this.lid).connect(bus);
+    this.strings=ctx.createConvolver();this.strings.normalize=false;this.strings.buffer=stringResponse(ctx);
+    this.res=gain(ctx,.3);this.strings.connect(this.res).connect(this.input);
+    const room=ctx.createConvolver();room.buffer=roomResponse(ctx);
+    this.room=gain(ctx,.10);this.lid.connect(room).connect(this.room).connect(bus);
+  }
+  update(p){
+    const now=this.ctx.currentTime;
+    smooth(this.input.gain,(p.brightness-50)*.15,now);
+    smooth(this.lid.frequency,2600*2**(p.lid/37),now);
+    smooth(this.res.gain,p.resonance*.017,now);smooth(this.room.gain,p.room*.006,now);
+  }
+  play(part,key,velocity,p,expression){
+    const now=this.ctx.currentTime;
+    part.releaseSeconds=(.10+.70*p.damping/100)*2**((54-key)/110);
+    const send=gain(this.ctx,expression.pedal?.92:.12);
+    part.gate.connect(send).connect(this.strings);part.own(send);
+    part.pedal=down=>smooth(send.gain,down?.92:.12,this.ctx.currentTime,.04);
+    const regions=this.bank.layers(key,velocity,p);
+    if(!regions.length){
+      const force=velocity/127;
+      for(const [ratio,mix,tau] of [[1,.27,1.9],[2.002,.13*force,.67],[3.008,.07*force,.30]]){
+        if(hz(key)*ratio>=this.ctx.sampleRate*.47)continue;
+        const osc=this.ctx.createOscillator(),amp=gain(this.ctx,0);
+        osc.frequency.value=hz(key)*ratio;amp.gain.setValueAtTime(0,now);
+        amp.gain.linearRampToValueAtTime(mix*force,now+.004);amp.gain.setTargetAtTime(0,now+.005,tau);
+        osc.connect(amp).connect(part.gate);part.own(amp);part.start(osc,{until:now+tau*9});
+      }
+      return;
+    }
+    for(const {record,full,weight,rate} of regions){
+      const src=this.ctx.createBufferSource(), amp=gain(this.ctx,.65*weight);
+      src.buffer=full||this.bank.atlas;src.playbackRate.value=rate;
+      src.connect(amp).connect(part.gate);part.own(amp);
+      if(full){part.start(src,{offset:record.onset});continue}
+      src.loop=true;src.loopStart=record.start+record.loopStart;src.loopEnd=record.start+record.loopEnd;
+      const tau=record.tau/rate;
+      amp.gain.setTargetAtTime(0,now+record.loopStart/rate,tau);
+      part.start(src,{offset:record.start,until:now+Math.min(60,record.loopStart/rate+9*tau)});
+    }
+  }
+}
