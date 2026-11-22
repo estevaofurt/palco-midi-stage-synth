@@ -1,4 +1,4 @@
-import {clamp,filter,gain,hz,saturation,smooth,noiseBuffer} from './voice.js';
+import {clamp,filter,gain,hz,saturation,smooth,noiseBuffer,redirect} from './voice.js';
 import {SampleLibrary} from './sample-library.js';
 export class Electric{
   constructor(ctx,bus){
@@ -49,7 +49,22 @@ export class Electric{
     else modes=[[1,.28,body],[reed?2:2.002,(.018+.14*pick)*v,body*.60],[reed?3:7.02+(key-60)*.0022,(.014+.23*hard)*v*v,body*(reed?.35:.085)],[reed?5:1.0035,(reed?.094:.051)*(reed?v:1),body*(reed?.17:.80)]];
     const pickup=ctx.createWaveShaper();const shapeKey=p.model+'/'+p.pickup;
     if(this.pickupKey!==shapeKey){this.pickupCurve=saturation(15+pick*62,reed?.09:.035+pick*.07);this.pickupKey=shapeKey}
-    pickup.curve=this.pickupCurve;pickup.connect(part.gate);part.own(pickup);
+    pickup.curve=this.pickupCurve;
+    // Per-note colour responds immediately to pickup and hammer controls;
+    // strike transients themselves are only generated when the hammer hits.
+    const colour=filter(ctx,'lowpass',16000),presence=filter(ctx,'peaking',2400,1.2);
+    pickup.connect(colour).connect(presence).connect(part.gate);part.own(pickup,colour,presence);
+    const decayers=[];
+    part.update=(next,changed)=>{
+      const t=ctx.currentTime;
+      part.releaseSeconds=.06+next.damper*.009;
+      smooth(colour.frequency,Math.min(ctx.sampleRate*.46,1700+next.pickup*105+next.hammer*56),t);
+      smooth(presence.gain,(next.pickup-45)*.12+(next.hammer-50)*.04,t);
+      if((!changed||changed==='decay')&&!part.released){
+        for(const [amp,tau] of decayers)redirect(amp.gain,0,t,tau*Math.max(.2,next.decay/Math.max(5,p.decay)));
+      }
+    };
+    part.update(p,'pickup');
     const sampled=this.samples.choose(p.model,key,velocity);
     if(sampled){
       const src=ctx.createBufferSource(),amp=gain(ctx,Math.min(.8,.34*force));
@@ -61,7 +76,7 @@ export class Electric{
       const osc=ctx.createOscillator(),amp=gain(ctx,0);osc.frequency.value=frequency*ratio;
       amp.gain.setValueAtTime(0,now);
       amp.gain.linearRampToValueAtTime(level*force,now+.0025+(1-hard)*.003);
-      amp.gain.setTargetAtTime(0,now+.006,tau);
+      amp.gain.setTargetAtTime(0,now+.006,tau);decayers.push([amp,tau]);
       osc.connect(amp).connect(pickup);part.own(amp);part.start(osc,{until:now+Math.min(42,8*tau+.04)});
     }
     if(p.hammerNoise){

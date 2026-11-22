@@ -9,6 +9,13 @@ export function filter(ctx,type,freq,q=.707){
 export function smooth(param,value,now,seconds=.018){
   param.setTargetAtTime(value,now,seconds);
 }
+// Continue a scheduled envelope from its current value before changing its target.
+// cancelAndHoldAtTime is preferable because AudioParam.value need not reflect automation.
+export function redirect(param, target, now, seconds=.02){
+  if(param.cancelAndHoldAtTime)param.cancelAndHoldAtTime(now);
+  else {const held=param.value;param.cancelScheduledValues(now);param.setValueAtTime(held,now)}
+  param.setTargetAtTime(target,now,Math.max(.002,seconds));
+}
 export function saturation(amount,bias=0){
   if(amount<=0)return null;
   const drive=1+amount*.085;

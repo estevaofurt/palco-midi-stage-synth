@@ -1,4 +1,4 @@
-import {clamp,filter,gain,hz,smooth,noiseBuffer} from './voice.js';
+import {clamp,filter,gain,hz,smooth,noiseBuffer,redirect} from './voice.js';
 import {PianoBank} from './piano-bank.js';
 import {SampleLibrary} from './sample-library.js';
 
@@ -58,7 +58,8 @@ export class Acoustic {
   constructor(ctx,bus,status){
     this.ctx=ctx;this.bank=new PianoBank(ctx,status);this.samples=new SampleLibrary(ctx);this.noise=noiseBuffer(ctx,.13);this.lastPedal=0;
     this.input=filter(ctx,'highshelf',2450);this.lid=filter(ctx,'lowpass',14000);
-    this.input.connect(this.lid).connect(bus);
+    this.hammerTone=filter(ctx,'highshelf',2800);this.damperTone=filter(ctx,'lowpass',18000);
+    this.input.connect(this.hammerTone).connect(this.damperTone).connect(this.lid).connect(bus);
     this.strings=ctx.createConvolver();this.strings.normalize=false;this.strings.buffer=stringResponse(ctx);
     this.res=gain(ctx,.3);this.strings.connect(this.res).connect(this.input);
     const room=ctx.createConvolver();room.buffer=roomResponse(ctx);
@@ -100,9 +101,16 @@ export class Acoustic {
     marker.connect(silent).connect(part.gate);part.own(silent);
     part.releaseSeconds=clamp(p.release*(.55+.75*p.damping/100),.035,3);
     this.modalParts.set(id,marker);
+    part.modalId=id;
     part.start(marker,{pitch:false,until:now+85});
     const send=p.stringRes==='off'?0:(expression.pedal?.55:.08)*p.resonance/55;
-    part.pedal=down=>this.modal?.port.postMessage({type:'send',id,value:p.stringRes==='off'?0:(down?.6:.08)*p.resonance/55});
+    part.pedal=down=>this.modal?.port.postMessage({type:'send',id,value:this.current?.stringRes==='off'?0:(down?.6:.08)*(this.current?.resonance??p.resonance)/55});
+    part.update=(next)=>{
+      part.releaseSeconds=clamp(next.release*(.55+.75*next.damping/100),.035,3);
+      const send=next.stringRes==='off'?0:(expression.pedal?.55:.08)*next.resonance/55;
+      this.modal?.port.postMessage({type:'send',id,value:send});
+      this.modal?.port.postMessage({type:'param',id,decayScale:1.1-next.damping/160});
+    };
     const release=part.release.bind(part);
     part.release=(fast=false)=>{
       if(!part.released)this.modal?.port.postMessage({type:'off',id,fast,release:part.releaseSeconds});
@@ -116,7 +124,10 @@ export class Acoustic {
   }
   update(p){
     const now=this.ctx.currentTime;
+    this.current=p;
     smooth(this.input.gain,(p.brightness-50)*.15,now);
+    smooth(this.hammerTone.gain,(p.hammer-50)*.16,now);
+    smooth(this.damperTone.frequency,Math.max(1900,18000-140*p.damping),now);
     smooth(this.lid.frequency,2600*2**(p.lid/37),now);
     smooth(this.res.gain,p.stringRes==='off'?0:p.resonance*.017,now);smooth(this.room.gain,p.room*.006,now);smooth(this.body.gain,(p.character==='felt'?.12:.19)*(.5+p.resonance/100),now);
   }
@@ -136,6 +147,15 @@ export class Acoustic {
     const send=gain(this.ctx,expression.pedal?.92:.12);
     part.gate.connect(send).connect(this.strings);part.own(send);
     part.pedal=down=>smooth(send.gain,down?.92:.12,this.ctx.currentTime,.04);
+    const decayers=[];
+    part.update=(next,changed)=>{
+      part.releaseSeconds=clamp(next.release*(.55+.75*next.damping/100)*2**((54-key)/110),.035,4);
+      if(!changed||changed==='stringRes'||changed==='resonance')smooth(send.gain,next.stringRes==='off'?0:(expression.pedal?.92:.12),this.ctx.currentTime,.035);
+      if((!changed||changed==='damping')&&!part.released){
+        const t=this.ctx.currentTime;
+        for(const [amp,tau] of decayers)redirect(amp.gain,0,t,tau*Math.max(.18,1.2-next.damping/100));
+      }
+    };
     if(p.hammerNoise){
       const click=this.ctx.createBufferSource(),eq=filter(this.ctx,'bandpass',1100+key*19,1.3),a=gain(this.ctx,.00038*p.hammerNoise*(velocity/127));
       click.buffer=this.noise;a.gain.setTargetAtTime(0,now+.002,.003);
@@ -178,7 +198,7 @@ export class Acoustic {
         osc.frequency.value=freq*stretched(ratio);
         amp.gain.setValueAtTime(0,now);
         amp.gain.linearRampToValueAtTime(mix*force,now+strike);
-        amp.gain.setTargetAtTime(0,now+strike+.001,tau*decay);
+        amp.gain.setTargetAtTime(0,now+strike+.001,tau*decay);decayers.push([amp,tau*decay]);
         osc.connect(amp).connect(part.gate);part.own(amp);
         part.start(osc,{until:now+Math.min(26,tau*decay*8)});
       }
@@ -190,7 +210,7 @@ export class Acoustic {
           osc.frequency.value=freq;osc.detune.value=cents*(.65+key/100);
           amp.gain.setValueAtTime(0,now);
           amp.gain.linearRampToValueAtTime(.095*force*model.body,now+strike*.85);
-          amp.gain.setTargetAtTime(0,now+strike+.001,decay*2.05);
+          amp.gain.setTargetAtTime(0,now+strike+.001,decay*2.05);decayers.push([amp,decay*2.05]);
           osc.connect(amp).connect(part.gate);part.own(amp);
           part.start(osc,{until:now+Math.min(27,decay*16)});
         }

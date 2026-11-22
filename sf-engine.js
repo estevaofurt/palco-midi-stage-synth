@@ -1,4 +1,4 @@
-import {clamp,filter,gain,hz,noiseBuffer,smooth} from './voice.js';
+import {clamp,filter,gain,hz,noiseBuffer,smooth,redirect} from './voice.js';
 import {SF2Reader} from './sf2-reader.js';
 export class SoundFontEngine{
   constructor(ctx,bus){
@@ -21,6 +21,17 @@ export class SoundFontEngine{
   unload(){this.reader=null;this.program=0}
   play(part,key,velocity,p){
     const ctx=this.ctx,now=ctx.currentTime,v=velocity/127;
+    const activeAmps=[];
+    part.update=(next,changed)=>{
+      part.releaseSeconds=next.release;
+      const t=ctx.currentTime;
+      if((!changed||changed==='attack')&&!part.released){
+        for(const {amp,level,start} of activeAmps){
+          const left=Math.max(.004,next.attack-(t-start));
+          if(t-start<next.attack)redirect(amp.gain,level,t,left/3);
+        }
+      }
+    };
     if(this.reader){
       const zones=this.reader.getZones(this.program,key,velocity);
       if(zones.length){
@@ -33,7 +44,7 @@ export class SoundFontEngine{
           const db=Math.max(0,gen[48]||0)/10;const level=.52*v**1.15*10**(-db/20)/Math.sqrt(zones.length);
           const attack=clamp(2**((gen[34]??-9000)/1200),.003,2.5);
           const release=clamp(2**((gen[38]??-2500)/1200),.045,4);
-          a.gain.setValueAtTime(0,now);a.gain.linearRampToValueAtTime(level,now+attack);
+          a.gain.setValueAtTime(0,now);a.gain.linearRampToValueAtTime(level,now+attack);activeAmps.push({amp:a,level,start:now});
           pan.pan.value=clamp((gen[17]||0)/500,-1,1);
           if((gen[54]||0)&1){
             const lo=Math.max(0,(s.loopStart-s.start)/s.rate),hi=Math.min(src.buffer.duration,(s.loopEnd-s.start)/s.rate);
@@ -62,7 +73,7 @@ export class SoundFontEngine{
       osc.type=typeWave;osc.frequency.value=frequency*ratio;
       const volume=base*v**1.2;
       amp.gain.setValueAtTime(0,now);
-      amp.gain.linearRampToValueAtTime(volume,now+(type==='bells'?.003:attack));
+      amp.gain.linearRampToValueAtTime(volume,now+(type==='bells'?.003:attack));activeAmps.push({amp,level:volume,start:now});
       if(type==='bells')amp.gain.setTargetAtTime(0,now+.012,tau);
       else if(type==='winds'||type==='brass')amp.gain.setTargetAtTime(volume*.7,now+attack,.17);
       osc.connect(amp).connect(filterNode);part.own(amp);part.start(osc,{until:now+(type==='bells'?Math.max(3,tau*9):45)});

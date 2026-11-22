@@ -39,7 +39,7 @@ export class Stage {
     this.instruments[name].update(patch.values,changed);
     for(const v of this.voices.values()){
       const part=v.parts.get(name);
-      if(part&&!part.released)part.update?.(patch.values,changed);
+      if(part&&!part.ended)part.update?.(patch.values,changed);
     }
   }
   updateEffects(){this.fx.update()}

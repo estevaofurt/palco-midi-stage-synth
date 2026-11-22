@@ -60,12 +60,12 @@ export class Synth{
     tone.frequency.setValueAtTime(base,now);
     tone.frequency.exponentialRampToValueAtTime(peak,now+Math.max(.004,Math.min(p.attack,.14)));
     tone.frequency.setTargetAtTime(base,now+Math.min(p.attack,.14),Math.max(.012,p.decay*.32));
-    const env=gain(ctx,0),pan=ctx.createStereoPanner();pan.pan.value=(p.pan||0)/100;
-    const volume=.19*v**1.1*(p.volume||85)/85;
+    const env=gain(ctx,0),vca=gain(ctx,(p.volume||0)/85),pan=ctx.createStereoPanner();pan.pan.value=(p.pan||0)/100;
+    const volume=.19*v**1.1;
     const attack=isLegato?.009:p.attack;
     env.gain.setValueAtTime(0,now);env.gain.linearRampToValueAtTime(volume,now+Math.max(.003,attack));
     env.gain.setTargetAtTime(volume*p.sustain/100,now+attack,Math.max(.007,p.decay/4));
-    tone.connect(env).connect(pan).connect(part.gate);part.own(tone,env,pan);
+    tone.connect(env).connect(vca).connect(pan).connect(part.gate);part.own(tone,env,vca,pan);
     const lfo=ctx.createOscillator(),lfoGain=gain(ctx,0);
     lfo.type='sine';lfo.frequency.value=p.lfoRate||5;lfo.connect(lfoGain);
     const controls=[],mix=p.blend/100;
@@ -91,17 +91,23 @@ export class Synth{
         controls.push({osc,amp,sp,side,sign,width});
       }
     }
-    if(p.noiseLevel>0){
-      const noise=ctx.createBufferSource(),noiseAmp=gain(ctx,p.noiseLevel*.0014);
-      noise.buffer=p.noiseType==='pink'?this.pink:this.white;noise.loop=true;
-      noise.connect(noiseAmp).connect(tone);part.own(noiseAmp);part.start(noise,{pitch:false});
+    // Keep both noise colours available, so a zero-to-nonzero level change
+    // or a pink/white switch works during a sustained note.
+    const noiseGains={white:gain(ctx,0),pink:gain(ctx,0)};
+    for(const type of ['white','pink']){
+      const noise=ctx.createBufferSource();noise.buffer=type==='pink'?this.pink:this.white;noise.loop=true;
+      noise.connect(noiseGains[type]).connect(tone);part.own(noiseGains[type]);part.start(noise,{pitch:false});
     }
+    const setNoise=next=>{
+      for(const [type,node] of Object.entries(noiseGains))smooth(node.gain,type===next.noiseType?next.noiseLevel*.0014:0,ctx.currentTime);
+    };
+    setNoise(p);
     part.own(lfoGain);
     // Auxiliary oscillator is a source owned by the voice and stops with its gate.
     part.start(lfo,{pitch:false});
     let matrixGain=null;
     const pressure=expression.pressure;
-    const source=(p.matrixSource==='aftertouch'&&pressure)?pressure:null;
+    const source=pressure||null;
     if(source){matrixGain=gain(ctx,0);source.connect(matrixGain);part.own(matrixGain)}
     function applyMod(next){
       const amount=(next.lfoDepth||0)/100;
@@ -115,7 +121,7 @@ export class Synth{
         if(next.matrixDest==='pitch')for(const c of controls)matrixGain.connect(c.osc.detune);
         else if(dest)matrixGain.connect(dest);
         const scale=next.matrixDest==='pitch'?80:next.matrixDest==='amp'?volume*.35:Math.min(2400,next.cutoff*.6);
-        smooth(matrixGain.gain,(next.matrixAmount||0)/100*scale,ctx.currentTime);
+        smooth(matrixGain.gain,next.matrixSource==='aftertouch'?(next.matrixAmount||0)/100*scale:0,ctx.currentTime);
       }
     }
     applyMod(p);
@@ -135,7 +141,8 @@ export class Synth{
     };
     part.update=(next,changed)=>{
       const t=ctx.currentTime;
-      if(!changed||['cutoff','resonance','filterType','filterEnv'].includes(changed)){
+      const changedOne=(...keys)=>!changed||keys.includes(changed);
+      if(changedOne('cutoff','resonance','filterType','filterEnv','attack','decay')){
         tone.type=next.filterType;
         const elapsed=Math.max(0,t-now-Math.min(next.attack,.14));
         const envOct=next.filterEnv*(.25+.75*v)*Math.exp(-elapsed/Math.max(.02,next.decay*.32));
@@ -143,17 +150,41 @@ export class Synth{
         smooth(tone.frequency,clamp(next.cutoff*2**((key-60)/40+envOct)*(.6+.4*v),50,ctx.sampleRate*.46),t);
         smooth(tone.Q,next.resonance,t);
       }
+      const pitchKeys=['octave','semitones','fine','glide'];
+      const waveKeys=['waveA','waveB','pulseWidth','sync','syncRatio'];
+      const oscKeys=['blend','oscA','oscB','detune','spread','unison'];
+      const frequency=hz(key)*2**((next.octave*12+next.semitones+next.fine/100)/12);
       for(const c of controls){
-        const wave=c.side==='A'?next.waveA:next.waveB;
-        this.setWave(c.osc,wave,next,c.side);
-        smooth(c.osc.detune,c.sign*next.detune*.5+c.width*14,t);
-        const level=c.side==='A'?Math.cos(next.blend*Math.PI/200)*next.oscA/100:Math.sin(next.blend*Math.PI/200)*next.oscB/100;
-        smooth(c.amp.gain,level/Math.sqrt(Number(p.unison||1)),t);
-        smooth(c.sp.pan,clamp(c.sign*next.spread/200+c.width*.24,-1,1),t);
+        if(changedOne(...waveKeys)){
+          const wave=c.side==='A'?next.waveA:next.waveB;
+          this.setWave(c.osc,wave,next,c.side);
+        }
+        if(changedOne(...pitchKeys)){
+          // Cancel any old glide ramp, then retune the oscillator without a new attack.
+          const portTime=changed==='glide'?Math.max(.015,next.glide/3):.014;
+          c.osc.frequency.cancelScheduledValues(t);
+          smooth(c.osc.frequency,frequency,t,portTime);
+        }
+        if(changedOne(...oscKeys)){
+          smooth(c.osc.detune,c.sign*next.detune*.5+c.width*14,t);
+          const level=c.side==='A'?Math.cos(next.blend*Math.PI/200)*next.oscA/100:Math.sin(next.blend*Math.PI/200)*next.oscB/100;
+          smooth(c.amp.gain,level/Math.sqrt(Number(p.unison||1)),t);
+          smooth(c.sp.pan,clamp(c.sign*next.spread/200+c.width*.24,-1,1),t);
+        }
       }
-      smooth(pan.pan,next.pan/100,t);
-      smooth(lfo.frequency,next.lfoRate,t);applyMod(next);
-      if((!changed||changed==='sustain')&&t>=now+attack)smooth(env.gain,volume*next.sustain/100,t);
+      if(changedOne('pan'))smooth(pan.pan,next.pan/100,t);
+      if(changedOne('lfoRate'))smooth(lfo.frequency,next.lfoRate,t);
+      if(changedOne('lfoDest','lfoDepth','matrixSource','matrixDest','matrixAmount','cutoff'))applyMod(next);
+      if(changedOne('volume'))smooth(vca.gain,(next.volume||0)/85,t);
+      if(changedOne('noiseLevel','noiseType'))setNoise(next);
+      if(changedOne('attack','decay','sustain')&&!part.released){
+        const elapsed=t-now;
+        const target=elapsed<next.attack?volume:volume*next.sustain/100;
+        const tau=elapsed<next.attack?Math.max(.004,(next.attack-elapsed)/3):Math.max(.008,next.decay/4);
+        if(env.gain.cancelAndHoldAtTime)env.gain.cancelAndHoldAtTime(t);
+        else {const prior=env.gain.value;env.gain.cancelScheduledValues(t);env.gain.setValueAtTime(prior,t)}
+        env.gain.setTargetAtTime(target,t,tau);
+      }
       part.releaseSeconds=next.release;
     };
   }

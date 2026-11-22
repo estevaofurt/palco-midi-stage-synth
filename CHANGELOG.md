@@ -77,3 +77,22 @@
 - As gravações originais da pasta `piano/` não vieram no backup; o piano acústico ainda utiliza síntese alternativa, que **não** equivale a bibliotecas profissionais de piano.
 - O som não foi homologado com um teclado controlador MIDI USB real, nem em todos os navegadores/dispositivos.
 - Os módulos novos de SoundFont, arpejador, looper, split avançado e efeitos ainda não estão implementados nesta base recuperada. Não devem ser apresentados como concluídos.
+
+## v1.5.0 — Interação e FX
+- FX/FX OFF por módulo (atalho de bypass sem perder configurações).
+- Cada efeito roteado simultaneamente para vários motores, migrando presets anteriores.
+- Duplo clique para restaurar valor original de knobs, drawbars, volume e sliders de efeitos.
+- Atualização de filtros, efeitos e parâmetros editáveis durante a execução; controles de ataque passam a afetar as próximas notas.
+- Motor modal experimental com fallback clássico e correções de perfil e damping.
+
+## v1.6.0 — Edição de vozes em execução
+- Corrigida a propagação de mudanças de parâmetros para notas que já estão tocando; os motores antes não implementavam `part.update` de maneira uniforme.
+- Piano Acústico: timbre do martelo (filtragem), abafamento, intensidade da ressonância e tempo de release em notas sustentadas. Modo modal recebe mensagens de atualização de decaimento sem novo ataque.
+- Piano Elétrico: Pickup, dureza tonal e decay em execução, e release da voz. Auto-Pan, tremolo e gabinete continuam atualizando o áudio global.
+- Órgão: drawbars, vibrato e Leslie permanecem globais e instantâneos; mudança de release reflete na voz ativa.
+- Synth: agora afinação (oitava/semitons/fine), VCA (inclusive de 0% para valor audível), ADSR, ruído branco/rosa, níveis dos osciladores e filtros passam a atuar nas vozes existentes. O tipo de onda, pulse width e hard sync seguem ajustáveis ao vivo.
+- Leitor SF: brilho, panorama e release atualizam vozes em andamento; ataque de uma nota ainda em fase de ataque também pode mudar.
+- `AudioParam` é suavizado para reduzir cliques. `stage.update` notifica vozes existentes, incluindo caudas ainda ativas.
+- Parâmetros estruturais e fenômenos de ataque (novos osciladores de uníssono, modo de voz, velocity já recebida, Key Click/Hammer Noise) se aplicam à próxima execução, pois não é tecnicamente correto recriar retroativamente o ataque de uma nota.
+- Validação: 24 testes automatizados; Playwright simulou uma nota sustentada em cada motor e comprovou alteração de parâmetros ativos, além de bypass FX. Regressão de polifonia e interface aprovada.
+- Pendente: teste com AudioWorklet em HTTPS e teclado MIDI físico em equipamento real.

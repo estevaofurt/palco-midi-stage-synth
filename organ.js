@@ -70,5 +70,6 @@ export class Organ {
       click.connect(contact).connect(amp).connect(part.gate);part.own(contact,amp);part.start(click,{pitch:false});
     }
     part.releaseSeconds=p.type==='church'?.22:.042;
+    part.update=next=>{part.releaseSeconds=next.type==='church'?.22:.042};
   }
 }

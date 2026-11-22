@@ -132,7 +132,7 @@ export class PianoEngine {
     // Normaliza o timbre desta nota e aplica a dinâmica (≈ 28 dB entre pp e ff).
     const scale = TARGET_RMS * speed ** 1.4 * tilt * profile.soft * (.75+.5*clamp(brightness,0,1)) / Math.sqrt(Math.max(1e-9, ref / 2));
     for (let i = 0; i < m; i++) { v.re[i] *= scale; v.im[i] *= scale }
-    v.key = key; v.count = m; v.id = id; v.active = true; v.released = false; v.age = 0; v.fade = 0;
+    v.decayScale=clamp(decayScale,.3,2);v.key = key; v.count = m; v.id = id; v.active = true; v.released = false; v.age = 0; v.fade = 0;
     const angle = (clamp((key - 64.5) / 43.5, -1, 1) * .4 + 1) * Math.PI / 4;
     v.gl = Math.SQRT2 * Math.cos(angle); v.gr = Math.SQRT2 * Math.sin(angle);
     v.send = v.sendTarget = send;
@@ -151,7 +151,19 @@ export class PianoEngine {
     }
     v.released = true;
   }
-  setSend(id, value) { const v = this.find(id); if (v) v.sendTarget = value }
+  setSend(id, value) { const v = this.find(id); if (v) v.sendTarget = clamp(value,0,1) }
+  // Retune decay coefficients of an already-ringing modal string without a re-strike.
+  updateVoice(id,{decayScale}){
+    const v=this.find(id);if(!v||v.released||!Number.isFinite(decayScale))return;
+    const scale=clamp(decayScale,.3,2),ratio=v.decayScale/scale;
+    for(let m=0;m<v.count;m++){
+      const c=v.cr[m],s=v.ci[m],old=Math.hypot(c,s);
+      if(old<=0)continue;
+      const next=old**ratio,adjust=next/old;
+      v.cr[m]=c*adjust;v.ci[m]=s*adjust;
+    }
+    v.decayScale=scale;
+  }
   // Escreve o piano em L/R e o envio de ressonância (mono) em S.
   render(L, R, S, n) {
     n = Math.min(n, BLOCK);
@@ -207,6 +219,7 @@ if (typeof registerProcessor === 'function') {
         if (m.type === 'on') this.engine.noteOn(m);
         else if (m.type === 'off') this.engine.noteOff(m.id, m.fast, m.release);
         else if (m.type === 'send') this.engine.setSend(m.id, m.value);
+        else if (m.type === 'param') this.engine.updateVoice(m.id,m);
         else if (m.type === 'quality') this.engine.maxPartials = clamp(m.partials | 0, 8, 64);
         else if (m.type === 'stop') this.engine.stopAll();
       };
