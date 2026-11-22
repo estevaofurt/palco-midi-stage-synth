@@ -1,3 +1,13 @@
+# Stage Synth v1.12.3 — Motores A/B dentro do Piano Acústico
+
+O seletor **Motor do piano** permanece no módulo já existente: **A · Claude (modal)**, **B · Novo Stage (mecânico)** e **Clássico · compatibilidade**. Não existe novo módulo, página intermediária ou link de acesso. A seleção é preservada no navegador inclusive no perfil móvel.
+
+O B reúne o motor físico experimental baseado na v1.9.5, com ponte/tampo e ressonância simpática da v1.12.2. **Não é o código-fonte exato do Novo Stage v1.11.0 de outra conversa**, que ainda não foi localizado aqui. O A é o motor modal disponível no projeto, derivado da linha associada à comparação Claude; não é uma cópia bit a bit independente.
+
+O controle *Acoplamento mecânico* fica dentro do próprio Piano Acústico e permite desligá-lo para comparação. FX pesados seguem sob demanda. O relato de ausência de estalos foi da v1.9.5; o novo B precisa de validação no PC e Moto g04s, e ainda não tem timbre acústico homologado.
+
+---
+
 ## Stage Synth v1.8.4 — Modo Leve (Moto g04s)
 
 Em Android, o aplicativo seleciona **Áudio: Leve · celular** automaticamente. Este perfil limita a polifonia a 8, desliga a modelagem modal e as convoluções de piano, usa menos osciladores, desliga oversampling e não instancia FX desativados. Os efeitos começam em bypass por motor na primeira abertura do perfil Leve e podem ser ativados individualmente. A seleção de tipo, roteamento e parâmetros permanece disponível. Para recuperar o áudio de 32 vozes e motor modal, escolha **Completo · computador**. Trocar de perfil reinicia o aplicativo e encerra as notas em andamento.

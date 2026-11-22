@@ -1,3 +1,15 @@
+# Atualização de execução — v1.12.3 integrada (22/11/2026)
+
+- [x] Integração do motor B físico + acoplamento mecânico ao app principal, selecionável no módulo Piano Acústico.
+- [x] Comparação A (modal derivado da linha Claude) / B (Novo Stage mecânico) no mesmo editor.
+- [x] Retirados novos banners e links externos; sem módulos adicionais.
+- [x] Testes automatizados (79) e testes do seletor em navegador simulado.
+- [ ] Testar **AudioWorklet real**, estabilidade e latência no PC e no Moto g04s; não confundir simulação com homologação.
+- [ ] Recuperar e comparar código original da linha Novo Stage v1.11.0, que não foi usado nesta implementação.
+- [ ] Corrigir inarmonicidade, decaimento espectral e realismo do timbre, mantendo estabilidade comprovada da v1.9.5.
+
+---
+
 # Stage Synth — prioridades e próximos passos
 
 **Atualizado em:** 22/11/2026. Este arquivo é um plano, não confirma implementação.

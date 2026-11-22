@@ -38,7 +38,7 @@ export class Electric{
   }
   play(part,key,velocity,p){
     const ctx=this.ctx,now=ctx.currentTime,v=velocity/127;
-    const reed=p.model.startsWith('wurly'),fm=p.model.startsWith('fm'),clav=p.model==='clav',cp=p.model==='cp80';
+    const reed=p.model.startsWith('wurly'),fm=p.model.startsWith('fm'),clav=p.model==='clav',cp=p.model==='cp70';
     const hard=p.hammer/100,pick=p.pickup/100;
     const body=(.65+p.decay*.045)*2**((60-key)/65)*(clav?.28:1);
     const force=v**(1.55-hard*.4),frequency=hz(key);

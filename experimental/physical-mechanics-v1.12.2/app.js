@@ -169,44 +169,6 @@ async function startAudio(){
   else if(!mobileLite&&state.patches.piano.values.soundEngine==='modal')await stage.instruments.piano.prepareModal();
   else stage.instruments.piano.bank.load();
 }
-// Atalho explícito: uma ação prepara o motor físico, liga o acoplamento
-// mecânico e abre o editor correto. Não modifica outros instrumentos.
-function paintMechanicalShortcut(){
-  const message=byId('mechanical-access-state');
-  if(!message)return;
-  const p=state.patches.piano.values;
-  const selected=p.soundEngine==='physical'&&p.mechanicalModel!=='off';
-  message.textContent=selected
-    ?'Piano mecânico selecionado. Toque em Ativar piano mecânico para iniciar o áudio.'
-    :'O piano mecânico está desligado nesta sessão.';
-}
-paintMechanicalShortcut();
-byId('enable-mechanical-piano')?.addEventListener('click',async()=>{
-  const button=byId('enable-mechanical-piano');
-  const message=byId('mechanical-access-state');
-  button.disabled=true;
-  try{
-    const piano=state.patches.piano.values;
-    piano.soundEngine='physical';
-    piano.mechanicalModel='on';
-    if(!['eco','balanced','studio'].includes(piano.physicalQuality))piano.physicalQuality='eco';
-    state.mask|=engines.piano.bit;
-    state.editor='piano';
-    stage?.applyRouting();
-    stage?.update('piano','soundEngine');
-    panel.drawEditor('piano');panel.sync();paintEngineLabel();save();
-    await startAudio();
-    const engine=stage?.instruments.piano;
-    if(!engine?.physical)throw Error('O navegador não iniciou o AudioWorklet do motor físico. Confira o console e o suporte de áudio do navegador.');
-    engine.setMechanicalModel(piano);
-    message.textContent='Motor físico e acoplamento mecânico ativados. Toque no teclado. Compare em Piano Acústico → Mecânica e ressonância.';
-    report('Motor mecânico v1.12.2 ativo. Alterne Acoplamento mecânico no editor para comparar.');
-    button.textContent='Motor ativo · reabrir editor';
-  }catch(error){
-    message.textContent='Não foi possível ativar: '+error.message;
-    report(error.message);
-  }finally{button.disabled=false}
-});
 byId('power').onclick=()=>startAudio().then(()=>{
   if(state.patches.piano.values.soundEngine==='physical'&&!stage.instruments.piano.physical)
     report('Este navegador não iniciou o AudioWorklet. O piano usa síntese clássica como alternativa.');

@@ -4,7 +4,7 @@ const group=(label,...controls)=>({label,controls});
 const preset=(id,name,values={})=>({id,name,values});
 export const feet=['16′','5⅓′','8′','4′','2⅔′','2′','1⅗′','1⅓′','1′'];
 const waves={sine:'Senoidal',triangle:'Triangular',sawtooth:'Dente de serra',square:'Quadrada',pulse:'Pulso ajustável'};
-const models={mark1:'Rhodes Tine · Mark I',mark2:'Rhodes Tine · Mark II',wurly200:'Wurly Reed · 200A',wurly140:'Wurly Reed · 140B',cp80:'CP80',clav:'Clav',fmfull:'FM · Full Tines',fmdino:'FM · Dino EP',fmballad:'FM · Ballad Key'};
+const models={mark1:'Rhodes Tine · Mark I',mark2:'Rhodes Tine · Mark II',wurly200:'Wurly Reed · 200A',wurly140:'Wurly Reed · 140B',cp70:'CP70',clav:'Clavinet',fmfull:'E. Piano 1 · Full Tines',fmdino:'E. Piano 2 · Dino EP',fmballad:'E. Piano 3 · Ballad Keys'};
 export const engines={
   piano:{name:'Piano acústico',short:'Acústico',bit:1,level:85,
     presets:[
@@ -14,8 +14,8 @@ export const engines={
       preset('upright','Piano Upright',{character:'upright',hammer:52,brightness:45,lid:45,resonance:31,room:10,release:.32})
     ],
     groups:[
-      group('Identidade e dinâmica',select('soundEngine','Motor do piano','modal',{modal:'Modelagem física (experimental)',classic:'Síntese clássica'}),select('character','Instrumento','japanese',{japanese:'Japanese Grand',american:'American Grand',felt:'Felt Piano',upright:'Piano Upright'}),knob('touch','Dinâmica',50),knob('hammer','Dureza de martelo',50),knob('release','Release',.42,.06,3,' s',{step:.01,log:true})),
-      group('Mecânica e ressonância',knob('hammerNoise','Hammer noise',26),knob('pedalNoise','Pedal noise',24),select('stringRes','String resonance','on',{on:'Ativada',off:'Desativada'}),knob('resonance','Intensidade',45)),
+      group('Identidade e dinâmica',select('soundEngine','Motor do piano','physical',{modal:'A · Claude (modal)',physical:'B · Novo Stage (mecânico)',classic:'Clássico · compatibilidade'}),select('physicalQuality','Detalhe físico','eco',{eco:'Econômico · 32 notas',balanced:'Equilibrado · 48 notas',studio:'Estúdio · 64 notas'}),select('character','Instrumento','japanese',{japanese:'Japanese Grand',american:'American Grand',felt:'Felt Piano',upright:'Piano Upright'}),knob('touch','Dinâmica',50),knob('hammer','Dureza de martelo',50),knob('release','Release',.42,.06,3,' s',{step:.01,log:true})),
+      group('Mecânica e ressonância',knob('hammerNoise','Hammer noise',26),knob('pedalNoise','Pedal noise',24),select('stringRes','String resonance','on',{on:'Ativada',off:'Desativada'}),select('mechanicalModel','Acoplamento mecânico','on',{on:'Ponte, tampo e cordas simpáticas',off:'Som anterior · comparar'}),knob('resonance','Intensidade',45)),
       group('Corpo do piano',knob('lid','Tampa',75),knob('brightness','Brilho',51),knob('room','Ambiente',15),knob('damping','Abafamento',37))
     ]
   },
@@ -25,11 +25,11 @@ export const engines={
       preset('mark2','Rhodes · Mark II',{model:'mark2',hammer:54,pickup:57,decay:58}),
       preset('wurly200','Wurly · 200A',{model:'wurly200',hammer:66,pickup:61,preamp:36,cabinet:'combo'}),
       preset('wurly140','Wurly · 140B',{model:'wurly140',hammer:58,preamp:49,cabinet:'small'}),
-      preset('cp80','CP80',{model:'cp80',hammer:69,decay:42,preamp:18}),
+      preset('cp70','CP70',{model:'cp70',hammer:69,decay:42,preamp:18}),
       preset('clav','Clav',{model:'clav',hammer:75,decay:32,damper:18}),
-      preset('fmfull','FM · Full Tines',{model:'fmfull',hammer:53,preamp:13,decay:59}),
-      preset('fmdino','FM · Dino EP',{model:'fmdino',hammer:60,pickup:69,preamp:23}),
-      preset('fmballad','FM · Ballad Key',{model:'fmballad',hammer:32,decay:76,damper:60})
+      preset('fmfull','E. Piano 1 · Full Tines',{model:'fmfull',hammer:53,preamp:13,decay:59}),
+      preset('fmdino','E. Piano 2 · Dino EP',{model:'fmdino',hammer:60,pickup:69,preamp:23}),
+      preset('fmballad','E. Piano 3 · Ballad Keys',{model:'fmballad',hammer:32,decay:76,damper:60})
     ],
     groups:[
       group('Instrumento e toque',select('model','Instrumento','mark1',models),knob('hammer','Dureza',50),knob('pickup','Captação',45),knob('decay','Decaimento',58),knob('damper','Release',35)),
@@ -166,11 +166,16 @@ export function loadState(storage){
   let saved={},legacy={};
   try{saved=JSON.parse(storage?.getItem(key))||{}}catch{}
   try{legacy=JSON.parse(storage?.getItem('palco-electric-v1'))||{}}catch{}
-  const state={editor:Object.hasOwn(engines,saved.editor)||saved.editor==='effects'?saved.editor:'piano',mask:Number.isInteger(saved.mask)&&saved.mask>=0&&saved.mask<=31?saved.mask:5,duo:saved.duo===true,patches:{},edits:{},
+  const state={editor:Object.hasOwn(engines,saved.editor)||saved.editor==='effects'?saved.editor:'piano',mask:Number.isInteger(saved.mask)&&saved.mask>=0&&saved.mask<=31?saved.mask:1,duo:saved.duo===true,patches:{},edits:{},
     fx:{enabled:{},slots:{}},performance:{bpm:120,arp:false,rate:'1/8',chord:'off',loopBars:'2'}};
   for(const [id,def] of Object.entries(engines)){
-    const stored=saved.patches?.[id],p=fromPreset(id,stored?.preset);let values=stored?.values||{};
-    if(id==='electric'&&!stored)values={...legacy};
+    const stored=saved.patches?.[id];
+    const migratePreset=original=>id==='electric'&&typeof original==='string'
+      ?original.replace(/^cp80(?=-|$)/,'cp70'):original;
+    const p=fromPreset(id,migratePreset(stored?.preset));
+    let values=stored?.values||{};
+    if(id==='electric'&&values.model==='cp80')values={...values,model:'cp70'};
+    if(id==='electric'&&!stored){values={...legacy};if(values.model==='cp80')values.model='cp70'}
     // Migração v1.6: os dois B3 usavam 'type=b3', que não identifica Jazz/Gospel.
     // Reconstrói o modelo pelo preset gravado; Church selecionado à parte tem precedência.
     if(id==='organ'&&!Object.hasOwn(values,'registration')){
@@ -185,9 +190,12 @@ export function loadState(storage){
     }
     state.patches[id]=p;state.edits[id]={};
     for(const item of def.presets){
-      const prev=saved.edits?.[id]?.[item.id];if(!prev)continue;
+      // Keep old CP80 edited presets (Natural/Suave/Brilhante) under CP70.
+      const legacyPreset=id==='electric'?item.id.replace(/^cp70(?=-|$)/,'cp80'):item.id;
+      const prev=saved.edits?.[id]?.[item.id]??saved.edits?.[id]?.[legacyPreset];if(!prev)continue;
       const copy=fromPreset(id,item.id);
-      for(const {controls} of def.groups)for(const c of controls)if(c.type!=='soundfont'&&c.type!=='samplepack')copy.values[c.id]=normalise(c,prev[c.id],copy.values[c.id]);
+      const savedPresetValues=id==='electric'&&prev.model==='cp80'?{...prev,model:'cp70'}:prev;
+      for(const {controls} of def.groups)for(const c of controls)if(c.type!=='soundfont'&&c.type!=='samplepack')copy.values[c.id]=normalise(c,savedPresetValues[c.id],copy.values[c.id]);
       state.edits[id][item.id]=copy.values;
     }
     rememberPatch(state,id);

@@ -1,3 +1,11 @@
+# ATUALIZAÇÃO CONFIRMADA — 22/11/2026: v1.12.3 integrada ao aplicativo principal
+
+O código da **raiz de main** agora é **v1.12.3**, com seleção A/B no **módulo Piano Acústico → Motor do piano**. Substitui o diagnóstico anterior de raiz v1.8.4 (mantida no histórico Git). A, modal derivado da linha Claude; B, motor físico **baseado na v1.9.5 + mecânica v1.12.2**. Não se trata da fonte original da linha separada Novo Stage v1.11.0.
+
+A v1.9.5 experimental permanece a **referência estável comprovada pelo usuário sem estalos**. A nova v1.12.3 exige verificação auditiva e de latência no PC e Moto g04s. Nenhum novo módulo ou link externo foi acrescentado; atalhos anteriores removidos. 79 testes de lógica aprovados e interface testada em Chromium simulado, sem homologação do AudioWorklet real.
+
+---
+
 # Stage Synth — estado real do projeto
 
 **Última conferência:** 22/11/2026. Verificar novamente o GitHub antes de começar qualquer nova tarefa; este documento não é uma consulta automática ao HEAD.

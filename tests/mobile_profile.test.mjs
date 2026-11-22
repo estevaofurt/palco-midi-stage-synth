@@ -11,10 +11,10 @@ test('Moto g04s entra em modo leve, computadores permanecem completos',()=>{
   assert.equal(getProfile({getItem:()=> 'lite'},{userAgent:'Windows'}),'lite');
 });
 test('limite de vozes e bypass preservam as preferências originais',()=>{
-  assert.equal(profilePolyphony('lite'),8);
-  assert.equal(profilePolyphony('full'),32);
+  assert.equal(profilePolyphony('lite'),32);
+  assert.equal(profilePolyphony('full'),64);
   const state=loadState(null);
   assert.ok(Object.keys(engines).length===5);
-  assert.equal(state.patches.piano.values.soundEngine,'modal');
+  assert.equal(state.patches.piano.values.soundEngine,'physical');
   assert.ok(Object.keys(state.fx.slots).length===8);
 });

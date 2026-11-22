@@ -9,7 +9,7 @@ import {FXRack} from './fx-rack.js';
 import {installOutputProtection} from './antclip.js';
 import {profilePolyphony} from './audio-profile.js';
 
-export const MAX_POLYPHONY=32;
+export const MAX_POLYPHONY=64;
 
 export class Stage {
   constructor(ctx,state,{bank=()=>{},note=()=>{},pedal=()=>{}}={},options={}){
@@ -37,11 +37,10 @@ export class Stage {
     this.fx=new FXRack(ctx,this.master,this.state,this.buses,{lite:this.lite});
     for(const name of Object.keys(engines))this.update(name);
   }
-  activeVoiceLimit(mask=this.state.mask){
-    if(!this.lite)return this.voiceLimit;
-    // Camadas múltiplas multiplicam o número real de osciladores por nota MIDI.
-    const layers=Object.values(engines).filter(x=>mask&x.bit).length;
-    return layers>=3?4:layers===2?6:8;
+  activeVoiceLimit(_mask=this.state.mask){
+    // 32 playable MIDI notes is a floor, even for mobile and layered scenes.
+    // Engine-specific quality (waveguides/unison/FX) is adapted independently.
+    return this.voiceLimit;
   }
   update(name,changed){
     const patch=this.state.patches[name];

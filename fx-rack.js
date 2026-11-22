@@ -142,12 +142,12 @@ export class FXRack {
     this.master=master;this.buses=buses;this.lite=Boolean(options.lite);
     // No modo leve, nem convolver, nem FX de modulação, nem EQ/Comp são
     // criados até que o usuário habilite o efeito num motor com FX ligado.
-    for(const name of Object.keys(engines))this.inserts[name]=this.lite?null:makeInsert(ctx,buses[name],master);
+    for(const name of Object.keys(engines))this.inserts[name]=null;
     for(const {id,type} of effectsDefinition){
       this.sends[id]={};
       if(type==='eq'||type==='comp'){this.nodes[id]={type};continue}
       this.nodes[id]=null;
-      if(!this.lite)this.createSlot(id,type);
+      // Todos os FX, inclusive no desktop, são criados apenas quando necessários.
     }
     this.update();
   }

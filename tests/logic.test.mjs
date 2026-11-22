@@ -31,7 +31,7 @@ test('presets completos com valores válidos',()=>{
 test('estado inválido não destrói timbres nem cenas',()=>{
  const s=memoryStorage();s.setItem('palco-stage-panel-v1',JSON.stringify({mask:99,editor:'missing',duo:true,patches:{organ:{preset:'bad',values:{bars:[100]}},synth:{values:{cutoff:-90}}}}));
  const state=loadState(s);
- assert.equal(state.mask,5);assert.equal(state.editor,'piano');
+ assert.equal(state.mask,1);assert.equal(state.editor,'piano');
  assert.equal(state.patches.organ.values.bars.length,9);
  assert.ok(state.patches.synth.values.cutoff>=90);
 });

@@ -1,5 +1,5 @@
 // Perfis de processamento separados dos presets musicais.
-export const PROFILES = Object.freeze({lite:{voices:8,meterInterval:240},full:{voices:32,meterInterval:80}});
+export const PROFILES = Object.freeze({lite:{voices:32,meterInterval:240},full:{voices:64,meterInterval:80}});
 export const PROFILE_STORAGE_KEY='palco-stage-audio-profile-v1';
 export function defaultProfile(navigatorLike={}){
   const ua=navigatorLike.userAgent||'';

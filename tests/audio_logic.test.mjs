@@ -14,5 +14,11 @@ test('piano sintetizado utiliza a curva de toque',()=>{
 });
 
 test('limite de polifonia permanece controlado',()=>{
-  assert.equal(MAX_POLYPHONY,32);
+  assert.equal(MAX_POLYPHONY,64);
+});
+
+test('palco conserva 32 vozes mínimas no modo Leve e 64 no Completo com camadas',async()=>{
+  const {Stage}=await import('../stage.js');
+  assert.equal(Stage.prototype.activeVoiceLimit.call({lite:true,voiceLimit:32},1),32);
+  assert.equal(Stage.prototype.activeVoiceLimit.call({lite:false,voiceLimit:64},31),64);
 });

@@ -59,3 +59,8 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 ## D-011 — Integração mecânica experimental, sem promover motor (22/11/2026)
 
 **Decisão:** manter a v1.9.5 intacta e testar o corpo de ressonâncias v1.12.1 **dentro do AudioWorklet** do piano físico numa nova pasta `experimental/physical-mechanics-v1.12.2/`. A interação usa retorno mecânico limitado, não uma segunda convolução de reverb nem feedback entre AudioNodes. Deve haver bypass A/B em tempo real e testes de estabilidade com 32/64 vozes. **Não chamar de integração à v1.11**, pois o código dessa linha não está disponível no repositório central. A v1.12.2 ainda depende de avaliação auditiva e validação em hardware.
+
+
+## D-011 — Novo motor deve ser selecionável dentro do Piano Acústico (22/11/2026)
+
+**Decisão explícita do usuário:** não adicionar categorias, módulos, banners, links ou botões externos para acessar novos motores; usar a opção existente **Motor do piano** com **A · Claude** e **B · Novo Stage**. A síntese clássica permanece opção de compatibilidade. A v1.12.3 integra o B mecânico baseado em v1.9.5/v1.12.2 na raiz do aplicativo e remove os atalhos externos anteriores.

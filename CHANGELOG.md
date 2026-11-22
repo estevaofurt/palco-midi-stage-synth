@@ -1,3 +1,12 @@
+## v1.12.3 — Integração A/B no Piano Acústico (22/11/2026)
+
+- Seleção **A · Claude (modal)** e **B · Novo Stage (mecânico)** no editor do piano, com clássico de compatibilidade.
+- Integrado ao código principal o acoplamento físico baseado na v1.9.5 + v1.12.2.
+- Removidos banners, atalhos e páginas de acesso criados anteriormente; não foram adicionadas categorias.
+- Escolha persistida no perfil Leve e Completo; importações AudioWorklet têm versão para reduzir cache.
+- Polifonia de 32 a 64 vozes conforme qualidade, ainda pendente de validação real no Moto g04s.
+- 79 testes automatizados e verificação da seleção no navegador simulado; AudioWorklet real pendente.
+
 ## v1.8.4 — Perfil Leve para celulares de entrada
 
 - Escolha automática de perfil Leve em Android/iPhone e aparelhos com pouca memória/CPU; escolha manual no cabeçalho.
