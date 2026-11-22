@@ -35,9 +35,14 @@ function pinkNoise(ctx){
   }
   return buf;
 }
+// Controle de portamento independente do modo de voz: a transição é entre
+// note-ons consecutivos do mesmo teclado/canal, não um efeito de nota estática.
+export const targetFrequency=(key,p)=>hz(key)*2**((p.octave*12+p.semitones+p.fine/100)/12);
+export const unisonCount=p=>clamp(Number(p.unison)||1,1,3);
 export class Synth{
   constructor(ctx,bus){this.ctx=ctx;this.input=bus;this.previousHz=new Map();this.white=noiseBuffer(ctx,1.15);this.pink=pinkNoise(ctx);this.syncCache=new Map()}
   update(){}
+  forget(expression){this.previousHz.delete(expression)}
   setWave(osc,wave,p,side){
     if(p.sync==='on'&&side==='B'){
       const key=wave+'/'+p.syncRatio+'/'+p.pulseWidth;
@@ -52,7 +57,7 @@ export class Synth{
   play(part,key,velocity,p,expression,legato=false){
     const ctx=this.ctx,now=ctx.currentTime,v=velocity/127;
     const mode=p.voiceMode||'poly',isLegato=mode==='legato'&&legato;
-    const baseHz=hz(key)*2**((p.octave*12+p.semitones+p.fine/100)/12);
+    const baseHz=targetFrequency(key,p);
     const filterType=p.filterType||'lowpass';
     const tone=filter(ctx,filterType,p.cutoff,p.resonance);
     const base=clamp(p.cutoff*2**((key-60)/40)*(.6+.4*v),55,ctx.sampleRate*.45);
@@ -68,29 +73,39 @@ export class Synth{
     tone.connect(env).connect(vca).connect(pan).connect(part.gate);part.own(tone,env,vca,pan);
     const lfo=ctx.createOscillator(),lfoGain=gain(ctx,0);
     lfo.type='sine';lfo.frequency.value=p.lfoRate||5;lfo.connect(lfoGain);
-    const controls=[],mix=p.blend/100;
-    const portamento=(mode==='mono'||mode==='legato')?p.glide:0;
-    const last=this.previousHz.get(expression)||baseHz;
+    const controls=[];
+    const previous=this.previousHz.get(expression);
+    const glideSeconds=Math.max(0,Number(p.glide)||0);
+    // No audible glide on the first note (there is no pitch to glide from).
+    const glideFrom=Number.isFinite(previous)?previous:baseHz;
     this.previousHz.set(expression,baseHz);
-    for(const [side,wave,amount,sign] of [
-      ['A',p.waveA,Math.cos(mix*Math.PI/2)*p.oscA/100,-1],
-      ['B',p.waveB,Math.sin(mix*Math.PI/2)*p.oscB/100,1]
-    ]){
-      const voices=Number(p.unison||1);
-      for(let j=0;j<voices;j++){
-        const osc=ctx.createOscillator(),amp=gain(ctx,amount/Math.sqrt(voices)),sp=ctx.createStereoPanner();
-        this.setWave(osc,wave,p,side);
-        const width=voices===1?0:(j-(voices-1)/2)/(voices-1);
-        const spread=sign*(p.spread/100)*.5+width*.24;
-        sp.pan.value=clamp(spread,-1,1);
-        const unisonDetune=(p.detune/2)*sign+width*14;
-        osc.detune.value=unisonDetune;
-        if(portamento>.005){osc.frequency.setValueAtTime(last,now);osc.frequency.exponentialRampToValueAtTime(baseHz,now+portamento)}
-        else osc.frequency.value=baseHz;
-        osc.connect(amp).connect(sp).connect(tone);part.own(amp,sp);part.start(osc);
-        controls.push({osc,amp,sp,side,sign,width});
+    const createOsc=(side,index,params,initial=false)=>{
+      const osc=ctx.createOscillator(),amp=gain(ctx,0),sp=ctx.createStereoPanner();
+      const wave=side==='A'?params.waveA:params.waveB;
+      this.setWave(osc,wave,params,side);
+      if(initial&&glideSeconds>.005&&Math.abs(glideFrom-baseHz)>.01){
+        osc.frequency.setValueAtTime(Math.max(1,glideFrom),now);
+        osc.frequency.exponentialRampToValueAtTime(baseHz,now+glideSeconds);
+      }else osc.frequency.value=targetFrequency(key,params);
+      osc.connect(amp).connect(sp).connect(tone);
+      part.own(amp,sp);part.start(osc);
+      const c={osc,amp,sp,side,sign:side==='A'?-1:1,index,width:0};
+      controls.push(c);
+      return c;
+    };
+    for(const side of ['A','B'])for(let j=0;j<unisonCount(p);j++)createOsc(side,j,p,true);
+    const refreshOscLevels=(next,time)=>{
+      const total=unisonCount(next),blend=next.blend/100;
+      for(const c of controls){
+        c.width=total===1?0:(c.index-(total-1)/2)/((total-1)/2);
+        const enabled=c.index<total;
+        const level=c.side==='A'?Math.cos(blend*Math.PI/2)*next.oscA/100:Math.sin(blend*Math.PI/2)*next.oscB/100;
+        smooth(c.amp.gain,enabled?level/Math.sqrt(total):0,time,.014);
+        smooth(c.osc.detune,c.sign*next.detune*.5+c.width*14,time);
+        smooth(c.sp.pan,clamp(c.sign*next.spread/200+c.width*.24,-1,1),time);
       }
-    }
+    };
+    refreshOscLevels(p,now);
     // Keep both noise colours available, so a zero-to-nonzero level change
     // or a pink/white switch works during a sustained note.
     const noiseGains={white:gain(ctx,0),pink:gain(ctx,0)};
@@ -105,39 +120,46 @@ export class Synth{
     part.own(lfoGain);
     // Auxiliary oscillator is a source owned by the voice and stops with its gate.
     part.start(lfo,{pitch:false});
-    let matrixGain=null;
-    const pressure=expression.pressure;
-    const source=pressure||null;
-    if(source){matrixGain=gain(ctx,0);source.connect(matrixGain);part.own(matrixGain)}
-    function applyMod(next){
+    // Matriz de modulação dinâmica: velocity E aftertouch podem ser
+    // roteados (e trocados) enquanto a nota está tocando.
+    const velocitySource=ctx.createConstantSource();velocitySource.offset.value=v-.5;
+    part.start(velocitySource,{pitch:false});
+    const matrixGain=gain(ctx,0);part.own(matrixGain);
+    let matrixSource=null;
+    const applyMod=next=>{
       const amount=(next.lfoDepth||0)/100;
       const dst=next.lfoDest||'pitch';
       try{lfoGain.disconnect()}catch{}
-      if(dst==='pitch'){for(const c of controls)lfoGain.connect(c.osc.detune);smooth(lfoGain.gain,amount*75,ctx.currentTime)}
-      else if(dst==='cutoff'){lfoGain.connect(tone.frequency);smooth(lfoGain.gain,amount*Math.min(2800,next.cutoff*.65),ctx.currentTime)}
-      else {lfoGain.connect(env.gain);smooth(lfoGain.gain,amount*volume*.36,ctx.currentTime)}
-      if(matrixGain){try{matrixGain.disconnect()}catch{}
-        const dest=next.matrixDest==='pitch'?null:next.matrixDest==='amp'?env.gain:tone.frequency;
-        if(next.matrixDest==='pitch')for(const c of controls)matrixGain.connect(c.osc.detune);
-        else if(dest)matrixGain.connect(dest);
-        const scale=next.matrixDest==='pitch'?80:next.matrixDest==='amp'?volume*.35:Math.min(2400,next.cutoff*.6);
-        smooth(matrixGain.gain,next.matrixSource==='aftertouch'?(next.matrixAmount||0)/100*scale:0,ctx.currentTime);
+      if(dst==='pitch'){
+        for(const c of controls)lfoGain.connect(c.osc.detune);
+        smooth(lfoGain.gain,amount*75,ctx.currentTime);
+      }else if(dst==='cutoff'){
+        lfoGain.connect(tone.frequency);
+        smooth(lfoGain.gain,amount*Math.min(2800,next.cutoff*.65),ctx.currentTime);
+      }else {
+        lfoGain.connect(env.gain);
+        smooth(lfoGain.gain,amount*volume*.36,ctx.currentTime);
       }
-    }
+      const source=next.matrixSource==='aftertouch'?expression.pressure:velocitySource;
+      if(matrixSource!==source){
+        if(matrixSource)try{matrixSource.disconnect(matrixGain)}catch{}
+        source.connect(matrixGain);matrixSource=source;
+      }
+      try{matrixGain.disconnect()}catch{}
+      if(next.matrixDest==='pitch')for(const c of controls)matrixGain.connect(c.osc.detune);
+      else if(next.matrixDest==='amp')matrixGain.connect(vca.gain);
+      else matrixGain.connect(tone.frequency);
+      const scale=next.matrixDest==='pitch'?90:next.matrixDest==='amp'?.30:Math.min(2400,next.cutoff*.6);
+      smooth(matrixGain.gain,(next.matrixAmount||0)/100*scale,ctx.currentTime,.012);
+    };
     applyMod(p);
-    // Velocity routing produces a per-note modulation independent of channel aftertouch.
-    if(p.matrixSource==='velocity'&&p.matrixAmount){
-      const amt=(p.matrixAmount/100)*(v-.5);
-      if(p.matrixDest==='cutoff')smooth(tone.frequency,clamp(peak+amt*p.cutoff*.65,50,ctx.sampleRate*.45),now);
-      else if(p.matrixDest==='amp')smooth(env.gain,Math.max(0,volume*(p.sustain/100+amt*.3)),now+attack);
-      else for(const c of controls)smooth(c.osc.detune,c.osc.detune.value+amt*70,now);
-    }
     part.releaseSeconds=p.release;
     part.onRelease=()=>{
       const t=ctx.currentTime;
       if(env.gain.cancelAndHoldAtTime)env.gain.cancelAndHoldAtTime(t);
       else{const current=env.gain.value;env.gain.cancelScheduledValues(t);env.gain.setValueAtTime(current,t)}
-      if(this.previousHz.get(expression)===baseHz&&mode==='poly')this.previousHz.delete(expression);
+      // A última altura permanece disponível para portamento na próxima nota.
+      // A exclusão ocorre em disconnect()/panic(), não na soltura da tecla.
     };
     part.update=(next,changed)=>{
       const t=ctx.currentTime;
@@ -150,31 +172,36 @@ export class Synth{
         smooth(tone.frequency,clamp(next.cutoff*2**((key-60)/40+envOct)*(.6+.4*v),50,ctx.sampleRate*.46),t);
         smooth(tone.Q,next.resonance,t);
       }
-      const pitchKeys=['octave','semitones','fine','glide'];
+      const pitchKeys=['octave','semitones','fine'];
       const waveKeys=['waveA','waveB','pulseWidth','sync','syncRatio'];
       const oscKeys=['blend','oscA','oscB','detune','spread','unison'];
-      const frequency=hz(key)*2**((next.octave*12+next.semitones+next.fine/100)/12);
+      const frequency=targetFrequency(key,next);
+      // O uníssono aumenta/diminui os osciladores de uma voz sustentada.
+      // Os novos osciladores entram com ganho zero e fazem fade-in, sem novo ADSR.
+      if(changedOne('unison')&&!part.released){
+        const count=unisonCount(next);
+        for(const side of ['A','B']){
+          const allocated=controls.filter(c=>c.side===side).length;
+          for(let j=allocated;j<count;j++)createOsc(side,j,next,false);
+        }
+      }
       for(const c of controls){
         if(changedOne(...waveKeys)){
           const wave=c.side==='A'?next.waveA:next.waveB;
           this.setWave(c.osc,wave,next,c.side);
         }
         if(changedOne(...pitchKeys)){
-          // Cancel any old glide ramp, then retune the oscillator without a new attack.
-          const portTime=changed==='glide'?Math.max(.015,next.glide/3):.014;
-          c.osc.frequency.cancelScheduledValues(t);
-          smooth(c.osc.frequency,frequency,t,portTime);
-        }
-        if(changedOne(...oscKeys)){
-          smooth(c.osc.detune,c.sign*next.detune*.5+c.width*14,t);
-          const level=c.side==='A'?Math.cos(next.blend*Math.PI/200)*next.oscA/100:Math.sin(next.blend*Math.PI/200)*next.oscB/100;
-          smooth(c.amp.gain,level/Math.sqrt(Number(p.unison||1)),t);
-          smooth(c.sp.pan,clamp(c.sign*next.spread/200+c.width*.24,-1,1),t);
+          // Reafinar uma nota sustentada imediatamente. Isso não cancela o
+          // portamento ao ajustar apenas o tempo do glide.
+          if(c.osc.frequency.cancelAndHoldAtTime)c.osc.frequency.cancelAndHoldAtTime(t);
+          else {const val=c.osc.frequency.value;c.osc.frequency.cancelScheduledValues(t);c.osc.frequency.setValueAtTime(val,t)}
+          smooth(c.osc.frequency,frequency,t,.014);
         }
       }
+      if(changedOne(...oscKeys))refreshOscLevels(next,t);
       if(changedOne('pan'))smooth(pan.pan,next.pan/100,t);
       if(changedOne('lfoRate'))smooth(lfo.frequency,next.lfoRate,t);
-      if(changedOne('lfoDest','lfoDepth','matrixSource','matrixDest','matrixAmount','cutoff'))applyMod(next);
+      if(changedOne('lfoDest','lfoDepth','matrixSource','matrixDest','matrixAmount','cutoff','unison'))applyMod(next);
       if(changedOne('volume'))smooth(vca.gain,(next.volume||0)/85,t);
       if(changedOne('noiseLevel','noiseType'))setNoise(next);
       if(changedOne('attack','decay','sustain')&&!part.released){

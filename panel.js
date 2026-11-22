@@ -221,6 +221,9 @@ export class Panel {
       }
       if(choices.children.length)section.append(choices);
       if(n){section.append(dials)}
+      if(id==='synth'&&g.label==='VCA e vozes'){
+        section.append(elem('p','control-hint','Portamento: desliza a afinação entre notas consecutivas do mesmo teclado/canal. Não altera a nota parada; funciona nos modos Poli, Mono e Legato.'));
+      }
       section.style.setProperty('--basis',g.controls[0].type==='drawbars'?1.05:Math.max(3,n)/3);
       groups.append(section);
     }

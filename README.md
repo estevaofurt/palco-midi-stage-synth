@@ -53,10 +53,24 @@ A interface de importação de WAV por instrumento foi retirada nesta versão, c
 - Alterações de filtros, Leslie, drawbars, Auto-Pan, tremolo, Synth (filtros/ondas/LFO) e FX são enviadas ao motor durante a execução. Alguns parâmetros físicos de ataque (martelo/dinâmica) só afetam notas iniciadas depois da alteração.
 - O botão **FX** de cada motor é um atalho para ativar/desativar a influência do rack inteiro *naquele motor*, preservando valores e destinos. Efeitos com caudas (reverb/delay) podem continuar decaindo por um instante após o bypass.
 
-## v1.6.0 — Controles durante notas sustentadas
+## v1.7.0 — Controles durante notas sustentadas
 
 O painel agora atualiza as vozes em execução ao mover knobs/seletores de timbre contínuos. A modificação ocorre de forma suavizada, sem reiniciar as notas. Entre os controles validados estão Pickup do elétrico, abafamento do piano, drawbars do órgão, afinação/volume/ruído/sustain do Synth e brilho/release do Leitor SF. O bypass FX por módulo e o endereçamento múltiplo seguem independentes.
 
 **Limites físicos:** tocar mais forte, modificar o impacto inicial do martelo ou acrescentar novas cordas/osciladores a uma nota já atacada exigiria reconstruir o ataque. Assim, ruídos de ataque, velocity e contagem de uníssono só mudam na próxima nota. Mudar o tipo de instrumento ou preset é estrutural; filtros e parâmetros contínuos correspondentes passam a atuar nas vozes existentes, mas a fonte sonora original não é substituída enquanto toca.
 
 **Testes:** `npm run check`; `python tests/browser_live_v16.py`; `python tests/browser_v15.py`; `python tests/browser_stress.py`. A calibração auditiva com controlador MIDI físico e a execução de `AudioWorklet` em HTTPS real continuam pendentes.
+
+
+## Stage Synth v1.7.0 — Organ B3 e síntese ao vivo
+
+- Órgão: seletor **B3 Jazz / B3 Gospel / Church Tubos** independente dos presets Natural, Suave e Brilhante.
+- Atualização do registro e drawbars em notas sustentadas; migração automática dos ajustes de versões anteriores (sem apagar presets salvos).
+- Synth: agora o **Uníssono 1/2/3** funciona durante notas sustentadas, adicionando osciladores com fade-in e silenciando os excedentes ao reduzir o número de vozes.
+- Matriz de modulação com **Velocity e Aftertouch** pode ser reconfigurada em tempo real.
+- **Portamento** agora também atua no modo Polifônico, entre notas consecutivas do mesmo controlador/canal. O controle de tempo afeta a próxima transição entre notas, e não desloca a altura de uma nota imóvel.
+- Ao trocar de Polifônico para Mono/Legato, notas extras em andamento são liberadas.
+- Panic e desconexão MIDI limpam o histórico de notas do glide.
+- 27 testes de lógica e testes de navegador específicos para seleção, glide, uníssono, matriz e panic.
+
+**Limites:** uníssono dinâmico aumenta uso de CPU nas notas ativas; testar em controladores físicos e celulares antes de uso ao vivo. O código não transforma timbres modelados em amostras de piano real.

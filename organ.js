@@ -34,11 +34,12 @@ export class Organ {
     this.vibrDepth=gain(ctx,0);this.vibr.connect(this.vibrDepth);this.vibr.start();
   }
   update(p){
-    const bars=p.type+'/'+p.bars.join('');
+    const kind=p.registration==='church'?'church':'b3';
+    const bars=kind+'/'+p.registration+'/'+p.bars.join('');
     if(bars!==this.registration){
       const real=new Float32Array(17),imag=new Float32Array(17);
       [1,3,2,4,6,8,10,12,16].forEach((harmonic,i)=>{
-        const position=p.type==='church'?Math.max(0,p.bars[i]-(i>3?2:0)):p.bars[i];
+        const position=kind==='church'?Math.max(0,p.bars[i]-(i>3?2:0)):p.bars[i];
         imag[harmonic]=position===0?0:10**((position-8)*3/20);
       });
       this.wave=this.ctx.createPeriodicWave(real,imag,{disableNormalization:true});
@@ -46,11 +47,11 @@ export class Organ {
       this.registration=bars;
     }
     if(this.drive!==p.drive){this.input.curve=saturation(p.drive,.018);this.drive=p.drive}
-    this.bass(p.type==='church'?'stop':p.rotor==='off'?'stop':p.rotor,p.width);this.horn(p.type==='church'?'stop':p.rotor==='off'?'stop':p.rotor,p.width);
+    this.bass(kind==='church'?'stop':p.rotor==='off'?'stop':p.rotor,p.width);this.horn(kind==='church'?'stop':p.rotor==='off'?'stop':p.rotor,p.width);
     smooth(this.vibrDepth.gain,p.vibrato*.11, this.ctx.currentTime);
   }
   play(part,key,velocity,p,_expression,legato){
-    const ctx=this.ctx,now=ctx.currentTime,f=hz(key);
+    const ctx=this.ctx,now=ctx.currentTime,f=hz(key),kind=p.registration==='church'?'church':'b3';
     const osc=ctx.createOscillator(), draw=gain(ctx,0);
     osc.setPeriodicWave(this.wave);osc.frequency.value=f*.5;this.vibrDepth.connect(osc.detune);
     draw.gain.setValueAtTime(0,now);draw.gain.linearRampToValueAtTime(.073*(.8+.2*velocity/127),now+.006);
@@ -58,18 +59,18 @@ export class Organ {
     this.live.add(osc);const cleanup=osc.onended;
     osc.onended=()=>{try{this.vibrDepth.disconnect(osc.detune)}catch{}this.live.delete(osc);cleanup()};
     const ratio=p.percussion==='third'?3:2;
-    if(p.type!=='church'&&!legato&&p.percussion!=='off'&&f*ratio<ctx.sampleRate*.48){
+    if(kind!=='church'&&!legato&&p.percussion!=='off'&&f*ratio<ctx.sampleRate*.48){
       const perc=ctx.createOscillator(), amp=gain(ctx,.108);
       perc.frequency.value=f*ratio;amp.gain.setTargetAtTime(0,now,.092);
       perc.connect(amp).connect(part.gate);part.own(amp);part.start(perc,{until:now+.72});
     }
-    if(p.type!=='church'&&p.click){
+    if(kind!=='church'&&p.click){
       const click=ctx.createBufferSource(), amp=gain(ctx,p.click*.00055*(.4+.6*velocity/127));
       const contact=filter(ctx,'bandpass',1700+key*12,.8);
       click.buffer=this.noise;amp.gain.setTargetAtTime(0,now,.0028);
       click.connect(contact).connect(amp).connect(part.gate);part.own(contact,amp);part.start(click,{pitch:false});
     }
-    part.releaseSeconds=p.type==='church'?.22:.042;
-    part.update=next=>{part.releaseSeconds=next.type==='church'?.22:.042};
+    part.releaseSeconds=kind==='church'?.22:.042;
+    part.update=next=>{part.releaseSeconds=next.registration==='church'?.22:.042};
   }
 }

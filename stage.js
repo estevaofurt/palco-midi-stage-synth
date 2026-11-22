@@ -41,6 +41,19 @@ export class Stage {
       const part=v.parts.get(name);
       if(part&&!part.ended)part.update?.(patch.values,changed);
     }
+    if(name==='synth'&&changed==='voiceMode'&&patch.values.voiceMode!=='poly'){
+      // Alternar de poli para mono/legato também deve limitar as vozes já ativas.
+      const byGroup=new Map();
+      for(const v of this.voices.values()){
+        if(!v.held||!v.parts.has('synth'))continue;
+        const prior=byGroup.get(v.group);
+        if(prior){
+          const old=prior.parts.get('synth');old?.release(true);
+          if(prior.parts.size===1)prior.held=false;
+        }
+        byGroup.set(v.group,v);
+      }
+    }
   }
   updateEffects(){this.fx.update()}
   group(source,channel){
@@ -153,6 +166,7 @@ export class Stage {
   disconnect(source){
     for(const v of this.voices.values())if(v.group.source===source)this.stopVoice(v,true);
     for(const [key,g] of this.groups)if(g.source===source){
+      this.instruments.synth?.forget(g);
       g.pitch.stop();g.vibr.stop();g.pressure.stop();g.pitch.disconnect();g.vibr.disconnect();g.depth.disconnect();g.pressure.disconnect();
       // Part cleanup disconnects its individual detune destination after its release ramp.
       this.groups.delete(key);

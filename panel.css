@@ -196,3 +196,6 @@ footer{flex-wrap:wrap}
 .fx-toggle.on{font-weight:800}
 .fx-toggle:not(.on){background:#252326;border-color:#777078;color:#c9bdb4}
 .dial:focus-within .dial-wheel{outline:2px solid #d89a74;outline-offset:3px}
+
+/* Ajuda contextual sem ocupar espaço nos controles de performance. */
+.control-hint{margin:10px 0 0;color:#aba5a0;font-size:11px;line-height:1.45;max-width:60ch}

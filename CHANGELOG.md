@@ -1,3 +1,14 @@
+## v1.7.0 — seleção do órgão e síntese em tempo real
+
+- Corrigido o seletor do órgão para distinguir B3 Jazz, B3 Gospel e Church.
+- Migração de preferências e presets antigos de órgão (campo `type` para `registration`).
+- Implementado Unison dinâmico para notas de Synth já iniciadas, com transição de ganhos.
+- Matrix Velocity/Aftertouch agora redireciona a modulação à voz ativa.
+- Portamento com rampas entre notas em Poly/Mono/Legato; ajuste de glide não cancela uma rampa em curso.
+- Mudança para Mono/Legato limita as notas já ativas; `panic`/desconexão limpam o histórico de portamento.
+- Ajuda contextual no editor explicando quando o glide é ouvido.
+- Testes: 27 lógicos aprovados, validação de navegador e corte de vozes.
+
 # v1.5.0 — Motor modal e roteamento FX
 
 - Adicionado modo experimental de síntese modal para piano, rodando em AudioWorklet e com fallback à síntese clássica.

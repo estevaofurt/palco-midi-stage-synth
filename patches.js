@@ -39,12 +39,12 @@ export const engines={
   },
   organ:{name:'Órgão',short:'Órgão',bit:2,level:72,
     presets:[
-      preset('jazz','B3 · Jazz',{type:'b3',rotor:'slow',bars:[8,8,8,0,0,0,0,0,0]}),
-      preset('gospel','B3 · Gospel',{type:'b3',bars:[8,5,8,6,3,5,2,3,5],percussion:'off',click:32,drive:37,rotor:'fast',width:78}),
-      preset('church','Church · Tubos',{type:'church',bars:[8,6,8,5,3,4,2,1,1],percussion:'off',rotor:'off',click:0,drive:0,vibrato:7,width:44})
+      preset('jazz','B3 · Jazz',{registration:'jazz',rotor:'slow',bars:[8,8,8,0,0,0,0,0,0]}),
+      preset('gospel','B3 · Gospel',{registration:'gospel',bars:[8,5,8,6,3,5,2,3,5],percussion:'off',click:32,drive:37,rotor:'fast',width:78}),
+      preset('church','Church · Tubos',{registration:'church',bars:[8,6,8,5,3,4,2,1,1],percussion:'off',rotor:'off',click:0,drive:0,vibrato:7,width:44})
     ],
     groups:[
-      group('Instrumento',select('type','Tipo','b3',{b3:'B3 · Jazz / Gospel',church:'Church · Tubos'}),{type:'drawbars',id:'bars',label:'Registros',initial:[8,8,8,0,0,0,0,0,0]}),
+      group('Instrumento',select('registration','Tipo de órgão','jazz',{jazz:'B3 · Jazz',gospel:'B3 · Gospel',church:'Church · Tubos'}),{type:'drawbars',id:'bars',label:'Registros',initial:[8,8,8,0,0,0,0,0,0]}),
       group('Leslie e articulação',select('rotor','Leslie','slow',{off:'Desligada',slow:'Lenta',fast:'Rápida'}),select('percussion','Percussão','third',{off:'Desligada',second:'2º harmônico',third:'3º harmônico'}),knob('vibrato','Vibrato',18),knob('click','Key click',32),knob('drive','Saturação',22),knob('width','Estéreo',66))
     ]
   },
@@ -78,7 +78,7 @@ export const engines={
 };
 // O menu Preset representa uma configuração de fábrica distinta do instrumento escolhido.
 // IDs originais permanecem válidos para não perder configurações de versões anteriores.
-export const instrumentField={piano:'character',electric:'model',organ:'type',sf:'native'};
+export const instrumentField={piano:'character',electric:'model',organ:'registration',sf:'native'};
 export const instrumentName=(engine,values)=>{
   const field=instrumentField[engine];if(!field)return '';
   for(const g of engines[engine].groups)for(const c of g.controls){
@@ -158,10 +158,15 @@ export function loadState(storage){
   for(const [id,def] of Object.entries(engines)){
     const stored=saved.patches?.[id],p=fromPreset(id,stored?.preset);let values=stored?.values||{};
     if(id==='electric'&&!stored)values={...legacy};
+    // Migração v1.6: os dois B3 usavam 'type=b3', que não identifica Jazz/Gospel.
+    // Reconstrói o modelo pelo preset gravado; Church selecionado à parte tem precedência.
+    if(id==='organ'&&!Object.hasOwn(values,'registration')){
+      const prior=stored?.preset||'';
+      values={...values,registration:values.type==='church'?'church':prior.startsWith('gospel')?'gospel':prior.startsWith('church')?'church':'jazz'};
+    }
     for(const {controls} of def.groups)for(const c of controls)if(c.type!=='soundfont'&&c.type!=='samplepack')p.values[c.id]=normalise(c,values[c.id],p.values[c.id]);
     if(Number.isFinite(stored?.level))p.level=Math.max(0,Math.min(100,stored.level));
-    if(instrumentField[id]&&stored?.values?.[instrumentField[id]]&&
-      stored.values[instrumentField[id]]!==fromPreset(id,p.preset).values[instrumentField[id]]){
+    if(instrumentField[id]&&p.values[instrumentField[id]]!==fromPreset(id,p.preset).values[instrumentField[id]]){
       const chosen=presetForInstrument(id,p.values[instrumentField[id]]);
       p.preset=chosen.id;
     }
