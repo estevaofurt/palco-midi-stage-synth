@@ -1,0 +1,74 @@
+{
+  "source": "Owner-provided synchronized WAV recordings; reference note onset ~82.52s C4; original effects present",
+  "notes": "Spectral/decay measures are passage-specific, not isolated physical parameters. The synthetic tests use velocity 0.75. Do not redistribute source audio.",
+  "pianos": {
+    "japanese": {
+      "reference": {
+        "h2_h1_db_at_0p28s": 7.81,
+        "h3_h1_db_at_0p28s": -6.04,
+        "decay_db_0p09_to_0p70": -18.47
+      },
+      "previous_v193": {
+        "h2_h1_db_at_0p28s": -7.16,
+        "h3_h1_db_at_0p28s": -12.56,
+        "decay_db_0p09_to_0p70": -2.15
+      },
+      "calibrated_v194": {
+        "h2_h1_db_at_0p28s": 6.55,
+        "h3_h1_db_at_0p28s": -8.08,
+        "decay_db_0p09_to_0p70": -18.01
+      }
+    },
+    "american": {
+      "reference": {
+        "h2_h1_db_at_0p28s": -11.61,
+        "h3_h1_db_at_0p28s": -19.96,
+        "decay_db_0p09_to_0p70": -9.11
+      },
+      "previous_v193": {
+        "h2_h1_db_at_0p28s": -8.88,
+        "h3_h1_db_at_0p28s": -12.05,
+        "decay_db_0p09_to_0p70": -2.58
+      },
+      "calibrated_v194": {
+        "h2_h1_db_at_0p28s": -12.89,
+        "h3_h1_db_at_0p28s": -17.59,
+        "decay_db_0p09_to_0p70": -8.38
+      }
+    },
+    "felt": {
+      "reference": {
+        "h2_h1_db_at_0p28s": -10.77,
+        "h3_h1_db_at_0p28s": -17.28,
+        "decay_db_0p09_to_0p70": -11.3
+      },
+      "previous_v193": {
+        "h2_h1_db_at_0p28s": -7.11,
+        "h3_h1_db_at_0p28s": -11.22,
+        "decay_db_0p09_to_0p70": -3.96
+      },
+      "calibrated_v194": {
+        "h2_h1_db_at_0p28s": -11.94,
+        "h3_h1_db_at_0p28s": -19.06,
+        "decay_db_0p09_to_0p70": -11.19
+      }
+    },
+    "upright": {
+      "reference": {
+        "h2_h1_db_at_0p28s": -2.43,
+        "h3_h1_db_at_0p28s": -10.64,
+        "decay_db_0p09_to_0p70": -11.75
+      },
+      "previous_v193": {
+        "h2_h1_db_at_0p28s": -9.2,
+        "h3_h1_db_at_0p28s": -15.88,
+        "decay_db_0p09_to_0p70": -2.7
+      },
+      "calibrated_v194": {
+        "h2_h1_db_at_0p28s": -2.42,
+        "h3_h1_db_at_0p28s": -16.65,
+        "decay_db_0p09_to_0p70": -12.75
+      }
+    }
+  }
+}
