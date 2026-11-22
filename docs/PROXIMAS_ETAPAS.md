@@ -1,3 +1,16 @@
+# Pesquisa externa concluída — 22/11/2026
+
+- [x] Referências científicas/comerciais/código aberto reunidas e mapeadas para os motores **A (modal), B (físico v1.9.5) e C (mecânico)**.
+- [x] Documento: [`REFERENCIAS_EXTERNAS_FIDELIDADE_MOTORES_2026-11-22.md`](REFERENCIAS_EXTERNAS_FIDELIDADE_MOTORES_2026-11-22.md).
+- [ ] **Próxima implementação P0:** suíte acústica de múltiplas notas/velocities com B, cents, dois tempos de decaimento, ganho por parcial, brilho por força e teste de clipping.
+- [ ] **P1 B/C:** corrigir inarmonicidade insuficiente com dispersão allpass calibrada e filtro de perda por frequência; não compensar H2 apenas com ganho artificial.
+- [ ] **P2 A:** ampliar capacidade modal 32→64 vozes somente se os testes de realismo/desempenho justificarem.
+- [ ] **P3–P4:** modelo de ataque comutado + tampo/pedal compartilhados; validar benefícios audíveis e custo de CPU.
+- [ ] Não promover novo DSP antes de comparação A/B nivelada e teste real no PC/Moto g04s. A v1.9.5 continua disponível para regressão.
+- **Nesta entrega foi feita apenas pesquisa/documentação; nenhum DSP, seletor ou preset foi alterado.**
+
+---
+
 # Atualização da comparação v1.12.4 (22/11/2026)
 
 - [x] A modal, B Stage físico histórico v1.9.5 e C Stage mecânico selecionáveis no mesmo módulo Piano Acústico.
