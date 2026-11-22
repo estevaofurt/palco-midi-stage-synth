@@ -48,3 +48,12 @@ Registrar em `docs/ESTADO_ATUAL.md`: **commit, pasta, mudança real, testes exec
 ## Próxima ação técnica recomendada
 
 **Localizar a fonte exata do Novo Stage e comparar sua arquitetura com o protótipo mecânico v1.12.1 antes de fazer merge**, mantendo a v1.9.5 como regressão de estabilidade. Se a fonte não estiver disponível, estudar/adaptar a integração em uma nova pasta experimental baseada em código realmente acessível, sem chamá-la de integração ao Novo Stage.
+
+## Execução em 22/11/2026 — acoplamento em base acessível
+
+- [x] Criar experimento **v1.12.2** baseado na v1.9.5 com ponte, tampo e cordas simpáticas processados no mesmo AudioWorklet, com realimentação limitada e bypass A/B.
+- [x] Integrar CC64, estados de amortecedores e testes de notas repetidas; rodar 76 testes e benchmark offline com 32/64 vozes.
+- [ ] Validar Audioworklet real no navegador do usuário e ouvir A/B em PC e Moto g04s; confirmar que não surgiram novos estalos.
+- [ ] **Recuperar a fonte exata do Novo Stage v1.11.0** para portar a integração sem quebrar seu comparador Claude/Stage.
+- [ ] Corrigir inarmonicidade e decaimento dependente da frequência; pontuação do scorecard anterior não demonstra realismo.
+- [ ] Calibrar auditivamente com notas secas e os quatro WAVs disponíveis como referência final (efeitos originais inclusos).

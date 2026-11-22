@@ -45,3 +45,11 @@ O aplicativo possui seis módulos: Piano Acústico (Japanese, American, Felt, Up
 ## Como atualizar este arquivo
 
 Após uma entrega, acrescentar: **versão/pasta + commit SHA + mudança real + testes executados + teste em hardware (se houver) + link de publicação confirmado + limitações abertas**. Não apresentar benchmark offline como desempenho garantido no celular.
+
+## Atualização experimental v1.12.2 — 22/11/2026
+
+- **Novo experimento executável:** `experimental/physical-mechanics-v1.12.2/`. É uma integração do núcleo `mechanical-resonance-v1.12.1` no AudioWorklet físico **baseado na v1.9.5**, não um merge no Novo Stage v1.11 de outra conversa (fonte ainda ausente do repositório).
+- **Integração:** feedback mecânico limitado devolvido à corda no próximo sample, 88 estados de amortecedores, CC64, corpo estéreo, cordas simpáticas e seletor A/B `Acoplamento mecânico`.
+- **Validação:** 76 testes automatizados de lógica passaram; interface validada em desktop e Android simulado. Testes de 32 e 64 notas sem clipping offline; bypass A/B com saída original idêntica quando desligado. Benchmark Node offline aproximado: 32 vozes 77→91 ms/1s; 64 vozes 219→246 ms/1s. São números de computador de testes, **não** homologação em hardware do usuário.
+- **Pendente:** Chrome AudioWorklet real bloqueado neste ambiente (localhost `ERR_BLOCKED_BY_ADMINISTRATOR`), comparação auditiva com as quatro referências, testes reais no PC/Moto g04s e obtenção do código do Novo Stage v1.11.
+- **Não houve substituição da raiz v1.8.4 nem da base estável relatada v1.9.5.**
