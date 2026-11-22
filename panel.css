@@ -94,3 +94,8 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:14px;pa
 @media(pointer:coarse) and (max-width:640px){
  .hard-button{min-height:42px}.toggle{min-height:34px}.octave button,.cut-button,.pedal-button{min-height:36px}.octave button{width:32px}
 }
+
+.keyboard-hint{margin:0;padding:0 13px 7px;color:#bab4af;font-size:.74rem;letter-spacing:.01em}
+#voice-status{white-space:nowrap;color:#d0b89f;font: .79rem var(--mono)}
+footer{flex-wrap:wrap}
+@media(max-width:640px){.keyboard-hint{display:none}#voice-status{font-size:.70rem}}

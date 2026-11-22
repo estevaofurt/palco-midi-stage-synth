@@ -1,6 +1,6 @@
 # Palco MIDI · Stage Synth
 
-Versão **1.1.0** — estabilização e recuperação do aplicativo Palco MIDI, usando o código fornecido pelo proprietário. O antigo site do Palco MIDI permanece independente.
+Versão **1.2.0** — estabilização e recuperação do aplicativo Palco MIDI, usando o código fornecido pelo proprietário. O antigo site do Palco MIDI permanece independente.
 
 **Site (GitHub Pages):** <https://estevaofurt.github.io/palco-midi-stage-synth/>
 
@@ -8,7 +8,8 @@ Versão **1.1.0** — estabilização e recuperação do aplicativo Palco MIDI, 
 
 - Cenas, camadas dos quatro motores, volumes independentes e seleção de timbres
 - Piano acústico sintetizado, piano elétrico, órgão com drawbars e sintetizador
-- Teclado na tela, oitavas, sustain, comando de pânico e entrada MIDI Web MIDI (quando disponível)
+- Teclado na tela e por letras do computador, oitavas, sustain, comando de pânico e entrada MIDI Web MIDI (quando disponível)
+- Indicador de polifonia e resposta da curva de toque aplicada ao piano alternativo
 - Editor de timbres com presets e preferências salvas localmente
 - Interface responsiva, incluindo uma oitava de teclado em telas estreitas
 
@@ -18,7 +19,7 @@ Versão **1.1.0** — estabilização e recuperação do aplicativo Palco MIDI, 
 
 **Testes de lógica:** instale Node.js 22+ e execute `npm test`.
 
-**Testes com navegador:** a revisão funcional foi realizada com Chromium/Playwright, incluindo inicialização, teclado na tela, os quatro motores e layout móvel. Um teclado MIDI físico ainda precisa ser testado.
+**Testes com navegador:** use `python tests/browser_smoke.py` e `python tests/browser_stress.py` com Chromium e Playwright instalados. Abrangem inicialização, teclado virtual e do computador, os quatro motores, stress MIDI, sustain, corte de áudio e layout móvel. Um teclado MIDI físico ainda precisa ser testado.
 
 ## Informações importantes
 

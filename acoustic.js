@@ -1,4 +1,4 @@
-import {filter,gain,hz,smooth} from './voice.js';
+import {clamp,filter,gain,hz,smooth} from './voice.js';
 import {PianoBank} from './piano-bank.js';
 
 function stringResponse(ctx){
@@ -29,6 +29,10 @@ function roomResponse(ctx){
   }
   return buffer;
 }
+// Mapeamento da intensidade MIDI consistente com o controle de toque.
+export function fallbackVelocity(velocity,touch){
+  return clamp((velocity/127)**(2**((50-touch)/55)),.001,1);
+}
 export class Acoustic {
   constructor(ctx,bus,status){
     this.ctx=ctx;this.bank=new PianoBank(ctx,status);
@@ -53,13 +57,25 @@ export class Acoustic {
     part.pedal=down=>smooth(send.gain,down?.92:.12,this.ctx.currentTime,.04);
     const regions=this.bank.layers(key,velocity,p);
     if(!regions.length){
-      const force=velocity/127;
-      for(const [ratio,mix,tau] of [[1,.27,1.9],[2.002,.13*force,.67],[3.008,.07*force,.30]]){
+      // Apply the same touch response when the recorded piano bank is unavailable.
+      // Hammer hardness changes the attack and overtone balance independently of volume.
+      const force=fallbackVelocity(velocity,p.touch);
+      const hardness=clamp(p.hammer/100,0,1);
+      const strike=.003+.006*(1-hardness);
+      const decay=2**((60-key)/105);
+      for(const [ratio,mix,tau] of [
+        [1,.28,1.9],
+        [2.002,.065+.16*hardness*force,.67],
+        [3.008,.018+.12*hardness*force,.30],
+        [4.013,.008+.045*hardness*force,.19]
+      ]){
         if(hz(key)*ratio>=this.ctx.sampleRate*.47)continue;
         const osc=this.ctx.createOscillator(),amp=gain(this.ctx,0);
         osc.frequency.value=hz(key)*ratio;amp.gain.setValueAtTime(0,now);
-        amp.gain.linearRampToValueAtTime(mix*force,now+.004);amp.gain.setTargetAtTime(0,now+.005,tau);
-        osc.connect(amp).connect(part.gate);part.own(amp);part.start(osc,{until:now+tau*9});
+        amp.gain.linearRampToValueAtTime(mix*force,now+strike);
+        amp.gain.setTargetAtTime(0,now+strike+.001,tau*decay);
+        osc.connect(amp).connect(part.gate);part.own(amp);
+        part.start(osc,{until:now+Math.min(35,tau*decay*9)});
       }
       return;
     }

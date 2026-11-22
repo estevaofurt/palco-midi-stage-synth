@@ -5,6 +5,8 @@ import {Electric} from './electric.js';
 import {Organ} from './organ.js';
 import {Synth} from './synth.js';
 
+export const MAX_POLYPHONY=32;
+
 export class Stage {
   constructor(ctx,state,{bank=()=>{},note=()=>{},pedal=()=>{}}={}){
     this.ctx=ctx;this.state=state;this.noteChanged=note;this.pedalChanged=pedal;
@@ -53,7 +55,7 @@ export class Stage {
     if(!mask)return;
     const group=this.group(source,channel);
     const playing=[...this.voices.values()];
-    if(playing.length>=32){
+    if(playing.length>=MAX_POLYPHONY){
       const steal=playing.find(v=>!v.held) || playing[0];
       this.stopVoice(steal,true);this.voices.delete(steal.id);
     }
@@ -65,7 +67,7 @@ export class Stage {
       const instrument=this.instruments[name], p=this.state.patches[name].values;
       const part=new Part(this.ctx,instrument.input,group,()=>{
         v.parts.delete(name);
-        if(!v.parts.size){this.voices.delete(v.id);if(v.held)this.noteChanged()}
+        if(!v.parts.size){this.voices.delete(v.id);this.noteChanged()}
       });
       v.parts.set(name,part);
       try{
@@ -92,6 +94,10 @@ export class Stage {
     this.noteChanged();
   }
   releaseId(id){this.stopVoice(this.voices.get(id))}
+  voiceStats(){
+    let held=0;for(const v of this.voices.values())if(v.held)held++;
+    return {active:this.voices.size,held,limit:MAX_POLYPHONY};
+  }
   setPedal(group,down){
     group.pedal=down;
     for(const v of this.voices.values())if(v.group===group){
@@ -110,6 +116,7 @@ export class Stage {
   message(source,data){
     if(!data||data.length<3)return;
     const [status,a,b]=data,ch=status&15,op=status&240;
+    if(!Number.isInteger(status)||status<128||status>239||a>127||b>127)return;
     if(op===144&&b>0)return this.startNote(source,ch,a,b);
     if(op!==128&&op!==144&&op!==176&&op!==224)return;
     const group=this.group(source,ch);

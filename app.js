@@ -8,6 +8,9 @@ let ctx,stage,access,panel,saveTimer,previewTimer,previewToken=0;
 let frame=0,lastMeter=0;
 const midiPorts=new Map(),activePointers=new Map(), keyboardButtons=new Map();
 const noteNames=['Dó','Dó♯','Ré','Mi♭','Mi','Fá','Fá♯','Sol','Sol♯','Lá','Si♭','Si'];
+// Teclado do computador: duas oitavas cromáticas a partir da oitava selecionada.
+const computerOffsets={KeyA:0,KeyW:1,KeyS:2,KeyE:3,KeyD:4,KeyF:5,KeyT:6,KeyG:7,KeyY:8,KeyH:9,KeyU:10,KeyJ:11,KeyK:12,KeyO:13,KeyL:14,KeyP:15,Semicolon:16,BracketLeft:17,Quote:18,BracketRight:19};
+const activeComputerKeys=new Set();
 const midiLabel=(key)=>noteNames[key%12]+(Math.floor(key/12)-1);
 function save(){
   clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveState(storage,state),140);
@@ -95,6 +98,8 @@ async function listen(id){
   }catch(e){report(e.message)}
 }
 function paintKeys(){
+  const stats=stage?.voiceStats();
+  byId('voice-status').textContent=stats?`${stats.active}/${stats.limit} vozes · ${stats.held} teclas`:'0/32 vozes';
   const held=new Set();
   if(stage)for(const v of stage.voices.values())if(v.held)held.add(v.key);
   for(const [key,button] of keyboardButtons)button.classList.toggle('down',held.has(key));
@@ -105,7 +110,7 @@ function paintPedal(){
   byId('pedal').setAttribute('aria-pressed',String(touch));byId('pedal').classList.toggle('on',Boolean(any));
 }
 function cut(){
-  stopPreview();stage?.panic();activePointers.clear();paintPedal();paintKeys();
+  stopPreview();stage?.panic();activePointers.clear();activeComputerKeys.clear();paintPedal();paintKeys();
 }
 byId('panic').onclick=cut;
 byId('pedal').onclick=async()=>{try{
@@ -126,15 +131,18 @@ function setKeys(){
     button.dataset.note=key;button.setAttribute('aria-label',midiLabel(key));
     if(black)button.style.left=(whiteIndex-.29)*100/whites+'%';
     else{whiteIndex++;if(pitch===0)button.textContent='Dó'+(Math.floor(key/12)-1)}
+    let lastKeyboardActivation=-Infinity;
     button.onkeydown=e=>{
       if((e.key===' '||e.key==='Enter')&&!e.repeat){
+        lastKeyboardActivation=performance.now();
         e.preventDefault();press('kbd-'+key,button,90);
       }
     };
     button.onkeyup=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();lift('kbd-'+key)}};
     button.onblur=()=>lift('kbd-'+key);
     button.onclick=e=>{
-      if(e.detail===0 && !activePointers.has('kbd-'+key)){
+      // Enter emits click on keydown; Space emits it on keyup. Do not sound twice.
+      if(e.detail===0 && performance.now()-lastKeyboardActivation>350 && !activePointers.has('kbd-'+key)){
         const a='assist-'+key;press(a,button,94);setTimeout(()=>lift(a),220);
       }
     };
@@ -174,6 +182,24 @@ keys.onpointermove=e=>{
 };
 keys.onpointerup=keys.onpointercancel=keys.onlostpointercapture=e=>lift(e.pointerId);
 narrow.addEventListener('change',setKeys);setKeys();
+const computerTargetIsEditable=target=>Boolean(target?.closest?.('input,select,textarea,[contenteditable="true"],button:not(.key)'));
+document.addEventListener('keydown',e=>{
+  if(e.repeat||e.altKey||e.metaKey||e.ctrlKey||e.isComposing||computerTargetIsEditable(e.target))return;
+  const offset=computerOffsets[e.code];if(offset===undefined)return;
+  e.preventDefault();
+  if(activeComputerKeys.has(e.code))return;
+  activeComputerKeys.add(e.code);
+  const key=12*(octave+1)+offset;
+  press('pc-'+e.code,keyboardButtons.get(key)||{dataset:{note:key}},e.shiftKey?110:94);
+});
+document.addEventListener('keyup',e=>{
+  if(!activeComputerKeys.has(e.code))return;
+  activeComputerKeys.delete(e.code);lift('pc-'+e.code);
+});
+window.addEventListener('blur',()=>{
+  for(const code of activeComputerKeys)lift('pc-'+code);
+  activeComputerKeys.clear();
+});
 function bindMIDI(){
   const names=[];
   for(const port of access.inputs.values())if(port.state==='connected'){
