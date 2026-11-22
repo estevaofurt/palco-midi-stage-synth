@@ -53,3 +53,10 @@ Após uma entrega, acrescentar: **versão/pasta + commit SHA + mudança real + t
 - **Validação:** 76 testes automatizados de lógica passaram; interface validada em desktop e Android simulado. Testes de 32 e 64 notas sem clipping offline; bypass A/B com saída original idêntica quando desligado. Benchmark Node offline aproximado: 32 vozes 77→91 ms/1s; 64 vozes 219→246 ms/1s. São números de computador de testes, **não** homologação em hardware do usuário.
 - **Pendente:** Chrome AudioWorklet real bloqueado neste ambiente (localhost `ERR_BLOCKED_BY_ADMINISTRATOR`), comparação auditiva com as quatro referências, testes reais no PC/Moto g04s e obtenção do código do Novo Stage v1.11.
 - **Não houve substituição da raiz v1.8.4 nem da base estável relatada v1.9.5.**
+
+
+## Correção de acesso ao experimento v1.12.2 (22/11/2026)
+
+O aplicativo principal na raiz ainda é v1.8.4; a implementação do acoplamento mecânico **não está incluída nesse motor**. Para eliminar confusão, foi adicionado na página principal um link explícito para `experimental/physical-mechanics-v1.12.2/acesso-motor-v1.12.2.html` e, no experimento, um botão **Ativar piano mecânico** que seleciona a síntese física, ativa acoplamento, abre o editor do piano e tenta iniciar o AudioWorklet.
+
+O endereço separado também evita reutilizar a página anterior do navegador. A existência do botão e o estado selecionado foram testados em Chromium simulado; a inicialização real do AudioWorklet ficou bloqueada pela origem de teste. A ativação em Chrome real e a audição no PC/Moto g04s continuam pendentes de confirmação do usuário.

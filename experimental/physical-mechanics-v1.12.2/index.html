@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#171719" name="theme-color"/><title>Stage Synth · Palco MIDI v1.12.2 · Mecânica experimental</title><meta name="palco-piano-bank" content="synthetic" /><link href="./panel.css?build=1.12.2" rel="stylesheet"/></head><body><main class="console">
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#171719" name="theme-color"/><title>Stage Synth · Palco MIDI v1.12.2 · Mecânica experimental</title><meta name="palco-piano-bank" content="synthetic" /><link href="./panel.css?build=1.12.2" rel="stylesheet"/><style>
+.stage-mechanics-link{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 17px;margin:10px 0 16px;border:1px solid #9c7656;border-radius:12px;background:#292528;color:#f1e8db}
+.stage-mechanics-link strong{font-size:1.03rem}.stage-mechanics-link p{margin:5px 0 0;line-height:1.5;color:#dbccbd;font-size:.86rem}
+.stage-mechanics-link a,.stage-mechanics-link button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 17px;border:1px solid #e0ac73;border-radius:8px;background:#754638;color:#fff1df;font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
+.stage-mechanics-link a:hover,.stage-mechanics-link button:hover{background:#986049}
+.stage-mechanics-link button:disabled{opacity:.6;cursor:progress}
+.stage-mechanics-link output{display:block;margin-top:4px;font-size:.8rem;color:#e7d2ac}
+</style></head><body><main class="console">
 <header class="rail">
 <h1><span aria-hidden="true" class="brand-symbol"><i></i><i></i><i></i><i></i></span>Palco<span class="brand-sub">MIDI</span></h1>
 <div class="connections"><label class="profile-selector">Áudio <select id="audio-profile" aria-label="Qualidade de áudio"><option value="lite">Leve · celular</option><option value="full">Completo · computador</option></select></label>
@@ -23,6 +30,10 @@
 </div>
 <p hidden="" id="status" role="status"></p>
 <p id="profile-note" class="profile-note" role="status"></p>
+<section class="stage-mechanics-link" aria-label="Atalho de acesso ao motor mecânico">
+  <div><strong>Motor mecânico experimental · v1.12.2</strong><p>Para ouvir o novo motor: ative o áudio e o Piano Acústico. A comparação com o motor anterior fica no editor.</p><output id="mechanical-access-state" aria-live="polite">Pronto para ativar o motor.</output></div>
+  <button id="enable-mechanical-piano" type="button">Ativar piano mecânico</button>
+</section>
 <div class="section-heading"><h2>Módulos · Stage Synth</h2><span class="engraved-line"></span></div>
 <div aria-label="Controles dos motores" class="modules" id="modules"></div>
 <div id="editors"></div>
