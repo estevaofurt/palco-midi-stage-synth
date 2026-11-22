@@ -1,3 +1,20 @@
+# Atualização do aplicativo principal — Stage Synth v1.12.4 (22/11/2026)
+
+**Confirmado no código publicado:** o módulo Piano Acústico possui três implementações selecionáveis em **Motor do piano**, sem módulos ou links extras.
+
+- **A · Claude (modal):** implementação modal adaptada já presente em `piano-worklet.js`. O código externo original do Claude não foi recuperado independentemente.
+- **B · Stage físico anterior (v1.9.5):** arquivo histórico de DSP `experimental/physical-v1.9.5/physical-piano.js`, incluído como `physical-piano-legacy.js` num AudioWorklet próprio (somente o identificador do processador mudou). É a base com estabilidade relatada no PC.
+- **C · Novo Stage mecânico:** motor integrado v1.12.3, com ponte/tampo/cordas simpáticas. Seleção `physical` antiga continua apontando para C.
+- A síntese clássica continua disponível para compatibilidade.
+
+**Não confundir B com o Novo Stage original v1.11.0 de outra conversa:** a fonte exata da v1.11.0 continua ausente deste repositório. A inclusão de B fornece uma comparação verificada, não reproduz a versão externa.
+
+Testes locais: **84 testes Node aprovados**, testes de seletor em navegador simulado desktop/Android aprovados, sem novo módulo. O ambiente de Chromium bloqueou navegação localhost para validar os três AudioWorklets reais. O desempenho e a fidelidade ainda exigem validação no PC e Moto g04s.
+
+Os WAVs de referência permanecem privados. As versões experimentais anteriores não foram apagadas.
+
+---
+
 # ATUALIZAÇÃO CONFIRMADA — 22/11/2026: v1.12.3 integrada ao aplicativo principal
 
 O código da **raiz de main** agora é **v1.12.3**, com seleção A/B no **módulo Piano Acústico → Motor do piano**. Substitui o diagnóstico anterior de raiz v1.8.4 (mantida no histórico Git). A, modal derivado da linha Claude; B, motor físico **baseado na v1.9.5 + mecânica v1.12.2**. Não se trata da fonte original da linha separada Novo Stage v1.11.0.

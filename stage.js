@@ -65,6 +65,14 @@ export class Stage {
       }
     }
   }
+  // Ao comparar motores, soltar somente as partes do Piano Acústico.
+  // Órgão, Synth e outros instrumentos em camadas não são interrompidos.
+  releaseInstrument(id){
+    for(const v of this.voices.values()){
+      const part=v.parts.get(id);
+      if(part&&!part.ended)part.release(true);
+    }
+  }
   updateEffects(){this.fx.update()}
   group(source,channel){
     const id=source+'/'+channel;

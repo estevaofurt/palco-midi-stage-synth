@@ -1,11 +1,60 @@
-## v1.12.3 — Integração A/B no Piano Acústico (22/11/2026)
+## v1.12.4 — Comparação A / B / C (experimental no módulo Piano Acústico)
 
-- Seleção **A · Claude (modal)** e **B · Novo Stage (mecânico)** no editor do piano, com clássico de compatibilidade.
-- Integrado ao código principal o acoplamento físico baseado na v1.9.5 + v1.12.2.
-- Removidos banners, atalhos e páginas de acesso criados anteriormente; não foram adicionadas categorias.
-- Escolha persistida no perfil Leve e Completo; importações AudioWorklet têm versão para reduzir cache.
-- Polifonia de 32 a 64 vozes conforme qualidade, ainda pendente de validação real no Moto g04s.
-- 79 testes automatizados e verificação da seleção no navegador simulado; AudioWorklet real pendente.
+- A: Claude (modal), com DSP existente em piano-worklet.js.
+- B: Stage físico anterior (v1.9.5), com o DSP original daquela versão em um AudioWorklet independente (`physical-piano-legacy.js`). O único ajuste ao arquivo histórico foi renomear seu registro de processador, evitando colisão com o motor atual.
+- C: Novo Stage mecânico, com acoplamento ponte/tampo/cordas simpáticas da v1.12.3.
+- Troca entre motores libera apenas as notas do Piano Acústico; não interrompe camadas de outros instrumentos.
+- Presets e cenas gravados antes continuam válidos; a seleção `physical` antiga continua apontando para C.
+- Instancia DSP antigo somente quando selecionado, evitando CPU extra na inicialização.
+- Nenhum módulo, categoria ou botão externo adicionado. Não implica que o código exato de Novo Stage v1.11.0 tenha sido recuperado.
+
+## v1.12.3 — Seleção A/B de motores dentro do Piano Acústico (22/11/2026)
+
+- Nova integração no aplicativo principal, sem banners, links, categorias ou módulos extras.
+- Piano Acústico → Motor do piano: **A · Claude (modal)**, **B · Novo Stage (mecânico)** e clássico de compatibilidade.
+- Seleção salva preservada no perfil Leve e no Completo; AudioWorklets preparados sob demanda.
+- B integra reação da ponte, tampo harmônico e cordas simpáticas do protótipo mecânico ao motor físico baseado na v1.9.5.
+- Histórico do GitHub e versões experimentais anteriores preservados.
+- Testes de logic, regressão, browser e áudio em desenvolvimento; a integração não é prova de timbre realista nem certificação de desempenho no Moto g04s.
+
+# v1.12.2 — 22/11/2026 (experimental: acoplamento mecânico integrado)
+
+- Integração de `PianoResonanceBody` ao AudioWorklet do piano físico baseado em v1.9.5.
+- Feedback mecânico controlado nas linhas de atraso, 88 amortecedores, pedal CC64, corpo estéreo e cordas simpáticas.
+- Bypass A/B direto no editor do piano, com transição suavizada e suporte a presets antigos.
+- Testes de 32/64 vozes, clipping, estados de teclas repetidas, bypass e mensagens do worklet.
+- Benchmark offline e testes da UI em desktop e Android simulado. **AudioWorklet real e Moto g04s ainda pendentes**.
+- A v1.9.5 e a linha Novo Stage v1.11 não foram modificadas.
+
+---
+
+## 1.9.2 · protótipo experimental de timbre (sem samples)
+
+**Diagnóstico:** a nota C4 do modelo v1.9.1 tinha o terceiro harmônico tão forte quanto, ou mais forte que, o fundamental no início do som. O espectro era excessivamente estável e o modelo tinha uma única lei de decaimento para muitos harmônicos, contribuindo para uma sonoridade de corda dedilhada/sintetizador.
+
+**Revisão de DSP:** nova distribuição de energia do pulso de excitação; 4–6 ressonadores inarmônicos independentes por nota (pré-alocados) com durações específicas para cada parcial; variação do tempo de contato do feltro conforme intensidade, caráter e registro; filtragem simples da radiação na ponte; transiente amortecido; ganho ajustado para maior audibilidade.
+
+**Custo:** comparativo Node.js, 48 kHz, um segundo de áudio, 32 notas no modo Econômico ~67 ms; 64 notas Estúdio ~186 ms. Resultados do computador de teste, não do Moto g04s. O aumento de custo frente à v1.9.1 impede classificar esta versão como otimizada/homologada para celular. Os limites de 32/48/64 vozes foram preservados.
+
+**Validação:** 52 testes Node.js; testes do painel em Chrome desktop e Android simulado; testes espectrais, variação de toque e headroom. Execução real do AudioWorklet e audição em Moto g04s continuam sem validação física. Teste em servidor local no navegador foi bloqueado pela rede da plataforma, não por um erro demonstrado no DSP.
+
+**Importante:** ainda não é uma reprodução fiel de piano acústico. Falta calibrar o som contra gravações de referência autorizadas, especialmente ataque nos graves, inarmonicidade por tecla, batimentos em uníssono e ressonância simpática real. Somente a comparação de escuta com referências poderá indicar se o novo timbre é uma melhoria subjetiva.
+
+A v1.9.1 e a versão principal do site permanecem independentes.
+
+---
+
+# Stage Synth v1.9.1 — motor físico e polifonia
+
+- Perfil Econômico: **32 vozes**; Equilibrado: 48 vozes; Estúdio: **64 vozes**.
+- Limites globais do palco: **32 notas no modo Leve** e **64 notas no modo Completo**, inclusive com camadas (mais camadas exigem mais CPU).
+- Excitação da corda modificada para pulso de martelo modelado, removendo perfil triangular típico de corda dedilhada.
+- Batimentos leves por modo ressonante em Eco; resposta do brilho invertido corrigida; parada de ressonância ao soltar a nota.
+- Headroom adaptativo, com resposta rápida ao aumento de vozes e suavização na recuperação.
+- Importmap e página versionada `v1.9.1.html` para isolar o teste.
+- 45 testes automatizados de lógica aprovados; navegador com perfil Android simulado/desktop aprovado. AudioWorklet real e smartphone físico ainda não homologados.
+
+---
 
 ## v1.8.4 — Perfil Leve para celulares de entrada
 
@@ -92,7 +141,7 @@
 
 - Evolução da base original v1.2.0 para **5 motores independentes + rack de efeitos** com seis cartões e editores.
 - Piano acústico: Japanese Grand, American Grand, Felt Piano e Upright; caracterização dos modelos, curvas de dinâmica, ruído de martelo/pedal, release e controle da ressonância de cordas.
-- Pianos elétricos: nove timbres Rhodes/Wurly/CP80/Clav/FM; amplificadores, posições de microfone, preamp, panorama, tremolo e ruídos mecânicos.
+- Pianos elétricos: nove timbres Rhodes/Wurly/CP70/Clav/FM; amplificadores, posições de microfone, preamp, panorama, tremolo e ruídos mecânicos.
 - Órgãos B3 Jazz/Gospel e Church com Leslie, vibrato, percussão, key click e drawbars.
 - Sintetizador ampliado: OSC A/B, pulse width, uníssono, afinação, mistura/ruído, hard sync aproximado por wavetable, filtros VCF, envelope ADSR, LFO, matriz de modulação limitada, modos de voz e glide.
 - Leitor SF: cinco famílias de timbres internos e importação SF2 PCM na memória, com seletor de programas e suporte básico a zonas/amostras.
@@ -163,3 +212,37 @@
 - Parâmetros estruturais e fenômenos de ataque (novos osciladores de uníssono, modo de voz, velocity já recebida, Key Click/Hammer Noise) se aplicam à próxima execução, pois não é tecnicamente correto recriar retroativamente o ataque de uma nota.
 - Validação: 24 testes automatizados; Playwright simulou uma nota sustentada em cada motor e comprovou alteração de parâmetros ativos, além de bypass FX. Regressão de polifonia e interface aprovada.
 - Pendente: teste com AudioWorklet em HTTPS e teclado MIDI físico em equipamento real.
+
+## Experimental v1.9.0 — motor físico econômico
+- Novo `physical-piano.js` com waveguides digitais, interpolaçao por allpass, martelo não linear aproximado, amortecimento e tampo compartilhado.
+- Perfis Econômico (8 vozes / uma corda), Equilibrado (16 / duas cordas) e Estúdio (24 / duas cordas). O limite geral de vozes do aplicativo continua independente.
+- Integração opcional no editor do Piano Acústico; modo Leve Android seleciona o motor físico por padrão, com fallback clássico se AudioWorklet estiver indisponível.
+- Mantidos os seis módulos, cenas, FX, arpejador, Chord Mode, Looper e histórico de presets; versão principal v1.8.4 permanece separada até aceitação.
+- 43 testes Node e UI em Android/desktop simulado aprovados. O processamento Web Audio real e o Moto g04s físico exigem homologação em HTTPS.
+
+## v1.9.3 — Japanese Grand calibrado com referência fornecida
+
+- Análise do MP3 Yamaha CFX / André Mehmari disponibilizado pelo usuário (apenas análise, sem inclusão do áudio nem redistribuição).
+- Perfil Japanese Grand com contato de martelo variável por registro, dois tempos de compressão do feltro, harmônicos de agudos recuperados e graves mais encorpados.
+- Perfis American Grand, Felt e Upright não foram recalibrados nesta etapa.
+- Mantidas 32 vozes em Econômico e 64 em Estúdio; implementação experimental para comparar antes da homologação em Android.
+- Critérios e limitações documentados em `CFX_REFERENCIA.md`.
+
+## v1.9.4 — Primeira calibração cruzada dos quatro pianos
+
+- Quatro capturas sincronizadas usadas como **referências de som final**, com efeitos originais preservados; os WAVs não são distribuídos no projeto.
+- Novo perfil de harmônicos e curva de ataque-corpo para Japanese, American, Felt e Upright, com ajuste por registro e saída mais suave para American/Felt.
+- Testes medem diferenças perceptivas em Dó4 e mantêm regressões de polifonia de 32/64 notas, sem clipping nos ensaios.
+- Documentação técnica e dados mínimos de calibração em `CALIBRACAO_194.md` e `.json`.
+- Continua **experimental**; a equivalência musical aos instrumentos e o desempenho no Moto g04s ainda não foram homologados.
+
+## v1.9.5 — Estabilidade de áudio e identidade dos pianos elétricos
+
+- Rack EQ/Compressor/Reverb/Delay/Mod: processamento criado sob demanda, inclusive em desktop, não no início da sessão.
+- Motor físico de piano passa a ser o padrão para novos presets; o motor modal anterior continua disponível; escolhas já salvas são respeitadas.
+- Evitado processamento de ressonância por convolução duplicada durante a síntese física; reconstrução de ambiente da síntese clássica apenas quando necessária.
+- Loop de síntese processa apenas vozes ativas por bloco de áudio, preservando limites de 32 e 64 notas.
+- Pianos elétricos: CP70 substitui CP80; E. Piano 1 = Full Tines; E. Piano 2 = Dino EP; E. Piano 3 = Ballad Keys.
+- Sessões antigas de CP80 são migradas para CP70, inclusive presets modificados e variantes Suave/Brilhante; IDs de E. Piano existentes são mantidos para compatibilidade.
+- As novas denominações identificam as capturas aprovadas, não significam que a síntese elétrica já foi calibrada para reproduzi-las.
+- Versão experimental; testar interrupções de áudio com hardware real antes de colocar como padrão.

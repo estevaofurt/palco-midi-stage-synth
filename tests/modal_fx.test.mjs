@@ -25,7 +25,8 @@ test('um módulo pode estar sem destino, mantendo som seco',()=>{
 });
 test('piano oferece motor modal e síntese clássica',()=>{
  const modes=engines.piano.groups.flatMap(g=>g.controls).find(c=>c.id==='soundEngine');
- assert.ok(modes);assert.equal(modes.options.physical,'B · Novo Stage (mecânico)');
+ assert.ok(modes);assert.equal(modes.options.physicalLegacy,'B · Stage físico anterior (v1.9.5)');
+ assert.equal(modes.options.physical,'C · Novo Stage mecânico');
  assert.equal(modes.options.modal,'A · Claude (modal)');
  assert.equal(fromPreset('piano','felt').values.soundEngine,'physical');
 });

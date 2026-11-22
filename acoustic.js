@@ -69,6 +69,10 @@ export class Acoustic {
     this.classicSpaceReady=false;
     this.modal=null;this.modalPromise=null;this.modalParts=new Map();this.modalSerial=0;
     this.physical=null;this.physicalPromise=null;this.physicalParts=new Map();this.physicalSerial=0;this.physicalQuality=null;this.physicalMechanical=null;
+    // Motor histórico v1.9.5: DSP e AudioWorklet separados. Nunca
+    // substituir o original por um seletor que apenas desligue a mecânica.
+    this.legacyPhysical=null;this.legacyPhysicalPromise=null;this.legacyPhysicalParts=new Map();
+    this.legacyPhysicalSerial=0;this.legacyPhysicalQuality=null;
   }
   ensureClassicSpace(){
     if(this.lite||this.classicSpaceReady)return;
@@ -89,7 +93,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.physicalPromise){
       this.physicalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./physical-piano.js?build=1.12.3');
+        await this.ctx.audioWorklet.addModule('./physical-piano.js?build=1.12.4');
         const node=new AudioWorkletNode(this.ctx,'palco-physical-piano',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -122,6 +126,46 @@ export class Acoustic {
     }
     return this.physicalPromise;
   }
+  async prepareLegacyPhysical(quality='eco'){
+    if(this.legacyPhysical){this.setLegacyPhysicalQuality(quality);return true;}
+    if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
+    if(!this.legacyPhysicalPromise){
+      this.legacyPhysicalPromise=(async()=>{
+        await this.ctx.audioWorklet.addModule('./physical-piano-legacy.js?build=1.12.4');
+        const node=new AudioWorkletNode(this.ctx,'palco-physical-piano-legacy',{
+          numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
+        });
+        node.connect(this.input,0,0);
+        node.port.onmessage=({data})=>{
+          if(data?.type!=='done')return;
+          for(const id of data.ids||[]){
+            const marker=this.legacyPhysicalParts.get(id);
+            this.legacyPhysicalParts.delete(id);
+            if(marker){try{marker.stop()}catch{}}
+          }
+        };
+        node.onprocessorerror=()=>{
+          console.error('Motor histórico v1.9.5 interrompido');
+          for(const marker of this.legacyPhysicalParts.values())try{marker.stop()}catch{}
+          this.legacyPhysicalParts.clear();this.legacyPhysical=null;
+          this.legacyPhysicalPromise=null;this.legacyPhysicalQuality=null;
+        };
+        this.legacyPhysical=node;
+        this.setLegacyPhysicalQuality(quality);
+        return true;
+      })().catch(error=>{
+        this.legacyPhysicalPromise=null;
+        console.warn('Motor anterior v1.9.5 indisponível',error);
+        return false;
+      });
+    }
+    return this.legacyPhysicalPromise;
+  }
+  setLegacyPhysicalQuality(quality){
+    if(!this.legacyPhysical||this.legacyPhysicalQuality===quality)return;
+    this.legacyPhysicalQuality=quality;
+    this.legacyPhysical.port.postMessage({type:'quality',quality});
+  }
   setPhysicalQuality(quality){
     if(!this.physical||this.physicalQuality===quality)return;
     this.physicalQuality=quality;
@@ -136,30 +180,32 @@ export class Acoustic {
     this.physicalMechanical=signature;
     this.physical.port.postMessage(options);
   }
-  playPhysical(part,key,velocity,p,expression){
-    this.setMechanicalModel(p);
-    const id=++this.physicalSerial,now=this.ctx.currentTime;
+  playPhysical(part,key,velocity,p,expression,useLegacy=false){
+    if(!useLegacy)this.setMechanicalModel(p);
+    const node=useLegacy?this.legacyPhysical:this.physical;
+    const activeParts=useLegacy?this.legacyPhysicalParts:this.physicalParts;
+    const id=useLegacy?++this.legacyPhysicalSerial:++this.physicalSerial,now=this.ctx.currentTime;
     const marker=this.ctx.createConstantSource(),silence=gain(this.ctx,0);
     marker.connect(silence).connect(part.gate);part.own(silence);
     part.releaseSeconds=clamp(p.release*(.55+.75*p.damping/100),.035,3);
-    this.physicalParts.set(id,marker);part.physicalId=id;
+    activeParts.set(id,marker);part.physicalId=id;
     part.start(marker,{pitch:false,until:now+65});
     const send=p.stringRes==='off'?0:(expression.pedal?.55:.08)*p.resonance/55;
-    part.pedal=down=>this.physical?.port.postMessage({type:'send',id,
+    part.pedal=down=>node?.port.postMessage({type:'send',id,
       value:this.current?.stringRes==='off'?0:(down?.55:.08)*(this.current?.resonance??p.resonance)/55});
     part.update=next=>{
       part.releaseSeconds=clamp(next.release*(.55+.75*next.damping/100),.035,3);
-      this.physical?.port.postMessage({type:'param',id,
+      node?.port.postMessage({type:'param',id,
         decayScale:1.1-next.damping/160,damping:next.damping/100,
         brightness:next.brightness/100,release:part.releaseSeconds,
         send:next.stringRes==='off'?0:(expression.pedal?.55:.08)*next.resonance/55});
     };
     const release=part.release.bind(part);
     part.release=(fast=false)=>{
-      if(!part.released)this.physical?.port.postMessage({type:'off',id,fast,release:part.releaseSeconds});
+      if(!part.released)node?.port.postMessage({type:'off',id,fast,release:part.releaseSeconds});
       release(fast);
     };
-    this.physical.port.postMessage({type:'on',id,key,
+    node.port.postMessage({type:'on',id,key,
       speed:fallbackVelocity(velocity,p.touch),hardness:clamp(p.hammer/100,0,1),
       character:p.character,decayScale:1.1-p.damping/160,
       brightness:clamp(p.brightness/100,0,1),send});
@@ -170,7 +216,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.modalPromise){
       this.modalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./piano-worklet.js?build=1.12.3');
+        await this.ctx.audioWorklet.addModule('./piano-worklet.js?build=1.12.4');
         const node=new AudioWorkletNode(this.ctx,'palco-piano',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -223,6 +269,7 @@ export class Acoustic {
     const now=this.ctx.currentTime;
     this.current=p;
     if(p.soundEngine==='physical'){this.setPhysicalQuality(p.physicalQuality||'eco');this.setMechanicalModel(p);}
+    if(p.soundEngine==='physicalLegacy')this.setLegacyPhysicalQuality(p.physicalQuality||'eco');
     const classic=p.soundEngine==='classic'||p.soundEngine==='modal';
     if(classic)this.ensureClassicSpace();
     smooth(this.input.gain,(p.brightness-50)*.15,now);
@@ -234,6 +281,8 @@ export class Acoustic {
   setPedal(down,p){
     this.lastPedalState=Boolean(down);
     if(this.physical)this.physical.port.postMessage({type:'pedal',value:down?127:0});
+    // O motor legado recebe sustain por mensagens 'send' de cada parte MIDI.
+    // Sua API v1.9.5 não possuía o tipo de mensagem 'pedal'.
     const now=this.ctx.currentTime;
     if(now-this.lastPedal<.07||!p?.pedalNoise)return;
     this.lastPedal=now;
@@ -244,6 +293,7 @@ export class Acoustic {
   }
   play(part,key,velocity,p,expression){
     if(p.soundEngine==='physical'&&this.physical)return this.playPhysical(part,key,velocity,p,expression);
+    if(p.soundEngine==='physicalLegacy'&&this.legacyPhysical)return this.playPhysical(part,key,velocity,p,expression,true);
     if(p.soundEngine==='modal'&&this.modal)return this.playModal(part,key,velocity,p,expression);
     const now=this.ctx.currentTime;
     part.releaseSeconds=clamp(p.release*(.55+.75*p.damping/100)*2**((54-key)/110),.035,4);

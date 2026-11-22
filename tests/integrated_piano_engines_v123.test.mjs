@@ -2,34 +2,37 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {engines,loadState,fromPreset} from '../patches.js';
-const read=(p)=>readFileSync(new URL(p,import.meta.url),'utf8');
-const modes=engines.piano.groups.flatMap(g=>g.controls).find(c=>c.id==='soundEngine');
-test('A Claude e B Novo Stage estão no mesmo Piano Acústico, sem novo módulo',()=>{
- assert.deepEqual(Object.keys(modes.options),['modal','physical','classic']);
- assert.match(modes.options.modal,/Claude/);
- assert.match(modes.options.physical,/Novo Stage/);
+const read=(p)=>readFileSync(new URL(p, import.meta.url),'utf8');
+const controls=engines.piano.groups.flatMap(g=>g.controls);
+const choice=controls.find(c=>c.id==='soundEngine');
+test('A Claude e B Novo Stage estão dentro do Piano Acústico, sem novo módulo',()=>{
+ assert.deepEqual(Object.keys(choice.options),['modal','physicalLegacy','physical','classic']);
+ assert.match(choice.options.modal,/Claude/);
+ assert.match(choice.options.physicalLegacy,/Stage físico anterior/);
+ assert.match(choice.options.physical,/Novo Stage mecânico/);
  assert.equal(Object.keys(engines).length,5);
  assert.equal(fromPreset('piano','japanese').values.soundEngine,'physical');
 });
-test('preserva escolha salva do motor',()=>{
+test('v1.12.3 mantém seleção salva do motor entre sessões',()=>{
  const saved={patches:{piano:{preset:'japanese',values:{soundEngine:'modal',physicalQuality:'studio'}}}};
- const fake={getItem:k=>k==='palco-stage-panel-v1'?JSON.stringify(saved):null};
- const x=loadState(fake);
- assert.equal(x.patches.piano.values.soundEngine,'modal');
- assert.equal(x.patches.piano.values.physicalQuality,'studio');
+ const fake={getItem:(k)=>k==='palco-stage-panel-v1'?JSON.stringify(saved):null};
+ const state=loadState(fake);
+ assert.equal(state.patches.piano.values.soundEngine,'modal');
+ assert.equal(state.patches.piano.values.physicalQuality,'studio');
 });
-test('app principal não tem banners, novas categorias ou atalhos externos',()=>{
- const h=read('../index.html');
- assert.doesNotMatch(h,/stage-mechanics-link|acesso-motor-v1\.12\.2|enable-mechanical-piano/);
- const a=read('../app.js');
- assert.doesNotMatch(a,/enable-mechanical-piano|state\.patches\.piano\.values\.soundEngine='physical';/);
- assert.match(a,/preparePhysical/);
- assert.match(a,/prepareModal/);
+test('UI não cria banners, páginas de atalhos ou outras categorias',()=>{
+ const html=read('../index.html');
+ assert.doesNotMatch(html,/stage-mechanics-link|acesso-motor-v1\.12\.2|enable-mechanical-piano/);
+ assert.match(html,/id="modules"/);
+ const app=read('../app.js');
+ assert.doesNotMatch(app,/enable-mechanical-piano|state\.patches\.piano\.values\.soundEngine='physical';/);
+ assert.match(app,/preparePhysical/);
+ assert.match(app,/prepareModal/);
 });
-test('motor B inclui acoplamento mecânico integrado e versão correta',()=>{
- const p=read('../physical-piano.js');
- const a=read('../acoustic.js');
- assert.match(p,/PianoResonanceBody/);
- assert.match(a,/setMechanicalModel/);
- assert.match(a,/physical-piano\.js\?build=1\.12\.3/);
+test('Novo Stage inclui motor físico e tampo mecânico no AudioWorklet',()=>{
+ const engine=read('../physical-piano.js');
+ const acoustic=read('../acoustic.js');
+ assert.match(engine,/PianoResonanceBody/);
+ assert.match(acoustic,/setMechanicalModel/);
+ assert.match(acoustic,/physical-piano\.js\?build=1\.12\.4/);
 });

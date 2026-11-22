@@ -1,3 +1,16 @@
+# Atualização da comparação v1.12.4 (22/11/2026)
+
+- [x] A modal, B Stage físico histórico v1.9.5 e C Stage mecânico selecionáveis no mesmo módulo Piano Acústico.
+- [x] B usa arquivo DSP independente recuperado, sem duplicar o motor C.
+- [x] Manter preferência salva e disponibilizar alternativa clássica.
+- [x] 84 testes automatizados e regressão de interface PC/celular simulados.
+- [ ] Recuperar **código exato do Novo Stage v1.11.0**, original de outra conversa; não confundir com v1.9.5.
+- [ ] Testar AudioWorklets reais, troca de motores e MIDI em Chrome do usuário, com FX e sustain.
+- [ ] Calibrar inarmonicidade, contato do martelo e ressonância com notas isoladas; não promover apenas por scorecard.
+- [ ] Medir 32 notas no Moto g04s e 64 no PC, sem estalos.
+
+---
+
 # Atualização de execução — v1.12.3 integrada (22/11/2026)
 
 - [x] Integração do motor B físico + acoplamento mecânico ao app principal, selecionável no módulo Piano Acústico.

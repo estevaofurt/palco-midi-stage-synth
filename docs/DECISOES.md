@@ -64,3 +64,12 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 ## D-011 — Novo motor deve ser selecionável dentro do Piano Acústico (22/11/2026)
 
 **Decisão explícita do usuário:** não adicionar categorias, módulos, banners, links ou botões externos para acessar novos motores; usar a opção existente **Motor do piano** com **A · Claude** e **B · Novo Stage**. A síntese clássica permanece opção de compatibilidade. A v1.12.3 integra o B mecânico baseado em v1.9.5/v1.12.2 na raiz do aplicativo e remove os atalhos externos anteriores.
+
+
+## D-012 — Comparação de motores A/B/C na mesma tela (22/11/2026)
+
+**Decisão do usuário:** incluir o motor anterior do Stage e o modelo modal associado ao Claude para comparação, **dentro de Piano Acústico → Motor do piano**, sem categorias, botões ou links adicionais.
+
+**Implementação v1.12.4:** A = modal derivado da linha Claude, B = código original da v1.9.5 (processador independente), C = Stage atual com mecânica integrada. O modo Clássico permanece. B NÃO é o Novo Stage v1.11.0 originalmente desenvolvido noutra conversa, cujo código não está disponível; esse item ainda requer localização/importação da fonte exata. Presets `physical` existentes continuam C.
+
+**Critérios de aceite:** motores DSP diferentes, teste de seleção/persistência, regressão 32/64 nos físicos B/C, nenhum novo módulo; validar AudioWorklet no hardware do usuário. Teste acústico ainda não significa equivalência a piano real.

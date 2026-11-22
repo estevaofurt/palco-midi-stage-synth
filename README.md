@@ -1,10 +1,83 @@
-# Stage Synth v1.12.3 — Motores A/B dentro do Piano Acústico
+# Stage Synth v1.12.4 — comparação de três motores de piano
 
-O seletor **Motor do piano** permanece no módulo já existente: **A · Claude (modal)**, **B · Novo Stage (mecânico)** e **Clássico · compatibilidade**. Não existe novo módulo, página intermediária ou link de acesso. A seleção é preservada no navegador inclusive no perfil móvel.
+Em **Piano Acústico → Motor do piano**, selecione **A · Claude (modal)**, **B · Stage físico anterior (v1.9.5)** ou **C · Novo Stage mecânico**. O modo Clássico permanece como compatibilidade. Os três motores A/B/C utilizam DSPs efetivamente distintos, e B preserva o código v1.9.5 como AudioWorklet independente. Não são novos módulos; são opções do piano acústico.
 
-O B reúne o motor físico experimental baseado na v1.9.5, com ponte/tampo e ressonância simpática da v1.12.2. **Não é o código-fonte exato do Novo Stage v1.11.0 de outra conversa**, que ainda não foi localizado aqui. O A é o motor modal disponível no projeto, derivado da linha associada à comparação Claude; não é uma cópia bit a bit independente.
+**Nota:** B é a implementação histórica v1.9.5 recuperada do repositório, **não** o Novo Stage v1.11.0 da outra conversa. O código original do chamado “Novo Stage v1.11.0” de outra conversa não foi encontrado no repositório. C integra mecânica à linha v1.9.5. São experimentos: a ausência de estalos na v1.9.5 foi relatada pelo usuário, e a comparação em hardware real precisa ser refeita.
 
-O controle *Acoplamento mecânico* fica dentro do próprio Piano Acústico e permite desligá-lo para comparação. FX pesados seguem sob demanda. O relato de ausência de estalos foi da v1.9.5; o novo B precisa de validação no PC e Moto g04s, e ainda não tem timbre acústico homologado.
+# Stage Synth v1.12.3 — A/B dentro do Piano Acústico
+
+Esta é a versão integrada do aplicativo, baseada na linha experimental v1.9.5 com o acoplamento mecânico v1.12.2. O motor está **dentro de Piano Acústico → Identidade e dinâmica → Motor do piano**, sem novo módulo, novo link ou botão dedicado.
+
+- **A · Claude (modal):** motor modal já existente e derivado; não é uma cópia bit a bit do motor original de outra IA.
+- **B · Novo Stage (mecânico):** motor físico da base v1.9.5 com retorno de ponte/tampo e cordas simpáticas da v1.12.2, usando o mesmo AudioWorklet. Não é o código-fonte da outra linha externa v1.11.0, ainda não localizada.
+- **Clássico · compatibilidade:** motor pré-existente, preservado para contingência.
+- O controle **Acoplamento mecânico**, dentro do próprio Piano Acústico, permite desligar a física adicional para comparação.
+- A escolha do motor é persistida; o perfil Leve no celular não a sobrescreve. FX continuam sob demanda.
+- Polifonia planejada: 32 (econômico) ou 64 (estúdio), não homologada em aparelho físico.
+- **Status:** o usuário confirmou ausência de estalos na v1.9.5, não nesta integração; manter backup e fazer teste em PC/Moto g04s antes de promover como nova referência estável.
+
+---
+
+# Stage Synth — integração mecânica experimental v1.12.2
+
+**Base do aplicativo:** `physical-v1.9.5` (a versão em que o usuário relatou estalos eliminados no PC). **Não é a fonte original da linha Novo Stage v1.11**, que ainda não está centralizada no GitHub. Este experimento pode ser usado como referência e ser portado à linha v1.11 quando seu código estiver disponível.
+
+## O que é novo
+
+- `physical-piano.js` importa `PianoResonanceBody` de `piano-resonance.js` e o executa **dentro do mesmo AudioWorklet** das cordas, sem ligação de feedback entre AudioNodes.
+- A ponte recebe a vibração seca das cordas, o corpo simula 12 modos globais e duas ressonâncias simpáticas por tecla; a reação limitada retorna ao buffer da corda no passo seguinte.
+- Estados de teclas repetidas preservam o amortecedor quando outra voz do mesmo pitch é liberada. Pedal CC64 é encaminhado ao núcleo físico.
+- O editor do piano inclui **Acoplamento mecânico: Ponte, tampo e cordas simpáticas / Som anterior · comparar**. O bypass preserva o áudio antigo no teste isolado, com transição suave entre algoritmos.
+- A ressonância antiga é progressivamente substituída, em vez de misturada como novo reverb externo. FX pesados continuam sob demanda como na v1.9.5.
+
+## Como testar
+
+Abra `index.html` num servidor HTTPS ou `localhost` com AudioWorklet disponível; selecione **Piano Acústico** > **Motor do piano: Cordas físicas** > **Acoplamento mecânico**. Alterne entre as duas opções durante uma nota ou acorde. Com o sustain acionado, as cordas abertas podem ressoar; com o pedal solto, os amortecedores reduzem as ressonâncias. Desative FX durante a comparação A/B.
+
+- `npm run check`: sintaxe JS e suite completa (76 testes nesta revisão).
+- `node tests/benchmark_mechanical_v122.mjs`: benchmark offline com 32/64 notas, modo anterior vs acoplado.
+- `python tests/browser_mechanical_v122.py`: UI no desktop e Android simulado.
+- `python tests/browser_worklet_v194.py`: teste opcional de AudioWorklet real no Chrome quando a origem localhost não estiver bloqueada pelo ambiente.
+
+## Limitações explícitas
+
+- **Ainda não é um piano realista:** não corrige inarmonicidade inadequada da linha de atraso, calibração apenas local à região média, nem perdas dependentes de frequência; não há garantia perceptual.
+- A resposta mecânica e os coeficientes do corpo são **aproximações** ainda sem ajuste por notas secas de referência; não há um modelo completo de impedância real da ponte.
+- Cada nota segue representada por uma ou duas linhas de atraso no motor físico. As 176 ressonâncias são **parciais simpáticas compartilhadas**, não 176 cordas de waveguide completas.
+- O tempo por bloco foi medido offline em Node.js, **não** no Moto g04s físico ou Chrome real com interface de áudio. O navegador disponível neste ambiente bloqueia localhost (`ERR_BLOCKED_BY_ADMINISTRATOR`), portanto a execução real do AudioWorklet ficou pendente.
+- **Mínimo requerido:** 32 notas; **meta:** 64 notas, a serem comprovadas com som sem estalos nos dispositivos reais.
+- Presets e FX originais são preservados, mas importação de valores antigos de `localStorage` depende do navegador; a nova opção possui valor padrão em presets do experimento.
+- WAVs do usuário não são redistribuídos nem embutidos.
+
+## Integração real ao Novo Stage v1.11
+
+A versão v1.11 do Novo Stage foi publicada em outro ambiente e seu código completo **não está na branch `main` deste repositório**. Antes de integrar este módulo à v1.11, será necessário localizar seu código atualizado, comparar APIs do processador e parâmetros MIDI e reexecutar os testes. Não renomear este experimento como se a integração tivesse sido realizada.
+
+## Fontes do projeto
+
+Documentação central: `AGENTS.md`, `docs/ESTADO_ATUAL.md`, `docs/DECISOES.md`, `docs/PROXIMAS_ETAPAS.md`. Núcleo anterior: `experimental/mechanical-resonance-v1.12.1/`. Experimento estável-base: `experimental/physical-v1.9.5/`.
+
+---
+
+# Stage Synth v1.9.2 — teste de timbre físico
+
+Esta é uma versão **experimental**, isolada da aplicação principal. A resposta à crítica de que o som ainda não se parece com um piano é uma mudança no processo de excitação, no equilíbrio harmônico e no decaimento. Não alegamos realismo final nem compatibilidade garantida com Moto g04s.
+
+No editor Piano Acústico: escolha Motor do piano → Cordas físicas e Detalhe físico → Econômico (32 notas) para começar. A opção Estúdio mantém 64 notas, mas com carga maior. Para avaliar o timbre, desligue FX e mantenha somente o piano ativo.
+
+Detalhes: `MOTOR_FISICO.md`. Código: `physical-piano.js`. Testes: `npm run check`, `node tests/benchmark_physical.mjs` e demos geradas em `demos/`.
+
+A v1.9.1 e a versão principal do site permanecem inalteradas.
+
+---
+
+# Stage Synth v1.9.1 — motor físico experimental (32/64 notas)
+
+Perfil **Leve:** mínimo de 32 notas MIDI simultâneas (uma corda waveguide por nota, ressonância de corpo compartilhada e modo de batimento leve). Perfil **Completo:** até 64 notas MIDI simultâneas; qualidade do motor **Estúdio** usa duas cordas waveguide por nota. Os limites são de alocação, não garantia de execução livre de falhas em hardware de entrada.
+
+A excitação martelo/corda foi modificada para uma força de contato bipolar, com largura dependente da velocidade/dureza e posição do martelo; a saída recebeu headroom gradual para acordes densos. O timbre é prototípico, ainda não é o som realista de um piano de concerto. Não utiliza samples comerciais.
+
+**Testes:** `npm run check` (45 testes de lógica) e `python tests/browser_physical_ui_v19.py`. Benchmark Node e demos podem ser regenerados com `node tests/benchmark_physical.mjs` e `node tests/render_physical_demo.mjs`. AudioWorklet real e Moto g04s físico não foram homologados.
 
 ---
 
@@ -23,7 +96,7 @@ Versão **1.8.2** — reconstrução dos seis módulos a partir dos arquivos ori
 ## Seis módulos
 
 1. **Piano acústico:** Japanese Grand (referência de caráter brilhante e articulado), American Grand (mais encorpado), Felt Piano, Piano Upright. Controles de dinâmica, dureza, Hammer Noise, Pedal Noise, string resonance (ativada/desativada), release, brilho, ambiente e amortecimento. Inclui importação local de amostras WAV por instrumento e diferentes camadas de intensidade.
-2. **Pianos elétricos:** Rhodes Tine Mark I/II, Wurly Reed 200A/140B, CP80, Clav e FM Full Tines/Dino EP/Ballad Key. Amplificador, microfone, preamp, **Auto-Pan com intensidade e velocidade**, tremolo, ruídos mecânicos e importação opcional de amostras WAV.
+2. **Pianos elétricos:** Rhodes Tine Mark I/II, Wurly Reed 200A/140B, CP70, Clav e E. Piano 1 (Full Tines), E. Piano 2 (Dino EP) e E. Piano 3 (Ballad Keys). Amplificador, microfone, preamp, **Auto-Pan com intensidade e velocidade**, tremolo, ruídos mecânicos e importação opcional de amostras WAV.
 3. **Órgão:** B3 Jazz/Gospel com nove drawbars, percussão, vibrato, Leslie parada/lenta/rápida e key click; Church Organ com registros diferenciados.
 4. **Synth:** formas de onda senoidal/triangular/serra/quadrada/pulso, pulse width, oitava/semitons/fine tune, uníssono 1–3, ruído branco/rosa, mixer OSC, VCF low/high/band/notch, filtro com envelope, ADSR, LFO para pitch/cutoff/amplitude, matriz de modulação limitada, modos mono/poly/legato, portamento, volume/pan. Hard sync é uma **aproximação digital por wavetable**, não sincronização analógica genuína.
 5. **Leitor SF:** instrumentos internos de cordas, bells, sopros, metais e coral; importação local de **SF2 PCM descomprimido** até 100 MB, seleção de programas do banco e reprodução de zonas simples com faixas de notas e velocidade. A importação permanece na memória da sessão; **não** há upload para servidor. Formatos SF3, SFZ, moduladores SF2 avançados e todos os tipos de zonas ainda não são compatíveis.
@@ -129,3 +202,31 @@ Abra o módulo **Efeitos**. Logo abaixo de **Reverb 1**, **Reverb 2**, **Delay 1
 **O que os testes provam:** em renderizações offline com acordes e múltiplos FX,
 nenhuma amostra ultrapassou 1,0. Isso mitiga clipping digital, mas não comprova
 que o hardware do usuário esteja livre de interrupções por CPU, driver ou latência.
+
+## Experimental v1.9.0 — motor acústico original
+
+O novo **motor `Cordas físicas · otimizado`** é um processador compartilhado de modelagem física por waveguide em `physical-piano.js`, em três níveis de qualidade. No perfil Leve, o Moto g04s tentará esse motor por padrão, caindo para a Síntese clássica se o AudioWorklet não iniciar. O modal antigo continua disponível no perfil Completo como comparação.
+
+Esta **é uma experiência separada** da aplicação principal; a qualidade sonora ainda não foi aprovada por comparação auditiva. Veja [MOTOR_FISICO.md](./MOTOR_FISICO.md) para arquitetura, benchmarks, limites e próximos testes. As demos WAV originais deste protótipo ficam em `demos/`.
+
+## v1.9.3 experimental — referência CFX
+
+Recebemos uma gravação de referência do Yamaha CFX. O Japanese Grand foi recalibrado para ter harmônicos mais presentes nos agudos e ataque mais variável de acordo com nota e velocidade; **nenhum trecho do MP3 foi incorporado** ao projeto. Veja `CFX_REFERENCIA.md` para dados, método e limitações. O motor ainda não tem realismo acústico homologado e o Moto g04s físico não foi testado.
+
+## v1.9.4 — calibração com quatro WAVs originais (experimental)
+
+Esta versão calibra **Japanese Grand, American Grand, Felt Piano e Upright Piano** com espectros e envelopes independentes, extraídos de trechos sincronizados das referências fornecidas pelo usuário, contendo os efeitos originais dos instrumentos. **Nenhuma gravação é embutida no sintetizador.** Consulte `CALIBRACAO_194.md` e `CALIBRACAO_194.json` para as medições, ressalvas e limites de realismo.
+
+- **32 notas** no Econômico, **48** no Equilibrado e **64** no Estúdio, como na versão anterior.
+- Testes: `npm run check` e `python tests/browser_physical_ui_v19.py`.
+- A publicação permanece separada em `experimental/physical-v1.9.4/`; a versão principal não é substituída.
+
+
+## Experimento v1.9.5 — estabilidade e organização dos elétricos
+
+- A síntese de cordas físicas é o padrão somente em sessões novas; sessões antigas mantêm suas preferências, que podem ser alteradas no seletor **Motor do piano**.
+- EQ e compressor por insert, reverb, delay e modulações são montados sob demanda, quando ativos e roteados a um instrumento com FX habilitado. O piano físico não alimenta convoluções auxiliares duplicadas da versão anterior.
+- Processamento das vozes físicas somente das notas ativas em cada bloco de áudio.
+- **CP70** substitui CP80. **E. Piano 1 = Full Tines; E. Piano 2 = Dino EP; E. Piano 3 = Ballad Keys.** Sessões antigas CP80 são migradas para CP70 com preservação das edições.
+- As identidades dos elétricos refletem as capturas de referência, mas a síntese ainda não foi recalibrada nesses timbres.
+- Os testes de lógica passam; Chrome com AudioWorklet em origem local não pôde ser homologado neste ambiente por restrição do navegador. Não foi validado em PC ou Moto g04s físicos.
