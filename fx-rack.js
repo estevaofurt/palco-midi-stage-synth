@@ -21,8 +21,13 @@ export function impulse(ctx,seconds,type='hall',seed=179){
   const length=Math.ceil(ctx.sampleRate*(tail*cfg.factor+cfg.pre+.05));
   const buffer=ctx.createBuffer(2,length,ctx.sampleRate),delay=Math.round(cfg.pre*ctx.sampleRate);
   const rng={value:seed>>>0};
+  // Pré-cálculo recursivo do envelope: evita três Math.exp() por amostra
+  // e reduz a chance de glitches durante ajustes do reverb no palco.
+  const dampingRatio=Math.exp(-cfg.decay/(ctx.sampleRate*tail*cfg.factor));
+  const attackRatio=Math.exp(-260/ctx.sampleRate);
   for(let ch=0;ch<2;ch++){
-    const out=buffer.getChannelData(ch);let low=0,ring=0,phase=0;
+    const out=buffer.getChannelData(ch);
+    let low=0,ring=0,phase=0,decay=1,attack=1;
     for(let i=delay;i<length;i++){
       const t=(i-delay)/ctx.sampleRate, raw=seeded(rng);
       low=low*cfg.damp+(1-cfg.damp)*raw;
@@ -33,12 +38,24 @@ export function impulse(ctx,seconds,type='hall',seed=179){
         signal=signal*.42+ring*.52*Math.sin(t*37+ch);
       }
       if(type==='shimmer'){
-        // Refrações cristalinas: harmônicos de alta frequência no campo reverberante.
         signal=signal*.5+.22*Math.sin(TWO_PI*(1777+ch*47)*t)*Math.exp(-t*.5);
       }
-      const early=cfg.early*(Math.exp(-(((t-.015)/.003)**2))+.6*Math.exp(-(((t-.039)/.004)**2)));
-      const envelope=Math.exp(-cfg.decay*t/(tail*cfg.factor))*(1-Math.exp(-t*260));
-      out[i]=clamp((signal+early)*envelope*.42,-1,1);
+      out[i]=clamp(signal*decay*(1-attack)*.42,-1,1);
+      decay*=dampingRatio; attack*=attackRatio;
+    }
+    // Reflexões iniciais curtas: calculadas só em torno dos dois impulsos,
+    // não em todas as dezenas de milhares de amostras da cauda.
+    for(const [time,strength] of [[.015,1],[.039,.6]]){
+      const centre=delay+Math.round(time*ctx.sampleRate);
+      const width=Math.ceil(.012*ctx.sampleRate);
+      for(let j=-width;j<=width;j++){
+        const at=centre+j;
+        if(at>=0&&at<length){
+          const dt=j/ctx.sampleRate;
+          const early=cfg.early*strength*Math.exp(-((dt/.003)**2))*.42;
+          out[at]=clamp(out[at]+early*Math.exp(-cfg.decay*time/(tail*cfg.factor)),-1,1);
+        }
+      }
     }
   }
   return buffer;
@@ -145,7 +162,7 @@ export class FXRack {
       }
       smooth(slot.wet.gain,p.active?amount*(type==='mod'?.50:.60):0,now,.02);
       if(type==='reverb'){
-        const seconds=clamp(p.time,.3,3.8),key=p.reverbType+'/'+seconds.toFixed(2);
+        const seconds=Math.round(clamp(p.time,.3,3.8)*10)/10,key=p.reverbType+'/'+seconds.toFixed(1);
         if(slot.irKey!==key){
           clearTimeout(slot.impulseTimer);
           slot.impulseTimer=setTimeout(()=>{
@@ -154,7 +171,7 @@ export class FXRack {
             smooth(slot.verbGains[next].gain,1,this.ctx.currentTime,.08);
             smooth(slot.verbGains[slot.activeIR].gain,0,this.ctx.currentTime,.08);
             slot.activeIR=next;slot.irKey=key;
-          },90);
+          },160);
         }
       }else if(type==='delay'){
         const kind=p.delayType||'digital';

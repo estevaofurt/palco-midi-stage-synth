@@ -96,3 +96,20 @@ Abra o módulo **Efeitos**. Logo abaixo de **Reverb 1**, **Reverb 2**, **Delay 1
 - O rodapé apresenta a versão de fato carregada.
 - CSS, módulo principal e importações locais usam identificação da versão no endereço dos recursos.
 - Os instrumentos e efeitos são os mesmos da v1.8.1; nenhuma configuração salva é apagada.
+
+
+## v1.8.3 — Proteção de saída e estabilidade do áudio
+
+- Sinal que passa de 0 dBFS pode estalar, especialmente com camadas e retornos FX.
+  A saída agora passa por `antclip.js`: ganho de segurança de 0,72 antes de
+  saturação suave com teto matemático de 0,94 (oversampling 2x).
+- Medidor passou a mostrar o sinal após a proteção, não antes dela.
+- Respostas dos reverbs tiveram cálculo de cauda e reflexões iniciais otimizado;
+  ajustes de tempo são arredondados a 0,1 s e reconstrutores são desacelerados
+  para reduzir picos de CPU ao girar knobs.
+- Motor modal usa no início 28 parciais e até 32 vozes internas, reduzindo custo.
+- `v1.8.3.html` abre esta versão com importações versionadas.
+
+**O que os testes provam:** em renderizações offline com acordes e múltiplos FX,
+nenhuma amostra ultrapassou 1,0. Isso mitiga clipping digital, mas não comprova
+que o hardware do usuário esteja livre de interrupções por CPU, driver ou latência.

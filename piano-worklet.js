@@ -12,7 +12,7 @@
 // Arquivo único, sem dependências e sem alocação no laço de áudio: o mesmo
 // código roda no AudioWorklet (navegador) e no Node (tests/piano_model.test.mjs).
 
-export const MAX_VOICES = 48;
+export const MAX_VOICES = 32;
 const MAX_MODES = 96;
 const BLOCK = 1024;          // maior bloco aceito por render()
 const TARGET_RMS = .075;     // nível de uma nota ff (antes dos filtros do app)
@@ -71,7 +71,7 @@ export class PianoEngine {
   constructor(sampleRate) {
     this.sr = sampleRate;
     this.voices = Array.from({ length: MAX_VOICES }, () => new Voice());
-    this.maxPartials = 40;
+    this.maxPartials = 28;
     this.done = [];           // ids de vozes que terminaram (lidos pelo processador)
     this.seed = 0x9e3779b9;
     this.pulse = [0, 0];      // área de trabalho (evita alocação em noteOn)

@@ -1,3 +1,11 @@
+## 1.8.3 — Estabilidade de áudio
+
+- Saída protegida contra clipping com headroom, soft limiter e medidor pós-proteção.
+- IR de reverb otimizado para minimizar cálculos durante alterações.
+- Piano modal em qualidade padrão econômica (28 modos, 32 vozes) para aliviar CPU.
+- Teste offline comparativo com acordes e processamento FX e regressão automatizada.
+- Novo acesso `v1.8.3.html` com cache-busting de todos os módulos JavaScript.
+
 ## v1.8.2 — acesso versionado e proteção contra cache antigo
 
 - Nova entrada `v1.8.2.html` para evitar a reutilização da página HTML antiga.

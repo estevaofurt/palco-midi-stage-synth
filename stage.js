@@ -6,6 +6,7 @@ import {Organ} from './organ.js';
 import {Synth} from './synth.js';
 import {SoundFontEngine} from './sf-engine.js';
 import {FXRack} from './fx-rack.js';
+import {installOutputProtection} from './antclip.js';
 
 export const MAX_POLYPHONY=32;
 
@@ -16,8 +17,10 @@ export class Stage {
     this.master=ctx.createDynamicsCompressor();
     this.master.threshold.value=-9;this.master.knee.value=9;
     this.master.ratio.value=5;this.master.attack.value=.004;this.master.release.value=.14;
-    this.master.connect(ctx.destination);
-    this.meter=ctx.createAnalyser();this.meter.fftSize=256;this.master.connect(this.meter);
+    // Nunca enviar a soma dos motores e FX diretamente à placa de som.
+    // O limitador final protege picos de transientes e múltiplos retornos FX.
+    this.output=installOutputProtection(ctx,this.master);
+    this.meter=ctx.createAnalyser();this.meter.fftSize=256;this.output.limiter.connect(this.meter);
     this.buses={};
     for(const name of Object.keys(engines)){
       const bus=gain(ctx,this.state.patches[name].level/100);bus.connect(this.master);this.buses[name]=bus;
