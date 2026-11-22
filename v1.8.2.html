@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#171719" name="theme-color"/><title>Stage Synth · Palco MIDI v1.8.2</title><meta name="palco-piano-bank" content="synthetic" /><link href="./panel.css?build=1.8.2" rel="stylesheet"/></head><body><main class="console">
+<header class="rail">
+<h1><span aria-hidden="true" class="brand-symbol"><i></i><i></i><i></i><i></i></span>Palco<span class="brand-sub">MIDI</span></h1>
+<div class="connections">
+<button class="hard-button" id="midi" type="button"><i aria-hidden="true" class="midi-led"></i>Conectar MIDI</button>
+<button class="hard-button power" id="power" type="button"><span aria-hidden="true" class="power-icon"></span><span>Ativar áudio</span></button>
+</div>
+</header>
+<div class="dashboard">
+<div class="display-bezel">
+<div class="display">
+<label class="legend" for="scene">Cena</label>
+<div class="scene-select"><select aria-label="Cena" id="scene"></select><i aria-hidden="true"></i></div>
+<div class="display-bottom"><span id="layer-count">2 motores ligados</span><span class="display-div"></span><span id="bank">Cauda estéreo · 3 camadas de toque</span></div>
+</div>
+</div>
+<div class="out-section">
+<div class="out-head"><span class="panel-label">Saída de áudio</span><output id="peak">−∞ dB</output></div>
+<div aria-hidden="true" class="levelmeter" id="meter"></div>
+<div aria-hidden="true" class="ruler"><span>−48</span><span>−24</span><span>−12</span><span>−6</span><span>0 dB</span></div>
+</div>
+</div>
+<p hidden="" id="status" role="status"></p>
+<div class="section-heading"><h2>Módulos · Stage Synth</h2><span class="engraved-line"></span></div>
+<div aria-label="Controles dos motores" class="modules" id="modules"></div>
+<div id="editors"></div>
+<section class="performance-panel" aria-label="Ferramentas de performance">
+ <div class="performance-heading"><h2>Performance</h2><span>ARPEGIADOR · CHORD MODE · LOOPER</span></div>
+ <div class="performance-tools">
+  <button type="button" id="arp-toggle" aria-pressed="false">Arpejador desligado</button>
+  <label>BPM <input id="bpm" type="number" min="40" max="240" step="1" value="120" /></label>
+  <label>Divisão <select id="arp-rate"><option value="1/4">1/4</option><option value="1/8">1/8</option><option value="1/16">1/16</option></select></label>
+  <label>Chord Mode <select id="chord-mode"><option value="off">Desligado</option><option value="major">Maior</option><option value="minor">Menor</option><option value="sus2">Sus2</option><option value="sus4">Sus4</option><option value="fifth">Quinta</option></select></label>
+  <label>Compassos <select id="loop-bars"><option value="1">1</option><option value="2">2</option><option value="4">4</option></select></label>
+  <button type="button" id="record-loop">Gravar loop</button>
+  <button type="button" id="play-loop" disabled>Tocar loop</button>
+  <button type="button" id="clear-loop" disabled>Limpar loop</button>
+  <output id="loop-status" aria-live="polite">Looper pronto</output>
+ </div>
+</section>
+<section aria-label="Teclado de toque" class="keyboard-panel">
+<div class="keytools">
+<h2>Teclado</h2>
+<div class="octave"><span class="oct-label">Oitava</span><button aria-label="Descer oitava" id="oct-down" type="button">−</button><output id="octave">4</output><button aria-label="Subir oitava" id="oct-up" type="button">+</button></div>
+<button aria-pressed="false" class="pedal-button" id="pedal" type="button"><i aria-hidden="true" class="lamp"></i>Sustain</button>
+<button class="cut-button" id="panic" type="button"><i aria-hidden="true" class="square"></i>Cortar som</button>
+</div>
+<p class="keyboard-hint">Teclas do computador: A W S E D F T G Y H U J K · usar Shift para tocar mais forte</p><div class="keybed"><div aria-label="Notas do teclado" id="keys" style="--whites: 15;"></div></div>
+</section>
+<footer><span id="midi-status" role="status">Teclado na tela disponível.</span><output id="voice-status" aria-live="off">0/32 vozes</output><span class="build-tag" aria-label="Versão do aplicativo">v1.8.2</span><a href="./creditos.html" rel="noopener" target="_blank">Créditos de áudio</a></footer>
+</main><script type="importmap">{"imports":{"./acoustic.js":"./acoustic.js?build=1.8.2","./electric.js":"./electric.js?build=1.8.2","./fx-rack.js":"./fx-rack.js?build=1.8.2","./organ.js":"./organ.js?build=1.8.2","./panel.js":"./panel.js?build=1.8.2","./patches.js":"./patches.js?build=1.8.2","./performance.js":"./performance.js?build=1.8.2","./piano-bank.js":"./piano-bank.js?build=1.8.2","./piano-worklet.js":"./piano-worklet.js?build=1.8.2","./sample-library.js":"./sample-library.js?build=1.8.2","./sf-engine.js":"./sf-engine.js?build=1.8.2","./sf2-reader.js":"./sf2-reader.js?build=1.8.2","./stage.js":"./stage.js?build=1.8.2","./synth.js":"./synth.js?build=1.8.2","./voice.js":"./voice.js?build=1.8.2"}}</script><script src="./app.js?build=1.8.2" type="module"></script></body></html>

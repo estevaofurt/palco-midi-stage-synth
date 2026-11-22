@@ -1,3 +1,11 @@
+## v1.8.2 — acesso versionado e proteção contra cache antigo
+
+- Nova entrada `v1.8.2.html` para evitar a reutilização da página HTML antiga.
+- Identificação visível da versão no rodapé do aplicativo.
+- CSS, JavaScript de entrada, importações de módulos e AudioWorklet com parâmetro de versão.
+- Preservados os timbres, presets, roteamento FX e dados salvos.
+- Nenhuma alteração no site Palco MIDI antigo.
+
 ## v1.8.1 — Seletor de tipo visível
 
 - Reverbs, delays, modulações e equalizador: a escolha do tipo aparece logo abaixo do título do efeito, antes do endereçamento.

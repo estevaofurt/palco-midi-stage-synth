@@ -73,7 +73,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.modalPromise){
       this.modalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./piano-worklet.js');
+        await this.ctx.audioWorklet.addModule('./piano-worklet.js?build=1.8.2');
         const node=new AudioWorkletNode(this.ctx,'palco-piano',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });

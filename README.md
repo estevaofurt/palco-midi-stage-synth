@@ -1,6 +1,6 @@
 # Stage Synth · Palco MIDI
 
-Versão **1.5.0** — reconstrução dos seis módulos a partir dos arquivos originais recuperados do Palco MIDI. O antigo site no ChatGPT Sites permanece independente; este código é destinado ao GitHub Pages.
+Versão **1.8.2** — reconstrução dos seis módulos a partir dos arquivos originais recuperados do Palco MIDI. O antigo site no ChatGPT Sites permanece independente; este código é destinado ao GitHub Pages.
 
 **Aplicativo:** https://estevaofurt.github.io/palco-midi-stage-synth/
 
@@ -88,3 +88,11 @@ O tipo Shimmer utiliza uma resposta harmônica brilhante, sem transposição de 
 
 ## v1.8.1 — Onde escolher os tipos de efeito
 Abra o módulo **Efeitos**. Logo abaixo de **Reverb 1**, **Reverb 2**, **Delay 1**, **Delay 2**, **Modulação 1**, **Modulação 2** e **Equalizador**, aparece um seletor grande **TIPO DE ...**. Escolha o algoritmo antes de marcar os instrumentos atendidos pelo efeito. O Compressor tem um único tipo, sem seletor.
+
+
+## v1.8.2 — acesso com cache separado
+
+- Página versionada: https://estevaofurt.github.io/palco-midi-stage-synth/v1.8.2.html
+- O rodapé apresenta a versão de fato carregada.
+- CSS, módulo principal e importações locais usam identificação da versão no endereço dos recursos.
+- Os instrumentos e efeitos são os mesmos da v1.8.1; nenhuma configuração salva é apagada.
