@@ -206,3 +206,10 @@ footer{flex-wrap:wrap}
   background:#181719;color:#f0e4db;border:1px solid #65534e;border-radius:4px;
   font:500 .9rem var(--ui, system-ui);padding:9px;}
 .fx-type-select:focus-visible{outline:2px solid #e5ad8c;outline-offset:2px}
+
+/* v1.8.1: escolha de algoritmo acima do roteamento, visível em todo slot. */
+.fx-type-panel{margin:0 0 13px;border:1px solid #8a6754;border-radius:6px;background:linear-gradient(110deg,#3b2e2b,#2a2727);padding:10px 12px;}
+.fx-type-control{display:flex;flex-direction:column;gap:8px;width:100%;}
+.fx-type-title{font:700 .83rem var(--cond,system-ui);letter-spacing:.07em;color:#f6c9a5;}
+.fx-type-panel .fx-type-select{font:600 1rem var(--ui,system-ui);padding:11px 34px 11px 12px;min-height:44px;cursor:pointer;background:#171719;color:#fff3e7;border:1px solid #ac7b61;}
+.fx-type-panel:focus-within{border-color:#e5ad8c;}

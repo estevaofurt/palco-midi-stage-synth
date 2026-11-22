@@ -1,3 +1,9 @@
+## v1.8.1 — Seletor de tipo visível
+
+- Reverbs, delays, modulações e equalizador: a escolha do tipo aparece logo abaixo do título do efeito, antes do endereçamento.
+- Maior contraste e área de clique para o seletor de algoritmo, em celular e desktop.
+- Nenhuma alteração nos presets ou no processamento de áudio; a atualização é de organização visual.
+
 ## v1.8.0 — Rack de efeitos avançado e compressor corrigido
 
 - Dois reverbs com **Hall, Room, Plate, Spring, Church e Shimmer (aproximação harmônica)**. Cada família possui resposta impulsiva gerada e características de pré-delay, cauda e filtragem. Mudanças de tipo/duração têm transição suavizada entre convolvers.

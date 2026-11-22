@@ -238,7 +238,7 @@ export class Panel {
     const top=elem('div','editor-top'),title=elem('div','editor-title');
     const head=elem('h2','','Efeitos');head.id='title-effects';
     title.append(elem('span','editor-kicker','Rack de efeitos · 8 sessões'),head);
-    top.append(title,elem('p','fx-help','Cada efeito pode atuar em vários instrumentos ao mesmo tempo. O botão FX de cada motor desliga todos os efeitos apenas naquele instrumento, mantendo seu som seco.'));
+    top.append(title,elem('p','fx-help','Escolha o TIPO logo abaixo do título de cada efeito (Reverb, Delay, Modulação e Equalizador). Depois marque os instrumentos em “Aplicar a estes módulos”. O botão FX de cada motor desliga todos os efeitos somente naquele instrumento.'));
     const rack=elem('div','fx-rack');
     const labels=Object.fromEntries(Object.entries(engines).map(([id,d])=>[id,d.name]));
     for(const def of effectsDefinition){
@@ -251,6 +251,30 @@ export class Panel {
       const h=elem('h3','',def.label),tog=elem('label','fx-enable');tog.append(enabled,elem('span','','Ativo'));
       header.append(h,tog);card.append(header);
       const settings=elem('div','fx-controls');
+      const typeSettings={
+        reverb:['reverbType','Tipo de reverb',reverbTypes],
+        delay:['delayType','Tipo de delay',delayTypes],
+        mod:['modType','Tipo de modulação',modulationTypes],
+        eq:['eqType','Tipo de equalizador',eqTypes]
+      };
+      if(typeSettings[def.type]){
+        const [field,label,types]=typeSettings[def.type];
+        const selector=elem('label','fx-control fx-type-control');
+        selector.append(elem('span','fx-type-title','TIPO DE '+(def.type==='eq'?'EQUALIZADOR':def.type==='mod'?'MODULAÇÃO':def.type.toUpperCase())));
+        const options=elem('select','fx-type-select');
+        options.setAttribute('aria-label',label+' '+def.label);
+        options.title='Escolher '+label.toLowerCase()+' para '+def.label;
+        for(const [key,name] of Object.entries(types))addOption(options,key,name);
+        options.value=slot[field];
+        options.onchange=()=>{
+          this.actions.fxChange(def.id,field,options.value);
+          if(def.type==='eq'){
+            this.drawFXEditor();this.panels.effects.querySelector(`[data-effect="${def.id}"] .fx-type-select`)?.focus({preventScroll:true});
+          }
+        };
+        options.ondblclick=()=>{options.value=defaultSlot(def.id)[field];options.dispatchEvent(new Event('change',{bubbles:true}))};
+        selector.append(options);const typePanel=elem('div','fx-type-panel');typePanel.append(selector);card.append(typePanel);
+      }
       const routing=elem('fieldset','fx-routing');
       routing.append(elem('legend','','Aplicar a estes módulos'));
       const checks=elem('div','fx-targets');
@@ -266,28 +290,6 @@ export class Panel {
         label.append(input,elem('span','',name));checks.append(label);
       }
       routing.append(checks);card.append(routing);
-      const typeSettings={
-        reverb:['reverbType','Tipo de reverb',reverbTypes],
-        delay:['delayType','Tipo de delay',delayTypes],
-        mod:['modType','Tipo de modulação',modulationTypes],
-        eq:['eqType','Tipo de equalizador',eqTypes]
-      };
-      if(typeSettings[def.type]){
-        const [field,label,types]=typeSettings[def.type];
-        const selector=elem('label','fx-control fx-type-control',label);
-        const options=elem('select','fx-type-select');
-        options.setAttribute('aria-label',label+' '+def.label);
-        for(const [key,name] of Object.entries(types))addOption(options,key,name);
-        options.value=slot[field];
-        options.onchange=()=>{
-          this.actions.fxChange(def.id,field,options.value);
-          if(def.type==='eq'){
-            this.drawFXEditor();this.panels.effects.querySelector(`[data-effect="${def.id}"] .fx-type-select`)?.focus({preventScroll:true});
-          }
-        };
-        options.ondblclick=()=>{options.value=defaultSlot(def.id)[field];options.dispatchEvent(new Event('change',{bubbles:true}))};
-        selector.append(options);settings.append(selector);
-      }
       const controls=[['mix',def.type==='eq'||def.type==='comp'?'Processamento (mix)':'Intensidade',0,100,1]];
       if(def.type==='reverb')controls.push(['time','Duração',.3,3.8,.1]);
       else if(def.type==='delay')controls.push(['time','Tempo',.04,1.5,.01],['feedback','Feedback',0,80,1]);

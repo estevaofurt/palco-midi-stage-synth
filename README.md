@@ -84,3 +84,7 @@ Cada sessão pode endereçar vários motores e o botão FX do motor elimina todo
 **Compressor:** Threshold (-50–0 dB), Ratio (1–16), Attack (1–200 ms), Release (20–1000 ms), Knee (0–30 dB) e Makeup (-12 a +18 dB). O compressor master de proteção da saída continua separado. Recomenda-se começar com Threshold -18 dB, Ratio 3:1, Attack 10 ms, Release 200 ms e Makeup 0 dB, evitando clipping ao elevar Makeup.
 
 O tipo Shimmer utiliza uma resposta harmônica brilhante, sem transposição de oitava genuína. Para obter um shimmer convencional com pitch shift +12 semitons em feedback será necessária implementação dedicada posterior.
+
+
+## v1.8.1 — Onde escolher os tipos de efeito
+Abra o módulo **Efeitos**. Logo abaixo de **Reverb 1**, **Reverb 2**, **Delay 1**, **Delay 2**, **Modulação 1**, **Modulação 2** e **Equalizador**, aparece um seletor grande **TIPO DE ...**. Escolha o algoritmo antes de marcar os instrumentos atendidos pelo efeito. O Compressor tem um único tipo, sem seletor.
