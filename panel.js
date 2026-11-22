@@ -1,4 +1,4 @@
-import {engines,feet,fromPreset,pretty,rememberPatch,effectsDefinition,instrumentField,presetsForInstrument,presetForInstrument,instrumentName,defaultSlot} from './patches.js';
+import {engines,feet,fromPreset,pretty,rememberPatch,effectsDefinition,reverbTypes,delayTypes,modulationTypes,eqTypes,instrumentField,presetsForInstrument,presetForInstrument,instrumentName,defaultSlot} from './patches.js';
 const elem=(tag,cls,text)=>{
   const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;
 };
@@ -266,12 +266,47 @@ export class Panel {
         label.append(input,elem('span','',name));checks.append(label);
       }
       routing.append(checks);card.append(routing);
-      const controls=[['mix','Intensidade',0,100,1]];
+      const typeSettings={
+        reverb:['reverbType','Tipo de reverb',reverbTypes],
+        delay:['delayType','Tipo de delay',delayTypes],
+        mod:['modType','Tipo de modulação',modulationTypes],
+        eq:['eqType','Tipo de equalizador',eqTypes]
+      };
+      if(typeSettings[def.type]){
+        const [field,label,types]=typeSettings[def.type];
+        const selector=elem('label','fx-control fx-type-control',label);
+        const options=elem('select','fx-type-select');
+        options.setAttribute('aria-label',label+' '+def.label);
+        for(const [key,name] of Object.entries(types))addOption(options,key,name);
+        options.value=slot[field];
+        options.onchange=()=>{
+          this.actions.fxChange(def.id,field,options.value);
+          if(def.type==='eq'){
+            this.drawFXEditor();this.panels.effects.querySelector(`[data-effect="${def.id}"] .fx-type-select`)?.focus({preventScroll:true});
+          }
+        };
+        options.ondblclick=()=>{options.value=defaultSlot(def.id)[field];options.dispatchEvent(new Event('change',{bubbles:true}))};
+        selector.append(options);settings.append(selector);
+      }
+      const controls=[['mix',def.type==='eq'||def.type==='comp'?'Processamento (mix)':'Intensidade',0,100,1]];
       if(def.type==='reverb')controls.push(['time','Duração',.3,3.8,.1]);
       else if(def.type==='delay')controls.push(['time','Tempo',.04,1.5,.01],['feedback','Feedback',0,80,1]);
       else if(def.type==='mod')controls.push(['rate','Velocidade',.1,12,.1],['depth','Profundidade',0,100,1]);
-      else if(def.type==='eq')controls.push(['low','Graves',-12,12,1],['mid','Médios',-12,12,1],['high','Agudos',-12,12,1]);
-      else if(def.type==='comp')controls.push(['threshold','Threshold',-50,0,1],['ratio','Ratio',1,16,.5]);
+      else if(def.type==='eq'){
+        if(slot.eqType==='graphic'){
+          for(const freq of [125,250,500,1000,2000,4000,8000])controls.push(['eq'+freq,freq>=1000?(freq/1000)+' kHz':freq+' Hz',-15,15,.5]);
+        } else {
+          controls.push(
+            ['low','Graves · ganho',-15,15,.5],['lowFreq','Graves · frequência',40,600,1],['lowQ','Graves · Q',.3,8,.1],
+            ['mid','Médios · ganho',-15,15,.5],['midFreq','Médios · frequência',200,6000,1],['midQ','Médios · Q',.3,8,.1],
+            ['high','Agudos · ganho',-15,15,.5],['highFreq','Agudos · frequência',1500,14000,1],['highQ','Agudos · Q',.3,8,.1]
+          );
+        }
+      } else if(def.type==='comp'){
+        controls.push(['threshold','Threshold (dB)',-50,0,1],['ratio','Ratio (x)',1,16,.5],
+          ['attack','Attack (s)',.001,.2,.001],['release','Release (s)',.02,1,.01],
+          ['knee','Knee (dB)',0,30,1],['makeup','Makeup Gain (dB)',-12,18,.5]);
+      }
       for(const [id,label,min,max,step] of controls){
         const l=elem('label','fx-control',label);const range=elem('input');range.type='range';
         range.min=min;range.max=max;range.step=step;range.value=slot[id];

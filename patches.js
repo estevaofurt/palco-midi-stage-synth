@@ -122,7 +122,20 @@ export const effectsDefinition=[
   {id:'mod1',label:'Modulação 1',type:'mod'},{id:'mod2',label:'Modulação 2',type:'mod'},
   {id:'eq',label:'Equalizador',type:'eq'},{id:'comp',label:'Compressor',type:'comp'}
 ];
-export const defaultSlot=id=>({active:false,targets:['piano'],mix:25,depth:50,time:id.startsWith('reverb')?1.7:.28,feedback:25,rate:2.1,low:0,mid:0,high:0,threshold:-18,ratio:3});
+export const reverbTypes={hall:'Hall',room:'Room',plate:'Plate',spring:'Spring',church:'Church',shimmer:'Shimmer'};
+export const delayTypes={tape:'Tape',analog:'Analog',digital:'Digital'};
+export const modulationTypes={chorus:'Chorus',flanger:'Flanger',phaser:'Phaser',wah:'Wah-Wah'};
+export const eqTypes={parametric:'Paramétrico',graphic:'Gráfico · 7 bandas'};
+export const defaultSlot=id=>({
+  active:false,targets:['piano'],mix:id==='eq'||id==='comp'?100:25,depth:50,
+  time:id.startsWith('reverb')?1.7:.28,feedback:25,rate:2.1,
+  reverbType:id==='reverb2'?'room':'hall',
+  delayType:id==='delay2'?'tape':'digital',
+  modType:id==='mod2'?'flanger':'chorus',eqType:'parametric',
+  low:0,mid:0,high:0,lowFreq:160,midFreq:1000,highFreq:5600,lowQ:.8,midQ:1.2,highQ:.8,
+  eq125:0,eq250:0,eq500:0,eq1000:0,eq2000:0,eq4000:0,eq8000:0,
+  threshold:-18,ratio:3,attack:.01,release:.2,knee:6,makeup:0
+});
 export const scenes=[
   {id:'piano-pad',name:'Piano + pad',mask:5},{id:'piano',name:'Piano acústico',mask:1},
   {id:'electric',name:'Piano elétrico',mask:8},{id:'electric-pad',name:'Elétrico + pad',mask:12},
@@ -188,6 +201,11 @@ export function loadState(storage){
     const source=Array.isArray(old.targets)?old.targets:(typeof old.target==='string'?[old.target]:defaults.targets);
     const targets=[...new Set(source.filter(x=>Object.hasOwn(engines,x)))];
     state.fx.slots[id]={...defaults,...numeric,targets};
+    // Valores desconhecidos não podem quebrar o rack ao restaurar sessões antigas.
+    if(!Object.hasOwn(reverbTypes,state.fx.slots[id].reverbType))state.fx.slots[id].reverbType=defaults.reverbType;
+    if(!Object.hasOwn(delayTypes,state.fx.slots[id].delayType))state.fx.slots[id].delayType=defaults.delayType;
+    if(!Object.hasOwn(modulationTypes,state.fx.slots[id].modType))state.fx.slots[id].modType=defaults.modType;
+    if(!Object.hasOwn(eqTypes,state.fx.slots[id].eqType))state.fx.slots[id].eqType=defaults.eqType;
   }
   const perf=saved.performance||{};
   if(Number.isFinite(perf.bpm))state.performance.bpm=Math.max(40,Math.min(240,Math.round(perf.bpm)));

@@ -199,3 +199,10 @@ footer{flex-wrap:wrap}
 
 /* Ajuda contextual sem ocupar espaço nos controles de performance. */
 .control-hint{margin:10px 0 0;color:#aba5a0;font-size:11px;line-height:1.45;max-width:60ch}
+
+/* v1.8 · escolha de algoritmo: respeita largura de cada slot, inclusive no celular. */
+.fx-type-control{grid-column:1/-1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.fx-type-select{box-sizing:border-box;width:100%;max-width:100%;min-width:0;
+  background:#181719;color:#f0e4db;border:1px solid #65534e;border-radius:4px;
+  font:500 .9rem var(--ui, system-ui);padding:9px;}
+.fx-type-select:focus-visible{outline:2px solid #e5ad8c;outline-offset:2px}

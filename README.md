@@ -53,7 +53,7 @@ A interface de importação de WAV por instrumento foi retirada nesta versão, c
 - Alterações de filtros, Leslie, drawbars, Auto-Pan, tremolo, Synth (filtros/ondas/LFO) e FX são enviadas ao motor durante a execução. Alguns parâmetros físicos de ataque (martelo/dinâmica) só afetam notas iniciadas depois da alteração.
 - O botão **FX** de cada motor é um atalho para ativar/desativar a influência do rack inteiro *naquele motor*, preservando valores e destinos. Efeitos com caudas (reverb/delay) podem continuar decaindo por um instante após o bypass.
 
-## v1.7.0 — Controles durante notas sustentadas
+## v1.8.0 — Controles durante notas sustentadas
 
 O painel agora atualiza as vozes em execução ao mover knobs/seletores de timbre contínuos. A modificação ocorre de forma suavizada, sem reiniciar as notas. Entre os controles validados estão Pickup do elétrico, abafamento do piano, drawbars do órgão, afinação/volume/ruído/sustain do Synth e brilho/release do Leitor SF. O bypass FX por módulo e o endereçamento múltiplo seguem independentes.
 
@@ -62,7 +62,7 @@ O painel agora atualiza as vozes em execução ao mover knobs/seletores de timbr
 **Testes:** `npm run check`; `python tests/browser_live_v16.py`; `python tests/browser_v15.py`; `python tests/browser_stress.py`. A calibração auditiva com controlador MIDI físico e a execução de `AudioWorklet` em HTTPS real continuam pendentes.
 
 
-## Stage Synth v1.7.0 — Organ B3 e síntese ao vivo
+## Stage Synth v1.8.0 — Organ B3 e síntese ao vivo
 
 - Órgão: seletor **B3 Jazz / B3 Gospel / Church Tubos** independente dos presets Natural, Suave e Brilhante.
 - Atualização do registro e drawbars em notas sustentadas; migração automática dos ajustes de versões anteriores (sem apagar presets salvos).
@@ -74,3 +74,13 @@ O painel agora atualiza as vozes em execução ao mover knobs/seletores de timbr
 - 27 testes de lógica e testes de navegador específicos para seleção, glide, uníssono, matriz e panic.
 
 **Limites:** uníssono dinâmico aumenta uso de CPU nas notas ativas; testar em controladores físicos e celulares antes de uso ao vivo. O código não transforma timbres modelados em amostras de piano real.
+
+## Rack de efeitos v1.8.0
+
+O rack preserva oito sessões independentes: Reverb 1/2 (Hall, Room, Plate, Spring, Church e Shimmer aproximado), Delay 1/2 (Tape, Analog e Digital), Mod 1/2 (Chorus, Flanger, Phaser e Wah-Wah automático), Equalizador (paramétrico de 3 bandas ou gráfico de 7 bandas) e Compressor.
+
+Cada sessão pode endereçar vários motores e o botão FX do motor elimina todos os efeitos de sua saída, sem alterar os outros instrumentos. EQ e compressor operam como inserts de sinal completo (mix 100% em novos presets); nos valores intermediários, o mix permite processamento paralelo intencional.
+
+**Compressor:** Threshold (-50–0 dB), Ratio (1–16), Attack (1–200 ms), Release (20–1000 ms), Knee (0–30 dB) e Makeup (-12 a +18 dB). O compressor master de proteção da saída continua separado. Recomenda-se começar com Threshold -18 dB, Ratio 3:1, Attack 10 ms, Release 200 ms e Makeup 0 dB, evitando clipping ao elevar Makeup.
+
+O tipo Shimmer utiliza uma resposta harmônica brilhante, sem transposição de oitava genuína. Para obter um shimmer convencional com pitch shift +12 semitons em feedback será necessária implementação dedicada posterior.

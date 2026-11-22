@@ -1,3 +1,15 @@
+## v1.8.0 — Rack de efeitos avançado e compressor corrigido
+
+- Dois reverbs com **Hall, Room, Plate, Spring, Church e Shimmer (aproximação harmônica)**. Cada família possui resposta impulsiva gerada e características de pré-delay, cauda e filtragem. Mudanças de tipo/duração têm transição suavizada entre convolvers.
+- Dois delays com **Tape, Analog e Digital**, diferenças de filtros, saturação e flutuação de tempo no Tape. Tempo e feedback respondem durante a execução.
+- Duas sessões de modulação com **Chorus, Flanger, Phaser e Wah-Wah**, LFO de taxa/profundidade configuráveis. Wah é automático por LFO.
+- Equalizador como **insert** selecionável entre **paramétrico de 3 bandas** (frequência, Q e ganho por banda) e **gráfico de 7 bandas** (125 Hz a 8 kHz).
+- **Compressor revisado como insert por módulo**: threshold, ratio, attack, release, knee e makeup gain, com mix para compressão paralela opcional e redução de ganho consultável. Eliminada a duplicação indevida de sinal seco nos EQ/Comp anteriores.
+- Preservado o endereçamento de cada sessão a vários módulos e o FX OFF por instrumento, sem apagar configurações. Alterações atuam durante o áudio.
+- Recuperação de presets da v1.7 sem quebrar campos não existentes; preservação do projeto antigo em outro endereço.
+- Testes: 30 testes Node aprovados; navegador em 390/1024/1440 px; renderização offline confirma compressão e EQ (RMS 0,460→0,166 com compressor forte, 0,082 com -15 dB em 1 kHz). Variações dos algoritmos e fluxo FX auditados.
+- Limites: Shimmer ainda não faz pitch-shifting real em oitavas; IRs e algoritmos de modulação são aproximações digitais, não emulações calibradas de equipamentos comerciais. Medidas ao vivo com hardware e DAW permanecem pendentes.
+
 ## v1.7.0 — seleção do órgão e síntese em tempo real
 
 - Corrigido o seletor do órgão para distinguir B3 Jazz, B3 Gospel e Church.

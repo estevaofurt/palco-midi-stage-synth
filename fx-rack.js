@@ -1,47 +1,135 @@
 import {engines,effectsDefinition} from './patches.js';
-import {gain,filter,smooth,clamp,noiseBuffer} from './voice.js';
-function impulse(ctx,seconds,seed=179){
-  const len=Math.ceil(ctx.sampleRate*seconds),buffer=ctx.createBuffer(2,len,ctx.sampleRate);
+import {gain,filter,smooth,clamp} from './voice.js';
+
+const TWO_PI=Math.PI*2;
+const GRAPHIC=[125,250,500,1000,2000,4000,8000];
+const dBToGain=db=>10**(db/20);
+const seeded=(state)=>{state.value=(Math.imul(state.value,1664525)+1013904223)>>>0;return state.value/2147483648-1};
+
+// IRs originais e determinísticos. Shimmer é um brilho harmônico aproximado,
+// não um pitch shifter de oitava; essa distinção permanece na documentação.
+export function impulse(ctx,seconds,type='hall',seed=179){
+  const tail=clamp(seconds,.3,3.8);
+  const cfg={
+    hall:{factor:1.12,pre:.018,damp:.69,decay:5.7,early:.22},
+    room:{factor:.47,pre:.004,damp:.42,decay:8.6,early:.55},
+    plate:{factor:.89,pre:.012,damp:.28,decay:5.2,early:.17},
+    spring:{factor:.76,pre:.012,damp:.43,decay:6.6,early:.14},
+    church:{factor:1.6,pre:.049,damp:.80,decay:4.8,early:.24},
+    shimmer:{factor:1.32,pre:.028,damp:.22,decay:5.0,early:.13}
+  }[type]||{factor:1,pre:.02,damp:.6,decay:5.7,early:.2};
+  const length=Math.ceil(ctx.sampleRate*(tail*cfg.factor+cfg.pre+.05));
+  const buffer=ctx.createBuffer(2,length,ctx.sampleRate),delay=Math.round(cfg.pre*ctx.sampleRate);
+  const rng={value:seed>>>0};
   for(let ch=0;ch<2;ch++){
-    const a=buffer.getChannelData(ch);let low=0;
-    for(let i=0;i<len;i++){
-      seed=(seed*1664525+1013904223)>>>0;
-      const n=seed/2147483648-1;
-      low=.58*low+.42*n;
-      const x=i/ctx.sampleRate;
-      a[i]=(low*.48+n*.1)*Math.exp(-x*5/seconds)*(1-Math.exp(-x*350));
+    const out=buffer.getChannelData(ch);let low=0,ring=0,phase=0;
+    for(let i=delay;i<length;i++){
+      const t=(i-delay)/ctx.sampleRate, raw=seeded(rng);
+      low=low*cfg.damp+(1-cfg.damp)*raw;
+      let signal=low*.75+raw*(type==='plate'||type==='shimmer'?.48:.2);
+      if(type==='spring'){
+        phase+=TWO_PI*(900+540*Math.exp(-t*18)+230*Math.sin(t*23))/ctx.sampleRate;
+        ring=.9*ring+.1*Math.sin(phase);
+        signal=signal*.42+ring*.52*Math.sin(t*37+ch);
+      }
+      if(type==='shimmer'){
+        // Refrações cristalinas: harmônicos de alta frequência no campo reverberante.
+        signal=signal*.5+.22*Math.sin(TWO_PI*(1777+ch*47)*t)*Math.exp(-t*.5);
+      }
+      const early=cfg.early*(Math.exp(-(((t-.015)/.003)**2))+.6*Math.exp(-(((t-.039)/.004)**2)));
+      const envelope=Math.exp(-cfg.decay*t/(tail*cfg.factor))*(1-Math.exp(-t*260));
+      out[i]=clamp((signal+early)*envelope*.42,-1,1);
     }
   }
   return buffer;
 }
+function saturator(ctx,drive=0){
+  const node=ctx.createWaveShaper();node.oversample='2x';node.curve=curve(drive);return node;
+}
+function curve(drive){
+  const a=new Float32Array(1025),d=1+drive;
+  for(let i=0;i<a.length;i++){
+    const x=2*i/(a.length-1)-1;
+    a[i]=drive===0?x:Math.tanh(d*x)/Math.tanh(d);
+  }
+  return a;
+}
+function connectChain(input,nodes,output){
+  let current=input;
+  for(const node of nodes){current.connect(node);current=node}
+  current.connect(output);
+}
+function makeInsert(ctx,bus,master){
+  const input=gain(ctx,1),eqDry=gain(ctx,1),eqParam=gain(ctx,0),eqGraphic=gain(ctx,0);
+  // O EQ tem duas redes selecionáveis e bypass. Nunca soma uma cópia extra do sinal.
+  const eqOut=gain(ctx,1);
+  input.connect(eqDry).connect(eqOut);
+  const bands=[
+    filter(ctx,'peaking',160,.8),filter(ctx,'peaking',1000,1.2),filter(ctx,'peaking',5600,.8)
+  ];
+  connectChain(input,bands,eqParam);eqParam.connect(eqOut);
+  const graphic=GRAPHIC.map(f=>filter(ctx,'peaking',f,1.15));
+  connectChain(input,graphic,eqGraphic);eqGraphic.connect(eqOut);
+  const compDry=gain(ctx,1),compWet=gain(ctx,0),makeup=gain(ctx,1);
+  const comp=ctx.createDynamicsCompressor();
+  eqOut.connect(compDry).connect(master);
+  eqOut.connect(comp).connect(makeup).connect(compWet).connect(master);
+  // O bus do motor deixa de ir diretamente ao master. Toda saída passa pelo
+  // caminho único de inserts, seco quando as sessões não estão habilitadas.
+  bus.disconnect(master);bus.connect(input);
+  return {input,eqDry,eqParam,eqGraphic,eqOut,bands,graphic,comp,compDry,compWet,makeup};
+}
+function makeReverb(ctx,input,wet,id){
+  const a=ctx.createConvolver(),b=ctx.createConvolver();
+  const ga=gain(ctx,1),gb=gain(ctx,0);
+  a.buffer=impulse(ctx,1.7,'hall',id==='reverb1'?171:431);
+  b.buffer=impulse(ctx,1.7,'hall',id==='reverb1'?173:433);
+  input.connect(a).connect(ga).connect(wet);
+  input.connect(b).connect(gb).connect(wet);
+  return {reverbs:[a,b],verbGains:[ga,gb],activeIR:0,irKey:'hall/1.7',impulseTimer:null};
+}
+function makeDelay(ctx,input,wet){
+  const delay=ctx.createDelay(2.5),loop=gain(ctx,.25),tone=filter(ctx,'lowpass',16000),drive=saturator(ctx,0);
+  input.connect(delay).connect(tone).connect(drive).connect(wet);
+  drive.connect(loop).connect(delay);
+  const flutter=ctx.createOscillator(),flutterDepth=gain(ctx,0);
+  flutter.frequency.value=4.8;flutter.connect(flutterDepth).connect(delay.delayTime);flutter.start();
+  return {delay,loop,tone,drive,flutter,flutterDepth,delayType:null};
+}
+function makeModulation(ctx,input,wet){
+  const chorus=ctx.createDelay(.08),chorusGain=gain(ctx,0);
+  chorus.delayTime.value=.021;input.connect(chorus).connect(chorusGain).connect(wet);
+  const flanger=ctx.createDelay(.04),flangerGain=gain(ctx,0),feedback=gain(ctx,.28);
+  flanger.delayTime.value=.004;input.connect(flanger).connect(flangerGain).connect(wet);
+  flanger.connect(feedback).connect(flanger);
+  const phaser=[350,650,1000,1550].map(f=>filter(ctx,'allpass',f,.8)),phaserGain=gain(ctx,0);
+  connectChain(input,phaser,phaserGain);phaserGain.connect(wet);
+  const wah=filter(ctx,'bandpass',850,3.5),wahGain=gain(ctx,0);
+  input.connect(wah).connect(wahGain).connect(wet);
+  const lfo=ctx.createOscillator(),chorusDepth=gain(ctx,0),flangerDepth=gain(ctx,0),phaserDepth=gain(ctx,0),wahDepth=gain(ctx,0);
+  lfo.frequency.value=1;
+  lfo.connect(chorusDepth).connect(chorus.delayTime);
+  lfo.connect(flangerDepth).connect(flanger.delayTime);
+  lfo.connect(phaserDepth);for(const f of phaser)phaserDepth.connect(f.frequency);
+  lfo.connect(wahDepth).connect(wah.frequency);lfo.start();
+  return {lfo,chorusGain,flangerGain,phaserGain,wahGain,chorusDepth,flangerDepth,phaserDepth,wahDepth,feedback,chorus,flanger,phaser,wah};
+}
 export class FXRack {
   constructor(ctx,master,state,buses){
-    this.ctx=ctx;this.state=state;this.nodes={};this.sends={};
+    this.ctx=ctx;this.state=state;this.nodes={};this.sends={};this.inserts={};
+    for(const name of Object.keys(engines))this.inserts[name]=makeInsert(ctx,buses[name],master);
     for(const {id,type} of effectsDefinition){
-      const input=gain(ctx,1),wet=gain(ctx,0),slot={input,wet};
+      if(type==='eq'||type==='comp'){
+        this.nodes[id]={type};this.sends[id]={};continue;
+      }
+      const input=gain(ctx,1),wet=gain(ctx,0),slot={input,wet,type};
       this.nodes[id]=slot;wet.connect(master);this.sends[id]={};
       for(const module of Object.keys(engines)){
         const send=gain(ctx,0);buses[module].connect(send).connect(input);this.sends[id][module]=send;
       }
-      if(type==='reverb'){
-        const conv=ctx.createConvolver();conv.buffer=impulse(ctx,id==='reverb1'?1.7:3.5,id==='reverb1'?171:431);
-        input.connect(conv).connect(wet);slot.convolver=conv;
-      } else if(type==='delay'){
-        const delay=ctx.createDelay(2.5),loop=gain(ctx,.2),tone=filter(ctx,'lowpass',5400);
-        input.connect(delay).connect(tone).connect(wet);
-        delay.connect(loop).connect(delay);slot.delay=delay;slot.loop=loop;
-      } else if(type==='mod'){
-        const delay=ctx.createDelay(.04),lfo=ctx.createOscillator(),depth=gain(ctx,0);
-        delay.delayTime.value=id==='mod1'?.018:.006;
-        lfo.frequency.value=1.1;lfo.connect(depth).connect(delay.delayTime);lfo.start();
-        input.connect(delay).connect(wet);slot.lfo=lfo;slot.depth=depth;
-      } else if(type==='eq'){
-        const low=filter(ctx,'lowshelf',170),mid=filter(ctx,'peaking',1000,1),high=filter(ctx,'highshelf',6200);
-        input.connect(low).connect(mid).connect(high).connect(wet);slot.low=low;slot.mid=mid;slot.high=high;
-      } else if(type==='comp'){
-        const comp=ctx.createDynamicsCompressor();comp.attack.value=.008;comp.release.value=.18;
-        input.connect(comp).connect(wet);slot.comp=comp;
-      }
+      if(type==='reverb')Object.assign(slot,makeReverb(ctx,input,wet,id));
+      else if(type==='delay')Object.assign(slot,makeDelay(ctx,input,wet));
+      else if(type==='mod')Object.assign(slot,makeModulation(ctx,input,wet));
     }
     this.update();
   }
@@ -49,33 +137,74 @@ export class FXRack {
     const now=this.ctx.currentTime;
     for(const {id,type} of effectsDefinition){
       const p=this.state.fx.slots[id],slot=this.nodes[id];
+      if(type==='eq'||type==='comp')continue;
       const amount=clamp(p.mix,0,100)/100;
-      // Multi-destination routing: each instrument has an independent FX bypass.
       for(const [module,send] of Object.entries(this.sends[id])){
         const enabled=p.active&&p.targets.includes(module)&&this.state.fx.enabled[module];
-        smooth(send.gain,enabled?1:0,now,.02);
+        smooth(send.gain,enabled?1:0,now,.018);
       }
-      smooth(slot.wet.gain,p.active?amount*(type==='eq'||type==='comp'?.75:.55):0,now,.02);
+      smooth(slot.wet.gain,p.active?amount*(type==='mod'?.50:.60):0,now,.02);
       if(type==='reverb'){
-        const seconds=clamp(p.time,.3,3.8);
-        if(slot.impulseSeconds===undefined||Math.abs(seconds-slot.impulseSeconds)>.08){
-          slot.impulseSeconds=seconds;clearTimeout(slot.impulseTimer);
-          slot.impulseTimer=setTimeout(()=>{slot.convolver.buffer=impulse(this.ctx,seconds,id==='reverb1'?171:431)},140);
+        const seconds=clamp(p.time,.3,3.8),key=p.reverbType+'/'+seconds.toFixed(2);
+        if(slot.irKey!==key){
+          clearTimeout(slot.impulseTimer);
+          slot.impulseTimer=setTimeout(()=>{
+            const next=1-slot.activeIR;
+            slot.reverbs[next].buffer=impulse(this.ctx,seconds,p.reverbType,id==='reverb1'?171:431);
+            smooth(slot.verbGains[next].gain,1,this.ctx.currentTime,.08);
+            smooth(slot.verbGains[slot.activeIR].gain,0,this.ctx.currentTime,.08);
+            slot.activeIR=next;slot.irKey=key;
+          },90);
         }
       }else if(type==='delay'){
+        const kind=p.delayType||'digital';
         smooth(slot.delay.delayTime,clamp(p.time,.04,1.5),now,.025);
         smooth(slot.loop.gain,clamp(p.feedback,0,80)/100,now,.03);
+        const freq=kind==='analog'?3000:kind==='tape'?5500:17500;
+        smooth(slot.tone.frequency,freq,now,.04);
+        smooth(slot.flutterDepth.gain,kind==='tape'?.0014:0,now,.04);
+        smooth(slot.flutter.frequency,kind==='tape'?4.8:1,now,.04);
+        if(slot.delayType!==kind){slot.drive.curve=curve(kind==='analog'?.7:kind==='tape'?1.3:0);slot.delayType=kind}
       }else if(type==='mod'){
+        const kind=p.modType||'chorus',depth=clamp(p.depth,0,100)/100;
         smooth(slot.lfo.frequency,clamp(p.rate,.1,12),now,.04);
-        smooth(slot.depth.gain,(id==='mod1'?.0035:.0009)*clamp(p.depth??50,0,100)/50,now,.04);
-      }else if(type==='eq'){
-        smooth(slot.low.gain,clamp(p.low,-12,12),now);
-        smooth(slot.mid.gain,clamp(p.mid,-12,12),now);
-        smooth(slot.high.gain,clamp(p.high,-12,12),now);
-      }else if(type==='comp'){
-        smooth(slot.comp.threshold,clamp(p.threshold,-50,0),now);
-        smooth(slot.comp.ratio,clamp(p.ratio,1,16),now);
+        for(const [name,node] of [['chorus',slot.chorusGain],['flanger',slot.flangerGain],['phaser',slot.phaserGain],['wah',slot.wahGain]]){
+          smooth(node.gain,name===kind?1:0,now,.035);
+        }
+        smooth(slot.chorusDepth.gain,.005*depth,now,.035);
+        smooth(slot.flangerDepth.gain,.003*depth,now,.035);
+        smooth(slot.phaserDepth.gain,650*depth,now,.035);
+        smooth(slot.wahDepth.gain,1000*depth,now,.035);
       }
     }
+    // EQ e compressor são inserts reais, não efeitos paralelos que apenas elevam o volume.
+    const eq=this.state.fx.slots.eq,comp=this.state.fx.slots.comp;
+    for(const [module,n] of Object.entries(this.inserts)){
+      const fxOn=Boolean(this.state.fx.enabled[module]);
+      const eqOn=fxOn&&eq.active&&eq.targets.includes(module);
+      const eqMix=eqOn?clamp(eq.mix,0,100)/100:0;
+      smooth(n.eqDry.gain,1-eqMix,now,.025);
+      smooth(n.eqParam.gain,eq.eqType==='parametric'?eqMix:0,now,.025);
+      smooth(n.eqGraphic.gain,eq.eqType==='graphic'?eqMix:0,now,.025);
+      for(let i=0;i<3;i++){
+        const key=['low','mid','high'][i],f=n.bands[i];
+        smooth(f.frequency,clamp(eq[key+'Freq'],30,16000),now,.03);
+        smooth(f.Q,clamp(eq[key+'Q'],.3,8),now,.03);
+        smooth(f.gain,clamp(eq[key],-15,15),now,.03);
+      }
+      GRAPHIC.forEach((freq,i)=>smooth(n.graphic[i].gain,clamp(eq['eq'+freq],-15,15),now,.03));
+      const compOn=fxOn&&comp.active&&comp.targets.includes(module);
+      const compMix=compOn?clamp(comp.mix,0,100)/100:0;
+      smooth(n.compDry.gain,1-compMix,now,.025);
+      smooth(n.compWet.gain,compMix,now,.025);
+      smooth(n.comp.threshold,clamp(comp.threshold,-50,0),now,.03);
+      smooth(n.comp.ratio,clamp(comp.ratio,1,16),now,.03);
+      smooth(n.comp.attack,clamp(comp.attack,.001,.2),now,.03);
+      smooth(n.comp.release,clamp(comp.release,.02,1),now,.03);
+      smooth(n.comp.knee,clamp(comp.knee,0,30),now,.03);
+      smooth(n.makeup.gain,dBToGain(clamp(comp.makeup,-12,18)),now,.03);
+    }
   }
+  // Redução de ganho negativa em dB, destinada a futuros indicadores do painel.
+  reduction(module){return this.inserts[module]?.comp.reduction??0}
 }
