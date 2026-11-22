@@ -1,5 +1,6 @@
 import {clamp,filter,gain,hz,smooth,noiseBuffer} from './voice.js';
 import {PianoBank} from './piano-bank.js';
+import {SampleLibrary} from './sample-library.js';
 
 function stringResponse(ctx){
   const rate=ctx.sampleRate, length=Math.round(rate*.72);
@@ -35,7 +36,7 @@ export function fallbackVelocity(velocity,touch){
 }
 export class Acoustic {
   constructor(ctx,bus,status){
-    this.ctx=ctx;this.bank=new PianoBank(ctx,status);this.noise=noiseBuffer(ctx,.13);this.lastPedal=0;
+    this.ctx=ctx;this.bank=new PianoBank(ctx,status);this.samples=new SampleLibrary(ctx);this.noise=noiseBuffer(ctx,.13);this.lastPedal=0;
     this.input=filter(ctx,'highshelf',2450);this.lid=filter(ctx,'lowpass',14000);
     this.input.connect(this.lid).connect(bus);
     this.strings=ctx.createConvolver();this.strings.normalize=false;this.strings.buffer=stringResponse(ctx);
@@ -69,6 +70,9 @@ export class Acoustic {
       click.buffer=this.noise;a.gain.setTargetAtTime(0,now+.002,.003);
       click.connect(eq).connect(a).connect(part.gate);part.own(eq,a);part.start(click,{pitch:false,until:now+.036});
     }
+    if(this.samples.play(p.character,part,key,velocity,.42+fallbackVelocity(velocity,p.touch)*.32)){
+      return;
+    }
     const regions=this.bank.layers(key,velocity,p);
     if(!regions.length){
       // Apply the same touch response when the recorded piano bank is unavailable.
@@ -76,22 +80,49 @@ export class Acoustic {
       const force=fallbackVelocity(velocity,p.touch);
       const hardness=clamp(p.hammer/100,0,1);
       const character=p.character||'japanese';
-      const color={japanese:1.15,american:.96,felt:.42,upright:.83}[character]||1;
-      const strike=(.003+.006*(1-hardness))*(character==='felt'?2:1);
-      const decay=2**((60-key)/105);
-      for(const [ratio,mix,tau] of [
-        [1,.28,1.9],
-        [2.002,(.065+.16*hardness*force)*color,.67],
-        [3.008,(.018+.12*hardness*force)*color,.30],
-        [4.013,(.008+.045*hardness*force)*color,.19]
-      ]){
-        if(hz(key)*ratio>=this.ctx.sampleRate*.47)continue;
+      const model={
+        japanese:{body:1.12,metal:.95,decay:1.11,inharm:.00013,strings:3},
+        american:{body:1.01,metal:.77,decay:1.19,inharm:.00022,strings:3},
+        felt:{body:.76,metal:.22,decay:.83,inharm:.00012,strings:2},
+        upright:{body:.93,metal:.63,decay:.85,inharm:.00037,strings:2}
+      }[character]||{body:1,metal:1,decay:1,inharm:.0002,strings:2};
+      const strike=(.0025+.0055*(1-hardness))*(character==='felt'?2.1:1);
+      const decay=2**((60-key)/105)*model.decay;
+      const freq=hz(key);
+      // Stretched string partials and small, slow detunings model the beating
+      // of multiple strings. Unlike a pure harmonic organ tone, piano strings
+      // have inharmonicity increasing with partial number and register.
+      const B=model.inharm*2**((key-60)/21);
+      const stretched=n=>n*Math.sqrt((1+B*n*n)/(1+B));
+      const partials=[
+        [1,.245*model.body,2.15],
+        [2,(.048+.125*hardness*force)*model.metal,.72],
+        [3,(.012+.09*hardness*force)*model.metal,.34],
+        [4,(.004+.035*hardness*force)*model.metal,.20],
+        [5,(.003+.014*hardness*force)*model.metal,.11]
+      ];
+      for(const [ratio,mix,tau] of partials){
+        if(freq*ratio>=this.ctx.sampleRate*.46)continue;
         const osc=this.ctx.createOscillator(),amp=gain(this.ctx,0);
-        osc.frequency.value=hz(key)*ratio;amp.gain.setValueAtTime(0,now);
+        osc.frequency.value=freq*stretched(ratio);
+        amp.gain.setValueAtTime(0,now);
         amp.gain.linearRampToValueAtTime(mix*force,now+strike);
         amp.gain.setTargetAtTime(0,now+strike+.001,tau*decay);
         osc.connect(amp).connect(part.gate);part.own(amp);
-        part.start(osc,{until:now+Math.min(35,tau*decay*9)});
+        part.start(osc,{until:now+Math.min(26,tau*decay*8)});
+      }
+      if(model.strings>1 && key>34){
+        // Two quiet unisons create natural low-rate beating without applying
+        // a global chorus to the entire instrument.
+        for(const cents of [-.65,.71]){
+          const osc=this.ctx.createOscillator(),amp=gain(this.ctx,0);
+          osc.frequency.value=freq;osc.detune.value=cents*(.65+key/100);
+          amp.gain.setValueAtTime(0,now);
+          amp.gain.linearRampToValueAtTime(.095*force*model.body,now+strike*.85);
+          amp.gain.setTargetAtTime(0,now+strike+.001,decay*2.05);
+          osc.connect(amp).connect(part.gate);part.own(amp);
+          part.start(osc,{until:now+Math.min(27,decay*16)});
+        }
       }
       return;
     }

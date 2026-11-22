@@ -19,7 +19,7 @@ test('presets completos com valores válidos',()=>{
    const patch=fromPreset(name,preset.id);
    assert.equal(patch.preset,preset.id);
    for(const group of engine.groups)for(const control of group.controls){
-    if(control.type==='soundfont')continue;
+    if(['soundfont','samplepack'].includes(control.type))continue;
     assert.ok(Object.hasOwn(patch.values,control.id),`${name}/${preset.id}/${control.id}`);
     const v=patch.values[control.id];
     assert.deepEqual(normalise(control,v,control.initial),v);

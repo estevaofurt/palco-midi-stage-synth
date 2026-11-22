@@ -14,9 +14,10 @@ export const engines={
       preset('upright','Piano Upright',{character:'upright',hammer:52,brightness:45,lid:45,resonance:31,room:10,release:.32})
     ],
     groups:[
-      group('Identidade e dinâmica',select('character','Tipo de piano','japanese',{japanese:'Japanese Grand',american:'American Grand',felt:'Felt Piano',upright:'Piano Upright'}),knob('touch','Dinâmica',50),knob('hammer','Dureza de martelo',50),knob('release','Release',.42,.06,3,' s',{step:.01,log:true})),
+      group('Identidade e dinâmica',select('character','Instrumento','japanese',{japanese:'Japanese Grand',american:'American Grand',felt:'Felt Piano',upright:'Piano Upright'}),knob('touch','Dinâmica',50),knob('hammer','Dureza de martelo',50),knob('release','Release',.42,.06,3,' s',{step:.01,log:true})),
       group('Mecânica e ressonância',knob('hammerNoise','Hammer noise',26),knob('pedalNoise','Pedal noise',24),select('stringRes','String resonance','on',{on:'Ativada',off:'Desativada'}),knob('resonance','Intensidade',45)),
-      group('Corpo do piano',knob('lid','Tampa',75),knob('brightness','Brilho',51),knob('room','Ambiente',15),knob('damping','Abafamento',37))
+      group('Corpo do piano',knob('lid','Tampa',75),knob('brightness','Brilho',51),knob('room','Ambiente',15),knob('damping','Abafamento',37)),
+      group('Amostras reais · opcional',{type:'samplepack',id:'samples',label:'Importar amostras WAV'})
     ]
   },
   electric:{name:'Pianos elétricos',short:'Elétricos',bit:8,level:82,
@@ -32,9 +33,10 @@ export const engines={
       preset('fmballad','FM · Ballad Key',{model:'fmballad',hammer:32,decay:76,damper:60})
     ],
     groups:[
-      group('Instrumento e toque',select('model','Timbre','mark1',models),knob('hammer','Dureza',50),knob('pickup','Captação',45),knob('decay','Decaimento',58),knob('damper','Release',35)),
-      group('Amplificador e microfonação',select('cabinet','Amplificador','line',{line:'Direto',combo:'Combo',small:'Vintage pequeno'}),select('mic','Microfone','close',{close:'Próximo',room:'Ambiente',di:'DI direta'}),knob('preamp','Preamp',19),knob('pan','Pan',0,-100,100,' %'),knob('tremolo','Tremolo',0),knob('speed','Velocidade',4.4,1,9,' Hz',{step:.1})),
-      group('Ruídos mecânicos',knob('pedalNoise','Pedal noise',18),knob('hammerNoise','Hammer noise',20))
+      group('Instrumento e toque',select('model','Instrumento','mark1',models),knob('hammer','Dureza',50),knob('pickup','Captação',45),knob('decay','Decaimento',58),knob('damper','Release',35)),
+      group('Amplificador e microfonação',select('cabinet','Amplificador','line',{line:'Direto',combo:'Combo',small:'Vintage pequeno'}),select('mic','Microfone','close',{close:'Próximo',room:'Ambiente',di:'DI direta'}),knob('preamp','Preamp',19),knob('autoPan','Auto-Pan',0),knob('autoPanRate','Velocidade Auto-Pan',2.5,.1,8,' Hz',{step:.1}),knob('tremolo','Tremolo',0),knob('speed','Velocidade Tremolo',4.4,1,9,' Hz',{step:.1})),
+      group('Ruídos mecânicos',knob('pedalNoise','Pedal noise',18),knob('hammerNoise','Hammer noise',20)),
+      group('Amostras reais · opcional',{type:'samplepack',id:'samples',label:'Importar amostras WAV'})
     ]
   },
   organ:{name:'Órgão',short:'Órgão',bit:2,level:72,
@@ -76,6 +78,46 @@ export const engines={
     ]
   }
 };
+// O menu Preset representa uma configuração de fábrica distinta do instrumento escolhido.
+// IDs originais permanecem válidos para não perder configurações de versões anteriores.
+export const instrumentField={piano:'character',electric:'model',organ:'type',sf:'native'};
+export const instrumentName=(engine,values)=>{
+  const field=instrumentField[engine];if(!field)return '';
+  for(const g of engines[engine].groups)for(const c of g.controls){
+    if(c.id===field)return c.options?.[values[field]]||'';
+  }
+  return '';
+};
+for(const engine of ['piano','electric','organ','sf']){
+  const def=engines[engine],base=[...def.presets];
+  for(const entry of base){
+    entry.name=entry.name+' · Natural';
+    const soft={...entry.values},bright={...entry.values};
+    if(engine==='piano'){
+      soft.brightness=Math.max(15,(soft.brightness??51)-17);soft.hammer=Math.max(10,(soft.hammer??50)-15);soft.room=10;
+      bright.brightness=Math.min(90,(bright.brightness??51)+18);bright.hammer=Math.min(90,(bright.hammer??50)+14);bright.room=18;
+    }else if(engine==='electric'){
+      soft.hammer=Math.max(10,(soft.hammer??50)-18);soft.pickup=Math.max(20,(soft.pickup??45)-12);soft.preamp=10;soft.tremolo=8;
+      bright.hammer=Math.min(92,(bright.hammer??50)+17);bright.pickup=Math.min(87,(bright.pickup??45)+14);bright.preamp=34;bright.tremolo=23;
+    }else if(engine==='organ'){
+      soft.drive=5;soft.vibrato=8;soft.click=7;
+      bright.drive=39;bright.vibrato=26;bright.click=35;
+    }else{
+      soft.brightness=30;soft.attack=.22;bright.brightness=79;bright.attack=.035;
+    }
+    def.presets.push(preset(entry.id+'-soft',entry.name.replace(' · Natural',' · Suave'),soft));
+    def.presets.push(preset(entry.id+'-bright',entry.name.replace(' · Natural',' · Brilhante'),bright));
+  }
+}
+export const presetsForInstrument=(engine,values)=>{
+  const field=instrumentField[engine],items=engines[engine].presets;
+  return field?items.filter(p=>(p.values[field]??fromPreset(engine,p.id).values[field])===values[field]):items;
+};
+export function presetForInstrument(engine,choice){
+  const field=instrumentField[engine];
+  return engines[engine].presets.find(p=>p.values[field]===choice)||engines[engine].presets[0];
+}
+
 export const effectsDefinition=[
   {id:'reverb1',label:'Reverb 1',type:'reverb'}, {id:'reverb2',label:'Reverb 2',type:'reverb'},
   {id:'delay1',label:'Delay 1',type:'delay'},{id:'delay2',label:'Delay 2',type:'delay'},
@@ -93,11 +135,11 @@ export const scenes=[
 const safeClone=val=>Array.isArray(val)?val.slice():val;
 export function fromPreset(engine,id){
   const def=engines[engine],item=def.presets.find(x=>x.id===id)||def.presets[0],values={};
-  for(const {controls} of def.groups)for(const c of controls)if(c.type!=='soundfont')values[c.id]=safeClone(item.values[c.id]??c.initial);
+  for(const {controls} of def.groups)for(const c of controls)if(c.type!=='soundfont'&&c.type!=='samplepack')values[c.id]=safeClone(item.values[c.id]??c.initial);
   return {preset:item.id,values,level:def.level};
 }
 export function normalise(c,value,fallback){
-  if(c.type==='soundfont')return fallback;
+  if(c.type==='soundfont'||c.type==='samplepack')return fallback;
   if(c.type==='select')return Object.hasOwn(c.options,value)?value:fallback;
   if(c.type==='drawbars')return Array.isArray(value)&&value.length===9&&value.every(Number.isInteger)?value.map(x=>Math.max(0,Math.min(8,x))):safeClone(fallback);
   return Number.isFinite(value)?Math.max(c.min,Math.min(c.max,value)):fallback;
@@ -118,13 +160,18 @@ export function loadState(storage){
   for(const [id,def] of Object.entries(engines)){
     const stored=saved.patches?.[id],p=fromPreset(id,stored?.preset);let values=stored?.values||{};
     if(id==='electric'&&!stored)values={...legacy};
-    for(const {controls} of def.groups)for(const c of controls)if(c.type!=='soundfont')p.values[c.id]=normalise(c,values[c.id],p.values[c.id]);
+    for(const {controls} of def.groups)for(const c of controls)if(c.type!=='soundfont'&&c.type!=='samplepack')p.values[c.id]=normalise(c,values[c.id],p.values[c.id]);
     if(Number.isFinite(stored?.level))p.level=Math.max(0,Math.min(100,stored.level));
+    if(instrumentField[id]&&stored?.values?.[instrumentField[id]]&&
+      stored.values[instrumentField[id]]!==fromPreset(id,p.preset).values[instrumentField[id]]){
+      const chosen=presetForInstrument(id,p.values[instrumentField[id]]);
+      p.preset=chosen.id;
+    }
     state.patches[id]=p;state.edits[id]={};
     for(const item of def.presets){
       const prev=saved.edits?.[id]?.[item.id];if(!prev)continue;
       const copy=fromPreset(id,item.id);
-      for(const {controls} of def.groups)for(const c of controls)if(c.type!=='soundfont')copy.values[c.id]=normalise(c,prev[c.id],copy.values[c.id]);
+      for(const {controls} of def.groups)for(const c of controls)if(c.type!=='soundfont'&&c.type!=='samplepack')copy.values[c.id]=normalise(c,prev[c.id],copy.values[c.id]);
       state.edits[id][item.id]=copy.values;
     }
     rememberPatch(state,id);

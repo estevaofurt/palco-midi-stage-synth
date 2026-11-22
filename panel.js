@@ -1,4 +1,4 @@
-import {engines,feet,fromPreset,pretty,rememberPatch,effectsDefinition} from './patches.js';
+import {engines,feet,fromPreset,pretty,rememberPatch,effectsDefinition,instrumentField,presetsForInstrument,presetForInstrument,instrumentName} from './patches.js';
 const elem=(tag,cls,text)=>{
   const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;
 };
@@ -60,6 +60,7 @@ function makeDial(control,initial,onChange){
 export class Panel {
   constructor(state,actions){
     this.state=state;this.actions=actions;this.cards={};this.panels={};this.soundfontInfo={name:null,programs:[],selected:0};
+    this.sampleCounts={piano:{},electric:{}};
     const modules=document.getElementById('modules'),editors=document.getElementById('editors');
     for(const [id,definition] of Object.entries(engines)){
       const card=elem('div','module'),tab=elem('button','module-tab'),tone=elem('span','module-tone');
@@ -104,7 +105,7 @@ export class Panel {
       fxToggle.setAttribute('aria-pressed',String(this.state.fx.enabled[id]));
       fxToggle.classList.toggle('on',this.state.fx.enabled[id]);
       level.value=patch.level;level.setAttribute('aria-valuetext',patch.level+'%');
-      tone.textContent=d.presets.find(p=>p.id===patch.preset).name+(this.state.edits[id][patch.preset]?' *':'');
+      tone.textContent=(instrumentName(id,patch.values)||d.presets.find(p=>p.id===patch.preset).name)+(this.state.edits[id][patch.preset]?' *':'');
       this.panels[id].hidden=!editing;
     }
     this.cards.effects.card.classList.toggle('editing',this.state.editor==='effects');
@@ -115,8 +116,12 @@ export class Panel {
     const def=engines[id], patch=this.state.patches[id], pane=this.panels[id], top=elem('div','editor-top');
     const title=elem('div','editor-title'),heading=elem('h2','',def.name);heading.id='title-'+id;
     title.append(elem('span','editor-kicker','Editor de timbre'),heading);
-    const {field,select}=selectField('Timbre',Object.fromEntries(def.presets.map(x=>[x.id,x.name])),false);
-    select.setAttribute('aria-label','Timbre · '+def.name);select.value=patch.preset;
+    const relevant=presetsForInstrument(id,patch.values);
+    const {field,select}=selectField('Preset',Object.fromEntries(relevant.map(x=>[x.id,x.name])),false);
+    select.setAttribute('aria-label','Preset · '+def.name);
+    if(!relevant.some(x=>x.id===patch.preset))addOption(select,patch.preset,'Personalizado · legado');
+    select.value=patch.preset;
+    field.title='Preset: configuração pronta do instrumento. Alterações manuais ficam marcadas com *.';
     select.onchange=()=>{
       rememberPatch(this.state,id);
       const p=fromPreset(id,select.value), saved=this.state.edits[id][select.value];
@@ -141,6 +146,16 @@ export class Panel {
       const section=elem('div','ctrl-group'),choices=elem('div','choices'),dials=elem('div','dial-grid');
       section.append(elem('h3','',g.label));let n=0;
       const change=(name,value)=>{
+        if(name===instrumentField[id] && patch.values[name]!==value){
+          // A mudança do instrumento carrega o seu preset Natural, evitando
+          // um modelo sonoro diferente do preset mostrado na barra superior.
+          rememberPatch(this.state,id);
+          const fresh=presetForInstrument(id,value),next=fromPreset(id,fresh.id);
+          if(this.state.edits[id][fresh.id])next.values=structuredClone(this.state.edits[id][fresh.id]);
+          next.level=patch.level;this.state.patches[id]=next;
+          this.drawEditor(id);this.sync();this.actions.set(id,name);
+          return;
+        }
         patch.values[name]=value;rememberPatch(this.state,id);
         restore.hidden=!this.state.edits[id][patch.preset];this.sync();this.actions.set(id,name);
       };
@@ -162,6 +177,19 @@ export class Panel {
             bar.append(elem('span','',foot),inp,out);bars.append(bar);
           });
           section.append(bars);
+        }else if(control.type==='samplepack'){
+          const picker=elem('div','sample-upload');
+          const model=patch.values[instrumentField[id]];
+          const count=this.sampleCounts[id]?.[model]||0;
+          const input=elem('input');input.type='file';input.multiple=true;input.accept='.wav,.wave,.ogg,.mp3,audio/wav,audio/mpeg,audio/ogg';
+          input.setAttribute('aria-label','Carregar amostras do '+instrumentName(id,patch.values));
+          input.onchange=()=>{if(input.files?.length)this.actions.loadSamples(id,model,input.files)};
+          const remove=elem('button','editor-btn','Retirar amostras');remove.type='button';
+          remove.disabled=count===0;remove.onclick=()=>this.actions.clearSamples(id,model);
+          const hint=elem('p','sample-hint',count
+            ?`${count} amostras reais carregadas para ${instrumentName(id,patch.values)}. Permanecem apenas nesta sessão.`
+            :'Para timbres mais realistas, selecione gravações WAV com nomes C4_v40.wav, C4_v100.wav, MIDI64_v100.wav. Carregamento local, sem envio de dados.');
+          picker.append(input,remove,hint);section.append(picker);
         }else if(control.type==='soundfont'){
           const upload=elem('div','sf-upload');
           const file=elem('input');file.type='file';file.accept='.sf2';file.setAttribute('aria-label','Importar SoundFont SF2');
@@ -180,12 +208,13 @@ export class Panel {
         }else{dials.append(makeDial(control,val,change));n++}
       }
       if(choices.children.length)section.append(choices);
-      if(n){dials.style.setProperty('--cols',n);section.append(dials)}
+      if(n){section.append(dials)}
       section.style.setProperty('--basis',g.controls[0].type==='drawbars'?1.05:Math.max(3,n)/3);
       groups.append(section);
     }
     pane.replaceChildren(top,groups);
   }
+  updateSamples(id,model,count){this.sampleCounts[id][model]=count;this.drawEditor(id);this.sync()}
   updateSoundFont(name,programs,selected=0){
     this.soundfontInfo={name,programs,selected};this.drawEditor('sf');this.sync();
   }

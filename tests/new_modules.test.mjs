@@ -31,9 +31,10 @@ const fixture=()=>{
 };
 test('catálogo contém timbres e oito sessões de efeitos',()=>{
  assert.equal(Object.keys(engines).length,5);assert.equal(effectsDefinition.length,8);
- assert.deepEqual(engines.piano.presets.map(x=>x.id),['japanese','american','felt','upright']);
- assert.equal(engines.electric.presets.length,9);
- assert.deepEqual(engines.organ.presets.map(x=>x.id),['jazz','gospel','church']);
+ assert.deepEqual(engines.piano.presets.slice(0,4).map(x=>x.id),['japanese','american','felt','upright']);
+ assert.equal(engines.piano.presets.length,12);
+ assert.equal(engines.electric.presets.length,27);
+ assert.deepEqual(engines.organ.presets.slice(0,3).map(x=>x.id),['jazz','gospel','church']);
  const state=loadState({getItem:()=>null});assert.equal(Object.keys(state.fx.slots).length,8);
  for(const id of Object.keys(engines))assert.equal(state.fx.enabled[id],false);
 });

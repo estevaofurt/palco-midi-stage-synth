@@ -140,3 +140,44 @@ footer{flex-wrap:wrap}
 #loop-status{font:.75rem var(--mono);color:#edc6aa;padding-bottom:8px}
 @media(max-width:760px){.modules{grid-template-columns:repeat(2,minmax(0,1fr))}.fx-rack{grid-template-columns:minmax(0,1fr)}.fx-slot{padding:9px}}
 @media(max-width:480px){.module-bottom{gap:4px}.toggle{padding:2px 4px}.fx-toggle{padding:2px 4px}.fx-rack{padding:8px}.performance-tools{gap:6px}.performance-tools button{padding:0 7px}.performance-heading span{font-size:.63rem}}
+
+/* v1.4 · Responsive rotary layout. No knob is allowed to steal width from another. */
+.editor .ctrl-group{min-width:0;flex-basis:360px}
+.editor .dial-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(105px,100%),1fr));
+  gap:18px 13px;
+  justify-items:stretch;
+  align-items:start;
+}
+.editor .dial{min-width:0;max-width:100%;width:100%;gap:6px}
+.editor .dial-wheel{width:min(64px,100%);flex:none}
+.editor .dial-name{
+  font-size:.83rem;line-height:1.3;min-height:2.6em;
+  max-width:100%;overflow-wrap:anywhere;word-break:normal;
+  text-align:center;hyphens:auto;
+}
+.editor .dial output{white-space:nowrap;font-size:.75rem}
+.editor .groups{flex-wrap:wrap;align-items:stretch}
+.editor .ctrl-group{border-bottom:1px solid #373538}
+.editor .ctrl-group:nth-child(4){border-left:1px solid #171719}
+.editor .sample-upload{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.editor .sample-upload input[type=file]{min-width:0;max-width:100%;font-size:.79rem;color:#ddd0c7}
+.editor .sample-upload input::file-selector-button{
+  border:1px solid #65514d;background:#343034;color:#f5d7bd;
+  border-radius:4px;padding:8px 11px;margin-right:9px;cursor:pointer
+}
+.editor .sample-hint{margin:3px 0 0;width:100%;font-size:.79rem;line-height:1.5;color:#bfb9b6}
+.editor .tone-field{min-width:min(230px,45vw);max-width:350px}
+.editor .tone-field select{font-size:.89rem}
+@media(min-width:760px){
+ .editor[data-engine="synth"] .ctrl-group{flex:1 1 350px}
+ .editor[data-engine="electric"] .ctrl-group{flex:1 1 345px}
+}
+@media(max-width:640px){
+ .editor .ctrl-group{flex-basis:100%;border-left:0!important;box-shadow:none}
+ .editor .dial-grid{grid-template-columns:repeat(auto-fit,minmax(min(93px,100%),1fr));gap:13px 9px}
+ .editor .dial-wheel{width:min(55px,100%)}
+ .editor .dial-name{font-size:.79rem}
+ .editor .tone-field{min-width:0;max-width:55%}
+}

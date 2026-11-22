@@ -1,14 +1,18 @@
 import {clamp,filter,gain,hz,saturation,smooth,noiseBuffer} from './voice.js';
+import {SampleLibrary} from './sample-library.js';
 export class Electric{
   constructor(ctx,bus){
     this.ctx=ctx;this.input=filter(ctx,'highpass',34);
     this.amp=ctx.createWaveShaper();this.amp.oversample='2x';
     this.speaker=filter(ctx,'lowpass',16000);this.presence=filter(ctx,'peaking',1700,.8);
     this.chop=gain(ctx,1);this.pan=ctx.createStereoPanner();
+    this.autoPanOsc=ctx.createOscillator();this.autoPanDepth=gain(ctx,0);
+    this.autoPanOsc.type='sine';this.autoPanOsc.frequency.value=2.5;
+    this.autoPanOsc.connect(this.autoPanDepth).connect(this.pan.pan);this.autoPanOsc.start();
     this.input.connect(this.amp).connect(this.speaker).connect(this.presence).connect(this.chop).connect(this.pan).connect(bus);
     this.trem=ctx.createOscillator();this.depth=gain(ctx,0);
     this.trem.connect(this.depth).connect(this.chop.gain);this.trem.start();
-    this.noise=noiseBuffer(ctx,.12);this.lastPedal=0;
+    this.noise=noiseBuffer(ctx,.12);this.lastPedal=0;this.samples=new SampleLibrary(ctx);
   }
   update(p){
     const now=this.ctx.currentTime;
@@ -22,7 +26,9 @@ export class Electric{
     smooth(this.input.frequency,cabinet[2],now);
     const depth=p.tremolo/200;
     smooth(this.chop.gain,1-depth,now);smooth(this.depth.gain,depth,now);
-    smooth(this.trem.frequency,p.speed,now);smooth(this.pan.pan,p.pan/100,now);
+    smooth(this.trem.frequency,p.speed,now);
+    smooth(this.pan.pan,0,now);smooth(this.autoPanDepth.gain,Math.min(.95,p.autoPan/100),now);
+    smooth(this.autoPanOsc.frequency,p.autoPanRate,now);
   }
   setPedal(down,p){
     const now=this.ctx.currentTime;if(!p?.pedalNoise||now-this.lastPedal<.07)return;
@@ -44,7 +50,13 @@ export class Electric{
     const pickup=ctx.createWaveShaper();const shapeKey=p.model+'/'+p.pickup;
     if(this.pickupKey!==shapeKey){this.pickupCurve=saturation(15+pick*62,reed?.09:.035+pick*.07);this.pickupKey=shapeKey}
     pickup.curve=this.pickupCurve;pickup.connect(part.gate);part.own(pickup);
-    for(const [ratio,level,tau] of modes){
+    const sampled=this.samples.choose(p.model,key,velocity);
+    if(sampled){
+      const src=ctx.createBufferSource(),amp=gain(ctx,Math.min(.8,.34*force));
+      src.buffer=sampled.buffer;src.playbackRate.value=2**((key-sampled.root)/12);
+      src.connect(amp).connect(pickup);part.own(amp);part.start(src);
+    }
+    if(!sampled)for(const [ratio,level,tau] of modes){
       if(frequency*ratio>=ctx.sampleRate*.46)continue;
       const osc=ctx.createOscillator(),amp=gain(ctx,0);osc.frequency.value=frequency*ratio;
       amp.gain.setValueAtTime(0,now);

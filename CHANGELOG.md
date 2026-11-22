@@ -1,4 +1,16 @@
-# Histórico de versões — Stage Synth / Palco MIDI
+# Stage Synth · Histórico de versões
+
+## v1.4.0 — Controles, presets, Auto-Pan e caminho para áudio real
+
+- Grade de knobs responsiva: dimensionamento automático por espaço, quebra segura de rótulos, sem colisões em seis resoluções de teste.
+- Separação explícita de seleção de **Instrumento** e **Preset**. Cada modelo de piano acústico, piano elétrico, órgão e SoundFont tem variantes Natural, Suave e Brilhante. IDs antigos de presets preservados.
+- Selecionar outro instrumento aplica seu preset Natural e impede divergência de configuração visual. Estado salvo legado com modelo diferente do preset é reconciliado.
+- Pianos elétricos: Pan estático removido; **Auto-Pan** com intensidade, velocidade e LFO independente conectado à panorâmica estéreo. Tremolo mantido.
+- Piano acústico sintetizado: parciais inarmônicos e uníssono discretamente desafinado para reduzir sonoridade de osciladores puros. Não é substituto de um piano gravado.
+- Importação opcional de arquivos de amostras locais WAV/OGG/MP3 (quando decodificáveis pelo navegador), identificando nota e velocidade pelo nome; carga separada por instrumento, sem upload externo.
+- Ampliação da validação automatizada: 17 testes de lógica; navegador de seis larguras, trocas de presets, teste de Auto-Pan e amostras; estresse de 60 notas, polifonia e MIDI simulado.
+- Persistência anterior preservada por compatibilidade e biblioteca de áudio de teste removida da distribuição.
+
 
 ## 1.3.0 — Seis módulos, instrumentos e performance
 

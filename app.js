@@ -41,11 +41,25 @@ panel=new Panel(state,{
   set(id,key){stage?.update(id,key);save()},listen,
   fxEnabled(id,enabled){state.fx.enabled[id]=enabled;stage?.updateEffects();panel.sync();save()},
   fxChange(id,key,value){state.fx.slots[id][key]=value;stage?.updateEffects();save()},
-  loadSF,clearSF,setProgram
+  loadSF,clearSF,setProgram,loadSamples,clearSamples
 });
 syncScene();
 performer=new Performance(()=>stage,state.performance,updatePerformanceUI);
 function setProgram(value){if(!stage)return;stage.instruments.sf.program=value;panel.soundfontInfo.selected=value;save()}
+async function loadSamples(id,model,files){
+  try{
+    await startAudio();
+    report(`Carregando ${files.length} amostras para ${model}…`);
+    const count=await stage.instruments[id].samples.load(model,files);
+    panel.updateSamples(id,model,count);
+    report(`${count} amostras carregadas para ${model}. São usadas ao tocar e permanecem apenas nesta sessão.`);
+  }catch(e){report('Falha nas amostras: '+e.message)}
+}
+function clearSamples(id,model){
+  stage?.instruments[id]?.samples.clear(model);panel.updateSamples(id,model,0);
+  report('Amostras retiradas. O instrumento voltou à síntese interna.');
+}
+
 function clearSF(){stage?.instruments.sf.unload();panel.updateSoundFont(null,[]);report('Banco SF2 retirado. Timbres internos disponíveis.');}
 async function loadSF(file){
   try{
