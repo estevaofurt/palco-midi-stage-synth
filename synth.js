@@ -40,7 +40,7 @@ function pinkNoise(ctx){
 export const targetFrequency=(key,p)=>hz(key)*2**((p.octave*12+p.semitones+p.fine/100)/12);
 export const unisonCount=p=>clamp(Number(p.unison)||1,1,3);
 export class Synth{
-  constructor(ctx,bus){this.ctx=ctx;this.input=bus;this.previousHz=new Map();this.white=noiseBuffer(ctx,1.15);this.pink=pinkNoise(ctx);this.syncCache=new Map()}
+  constructor(ctx,bus,options={}){this.ctx=ctx;this.lite=Boolean(options.lite);this.input=bus;this.previousHz=new Map();this.white=noiseBuffer(ctx,1.15);this.pink=pinkNoise(ctx);this.syncCache=new Map()}
   update(){}
   forget(expression){this.previousHz.delete(expression)}
   setWave(osc,wave,p,side){
@@ -93,9 +93,9 @@ export class Synth{
       controls.push(c);
       return c;
     };
-    for(const side of ['A','B'])for(let j=0;j<unisonCount(p);j++)createOsc(side,j,p,true);
+    for(const side of ['A','B'])for(let j=0;j<(this.lite?1:unisonCount(p));j++)createOsc(side,j,p,true);
     const refreshOscLevels=(next,time)=>{
-      const total=unisonCount(next),blend=next.blend/100;
+      const total=this.lite?1:unisonCount(next),blend=next.blend/100;
       for(const c of controls){
         c.width=total===1?0:(c.index-(total-1)/2)/((total-1)/2);
         const enabled=c.index<total;
@@ -179,7 +179,7 @@ export class Synth{
       // O uníssono aumenta/diminui os osciladores de uma voz sustentada.
       // Os novos osciladores entram com ganho zero e fazem fade-in, sem novo ADSR.
       if(changedOne('unison')&&!part.released){
-        const count=unisonCount(next);
+        const count=this.lite?1:unisonCount(next);
         for(const side of ['A','B']){
           const allocated=controls.filter(c=>c.side===side).length;
           for(let j=allocated;j<count;j++)createOsc(side,j,next,false);

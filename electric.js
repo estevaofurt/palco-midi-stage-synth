@@ -1,9 +1,9 @@
 import {clamp,filter,gain,hz,saturation,smooth,noiseBuffer,redirect} from './voice.js';
 import {SampleLibrary} from './sample-library.js';
 export class Electric{
-  constructor(ctx,bus){
-    this.ctx=ctx;this.input=filter(ctx,'highpass',34);
-    this.amp=ctx.createWaveShaper();this.amp.oversample='2x';
+  constructor(ctx,bus,options={}){
+    this.ctx=ctx;this.lite=Boolean(options.lite);this.input=filter(ctx,'highpass',34);
+    this.amp=ctx.createWaveShaper();this.amp.oversample=this.lite?'none':'2x';
     this.speaker=filter(ctx,'lowpass',16000);this.presence=filter(ctx,'peaking',1700,.8);
     this.chop=gain(ctx,1);this.pan=ctx.createStereoPanner();
     this.autoPanOsc=ctx.createOscillator();this.autoPanDepth=gain(ctx,0);
@@ -71,7 +71,7 @@ export class Electric{
       src.buffer=sampled.buffer;src.playbackRate.value=2**((key-sampled.root)/12);
       src.connect(amp).connect(pickup);part.own(amp);part.start(src);
     }
-    if(!sampled)for(const [ratio,level,tau] of modes){
+    if(!sampled)for(const [ratio,level,tau] of (this.lite?modes.slice(0,2):modes)){
       if(frequency*ratio>=ctx.sampleRate*.46)continue;
       const osc=ctx.createOscillator(),amp=gain(ctx,0);osc.frequency.value=frequency*ratio;
       amp.gain.setValueAtTime(0,now);

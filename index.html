@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#171719" name="theme-color"/><title>Stage Synth · Palco MIDI v1.8.3</title><meta name="palco-piano-bank" content="synthetic" /><link href="./panel.css?build=1.8.3" rel="stylesheet"/></head><body><main class="console">
+<html lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#171719" name="theme-color"/><title>Stage Synth · Palco MIDI v1.8.4</title><meta name="palco-piano-bank" content="synthetic" /><link href="./panel.css?build=1.8.4" rel="stylesheet"/></head><body><main class="console">
 <header class="rail">
 <h1><span aria-hidden="true" class="brand-symbol"><i></i><i></i><i></i><i></i></span>Palco<span class="brand-sub">MIDI</span></h1>
-<div class="connections">
+<div class="connections"><label class="profile-selector">Áudio <select id="audio-profile" aria-label="Qualidade de áudio"><option value="lite">Leve · celular</option><option value="full">Completo · computador</option></select></label>
 <button class="hard-button" id="midi" type="button"><i aria-hidden="true" class="midi-led"></i>Conectar MIDI</button>
 <button class="hard-button power" id="power" type="button"><span aria-hidden="true" class="power-icon"></span><span>Ativar áudio</span></button>
 </div>
@@ -22,6 +22,7 @@
 </div>
 </div>
 <p hidden="" id="status" role="status"></p>
+<p id="profile-note" class="profile-note" role="status"></p>
 <div class="section-heading"><h2>Módulos · Stage Synth</h2><span class="engraved-line"></span></div>
 <div aria-label="Controles dos motores" class="modules" id="modules"></div>
 <div id="editors"></div>
@@ -48,5 +49,5 @@
 </div>
 <p class="keyboard-hint">Teclas do computador: A W S E D F T G Y H U J K · usar Shift para tocar mais forte</p><div class="keybed"><div aria-label="Notas do teclado" id="keys" style="--whites: 15;"></div></div>
 </section>
-<footer><span id="midi-status" role="status">Teclado na tela disponível.</span><output id="voice-status" aria-live="off">0/32 vozes</output><span class="build-tag" aria-label="Versão do aplicativo">v1.8.3</span><a href="./creditos.html" rel="noopener" target="_blank">Créditos de áudio</a></footer>
-</main><script type="importmap">{"imports":{"./antclip.js":"./antclip.js?build=1.8.3","./acoustic.js":"./acoustic.js?build=1.8.3","./electric.js":"./electric.js?build=1.8.3","./fx-rack.js":"./fx-rack.js?build=1.8.3","./organ.js":"./organ.js?build=1.8.3","./panel.js":"./panel.js?build=1.8.3","./patches.js":"./patches.js?build=1.8.3","./performance.js":"./performance.js?build=1.8.3","./piano-bank.js":"./piano-bank.js?build=1.8.3","./piano-worklet.js":"./piano-worklet.js?build=1.8.3","./sample-library.js":"./sample-library.js?build=1.8.3","./sf-engine.js":"./sf-engine.js?build=1.8.3","./sf2-reader.js":"./sf2-reader.js?build=1.8.3","./stage.js":"./stage.js?build=1.8.3","./synth.js":"./synth.js?build=1.8.3","./voice.js":"./voice.js?build=1.8.3"}}</script><script src="./app.js?build=1.8.3" type="module"></script></body></html>
+<footer><span id="midi-status" role="status">Teclado na tela disponível.</span><output id="voice-status" aria-live="off">0/32 vozes</output><span class="build-tag" aria-label="Versão do aplicativo">v1.8.4</span><a href="./creditos.html" rel="noopener" target="_blank">Créditos de áudio</a></footer>
+</main><script type="importmap">{"imports":{"./audio-profile.js":"./audio-profile.js?build=1.8.4","./antclip.js":"./antclip.js?build=1.8.4","./acoustic.js":"./acoustic.js?build=1.8.4","./electric.js":"./electric.js?build=1.8.4","./fx-rack.js":"./fx-rack.js?build=1.8.4","./organ.js":"./organ.js?build=1.8.4","./panel.js":"./panel.js?build=1.8.4","./patches.js":"./patches.js?build=1.8.4","./performance.js":"./performance.js?build=1.8.4","./piano-bank.js":"./piano-bank.js?build=1.8.4","./piano-worklet.js":"./piano-worklet.js?build=1.8.4","./sample-library.js":"./sample-library.js?build=1.8.4","./sf-engine.js":"./sf-engine.js?build=1.8.4","./sf2-reader.js":"./sf2-reader.js?build=1.8.4","./stage.js":"./stage.js?build=1.8.4","./synth.js":"./synth.js?build=1.8.4","./voice.js":"./voice.js?build=1.8.4"}}</script><script src="./app.js?build=1.8.4" type="module"></script></body></html>

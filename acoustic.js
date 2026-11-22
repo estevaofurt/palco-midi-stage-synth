@@ -55,17 +55,24 @@ export function fallbackVelocity(velocity,touch){
   return clamp((velocity/127)**(2**((50-touch)/55)),.001,1);
 }
 export class Acoustic {
-  constructor(ctx,bus,status){
-    this.ctx=ctx;this.bank=new PianoBank(ctx,status);this.samples=new SampleLibrary(ctx);this.noise=noiseBuffer(ctx,.13);this.lastPedal=0;
+  constructor(ctx,bus,status,options={}){
+    this.ctx=ctx;this.lite=Boolean(options.lite);this.bank=new PianoBank(ctx,status);this.samples=new SampleLibrary(ctx);this.noise=noiseBuffer(ctx,.13);this.lastPedal=0;
     this.input=filter(ctx,'highshelf',2450);this.lid=filter(ctx,'lowpass',14000);
     this.hammerTone=filter(ctx,'highshelf',2800);this.damperTone=filter(ctx,'lowpass',18000);
     this.input.connect(this.hammerTone).connect(this.damperTone).connect(this.lid).connect(bus);
-    this.strings=ctx.createConvolver();this.strings.normalize=false;this.strings.buffer=stringResponse(ctx);
-    this.res=gain(ctx,.3);this.strings.connect(this.res).connect(this.input);
-    const room=ctx.createConvolver();room.buffer=roomResponse(ctx);
-    this.room=gain(ctx,.10);this.lid.connect(room).connect(this.room).connect(bus);
-    const board=ctx.createConvolver();board.normalize=false;board.buffer=soundboardResponse(ctx);
-    this.body=gain(ctx,.19);this.input.connect(board).connect(this.body).connect(bus);
+    if(this.lite){
+      // Sem convoluções fixas no modo leve: apenas cor tonal simples.
+      this.strings=gain(ctx,0);this.res=gain(ctx,0);this.strings.connect(this.res).connect(this.input);
+      this.room=gain(ctx,0);this.lid.connect(this.room).connect(bus);
+      this.body=gain(ctx,.045);this.input.connect(this.body).connect(bus);
+    }else{
+      this.strings=ctx.createConvolver();this.strings.normalize=false;this.strings.buffer=stringResponse(ctx);
+      this.res=gain(ctx,.3);this.strings.connect(this.res).connect(this.input);
+      const room=ctx.createConvolver();room.buffer=roomResponse(ctx);
+      this.room=gain(ctx,.10);this.lid.connect(room).connect(this.room).connect(bus);
+      const board=ctx.createConvolver();board.normalize=false;board.buffer=soundboardResponse(ctx);
+      this.body=gain(ctx,.19);this.input.connect(board).connect(this.body).connect(bus);
+    }
     this.modal=null;this.modalPromise=null;this.modalParts=new Map();this.modalSerial=0;
   }
   async prepareModal(){
@@ -73,7 +80,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.modalPromise){
       this.modalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./piano-worklet.js?build=1.8.3');
+        await this.ctx.audioWorklet.addModule('./piano-worklet.js?build=1.8.4');
         const node=new AudioWorkletNode(this.ctx,'palco-piano',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -129,7 +136,7 @@ export class Acoustic {
     smooth(this.hammerTone.gain,(p.hammer-50)*.16,now);
     smooth(this.damperTone.frequency,Math.max(1900,18000-140*p.damping),now);
     smooth(this.lid.frequency,2600*2**(p.lid/37),now);
-    smooth(this.res.gain,p.stringRes==='off'?0:p.resonance*.017,now);smooth(this.room.gain,p.room*.006,now);smooth(this.body.gain,(p.character==='felt'?.12:.19)*(.5+p.resonance/100),now);
+    smooth(this.res.gain,this.lite?0:(p.stringRes==='off'?0:p.resonance*.017),now);smooth(this.room.gain,this.lite?0:p.room*.006,now);smooth(this.body.gain,(this.lite ? .045 : (p.character==='felt' ? .12 : .19))*(.5+p.resonance/100),now);
   }
   setPedal(down,p){
     const now=this.ctx.currentTime;
@@ -192,7 +199,7 @@ export class Acoustic {
         [4,(.004+.035*hardness*force)*model.metal,.20],
         [5,(.003+.014*hardness*force)*model.metal,.11]
       ];
-      for(const [ratio,mix,tau] of partials){
+      for(const [ratio,mix,tau] of (this.lite?partials.slice(0,2):partials)){
         if(freq*ratio>=this.ctx.sampleRate*.46)continue;
         const osc=this.ctx.createOscillator(),amp=gain(this.ctx,0);
         osc.frequency.value=freq*stretched(ratio);
@@ -205,7 +212,7 @@ export class Acoustic {
       if(model.strings>1 && key>34){
         // Two quiet unisons create natural low-rate beating without applying
         // a global chorus to the entire instrument.
-        for(const cents of [-.65,.71]){
+        for(const cents of (this.lite?[-.65]:[-.65,.71])){
           const osc=this.ctx.createOscillator(),amp=gain(this.ctx,0);
           osc.frequency.value=freq;osc.detune.value=cents*(.65+key/100);
           amp.gain.setValueAtTime(0,now);

@@ -10,13 +10,13 @@ export function softClipCurve(ceiling = CEILING, size = 4097) {
   }
   return curve;
 }
-export function installOutputProtection(ctx, upstream, destination = ctx.destination) {
+export function installOutputProtection(ctx, upstream, destination = ctx.destination, options = {}) {
   const trim = ctx.createGain();
   trim.gain.value = HEADROOM;
   const limiter = ctx.createWaveShaper();
   limiter.curve = softClipCurve();
   // O oversampling suaviza os harmônicos gerados pelo limitador.
-  limiter.oversample = '2x';
+  limiter.oversample = options.lite ? 'none' : '2x';
   upstream.connect(trim).connect(limiter).connect(destination);
   return { trim, limiter };
 }

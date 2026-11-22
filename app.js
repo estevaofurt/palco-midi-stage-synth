@@ -2,9 +2,29 @@ import {engines,scenes,loadState,saveState} from './patches.js';
 import {Stage} from './stage.js';
 import {Panel,addOption} from './panel.js';
 import {Performance} from './performance.js';
+import {getProfile,PROFILE_STORAGE_KEY} from './audio-profile.js';
 const byId=id=>document.getElementById(id);
 let storage;try{storage=localStorage}catch{storage=null}
 const state=loadState(storage);
+const profile=getProfile(storage,typeof navigator!=='undefined'?navigator:{});
+const mobileLite=profile==='lite';
+// Configurações temporárias da sessão leve: preserva os presets e endereçamentos.
+if(mobileLite){
+  state.patches.piano.values.soundEngine='classic';
+  for(const id of Object.keys(state.fx.enabled))state.fx.enabled[id]=false;
+  if(!storage?.getItem('palco-stage-panel-v1'))state.mask=1;
+}
+const profileSelect=byId('audio-profile');
+profileSelect.value=profile;
+profileSelect.onchange=()=>{
+  try{storage?.setItem(PROFILE_STORAGE_KEY,profileSelect.value)}catch{}
+  // Reconstruir o grafo é mais seguro que desligar AudioWorklets e Convolvers a quente.
+  window.location.reload();
+};
+byId('profile-note').textContent=mobileLite
+  ?'Leve: 8 vozes, piano clássico, menos osciladores e FX desligados inicialmente. Reative um efeito por vez.'
+  :'Completo: 32 vozes e modelagem física disponível.';
+
 let ctx,stage,access,panel,performer,saveTimer,previewTimer,previewToken=0;
 let frame=0,lastMeter=0;
 const midiPorts=new Map(),activePointers=new Map(), keyboardButtons=new Map();
@@ -38,7 +58,13 @@ function toggle(id){state.mask^=engines[id].bit;stage?.applyRouting();syncScene(
 panel=new Panel(state,{
   edit,toggle,
   level(id,level){state.patches[id].level=level;stage?.update(id,'level');panel.sync();save()},
-  set(id,key){stage?.update(id,key);if(id==='piano'&&key==='soundEngine'&&state.patches.piano.values.soundEngine==='modal')stage?.instruments.piano.prepareModal();save()},listen,
+  set(id,key){stage?.update(id,key);if(id==='piano'&&key==='soundEngine'){
+    if(mobileLite&&state.patches.piano.values.soundEngine==='modal'){
+      state.patches.piano.values.soundEngine='classic';
+      panel.drawEditor('piano');panel.sync();
+      report('Modelagem modal não é executada no perfil Leve. Para usá-la, selecione Completo.');
+    }else if(state.patches.piano.values.soundEngine==='modal')stage?.instruments.piano.prepareModal();
+  }save()},listen,
   fxEnabled(id,enabled){state.fx.enabled[id]=enabled;stage?.updateEffects();panel.sync();save()},
   fxChange(id,key,value){state.fx.slots[id][key]=value;stage?.updateEffects();save()},
   loadSF,clearSF,setProgram,loadSamples,clearSamples
@@ -98,32 +124,32 @@ for(let i=0;i<24;i++){const mark=document.createElement('i');byId('meter').appen
 const meterData=new Float32Array(256);
 function updateMeter(time){
   frame=0;if(document.hidden||ctx?.state!=='running')return;
-  if(time-lastMeter>80){
+  if(time-lastMeter>(mobileLite?220:80)){
     lastMeter=time;stage.meter.getFloatTimeDomainData(meterData);
     let peak=0;for(const v of meterData)peak=Math.max(peak,Math.abs(v));
     const db=20*Math.log10(Math.max(.00001,peak)),bars=Math.max(0,Math.round((db+48)/2));
     for(let i=0;i<24;i++)meterBars[i].classList.toggle('lit',i<bars);
     byId('peak').textContent=db< -59?'−∞ dB':Math.round(db)+' dB';
   }
-  frame=requestAnimationFrame(updateMeter);
+  frame=mobileLite?setTimeout(()=>updateMeter(performance.now()),220):requestAnimationFrame(updateMeter);
 }
 function resetMeter(){
-  if(frame)cancelAnimationFrame(frame);frame=0;meterBars.forEach(b=>b.classList.remove('lit'));byId('peak').textContent='−∞ dB';
+  if(frame){if(mobileLite)clearTimeout(frame);else cancelAnimationFrame(frame)}frame=0;meterBars.forEach(b=>b.classList.remove('lit'));byId('peak').textContent='−∞ dB';
 }
 function displayAudio(){
   const on=ctx?.state==='running';
   byId('power').classList.toggle('on',on);
   byId('power').querySelector('span:last-child').textContent=on?'Áudio ativo':'Ativar áudio';
-  if(on&&!frame&&!document.hidden)frame=requestAnimationFrame(updateMeter);else if(!on)resetMeter();
+  if(on&&!frame&&!document.hidden)frame=mobileLite?setTimeout(()=>updateMeter(performance.now()),220):requestAnimationFrame(updateMeter);else if(!on)resetMeter();
 }
 async function startAudio(){
   if(!ctx){
     const Audio=window.AudioContext||window.webkitAudioContext;
     if(!Audio)throw Error('Áudio indisponível neste navegador.');
-    ctx=new Audio({latencyHint:'interactive'});
+    ctx=new Audio({latencyHint:mobileLite?'balanced':'interactive'});
     const resume=ctx.resume();
     try{
-      stage=new Stage(ctx,state,{bank:text=>byId('bank').textContent=text,note:paintKeys,pedal:paintPedal});
+      stage=new Stage(ctx,state,{bank:text=>byId('bank').textContent=text,note:paintKeys,pedal:paintPedal},{profile});
     }catch(e){
       resume.catch(()=>{});ctx.close().catch(()=>{});ctx=null;stage=null;throw e;
     }
@@ -131,7 +157,7 @@ async function startAudio(){
     await resume;
   }else if(ctx.state!=='running')await ctx.resume();
   displayAudio();if(ctx.state!=='running')throw Error('Toque em Ativar áudio para liberar o som.');
-  if(state.patches.piano.values.soundEngine==='modal')await stage.instruments.piano.prepareModal();
+  if(!mobileLite&&state.patches.piano.values.soundEngine==='modal')await stage.instruments.piano.prepareModal();
   else stage.instruments.piano.bank.load();
 }
 byId('power').onclick=()=>startAudio().then(()=>report('')).catch(e=>report(e.message));
@@ -141,7 +167,7 @@ async function listen(id){
   try{
     await startAudio();
     if(id==='piano'){
-      if(state.patches.piano.values.soundEngine==='modal')await stage.instruments.piano.prepareModal();
+      if(!mobileLite&&state.patches.piano.values.soundEngine==='modal')await stage.instruments.piano.prepareModal();
       else if(!stage.instruments.piano.bank.atlas)await stage.instruments.piano.bank.load();
     }
     if(token!==previewToken)return;
@@ -156,7 +182,7 @@ async function listen(id){
 }
 function paintKeys(){
   const stats=stage?.voiceStats();
-  byId('voice-status').textContent=stats?`${stats.active}/${stats.limit} vozes · ${stats.held} teclas`:'0/32 vozes';
+  byId('voice-status').textContent=stats?`${stats.active}/${stats.limit} vozes · ${stats.held} teclas`:`0/${mobileLite?8:32} vozes`;
   const held=new Set();
   if(stage)for(const v of stage.voices.values())if(v.held)held.add(v.key);
   for(const [key,button] of keyboardButtons)button.classList.toggle('down',held.has(key));
@@ -284,4 +310,4 @@ byId('midi').onclick=async()=>{try{
 }};
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cut();resetMeter()}else displayAudio()});
 window.addEventListener('pagehide',()=>{cut();saveState(storage,state)});
-window.__palcoTest={state,getStage:()=>stage,performer};
+window.__palcoTest={state,getStage:()=>stage,performer,profile};

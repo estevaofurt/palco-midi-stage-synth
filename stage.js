@@ -7,33 +7,41 @@ import {Synth} from './synth.js';
 import {SoundFontEngine} from './sf-engine.js';
 import {FXRack} from './fx-rack.js';
 import {installOutputProtection} from './antclip.js';
+import {profilePolyphony} from './audio-profile.js';
 
 export const MAX_POLYPHONY=32;
 
 export class Stage {
-  constructor(ctx,state,{bank=()=>{},note=()=>{},pedal=()=>{}}={}){
+  constructor(ctx,state,{bank=()=>{},note=()=>{},pedal=()=>{}}={},options={}){
     this.ctx=ctx;this.state=state;this.noteChanged=note;this.pedalChanged=pedal;
+    this.lite=options.profile==='lite';this.voiceLimit=profilePolyphony(options.profile);
     this.voices=new Map();this.groups=new Map();this.serial=0;
     this.master=ctx.createDynamicsCompressor();
     this.master.threshold.value=-9;this.master.knee.value=9;
     this.master.ratio.value=5;this.master.attack.value=.004;this.master.release.value=.14;
     // Nunca enviar a soma dos motores e FX diretamente à placa de som.
     // O limitador final protege picos de transientes e múltiplos retornos FX.
-    this.output=installOutputProtection(ctx,this.master);
+    this.output=installOutputProtection(ctx,this.master,ctx.destination,{lite:this.lite});
     this.meter=ctx.createAnalyser();this.meter.fftSize=256;this.output.limiter.connect(this.meter);
     this.buses={};
     for(const name of Object.keys(engines)){
       const bus=gain(ctx,this.state.patches[name].level/100);bus.connect(this.master);this.buses[name]=bus;
     }
     this.instruments={
-      piano:new Acoustic(ctx,this.buses.piano,bank),
-      electric:new Electric(ctx,this.buses.electric),
-      organ:new Organ(ctx,this.buses.organ),
-      synth:new Synth(ctx,this.buses.synth),
-      sf:new SoundFontEngine(ctx,this.buses.sf)
+      piano:new Acoustic(ctx,this.buses.piano,bank,{lite:this.lite}),
+      electric:new Electric(ctx,this.buses.electric,{lite:this.lite}),
+      organ:new Organ(ctx,this.buses.organ,{lite:this.lite}),
+      synth:new Synth(ctx,this.buses.synth,{lite:this.lite}),
+      sf:new SoundFontEngine(ctx,this.buses.sf,{lite:this.lite})
     };
-    this.fx=new FXRack(ctx,this.master,this.state,this.buses);
+    this.fx=new FXRack(ctx,this.master,this.state,this.buses,{lite:this.lite});
     for(const name of Object.keys(engines))this.update(name);
+  }
+  activeVoiceLimit(mask=this.state.mask){
+    if(!this.lite)return this.voiceLimit;
+    // Camadas múltiplas multiplicam o número real de osciladores por nota MIDI.
+    const layers=Object.values(engines).filter(x=>mask&x.bit).length;
+    return layers>=3?4:layers===2?6:8;
   }
   update(name,changed){
     const patch=this.state.patches[name];
@@ -76,7 +84,7 @@ export class Stage {
     if(!mask)return;
     const group=this.group(source,channel);
     const playing=[...this.voices.values()];
-    if(playing.length>=MAX_POLYPHONY){
+    if(playing.length>=this.activeVoiceLimit(mask)){
       const steal=playing.find(v=>!v.held) || playing[0];
       this.stopVoice(steal,true);this.voices.delete(steal.id);
     }
@@ -123,7 +131,7 @@ export class Stage {
   releaseId(id){this.stopVoice(this.voices.get(id))}
   voiceStats(){
     let held=0;for(const v of this.voices.values())if(v.held)held++;
-    return {active:this.voices.size,held,limit:MAX_POLYPHONY};
+    return {active:this.voices.size,held,limit:this.activeVoiceLimit()};
   }
   setPedal(group,down){
     if(group.pedal===down)return;

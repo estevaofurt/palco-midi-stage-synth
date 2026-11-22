@@ -1,3 +1,9 @@
+## Stage Synth v1.8.4 — Modo Leve (Moto g04s)
+
+Em Android, o aplicativo seleciona **Áudio: Leve · celular** automaticamente. Este perfil limita a polifonia a 8, desliga a modelagem modal e as convoluções de piano, usa menos osciladores, desliga oversampling e não instancia FX desativados. Os efeitos começam em bypass por motor na primeira abertura do perfil Leve e podem ser ativados individualmente. A seleção de tipo, roteamento e parâmetros permanece disponível. Para recuperar o áudio de 32 vozes e motor modal, escolha **Completo · computador**. Trocar de perfil reinicia o aplicativo e encerra as notas em andamento.
+
+O modo Leve pode apresentar latência um pouco maior que o modo Completo. O áudio dependerá do navegador, da temperatura e do estado de bateria do celular. O perfil não garante eliminação de estalos com efeitos demais ligados.
+
 # Stage Synth · Palco MIDI
 
 Versão **1.8.2** — reconstrução dos seis módulos a partir dos arquivos originais recuperados do Palco MIDI. O antigo site no ChatGPT Sites permanece independente; este código é destinado ao GitHub Pages.

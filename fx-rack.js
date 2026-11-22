@@ -8,7 +8,7 @@ const seeded=(state)=>{state.value=(Math.imul(state.value,1664525)+1013904223)>>
 
 // IRs originais e determinísticos. Shimmer é um brilho harmônico aproximado,
 // não um pitch shifter de oitava; essa distinção permanece na documentação.
-export function impulse(ctx,seconds,type='hall',seed=179){
+export function impulse(ctx,seconds,type='hall',seed=179,channels=2){
   const tail=clamp(seconds,.3,3.8);
   const cfg={
     hall:{factor:1.12,pre:.018,damp:.69,decay:5.7,early:.22},
@@ -19,13 +19,13 @@ export function impulse(ctx,seconds,type='hall',seed=179){
     shimmer:{factor:1.32,pre:.028,damp:.22,decay:5.0,early:.13}
   }[type]||{factor:1,pre:.02,damp:.6,decay:5.7,early:.2};
   const length=Math.ceil(ctx.sampleRate*(tail*cfg.factor+cfg.pre+.05));
-  const buffer=ctx.createBuffer(2,length,ctx.sampleRate),delay=Math.round(cfg.pre*ctx.sampleRate);
+  const buffer=ctx.createBuffer(channels,length,ctx.sampleRate),delay=Math.round(cfg.pre*ctx.sampleRate);
   const rng={value:seed>>>0};
   // Pré-cálculo recursivo do envelope: evita três Math.exp() por amostra
   // e reduz a chance de glitches durante ajustes do reverb no palco.
   const dampingRatio=Math.exp(-cfg.decay/(ctx.sampleRate*tail*cfg.factor));
   const attackRatio=Math.exp(-260/ctx.sampleRate);
-  for(let ch=0;ch<2;ch++){
+  for(let ch=0;ch<channels;ch++){
     const out=buffer.getChannelData(ch);
     let low=0,ring=0,phase=0,decay=1,attack=1;
     for(let i=delay;i<length;i++){
@@ -61,7 +61,7 @@ export function impulse(ctx,seconds,type='hall',seed=179){
   return buffer;
 }
 function saturator(ctx,drive=0){
-  const node=ctx.createWaveShaper();node.oversample='2x';node.curve=curve(drive);return node;
+  const node=ctx.createWaveShaper();node.oversample='none';node.curve=curve(drive);return node;
 }
 function curve(drive){
   const a=new Float32Array(1025),d=1+drive;
@@ -96,15 +96,20 @@ function makeInsert(ctx,bus,master){
   bus.disconnect(master);bus.connect(input);
   return {input,eqDry,eqParam,eqGraphic,eqOut,bands,graphic,comp,compDry,compWet,makeup};
 }
-function makeReverb(ctx,input,wet,id){
-  const a=ctx.createConvolver(),b=ctx.createConvolver();
-  const ga=gain(ctx,1),gb=gain(ctx,0);
-  a.buffer=impulse(ctx,1.7,'hall',id==='reverb1'?171:431);
-  b.buffer=impulse(ctx,1.7,'hall',id==='reverb1'?173:433);
+function makeReverb(ctx,input,wet,id,lite=false){
+  const a=ctx.createConvolver(),ga=gain(ctx,1);
+  a.buffer=impulse(ctx,lite?.55:1.7,'hall',id==='reverb1'?171:431,lite?1:2);
   input.connect(a).connect(ga).connect(wet);
+  if(lite){
+    // Uma convolução mono curta em vez de quatro convoluções estéreo simultâneas.
+    return {reverbs:[a],verbGains:[ga],activeIR:0,irKey:'hall/0.6',impulseTimer:null};
+  }
+  const b=ctx.createConvolver(),gb=gain(ctx,0);
+  b.buffer=impulse(ctx,1.7,'hall',id==='reverb1'?173:433);
   input.connect(b).connect(gb).connect(wet);
   return {reverbs:[a,b],verbGains:[ga,gb],activeIR:0,irKey:'hall/1.7',impulseTimer:null};
 }
+
 function makeDelay(ctx,input,wet){
   const delay=ctx.createDelay(2.5),loop=gain(ctx,.25),tone=filter(ctx,'lowpass',16000),drive=saturator(ctx,0);
   input.connect(delay).connect(tone).connect(drive).connect(wet);
@@ -132,29 +137,39 @@ function makeModulation(ctx,input,wet){
   return {lfo,chorusGain,flangerGain,phaserGain,wahGain,chorusDepth,flangerDepth,phaserDepth,wahDepth,feedback,chorus,flanger,phaser,wah};
 }
 export class FXRack {
-  constructor(ctx,master,state,buses){
+  constructor(ctx,master,state,buses,options={}){
     this.ctx=ctx;this.state=state;this.nodes={};this.sends={};this.inserts={};
-    for(const name of Object.keys(engines))this.inserts[name]=makeInsert(ctx,buses[name],master);
+    this.master=master;this.buses=buses;this.lite=Boolean(options.lite);
+    // No modo leve, nem convolver, nem FX de modulação, nem EQ/Comp são
+    // criados até que o usuário habilite o efeito num motor com FX ligado.
+    for(const name of Object.keys(engines))this.inserts[name]=this.lite?null:makeInsert(ctx,buses[name],master);
     for(const {id,type} of effectsDefinition){
-      if(type==='eq'||type==='comp'){
-        this.nodes[id]={type};this.sends[id]={};continue;
-      }
-      const input=gain(ctx,1),wet=gain(ctx,0),slot={input,wet,type};
-      this.nodes[id]=slot;wet.connect(master);this.sends[id]={};
-      for(const module of Object.keys(engines)){
-        const send=gain(ctx,0);buses[module].connect(send).connect(input);this.sends[id][module]=send;
-      }
-      if(type==='reverb')Object.assign(slot,makeReverb(ctx,input,wet,id));
-      else if(type==='delay')Object.assign(slot,makeDelay(ctx,input,wet));
-      else if(type==='mod')Object.assign(slot,makeModulation(ctx,input,wet));
+      this.sends[id]={};
+      if(type==='eq'||type==='comp'){this.nodes[id]={type};continue}
+      this.nodes[id]=null;
+      if(!this.lite)this.createSlot(id,type);
     }
     this.update();
+  }
+  createSlot(id,type){
+    if(this.nodes[id])return this.nodes[id];
+    const {ctx,master,buses}=this,input=gain(ctx,1),wet=gain(ctx,0),slot={input,wet,type};
+    this.nodes[id]=slot;wet.connect(master);
+    for(const module of Object.keys(engines)){
+      const send=gain(ctx,0);buses[module].connect(send).connect(input);this.sends[id][module]=send;
+    }
+    if(type==='reverb')Object.assign(slot,makeReverb(ctx,input,wet,id,this.lite));
+    else if(type==='delay')Object.assign(slot,makeDelay(ctx,input,wet));
+    else if(type==='mod')Object.assign(slot,makeModulation(ctx,input,wet));
+    return slot;
   }
   update(){
     const now=this.ctx.currentTime;
     for(const {id,type} of effectsDefinition){
-      const p=this.state.fx.slots[id],slot=this.nodes[id];
+      const p=this.state.fx.slots[id];
       if(type==='eq'||type==='comp')continue;
+      if(!this.nodes[id] && p.active && p.targets.some(module=>this.state.fx.enabled[module]))this.createSlot(id,type);
+      const slot=this.nodes[id];if(!slot)continue;
       const amount=clamp(p.mix,0,100)/100;
       for(const [module,send] of Object.entries(this.sends[id])){
         const enabled=p.active&&p.targets.includes(module)&&this.state.fx.enabled[module];
@@ -162,15 +177,20 @@ export class FXRack {
       }
       smooth(slot.wet.gain,p.active?amount*(type==='mod'?.50:.60):0,now,.02);
       if(type==='reverb'){
-        const seconds=Math.round(clamp(p.time,.3,3.8)*10)/10,key=p.reverbType+'/'+seconds.toFixed(1);
+        const seconds=Math.round(clamp(p.time,.3,this.lite?.65:3.8)*10)/10,key=p.reverbType+'/'+seconds.toFixed(1);
         if(slot.irKey!==key){
           clearTimeout(slot.impulseTimer);
           slot.impulseTimer=setTimeout(()=>{
-            const next=1-slot.activeIR;
-            slot.reverbs[next].buffer=impulse(this.ctx,seconds,p.reverbType,id==='reverb1'?171:431);
-            smooth(slot.verbGains[next].gain,1,this.ctx.currentTime,.08);
-            smooth(slot.verbGains[slot.activeIR].gain,0,this.ctx.currentTime,.08);
-            slot.activeIR=next;slot.irKey=key;
+            if(this.lite){
+              slot.reverbs[0].buffer=impulse(this.ctx,seconds,p.reverbType,id==='reverb1'?171:431,1);
+            }else{
+              const next=1-slot.activeIR;
+              slot.reverbs[next].buffer=impulse(this.ctx,seconds,p.reverbType,id==='reverb1'?171:431);
+              smooth(slot.verbGains[next].gain,1,this.ctx.currentTime,.08);
+              smooth(slot.verbGains[slot.activeIR].gain,0,this.ctx.currentTime,.08);
+              slot.activeIR=next;
+            }
+            slot.irKey=key;
           },160);
         }
       }else if(type==='delay'){
@@ -196,8 +216,11 @@ export class FXRack {
     }
     // EQ e compressor são inserts reais, não efeitos paralelos que apenas elevam o volume.
     const eq=this.state.fx.slots.eq,comp=this.state.fx.slots.comp;
-    for(const [module,n] of Object.entries(this.inserts)){
+    for(const [module,existing] of Object.entries(this.inserts)){
       const fxOn=Boolean(this.state.fx.enabled[module]);
+      const wantInsert=fxOn&&((eq.active&&eq.targets.includes(module))||(comp.active&&comp.targets.includes(module)));
+      if(!existing&&wantInsert)this.inserts[module]=makeInsert(this.ctx,this.buses[module],this.master);
+      const n=this.inserts[module];if(!n)continue;
       const eqOn=fxOn&&eq.active&&eq.targets.includes(module);
       const eqMix=eqOn?clamp(eq.mix,0,100)/100:0;
       smooth(n.eqDry.gain,1-eqMix,now,.025);

@@ -1,8 +1,8 @@
 import {clamp,filter,gain,hz,noiseBuffer,smooth,redirect} from './voice.js';
 import {SF2Reader} from './sf2-reader.js';
 export class SoundFontEngine{
-  constructor(ctx,bus){
-    this.ctx=ctx;this.input=filter(ctx,'lowpass',8500);this.pan=ctx.createStereoPanner();
+  constructor(ctx,bus,options={}){
+    this.ctx=ctx;this.lite=Boolean(options.lite);this.input=filter(ctx,'lowpass',8500);this.pan=ctx.createStereoPanner();
     this.input.connect(this.pan).connect(bus);
     this.noise=noiseBuffer(ctx,.2);this.reader=null;this.program=0;
   }
@@ -35,7 +35,7 @@ export class SoundFontEngine{
     if(this.reader){
       const zones=this.reader.getZones(this.program,key,velocity);
       if(zones.length){
-        for(const {sample:s,gen,index,sampleIndex} of zones){
+        for(const {sample:s,gen,index,sampleIndex} of (this.lite?zones.slice(0,2):zones)){
           const src=ctx.createBufferSource(),a=gain(ctx,0),pan=ctx.createStereoPanner();
           try{src.buffer=this.reader.audioBuffer(ctx,sampleIndex)}catch(e){console.warn(e);continue}
           const root=gen[58]!==undefined?gen[58]:s.pitch;
@@ -67,7 +67,7 @@ export class SoundFontEngine{
       brass:[[1,.29,1.5,'sawtooth'],[2,.13,1,'triangle'],[3,.046,.75,'sawtooth']],
       choir:[[1,.28,3,'sine'],[1.99,.09,3.1,'triangle'],[3.01,.04,2.8,'sine']]
     };
-    for(const [ratio,base,tau,typeWave] of profiles[type]||profiles.strings){
+    for(const [ratio,base,tau,typeWave] of (this.lite?(profiles[type]||profiles.strings).slice(0,2):(profiles[type]||profiles.strings))){
       if(frequency*ratio>ctx.sampleRate*.46)continue;
       const osc=ctx.createOscillator(),amp=gain(ctx,0);
       osc.type=typeWave;osc.frequency.value=frequency*ratio;

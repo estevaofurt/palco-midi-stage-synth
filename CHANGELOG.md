@@ -1,3 +1,16 @@
+## v1.8.4 — Perfil Leve para celulares de entrada
+
+- Escolha automática de perfil Leve em Android/iPhone e aparelhos com pouca memória/CPU; escolha manual no cabeçalho.
+- Limite de 8 vozes simultâneas no perfil Leve (Completo mantém 32).
+- Piano clássico com apenas três osciladores por nota (dois parciais e uma corda desafinada), sem AudioWorklet modal ou três convoluções permanentes.
+- Menos parciais nos elétricos e no SF; Unison do Synth limitado a um oscilador por lado.
+- Rack FX e inserts de EQ/Compressor criados sob demanda no perfil Leve. Reverberação mono curta até 0,65 s em cada slot ativado.
+- FX entram em bypass inicialmente no perfil Leve, preservando os parâmetros e destinos. Usuário pode reativar um efeito por vez.
+- Oversampling desligado no perfil Leve, medidor atualizado a cada 220 ms e áudio com preferência de latência balanceada.
+- Troca de perfil reinicia a página para liberar o processamento anterior.
+
+**Limitação:** recursos reduzidos no perfil Leve, inclusive motor modal, qualidade dos reverbs e polifonia. Precisa ser validado em Moto g04s físico.
+
 ## 1.8.3 — Estabilidade de áudio
 
 - Saída protegida contra clipping com headroom, soft limiter e medidor pós-proteção.

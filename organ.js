@@ -25,8 +25,8 @@ function rotorBand(ctx,input,output,bass){
   };
 }
 export class Organ {
-  constructor(ctx,bus){
-    this.ctx=ctx;this.input=ctx.createWaveShaper();this.input.oversample='2x';
+  constructor(ctx,bus,options={}){
+    this.ctx=ctx;this.lite=Boolean(options.lite);this.input=ctx.createWaveShaper();this.input.oversample=this.lite?'none':'2x';
     const cabinet=filter(ctx,'lowpass',7300);this.input.connect(cabinet);
     this.bass=rotorBand(ctx,cabinet,bus,true);this.horn=rotorBand(ctx,cabinet,bus,false);
     this.noise=noiseBuffer(ctx,.02);this.live=new Set();
