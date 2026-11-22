@@ -1,3 +1,12 @@
+# v1.5.0 — Motor modal e roteamento FX
+
+- Adicionado modo experimental de síntese modal para piano, rodando em AudioWorklet e com fallback à síntese clássica.
+- Perfis iniciais Japanese, American, Felt e Upright com corpo, inarmonicidade e decaimento diferenciados.
+- FX por instrumento com bypass independente; efeitos podem ser atribuídos a zero, um ou diversos instrumentos.
+- Configurações antigas de um destino migram sem perder a seleção.
+- Ocultada a importação manual de arquivos WAV no painel (SF2 permanece).
+- Limitações: não equivale a modelagem física completa de martelo e tampo harmônico; requer ensaios em teclados MIDI e dispositivos móveis.
+
 # Stage Synth · Histórico de versões
 
 ## v1.4.0 — Controles, presets, Auto-Pan e caminho para áudio real

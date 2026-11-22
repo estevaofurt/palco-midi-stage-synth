@@ -50,9 +50,9 @@ export class FXRack {
     for(const {id,type} of effectsDefinition){
       const p=this.state.fx.slots[id],slot=this.nodes[id];
       const amount=clamp(p.mix,0,100)/100;
-      // Only one selected engine feeds a session, and that engine can bypass all assigned effects.
+      // Multi-destination routing: each instrument has an independent FX bypass.
       for(const [module,send] of Object.entries(this.sends[id])){
-        const enabled=p.active&&p.target===module&&this.state.fx.enabled[module];
+        const enabled=p.active&&p.targets.includes(module)&&this.state.fx.enabled[module];
         smooth(send.gain,enabled?1:0,now,.02);
       }
       smooth(slot.wet.gain,p.active?amount*(type==='eq'||type==='comp'?.75:.55):0,now,.02);
@@ -67,7 +67,7 @@ export class FXRack {
         smooth(slot.loop.gain,clamp(p.feedback,0,80)/100,now,.03);
       }else if(type==='mod'){
         smooth(slot.lfo.frequency,clamp(p.rate,.1,12),now,.04);
-        smooth(slot.depth.gain,id==='mod1'?.0035:.0009,now,.04);
+        smooth(slot.depth.gain,(id==='mod1'?.0035:.0009)*clamp(p.depth??50,0,100)/50,now,.04);
       }else if(type==='eq'){
         smooth(slot.low.gain,clamp(p.low,-12,12),now);
         smooth(slot.mid.gain,clamp(p.mid,-12,12),now);

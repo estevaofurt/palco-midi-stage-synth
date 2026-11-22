@@ -38,7 +38,7 @@ function toggle(id){state.mask^=engines[id].bit;stage?.applyRouting();syncScene(
 panel=new Panel(state,{
   edit,toggle,
   level(id,level){state.patches[id].level=level;stage?.update(id,'level');panel.sync();save()},
-  set(id,key){stage?.update(id,key);save()},listen,
+  set(id,key){stage?.update(id,key);if(id==='piano'&&key==='soundEngine'&&state.patches.piano.values.soundEngine==='modal')stage?.instruments.piano.prepareModal();save()},listen,
   fxEnabled(id,enabled){state.fx.enabled[id]=enabled;stage?.updateEffects();panel.sync();save()},
   fxChange(id,key,value){state.fx.slots[id][key]=value;stage?.updateEffects();save()},
   loadSF,clearSF,setProgram,loadSamples,clearSamples
@@ -131,7 +131,8 @@ async function startAudio(){
     await resume;
   }else if(ctx.state!=='running')await ctx.resume();
   displayAudio();if(ctx.state!=='running')throw Error('Toque em Ativar áudio para liberar o som.');
-  stage.instruments.piano.bank.load();
+  if(state.patches.piano.values.soundEngine==='modal')await stage.instruments.piano.prepareModal();
+  else stage.instruments.piano.bank.load();
 }
 byId('power').onclick=()=>startAudio().then(()=>report('')).catch(e=>report(e.message));
 function stopPreview(){previewToken++;clearTimeout(previewTimer);if(stage)stage.disconnect('preview')}
@@ -139,7 +140,10 @@ async function listen(id){
   stopPreview();const token=previewToken;
   try{
     await startAudio();
-    if(id==='piano'&&!stage.instruments.piano.bank.atlas)await stage.instruments.piano.bank.load();
+    if(id==='piano'){
+      if(state.patches.piano.values.soundEngine==='modal')await stage.instruments.piano.prepareModal();
+      else if(!stage.instruments.piano.bank.atlas)await stage.instruments.piano.bank.load();
+    }
     if(token!==previewToken)return;
     const mask=engines[id].bit;
     const play=(key,velocity,duration)=>{

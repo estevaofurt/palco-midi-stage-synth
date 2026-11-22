@@ -1,4 +1,4 @@
-import {engines,feet,fromPreset,pretty,rememberPatch,effectsDefinition,instrumentField,presetsForInstrument,presetForInstrument,instrumentName} from './patches.js';
+import {engines,feet,fromPreset,pretty,rememberPatch,effectsDefinition,instrumentField,presetsForInstrument,presetForInstrument,instrumentName,defaultSlot} from './patches.js';
 const elem=(tag,cls,text)=>{
   const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;
 };
@@ -12,7 +12,7 @@ function selectField(label,options,control){
   wrap.append(select);field.append(name,wrap);
   return {field,select};
 }
-function makeDial(control,initial,onChange){
+function makeDial(control,initial,onChange,resetValue=control.initial){
   const {min,max,log,id,label,step}=control;
   const card=elem('label','dial'),wheel=elem('span','dial-wheel'),cap=elem('i','dial-cap');
   cap.setAttribute('aria-hidden','true');cap.append(elem('i','dial-face'),elem('i','dial-pointer'));
@@ -34,6 +34,9 @@ function makeDial(control,initial,onChange){
     paint(value);onChange(id,value);
   }
   input.oninput=()=>set(Number(input.value));
+  // Duplo clique restaura apenas este controle ao valor original do preset.
+  input.ondblclick=e=>{e.preventDefault();e.stopPropagation();set(fraction(resetValue)*1000)};
+  card.title='Duplo clique para restaurar o valor inicial do preset';
   // Native keyboard steps must advance the physical value even when the range is quantized.
   input.onkeydown=e=>{
     const direction={ArrowUp:1,ArrowRight:1,ArrowDown:-1,ArrowLeft:-1}[e.key];if(!direction)return;
@@ -69,11 +72,13 @@ export class Panel {
       tab.append(elem('span','module-name',definition.name),tone);
       const bottom=elem('div','module-bottom'), label=elem('label','mixrange'),level=elem('input');
       level.type='range';level.min=0;level.max=100;level.step=1;level.setAttribute('aria-label','Volume · '+definition.name);
-      level.oninput=()=>actions.level(id,+level.value);label.append(elem('span','','Vol.'),level);
+      level.oninput=()=>actions.level(id,+level.value);
+      level.title='Duplo clique para restaurar o volume inicial';
+      level.ondblclick=e=>{e.preventDefault();level.value=definition.level;level.dispatchEvent(new Event('input',{bubbles:true}))};label.append(elem('span','','Vol.'),level);
       const toggle=elem('button','toggle'), txt=elem('span');toggle.type='button';toggle.onclick=()=>actions.toggle(id);
       toggle.append(elem('i','lamp'),txt);
       const fxToggle=elem('button','fx-toggle','FX');fxToggle.type='button';
-      fxToggle.title='Habilitar ou desabilitar efeitos para '+definition.name;
+      fxToggle.title='Atalho: ligar/desligar todos os efeitos deste instrumento, sem mudar as configurações';
       fxToggle.setAttribute('aria-label','Efeitos para '+definition.name);
       fxToggle.onclick=()=>actions.fxEnabled(id,!state.fx.enabled[id]);
       bottom.append(label,fxToggle,toggle);card.append(tab,bottom);modules.append(card);
@@ -103,6 +108,8 @@ export class Panel {
       toggle.setAttribute('aria-label',(on?'Desligar ':'Ligar ')+d.name.toLowerCase());
       txt.textContent=on?'Ligado':'Desligado';
       fxToggle.setAttribute('aria-pressed',String(this.state.fx.enabled[id]));
+      fxToggle.textContent=this.state.fx.enabled[id]?'FX':'FX OFF';
+      fxToggle.title=(this.state.fx.enabled[id]?'Desligar':'Ligar')+' todos os efeitos deste instrumento (atalho de bypass)';
       fxToggle.classList.toggle('on',this.state.fx.enabled[id]);
       level.value=patch.level;level.setAttribute('aria-valuetext',patch.level+'%');
       tone.textContent=(instrumentName(id,patch.values)||d.presets.find(p=>p.id===patch.preset).name)+(this.state.edits[id][patch.preset]?' *':'');
@@ -171,7 +178,9 @@ export class Panel {
             const bar=elem('label','bar'),inp=elem('input'),out=elem('output','',String(val[i]));
             const color=['#905e4d','#905e4d','#d5ceba','#d5ceba','#464448','#d5ceba','#464448','#464448','#d5ceba'][i];
             bar.style.setProperty('--bar-color',color);inp.type='range';inp.min=0;inp.max=8;inp.step=1;inp.value=val[i];
-            inp.setAttribute('aria-label','Registro '+foot);inp.oninput=()=>{
+            inp.setAttribute('aria-label','Registro '+foot);inp.title='Duplo clique para restaurar o registro';
+            inp.ondblclick=e=>{e.preventDefault();const factory=fromPreset(id,patch.preset).values.bars?.[i]??control.initial[i];inp.value=factory;inp.dispatchEvent(new Event('input',{bubbles:true}))};
+            inp.oninput=()=>{
               const next=patch.values.bars.slice();next[i]=+inp.value;out.textContent=inp.value;change('bars',next);
             };
             bar.append(elem('span','',foot),inp,out);bars.append(bar);
@@ -205,7 +214,10 @@ export class Panel {
           clear.disabled=!this.soundfontInfo.programs.length;clear.onclick=()=>this.actions.clearSF();
           const hint=elem('p','sf-hint',this.soundfontInfo.name?`Em uso: ${this.soundfontInfo.name} · somente nesta sessão`:'Timbres internos prontos. Importe um SF2 PCM para usar suas amostras; arquivos SFZ e SF3 ainda não são compatíveis.');
           upload.append(file,programLabel,clear,hint);section.append(upload);
-        }else{dials.append(makeDial(control,val,change));n++}
+        }else{
+          const factory=fromPreset(id,patch.preset).values[control.id]??control.initial;
+          dials.append(makeDial(control,val,change,factory));n++
+        }
       }
       if(choices.children.length)section.append(choices);
       if(n){section.append(dials)}
@@ -223,7 +235,7 @@ export class Panel {
     const top=elem('div','editor-top'),title=elem('div','editor-title');
     const head=elem('h2','','Efeitos');head.id='title-effects';
     title.append(elem('span','editor-kicker','Rack de efeitos · 8 sessões'),head);
-    top.append(title,elem('p','fx-help','Ative FX em cada motor e escolha o destino de cada sessão abaixo. O som original permanece audível.'));
+    top.append(title,elem('p','fx-help','Cada efeito pode atuar em vários instrumentos ao mesmo tempo. O botão FX de cada motor desliga todos os efeitos apenas naquele instrumento, mantendo seu som seco.'));
     const rack=elem('div','fx-rack');
     const labels=Object.fromEntries(Object.entries(engines).map(([id,d])=>[id,d.name]));
     for(const def of effectsDefinition){
@@ -236,15 +248,25 @@ export class Panel {
       const h=elem('h3','',def.label),tog=elem('label','fx-enable');tog.append(enabled,elem('span','','Ativo'));
       header.append(h,tog);card.append(header);
       const settings=elem('div','fx-controls');
-      const targetLabel=elem('label','fx-control','Destino');const target=elem('select');
-      target.setAttribute('aria-label','Destino '+def.label);
-      for(const [id,name] of Object.entries(labels))addOption(target,id,name);
-      target.value=slot.target;target.onchange=()=>this.actions.fxChange(def.id,'target',target.value);
-      targetLabel.append(target);settings.append(targetLabel);
+      const routing=elem('fieldset','fx-routing');
+      routing.append(elem('legend','','Aplicar a estes módulos'));
+      const checks=elem('div','fx-targets');
+      for(const [id,name] of Object.entries(labels)){
+        const label=elem('label','fx-target'),input=elem('input');input.type='checkbox';
+        input.checked=slot.targets.includes(id);
+        input.setAttribute('aria-label',def.label+' no '+name);
+        input.onchange=()=>{
+          const targets=new Set(slot.targets);
+          if(input.checked)targets.add(id);else targets.delete(id);
+          this.actions.fxChange(def.id,'targets',[...targets]);
+        };
+        label.append(input,elem('span','',name));checks.append(label);
+      }
+      routing.append(checks);card.append(routing);
       const controls=[['mix','Intensidade',0,100,1]];
       if(def.type==='reverb')controls.push(['time','Duração',.3,3.8,.1]);
       else if(def.type==='delay')controls.push(['time','Tempo',.04,1.5,.01],['feedback','Feedback',0,80,1]);
-      else if(def.type==='mod')controls.push(['rate','Velocidade',.1,12,.1]);
+      else if(def.type==='mod')controls.push(['rate','Velocidade',.1,12,.1],['depth','Profundidade',0,100,1]);
       else if(def.type==='eq')controls.push(['low','Graves',-12,12,1],['mid','Médios',-12,12,1],['high','Agudos',-12,12,1]);
       else if(def.type==='comp')controls.push(['threshold','Threshold',-50,0,1],['ratio','Ratio',1,16,.5]);
       for(const [id,label,min,max,step] of controls){
@@ -252,6 +274,8 @@ export class Panel {
         range.min=min;range.max=max;range.step=step;range.value=slot[id];
         range.setAttribute('aria-label',label+' '+def.label);
         const value=elem('output','',String(slot[id]));
+        range.title='Duplo clique para restaurar o valor inicial do efeito';
+        range.ondblclick=e=>{e.preventDefault();range.value=defaultSlot(def.id)[id];range.dispatchEvent(new Event('input',{bubbles:true}))};
         range.oninput=()=>{value.textContent=range.value;this.actions.fxChange(def.id,id,+range.value)};
         l.append(range,value);settings.append(l);
       }

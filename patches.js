@@ -14,10 +14,9 @@ export const engines={
       preset('upright','Piano Upright',{character:'upright',hammer:52,brightness:45,lid:45,resonance:31,room:10,release:.32})
     ],
     groups:[
-      group('Identidade e dinâmica',select('character','Instrumento','japanese',{japanese:'Japanese Grand',american:'American Grand',felt:'Felt Piano',upright:'Piano Upright'}),knob('touch','Dinâmica',50),knob('hammer','Dureza de martelo',50),knob('release','Release',.42,.06,3,' s',{step:.01,log:true})),
+      group('Identidade e dinâmica',select('soundEngine','Motor do piano','modal',{modal:'Modelagem física (experimental)',classic:'Síntese clássica'}),select('character','Instrumento','japanese',{japanese:'Japanese Grand',american:'American Grand',felt:'Felt Piano',upright:'Piano Upright'}),knob('touch','Dinâmica',50),knob('hammer','Dureza de martelo',50),knob('release','Release',.42,.06,3,' s',{step:.01,log:true})),
       group('Mecânica e ressonância',knob('hammerNoise','Hammer noise',26),knob('pedalNoise','Pedal noise',24),select('stringRes','String resonance','on',{on:'Ativada',off:'Desativada'}),knob('resonance','Intensidade',45)),
-      group('Corpo do piano',knob('lid','Tampa',75),knob('brightness','Brilho',51),knob('room','Ambiente',15),knob('damping','Abafamento',37)),
-      group('Amostras reais · opcional',{type:'samplepack',id:'samples',label:'Importar amostras WAV'})
+      group('Corpo do piano',knob('lid','Tampa',75),knob('brightness','Brilho',51),knob('room','Ambiente',15),knob('damping','Abafamento',37))
     ]
   },
   electric:{name:'Pianos elétricos',short:'Elétricos',bit:8,level:82,
@@ -35,8 +34,7 @@ export const engines={
     groups:[
       group('Instrumento e toque',select('model','Instrumento','mark1',models),knob('hammer','Dureza',50),knob('pickup','Captação',45),knob('decay','Decaimento',58),knob('damper','Release',35)),
       group('Amplificador e microfonação',select('cabinet','Amplificador','line',{line:'Direto',combo:'Combo',small:'Vintage pequeno'}),select('mic','Microfone','close',{close:'Próximo',room:'Ambiente',di:'DI direta'}),knob('preamp','Preamp',19),knob('autoPan','Auto-Pan',0),knob('autoPanRate','Velocidade Auto-Pan',2.5,.1,8,' Hz',{step:.1}),knob('tremolo','Tremolo',0),knob('speed','Velocidade Tremolo',4.4,1,9,' Hz',{step:.1})),
-      group('Ruídos mecânicos',knob('pedalNoise','Pedal noise',18),knob('hammerNoise','Hammer noise',20)),
-      group('Amostras reais · opcional',{type:'samplepack',id:'samples',label:'Importar amostras WAV'})
+      group('Ruídos mecânicos',knob('pedalNoise','Pedal noise',18),knob('hammerNoise','Hammer noise',20))
     ]
   },
   organ:{name:'Órgão',short:'Órgão',bit:2,level:72,
@@ -124,7 +122,7 @@ export const effectsDefinition=[
   {id:'mod1',label:'Modulação 1',type:'mod'},{id:'mod2',label:'Modulação 2',type:'mod'},
   {id:'eq',label:'Equalizador',type:'eq'},{id:'comp',label:'Compressor',type:'comp'}
 ];
-const defaultSlot=id=>({active:false,target:'piano',mix:25,time:id.startsWith('reverb')?1.7:.28,feedback:25,rate:2.1,low:0,mid:0,high:0,threshold:-18,ratio:3});
+export const defaultSlot=id=>({active:false,targets:['piano'],mix:25,depth:50,time:id.startsWith('reverb')?1.7:.28,feedback:25,rate:2.1,low:0,mid:0,high:0,threshold:-18,ratio:3});
 export const scenes=[
   {id:'piano-pad',name:'Piano + pad',mask:5},{id:'piano',name:'Piano acústico',mask:1},
   {id:'electric',name:'Piano elétrico',mask:8},{id:'electric-pad',name:'Elétrico + pad',mask:12},
@@ -177,9 +175,14 @@ export function loadState(storage){
     rememberPatch(state,id);
     state.fx.enabled[id]=saved.fx?.enabled?.[id]===true;
   }
-  for(const {id} of effectsDefinition){const defaults=defaultSlot(id),old=saved.fx?.slots?.[id]||{};
-    state.fx.slots[id]={...defaults,...Object.fromEntries(Object.entries(old).filter(([k,v])=>
-      Object.hasOwn(defaults,k)&& (typeof v===typeof defaults[k]) && (k!=='target'||Object.hasOwn(engines,v))))};
+  for(const {id} of effectsDefinition){
+    const defaults=defaultSlot(id), old=saved.fx?.slots?.[id]||{};
+    const numeric=Object.fromEntries(Object.entries(old).filter(([k,v])=>
+      Object.hasOwn(defaults,k)&&k!=='targets' && typeof v===typeof defaults[k]));
+    // Migração: v1.4 salvava somente 'target'. A lista nova aceita vários motores.
+    const source=Array.isArray(old.targets)?old.targets:(typeof old.target==='string'?[old.target]:defaults.targets);
+    const targets=[...new Set(source.filter(x=>Object.hasOwn(engines,x)))];
+    state.fx.slots[id]={...defaults,...numeric,targets};
   }
   const perf=saved.performance||{};
   if(Number.isFinite(perf.bpm))state.performance.bpm=Math.max(40,Math.min(240,Math.round(perf.bpm)));

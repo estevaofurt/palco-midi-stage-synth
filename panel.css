@@ -181,3 +181,18 @@ footer{flex-wrap:wrap}
  .editor .dial-name{font-size:.79rem}
  .editor .tone-field{min-width:0;max-width:55%}
 }
+
+/* v1.5 — destino multi-módulo de efeitos */
+.fx-routing{margin:0 0 12px;border:1px solid #504845;border-radius:5px;padding:9px 10px;min-width:0}
+.fx-routing legend{padding:0 5px;font:600 .81rem var(--cond);color:#e4d4c6}
+.fx-targets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(108px,100%),1fr));gap:6px}
+.fx-target{display:flex;gap:7px;align-items:center;padding:6px 8px;min-width:0;border:1px solid #514746;background:#1b1a1d;border-radius:4px;color:#e9e5e0;font-size:.79rem;cursor:pointer}
+.fx-target:has(input:checked){border-color:#cb886a;background:#3f2d2a}
+.fx-target input{accent-color:#d28d6e;flex-shrink:0}
+.fx-toggle:focus-visible,.fx-target:focus-within{outline:2px solid #e5ad8c;outline-offset:2px}
+
+/* v1.5: clear per-instrument FX bypass shortcut */
+.fx-toggle{min-width:51px;white-space:nowrap;transition:background-color .13s,border-color .13s,color .13s}
+.fx-toggle.on{font-weight:800}
+.fx-toggle:not(.on){background:#252326;border-color:#777078;color:#c9bdb4}
+.dial:focus-within .dial-wheel{outline:2px solid #d89a74;outline-offset:3px}

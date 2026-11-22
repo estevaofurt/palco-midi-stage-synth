@@ -17,6 +17,26 @@ function stringResponse(ctx){
   for(let i=0;i<length;i++)data[i]*=Math.min(1,i/(rate*.008),(length-i)/(rate*.08));
   return buffer;
 }
+// Resposta modal curta do tampo harmônico: reforça regiões de corpo e
+// madeira sem transformar o piano em um sintetizador com chorus.
+function soundboardResponse(ctx){
+  const rate=ctx.sampleRate,length=Math.round(rate*.23);
+  const buffer=ctx.createBuffer(2,length,rate);
+  const modes=[[87,.14],[132,.13],[196,.095],[274,.078],[367,.065],[512,.055],[748,.046],[1090,.037]];
+  for(let ch=0;ch<2;ch++){
+    const data=buffer.getChannelData(ch);
+    for(const [j,[hz,tau]] of modes.entries()){
+      const f=hz*(1+(ch?-.0015:.0015)),decay=Math.exp(-1/(rate*tau)),w=2*Math.PI*f/rate;
+      let a=0,b=1;
+      for(let i=0;i<length;i++){
+        const next=2*Math.cos(w)*decay*a-decay*decay*b;
+        b=a;a=next;
+        data[i]+=next*(.00021/(1+j*.22))*(1-Math.exp(-i/(rate*.0015)));
+      }
+    }
+  }
+  return buffer;
+}
 function roomResponse(ctx){
   const rate=ctx.sampleRate, buffer=ctx.createBuffer(2,Math.round(rate*.64),rate);
   let seed=9133;
@@ -43,12 +63,62 @@ export class Acoustic {
     this.res=gain(ctx,.3);this.strings.connect(this.res).connect(this.input);
     const room=ctx.createConvolver();room.buffer=roomResponse(ctx);
     this.room=gain(ctx,.10);this.lid.connect(room).connect(this.room).connect(bus);
+    const board=ctx.createConvolver();board.normalize=false;board.buffer=soundboardResponse(ctx);
+    this.body=gain(ctx,.19);this.input.connect(board).connect(this.body).connect(bus);
+    this.modal=null;this.modalPromise=null;this.modalParts=new Map();this.modalSerial=0;
+  }
+  async prepareModal(){
+    if(this.modal)return true;
+    if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
+    if(!this.modalPromise){
+      this.modalPromise=(async()=>{
+        await this.ctx.audioWorklet.addModule('./piano-worklet.js');
+        const node=new AudioWorkletNode(this.ctx,'palco-piano',{
+          numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
+        });
+        node.connect(this.input,0,0);
+        node.connect(this.strings,1,0);
+        node.port.onmessage=({data})=>{
+          if(data?.type!=='done')return;
+          for(const id of data.ids||[]){
+            const marker=this.modalParts.get(id);
+            this.modalParts.delete(id);
+            if(marker){try{marker.stop()}catch{}}
+          }
+        };
+        node.port.onmessageerror=()=>console.warn('Falha de mensagem no motor modal');
+        this.modal=node;return true;
+      })().catch(e=>{this.modalPromise=null;console.warn('Motor modal indisponível',e);return false});
+    }
+    return this.modalPromise;
+  }
+  playModal(part,key,velocity,p,expression){
+    const now=this.ctx.currentTime,id=++this.modalSerial;
+    // A voz de controle utiliza uma fonte silenciosa; o áudio real sai do
+    // AudioWorklet compartilhado. Isso preserva o ciclo de vida do Stage.
+    const marker=this.ctx.createConstantSource(),silent=gain(this.ctx,0);
+    marker.connect(silent).connect(part.gate);part.own(silent);
+    part.releaseSeconds=clamp(p.release*(.55+.75*p.damping/100),.035,3);
+    this.modalParts.set(id,marker);
+    part.start(marker,{pitch:false,until:now+85});
+    const send=p.stringRes==='off'?0:(expression.pedal?.55:.08)*p.resonance/55;
+    part.pedal=down=>this.modal?.port.postMessage({type:'send',id,value:p.stringRes==='off'?0:(down?.6:.08)*p.resonance/55});
+    const release=part.release.bind(part);
+    part.release=(fast=false)=>{
+      if(!part.released)this.modal?.port.postMessage({type:'off',id,fast,release:part.releaseSeconds});
+      release(fast);
+    };
+    this.modal.port.postMessage({type:'on',id,key,
+      speed:fallbackVelocity(velocity,p.touch),hardness:clamp(p.hammer/100,0,1),
+      character:p.character,decayScale:1.1-p.damping/160,
+      brightness:clamp(p.brightness/100,0,1),send
+    });
   }
   update(p){
     const now=this.ctx.currentTime;
     smooth(this.input.gain,(p.brightness-50)*.15,now);
     smooth(this.lid.frequency,2600*2**(p.lid/37),now);
-    smooth(this.res.gain,p.stringRes==='off'?0:p.resonance*.017,now);smooth(this.room.gain,p.room*.006,now);
+    smooth(this.res.gain,p.stringRes==='off'?0:p.resonance*.017,now);smooth(this.room.gain,p.room*.006,now);smooth(this.body.gain,(p.character==='felt'?.12:.19)*(.5+p.resonance/100),now);
   }
   setPedal(down,p){
     const now=this.ctx.currentTime;
@@ -60,6 +130,7 @@ export class Acoustic {
     src.onended=()=>{src.disconnect();eq.disconnect();vol.disconnect()};src.start();src.stop(now+.12);
   }
   play(part,key,velocity,p,expression){
+    if(p.soundEngine==='modal'&&this.modal)return this.playModal(part,key,velocity,p,expression);
     const now=this.ctx.currentTime;
     part.releaseSeconds=clamp(p.release*(.55+.75*p.damping/100)*2**((54-key)/110),.035,4);
     const send=gain(this.ctx,expression.pedal?.92:.12);

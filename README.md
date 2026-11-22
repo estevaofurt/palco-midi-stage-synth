@@ -1,6 +1,6 @@
 # Stage Synth · Palco MIDI
 
-Versão **1.4.0** — reconstrução dos seis módulos a partir dos arquivos originais recuperados do Palco MIDI. O antigo site no ChatGPT Sites permanece independente; este código é destinado ao GitHub Pages.
+Versão **1.5.0** — reconstrução dos seis módulos a partir dos arquivos originais recuperados do Palco MIDI. O antigo site no ChatGPT Sites permanece independente; este código é destinado ao GitHub Pages.
 
 **Aplicativo:** https://estevaofurt.github.io/palco-midi-stage-synth/
 
@@ -11,7 +11,7 @@ Versão **1.4.0** — reconstrução dos seis módulos a partir dos arquivos ori
 3. **Órgão:** B3 Jazz/Gospel com nove drawbars, percussão, vibrato, Leslie parada/lenta/rápida e key click; Church Organ com registros diferenciados.
 4. **Synth:** formas de onda senoidal/triangular/serra/quadrada/pulso, pulse width, oitava/semitons/fine tune, uníssono 1–3, ruído branco/rosa, mixer OSC, VCF low/high/band/notch, filtro com envelope, ADSR, LFO para pitch/cutoff/amplitude, matriz de modulação limitada, modos mono/poly/legato, portamento, volume/pan. Hard sync é uma **aproximação digital por wavetable**, não sincronização analógica genuína.
 5. **Leitor SF:** instrumentos internos de cordas, bells, sopros, metais e coral; importação local de **SF2 PCM descomprimido** até 100 MB, seleção de programas do banco e reprodução de zonas simples com faixas de notas e velocidade. A importação permanece na memória da sessão; **não** há upload para servidor. Formatos SF3, SFZ, moduladores SF2 avançados e todos os tipos de zonas ainda não são compatíveis.
-6. **Efeitos:** rack com oito sessões independentes: Reverb 1/2, Delay 1/2, Modulação 1/2, EQ e compressor. Cada motor possui botão **FX**, e cada sessão pode ser habilitada e endereçada a um motor.
+6. **Efeitos:** rack com oito sessões independentes: Reverb 1/2, Delay 1/2, Modulação 1/2, EQ e compressor. Cada motor possui atalho **FX/FX OFF** para desligar somente seus efeitos, sem apagar endereçamentos; cada sessão pode ser endereçada simultaneamente a vários instrumentos.
 
 ### Recursos para tocar ao vivo
 
@@ -33,17 +33,22 @@ Os modelos **Japanese Grand** e **American Grand** são perfis de síntese desen
 
 A fidelidade dos timbres sintéticos depende de futura melhoria de modelagem e/ou inclusão de bibliotecas de amostras licenciadas. Por enquanto, a homologação foi feita com navegador de testes, não com um controlador e sistema de som reais.
 
-## Importar amostras de instrumentos reais (opcional)
+## Amostras e limites de qualidade sonora
 
-No editor de **Piano acústico** ou **Pianos elétricos**, selecione o instrumento e vá à seção **Amostras reais · opcional**. Escolha vários arquivos `.wav` (também aceita formatos de áudio compatíveis com o navegador), nomeados conforme a nota MIDI e a camada de velocidade, por exemplo:
-
-- `C4_v40.wav` (Dó central MIDI 60, intensidade 40)
-- `C4_v100.wav` (mesma nota com intensidade 100)
-- `Db4_v100.wav` (Ré bemol MIDI 61)
-- `MIDI64_v100.wav` (Mi central MIDI 64)
-
-O sistema escolhe a gravação mais próxima de nota e velocidade, transpondo no máximo uma oitava. Sem uma amostra adequada, continua usando síntese. O carregamento é limitado a 128 arquivos e 180 MB por instrumento; os dados ficam apenas na memória local do navegador. Cada modelo tem seu conjunto de arquivos independente: uma amostra carregada para Mark I não será aplicada automaticamente ao Mark II.
-
-**Direitos autorais:** use somente amostras gravadas por você ou bibliotecas com licença adequada. O aplicativo não inclui gravações oficiais Yamaha ou Steinway nem áudio comercial. A simples importação não substitui recursos avançados de modelagem, como pedal half-damper, release samples e ressonância harmônica por nota, que permanecem como desenvolvimento futuro.
+A interface de importação de WAV por instrumento foi retirada nesta versão, conforme solicitado. O Leitor SF continua aceitando bancos SF2 PCM. O motor modal é uma aproximação experimental de piano, não um modelo acústico validado contra gravações profissionais.
 
 **Validação v1.4:** `npm run check` executa 17 testes de lógica; `python tests/browser_v14.py` valida layout entre 390 e 1600 px, presets, Auto-Pan e upload WAV; `python tests/browser_stress.py` valida 60 notas MIDI simuladas, sustain, modo Duo e corte de som. Teclado físico e qualidade acústica subjetiva ainda precisam de testes em campo.
+
+
+## v1.5.0 — Experimental
+
+- Piano Acústico: motor modal em `AudioWorklet` (alocação de vozes e ressonância auxiliar). `Síntese clássica` segue disponível como fallback. Ainda não reproduz o realismo de um piano de concerto; não há amostras comerciais incluídas.
+- Rack FX: cada sessão recebe uma seleção **múltipla** de instrumentos. O botão **FX** de cada módulo continua sendo bypass próprio; desligá-lo mantém o som original daquele instrumento, sem silenciar os demais.
+- Configurações antigas do rack com destino único são migradas automaticamente.
+- A interface de upload manual de WAV foi ocultada nesta iteração, mantendo a importação SF2 no Leitor SF.
+
+### Edição v1.5.0
+
+- **Clique duplo em knobs, drawbars, sliders de volume ou controles deslizantes do rack:** restaura o valor inicial do preset ou do efeito.
+- Alterações de filtros, Leslie, drawbars, Auto-Pan, tremolo, Synth (filtros/ondas/LFO) e FX são enviadas ao motor durante a execução. Alguns parâmetros físicos de ataque (martelo/dinâmica) só afetam notas iniciadas depois da alteração.
+- O botão **FX** de cada motor é um atalho para ativar/desativar a influência do rack inteiro *naquele motor*, preservando valores e destinos. Efeitos com caudas (reverb/delay) podem continuar decaindo por um instante após o bypass.
