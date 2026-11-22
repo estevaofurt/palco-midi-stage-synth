@@ -4,6 +4,8 @@ import {Acoustic} from './acoustic.js';
 import {Electric} from './electric.js';
 import {Organ} from './organ.js';
 import {Synth} from './synth.js';
+import {SoundFontEngine} from './sf-engine.js';
+import {FXRack} from './fx-rack.js';
 
 export const MAX_POLYPHONY=32;
 
@@ -24,8 +26,10 @@ export class Stage {
       piano:new Acoustic(ctx,this.buses.piano,bank),
       electric:new Electric(ctx,this.buses.electric),
       organ:new Organ(ctx,this.buses.organ),
-      synth:new Synth(ctx,this.buses.synth)
+      synth:new Synth(ctx,this.buses.synth),
+      sf:new SoundFontEngine(ctx,this.buses.sf)
     };
+    this.fx=new FXRack(ctx,this.master,this.state,this.buses);
     for(const name of Object.keys(engines))this.update(name);
   }
   update(name,changed){
@@ -38,14 +42,15 @@ export class Stage {
       if(part&&!part.released)part.update?.(patch.values,changed);
     }
   }
+  updateEffects(){this.fx.update()}
   group(source,channel){
     const id=source+'/'+channel;
     if(!this.groups.has(id)){
       const pitch=this.ctx.createConstantSource(),vibr=this.ctx.createOscillator();
-      const depth=gain(this.ctx,0),signal=gain(this.ctx,1);
+      const depth=gain(this.ctx,0),signal=gain(this.ctx,1),pressure=this.ctx.createConstantSource();
       pitch.offset.value=0;vibr.frequency.value=5.5;
-      pitch.connect(signal);vibr.connect(depth).connect(signal);pitch.start();vibr.start();
-      this.groups.set(id,{source,pitch,vibr,depth,signal,pedal:false,channel});
+      pitch.connect(signal);vibr.connect(depth).connect(signal);pitch.start();vibr.start();pressure.offset.value=0;pressure.start();
+      this.groups.set(id,{source,pitch,vibr,depth,signal,pressure,pedal:false,channel});
     }
     return this.groups.get(id);
   }
@@ -59,7 +64,13 @@ export class Stage {
       const steal=playing.find(v=>!v.held) || playing[0];
       this.stopVoice(steal,true);this.voices.delete(steal.id);
     }
-    const legato=playing.some(v=>v.group===group&&v.held&&v.parts.has('organ')&&!v.parts.get('organ').released);
+    const legato=playing.some(v=>v.group===group&&v.held&&v.parts.has('synth')&&!v.parts.get('synth').released);
+    if((mask&engines.synth.bit)&&this.state.patches.synth.values.voiceMode!=='poly'){
+      for(const prior of playing)if(prior.group===group&&prior.parts.has('synth')){
+        prior.parts.get('synth').release(true);
+        if(!prior.parts.has('organ')&&!prior.parts.has('piano')&&!prior.parts.has('electric')&&!prior.parts.has('sf'))prior.held=false;
+      }
+    }
     const v={id:++this.serial,group,key,held:true,parts:new Map()};
     this.voices.set(v.id,v);
     for(const [name,{bit}] of Object.entries(engines)){
@@ -99,7 +110,11 @@ export class Stage {
     return {active:this.voices.size,held,limit:MAX_POLYPHONY};
   }
   setPedal(group,down){
+    if(group.pedal===down)return;
     group.pedal=down;
+    for(const id of ['piano','electric'])if(this.state.mask&engines[id].bit){
+      this.instruments[id].setPedal?.(down,this.state.patches[id].values);
+    }
     for(const v of this.voices.values())if(v.group===group){
       for(const part of v.parts.values())part.pedal?.(down);
       if(!down&&!v.held)this.stopVoice(v);
@@ -114,9 +129,10 @@ export class Stage {
     }
   }
   message(source,data){
-    if(!data||data.length<3)return;
-    const [status,a,b]=data,ch=status&15,op=status&240;
+    if(!data||data.length<2)return;
+    const [status,a,b=0]=data,ch=status&15,op=status&240;
     if(!Number.isInteger(status)||status<128||status>239||a>127||b>127)return;
+    if(op===208){const g=this.group(source,ch);smooth(g.pressure.offset,a/127,this.ctx.currentTime,.012);return}
     if(op===144&&b>0)return this.startNote(source,ch,a,b);
     if(op!==128&&op!==144&&op!==176&&op!==224)return;
     const group=this.group(source,ch);
@@ -137,7 +153,7 @@ export class Stage {
   disconnect(source){
     for(const v of this.voices.values())if(v.group.source===source)this.stopVoice(v,true);
     for(const [key,g] of this.groups)if(g.source===source){
-      g.pitch.stop();g.vibr.stop();g.pitch.disconnect();g.vibr.disconnect();g.depth.disconnect();
+      g.pitch.stop();g.vibr.stop();g.pressure.stop();g.pitch.disconnect();g.vibr.disconnect();g.depth.disconnect();g.pressure.disconnect();
       // Part cleanup disconnects its individual detune destination after its release ramp.
       this.groups.delete(key);
     }

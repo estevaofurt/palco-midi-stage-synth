@@ -1,4 +1,4 @@
-import {engines,feet,fromPreset,pretty,rememberPatch} from './patches.js';
+import {engines,feet,fromPreset,pretty,rememberPatch,effectsDefinition} from './patches.js';
 const elem=(tag,cls,text)=>{
   const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;
 };
@@ -59,7 +59,7 @@ function makeDial(control,initial,onChange){
 }
 export class Panel {
   constructor(state,actions){
-    this.state=state;this.actions=actions;this.cards={};this.panels={};
+    this.state=state;this.actions=actions;this.cards={};this.panels={};this.soundfontInfo={name:null,programs:[],selected:0};
     const modules=document.getElementById('modules'),editors=document.getElementById('editors');
     for(const [id,definition] of Object.entries(engines)){
       const card=elem('div','module'),tab=elem('button','module-tab'),tone=elem('span','module-tone');
@@ -70,25 +70,46 @@ export class Panel {
       level.type='range';level.min=0;level.max=100;level.step=1;level.setAttribute('aria-label','Volume · '+definition.name);
       level.oninput=()=>actions.level(id,+level.value);label.append(elem('span','','Vol.'),level);
       const toggle=elem('button','toggle'), txt=elem('span');toggle.type='button';toggle.onclick=()=>actions.toggle(id);
-      toggle.append(elem('i','lamp'),txt);bottom.append(label,toggle);card.append(tab,bottom);modules.append(card);
-      this.cards[id]={card,tab,tone,level,toggle,txt};
+      toggle.append(elem('i','lamp'),txt);
+      const fxToggle=elem('button','fx-toggle','FX');fxToggle.type='button';
+      fxToggle.title='Habilitar ou desabilitar efeitos para '+definition.name;
+      fxToggle.setAttribute('aria-label','Efeitos para '+definition.name);
+      fxToggle.onclick=()=>actions.fxEnabled(id,!state.fx.enabled[id]);
+      bottom.append(label,fxToggle,toggle);card.append(tab,bottom);modules.append(card);
+      this.cards[id]={card,tab,tone,level,toggle,txt,fxToggle};
       const pane=elem('section','editor');pane.id='edit-'+id;pane.dataset.engine=id;
       pane.setAttribute('aria-labelledby','title-'+id);editors.append(pane);this.panels[id]=pane;
       this.drawEditor(id);
     }
-    this.sync();
+    const fxCard=elem('div','module module-effects'),fxTab=elem('button','module-tab');
+    fxTab.type='button';fxTab.id='tab-effects';fxTab.setAttribute('aria-controls','edit-effects');
+    fxTab.append(elem('span','module-name','Efeitos'),elem('span','module-tone','8 sessões de efeitos'));
+    fxTab.onclick=()=>actions.edit('effects');fxCard.append(fxTab);
+    const fxBottom=elem('div','module-bottom');
+    fxBottom.append(elem('span','fx-subtitle','2 Reverbs · 2 Delays · 2 Mod · EQ · Comp'));
+    fxCard.append(fxBottom);modules.append(fxCard);
+    this.cards.effects={card:fxCard,tab:fxTab};
+    const pane=elem('section','editor fx-editor');pane.id='edit-effects';pane.dataset.engine='effects';
+    pane.setAttribute('aria-labelledby','title-effects');editors.append(pane);this.panels.effects=pane;
+    this.drawFXEditor();this.sync();
   }
   sync(){
     for(const [id,d] of Object.entries(engines)){
-      const {card,tab,tone,level,toggle,txt}=this.cards[id],patch=this.state.patches[id];
+      const {card,tab,tone,level,toggle,txt,fxToggle}=this.cards[id],patch=this.state.patches[id];
       const on=Boolean(this.state.mask&d.bit),editing=this.state.editor===id;
       card.classList.toggle('editing',editing);tab.setAttribute('aria-expanded',String(editing));
       toggle.setAttribute('aria-pressed',String(on));
       toggle.setAttribute('aria-label',(on?'Desligar ':'Ligar ')+d.name.toLowerCase());
-      txt.textContent=on?'Ligado':'Desligado';level.value=patch.level;level.setAttribute('aria-valuetext',patch.level+'%');
+      txt.textContent=on?'Ligado':'Desligado';
+      fxToggle.setAttribute('aria-pressed',String(this.state.fx.enabled[id]));
+      fxToggle.classList.toggle('on',this.state.fx.enabled[id]);
+      level.value=patch.level;level.setAttribute('aria-valuetext',patch.level+'%');
       tone.textContent=d.presets.find(p=>p.id===patch.preset).name+(this.state.edits[id][patch.preset]?' *':'');
       this.panels[id].hidden=!editing;
     }
+    this.cards.effects.card.classList.toggle('editing',this.state.editor==='effects');
+    this.cards.effects.tab.setAttribute('aria-expanded',String(this.state.editor==='effects'));
+    this.panels.effects.hidden=this.state.editor!=='effects';
   }
   drawEditor(id){
     const def=engines[id], patch=this.state.patches[id], pane=this.panels[id], top=elem('div','editor-top');
@@ -141,6 +162,21 @@ export class Panel {
             bar.append(elem('span','',foot),inp,out);bars.append(bar);
           });
           section.append(bars);
+        }else if(control.type==='soundfont'){
+          const upload=elem('div','sf-upload');
+          const file=elem('input');file.type='file';file.accept='.sf2';file.setAttribute('aria-label','Importar SoundFont SF2');
+          file.onchange=()=>{if(file.files?.length)this.actions.loadSF(file.files[0])};
+          const programLabel=elem('label','choice','Programa do SF2');
+          const program=elem('select');program.id='sf-program';program.setAttribute('aria-label','Programa do SoundFont');
+          if(!this.soundfontInfo.programs.length){program.disabled=true;addOption(program,'','Carregue um SF2')}
+          else {for(const entry of this.soundfontInfo.programs)addOption(program,entry.id,entry.name);
+            program.value=String(this.soundfontInfo.selected)}
+          program.onchange=()=>this.actions.setProgram(+program.value);
+          programLabel.append(program);
+          const clear=elem('button','editor-btn','Retirar SF2');clear.type='button';
+          clear.disabled=!this.soundfontInfo.programs.length;clear.onclick=()=>this.actions.clearSF();
+          const hint=elem('p','sf-hint',this.soundfontInfo.name?`Em uso: ${this.soundfontInfo.name} · somente nesta sessão`:'Timbres internos prontos. Importe um SF2 PCM para usar suas amostras; arquivos SFZ e SF3 ainda não são compatíveis.');
+          upload.append(file,programLabel,clear,hint);section.append(upload);
         }else{dials.append(makeDial(control,val,change));n++}
       }
       if(choices.children.length)section.append(choices);
@@ -149,5 +185,49 @@ export class Panel {
       groups.append(section);
     }
     pane.replaceChildren(top,groups);
+  }
+  updateSoundFont(name,programs,selected=0){
+    this.soundfontInfo={name,programs,selected};this.drawEditor('sf');this.sync();
+  }
+  drawFXEditor(){
+    const pane=this.panels.effects;
+    const top=elem('div','editor-top'),title=elem('div','editor-title');
+    const head=elem('h2','','Efeitos');head.id='title-effects';
+    title.append(elem('span','editor-kicker','Rack de efeitos · 8 sessões'),head);
+    top.append(title,elem('p','fx-help','Ative FX em cada motor e escolha o destino de cada sessão abaixo. O som original permanece audível.'));
+    const rack=elem('div','fx-rack');
+    const labels=Object.fromEntries(Object.entries(engines).map(([id,d])=>[id,d.name]));
+    for(const def of effectsDefinition){
+      const slot=this.state.fx.slots[def.id],card=elem('div','fx-slot');
+      card.dataset.effect=def.id;
+      const header=elem('div','fx-slot-header');
+      const enabled=elem('input');enabled.type='checkbox';enabled.checked=slot.active;
+      enabled.setAttribute('aria-label','Ativar '+def.label);
+      enabled.onchange=()=>this.actions.fxChange(def.id,'active',enabled.checked);
+      const h=elem('h3','',def.label),tog=elem('label','fx-enable');tog.append(enabled,elem('span','','Ativo'));
+      header.append(h,tog);card.append(header);
+      const settings=elem('div','fx-controls');
+      const targetLabel=elem('label','fx-control','Destino');const target=elem('select');
+      target.setAttribute('aria-label','Destino '+def.label);
+      for(const [id,name] of Object.entries(labels))addOption(target,id,name);
+      target.value=slot.target;target.onchange=()=>this.actions.fxChange(def.id,'target',target.value);
+      targetLabel.append(target);settings.append(targetLabel);
+      const controls=[['mix','Intensidade',0,100,1]];
+      if(def.type==='reverb')controls.push(['time','Duração',.3,3.8,.1]);
+      else if(def.type==='delay')controls.push(['time','Tempo',.04,1.5,.01],['feedback','Feedback',0,80,1]);
+      else if(def.type==='mod')controls.push(['rate','Velocidade',.1,12,.1]);
+      else if(def.type==='eq')controls.push(['low','Graves',-12,12,1],['mid','Médios',-12,12,1],['high','Agudos',-12,12,1]);
+      else if(def.type==='comp')controls.push(['threshold','Threshold',-50,0,1],['ratio','Ratio',1,16,.5]);
+      for(const [id,label,min,max,step] of controls){
+        const l=elem('label','fx-control',label);const range=elem('input');range.type='range';
+        range.min=min;range.max=max;range.step=step;range.value=slot[id];
+        range.setAttribute('aria-label',label+' '+def.label);
+        const value=elem('output','',String(slot[id]));
+        range.oninput=()=>{value.textContent=range.value;this.actions.fxChange(def.id,id,+range.value)};
+        l.append(range,value);settings.append(l);
+      }
+      card.append(settings);rack.append(card);
+    }
+    pane.replaceChildren(top,rack);
   }
 }

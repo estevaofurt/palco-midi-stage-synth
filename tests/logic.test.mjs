@@ -6,11 +6,11 @@ const memoryStorage=()=>{
  const m=new Map();return {getItem:k=>m.get(k)||null,setItem:(k,v)=>m.set(k,v)};
 };
 
-test('quatro motores únicos e máscaras independentes',()=>{
- assert.deepEqual(Object.keys(engines),['piano','electric','organ','synth']);
+test('cinco motores e um rack de efeitos independente',()=>{
+ assert.deepEqual(Object.keys(engines),['piano','electric','organ','synth','sf']);
  const bits=Object.values(engines).map(e=>e.bit);
- assert.deepEqual(bits.sort((a,b)=>a-b),[1,2,4,8]);
- for(const scene of scenes)assert.ok((scene.mask&~15)===0);
+ assert.deepEqual(bits.sort((a,b)=>a-b),[1,2,4,8,16]);
+ for(const scene of scenes)assert.ok((scene.mask&~31)===0);
 });
 
 test('presets completos com valores válidos',()=>{
@@ -19,6 +19,7 @@ test('presets completos com valores válidos',()=>{
    const patch=fromPreset(name,preset.id);
    assert.equal(patch.preset,preset.id);
    for(const group of engine.groups)for(const control of group.controls){
+    if(control.type==='soundfont')continue;
     assert.ok(Object.hasOwn(patch.values,control.id),`${name}/${preset.id}/${control.id}`);
     const v=patch.values[control.id];
     assert.deepEqual(normalise(control,v,control.initial),v);
@@ -47,12 +48,12 @@ test('edição, restauração e persistência de presets',()=>{
  const storage=memoryStorage();const state=loadState(storage);
  state.patches.piano.values.brightness=65;
  rememberPatch(state,'piano');
- assert.equal(state.edits.piano.concert.brightness,65);
+ assert.equal(state.edits.piano.japanese.brightness,65);
  saveState(storage,state);
  const loaded=loadState(storage);
  assert.equal(loaded.patches.piano.values.brightness,65);
- assert.equal(loaded.edits.piano.concert.brightness,65);
- loaded.patches.piano.values=fromPreset('piano','concert').values;
+ assert.equal(loaded.edits.piano.japanese.brightness,65);
+ loaded.patches.piano.values=fromPreset('piano','japanese').values;
  rememberPatch(loaded,'piano');
- assert.equal(loaded.edits.piano.concert,undefined);
+ assert.equal(loaded.edits.piano.japanese,undefined);
 });

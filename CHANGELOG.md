@@ -1,3 +1,28 @@
+# Histórico de versões — Stage Synth / Palco MIDI
+
+## 1.3.0 — Seis módulos, instrumentos e performance
+
+- Evolução da base original v1.2.0 para **5 motores independentes + rack de efeitos** com seis cartões e editores.
+- Piano acústico: Japanese Grand, American Grand, Felt Piano e Upright; caracterização dos modelos, curvas de dinâmica, ruído de martelo/pedal, release e controle da ressonância de cordas.
+- Pianos elétricos: nove timbres Rhodes/Wurly/CP80/Clav/FM; amplificadores, posições de microfone, preamp, panorama, tremolo e ruídos mecânicos.
+- Órgãos B3 Jazz/Gospel e Church com Leslie, vibrato, percussão, key click e drawbars.
+- Sintetizador ampliado: OSC A/B, pulse width, uníssono, afinação, mistura/ruído, hard sync aproximado por wavetable, filtros VCF, envelope ADSR, LFO, matriz de modulação limitada, modos de voz e glide.
+- Leitor SF: cinco famílias de timbres internos e importação SF2 PCM na memória, com seletor de programas e suporte básico a zonas/amostras.
+- Rack de **8 sessões**: dois reverbs, dois delays, dois efeitos de modulação, EQ e compressor; endereçamento e ativação por módulo e por sessão.
+- Arpejador com BPM/subdivisão, Chord Mode e looper de 1–4 barras; execução integrada a teclado virtual, teclas do computador e entrada MIDI.
+- Mantido limite de 32 notas, botão de pânico, persistência local de presets e temas escuros. Layout revisto para celular.
+- Eliminação de requisição HTTP de piano sabidamente ausente; banco de gravações permanece pendente.
+- Testes: 12 testes Node aprovados; navegador verificou os seis módulos, os oito slots, os cinco motores sonoros, um SF2 sintético, looper/acordes e responsividade; teste de estresse com 60 notas sem exceder 32 vozes e sem notas presas após corte.
+
+### Limites ainda abertos
+
+- Perfis de piano sintetizados não substituem amostras reais da Yamaha CFX ou Steinway.
+- Suporte SF2 inicial: não há SFZ/SF3, nem modulação abrangente do padrão SF2; bancos reais precisam de testes adicionais.
+- Hard sync usa aproximação por tabela de onda; a matriz de modulação é simplificada.
+- Looper e SoundFont importado são dados temporários por sessão, não persistidos.
+- Testes com controlador físico, latência e estabilidade prolongada de palco ainda pendentes.
+
+---
 # Histórico de correções — Palco MIDI
 
 ## v1.2.0 — Confiabilidade e dinâmica

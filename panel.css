@@ -99,3 +99,44 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:14px;pa
 #voice-status{white-space:nowrap;color:#d0b89f;font: .79rem var(--mono)}
 footer{flex-wrap:wrap}
 @media(max-width:640px){.keyboard-hint{display:none}#voice-status{font-size:.70rem}}
+/* Stage Synth v1.3 — sixth module, source loaders, per-module FX, eight-slot rack */
+.modules{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fx-toggle{min-width:30px;min-height:29px;padding:2px 6px;background:#1a1b1e;border:1px solid #65514b;border-radius:4px;color:#a9a2a0;font:700 .75rem var(--cond);letter-spacing:.05em}
+.fx-toggle.on,.fx-toggle[aria-pressed="true"]{background:#4f382f;border-color:#c47b62;color:#ffe6ca;box-shadow:0 0 7px #bb654333}
+.fx-subtitle{font-size:.78rem;color:#c8b6a8;padding:6px 0}
+.module-effects .module-tone{color:#f2cdb1}
+.editor[data-engine="piano"] .groups,.editor[data-engine="electric"] .groups,.editor[data-engine="synth"] .groups{flex-wrap:wrap}
+.editor[data-engine="piano"] .ctrl-group,.editor[data-engine="electric"] .ctrl-group,.editor[data-engine="synth"] .ctrl-group{flex:1 1 300px;border-bottom:1px solid #383739}
+.editor[data-engine="synth"] .ctrl-group{flex-basis:290px}
+.editor[data-engine="piano"] .ctrl-group:nth-child(4),.editor[data-engine="electric"] .ctrl-group:nth-child(4),.editor[data-engine="synth"] .ctrl-group:nth-child(4){border-left:0}
+.editor[data-engine="sf"] .groups{flex-wrap:wrap}
+.sf-upload{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.sf-upload input[type=file]{max-width:100%;font-size:.85rem}
+.sf-upload .choice{flex:1 1 180px}
+.sf-upload .choice select{width:100%;min-height:34px;background:#18191b;color:#eee;border:1px solid #514844;border-radius:4px}
+.sf-hint{width:100%;color:#bfb6b0;font-size:.82rem;margin:0}
+.fx-help{margin:0;max-width:650px;font-size:.88rem;color:#c9c4c1}
+.fx-rack{padding:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.fx-slot{background:#222225;border:1px solid #4c4443;border-radius:5px;padding:12px;min-width:0}
+.fx-slot-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+.fx-slot h3{font:600 1.04rem var(--cond);color:#eccbb6;margin:0}
+.fx-enable{display:flex;gap:5px;align-items:center;font-size:.79rem;color:#ddd}
+.fx-enable input{accent-color:#e59075}
+.fx-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(130px,100%),1fr));gap:9px}
+.fx-control{min-width:0;display:flex;flex-direction:column;gap:4px;color:#c7c2c0;font-size:.8rem}
+.fx-control input[type=range]{width:100%;accent-color:#db9072}
+.fx-control select{background:#171719;color:#f2dfcb;border:1px solid #57504e;border-radius:4px;padding:5px;max-width:100%}
+.fx-control output{color:var(--amber);font: .7rem var(--mono)}
+.performance-panel{margin-top:16px;border:1px solid #4c4542;border-radius:5px;background:linear-gradient(120deg,#2c2a2b,#222325);padding:10px 13px}
+.performance-heading{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.performance-heading h2{margin:0;font:600 1.05rem var(--cond);text-transform:uppercase;letter-spacing:.1em;color:#f0c9aa}
+.performance-heading span{font:.72rem var(--cond);letter-spacing:.12em;color:#a9a2a0}
+.performance-tools{display:flex;flex-wrap:wrap;align-items:end;gap:9px}
+.performance-tools label{display:flex;flex-direction:column;gap:3px;font-size:.7rem;letter-spacing:.06em;color:#cbbdb5}
+.performance-tools select,.performance-tools input{height:34px;border:1px solid #4c4544;border-radius:4px;background:#1a1a1d;color:#fff0e6;padding:0 7px;max-width:125px}
+.performance-tools input{width:73px}
+.performance-tools button{height:34px;border:1px solid #63514c;background:linear-gradient(#343031,#222124);border-radius:4px;padding:0 10px;font-size:.79rem}
+.performance-tools button[aria-pressed=true],#record-loop:active{background:#80483a;border-color:#b87966;color:#ffe9d8}
+#loop-status{font:.75rem var(--mono);color:#edc6aa;padding-bottom:8px}
+@media(max-width:760px){.modules{grid-template-columns:repeat(2,minmax(0,1fr))}.fx-rack{grid-template-columns:minmax(0,1fr)}.fx-slot{padding:9px}}
+@media(max-width:480px){.module-bottom{gap:4px}.toggle{padding:2px 4px}.fx-toggle{padding:2px 4px}.fx-rack{padding:8px}.performance-tools{gap:6px}.performance-tools button{padding:0 7px}.performance-heading span{font-size:.63rem}}

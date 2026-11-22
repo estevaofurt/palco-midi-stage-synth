@@ -1,10 +1,11 @@
 import {engines,scenes,loadState,saveState} from './patches.js';
 import {Stage} from './stage.js';
 import {Panel,addOption} from './panel.js';
+import {Performance} from './performance.js';
 const byId=id=>document.getElementById(id);
 let storage;try{storage=localStorage}catch{storage=null}
 const state=loadState(storage);
-let ctx,stage,access,panel,saveTimer,previewTimer,previewToken=0;
+let ctx,stage,access,panel,performer,saveTimer,previewTimer,previewToken=0;
 let frame=0,lastMeter=0;
 const midiPorts=new Map(),activePointers=new Map(), keyboardButtons=new Map();
 const noteNames=['Dó','Dó♯','Ré','Mi♭','Mi','Fá','Fá♯','Sol','Sol♯','Lá','Si♭','Si'];
@@ -29,7 +30,7 @@ const custom=addOption(byId('scene'),'custom','Camadas livres');custom.id='custo
 byId('scene').onchange=e=>{
   const s=scenes.find(item=>item.id===e.target.value);if(!s)return;
   state.mask=s.mask;state.duo=Boolean(s.duo);
-  if(!(state.mask&engines[state.editor].bit))state.editor=Object.keys(engines).find(id=>engines[id].bit&state.mask);
+  if(state.editor!=='effects'&&!(state.mask&engines[state.editor].bit))state.editor=Object.keys(engines).find(id=>engines[id].bit&state.mask)||'piano';
   stage?.applyRouting();syncScene();save();
 };
 function edit(id){state.editor=id;panel.sync();save()}
@@ -37,9 +38,47 @@ function toggle(id){state.mask^=engines[id].bit;stage?.applyRouting();syncScene(
 panel=new Panel(state,{
   edit,toggle,
   level(id,level){state.patches[id].level=level;stage?.update(id,'level');panel.sync();save()},
-  set(id,key){stage?.update(id,key);save()},listen
+  set(id,key){stage?.update(id,key);save()},listen,
+  fxEnabled(id,enabled){state.fx.enabled[id]=enabled;stage?.updateEffects();panel.sync();save()},
+  fxChange(id,key,value){state.fx.slots[id][key]=value;stage?.updateEffects();save()},
+  loadSF,clearSF,setProgram
 });
 syncScene();
+performer=new Performance(()=>stage,state.performance,updatePerformanceUI);
+function setProgram(value){if(!stage)return;stage.instruments.sf.program=value;panel.soundfontInfo.selected=value;save()}
+function clearSF(){stage?.instruments.sf.unload();panel.updateSoundFont(null,[]);report('Banco SF2 retirado. Timbres internos disponíveis.');}
+async function loadSF(file){
+  try{
+    report('Importando '+file.name+'…');await startAudio();
+    const programs=await stage.instruments.sf.load(file);
+    state.mask|=engines.sf.bit;state.editor='sf';stage.applyRouting();
+    panel.updateSoundFont(file.name,programs);syncScene();save();
+    report(programs.length+' programas disponíveis no arquivo '+file.name+'. O arquivo permanece apenas nesta sessão.');
+  }catch(e){report('Falha ao carregar SF2: '+e.message)}
+}
+function updatePerformanceUI(){
+  if(!performer)return;
+  const p=state.performance;
+  byId('arp-toggle').setAttribute('aria-pressed',String(p.arp));
+  byId('arp-toggle').textContent=p.arp?'Arpejador ligado':'Arpejador desligado';
+  byId('bpm').value=p.bpm;byId('arp-rate').value=p.rate;
+  byId('chord-mode').value=p.chord;byId('loop-bars').value=p.loopBars;
+  byId('record-loop').textContent=performer.recording?'Parar gravação':'Gravar loop';
+  byId('play-loop').textContent=performer.loopPlaying?'Parar loop':'Tocar loop';
+  byId('play-loop').disabled=!performer.events.length;
+  byId('clear-loop').disabled=!performer.events.length;
+  const status=performer.recording?'Gravando':performer.loopPlaying?'Reproduzindo':performer.events.length?'Loop disponível':'Looper pronto';
+  byId('loop-status').textContent=status;
+}
+byId('arp-toggle').onclick=()=>{performer.setArp(!state.performance.arp);save()};
+byId('arp-rate').onchange=e=>{state.performance.rate=e.target.value;performer.restartArp();save()};
+byId('chord-mode').onchange=e=>{performer.allNotesOff();state.performance.chord=e.target.value;save()};
+byId('bpm').onchange=e=>{state.performance.bpm=+e.target.value;performer.restartArp();save()};
+byId('loop-bars').onchange=e=>{state.performance.loopBars=e.target.value;save()};
+byId('record-loop').onclick=()=>{if(performer.recording)performer.stopRecording();else performer.startRecording()};
+byId('play-loop').onclick=()=>{if(performer.loopPlaying)performer.stopLoop();else performer.startLoop()};
+byId('clear-loop').onclick=()=>performer.clearLoop();
+updatePerformanceUI();
 const meterBars=[];
 for(let i=0;i<24;i++){const mark=document.createElement('i');byId('meter').append(mark);meterBars.push(mark)}
 const meterData=new Float32Array(256);
@@ -110,7 +149,7 @@ function paintPedal(){
   byId('pedal').setAttribute('aria-pressed',String(touch));byId('pedal').classList.toggle('on',Boolean(any));
 }
 function cut(){
-  stopPreview();stage?.panic();activePointers.clear();activeComputerKeys.clear();paintPedal();paintKeys();
+  stopPreview();performer.panic();stage?.panic();activePointers.clear();activeComputerKeys.clear();paintPedal();paintKeys();
 }
 byId('panic').onclick=cut;
 byId('pedal').onclick=async()=>{try{
@@ -119,7 +158,7 @@ byId('pedal').onclick=async()=>{try{
 let octave=4;
 const narrow=matchMedia('(max-width:640px)');
 function setKeys(){
-  if(stage)stage.disconnect('touch');activePointers.clear();keyboardButtons.clear();
+  if(stage)performer.disconnect('touch');activePointers.clear();keyboardButtons.clear();
   const board=byId('keys');board.replaceChildren();
   const octaves=narrow.matches?1:2,whites=octaves*7+1,base=12*(octave+1);
   board.style.setProperty('--whites',whites);byId('octave').textContent=octave;
@@ -159,12 +198,12 @@ async function press(pointer,button,velocity){
   try{
     if(!stage||ctx?.state!=='running')await startAudio();
     if(activePointers.get(pointer)!==slot)return;
-    slot.id=stage.startNote('touch',0,key,velocity);
+    slot.id=performer.noteOn('touch',0,key,velocity);
   }catch(e){activePointers.delete(pointer);report(e.message)}
 }
 function lift(pointer){
   const slot=activePointers.get(pointer);if(!slot)return;
-  activePointers.delete(pointer);stage?.releaseId(slot.id);
+  activePointers.delete(pointer);performer.noteOffId(slot.id);
 }
 byId('oct-down').onclick=()=>{if(octave>0)octave--;setKeys()};
 byId('oct-up').onclick=()=>{if(octave<6)octave++;setKeys()};
@@ -205,7 +244,7 @@ function bindMIDI(){
   for(const port of access.inputs.values())if(port.state==='connected'){
     names.push(port.name||'Controlador MIDI');
     if(midiPorts.get(port.id)!==port){
-      midiPorts.set(port.id,port);port.onmidimessage=e=>stage?.message(port.id,e.data);
+      midiPorts.set(port.id,port);port.onmidimessage=e=>performer.message(port.id,e.data);
     }
   }
   byId('midi-status').textContent=names.length?names.join(' · '):'Permissão concedida. Aguardando um controlador MIDI.';
@@ -217,7 +256,7 @@ byId('midi').onclick=async()=>{try{
   const [allowed]=await Promise.all([navigator.requestMIDIAccess({sysex:false}),startAudio()]);
   access=allowed;access.onstatechange=e=>{
     if(e.port.type==='input'&&e.port.state==='disconnected'){
-      e.port.onmidimessage=null;midiPorts.delete(e.port.id);stage.disconnect(e.port.id);
+      e.port.onmidimessage=null;midiPorts.delete(e.port.id);performer.disconnect(e.port.id);
     }
     bindMIDI();
   };bindMIDI();report('');
@@ -227,3 +266,4 @@ byId('midi').onclick=async()=>{try{
 }};
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cut();resetMeter()}else displayAudio()});
 window.addEventListener('pagehide',()=>{cut();saveState(storage,state)});
+window.__palcoTest={state,getStage:()=>stage,performer};

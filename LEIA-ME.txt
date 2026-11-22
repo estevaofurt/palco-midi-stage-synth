@@ -1,13 +1,11 @@
-PALCO MIDI / STAGE SYNTH — V1.2.0
+STAGE SYNTH / PALCO MIDI v1.3.0
 
-Versão de estabilização e melhorias do motor de síntese Web Audio.
+Abra o projeto pelo site https://estevaofurt.github.io/palco-midi-stage-synth/
+ou use um servidor local (python -m http.server 8000) para carregar os módulos ES.
 
-Site: https://estevaofurt.github.io/palco-midi-stage-synth/
-Código: https://github.com/estevaofurt/palco-midi-stage-synth
+Para funcionar, todos os arquivos JavaScript e CSS precisam estar juntos de index.html.
+Para usar MIDI físico, prefira Chrome ou Edge em HTTPS/localhost e autorize o dispositivo.
 
-Para executar localmente: python -m http.server 8000 e abra http://localhost:8000.
-A pasta piano/ com amostras gravadas não está incluída. O piano acústico usa síntese alternativa.
-A conexão com controlador USB/MIDI físico ainda exige validação do usuário.
-
-Testes: npm test, python tests/browser_smoke.py e python tests/browser_stress.py.
-Consulte CHANGELOG.md para detalhes.
+O som de piano é sintetizado. As gravações originais não foram recuperadas.
+SF2 PCM pode ser importado na sessão, mas SF3/SFZ não são compatíveis nesta versão.
+Leia README.md e CHANGELOG.md para limites e testes.

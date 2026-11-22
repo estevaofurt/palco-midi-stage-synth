@@ -11,6 +11,10 @@ export class PianoBank {
   }
   async load(){
     if(this.atlas||this.unavailable)return;
+    // The published edition does not contain licensed recordings; do not issue known-404 requests.
+    if(document.querySelector('meta[name="palco-piano-bank"]')?.content==='synthetic'){
+      this.unavailable=true;this.status('Piano de síntese ativo · gravações não incluídas nesta versão');return;
+    }
     if(this.loading)return this.loading;
     this.status('Carregando as gravações do piano…');
     this.loading=(async()=>{
