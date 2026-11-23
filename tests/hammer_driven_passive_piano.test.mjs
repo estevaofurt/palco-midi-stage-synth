@@ -48,7 +48,8 @@ test('force causally re-excites another string only when bridge coupling is pres
  const connected=new HammerDrivenPassivePiano({coupling:.8});
  const disconnected=new HammerDrivenPassivePiano({coupling:0});
  for(const p of [connected,disconnected]){
-  p.noteOn(43);
+  // Open the receiving damper without striking that string.
+  p.noteOn(43,{peakForce:0});
   p.noteOn(36,{peakForce:120});
  }
  let max=0;
