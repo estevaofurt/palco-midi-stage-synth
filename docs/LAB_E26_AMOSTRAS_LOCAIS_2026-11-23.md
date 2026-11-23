@@ -38,3 +38,12 @@ O fato de o usuário ter carregado uma gravação permite análise privada solic
 [Baseline Stage 45207770796](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45207770796): aprovado. Os únicos arquivos de produto alterados por esta PR são a **declaração visual do campo de importação em `patches.js`** e a **mensagem de orientação em `panel.js`**. O código de áudio publicado e a configuração padrão C são idênticos à main v1.12.8.
 
 **BLOQUEIO:** os testes unitários usam WAVs construídos matematicamente, não o arquivo pessoal do usuário; a captura/reprodução de 12 samples locais com o navegador real no PC/Android ainda não foi homologada. O A/B pessoal C2/C3/C4 não controla os mesmos parâmetros MIDI/ambiente das gravações de referência e **não estabelece superioridade objetiva**. Ainda precisa de escuta do usuário antes de qualquer mudança no D.
+
+## Comprovação adicional e execução privada (23/11/2026)
+O laboratório do usuário inclui agora `Stage_Synth_E26_Laboratorio_Sampler_Local.html`: uma página HTML **autônoma no ZIP privado**, com teclado na tela, seleção de WAV locais, 64 reproduções simultâneas limitadas, sustain e três reprodutores A/B (C2/C3/C4). Ela funciona como **prova de conceito separada** do Stage Synth, sem backend/servidor. Web MIDI é opcional e depende do navegador/permissões; não se afirma homologação. Os arquivos WAV do usuário e a página de escuta acompanhada dessas referências permanecem **fora do GitHub**.
+
+O ZIP privado contém também `MANIFESTO_PARA_SCRIPT_E26.json`, com os 12 recortes de notas verificadas e o SHA256 exato do WAV fornecido, compatível com a CLI do repositório. O título `v60/v110` é apenas classificação nominal de intensidade.
+
+[Execução CI E2.6 45208925638](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45208925638) comprova **173/173 testes aprovados**, incluindo nova verificação de ponta a ponta do CLI de extração WAV a partir de fixture sintética e recusa em sobrescrever arquivos existentes. A verificação de DSP/roteamento público e proibição de áudio/arquivos compactados na PR também passaram.
+
+A comparação ainda **não** é um experimento auditivo com mesma origem de amostras, mesma velocity e sala; a percepção e a autorização de uso comercial permanecem pendentes. O sampler local permite experimentar diferença de timbre agora, não prova uma nova arquitetura D integrada.
