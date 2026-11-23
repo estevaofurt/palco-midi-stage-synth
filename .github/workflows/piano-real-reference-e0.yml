@@ -13,6 +13,7 @@ jobs:
     env:
       STAGE_AUDIO_WORKDIR: /tmp/stage-piano-reference-e0
       STAGE_PIANO_SELECTION: matrix
+      STAGE_FELT_SELECTION: C4:v2
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -40,6 +41,11 @@ jobs:
       - name: Inspect public-domain Felt Piano sample map (metadata only)
         continue-on-error: true
         run: python3 scripts/probe_felt_reference.py
+      - name: Download public-domain Felt WAV after verifying pitch and velocity in SFZ
+        run: python3 scripts/fetch_felt_reference.py
+      - name: Measure real Felt Piano recording against A/B/C
+        run: |
+          node scripts/analyze_reference_audio.mjs "$STAGE_AUDIO_WORKDIR/felt-manifest.json" "$STAGE_AUDIO_WORKDIR/e0-felt-report.json"
       - name: Publish only numeric measurements and source hashes
         uses: actions/upload-artifact@v4
         with:
@@ -47,6 +53,7 @@ jobs:
           path: |
             /tmp/stage-piano-reference-e0/e0-report.json
             /tmp/stage-piano-reference-e0/e0-compact-report.json
+            /tmp/stage-piano-reference-e0/e0-felt-report.json
           retention-days: 14
           if-no-files-found: error
       - name: Delete external audio samples from runner
