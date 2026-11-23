@@ -194,3 +194,12 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Acervo comercialmente elegível preparado até aqui:** **50 WAV/FLAC originais / seis pianos reais / 173.943.136 bytes totais**. A declaração de domínio público do autor precisa de avaliação de direitos e condições de exploração comercial no lançamento, como as demais licenças.
 
 **Atenção física:** Felt com/sem no mesmo piano ainda não medido; camadas p/m/f não são velocidades de martelo; faltam força F(t), duas polarizações e mobilidade complexa da ponte. O protocolo de ensaios foi formalizado em docs/PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md. **Todos os R-GATEs ainda NÃO integralmente aprovados (0/7), e P1/P2/DSP continuam congelados por determinação do usuário.**
+
+
+## D-027 — Distinguir IR acústica, mobilidade mecânica e movimento de tecla na calibração comercial (23/11/2026)
+
+**Decisão:** não interpretar IR do tampo medida por alto-falante de contato + microfones como admitância física complexa da ponte, nem `T60` de percussão do tampo como decaimento das parciais de uma corda. A calibração M04 exige `F_ponte(t)` e resposta no mesmo ponto, com amplitude, **fase**, posição e coerência; M05 mede radiação acústica separadamente. Nove ensaios M01–M09 permanecem planejados, sem nenhuma captura executada. Evidência e critérios em [RADIACAO_TAMPO_TOQUE_FONTES_COMERCIAIS_2026-11-23.md](RADIACAO_TAMPO_TOQUE_FONTES_COMERCIAIS_2026-11-23.md), a partir de Bader/Acoustics 2022, AudioLabs FAU 2023 e PNAS 2025.
+
+**Dado externo novo:** `facebookincubator/Meta-open-sound` possui CC0 declarado e manifesto de **352 nomes de amostras Upright**, 88 notas × 4 velocities; **somente os textos, SFZ e manifestos foram verificados**. Não baixar, redistribuir ou considerar os arquivos plenamente verificados antes de conferir bytes, origem e condições acústicas. Não somar 352 às 50 gravações Stage com proveniência original e hashes já auditados. Artigos e dados com restrições NC ou licenças não esclarecidas ficam fora de calibração comercial.
+
+**Proteções:** nenhum novo DSP ou integração P1/P2. `main` v1.12.4, motor histórico v1.9.5 preservado. Os **sete R-GATEs permanecem integralmente bloqueados**, e a homologação de 32–64 notas depende de hardware real.
