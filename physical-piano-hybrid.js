@@ -36,7 +36,8 @@ export function hybridContactTime(key,speed,hardness,character='american'){
   const cfg=CHARACTER[character]||CHARACTER.american;
   const normalized=clamp(speed,.04,1),hard=clamp(hardness,0,1);
   const t=(.0010+.0020*(1-hard))*normalized**(-.24)*cfg.contact;
-  return clamp(t,.00045,Math.min(.012,1.0/midiHz(key)));
+  const maxContact=Math.min(.012,1.0/midiHz(key));
+  return clamp(t,Math.min(.00011,maxContact),maxContact);
 }
 
 class Voice {
