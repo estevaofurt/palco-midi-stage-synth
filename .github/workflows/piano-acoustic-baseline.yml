@@ -1,0 +1,28 @@
+name: Stage Synth - piano acoustic baseline
+on:
+  push:
+    branches:
+      - research/piano-acoustic-metrics-v124
+  pull_request:
+  workflow_dispatch:
+jobs:
+  audio-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax and all Node regression tests
+        run: npm run check
+      - name: Offline A/B/C acoustic baseline
+        run: node tests/measure_piano_engines.mjs --json > piano-acoustic-baseline.json
+      - name: Preserve measurements for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: piano-acoustic-baseline-v124
+          path: piano-acoustic-baseline.json
+          retention-days: 14
