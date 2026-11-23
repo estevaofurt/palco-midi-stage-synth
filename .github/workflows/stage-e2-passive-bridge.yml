@@ -13,6 +13,7 @@ on:
       - 'research/pure-physical-audition-e28.mjs'
       - 'research/analytic-soundboard-radiation.mjs'
       - 'research/pure-physical-radiation-e29.mjs'
+      - 'research/compare-analytic-mesh-e30.mjs'
       - 'tests/damper_aware_shared_bridge.test.mjs'
       - 'tests/hammer_driven_passive_piano.test.mjs'
       - 'tests/measured_radiation_adapter.test.mjs'
@@ -21,6 +22,7 @@ on:
       - 'tests/passive_bridge_mobility_fit.test.mjs'
       - 'tests/pure_physical_audition_e28.test.mjs'
       - 'tests/analytic_soundboard_radiation_e29.test.mjs'
+      - 'tests/compare_analytic_mesh_e30.test.mjs'
       - 'scripts/benchmark_damper_aware_shared_bridge.mjs'
       - 'scripts/benchmark_hammer_driven_passive_piano.mjs'
       - 'scripts/benchmark_shared_passive_modal_piano.mjs'
@@ -28,6 +30,8 @@ on:
       - 'scripts/render_pure_physical_e28.mjs'
       - 'scripts/render_pure_physical_e29.mjs'
       - 'scripts/benchmark_analytic_physical_e29.mjs'
+      - 'scripts/render_physical_mesh_e30.mjs'
+      - 'scripts/benchmark_analytic_mesh_e30.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
 jobs:
@@ -57,6 +61,10 @@ jobs:
         run: node scripts/render_pure_physical_e29.mjs e29-physical-piano-analytic-air.wav | tee e29-air-radiation.json
       - name: Benchmark 32/48/64 fully coupled notes plus analytic radiation
         run: node scripts/benchmark_analytic_physical_e29.mjs | tee e29-physical-benchmark.json
+      - name: Compare physical E3.0 48 96 192 mesh WAVs and relative error
+        run: node scripts/render_physical_mesh_e30.mjs | tee e30-render-summary.json
+      - name: Benchmark physical E3.0 32 48 64 notes with 48 96 192 patches
+        run: node scripts/benchmark_analytic_mesh_e30.mjs | tee e30-mesh-benchmark.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -74,4 +82,10 @@ jobs:
             e29-air-radiation.json
             e29-physical-benchmark.json
             e29-physical-piano-analytic-air.wav
+            e30-render-summary.json
+            e30-mesh-comparison.json
+            e30-mesh-benchmark.json
+            e30-physical-48-patches.wav
+            e30-physical-96-patches.wav
+            e30-physical-192-patches.wav
           retention-days: 30
