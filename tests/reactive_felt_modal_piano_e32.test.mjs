@@ -95,3 +95,31 @@ test('reject impossible contact parameters and forbid recorded piano dependencie
  assert.doesNotMatch(code,/^import .*(sample-library|sf2-reader|piano-bank|\.wav)/gm);
  assert.doesNotMatch(code,/readFileSync\s*\(|fetch\s*\(|decodeAudioData\s*\(/);
 });
+
+
+test('discrete-gradient force exactly matches bridge-coupled final contact gap',()=>{
+ const m=new ReactiveFeltModalPiano({
+  sampleRate:48000,key:48,hammerGapM:0,velocityMps:2
+ });
+ const before=m.predictor(),oldHammerX=m.hammerX;
+ m.step();
+ const qActual=m.currentStringX();
+ const qPredicted=before.qFree+before.compliance*m.force;
+ assert.ok(m.force>0);
+ assert.ok(Math.abs(qActual-qPredicted)<1e-14,
+  'bridge compliance predictor must match integrated motion');
+ const oldGap=oldHammerX-before.q0,newGap=m.hammerX-qActual;
+ const energyGradient=m.discreteGradient(oldGap,newGap);
+ assert.ok(Math.abs(m.force-energyGradient)<1e-9*Math.max(1,m.force),
+  'felt contact must equal its potential discrete gradient');
+});
+
+test('reactive contact remains passive with an enriched 8x8 string modal bank',()=>{
+ const m=integrate(2,{
+  seconds:.05,partialsBass:8,partialsTreble:8
+ });
+ assert.ok(m.piano.n>592);
+ assert.ok(m.maxForce>0);
+ assert.ok(m.piano.energy()>0);
+ assert.ok(Math.abs(m.balanceRelativeError())<1e-6);
+});
