@@ -1,3 +1,23 @@
+# Auditoria P0/P1/P2 de modelagem física antes de P2 (22/11/2026)
+
+Documento: [AUDITORIA_LACUNAS_MODELAGEM_FISICA_E1_2026-11-22.md](AUDITORIA_LACUNAS_MODELAGEM_FISICA_E1_2026-11-22.md).
+
+- [x] Inspecionar o DSP real de A/B/C, ponte compartilhada, camada de teclas/pedal, presets, analisador E0 e metas de 32/64 notas.
+- [x] Confrontar martelo não linear, two polarizations, double decay, impedância de ponte, som radiado, perda por parcial e modos longitudinais com Bank, Smith, Weinreich e Chabassier.
+- [x] Classificar **18 lacunas**, incluindo sete condições P0 para promover nova arquitetura, requisitos P1 (pedal CC64/66/67, escala e afinação, alias) e itens P2 (mecânica e detalhes auxiliares).
+- [x] Documentar viés da busca de harmônicos: ±2,5% em torno de n×f_ET falha se B=0,0012 para n=8 (+3,707%), invalidando inferências de B em condições extremas; **os 33 resultados E0 não são ranking de realismo**.
+- [ ] **E1.1/P0:** validar medidor f1/B/envelopes com sinais sintéticos B=0..0,003, ruído, 2 cordas e parciais transitórios; manter histórico E0 e reprocessar as referências.
+- [ ] **E1.2/P0:** obter subconjuntos científicos licenciados BiVib/RWC/bitKlavier com velocity, mic e estados documentados; não copiar samples terceiros para repo ou distribuição.
+- [ ] **E1.3/P0:** martelo-corda e uma corda H/V resolvidos offline; medir duração de contato e double decay por parcial.
+- [ ] **E1.4/P0:** múltiplas cordas e ponte reduzida passiva; testar energia, batimento e acoplamento em posição de excitação variável.
+- [ ] **E1.5/P1:** radiação por região, filtro antialias de corpo 4:1 e testes isolados de alias; separar som de tampo de reverb da sala.
+- [ ] **E2:** comparar A/B/C/P1/P2 em condição nivelada, com diferentes dinâmicas e registros, registrar hipóteses fracassadas.
+- [ ] **E3:** PC/Chrome/Moto g04s, 32–64 vozes, MIDI/pedal/FX e xrun, latência, p95/p99 dos callbacks; **não homologar sem hardware**.
+
+**Decisão:** protótipos de pesquisa isolados são permitidos, **não integrar P1/P2 à main** até evidência física/perceptual e performance. Nenhum DSP, UI, MIDI, FX ou preset alterado nesta rodada.
+
+---
+
 ## Atualização: Steinway Model D aberto e CFX comercial (22/11/2026)
 
 - [x] **bitKlavier Grand**, produzido em Princeton: piano acústico Steinway Model D real, **16 camadas**, **9 pares de microfones**, WAV até 96k/24bit, **CC BY 4.0**, com arquivos separados de pedal, martelo e ressonância. **Processados e nivelados na pós-produção** — usar para timbre American, release e radiador, não curva física de hammer velocity.
