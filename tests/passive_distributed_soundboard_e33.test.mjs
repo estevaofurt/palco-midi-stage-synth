@@ -112,7 +112,7 @@ test('external-force mode disables prescribed hammer without modifying 88-key sy
 
 test('invalid geometry and mode counts fail closed',()=>{
  for(const opts of [
-  {panelModes:1},{panelModes:9},{bridgeU:1.3},
+  {panelModes:1},{panelModes:17},{bridgeU:1.3},
   {bridgePanelSpring:-1},{partialsBass:9},
   {sampleRate:1000},{coupling:-1},{externalForceMode:1}
  ])assert.throws(()=>new PassiveDistributedSoundboardE33(opts),RangeError);
