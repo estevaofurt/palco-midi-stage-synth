@@ -26,4 +26,12 @@ class ArchiveMemberTests(unittest.TestCase):
   self.assertEqual(len(short["presentInViewerListing"]),1)
   self.assertIn("INCONCLUSIVE",short["listingStatus"])
 
+ def test_folder_qualified_member_href_is_accepted(self):
+  ident="bitKlavierGrand_PianoBar_44k16b"
+  base=f"https://archive.org/download/{ident}/{ident}.zip/"
+  content=f'<a href="//archive.org/download/{ident}/{ident}.zip/{ident}%2FC4v8.wav">{ident}/C4v8.wav</a>'
+  link=app.find_member_link(content,"C4v8.wav",base)
+  self.assertIsNotNone(link)
+  self.assertIn("C4v8.wav",link)
+
 if __name__=="__main__":unittest.main()
