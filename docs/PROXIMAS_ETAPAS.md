@@ -1,3 +1,18 @@
+# Critério comercial obrigatório para todas as referências (22/11/2026)
+
+**O Stage Synth é comercial.** Documento: [POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md](POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md). Nenhuma implantação de novo DSP até haver corpus e parâmetros fisicamente adequados **E legalmente utilizáveis para esse fim**.
+
+- [x] Confirmar regras autorais CC0, CC BY e CC BY-NC por fonte oficial, e inventariar acervos e licenças.
+- [x] Classificar VCSL CC0, Salamander CC BY 3.0, bitKlavier Grand CC BY 4.0, Kawai KW CC0, Felt PD declarado e Iowa com permissão de uso em quaisquer projetos como **candidatos**, não datasets já preparados.
+- [x] Retirar BiVib/RWC/MAPS/MAESTRO NC do pipeline comercial autorizado, mantendo-os apenas como literatura científica consultável sem uso dos áudios, salvo licença comercial escrita.
+- [ ] Revisar licenças por arquivo original, EULA, direitos de terceiros e marcas; preservar manifestos com hashes, versões, autores, condições, aviso de modificação e atribuição.
+- [ ] Priorizar obtenção de WAV/FLAC originais dos candidatos e **capturas próprias de piano real com autorização contratual comercial**, inclusive martelo, pontes e antes/depois de feltro quando viável.
+- [ ] Solicitar autorizações comerciais separadas a titulares de dados NC apenas se realmente necessários.
+- [ ] Decidir a licença de distribuição do **código Stage Synth** e preparar THIRDPARTY/ATTRIBUTIONS antes da venda: não há LICENSE na raiz atualmente.
+- [ ] Validar R-GATE-1..7 com foco **comercial**, sem liberar o novo motor enquanto os demais critérios estiverem pendentes.
+
+---
+
 # BLOQUEIO: aguardar referências científicas completas antes de continuar o DSP (22/11/2026)
 
 **Não programar P2, modificar timbre ou promover P1** enquanto o status de prontidão estiver pendente; solicitação expressa do usuário. Registro detalhado: [PRONTIDAO_REFERENCIAS_PIANO_FISICO_2026-11-22.md](PRONTIDAO_REFERENCIAS_PIANO_FISICO_2026-11-22.md).
