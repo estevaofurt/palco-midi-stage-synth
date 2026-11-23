@@ -290,6 +290,18 @@ Após a revisão do plano, foi realizado um [**atlas internacional de estudos ma
 
 **Limite de conhecimento:** os métodos e muitos resultados de literatura são conhecidos, mas falta um conjunto coerente de parâmetros medidos do MESMO piano-alvo para calibrar os subsistemas. Isso autoriza bancadas físicas, não conclusão de fidelidade acústica.
 
+## 10.2. Medidas de Yamaha grand — estudo de caso para F1
+
+A pesquisa encontrou [**medidas e experimentos em Yamaha C6, C7, DC7 e DC3**](PIANO_V4_MEDIDAS_YAMAHA_GRAND_C3_C6_C7_2026-11-23.md), além de especificações oficiais de C3X/C6X/C7X. Os dados mais úteis:
+
+- **Yamaha Disklavier C6**: campanha física Bensa/Bilbao/Kronland-Martinet/Smith (JASA 2003), velocidade de martelo **2,2 m/s** (aprox. MIDI 80 **somente no experimento**) com tolerância **±0,1 m/s**, acelerometria perto da ponte, 44,1kHz e estimativas de inarmonicidade e amortecimento dependente da frequência por nota; lei empírica de perda `b1(f0)` e `b2(f0)`.
+- **Nota de proveniência essencial:** a Tabela I de C2/C4/C7 do mesmo artigo usa comprimentos/coeficientes de **Chaigne & Askenfelt**, exceto `b2` calibrado na pesquisa; **L(C4)=0,63m NÃO É uma medida comprovada do Yamaha C6**.
+- **Yamaha C7 de cauda (2008)**: impacto com força e velocimetria a laser na ponte grave, impedância complexa (resistiva e reativa), dez frequências de ressonância medidas naquele ponto; não confundir com `Yamaha C7X` atual ou com o C4 no C6.
+- **Yamaha DC7M4Pro (2013)**: C4 em MIDI 15/60/127, medido espacialmente em mais de 450 posições de microfones acima do piano sem tampa; não é medição de velocidade de martelo em m/s.
+- **Yamaha DC3M4 (BiVib 2019)**: sinal binaural e vibração de **teclado**, não ponte; áudio externo só para análise permitida.
+
+**Decisão F1:** Yamaha Disklavier C6 é uma **candidata de referência de física com parâmetros parciais publicados**. C7/DC7 servem como **testes externos de modelos/leis físicas**, mas seus dados não podem ser unificados num falso "instrumento Yamaha medido completo". O piano-alvo final só será dado como calibrado com fonte consistente e verificável para martelo, corda, ponte, tampo, ar e microfonação.
+
 ## 11. Fontes principais que fundamentam este desenho
 
 1. **Chabassier, Chaigne & Joly, JASA 2013, _Modeling and simulation of a grand piano_** — contato martelo/corda dissipativo, cordas rígidas, tampo ortotrópico, radiação acústica e esquemas que preservam energia: https://pubmed.ncbi.nlm.nih.gov/23862839/
