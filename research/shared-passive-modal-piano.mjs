@@ -20,7 +20,7 @@ const midiHz=k=>440*2**((k-69)/12);
 export class SharedPassiveModalPiano {
  constructor({sampleRate=48000,coupling=.12,partialsBass=5,partialsTreble=2,
               releaseDamping=110,inharmonicity=.00010,maxContactMs=12,
-              externalForceMode=false}={}){
+              externalForceMode=false,uniformModalMassKg=null}={}){
   if(!Number.isFinite(sampleRate)||sampleRate<22050||sampleRate>192000||
      !Number.isFinite(coupling)||coupling<0||coupling>1||
      !Number.isInteger(partialsBass)||partialsBass<1||partialsBass>8||
@@ -28,10 +28,16 @@ export class SharedPassiveModalPiano {
      !Number.isFinite(releaseDamping)||releaseDamping<0||releaseDamping>400||
      !Number.isFinite(inharmonicity)||inharmonicity<0||inharmonicity>.003||
      !Number.isFinite(maxContactMs)||maxContactMs<=0||maxContactMs>25||
-     typeof externalForceMode!=='boolean')
+     typeof externalForceMode!=='boolean'||
+     !(uniformModalMassKg===null||
+       (Number.isFinite(uniformModalMassKg)&&uniformModalMassKg>0&&uniformModalMassKg<=.2)))
    throw new RangeError('invalid passive modal configuration');
   this.sampleRate=sampleRate;this.dt=1/sampleRate;
   this.externalForceMode=externalForceMode;
+  // Research-only optional uniform modal mass; default preserves E2.3 bit for bit.
+  // For a sinusoidal ideal string mode: m_eff = rho*pi*r^2*L/2.
+  // A single mass across 88 keys is only a controlled C3 study, not keyboard calibration.
+  this.uniformModalMassKg=uniformModalMassKg;
   this.keyStart=new Uint16Array(89);
   const keyOf=[],partialOf=[],polarOf=[],frequency=[];
   for(let key=21;key<=108;key++){
@@ -78,7 +84,8 @@ export class SharedPassiveModalPiano {
   for(let i=0;i<n;i++){
    const key=keyOf[i]+21,partial=partialOf[i],pol=polarOf[i];
    const f=this.frequency[i],w=TWOPI*f;
-   const m=(pol?1.1:1)/(partial**1.1);
+   const m=uniformModalMassKg===null?
+    (pol?1.1:1)/(partial**1.1):uniformModalMassKg;
    this.mass[i]=m;
    this.ground[i]=m*w*w;
    this.openDamping[i]=2*m*(pol?.14:.5)*(1+.12*(partial-1));
