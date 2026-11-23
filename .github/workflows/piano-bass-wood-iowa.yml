@@ -1,0 +1,74 @@
+name: Stage Synth — Iowa soundboard and longitudinal bass diagnosis (numeric only)
+on:
+  push:
+    branches:
+      - experiment/stage-d-wood-longitudinal-bass-20261123
+    paths:
+      - 'piano-bass-wood.js'
+      - 'physical-piano-hybrid.js'
+      - 'scripts/assess_wood_longitudinal_iowa.mjs'
+      - '.github/workflows/piano-bass-wood-iowa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      STAGE_AUDIO_WORKDIR: /tmp/stage-iowa-bass-wood-study
+      STAGE_PIANO_SELECTION: matrix
+      STAGE_IOWA_FIVE_REGIONS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify regression and new analytical script
+        run: |
+          npm run check
+          node --check scripts/assess_wood_longitudinal_iowa.mjs
+      - name: Get ffmpeg and ffprobe for temporary source decoding
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Fetch temporary original Iowa references
+        run: python3 scripts/fetch_iowa_reference.py
+      - name: Validate every source original against the SHA256 audit
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,os
+          source=json.load(open('research/commercial_audio/iowa_steinway_b_verified_original_sha256.json'))
+          manifest=json.load(open(pathlib.Path(os.environ['STAGE_AUDIO_WORKDIR'])/'manifest.json'))
+          expected={x['recordedPitchLabel'].lower()+':'+x['dynamic']:x for x in source['items']}
+          assert len(manifest['notes'])==15
+          inv={36:'c2',48:'c3',60:'c4',72:'c5',84:'c6'}
+          for n in manifest['notes']:
+              key=inv[n['key']]+':'+n['dynamic']
+              item=expected[key]
+              assert n['sha256']==item['sha256'],key
+              assert n['bytes']==item['bytes'],key
+              assert n['originalRate']==item['sampleRateHz'],key
+              assert n['originalChannels']==item['channels'],key
+              print('SHA256_VERIFIED',key,item['sha256'][:16])
+          PY
+      - name: Diagnose STABLE / WOOD / LONGITUDINAL / COMBINED without subjective claims
+        run: |
+          node scripts/assess_wood_longitudinal_iowa.mjs "$STAGE_AUDIO_WORKDIR/manifest.json" "$STAGE_AUDIO_WORKDIR/wood-longitudinal-numeric-diagnostic.json"
+      - name: Upload numbers ONLY — original acoustic audio is not an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-iowa-wood-longitudinal-bass-numeric-only
+          path: /tmp/stage-iowa-bass-wood-study/wood-longitudinal-numeric-diagnostic.json
+          retention-days: 7
+          if-no-files-found: error
+      - name: Remove original recordings and decoded audio
+        if: always()
+        run: rm -rf /tmp/stage-iowa-bass-wood-study
