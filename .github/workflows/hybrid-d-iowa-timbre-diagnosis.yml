@@ -30,6 +30,7 @@ jobs:
           npm run check
           node --check scripts/print_real_timbre_gaps.mjs
           node --check scripts/extract_iowa_spectral_targets.mjs
+          node --check scripts/check_iowa_hybrid_improvement.mjs
       - name: Install and verify ffmpeg and ffprobe
         run: |
           if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
@@ -64,6 +65,7 @@ jobs:
           node scripts/analyze_reference_audio.mjs "$STAGE_AUDIO_WORKDIR/manifest.json" "$STAGE_AUDIO_WORKDIR/diagnostic.json"
           node scripts/print_real_timbre_gaps.mjs "$STAGE_AUDIO_WORKDIR/diagnostic.json"
           node scripts/extract_iowa_spectral_targets.mjs "$STAGE_AUDIO_WORKDIR/diagnostic.json" "$STAGE_AUDIO_WORKDIR/early-spectral-targets.json"
+          node scripts/check_iowa_hybrid_improvement.mjs "$STAGE_AUDIO_WORKDIR/diagnostic.json"
       - name: Upload NUMERIC diagnostic only; never publish original AIFF/PCM
         uses: actions/upload-artifact@v4
         with:
