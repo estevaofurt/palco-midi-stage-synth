@@ -88,7 +88,7 @@ test('identical input is deterministic at two physics sample rates',()=>{
 test('malformed hammer parameters and sound recording dependencies fail closed',()=>{
  for(const x of [
   {key:500},{hammerMassKg:0},{hammerVelocityMps:-1},
-  {feltExponent:-1},{panelModes:12},{hammerGapM:-1},{sampleRate:1000}
+  {feltExponent:-1},{panelModes:17},{hammerGapM:-1},{sampleRate:1000}
  ])assert.throws(()=>new ReactiveFeltDistributedPianoE33(x),RangeError);
  const code=readFileSync(new URL('../research/reactive-felt-distributed-e33.mjs',import.meta.url),'utf8');
  assert.doesNotMatch(code,/^import .*(sample-library|sf2-reader|piano-bank|\.wav)/gm);
