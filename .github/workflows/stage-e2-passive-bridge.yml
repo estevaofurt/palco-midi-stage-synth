@@ -43,6 +43,7 @@ on:
       - 'scripts/render_physical_mesh_e30.mjs'
       - 'scripts/benchmark_analytic_mesh_e30.mjs'
       - 'scripts/audit_piano_source_e31.mjs'
+      - 'scripts/audit_reactive_felt_e32.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
 jobs:
@@ -82,6 +83,8 @@ jobs:
         run: node scripts/benchmark_nonlinear_hammers_e32.mjs | tee e32-hammer-benchmark.json
       - name: E3.2 C2 C3 C4 C5 harmonic diagnosis without any recordings
         run: node scripts/diagnose_nonlinear_hammers_e32.mjs | tee e32-hammer-audit.json
+      - name: Audit E3.2 reactive contact energy and acoustic limits
+        run: node scripts/audit_reactive_felt_e32.mjs | tee e32-reactive-hammer-run.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -104,6 +107,8 @@ jobs:
             e30-mesh-benchmark.json
             e31-report.json
             e31-physical-source-diagnostic.json
+            e32-reactive-hammer-run.json
+            e32-reactive-hammer-diagnostic.json
             e32-hammer-benchmark.json
             e32-hammer-audit.json
             e32-hammer-harmonic-audit.json
