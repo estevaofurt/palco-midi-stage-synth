@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - experiment/d-v129-bass-polarization-20261123
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 jobs:
   candidate:
