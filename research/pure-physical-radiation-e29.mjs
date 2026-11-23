@@ -18,7 +18,7 @@ export function renderAnalyticPhysicalPiano({
    !Array.isArray(score)||score.length>512)
   throw new RangeError('invalid physical audition setup');
  const piano=new SharedPassiveModalPiano({sampleRate,partialsBass,partialsTreble});
- const radiator=new AnalyticSoundboardRadiator({sampleRate,...radiation});
+ const radiator=new AnalyticSoundboardRadiator({...radiation,sampleRate});
  const frames=Math.floor(sampleRate*seconds);
  const left=new Float64Array(frames),right=new Float64Array(frames);
  const events=score.map((event,i)=>{
