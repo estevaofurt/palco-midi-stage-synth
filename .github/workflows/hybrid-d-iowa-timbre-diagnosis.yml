@@ -4,6 +4,8 @@ on:
     paths:
       - 'physical-piano-hybrid.js'
       - 'scripts/analyze_reference_audio.mjs'
+      - 'scripts/diagnose_piano_bass_envelope.mjs'
+      - 'tests/piano_bass_preparation_v127.test.mjs'
       - 'scripts/print_real_timbre_gaps.mjs'
       - '.github/workflows/hybrid-d-iowa-timbre-diagnosis.yml'
   workflow_dispatch:
@@ -31,6 +33,7 @@ jobs:
           node --check scripts/print_real_timbre_gaps.mjs
           node --check scripts/extract_iowa_spectral_targets.mjs
           node --check scripts/check_iowa_hybrid_improvement.mjs
+          node --check scripts/diagnose_piano_bass_envelope.mjs
       - name: Install and verify ffmpeg and ffprobe
         run: |
           if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
@@ -66,6 +69,9 @@ jobs:
           node scripts/print_real_timbre_gaps.mjs "$STAGE_AUDIO_WORKDIR/diagnostic.json"
           node scripts/extract_iowa_spectral_targets.mjs "$STAGE_AUDIO_WORKDIR/diagnostic.json" "$STAGE_AUDIO_WORKDIR/early-spectral-targets.json"
           node scripts/check_iowa_hybrid_improvement.mjs "$STAGE_AUDIO_WORKDIR/diagnostic.json"
+      - name: Prepare bass transient and partial-decay comparisons (research only)
+        run: |
+          node scripts/diagnose_piano_bass_envelope.mjs "$STAGE_AUDIO_WORKDIR/manifest.json" "$STAGE_AUDIO_WORKDIR/bass-temporal-diagnostics.json"
       - name: Upload NUMERIC diagnostic only; never publish original AIFF/PCM
         uses: actions/upload-artifact@v4
         with:
@@ -73,6 +79,7 @@ jobs:
           path: |
             /tmp/stage-iowa-steinway-d-comparison/diagnostic.json
             /tmp/stage-iowa-steinway-d-comparison/early-spectral-targets.json
+            /tmp/stage-iowa-steinway-d-comparison/bass-temporal-diagnostics.json
           retention-days: 7
           if-no-files-found: error
       - name: Delete raw AIFF and intermediate decoded PCM
