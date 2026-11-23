@@ -8,8 +8,8 @@
  */
 import {writeFileSync,mkdirSync} from 'node:fs';
 import {join} from 'node:path';
-import {HybridPianoEngine as V127} from '../physical-piano-hybrid-v127.js';
-import {HybridPianoEngine as Candidate} from '../physical-piano-hybrid-v128-candidate.js';
+import {HybridPianoEngine as V127} from '../physical-piano-hybrid-v127.mjs';
+import {HybridPianoEngine as Candidate} from '../physical-piano-hybrid-v128-candidate.mjs';
 const RATE=48000,BLOCK=128,SECONDS=2.35;
 const GROUP_FRAMES=Math.ceil(SECONDS*RATE/BLOCK)*BLOCK;
 const GAP_FRAMES=Math.round(.28*RATE);
@@ -132,7 +132,7 @@ const files=[
 const meta={schema:'stage-original-d-v127-v128-bass-unison-ab-v1',
   source:'actual Stage Synth HybridPianoEngine source files',
   sampleRate:RATE,channels:2,bits:24,quality:'studio',
-  sourceVersions:['physical-piano-hybrid-v127.js','physical-piano-hybrid-v128-candidate.js'],
+  sourceVersions:['physical-piano-hybrid-v127.mjs','physical-piano-hybrid-v128-candidate.mjs'],
   masterLinearGain:gain,individuallyNormalized:false,
   soundDesign:'Bass F1 through C2 bichord approximation. No novel additive board modes or external samples.',
   noExternalAudio:true,noFX:true,
