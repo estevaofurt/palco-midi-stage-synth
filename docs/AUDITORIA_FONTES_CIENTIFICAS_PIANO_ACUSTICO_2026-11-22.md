@@ -1,3 +1,9 @@
+## ALERTA DE VIGÊNCIA — uso comercial confirmado pelo usuário (22/11/2026)
+
+A auditoria abaixo foi elaborada antes da confirmação expressa da **finalidade comercial** do Stage. **NÃO usar a prioridade científica anterior como permissão de uso de áudio**. Para calibração e demais usos do corpus no produto comercial, BiVib/RWC/MAPS/MAESTRO NC ficam sem autorização até existir licença comercial adicional. Priorizar fontes CC0/CC BY/corpus próprio autorizado e revisar licença e qualidade de cada arquivo. A matriz atualizada e o bloqueio estão em [POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md](POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md). A bibliografia científica permanece disponível para estudo das equações.
+
+---
+
 # Stage Synth — auditoria de referências científicas de pianos acústicos
 
 **Consulta:** 22/11/2026 (Brasil; disponibilizações e logs UTC de 23/11).
