@@ -1,3 +1,11 @@
+## Próximo foco após E1.4 — interromper variações quase iguais, investigar transmissão real da corda ao tampo
+
+**Feedback auditivo definitivo deste A/B:** titular não percebe diferenças entre D v1.12.6 e v1.12.7. **A modificação de martelo foi reprovada como melhoria de produto**, apesar de uma alteração transitória quantificável. A cadeia atual soma **`dryL + body.wetL*.48`** e ignora `PianoResonanceBody.reaction` no retorno à corda — um bloqueio arquitetural específico de acoplamento recíproco. [Evidência e decisões](REPROVACAO_PERCEPTIVA_MARTELO_D_V127_2026-11-23.md).
+
+**Plano focado:** (1) desenvolver e calibrar em pesquisa a emissão acústica do sistema passivo corda↔ponte↔tampo **antes de integrá-lo** (não inventar madeira por harmônicos aditivos); (2) medir evolução de parciais, corpo e cauda C2/C3 mf versus referências originais licitamente utilizáveis, usando fontes separadas para ajuste e validação; (3) impedir troca de WAV por candidato que só mude poucos milissegundos e não melhore o caráter de piano; (4) só disponibilizar nova experiência de áudio após testes de regressão, C4–C6 e CPU, para escuta explícita do titular. Preservar motores A/B/C/Clássico e v1.12.6/v1.12.7 históricos, sem nova categoria de Piano. **0/7 R-GATEs**; 32–64 vozes ainda requerem validação física de dispositivo.
+
+---
+
 ## Prioridade após E1.2: falha de timbre grave, não suposto rótulo errado de notas
 
 A auditoria independente do corpus Steinway B/Iowa original 15/15 determinou **12/15 duplamente consistentes com a nota identificada** e 3/15 inconclusivos; não encontrou **nenhuma discrepância de oitava corroborada**. [Resultados e 157 testes aprovados](AUDITORIA_AFINACAO_IOWA_ORIGINAIS_2026-11-23.md). **Não reatribuir notas, não retocar calibração D por hipótese de rótulo e não rodar novo DSP sem motivo mensurável.**
