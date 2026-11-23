@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - research/fast-track-piano-readiness-20261123
+    paths:
+      - 'scripts/fetch_iowa_reference.py'
+      - '.github/workflows/research-iowa-15-originals.yml'
   workflow_dispatch:
 permissions:
   contents: read
