@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {ReactiveFeltModalPiano}
+import {ReactiveFeltModalPiano,idealStringModalMassKg}
  from '../research/reactive-felt-modal-piano-e32.mjs';
 import {SharedPassiveModalPiano} from '../research/shared-passive-modal-piano.mjs';
 
@@ -122,4 +122,31 @@ test('reactive contact remains passive with an enriched 8x8 string modal bank',(
  assert.ok(m.maxForce>0);
  assert.ok(m.piano.energy()>0);
  assert.ok(Math.abs(m.balanceRelativeError())<1e-6);
+});
+
+
+test('ideal string modal mass is rho * pi * r² * L / 2 and not a timbral preset',()=>{
+ const g={lengthM:.85,radiusM:.0006,densityKgM3:7850};
+ const expected=7850*Math.PI*.0006**2*.85/2;
+ assert.equal(idealStringModalMassKg(g),expected);
+ assert.ok(expected>.002&&expected<.006);
+ assert.throws(()=>idealStringModalMassKg({...g,radiusM:0}),RangeError);
+ assert.throws(()=>idealStringModalMassKg({...g,densityKgM3:-1}),RangeError);
+ const legacy=new SharedPassiveModalPiano();
+ assert.equal(legacy.uniformModalMassKg,null);
+ const dimensional=new SharedPassiveModalPiano({uniformModalMassKg:expected});
+ assert.equal(dimensional.mass[0],expected);
+ assert.equal(dimensional.ground[0]/dimensional.mass[0],
+              legacy.ground[0]/legacy.mass[0]);
+ assert.throws(()=>new SharedPassiveModalPiano({uniformModalMassKg:-1}),RangeError);
+});
+
+test('geometry-derived string mass remains mechanically passive with reactive felt',()=>{
+ const g={lengthM:.85,radiusM:.0006,densityKgM3:7850};
+ const m=integrate(2,{seconds:.05,stringGeometry:g});
+ assert.equal(m.localModalMassKg,idealStringModalMassKg(g));
+ assert.ok(m.maxForce>0);
+ assert.ok(m.piano.energy()>0);
+ assert.ok(Math.abs(m.balanceRelativeError())<1e-6,
+  'geometry-matched string mass energy residual = '+m.balanceRelativeError());
 });
