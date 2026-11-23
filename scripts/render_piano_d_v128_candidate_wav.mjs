@@ -84,16 +84,11 @@ function encode(path,pcm){
  buf.write('data',36,'ascii');buf.writeUInt32LE(len,40);
  let peakOut=0;
  for(let i=0;i<n;i++){
-  for(const x of [pcm.l[i],pcm.r[i]]){
-   const v=Math.max(-1,Math.min(1,x*gain));
-   peakOut=Math.max(peakOut,Math.abs(v));
-   buf.writeIntLE(Math.round(v*8388607),44+6*i+(x===pcm.l[i]?0:3),3);
-  }
- }
- // Explicitly rewrite both channels; no dependence on value comparisons.
- for(let i=0;i<n;i++){
-  buf.writeIntLE(Math.round(Math.max(-1,Math.min(1,pcm.l[i]*gain))*8388607),44+6*i,3);
-  buf.writeIntLE(Math.round(Math.max(-1,Math.min(1,pcm.r[i]*gain))*8388607),47+6*i,3);
+  const x=Math.max(-1,Math.min(1,pcm.l[i]*gain));
+  const y=Math.max(-1,Math.min(1,pcm.r[i]*gain));
+  peakOut=Math.max(peakOut,Math.abs(x),Math.abs(y));
+  buf.writeIntLE(Math.round(x*8388607),44+6*i,3);
+  buf.writeIntLE(Math.round(y*8388607),47+6*i,3);
  }
  writeFileSync(path,buf);
  return {name:path.split('/').at(-1),bytes:buf.length,frames:n,seconds:Number((n/RATE).toFixed(4)),peakOut};
