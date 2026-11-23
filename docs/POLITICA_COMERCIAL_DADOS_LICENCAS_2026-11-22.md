@@ -1,7 +1,7 @@
 # Stage Synth — Política de referências e licenças para SOFTWARE COMERCIAL
 
 **Decisão do titular do projeto (22/11/2026): o Stage Synth é destinado a comercialização.**
-**Base conferida:** \`main\` commit \`c85e3e8ab238d6a435af6cf55ffa850e4ea34a97\`, app v1.12.4.
+**Base conferida:** `main` commit `c85e3e8ab238d6a435af6cf55ffa850e4ea34a97`, app v1.12.4.
 **Status:** congelamento de DSP/P1/P2 mantido. Este documento altera exclusivamente critérios de pesquisa, legalidade e seleção de dados, não o motor.
 
 ## 1. Regra de trabalho obrigatória
@@ -34,7 +34,7 @@
 | **bitKlavier Grand / Steinway Model D** | [Autor](https://bitklavier.com/the-bitklavier-grand/) declara **CC BY 4.0** | **CANDIDATO ELEGÍVEL** com atribuição/avisos | 16 layers, 9 pares estéreo, 96k/24b; amostras denoised/editadas/ganho ajustado; Model D ≠ B |
 | **Fuchs & Möhr Felt / Tom Guder** | [Declaração do criador](https://www.polyphone.io/en/forum/your-creations/850-acoustic-felt-piano-upright-fuchs-mohr) como **public domain**, samples WAV em três layers | **CANDIDATO ELEGÍVEL**, arquivar prova da declaração e conferir cadeia de direitos do espelho | Não identifica física do feltro sem comparação mesmo piano com e sem feltro |
 | **Upright Kawai KW FreePats** | [Autor/distribuidor](https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html#UprightKW), **CC0** | **CANDIDATO ELEGÍVEL** | Gravações de sala e loops nos graves — inadequado para calibrar T60 natural de cordas |
-| **Steinway Model B Iowa** | [Universidade](https://theremin.music.uiowa.edu/MIS.html) permite usos amplos, mas não identificamos licença CC/SPDX formal explícita | **PENDENTE jurídico** para desenvolver/distribuir comercialmente; pedir esclarecimento se necessário | 9 arquivos AIFF E0, sala não anecoica; pp/mf/ff não são velocity calibrada |
+| **Steinway Model B Iowa** | [Titular institucional](https://theremin.music.uiowa.edu/MIS.html) declara expressamente que downloads podem ser usados **em quaisquer projetos sem restrições**, inclusive por desenvolvedores de aplicações; **não é uma licença CC/SPDX**, registrar prova e condições | **CANDIDATO ELEGÍVEL pelo texto público expresso**, preservando prova da permissão; confirmar por escrito caso o jurídico exija documento formal | 9 arquivos AIFF E0, sala não anecoica; pp/mf/ff não são velocity calibrada |
 | **BiVib Yamaha Disklavier** | [Zenodo](https://zenodo.org/records/2573232), artigo identifica **CC BY-NC-SA 4.0** | **NÃO APROVADO para calibração comercial** sem licença comercial escrita do titular | Alta qualidade científica; pode citar publicação sem usar áudio sob termos NC |
 | **RWC Musical Instrument Sound DB** | [Autores/reedição Zenodo 2026](https://zenodo.org/records/17170844), **CC BY-NC 4.0** | **NÃO APROVADO para calibração comercial** sem licença específica | Yamaha/Steinway/Bösendorfer, articulações, dados originais ainda não preparados |
 | **MAPS ENSTDkCl/ENSTDkAm** | [Telecom Paris](https://adasp.telecom-paris.fr/resources/2010-07-08-maps-database/), documentação anterior reportou licença NC de redistribuição | **NÃO APROVADO até conferir texto original e obter autorização comercial** | Só os subconjuntos ENSTD são acústicos reais; outro conteúdo é simulado |
@@ -53,7 +53,7 @@ Legenda: **CANDIDATO ELEGÍVEL ≠ pronto para produção**. Falta conferir vers
 - Solicitar **licença comercial** aos autores de BiVib/RWC caso seus dados sejam imprescindíveis; não estimar que autorização acadêmica valha para produto pago.
 - Estudar artigos físicos de Smith, Bank, Weinreich, Chabassier, Plath/Ege e modelos passivos. **Escrever implementação original independente e registrar fórmulas/parâmetros com fonte** quando autorizado recomeçar o DSP.
 - Preparar uma página de **ATTRIBUTIONS/THIRD_PARTY_NOTICES** para o produto antes de distribuir ou incluir qualquer WAV externo CC BY, com nomes, versão, URLs, licença e modificações.
-- Obter avaliação de licenças dos **assets já versionados**, dependências e eventual código/procedência externa (adaptação de Claude, Bibliotecas GPL/AGPL). O repositório **não tem arquivo LICENSE na raiz** na consulta de 22/11/2026; a licença de distribuição do código do Stage deve ser decidida pelo titular antes de comercializar. O \`package.json\` contém \`"private": true\` (flag npm, **não** licença de uso).
+- Obter avaliação de licenças dos **assets já versionados**, dependências e eventual código/procedência externa (adaptação de Claude, Bibliotecas GPL/AGPL). O repositório **não tem arquivo LICENSE na raiz** na consulta de 22/11/2026; a licença de distribuição do código do Stage deve ser decidida pelo titular antes de comercializar. O `package.json` contém `"private": true` (flag npm, **não** licença de uso).
 - Avaliar marcas registradas Yamaha, Steinway e outras; não afirmar endosso de fabricantes nem usar logotipos sem direito.
 
 ## 5. Novo gate obrigatório de licenças COMERCIAIS
