@@ -40,7 +40,7 @@ for(const panels of [2,4,8]){
    peakPanelVelocityProxy:max,
    energyBalanceRelativeError:Math.abs(p.energyBalanceError())/
     Math.max(1,p.externalWork),
-   testedSimultaneousReactiveHammers:1,
+   testedSimultaneousReactiveHammers:0,
    realTimeDeviceCertified:false
   });
  }
