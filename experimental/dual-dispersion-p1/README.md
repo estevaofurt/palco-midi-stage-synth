@@ -23,3 +23,13 @@ Arquivo: tests/dual_dispersion_p1.test.mjs
 - Ganho, dinâmica por velocity, amortecimento de parciais e consumo de CPU ainda exigem análise e escuta.
 - Este arquivo **não está no seletor do Piano Acústico** e não é uma versão publicada.
 - A v1.9.5 e a raiz v1.12.4 continuam intactas. Antes de qualquer integração, ensaiar PC/Moto g04s, acordes e pedal no AudioWorklet real e comparar A/B nivelado.
+
+
+## Resultado da primeira medição (não homologado)
+A execução inicial do GitHub Actions em 23/11/2026 (run 45094402305) obteve **92 testes aprovados e 1 falha**. A exigência experimental de aumento mínimo de 5% do coeficiente B de C4 falhou: C4 / Japanese / velocity 80 passou de **0,0001102457** (motor C) para **0,0001129035** (P1), incremento de somente ~2,4%.
+
+- C2: 0,0000547790 → 0,0000552145; C6: 0,0002769985 → 0,0002784529.
+- Em C4, o pico caiu de 0,06232 para 0,05370 no sinal médio estéreo; não confundir redução de volume com fidelidade.
+- Nenhuma conclusão auditiva é permitida a partir desses números. Os modos ressonantes independentes preservam sua própria rigidez: melhorar só a fase da linha de atraso tem efeito limitado no espectro final.
+- O teste foi reestruturado para **isolar o guia de onda** e medir seu efeito real, mantendo o aumento de B global como objetivo ainda não atingido. Isso **não** autoriza integrar o experimento no app.
+- Próximos passos: verificar métricas isoladas, estudar coerência entre modos e linha dispersiva, corrigir perdas por frequência, repetir benchmark de CPU e só depois comparar a audição.
