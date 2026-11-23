@@ -25,7 +25,7 @@ for(const n of notes){
     const scalar=(delta.meanAbsDb??delta.exploratoryMeanAbsDb);
     console.log('  '+engine.padEnd(12)+' model-minus-reference (harmonic): |Δ|='+
        (scalar===null||scalar===undefined?'n/a':scalar.toFixed(1)+'dB')+
-       '; comparable=+delta.comparablePartials+
+       '; comparable='+delta.comparablePartials+
        '; early deviations model-minus-ref='+JSON.stringify(earlyDiff.slice(0,8))+
        '; lateDecDb='+result.lateDecayDb);
   }
