@@ -22,7 +22,7 @@ export class AnalyticSpatialPlateRadiatorE33 {
   microphones=[{x:-.38,y:.14,z:1.35},{x:.38,y:.14,z:1.35}]
  }={}){
   if(!Number.isInteger(sampleRate)||sampleRate<22050||sampleRate>96000||
-     !Array.isArray(shapes)||shapes.length<1||shapes.length>8||
+     !Array.isArray(shapes)||shapes.length<1||shapes.length>16||
      shapes.some(x=>!Array.isArray(x)||x.length!==2||
       x.some(y=>!Number.isInteger(y)||y<1||y>6))||
      !Number.isInteger(columns)||columns<2||columns>24||
