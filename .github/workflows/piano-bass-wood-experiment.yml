@@ -1,0 +1,66 @@
+name: Stage Synth — bass wood / longitudinal AB-CD experiment
+on:
+  push:
+    branches:
+      - experiment/stage-d-wood-longitudinal-bass-20261123
+  pull_request:
+    paths:
+      - 'physical-piano-hybrid.js'
+      - 'piano-bass-wood.js'
+      - 'physical-piano-hybrid-v127.js'
+      - 'tests/piano_bass_wood_longitudinal_experiment.test.mjs'
+      - 'scripts/render_bass_wood_longitudinal_abcd.mjs'
+      - '.github/workflows/piano-bass-wood-experiment.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  isolated-synthesis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run all existing and new DSP regression tests
+        run: |
+          npm run check
+          node --check piano-bass-wood.js
+          node --check scripts/render_bass_wood_longitudinal_abcd.mjs
+      - name: Render all four test conditions with identical MIDI
+        run: node scripts/render_bass_wood_longitudinal_abcd.mjs artifacts/stage-bass-wood-ABCD
+      - name: Verify sample format, duration, volume, the four variants and evidence
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, struct
+          p=pathlib.Path('artifacts/stage-bass-wood-ABCD')
+          meta=json.loads((p/'metadata.json').read_text())
+          assert len(meta['models'])==4
+          assert len(meta['files'])==5
+          assert not meta['perFileNormalization']
+          assert not meta['originalPianoRecordingsEmbedded']
+          assert all(r['differentSamples']>500 for r in meta['comparisons'])
+          wavs=sorted(p.glob('*.wav'))
+          assert len(wavs)==5
+          sizes=[]
+          for wav in wavs:
+              with wav.open('rb') as f:h=f.read(44)
+              assert h[0:4]==b'RIFF' and h[8:12]==b'WAVE'
+              assert h[12:16]==b'fmt ' and h[36:40]==b'data'
+              assert struct.unpack_from('<HHIIHH',h,20)==(1,2,48000,288000,6,24)
+              assert wav.stat().st_size==44+struct.unpack_from('<I',h,40)[0]
+              sizes.append(struct.unpack_from('<I',h,40)[0]//6)
+              print('WAV_VALIDATED',wav.name,round(sizes[-1]/48000,3),'seconds')
+          assert len(set(sizes[:4]))==1
+          assert sizes[4]==sum(sizes[:4])+3*round(meta['gapSeconds']*48000)
+          print('FOUR MODEL A/B C/D STUDY VALIDATED — original Stage DSP only')
+          PY
+      - name: Save all numeric provenance and listening files
+        uses: actions/upload-artifact@v4
+        with:
+          name: palco-stage-piano-d-wood-longitudinal-abcd-wav
+          path: artifacts/stage-bass-wood-ABCD/
+          retention-days: 7
+          compression-level: 4
+          if-no-files-found: error
