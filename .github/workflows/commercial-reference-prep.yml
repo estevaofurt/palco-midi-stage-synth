@@ -25,11 +25,25 @@ jobs:
           python3 research/commercial_audio/verify_vcsl.py \
             research/commercial_audio/vcsl_cc0_pilot_manifest.json \
             "$STAGE_COMMERCIAL_AUDIO_DIR/verified.json"
+      - name: Install and verify lossless FLAC decoder
+        run: |
+          if ! command -v flac >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq flac
+          fi
+          flac --version
+      - name: Validate 14 Yamaha C5 and Kawai KW original lossless FLAC samples
+        run: |
+          python3 research/commercial_audio/verify_flac.py \
+            research/commercial_audio/cc_flac_pilot_manifest.json \
+            "$STAGE_COMMERCIAL_AUDIO_DIR/flac-verified.json"
       - name: Archive ONLY provenance hashes and acoustic file-header metadata
         uses: actions/upload-artifact@v4
         with:
           name: stage-commercial-reference-vcsl-metadata-only
-          path: /tmp/stage-commercial-reference-vcsl/verified.json
+          path: |
+            /tmp/stage-commercial-reference-vcsl/verified.json
+            /tmp/stage-commercial-reference-vcsl/flac-verified.json
           retention-days: 14
           if-no-files-found: error
       - name: Delete source recordings and report from CI runner
