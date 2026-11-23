@@ -110,3 +110,12 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Resultado:** diferenças sistemáticas de amplitude relativa dos parciais, especialmente no grave, foram maiores nos modelos Stage B/C que no modal A em muitos desses exemplos. Não é comprovante de superioridade perceptual; microfones, camadas de velocity, compressão e acústica da sala não são equivalentes. B/C mantidos sem mudanças.
 
 **Exigência E1:** tratar B com menos de três parciais como inconclusivo, medir transientes agudos em janelas curtas sem chamá-los de B e desenvolver identificação por harmônico/tempo antes de qualquer ajuste de DSP. Referência: docs/ANALISE_AUDIO_REAL_E0.md. CI documentado na branch de pesquisa. Nenhum som de terceiro foi embutido.
+
+
+## D-018 — Priorizar dados acústicos científicos com velocity controlada e fabricante identificado (22/11/2026)
+
+**Decisão:** antes de qualquer nova modificação em timbre físico, promover a **qualidade das evidências**, não a complexidade do DSP. O BiVib Yamaha DC3 M4/DU1A (88×10 velocidades, 96 kHz/24 bit, calibração binaural/equipamentos) passa a ser a referência primária para dinâmica e radiador; o RWC Yamaha/Steinway/Bösendorfer (3×88×4×3) para fabricantes, pedal, repetição e articulação; MAPS ENSTDkCl/ENSTDkAm **somente** para captação do mesmo Disklavier real; MAESTRO para interpretação musical, velocity e pedais.
+
+**Cautelas:** os dados anteriores E0 (33 casos) foram medidos corretamente segundo o método disponível, mas **não constituem padrões físicos controlados**: erros espectrais relativos e aumento de B não significam fidelidade perceptiva. As referências científicas BiVib/RWC/MAPS/MAESTRO usam licenças que incluem restrições NC; o uso interno e comercial, se houver, depende de revisão de termos e permissões apropriadas. Dados CFX específicos e referência Felt com gravação científica controlada continuam sem identificação confirmada.
+
+**Evidência:** docs/AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md. Somente pesquisa; nenhuma gravação adicional baixada, sem alteração DSP/UI/MIDI/FX/presets. A v1.9.5 fica preservada.
