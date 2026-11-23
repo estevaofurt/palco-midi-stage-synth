@@ -1,0 +1,36 @@
+name: Stage Synth — offline bridge-to-pressure H1 research
+on:
+  pull_request:
+    paths:
+      - 'research/bridge-radiation-h1.mjs'
+      - 'tests/bridge_radiation_h1.test.mjs'
+      - 'docs/VERIFICACAO_TRANSFERENCIA_RADIATIVA_H1_E11_2026-11-23.md'
+      - '.github/workflows/bridge-radiation-h1-laboratory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  radiation-h1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify acoustic engines and existing app remain unchanged
+        run: |
+          git diff --exit-code b49d9abdf3a50b057b37a0d65a5c72ec4ddc2e07 -- \
+            physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js \
+            piano-worklet.js piano-resonance.js piano-hybrid-calibration.js \
+            acoustic.js acoustic-v126.js index.html v1.12.6.html v1.12.7.html \
+            app.js stage.js panel.js fx-rack.js package.json
+      - name: Verify research syntax and all Stage regressions
+        run: |
+          node --check research/bridge-radiation-h1.mjs
+          node --check tests/bridge_radiation_h1.test.mjs
+          npm run check
+      - name: Validate known causal impulse, coherence, noise, holdout, calibration and time alignment
+        run: node --test tests/bridge_radiation_h1.test.mjs
