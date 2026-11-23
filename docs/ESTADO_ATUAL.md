@@ -1,3 +1,11 @@
+## Preparação comercial — 28 fontes sonoras ORIGINAIS verificadas (22/11/2026)
+
+A auditoria comercial passou a possuir **dados efetivamente adquiridos e conferidos**, não só links: **8 WAV VCSL (Steinway Model B + Knight Upright) CC0, 15 FLAC Yamaha C5 Salamander CC BY 3.0 e 5 FLAC Kawai KW FreePats CC0**. Quatro pianos acústicos distintos, 28 arquivos originais e **64.396.672 bytes** totais, 24 bits (WAV 44,1 kHz ou FLAC 48/44,1 kHz). Os arquivos foram validados contra commits e Git blob SHA1 de origem, SHA256 por arquivo e decodificação original; **10/10 testes da verificação aprovados** em https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45101876490 . Os 28 SHA256 estão em research/commercial_audio/verified_source_sha256.json. **Nenhum áudio foi incluído no repositório, no app ou nos artifacts.**
+
+**Cuidado:** VCSL Steinway teve dinâmica normalizada; Yamaha C5 não é CFX, layers v1/v8/v16 não são velocidade física de martelo; Kawai tem loops nos graves e C4vH ausente. Dados são candidatos acústicos comercialmente compatíveis, **não parâmetros físicos calibrados**, e R-GATEs permanecem **0/7 aprovados**. P1/P2 e DSP continuam congelados. Documentação: docs/PREPARACAO_FONTES_COMERCIAIS_PILOTO_2026-11-22.md.
+
+---
+
 ## Mudança de requisito: Stage Synth será produto COMERCIAL (22/11/2026)
 
 O usuário esclareceu que **o Stage Synth tem finalidade comercial**. A pesquisa científica deve separar leitura de artigos de uso comercial dos datasets. **BiVib (NC-SA), RWC (NC), MAPS (NC) e MAESTRO (NC-SA)** não são fontes aprovadas para calibração do produto sem autorização específica. **Candidatos legalmente mais promissores:** VCSL (CC0), Kawai KW FreePats (CC0), Salamander Yamaha C5 (CC BY 3.0), Princeton bitKlavier Steinway D (CC BY 4.0), Felt Tom Guder (domínio público declarado) e University of Iowa Steinway B (permissão expressa para quaisquer projetos, sem licença CC identificada). Os candidatos ainda precisam de arquivos e direitos específicos conferidos.
