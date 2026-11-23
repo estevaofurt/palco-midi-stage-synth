@@ -1,0 +1,53 @@
+name: Piano V4 clean-slate physical single-note research
+on:
+  push:
+    branches:
+      - research/piano-v4-restart-physical-20261123
+    paths:
+      - 'research/piano-v4/**'
+      - 'tests/piano_v4_*.test.mjs'
+      - 'scripts/piano-v4/**'
+      - 'docs/PIANO_V4_*.md'
+      - '.github/workflows/piano-v4-physical-restart.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'research/piano-v4/**'
+      - 'tests/piano_v4_*.test.mjs'
+      - 'scripts/piano-v4/**'
+      - 'docs/PIANO_V4_*.md'
+      - '.github/workflows/piano-v4-physical-restart.yml'
+
+jobs:
+  single-note:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify V4 new physics and all existing Stage tests
+        run: npm run check
+      - name: Verify V4 single-note source has NO old-engine imports
+        run: |
+          ! grep -E '^(import|require).*((E2|E3)|sample-library|audio-profile|sf2-reader)' research/piano-v4/stiff-string-hammer.mjs
+      - name: Run V4 mechanical C4 diagnostics
+        run: node scripts/piano-v4/diagnose-single-string.mjs | tee piano-v4-ci-report.json
+      - name: Preserve stable UI/MIDI/effects and audio source
+        run: |
+          git diff --exit-code origin/main...HEAD -- \
+            package.json app.js stage.js panel.js patches.js \
+            physical-piano.js physical-piano-hybrid.js physical-piano-legacy.js \
+            acoustic.js piano-worklet.js fx-rack.js index.html
+      - name: Publish numerical research evidence (no WAV yet)
+        uses: actions/upload-artifact@v4
+        with:
+          name: piano-v4-single-note-physics-evidence
+          path: |
+            piano-v4-physics-only-c4.json
+            piano-v4-ci-report.json
+          retention-days: 30
