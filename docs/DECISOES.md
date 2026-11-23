@@ -1,3 +1,9 @@
+## 23/11/2026 — E1.4: reprovação perceptiva do candidato de martelo grave D v1.12.7
+
+**Decisão do proprietário após escuta comparativa de WAVs reais:** “não existem diferenças perceptíveis entre os dois modelos”. Classificar D v1.12.7 como **SEM AVANÇO PERCEPTÍVEL** frente a D v1.12.6; **não homologar como melhoria sonora**. Diferenças de 12 ms não bastam quando corpo/cauda são idênticos em energia e as métricas Iowa são mistas. Inspeção do código D identifica `body.step` + soma `dry + wet`, mas nenhuma leitura de `body.reaction` para realimentar os modos das cordas; hipótese prioritária de **reconstrução estrutural da interação cordas–ponte–tampo**, não demonstração de realismo. Antes do próximo WAV, exigir melhora de métricas contra referências acústicas e arquitetura passiva/radiativa plausível, além de futura escuta pelo titular e CPU 32–64 real. **Não incorporar PR #26, não mexer em D/C4+ nem engines A/B/C/Clássico sem evidência.** Manter 0/7 R-GATEs e finalidades comerciais. [Análise e plano](REPROVACAO_PERCEPTIVA_MARTELO_D_V127_2026-11-23.md).
+
+---
+
 ## 23/11/2026 — E1.3: comparar imediatamente as mesmas notas, não forçar "som de madeira" por ruído
 
 Um teste com os **motores verdadeiros D v1.12.6 e v1.12.7** (WAV 48k 24-bit estéreo) mostrou que a v1.12.7 em **C2 mf atenua 4,38 dB de energia nos primeiros 12 ms**, sem mudança significativa de energia entre 100–220 ms nem em cauda 900–1180 ms. [Diagnóstico E1.3](DIAGNOSTICO_D_GRAVES_AB_INTERCALADO_2026-11-23.md). Decisão: criar render A/B intercalado reprodutível, **não mexer DSP ainda** nem declarar vitória pela troca de martelo. Próximo experimento deve tratar sustain e evolução harmônica/radiação, condicionado a referências e ABX. Preservar Stage público v1.12.7, D histórico 1.12.6, A/B/C/Clássico, C4–C6, MIDI, FX, UI, presets, 32–64 vozes como meta e 0/7 R-GATEs.

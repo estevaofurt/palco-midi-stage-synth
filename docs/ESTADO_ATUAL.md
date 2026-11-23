@@ -1,3 +1,9 @@
+## Escuta E1.4 — v1.12.7 martelo grave REPROVADA em avanço perceptivo (23/11/2026)
+
+Após ouvir os WAVs **verdadeiros D v1.12.6 e D v1.12.7** (inclusive pares intercalados), o titular declara expressamente: **“não existem diferenças perceptíveis entre os dois modelos”**. **Resultado perceptivo: reprovado.** O transiente de C2 mf difere em −4,38 dB nos primeiros 12 ms, mas corpo 100–220 ms e cauda 900–1180 ms ficam essencialmente iguais. A análise original Iowa também foi mista (espectros em duas janelas pioraram). Auditoria de código revela que o motor D soma ressonadores de corda diretamente à saída e adiciona `body.wet*`, enquanto **ignora `body.reaction` de volta às cordas**; diagnóstico estrutural, não prova de causa auditiva. [Registro, critérios de nova arquitetura e limites](REPROVACAO_PERCEPTIVA_MARTELO_D_V127_2026-11-23.md). **Não propor mais ajustes marginais do martelo nem PR #26 de ruído/wood.** Preservar versão pública v1.12.7 como experimento histórico e v1.12.6 para comparação; A/B/C, C4–C6, MIDI/FX/UI/presets intactos. Sem novo som, 0/7 R-GATEs e CPU 32–64 no dispositivo ainda pendente.
+
+---
+
 ## E1.3 — WAV dos motores reais D 1.12.6/1.12.7 intercalado por nota (23/11/2026)
 
 Montagem de **WAV real de síntese Stage, 48k/24-bit estéreo**, sem amostras externas e com o mesmo ganho original, alternando v1.12.6 / v1.12.7 em C2 e C3 (pp/mf/ff), C4, A1 e acorde grave. Diagnóstico: **C2 mf 0–12 ms = −4,38 dB na v1.12.7 contra a v1.12.6; corpo 100–220 ms = 0,00 dB; cauda 900–1180 ms = +0,03 dB**. Ou seja: o novo martelo mexeu no começo, quase não no corpo. Mesma tendência C2 pp/ff e A1. D não está aprovado como som de piano real; não reintegrar "wood" aditivo reprovado. Renderizador reproduzível `scripts/assemble_stage_d_bass_interleaved.mjs`; [relatório completo](DIAGNOSTICO_D_GRAVES_AB_INTERCALADO_2026-11-23.md). **Sem alteração de DSP, versão pública v1.12.7, A/B/C e C4–C6 intactos; 0/7 R-GATEs, CPU do dispositivo não validada.**
