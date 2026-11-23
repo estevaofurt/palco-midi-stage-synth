@@ -1,3 +1,9 @@
+## Verificação independente do solver passivo compartilhado — PR #28 (23/11/2026)
+
+Nova referência matemática densa (Gauss com pivô, matriz M/C/K reconstruída a cada amostra) confirma o solver O(N) de complemento de Schur do laboratório, em **44,1/48/96 kHz**, acoplamentos 0/0,12/0,8 e 1/3/5 notas. Teste com **88 teclas MIDI únicas** manteve passividade. Benchmark Node/Linux revisado agora usa teclas distintas (64 notas: p95 **0,0896 ms** com tampo único vs **0,9857 ms** de células independentes — topologias acústicas diferentes). [CI 141/141 aprovado](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45173258761). [Documento e limitações](VERIFICACAO_SOLVER_PASSIVO_REFERENCIA_DENSA_V128_2026-11-23.md). **Som público Stage v1.12.7 e motores A/B/C/D inalterados; não foi integrado motor v1.12.8 nem áudio de madeira. 0/7 R-GATEs.**
+
+---
+
 ## Laboratório passivo de ponte e tampo compartilhado — sem alteração no som público (23/11/2026)
 
 Feedback: modelos D/wood/longitudinal quase idênticos, agudo soa como ruído, grave ainda redondo e semelhante a violão. A tentativa "wood" aditiva da PR #26 foi reprovada e não mesclada. Criado **laboratório em `research/passive-string-bridge-cell.mjs` e `research/shared-passive-piano-bridge.mjs`**, com troca de energia cordas/ponte/tampo em equações passivas e integrador de ponto médio implícito. O núcleo compartilhado usa 2 modos totais de tampo + 2 polarizações de corda/nota, sem armazenamento de áudio externo. **Teste CI 139 Node + 12 testes dedicados, p95 64 notas 0,1556ms compartilhado contra 1,4939ms independentes** em Node/Linux. Os motores A/B/C/D/Clássico e página Stage v1.12.7 estão inalterados: não há atualização sonora nem validação do som de madeira. [Estudo técnico detalhado](PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md). Dados físicos ainda não identificados e licença comercial do conjunto de Plath/IR Yamaha não confirmada. **0/7 R-GATEs completos.**
