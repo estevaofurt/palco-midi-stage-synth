@@ -44,7 +44,7 @@ class FlacSourceTests(unittest.TestCase):
     def test_pinned_manifest_and_bytes_in_budget(self):
         m=json.loads((HERE/"cc_flac_pilot_manifest.json").read_text())
         p.check_manifest(m)
-        self.assertEqual(len(m["items"]),14)
+        self.assertEqual(len(m["items"]),20)
         m["items"][0]["gitBlobSha"]="uncertain"
         with self.assertRaisesRegex(ValueError,"blob"):
             p.check_manifest(m)
