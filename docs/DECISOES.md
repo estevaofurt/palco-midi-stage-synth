@@ -1,3 +1,9 @@
+## 23/11/2026 — publicar D v1.12.8 somente como experimento dentro de Piano
+
+A autorização explícita foi atualizar D e gerar WAV, sem retirar motores anteriores. O projeto conserva arquivo imutável v1.12.7 e seleciona **o D v1.12.8 no mesmo campo `soundEngine=hybrid`**; A/B/C/Clássico e padrão C intactos. Alteração local limitada a uníssonos **MIDI 29–36** (dois modos de decaimento com energia inicial 50/50), baseada em hipótese de cordas graves bicord, **não parâmetros medidos**. [Ensaios Iowa reais](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45183947692) mostram resultado **misto**: ataque e alguns espectros melhoram discretamente, cauda piora. Não chamar de som de piano acústico certificado; manter rollback, não integrar "wood" aditivo PR #26, exigir escuta e hardware 32–64. [Release e limites](RELEASE_EXPERIMENTAL_MOTOR_D_V128_2026-11-23.md); **R-GATEs 0/7**.
+
+---
+
 ## 23/11/2026 — E1.4: reprovação perceptiva do candidato de martelo grave D v1.12.7
 
 **Decisão do proprietário após escuta comparativa de WAVs reais:** “não existem diferenças perceptíveis entre os dois modelos”. Classificar D v1.12.7 como **SEM AVANÇO PERCEPTÍVEL** frente a D v1.12.6; **não homologar como melhoria sonora**. Diferenças de 12 ms não bastam quando corpo/cauda são idênticos em energia e as métricas Iowa são mistas. Inspeção do código D identifica `body.step` + soma `dry + wet`, mas nenhuma leitura de `body.reaction` para realimentar os modos das cordas; hipótese prioritária de **reconstrução estrutural da interação cordas–ponte–tampo**, não demonstração de realismo. Antes do próximo WAV, exigir melhora de métricas contra referências acústicas e arquitetura passiva/radiativa plausível, além de futura escuta pelo titular e CPU 32–64 real. **Não incorporar PR #26, não mexer em D/C4+ nem engines A/B/C/Clássico sem evidência.** Manter 0/7 R-GATEs e finalidades comerciais. [Análise e plano](REPROVACAO_PERCEPTIVA_MARTELO_D_V127_2026-11-23.md).
