@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {HybridPianoEngine as Original} from '../physical-piano-hybrid-v127.js';
-import {HybridPianoEngine as Candidate} from '../physical-piano-hybrid-v128-candidate.js';
+import {HybridPianoEngine as Original} from '../physical-piano-hybrid-v127.mjs';
+import {HybridPianoEngine as Candidate} from '../physical-piano-hybrid-v128-candidate.mjs';
 
 const R=48000,B=128;
 const prepare=(Engine,key,velocity=80,quality='studio',character='american')=>{
