@@ -1,3 +1,9 @@
+## 23/11/2026 — verificação independente e benchmark corrigido do tampo passivo compartilhado (PR #28)
+
+**Decisão:** validar numericamente o laboratório de pesquisa do PR #27 antes de qualquer tentativa de integração audível; **não alterar DSP, A/B/C/D/Clássico, UI, FX, MIDI, presets, cache ou versão pública**. Novo teste compara solução densa independente de M/C/K com Schur O(N) por amostra e verifica a rede com 88 teclas. Benchmark passa a usar 16/32/64 notas **distintas**, não 28 notas repetidas. [CI 141/141 + teste novo 2/2](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45173258761). P95 a 64 teclas: 0,0896ms tampo compartilhado vs 0,9857ms múltiplas placas por nota no Node/Linux, **não** AudioWorklet real, não prova auditiva nem CPU do app. Parâmetros mecânicos e saída acústica continuam não medidos; PR #26 permanece reprovada, **0/7 R-GATEs**. Detalhes em [verificação numérica](VERIFICACAO_SOLVER_PASSIVO_REFERENCIA_DENSA_V128_2026-11-23.md).
+
+---
+
 # Stage Synth — registro de decisões compartilhadas
 
 **Criado em:** 22/11/2026. Este documento registra acordos obtidos das conversas e dos arquivos existentes; onde faltam evidências, o status é explicitado.

@@ -9,7 +9,8 @@ const SR=48000,BLOCK=128;
 const round=x=>Number(x.toFixed(4));
 const percentile=(a,q)=>a[Math.floor((a.length-1)*q)];
 function runShared(notes){
- const keys=Array.from({length:notes},(_,i)=>21+i%28);
+ // Use unique piano keys, not repeated pitches for 32/64-note loads.
+ const keys=Array.from({length:notes},(_,i)=>21+i);
  const p=new SharedPassivePianoBridge({sampleRate:SR,keys,coupling:.12});
  for(let i=0;i<p.n;i+=3)p.setInitialStringDisplacement(i,.00002);
  return benchmark('shared',notes,()=>{
@@ -20,7 +21,7 @@ function runShared(notes){
 }
 function runIndependent(notes){
  const cells=Array.from({length:notes},(_,i)=>{
-   const p=new PassiveStringBridgeCell({sampleRate:SR,key:21+i%28,coupling:.12});
+   const p=new PassiveStringBridgeCell({sampleRate:SR,key:21+i,coupling:.12});
    p.setInitialDisplacement(0,.00002);
    return p;
  });

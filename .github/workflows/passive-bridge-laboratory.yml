@@ -9,6 +9,7 @@ on:
       - 'research/shared-passive-piano-bridge.mjs'
       - 'scripts/benchmark_shared_passive_bridge.mjs'
       - 'tests/piano_shared_passive_bridge.test.mjs'
+      - 'tests/piano_shared_bridge_dense_reference.test.mjs'
       - 'scripts/benchmark_passive_bridge_cell.mjs'
       - 'tests/piano_passive_bridge_cell.test.mjs'
       - 'docs/PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md'
@@ -44,7 +45,9 @@ jobs:
         run: node --test tests/piano_passive_bridge_cell.test.mjs
       - name: Prove shared O(N) bridge coupling, energy conservation and cross-note sympathy
         run: node --test tests/piano_shared_passive_bridge.test.mjs
-      - name: Benchmark shared versus independent plate for 16, 32, 64 notes
+      - name: Compare optimized O(N) Schur bridge with independent dense solver across rates and all 88 keys
+        run: node --test tests/piano_shared_bridge_dense_reference.test.mjs
+      - name: Benchmark shared versus independent plate for 16, 32, 64 distinct keys
         run: node scripts/benchmark_shared_passive_bridge.mjs | tee shared-bridge-node-profile.txt
       - name: Profile bridge-only 16, 32, 64 cells at 48 kHz
         run: node scripts/benchmark_passive_bridge_cell.mjs | tee passive-bridge-node-profile.txt
