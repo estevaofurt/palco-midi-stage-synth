@@ -28,3 +28,17 @@ A E2.1 tinha apenas uma frequência fundamental e duas polarizações em cada te
 Nenhuma frequência de placa, mobilidade mecânica, rigidez/atrito de corda, duração/força do martelo ou função de transferência ponte→pressão foi identificada por medição do instrumento. O `boardVelocity` é grandeza mecânica normalizada, **não um WAV de piano**. O contrato E2.2 exige FIR medido e autorizado, além de calibração SI real; não é permitido introduzir uma FIR sintética para apresentar avanço comercial.
 
 **Não fazer merge ao D público** sem auditoria física/acústica, escuta e CPU real. D v1.12.8 permanece, com A/B/C/Clássico/default C, MIDI/CC64, FX, UI, presets e arquivos históricos inalterados. R-GATEs 0/7. A PR #37 segue em draft para pesquisa.
+
+## Experiência de controle: não confundir aumento de modos com avanço físico ou timbral
+
+[Execução CI 45198370177](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45198370177): **192/192 testes passaram**, com regressão completa e comparação de três bancos para 64 teclas, em Node/Linux, 128 quadros a 48kHz. O script `scripts/compare_passive_modal_profiles.mjs` usa a **mesma excitação C2 de 1s** e compara apenas **velocidade generalizada da ponte** (não pressão sonora, não áudio perceptual):
+
+| Configuração | Coordenadas | p95 64 teclas | Correlação mecânica com 5 parciais nos graves |
+|---|---:|---:|---:|
+| 3 parciais graves / 2 agudos | 432 | 0,65281ms | 0,99470 |
+| 5 parciais graves / 2 agudos | 592 | 0,86332ms | 1,00000 (referência) |
+| 6 parciais graves / 3 agudos | 768 | 1,15674ms | 0,99292 |
+
+O custo passa de ~24,5% a ~43,4% do orçamento temporal teórico de 2,667ms do bloco **somente na mecânica**. Como mais de 99% da forma de onda da ponte permanece correlacionada para o caso C2 de teste, não existe base para assumir automaticamente que maior ordem modal vale o custo. Correlação elevada **não prova identidade timbral** e é sensível à excitação e ao ganho; ainda seriam necessários trajetória de parciais, saída radiativa medida e escuta real.
+
+**Decisão objetiva:** manter configurações como opções apenas de pesquisa; não promover o banco de 768 coordenadas, não anexar ruído de madeira nem alimentar WAV sintético como se fosse piano. Priorizar calibração de transferência mecânica e radiação e desenho de modos que alterem os mecanismos físicos relevantes, em vez de simplesmente ampliar N. Sem integração D nem certificação de 64 notas.
