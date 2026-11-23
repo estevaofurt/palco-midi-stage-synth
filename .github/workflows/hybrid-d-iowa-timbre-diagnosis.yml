@@ -25,8 +25,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Check all Node tests and syntax
-        run: npm run check
+      - name: Check all Node tests and research script syntax
+        run: |
+          npm run check
+          node --check scripts/print_real_timbre_gaps.mjs
+          node --check scripts/extract_iowa_spectral_targets.mjs
       - name: Install and verify ffmpeg and ffprobe
         run: |
           if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
