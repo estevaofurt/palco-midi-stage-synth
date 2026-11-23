@@ -243,3 +243,14 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Integração:** D passa a ser o quarto motor moderno **dentro do próprio Piano Acústico**, preservando A Claude, B Stage físico anterior v1.9.5, C Novo Stage mecânico e Clássico. Sessões antigas e padrão C permanecem. O usuário deverá ouvir e testar em hardware antes de escolher estabilização. A versão torna-se v1.12.5; `v1.12.4.html` permanece histórico.
 
 **Condições:** nunca afirmar calibração de um Steinway/Yamaha específico sem medição correspondente. Sem aprovação dos **7 R-GATEs**, sem licença NC/AGPL, sem mudança nos demais motores, FX ou MIDI. Os limites 32/48/64 são tetos de vozes prealocadas, não homologação de CPU/latência/xruns; regressões técnicas do CI são necessárias mas insuficientes para fidelidade sonora.
+
+
+## D-032 — Preservar médio-agudo do D e preparar correção dirigida de grave (23/11/2026)
+
+**Feedback registrado:** o titular percebeu melhora musical real do **médio-agudo no D v1.12.6**, mas o **grave ainda evoca violão**. Sua ordem foi **terminar a preparação antes do próximo modelo**. Não extrapolar o sucesso de ajuste espectral do ataque em 15 fontes para dinâmica real de martelo, tampo ou corpo acústico.
+
+**Auditoria causal:** `hybridContactTime` define ganhos iniciais de modos mas não resolve F_h(t), deformação do feltro ou forma temporal da força; `PianoResonanceBody` em D é misturado como saída aditiva sem retorno de `reaction` para os modos; a regra fixa `single=key<37` não está vinculada a mapa de cordas comprovado. Isso **não prova** qual subsistema causa a percepção de violão, mas determina ordem de experimentos. Os primeiros 18ms da antiga FFT eram apenas **início** de janela que continha 341ms (grave) ou 171ms (agudo), então a medida **não distinguia impacto da cauda inicial**.
+
+**Preparação feita, sem alterar código sonoro:** [PRONTIDAO_GRAVES_MOTOR_D_V127_2026-11-23.md](PRONTIDAO_GRAVES_MOTOR_D_V127_2026-11-23.md) e diagnóstico temporal independente `scripts/diagnose_piano_bass_envelope.mjs`, mais testes dedicados e workflow que valida SHA256 dos mesmos 15 originais Iowa e retorna apenas números. Medir C2/C3 em pp/mf/ff; C4/C5/C6 são guardas de não regressão. Próximo DSP **não autorizado automaticamente**, depende de experimentos A/B escalonados, áudio no navegador e retorno auditivo do usuário.
+
+**Proteções e status:** permanecer v1.12.6; A/B/C/Clássico, versão histórica v1.9.5, FX, MIDI, UI, presets e default C preservados. Sem novos dados comerciais não verificados e sem samples no Git; **0/7 R-GATEs integrais aprovados**, 32/64 notas apenas alocação até teste de callback real.

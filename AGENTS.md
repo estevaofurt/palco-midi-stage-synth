@@ -1,3 +1,11 @@
+## PROTEÇÃO DO TIMBRE MÉDIO-AGUDO / PLANO GRAVES D v1.12.7 (23/11/2026)
+
+O titular ouviu D v1.12.6: **médio-agudo passou a parecer com piano real, mas grave ainda parece violão**. Preservar explicitamente o avanço de C4–C6 e os motores A/B/C/Clássico. A solicitação atual é **TERMINAR A PREPARAÇÃO** para a próxima versão, não substituir motores, adicionar menu, publicar versão nova ou mexer em DSP/FX/MIDI/UI/presets. Criar somente instrumentação, testes, documentos e CI com fontes verificadas; a v1.12.6 principal permanece intacta.
+
+Diagnóstico/roadmap compacto: [docs/PRONTIDAO_GRAVES_MOTOR_D_V127_2026-11-23.md](docs/PRONTIDAO_GRAVES_MOTOR_D_V127_2026-11-23.md). Diferenciar primeiro choque 0–12ms, evolução dos parciais e radiação da ponte. **NÃO chamar 16.384 amostras @48 kHz de primeiros 18ms**: a FFT dura aproximadamente 341ms. Código confirmável: martelo atual não resolve força em tempo real; `PianoResonanceBody.reaction` não retorna a modos D; `single=key<37` tem fronteira fixa sem mapa de cordas confirmado. Essa é hipótese prioritária, não uma certeza subjetiva de causa. Sem importação de áudio e sem reutilização NC/AGPL, **0/7 R-GATEs fechados**, 32–64 apenas alocação.
+
+---
+
 ## ITERAÇÃO V1.12.6 — REFINO DO D APÓS REPROVAÇÃO SONORA PELO TITULAR (23/11/2026)
 
 Depois de ouvir o v1.12.5, o titular declarou que **o timbre ainda não se parece com um piano real** e pediu continuidade cuidadosa e máxima qualidade. A autorização específica anterior do D inclui **refinar somente o D experimental a partir de evidências verificáveis**, sem mexer em A/B/C, FX, MIDI, presets ou adicionar outros módulos. A v1.12.6 usa **15 AIFF originais Iowa/Steinway B com SHA256 conferido** para perfis NUMÉRICOS de radiação/ataque por registro/velocidade, no arquivo próprio `piano-hybrid-calibration.js`, sem armazenar samples.

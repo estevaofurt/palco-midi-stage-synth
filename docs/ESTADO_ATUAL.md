@@ -1,3 +1,13 @@
+## Preparação exclusiva dos graves para o próximo D (v1.12.7) — sem DSP novo (23/11/2026)
+
+**Nova escuta do titular:** o motor **D v1.12.6 melhorou no médio-agudo**, mas o **grave permanece parecido com violão**. O progresso de C4–C6 está protegido. A auditoria de código localizou três candidatos técnicos específicos: (1) pulso/contato de martelo usado só para pesos estáticos + ruído mecânico curto, (2) som de cordas misturado ao ressonador de corpo sem reação de ponte de volta aos modos, (3) envoltória/decaimento de parciais fixa e transição de população modal em MIDI 37 sem mapa de cordas reais validado. **Ainda não se comprovou qual falha domina a percepção.**
+
+**Mudança de método:** o FFT anterior do “ataque” integra **~341ms do grave** ou **~171ms do agudo**, não isola os primeiros 10ms. Nova rotina `scripts/diagnose_piano_bass_envelope.mjs` e CI no próprio fluxo dos 15 AIFF Iowa já hash-verificados comparam *energia transiente 0–12/12–36/36–100ms*, corpo 100–220ms, cauda até 1,4s e trajetórias de parciais em janelas explicitamente rotuladas de 171ms. Original continua só em diretório temporário do runner, relatório numérico sem áudio. [Plano e critérios](PRONTIDAO_GRAVES_MOTOR_D_V127_2026-11-23.md).
+
+**Status de código:** `main` continua Stage **v1.12.6**. Este trabalho **não altera o som** nem concede prontidão comercial. A/B/C, MIDI, UI, FX, presets e default C preservados. **0/7 R-GATEs integrais**, sem aferição real 32–64 notas em PC/Moto g04s. A versão experimental posterior dependerá de sinal físico/temporal, testes e escuta de graves ao lado do D anterior.
+
+---
+
 ## Stage v1.12.6 — reparo dirigido do timbre D, sob homologação (23/11/2026)
 
 Após a crítica perceptiva do titular, a análise de [15 AIFF originais Steinway B/Iowa hash-verificados](DIAGNOSTICO_TIMBRE_D_IOWA_15_2026-11-23.md) detectou uma falha sistêmica do D: nos graves, a síntese subestimava fortemente os parciais; no agudo, alguns parciais tinham energia excessiva. Na v1.12.6, o **D recebeu ponderação numérica limitada por nota e intensidade `piano-hybrid-calibration.js`, aplicada à excitação modal**, não no EQ global. Os motores A/B/C e o padrão C permanecem intactos.
