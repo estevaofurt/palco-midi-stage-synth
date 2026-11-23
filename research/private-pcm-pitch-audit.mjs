@@ -14,6 +14,7 @@ function fft(re,im){
  for(let i=1,j=0;i<n;i++){
   let bit=n>>1;
   for(;j&bit;bit>>=1)j^=bit;
+  j^=bit;
   if(i<j){
    [re[i],re[j]]=[re[j],re[i]];
    [im[i],im[j]]=[im[j],im[i]];
