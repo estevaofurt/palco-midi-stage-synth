@@ -34,7 +34,7 @@ def find_member_link(html,filename,listing_url):
     parser=Links()
     parser.feed(html)
     candidates=[urllib.parse.urljoin(listing_url,href) for label,href in parser.items
-                if label==filename and "zip" in href.lower()]
+                if (label==filename or label.endswith("/"+filename)) and ".zip/" in href.lower()]
     # Never dynamically follow foreign URLs, questionable query strings or directories.
     for x in candidates:
         u=urllib.parse.urlsplit(x)
