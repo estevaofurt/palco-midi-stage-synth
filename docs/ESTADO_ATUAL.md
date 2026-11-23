@@ -1,3 +1,11 @@
+## Mudança de requisito: Stage Synth será produto COMERCIAL (22/11/2026)
+
+O usuário esclareceu que **o Stage Synth tem finalidade comercial**. A pesquisa científica deve separar leitura de artigos de uso comercial dos datasets. **BiVib (NC-SA), RWC (NC), MAPS (NC) e MAESTRO (NC-SA)** não são fontes aprovadas para calibração do produto sem autorização específica. **Candidatos legalmente mais promissores:** VCSL (CC0), Kawai KW FreePats (CC0), Salamander Yamaha C5 (CC BY 3.0), Princeton bitKlavier Steinway D (CC BY 4.0), Felt Tom Guder (domínio público declarado) e University of Iowa Steinway B (permissão expressa para quaisquer projetos, sem licença CC identificada). Os candidatos ainda precisam de arquivos e direitos específicos conferidos.
+
+Não há arquivo LICENSE na raiz; a licença de distribuição do código Stage e atribuições de terceiros precisam ser definidas pelo titular/revisão jurídica. **Motor P2 e experimento P1 permanecem bloqueados**, nenhum DSP/preset/UI/MIDI/FX alterado. Matriz legal: docs/POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md.
+
+---
+
 ## BLOQUEIO DE IMPLEMENTAÇÃO — auditoria de referências (22/11/2026)
 
 **Situação: NÃO PRONTO. O usuário solicitou não prosseguir com a implantação de novos motores físicos até estarem preparadas todas as referências essenciais.** Foram verificadas 22 fontes/famílias primárias e as 18 lacunas anteriores. A teoria física é ampla, porém **0/7 critérios de prontidão integralmente comprovados**: originais de BiVib/RWC/bitKlavier e medidas da ponte/martelo ainda não estão adquiridos/alinhados; há restrições de licenças NC, incertezas de parâmetros e o medidor E0 precisa de validação sintética. Nova fonte Plath/Hamburgo reúne força tecla–base, aceleração da ponte e pressão binaural a 50 kHz, mas NÃO mede força martelo–corda/força aplicada na ponte. Liang/QMUL tem posição contínua de pedal e som real. P1 permanece experimental e **a programação do P2 está congelada**.
