@@ -1,3 +1,11 @@
+## D v1.12.7 DISPONÍVEL SOMENTE COMO EXPERIMENTO DE GRAVE (23/11/2026)
+
+O titular autorizou prosseguir com o plano depois da auditoria de algoritmo. O experimento v1.12.7 **altera apenas o motor D em MIDI 21–48**, com força de contato temporal por ressonadores e crescimento de radiação de grave, sem qualquer alteração ao caminho C4–C6 (MIDI >=49) nem A/B/C/Clássico, FX, MIDI, interface ou presets. A página histórica `v1.12.6.html` agora utiliza `acoustic-v126.js` e snapshots congelados do D v1.12.6 para **comparação auditiva verdadeira**; a v1.12.7 mantém uma única opção D no módulo Piano.
+
+**Resultados originais Iowa (15 AIFF, SHA256) são MISTOS**: melhora de erro do envelope 0–12ms em C2/C3, **3,58→2,96dB**, mas piora no espectro integrado 3,23→4,30dB e espectro posterior 9,38→10,49dB. Portanto **não afirmar melhora geral, piano realista, modelo físico medido ou liberação comercial**. A avaliação auditiva do usuário com FX desligados é determinante para continuar ou reverter a v1.12.7. [Documento específico](docs/EXPERIMENTO_D_MARTELO_V127_2026-11-23.md). A/B/C e a v1.12.6 preservados. CPU 32/64 em hardware ainda não homologada; R-GATEs **0/7**.
+
+---
+
 ## AUDITORIA DE ALGORITMO ANTES DE v1.12.7 (23/11/2026)
 
 **Pedido atual:** revisar profundamente algoritmo físico e custo computacional, com fontes primárias, **sem prosseguir com DSP ainda**. Resultado e decisões: [docs/AUDITORIA_ALGORITMO_MOTOR_D_2026-11-23.md](docs/AUDITORIA_ALGORITMO_MOTOR_D_2026-11-23.md). Preservar explicitamente o D v1.12.6 nos médios/agudos, seus motores A/B/C/Clássico, UI, FX, MIDI e default. Não chamar regressão numérica de fidelidade sonora.
