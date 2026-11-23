@@ -76,9 +76,9 @@ Teste obrigatório E1.1: sintetizar sinais com f1, B entre 0 e 0,003, envelopes 
 
 ### L06 — P0 — Identificabilidade de parâmetros físicos e referência sonora
 
-Um microfone que capta uma única nota não determina univocamente massa do martelo, curva de feltro, perdas da corda, impedância da ponte, radiação ou a resposta da sala. Um filtro de corpo e uma curva de excitação diferentes podem produzir quase o mesmo espectro. BiVib oferece 10 velocidades MIDI/duas classes de piano e posições binaurais; RWC oferece fabricantes e articulações; bitKlavier D oferece 9 microfones, mas usa edição e equalização de amplitudes. A velocidade MIDI comandada não é a mesma grandeza que a velocidade física do martelo.
+Um microfone que capta uma única nota não determina univocamente massa do martelo, curva de feltro, perdas da corda, impedância da ponte, radiação ou a resposta da sala. **Problema adicional do benchmark E0:** o Motor A modal dentro da aplicação recebe convolução de cordas/corpo na cadeia acoustic.js:213–225,268–279 (node conectada a this.strings, retorno res e corpo classic), enquanto scripts/analyze_reference_audio.mjs e tests/measure_piano_engines.mjs analisam apenas a saída direta dos respectivos motores, sem passar pelo mesmo grafo final. O C já incorpora um corpo mecânico interno. Portanto, as diferenças dB A/B/C de E0 sequer comparam **os mesmos estágios de saída ou a experiência final do aplicativo**. Um filtro de corpo e uma curva de excitação diferentes podem produzir quase o mesmo espectro. BiVib oferece 10 velocidades MIDI/duas classes de piano e posições binaurais; RWC oferece fabricantes e articulações; bitKlavier D oferece 9 microfones, mas usa edição e equalização de amplitudes. A velocidade MIDI comandada não é a mesma grandeza que a velocidade física do martelo.
 
-Teste: fixar hipóteses físicas verificáveis e usar diferentes velocidades, posições, tampas, pedal, registros e instrumentos independentes. Conservar metadata, licença e hashes; não ajustar 30 parâmetros apenas pelo erro de C4.
+Teste: comparar em **duas trilhas separadas**: (1) núcleos secos, sem corpo/radiador, para identificar cordas; (2) saída real do aplicativo com corpo, reverb/FX=off, mics e ganhos pareados para escuta. A diferença entre A modal com convolução e C com corpo interno deve ser explicitada, não escondida num único score. Fixar hipóteses físicas verificáveis e usar diferentes velocidades, posições, tampas, pedal, registros e instrumentos independentes. Conservar metadata, licença e hashes; não ajustar 30 parâmetros apenas pelo erro de C4.
 
 Fontes e licenças: docs/AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md .
 
@@ -194,6 +194,8 @@ Teste: comparar modal, waveguide dispersivo e híbrido com mesmo pitch/velocity 
 | G7 Escuta | Comparação cega e nivelada, notas e música, vários registros/dinâmicas/pedal, sem efeito de sala confundir | NÃO HOMOLOGADO | **P0 para alegar realismo** |
 
 ## Próximos experimentos sem alterar o DSP estável
+
+**E1.0 — Correção de justiça do benchmark:** separar comparação de núcleo seco e saída final do aplicativo; garantir que A modal inclua seu corpo de convolução no teste de escuta, enquanto C inclui o próprio corpo, com FX de sala desligados, microfone/ganho documentados. Testar o uso dos envios auxiliares do worklet. Os dB E0 anteriores NÃO são comparações do som final.
 
 E1.1 **Antes de mexer no timbre:** teste sintético do medidor para f1/B até 0,003, parciais que morrem rapidamente, batimento, desafinação e SNR. Reprocessar 33 E0 como diagnóstico após o conserto (preservar histórico).
 
