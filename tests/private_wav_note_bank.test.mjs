@@ -106,3 +106,29 @@ test('already-built sample library can select a private MIDI pitch/layer, classi
  assert.ok(models.hybrid.startsWith('D · Stage híbrido'));
  assert.equal(controls.find(x=>x.id==='soundEngine').initial,'physical');
 });
+
+test('CLI converts a verified private manifest into local playable samples and refuses overwrite',async()=>{
+ const {mkdtempSync,writeFileSync,readFileSync,existsSync,rmSync}=
+   await import('node:fs');
+ const {tmpdir}=await import('node:os');
+ const {join}=await import('node:path');
+ const {spawnSync}=await import('node:child_process');
+ const dir=mkdtempSync(join(tmpdir(),'stage-e26-private-'));
+ try{
+  const input=join(dir,'user.wav'),description=join(dir,'notes.json'),
+    out=join(dir,'bank');
+  const audio=makePcm();
+  writeFileSync(input,audio);
+  writeFileSync(description,JSON.stringify(manifest(audio)));
+  const cli=new URL('../scripts/build_private_piano_bank.mjs',import.meta.url);
+  const run=()=>spawnSync(process.execPath,[cli.pathname,input,description,out],
+    {encoding:'utf8',timeout:15000});
+  const first=run();
+  assert.equal(first.status,0,first.stderr);
+  assert.ok(existsSync(join(out,'MIDI36_v60.wav')));
+  assert.equal(parseLocalPcmWav(readFileSync(join(out,'MIDI36_v60.wav'))).channels,2);
+  assert.ok(existsSync(join(out,'PRIVATE_MANIFEST.json')));
+  const second=run();
+  assert.equal(second.status,1,'previous sample must never be overwritten by CLI');
+ }finally{rmSync(dir,{recursive:true,force:true})}
+});
