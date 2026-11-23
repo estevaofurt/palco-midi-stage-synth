@@ -1,3 +1,15 @@
+## Atualização: Steinway Model D aberto e CFX comercial (22/11/2026)
+
+- [x] **bitKlavier Grand**, produzido em Princeton: piano acústico Steinway Model D real, **16 camadas**, **9 pares de microfones**, WAV até 96k/24bit, **CC BY 4.0**, com arquivos separados de pedal, martelo e ressonância. **Processados e nivelados na pós-produção** — usar para timbre American, release e radiador, não curva física de hammer velocity.
+- [x] **Vienna Synchron Yamaha CFX**: piano CFX real capturado por sistema robótico com sensores de tecla, pedal e martelo, porém **amostras comerciais/processadas**; referência para escuta comparativa **sem extrair/republicar áudio**. Yamaha C5 e Disklavier DC3 M4 **não** são CFX.
+- [x] **CCMusic Piano Sound Quality Dataset**: 1.320 gravações individuais de 7 grupos de pianos Kawai, Steinway, Young Chang, Hsinghai e Pearl River e avaliações humanas; possível controle externo de tipos acústicos, mas não física de martelo calibrada.
+- [ ] Antes de priorizar o American Stage, obter subconjunto **Steinway D bitKlavier original WAV** com documentação do microfone, analisar tratamento da camada e escolher registros gravados fisicamente (a cada terça menor). Não afirmar que toda tecla possui gravação própria.
+- [ ] Continuar sem alegar referência científica calibrada **felt vs no-felt no mesmo instrumento**; solicitar/gravar par controlado se esse efeito precisar ser identificado.
+
+Detalhes: [AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md](AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md).
+
+---
+
 # Auditoria de referências científicas de piano acústico (22/11/2026)
 
 **Documento técnico atualizado:** [AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md](AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md).
