@@ -6,6 +6,7 @@ Documento: [AUDITORIA_LACUNAS_MODELAGEM_FISICA_E1_2026-11-22.md](AUDITORIA_LACUN
 - [x] Confrontar martelo não linear, two polarizations, double decay, impedância de ponte, som radiado, perda por parcial e modos longitudinais com Bank, Smith, Weinreich e Chabassier.
 - [x] Classificar **18 lacunas**, incluindo sete condições P0 para promover nova arquitetura, requisitos P1 (pedal CC64/66/67, escala e afinação, alias) e itens P2 (mecânica e detalhes auxiliares).
 - [x] Documentar viés da busca de harmônicos: ±2,5% em torno de n×f_ET falha se B=0,0012 para n=8 (+3,707%), invalidando inferências de B em condições extremas; **os 33 resultados E0 não são ranking de realismo**.
+- [ ] **E1.0/P0:** separar benchmark de núcleo seco e saída acústica final; A modal envia saída auxiliar a convolução de cordas/corpo no aplicativo, ausente no E0, e C inclui corpo interno. Controlar FX e os ganhos antes de alegar comparação justa.
 - [ ] **E1.1/P0:** validar medidor f1/B/envelopes com sinais sintéticos B=0..0,003, ruído, 2 cordas e parciais transitórios; manter histórico E0 e reprocessar as referências.
 - [ ] **E1.2/P0:** obter subconjuntos científicos licenciados BiVib/RWC/bitKlavier com velocity, mic e estados documentados; não copiar samples terceiros para repo ou distribuição.
 - [ ] **E1.3/P0:** martelo-corda e uma corda H/V resolvidos offline; medir duração de contato e double decay por parcial.
