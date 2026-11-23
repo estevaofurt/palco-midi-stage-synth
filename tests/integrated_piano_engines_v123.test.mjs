@@ -6,7 +6,7 @@ const read=(p)=>readFileSync(new URL(p, import.meta.url),'utf8');
 const controls=engines.piano.groups.flatMap(g=>g.controls);
 const choice=controls.find(c=>c.id==='soundEngine');
 test('A Claude e B Novo Stage estão dentro do Piano Acústico, sem novo módulo',()=>{
- assert.deepEqual(Object.keys(choice.options),['modal','physicalLegacy','physical','classic']);
+ assert.deepEqual(Object.keys(choice.options),['modal','physicalLegacy','physical','hybrid','classic']);
  assert.match(choice.options.modal,/Claude/);
  assert.match(choice.options.physicalLegacy,/Stage físico anterior/);
  assert.match(choice.options.physical,/Novo Stage mecânico/);
@@ -34,5 +34,5 @@ test('Novo Stage inclui motor físico e tampo mecânico no AudioWorklet',()=>{
  const acoustic=read('../acoustic.js');
  assert.match(engine,/PianoResonanceBody/);
  assert.match(acoustic,/setMechanicalModel/);
- assert.match(acoustic,/physical-piano\.js\?build=1\.12\.4/);
+ assert.match(acoustic,/physical-piano\.js\?build=1\.12\.5/);
 });
