@@ -161,6 +161,11 @@ def main(argv):
     }
     # Filename discovery only, no PCM/WAV access. Print a short source evidence list.
     import os as _os
+    from collections import Counter
+    print("FELT-ORIGINAL-LAYERS:",json.dumps(Counter(x["name"].split("/")[0] for x in items)),flush=True)
+    target_list=[f"{folder}/{prefix}{n}.wav" for folder,prefix in (("forte","f"),("mezzo","m"),("piano","p")) for n in (36,48,60,72,84)]
+    present={x["name"] for x in items}
+    print("FELT-ORIGINAL-TARGETS:",json.dumps([{"name":n,"found":n in present} for n in target_list]),flush=True)
     print("FELT-ORIGINAL-ZIP-FIRST:",json.dumps([x["name"] for x in items[:15]],ensure_ascii=False),flush=True)
     target=[x for x in items if re.search(r"C[246](?![0-9])",_os.path.basename(x["name"]),re.I)]
     print("FELT-ORIGINAL-ZIP-KEYS:",json.dumps([x["name"] for x in target[:35]],ensure_ascii=False),flush=True)
