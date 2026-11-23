@@ -1,3 +1,11 @@
+## E1 — auditoria das lacunas físicas antes de nova implementação (22/11/2026)
+
+A pesquisa verificou **18 lacunas P0/P1/P2** no Stage Synth a partir do código do main commit ba224226 e de Smith/Bank/Weinreich/Chabassier. Os P0 são martelo–corda não linear, uníssonos e polarizações, ponte/tampo passivos, perdas/rigidez por parcial, **falha de faixa da análise de B**, identificação de parâmetros e validação auditiva/CPU em hardware. **O medidor E0 procura apenas ±2,5% em n×f_ET**, ao passo que B=0,0012 desloca a oitava parcial +3,707%; os números relativos de 33 referências não autorizam calibrar um novo motor. CC64 perde valores intermediários antes da camada mecânica; CC66/67 ainda não são modelados. **Não houve mudança de DSP, UI, presets, MIDI nem FX nesta auditoria.** O P1 permanece isolado no PR #2.
+
+Rastreabilidade, bibliografia e gates de implementação: docs/AUDITORIA_LACUNAS_MODELAGEM_FISICA_E1_2026-11-22.md. Experimentos E1 separados podem começar, mas P1/P2 não devem ser promovidos sem validação.
+
+---
+
 **Complemento Steinway D (2021/2026):** bitKlavier Grand/Princeton disponibiliza 16 camadas em notas amostradas a cada terça menor, 9 posições estéreo, WAV até 96k/24 bits **CC BY 4.0**, mas o áudio foi denoised/recortado e seus níveis reequilibrados; serve para timbre e radiação, **não** velocidade física do martelo. A Vienna Symphonic Library disponibiliza demonstrações de Yamaha CFX verdadeiro, produto comercial com ressonâncias/FX, referência perceptiva e **não** WAV aberto. CCMusic apresenta 1.320 notas e 29 avaliadores humanos de pianos variados, com licenças restritivas para distribuição.
 
 ## Qualificação científica das referências sonoras (22/11/2026)
