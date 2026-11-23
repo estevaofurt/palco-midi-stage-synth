@@ -4,7 +4,7 @@
 
 **Correção do planejamento:** o antigo ensaio M04 media apenas força/velocidade **perpendicular** à ponte. Novo **M04.1** pede matriz complexa `Y_TT/Y_TP/Y_PT/Y_PP` com amplitude, fase, coerência, geometria e origem; **M01.1** pede ciclo de compressão e recuperação do feltro, não apenas pico de força. Exemplo publicado de martelo Steinway não autoriza calibrar os instrumentos Stage. O protocolo comercial foi atualizado, mas **nenhum sensor/medição de piano foi adquirido ou executado**.
 
-**Prontidão inalterada:** acervo de 50 gravações originais/seis pianos; `main` v1.12.4, referência histórica v1.9.5; **0/7 R-GATEs globais integralmente aprovados**, P1/P2 e DSP/UI/MIDI/FX/presets inalterados, 32–64 vozes sem homologação real. Testes deste ciclo a registrar após workflow.
+**Prontidão inalterada:** acervo de 50 gravações originais/seis pianos; `main` v1.12.4, referência histórica v1.9.5; **0/7 R-GATEs globais integralmente aprovados**, P1/P2 e DSP/UI/MIDI/FX/presets inalterados, 32–64 vozes sem homologação real. **Validação efetiva da primeira revisão documental:** [GitHub Actions 45109195066](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45109195066) aprovado; logs do job `audio-regression` mostram **95/95 testes Node aprovados** e **108/108 cenários offline de A/B/C sem clipping ou não finitos**. Não é validação de 32–64 vozes em hardware real nem demonstra realismo perceptivo. O commit final também requer CI antes de merge.
 
 ---
 
