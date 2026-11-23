@@ -1,3 +1,11 @@
+## REFERÊNCIAS COMERCIAIS ATUALIZADAS — 35 ORIGINAIS, DSP CONGELADO (22/11/2026)
+
+A partir do último piloto: **sete WAVs originais Steinway Model D Princeton CC BY 4.0** foram obtidos diretamente do Internet Archive (sem baixar ZIPs inteiros), verificados integralmente e receberam SHA256. São cinco notas/camadas Piano Bar e duas C4v8 correspondentes em Binaural/Harp Omni; áudio foi eliminado, somente metadados persistiram. Somando 28 arquivos anteriores, **35 originais / cinco instrumentos reais / 103.753.348 bytes**, mas **sem medir parâmetros físicos internos**. CI https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45103239343 ; manifesto research/commercial_audio/steinway_d_verified_wav_sha256.json.
+
+Tom Guder Fuchs & Möhr Felt: autoria e declaração Public Domain do ZIP WAV no fórum confirmadas, porém ZIP autoral NÃO adquirido/validado, nem existe par antes/depois felt controlado. **R-GATE-1..7 permanecem não aprovados integralmente (0/7).** Manter congelamento expresso do DSP e P1/P2, sem alterações em A/B/C, presets, interface, MIDI ou FX. Detalhes docs/PRINCETON_STEINWAY_D_FELT_FONTES_COMERCIAIS_2026-11-22.md.
+
+---
+
 ## AVANÇO DE REFERÊNCIAS COMERCIAIS — NÃO LIBERAR DSP (22/11/2026)
 
 Há um **piloto de proveniência aprovado**: 28 arquivos originais de piano real (8 WAV VCSL CC0; 15 FLAC Salamander Yamaha C5 CC BY 3.0; 5 FLAC Kawai Upright KW CC0), SHA256 individual, fonte pinned por SHA Git e codec verificado em CI. Ver research/commercial_audio/verified_source_sha256.json e docs/PREPARACAO_FONTES_COMERCIAIS_PILOTO_2026-11-22.md. Os arquivos não são distribuídos nem guardados no repositório.
