@@ -25,7 +25,7 @@ test('v1.12.6 historic D has independent immutable engine and calibration import
  assert.match(now,/prepareBassContact/);
  assert.match(read('../acoustic.js'),/endsWith\('\/v1\.12\.6\.html'\)/);
  assert.match(read('../acoustic.js'),/physical-piano-hybrid-v126\.js\?build=1\.12\.6/);
- assert.match(read('../acoustic.js'),/physical-piano-hybrid\.js\?build=1\.12\.8/);
+ assert.match(read('../acoustic.js'),/physical-piano-hybrid\.js\?build=1\.12\.9/);
 });
 test('historical and new D engines produce identical C4–C6 exact PCM',()=>{
  for(const key of [60,72,84])

@@ -25,15 +25,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify A/B/C/Classic, MIDI, FX, presets and original calibration remain untouched
+      # v1.12.9 may add an optional engine to patches/app/panel; test suite still
+      # verifies C default, migration, historical worklets and D PCM identity.
+      - name: Verify frozen A/B/C/D audio DSP, FX, MIDI routing and calibration remain untouched
         run: |
           git diff --exit-code 1baf9ee3243feb9903f6765be778e5582861c83d -- \
             piano-worklet.js physical-piano.js physical-piano-legacy.js \
             piano-resonance.js piano-hybrid-calibration.js \
             piano-resonance-v126.js piano-hybrid-calibration-v126.js \
             physical-piano-hybrid-v126.js acoustic-v126.js \
-            v1.12.6.html patches.js fx-rack.js stage.js app.js \
-            performance.js piano-bank.js sample-library.js panel.js panel.css
+            v1.12.6.html fx-rack.js stage.js \
+            performance.js piano-bank.js sample-library.js panel.css
       - name: Validate Stage complete Node test suite and historical routing
         run: |
           node --check acoustic-v127.mjs
