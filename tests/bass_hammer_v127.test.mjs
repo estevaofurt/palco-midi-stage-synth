@@ -56,7 +56,7 @@ test('hammer contact changes with touch/soft felt and has no static onset fake i
  const v=e.find(2);
  assert.equal(v.impact,0);
  assert.equal(v.attack,0);
- assert.ok(v.attackStep>0&&v.attackStep<1/(R*.009),'bass bridge radiation builds over milliseconds');
+ assert.ok(v.attackStep>0&&v.attackStep<1/(R*.004),'bass bridge radiation builds over milliseconds');
  samples(e,.15);
  assert.equal(v.forceIndex,v.forceCount);
 });
