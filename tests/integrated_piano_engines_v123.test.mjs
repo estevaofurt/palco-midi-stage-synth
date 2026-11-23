@@ -34,5 +34,5 @@ test('Novo Stage inclui motor físico e tampo mecânico no AudioWorklet',()=>{
  const acoustic=read('../acoustic.js');
  assert.match(engine,/PianoResonanceBody/);
  assert.match(acoustic,/setMechanicalModel/);
- assert.match(acoustic,/physical-piano\.js\?build=1\.12\.7/);
+ assert.match(acoustic,/physical-piano\.js\?build=1\.12\.8/);
 });
