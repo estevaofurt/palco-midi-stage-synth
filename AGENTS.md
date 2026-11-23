@@ -1,3 +1,11 @@
+## AUTORIZAÇÃO POSTERIOR E LIMITADA — MOTOR D EXPERIMENTAL (23/11/2026)
+
+**Nova instrução expressa do titular:** “Vamos gerar um motor com o que temos até aqui”. Essa autorização posterior **permite desenvolver, integrar e testar somente um motor de piano experimental original**, selecionável **dentro do módulo Piano Acústico** ao lado de A Claude, B v1.9.5 e C Novo Stage; **não criar módulos/categorias/links adicionais**, não substituir A/B/C, não alterar o padrão de sessões antigas. Identificação de release: **Stage v1.12.5, D · Stage híbrido**. Documentar hipóteses e limites, executar regressão Node e baseline offline. Não usar dados NC nem copiar código AGPL de terceiros.
+
+**Os sete R-GATEs NÃO estão automaticamente aprovados** e nenhum desempenho de 32/64 vozes em hardware ou fidelidade acústica real está demonstrado. Essa autorização pontual **supera o bloqueio anterior apenas para o protótipo D**, mas não libera alterações indiscriminadas a DSP dos motores A/B/C, presets, efeitos, MIDI ou demais módulos. O trabalho posterior deve continuar por etapas com GitHub/CI e escuta real do usuário antes de promover D a motor estável.
+
+---
+
 ## NOVA PRIORIDADE: FECHAR, NÃO AMPLIAR A PESQUISA (23/11/2026)
 
 Plano operacional curto: `docs/PLANO_ENXUTO_FECHAMENTO_LACUNAS_2026-11-23.md`. **15 AIFF originais Steinway Model B (Iowa)** nas notas C2/C3/C4/C5/C6 × pp/mf/ff passaram por download oficial, codec, SHA256 e eliminação dos bytes na auditoria GitHub [run 45111873583](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45111873583). Manifesto completo `research/commercial_audio/iowa_steinway_b_verified_original_sha256.json`. **Acervo total agora: 65 gravações originais verificadas em sete fontes instrumentais de piano**, mas *pitch independente, pedal/soltura, física interna e homologação* ainda pendentes.
