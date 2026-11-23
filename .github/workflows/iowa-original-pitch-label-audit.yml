@@ -44,9 +44,15 @@ jobs:
           node --check tests/iowa_f0_label_audit.test.mjs
           npm run check
           node --test tests/iowa_f0_label_audit.test.mjs
-      - name: Confirm lossless AIFF decoder
+      - name: Install and confirm lossless AIFF decoder
         run: |
-          ffmpeg -version | head -n 1
+          if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+          ffprobe -version | head -n 1
           python3 -m py_compile scripts/fetch_iowa_reference.py
       - name: Acquire all 15 original AIFF files in ephemeral runner only
         run: python3 scripts/fetch_iowa_reference.py
