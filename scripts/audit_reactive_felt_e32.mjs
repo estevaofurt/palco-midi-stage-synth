@@ -10,9 +10,9 @@ import {ReactiveFeltModalPiano} from '../research/reactive-felt-modal-piano-e32.
 import {harmonicLevelsDb} from '../research/diagnose-piano-source-e31.mjs';
 
 const rate=48000,key=48,seconds=.38;
-function inspect({velocityMps=2,partialsBass=5,partialsTreble=2}={}){
+function inspect({velocityMps=2,partialsBass=5,partialsTreble=2,stringGeometry=null}={}){
  const model=new ReactiveFeltModalPiano({
-  sampleRate:rate,key,velocityMps,partialsBass,partialsTreble
+  sampleRate:rate,key,velocityMps,partialsBass,partialsTreble,stringGeometry
  });
  const samples=Math.round(rate*seconds);
  const panel=new Float64Array(samples);
@@ -30,6 +30,11 @@ function inspect({velocityMps=2,partialsBass=5,partialsTreble=2}={}){
  });
  return {
   key,velocityMps,partialsBass,partialsTreble,
+  localModalMassKg:model.localModalMassKg,
+  localStringGeometryIsIllustrative:stringGeometry!==null,
+  initialHammerEnergy:model.initialEnergy,
+  fractionOfInitialEnergyInStringAndLoss:
+   (model.piano.energy()+model.piano.dissipated)/Math.max(model.initialEnergy,1e-12),
   connectedKeys:88,mechanicalCoordinates:model.piano.n+2,
   peakGeneralizedContactForce:model.maxForce,
   summedContactDurationMs:model.contactSamples/rate*1000,
@@ -51,11 +56,15 @@ const report={
   inspect({velocityMps:1}),
   inspect({velocityMps:2}),
   inspect({velocityMps:3}),
-  inspect({velocityMps:2,partialsBass:8,partialsTreble:8})
+  inspect({velocityMps:2,partialsBass:8,partialsTreble:8}),
+  inspect({velocityMps:2,stringGeometry:{lengthM:.85,radiusM:.0006,densityKgM3:7850}}),
+  inspect({velocityMps:2,partialsBass:8,partialsTreble:8,
+   stringGeometry:{lengthM:.85,radiusM:.0006,densityKgM3:7850}})
  ],
  limitations:[
   'ONE hammer only; 32–64 simultaneously reacting hammer contacts NOT tested',
-  'The string/hammer modal masses and lengths are not calibrated to SI',
+  'C3 nominal steel-wire length/radius are illustrative and NOT measured',
+  'The string/hammer generalized coordinates and all 88 string geometries are not calibrated to SI',
   'Panel has only two generalized modes; panel output is NOT acoustic pressure',
   'Partial amplitude ratios are diagnostic, NOT proof of musical improvement',
   'No recordings entered the physical synthesis'
