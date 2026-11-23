@@ -1,3 +1,21 @@
+# Estudo aprofundado de modelagem física — pesquisa, sem DSP (22/11/2026)
+
+Documento: [FUNDAMENTOS_MODELAGEM_FISICA_PIANO_2026-11-22.md](FUNDAMENTOS_MODELAGEM_FISICA_PIANO_2026-11-22.md).
+
+- [x] Revisar literatura fundamental sobre colisão do martelo, rigidez/damping da corda, duas polarizações, acoplamento de uníssono, prompt/aftersound, ponte, tampo, abafadores, ressonância simpática e radiação acústica.
+- [x] Analisar arquitetura modal de Bank (2010), simulação acoplada de Chabassier (2014) e documentação do Unsampled Piano (2026); diferenciar código aberto GPL de informações públicas comerciais.
+- [x] Auditar lacunas existentes nos motores A/B/C; confirmar que o P1 em PR #2 permanece fora de main.
+- [ ] **E0:** obter referência seca autorizada por nota, velocidade e estado dos pedais; as capturas atuais com FX não são suficientes para identificar constantes físicas.
+- [ ] **E1:** medir por nota B, cents, amplitudes e decaimentos por parcial com método mais robusto que uma FFT fixa.
+- [ ] **E2:** prototipar contato martelo-corda com solução offline e famílias **sintéticas** de força por velocity, medindo custo e dinâmica.
+- [ ] **E3:** testar 1–3 cordas, duas polarizações e ponte compartilhada em pequena prova física, com diagnóstico de energia/passividade e double-decay.
+- [ ] **E4:** comparar tampo/radiação por regiões e localização de microfones, separando corpo e reverb de sala; validar controles CC64/release.
+- [ ] **E5:** comparar arquiteturas modal, waveguide e híbrida em áudio nivelado, sem promover motor por um único scorecard.
+- [ ] **E6:** homologar 32/64 notas em Chrome real, PC e Moto g04s, com efeitos, MIDI, pedal, picos e estabilidade.
+- Nenhum novo link, módulo, motor ou preset foi integrado ao aplicativo. Nesta etapa, **apenas pesquisa e documentação**.
+
+---
+
 
 ## Resultados P0 verificados no GitHub Actions (22/11/2026; UTC da execução em 23/11)
 

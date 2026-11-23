@@ -77,3 +77,18 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 ## D-013 — Medir a inarmonicidade e o decaimento antes de alterar o DSP (22/11/2026)
 
 **Decisão:** começar a evolução acústica com uma suíte offline, reprodutível, sem tocar nos motores A/B/C. Medir C2/C4/C6, velocities 32/80/120 e quatro pianos; registrar picos, espectro, desvios, B aproximado e decaimento. O histórico B v1.9.5 não é alterado. **Limitação:** números de FFT não atestam timbre realista ou 32/64 vozes em hardware. Só comparar/potencialmente promover uma mudança de DSP depois de CI, testes de áudio em navegador e escuta real. Evidência: branch research/piano-acoustic-metrics-v124 e docs/BASELINE_ACUSTICA_V124.md.
+
+
+## D-014 — Modelagem física requer coerência entre subsistemas, não acumulação de ressonadores (22/11/2026)
+
+**Decisão de pesquisa:** a escolha entre síntese modal, waveguide e motor híbrido será feita com base em equações/medidas, resposta sonora e custo real. Na linha v1.12.4, modos adicionais e linha de atraso têm dispersão e perdas parcialmente independentes; o P1 mostrou que alterar só o guia não modifica proporcionalmente a saída completa. Não promover motor por aumento isolado de B, harmônicos ou ressonância.
+
+**Base técnica:** Bank–Zambon–Fontana (2010), Chabassier–Chaigne–Joly (2014), Cheng–Dixon–Mauch (2015), documentação Unsampled Piano (2026). Síntese aprofundada em docs/FUNDAMENTOS_MODELAGEM_FISICA_PIANO_2026-11-22.md.
+
+**Evidência de implementação:** somente documentação; nenhum DSP alterado. P1 permanece em PR #2 experimental/draft. A base v1.9.5 fica preservada.
+
+## D-015 — Exigir identificação acústica e teste perceptivo antes de calibração de parâmetros físicos (22/11/2026)
+
+**Decisão:** diferenciar gravações polifônicas com FX de notas isoladas secas; medir rigidez, decaimento por parcial, resposta à velocity, releases, ressonância simpática e função de transferência da ponte/tampo por registro. Usar instrumentos/referências licenciados e metadados claros. Gravações privadas não devem ser publicadas nem copiadas como samples.
+
+**Validação:** medições observacionais, teste auditivo nivelado, CI e CPU em AudioWorklet real (PC e Moto g04s). Mínimo 32, meta 64; sem homologação por benchmark Node. Decisão de arquitetura depende da evidência, não do rótulo do motor.

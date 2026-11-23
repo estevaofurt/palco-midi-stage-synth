@@ -1,3 +1,9 @@
+## Pesquisa aprofundada de física de piano (22/11/2026)
+
+Estudo científico/arquitetural de martelo, cordas rígidas e acopladas, ponte/tampo, radiador e amortecedores: docs/FUNDAMENTOS_MODELAGEM_FISICA_PIANO_2026-11-22.md. **Sem alterações do DSP ou do aplicativo.** O experimento P1 de duas seções allpass continua isolado no PR #2 e não é versão integrada. A próxima implementação exige calibração com notas secas licenciadas e comparação auditiva, preservando v1.9.5/32–64 notas.
+
+---
+
 
 ## Resultados P0 verificados no GitHub Actions (22/11/2026; UTC da execução em 23/11)
 
