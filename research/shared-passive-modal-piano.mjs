@@ -92,7 +92,7 @@ export class SharedPassiveModalPiano {
   this.S11=this.bmass[1]+.5*h*this.bdamper[1]+
     .25*h*h*(this.bground[1]+this.boardSpring);
   this.S00=0;this.determinant=0;
-  this.bridgeVelocity=0;this.boardVelocity=0;
+  this.bridgeVelocity=0;this.boardVelocity=0;this.boardPanelVelocity=0;
   this.externalWork=0;this.dissipated=0;this.samples=0;
   this.updateDampers();
  }
@@ -187,6 +187,7 @@ export class SharedPassiveModalPiano {
   diss+=this.bdamper[0]*vm0*vm0+this.bdamper[1]*vm1*vm1;
   this.externalWork+=h*work;this.dissipated+=h*diss;
   this.bridgeVelocity=vm0;
+  this.boardPanelVelocity=vm1; // E2.9: second passive midpoint mode, no new force/energy
   this.boardVelocity=.67*vm0+.33*vm1;
   this.samples++;
   return this.boardVelocity;
