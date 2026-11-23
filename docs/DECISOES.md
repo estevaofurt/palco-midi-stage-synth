@@ -138,7 +138,7 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 
 ## D-021 — Medidor E0 não pode certificar inarmonicidade para altos valores B (22/11/2026)
 
-**Decisão:** a busca fixa por picos de ±2,5% de n×f_ET no tests/piano_acoustic_metrics.mjs é insuficiente quando B cresce. Analiticamente, B=0,0012 e n=8 produzem deslocamento relativo de +3,707%; o medidor pode tomar outro pico ou não encontrar a parcial física. Uma taxa mínima de três picos não prova correspondência física. Além disso, mono L/R e velocidades diferentes limitam a fidelidade das comparações de 33 áudios E0.
+**Decisão:** a busca fixa por picos de ±2,5% de n×f_ET no tests/piano_acoustic_metrics.mjs é insuficiente quando B cresce. Analiticamente, B=0,0012 e n=8 produzem deslocamento relativo de +3,707%; o medidor pode tomar outro pico ou não encontrar a parcial física. Uma taxa mínima de três picos não prova correspondência física. Além disso, mono L/R e velocidades diferentes limitam a fidelidade das comparações de 33 áudios E0. **Não são cadeias equivalentes**: no aplicativo, A modal usa convoluções de cordas/corpo enviadas pelo output auxiliar de acoustic.js; o benchmark E0 lê apenas L/R direto do A, ao passo que C já incorpora corpo interno. E1.0 deve medir o núcleo seco e o aplicativo completo como trilhas separadas.
 
 **Ação:** testar primeiro com sinais sintéticos conhecidos (f1, B até 0,003, envelope por parcial, cordas duplicadas, ruído, ataque curto), implementar E1 STFT/peak tracking e registrar intervalos de incerteza. Reprocessar 33 referências sem apagar a baseline original. **Não afirmar melhora ou piora do timbre por esses escores sozinhos.**
 
