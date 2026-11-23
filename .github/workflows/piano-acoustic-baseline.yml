@@ -1,0 +1,43 @@
+name: Stage Synth - piano acoustic baseline
+on:
+  push:
+    branches:
+      - research/piano-acoustic-metrics-v124
+  pull_request:
+  workflow_dispatch:
+jobs:
+  audio-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax and all Node regression tests
+        run: npm run check
+      - name: Offline A/B/C acoustic baseline
+        run: node tests/measure_piano_engines.mjs --json > piano-acoustic-baseline.json
+      - name: Print diagnostic digest for code review
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const m=JSON.parse(readFileSync('piano-acoustic-baseline.json','utf8')).measurements;
+          const bad=m.filter(x=>x.clipped||x.nonFinite);
+          console.log('Samples: '+m.length+'; clipped/nonfinite scenarios: '+bad.length);
+          for(const x of bad)console.log('ALERT '+x.motor+'/'+x.character+'/'+x.key+'/v'+x.velocity+' peak='+x.peak+' clipped='+x.clipped+' nonfinite='+x.nonFinite);
+          for(const motor of ['A_modal','B_v195','C_mechanical']){
+            for(const key of [36,60,84]){
+              const x=m.find(x=>x.motor===motor&&x.character==='japanese'&&x.key===key&&x.velocity===80);
+              console.log('REFERENCE '+motor+' C'+(key/12-1)+' v80: B='+x.bMedian+' peak='+x.peak.toFixed(4)+' rms='+x.rms.toFixed(5)+' earlyDecayDb='+x.earlyDecayDb+' lateDecayDb='+x.lateDecayDb+' harmonicCount='+x.bSampleCount);
+            }
+          }
+          NODE
+      - name: Preserve measurements for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: piano-acoustic-baseline-v124
+          path: piano-acoustic-baseline.json
+          retention-days: 14
