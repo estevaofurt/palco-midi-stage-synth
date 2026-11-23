@@ -14,7 +14,6 @@ import {PhysicalPianoEngine as Mechanical} from '../physical-piano.js';
 
 const RATE=48000, BLOCK=128, DURATION=1.7;
 const configs=[['A_modal',Modal],['B_v195',Legacy],['C_mechanical',Mechanical]];
-const limit=(v,a,b)=>Math.max(a,Math.min(v,b));
 
 export function decodeF32le(buffer){
  if(buffer.byteLength%4)throw new Error('PCM not aligned to Float32');
@@ -52,7 +51,9 @@ function outputMetric(metric){
  return {
   f0:metric.f0,peak:metric.peak,rms:metric.rms,clipped:metric.clipped,nonFinite:metric.nonFinite,
   windows:metric.windows,earlyDecayDb:metric.earlyDecayDb,lateDecayDb:metric.lateDecayDb,
-  bMedian:metric.bMedian,bSampleCount:metric.bSampleCount,
+  // A single detectable stretched partial cannot identify B robustly.
+  bMedian:metric.bSampleCount>=3?metric.bMedian:null,bSampleCount:metric.bSampleCount,
+  bDiagnosticOnly:metric.bSampleCount<3,
   harmonics:metric.harmonics.map(h=>({n:h.n,expectedHz:h.expectedHz,measuredHz:h.measuredHz,
    cents:h.cents,relativeDb:h.relativeDb,bEstimate:h.bEstimate,
    earlyDb:h.earlyDb,middleDb:h.middleDb,lateDb:h.lateDb}))
@@ -82,8 +83,9 @@ export function compareSpectralShape(real,stage){
   bands.push({n:re.n,realDb:re.relativeDb,syntheticDb:synthetic.relativeDb,
    deltaDb:synthetic.relativeDb-re.relativeDb});
  }
- return {comparablePartials:bands.length,meanAbsDb:bands.length?
-  bands.reduce((a,b)=>a+Math.abs(b.deltaDb),0)/bands.length:null,partials:bands};
+ const exploratoryMean=bands.length?bands.reduce((a,b)=>a+Math.abs(b.deltaDb),0)/bands.length:null;
+ return {comparablePartials:bands.length,meanAbsDb:bands.length>=3?exploratoryMean:null,
+  insufficientPartials:bands.length<3,exploratoryMeanAbsDb:exploratoryMean,partials:bands};
 }
 export function analyzeOne(entry){
  if(!Number.isInteger(entry.key)||entry.key<21||entry.key>108)throw new Error('Invalid MIDI key');
@@ -96,9 +98,12 @@ export function analyzeOne(entry){
   id:entry.id,instrument:entry.instrument,key:entry.key,dynamic:entry.dynamic,
   provenance:{originalUrl:entry.originalUrl,sha256:entry.sha256,bytes:entry.bytes,
    originalRate:entry.originalRate,originalChannels:entry.originalChannels,
-   originalFormat:entry.originalFormat,captureNotes:entry.captureNotes},
+   originalFormat:entry.originalFormat,captureNotes:entry.captureNotes,
+   processing:entry.processing||'as published',license:entry.license||'see original source'}, 
   analysis:{rate:RATE,downmix:'ffmpeg stereo-to-mono average',offsetSeconds:onset,
-   analysisSeconds:DURATION,recordingRoom:'non-anechoic'},
+   analysisSeconds:DURATION,recordingRoom:entry.roomType||'unknown',
+   compression:entry.compression||'lossless source',
+   caution:entry.compression==='lossy AAC'?'AAC and edits prevent precise physical envelope identification':null}, 
   real,stage,shapeDifferences:Object.fromEntries(Object.entries(stage).map(([name,metric])=>
    [name,compareSpectralShape(real,metric)]))
  };
@@ -109,18 +114,18 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
  if(!manifestFile||!outputFile)throw Error('usage: node scripts/analyze_reference_audio.mjs manifest.json output.json');
  const manifest=JSON.parse(readFileSync(manifestFile,'utf8'));
  const analyses=manifest.notes.map(analyzeOne);
- const result={schema:'stage-piano-reference-e0-v1',reference:'University of Iowa Steinway Model B',
+ const result={schema:'stage-piano-reference-e0-v2',reference:'Identified piano recordings (see per-note provenance)',
   notes:analyses,qualifications:[
-   'Iowa recording is non-anechoic: tails include room response.',
-   'pp/mf/ff are descriptive musical dynamics; Stage synth speed is 80/127 for all comparisons and is NOT a matched velocity.',
+   'Recordings may include room response, sample edits or fades: only original lossless non-looped recordings are candidates for individual physical decay estimates.',
+   'Real-world pp/mf/ff or sample layers do not equal a calibrated MIDI/hammer velocity; Stage speed is fixed at 80/127 for diagnostic comparison.',
    'Different microphones and positions: relative spectral shape is diagnostic, not an objective realism score.',
-   'B estimated with finite FFT and few sufficiently loud harmonics; null or unstable values are not physical certainties.',
+   'B requires at least three candidate stretched partials; 1–2 candidates are marked inconclusive. Even >=3 is a finite FFT approximation.',
    'Sources, SHA256 and numeric summaries only: no sample files are retained in GitHub artifacts.'
   ]};
  writeFileSync(outputFile,JSON.stringify(result,null,2)+'\n');
  console.log('E0 complete: '+analyses.length+' single-note measurements');
  for(const r of analyses){
-  console.log('E0 '+r.instrument+' C'+(r.key/12-1)+' '+r.dynamic+' onset='+r.analysis.offsetSeconds.toFixed(3)+
+  console.log('E0 '+r.instrument+' MIDI '+r.key+' '+r.dynamic+' onset='+r.analysis.offsetSeconds.toFixed(3)+
    's rms='+r.real.rms.toFixed(5)+' B='+r.real.bMedian+' reliableB='+r.real.bSampleCount+
    ' harmonics='+r.real.harmonics.length);
   for(const [name,c] of Object.entries(r.shapeDifferences)){
