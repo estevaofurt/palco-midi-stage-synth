@@ -1,3 +1,11 @@
+## Falha timbral do motor D CONFIRMADA por medição acústica (23/11/2026)
+
+**Feedback do titular:** v1.12.5 não soa como um piano acústico real. Em vez de trocar equalização ou gerar mais um motor, foi executado [diagnóstico original de 15 AIFF Steinway B/Iowa, 5 notas × 3 dinâmicas](DIAGNOSTICO_TIMBRE_D_IOWA_15_2026-11-23.md), todos com SHA256 e codec correspondendo ao manifesto aprovado. No C2 mf, o 6º harmônico é **+26,4 dB relativo à fundamental na referência**, mas **−23,4 dB no motor D**; na região central há harmônicos altos ausentes e no C6 há excesso de segundo harmônico. O D tem **perfil de excitação/radiação errado por registro**, não um problema que EQ global resolva. Essas métricas são espectrais, *não* notas de fidelidade ou análise da física interna. A primeira tentativa de CI faltava ffmpeg; o workflow foi corrigido, e o [run 45115134998](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45115134998) concluiu com êxito e publicou apenas parâmetros numéricos; mídia original eliminada no runner.
+
+**Situação:** a próxima intervenção será perfil de modos por nota/dinâmica com derivação rastreável dos sinais originais; **nenhum DSP/UI/MIDI/FX alterado neste diagnóstico**. A/B/C e D v1.12.5 estão preservados; biblioteca mantém 65 originais verificados, não embutidos. **R-GATEs 0/7 integralmente aprovados**, 32–64 vozes sem validação no hardware. Não declarar timbre D corrigido até teste auditivo real.
+
+---
+
 ## Autorização de D experimental — Stage v1.12.5 (23/11/2026)
 
 **Titular autorizou implementar** um novo motor com o conhecimento acumulado. O **D · Stage híbrido · experimental** foi criado em `physical-piano-hybrid.js`, com carregamento opcional no Piano Acústico e perfis de 32/48/64 vozes alocadas. Inspiração científica: martelo de contato finito, modos de cordas rígidas, uníssonos com dupla cauda, som de impacto breve, tampo e simpática compartilhados. **Nenhum ajuste de parâmetros reais de martelo/ponte nem arquivo de terceiros foi incorporado**; rótulos e parâmetros são aproximados. A/B/C/Clássico continuam selecionáveis e o padrão anterior permanece C. Arquivo de release `v1.12.5.html`. Detalhes [MOTOR_D_HIBRIDO_EXPERIMENTAL_2026-11-23.md](MOTOR_D_HIBRIDO_EXPERIMENTAL_2026-11-23.md).
