@@ -1,3 +1,11 @@
+## Prioridade após E1.2: falha de timbre grave, não suposto rótulo errado de notas
+
+A auditoria independente do corpus Steinway B/Iowa original 15/15 determinou **12/15 duplamente consistentes com a nota identificada** e 3/15 inconclusivos; não encontrou **nenhuma discrepância de oitava corroborada**. [Resultados e 157 testes aprovados](AUDITORIA_AFINACAO_IOWA_ORIGINAIS_2026-11-23.md). **Não reatribuir notas, não retocar calibração D por hipótese de rótulo e não rodar novo DSP sem motivo mensurável.**
+
+**Próximo passo sonoro sob evidência:** confrontar a forma temporal e as trajetórias harmônicas **dos graves C2/C3** do D v1.12.6/v1.12.7 com originais que tiveram afinação consistente nos dois métodos (sobretudo mf). Isolar martelo, cordas e ponte/radiação, comparar sem FX nem normalização independente e preservar C4–C6. O trabalho de transferência H1 ainda precisa de **aceleração da ponte e pressão instrumentadas, sincronizadas e com direitos comerciais**, não disponíveis na Iowa. Manter 32 vozes mínimo/64 meta sem homologação em hardware, R-GATEs **0/7**.
+
+---
+
 ## Próxima etapa após E1.1 — obter evidência de radiação sincronizada, sem mudança de timbre
 
 Existe agora um analisador original offline para sinais **ponte aceleração [m/s²] e microfone pressão [Pa]**, com resposta H1 e coerência Welch. Seu teste apenas sintético foi preparado em `tests/bridge_radiation_h1.test.mjs`; o estágio **não é uma medição acústica** e tampouco comprova a identificação de uma estrutura de madeira. [Definição de instrumento, posicionamento, sincronismo, validação e direitos](VERIFICACAO_TRANSFERENCIA_RADIATIVA_H1_E11_2026-11-23.md).
