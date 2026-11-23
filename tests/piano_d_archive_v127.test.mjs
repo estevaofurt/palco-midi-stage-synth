@@ -15,6 +15,10 @@ function block(Model,key){
 test('v1.12.6 historic D has independent immutable engine and calibration imports',()=>{
  const old=read('../physical-piano-hybrid-v126.js');
  const now=read('../physical-piano-hybrid.js');
+ assert.match(read('../acoustic-v126.js'),/physical-piano-hybrid-v126\.js\?build=1\.12\.6/);
+ const oldHtml=read('../v1.12.6.html');
+ const oldMap=JSON.parse(oldHtml.match(/<script type="importmap">(.*?)<\/script>/s)[1]).imports;
+ assert.equal(oldMap['./acoustic.js'],'./acoustic-v126.js?build=1.12.6-archive');
  assert.match(old,/piano-hybrid-calibration-v126\.js/);
  assert.match(old,/piano-resonance-v126\.js/);
  assert.doesNotMatch(old,/prepareBassContact/);
