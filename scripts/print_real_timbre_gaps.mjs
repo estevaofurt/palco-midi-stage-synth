@@ -23,9 +23,9 @@ for(const n of notes){
       earlyDiff.push([a.n,Math.round((b.relativeDb-a.relativeDb)*10)/10]);
     }
     const scalar=(delta.meanAbsDb??delta.exploratoryMeanAbsDb);
-    console.log('  '+engine.padEnd(12)+' reference-minus-model (harmonic): |Δ|='+
-       (scalar===null||scalar===undefined?'n/a':scalar.toFixed(1))+
-       'dB; comparable='+delta.comparablePartials+
+    console.log('  '+engine.padEnd(12)+' model-minus-reference (harmonic): |Δ|='+
+       (scalar===null||scalar===undefined?'n/a':scalar.toFixed(1)+'dB')+
+       '; comparable=+delta.comparablePartials+
        '; early deviations model-minus-ref='+JSON.stringify(earlyDiff.slice(0,8))+
        '; lateDecDb='+result.lateDecayDb);
   }
