@@ -1,3 +1,12 @@
+# Motor D — ações depois da integração experimental (23/11/2026)
+
+1. **Prioridade imediata:** testar D em navegador real em PC e Moto g04s: inicialização do AudioWorklet, troca A/B/C/D, MIDI, sustain, sem estalos, uso de CPU e 32/64 notas simultâneas. Testes Node/callback simulado **não são homologação**.
+2. Ouvir D em **C2/C3/C4/C5/C6** e acordes, com FX desligados e nível alinhado; comparar com A/B/C e as 65 amostras originais verificadas (incluindo 15 Iowa Steinway B), sem prometer fidelidade. Anotar *guitar-like*, martelo, corpo, graves e duplo decay, com notas de diagnóstico.
+3. Avaliar fechamento de R-GATEs por evidência: parâmetros aproximados no D NÃO são dados físicos medidos; a reconstrução física e a licença do produto ainda precisam de revisão.
+4. D permanece **experimental e não padrão** até teste auditivo e de hardware. A autorização do usuário (“Vamos gerar um motor com o que temos até aqui”) **é específica do novo D**, não licença para mexer A/B/C/FX/MIDI.
+
+---
+
 # PRIORIDADE ÚNICA — fechar lacunas, não ampliar a pesquisa (23/11/2026)
 
 **Plano operacional vigente:** [PLANO_ENXUTO_FECHAMENTO_LACUNAS_2026-11-23.md](PLANO_ENXUTO_FECHAMENTO_LACUNAS_2026-11-23.md). **Sequência: (1)** **CONCLUÍDO** download/integridade 15/15 AIFF originais Steinway B/Iowa, somados aos 15 Yamaha C5 já verificados ([run 45111873583](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45111873583), hashes em `research/commercial_audio/iowa_steinway_b_verified_original_sha256.json`), pendente aferição f0; **(2)** resolver lacunas de pedal, release, direitos e hashes; **(3)** formalizar modelo passivo reduzido e parâmetros com origem explícita; **(4)** fechar aferição do analisador, matriz de avaliação e aceite para 32/64 vozes; **(5)** rever sete gates e exigir autorização expressa antes de novo DSP. A mobilidade 2×2 e a histerese medidas **não são exigências absolutas por padrão**, pois o R-GATE-2 já admite aproximação passiva justificada e calibrável. Não procurar outras bibliotecas nem adicionar motores/código agora. **0/7 gates integralmente aprovados até prova contrária.**

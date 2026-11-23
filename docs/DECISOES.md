@@ -234,3 +234,12 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Medição rigorosa:** os modelos numéricos de áudio Dussek/MF-1 constituem **parâmetros de síntese inferidos**, não F_h(t), δ(t), resposta da corda H/V ou Y_ponte 2×2 diretamente medidas. A contagem de 50 arquivos de referência física sonora do Stage **não aumenta**, e a existência de 32 modos/384 osciladores em terceiros **não comprova** 32–64 notas reais no nosso produto.
 
 **Status:** pesquisa só documental, sem importação, DSP/UI/MIDI/FX/presets, sem modelo físico novo e sem alteração de metas; **0/7 R-GATEs completos** e bloqueio expresso mantido.
+
+
+## D-031 — Autorização excepcional para novo motor original D, mantendo bloqueio de homologação (23/11/2026)
+
+**Motivo:** o titular pediu expressamente “Vamos gerar um motor com o que temos até aqui”, após determinar foco em fechar as lacunas. Nova instrução supera **apenas para um protótipo experimental isolado** o congelamento anterior de criação de DSP. Implementar o novo D com martelo de contato finito, parciais inarmônicos e decaimentos rápidos/lentos, ressonância compartilhada, pedal/abafadores e ruídos mecânicos, sem componentes NC/AGPL externos.
+
+**Integração:** D passa a ser o quarto motor moderno **dentro do próprio Piano Acústico**, preservando A Claude, B Stage físico anterior v1.9.5, C Novo Stage mecânico e Clássico. Sessões antigas e padrão C permanecem. O usuário deverá ouvir e testar em hardware antes de escolher estabilização. A versão torna-se v1.12.5; `v1.12.4.html` permanece histórico.
+
+**Condições:** nunca afirmar calibração de um Steinway/Yamaha específico sem medição correspondente. Sem aprovação dos **7 R-GATEs**, sem licença NC/AGPL, sem mudança nos demais motores, FX ou MIDI. Os limites 32/48/64 são tetos de vozes prealocadas, não homologação de CPU/latência/xruns; regressões técnicas do CI são necessárias mas insuficientes para fidelidade sonora.

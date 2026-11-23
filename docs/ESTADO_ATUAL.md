@@ -1,3 +1,11 @@
+## Autorização de D experimental — Stage v1.12.5 (23/11/2026)
+
+**Titular autorizou implementar** um novo motor com o conhecimento acumulado. O **D · Stage híbrido · experimental** foi criado em `physical-piano-hybrid.js`, com carregamento opcional no Piano Acústico e perfis de 32/48/64 vozes alocadas. Inspiração científica: martelo de contato finito, modos de cordas rígidas, uníssonos com dupla cauda, som de impacto breve, tampo e simpática compartilhados. **Nenhum ajuste de parâmetros reais de martelo/ponte nem arquivo de terceiros foi incorporado**; rótulos e parâmetros são aproximados. A/B/C/Clássico continuam selecionáveis e o padrão anterior permanece C. Arquivo de release `v1.12.5.html`. Detalhes [MOTOR_D_HIBRIDO_EXPERIMENTAL_2026-11-23.md](MOTOR_D_HIBRIDO_EXPERIMENTAL_2026-11-23.md).
+
+**Observação de confiabilidade:** 65 arquivos originais verificados em sete fontes (incluindo 15 Iowa Steinway B); nenhum desses arquivos foi embutido ou calibrado no D. **0/7 R-GATEs integrais**, sem testes em Moto g04s/PC ou ABX. Esta autorização posterior afasta o congelamento **apenas para o protótipo isolado D**, sem promover validade comercial/física. CI e testes da alteração devem ser registrados após execução.
+
+---
+
 ## FECHAMENTO RÁPIDO: Yamaha C5 + Steinway B com 15 fontes oficiais por piano (23/11/2026)
 
 Novo [plano mínimo](PLANO_ENXUTO_FECHAMENTO_LACUNAS_2026-11-23.md), baseado nos sete R-GATEs e no fato de que **R-GATE-2 aceita uma aproximação de ponte passiva, justificável e calibrável**, sem exigir medição 2×2 para todos os casos. **Steinway B/Iowa:** 15 AIFF **originais**, C2/C3/C4/C5/C6 × pp/mf/ff, **90.184.430 bytes**, AIFF 44,1 kHz/16-bit/2 canais, origem institucional, SHA256 individual e mídia descartada após auditoria [run 45111873583](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45111873583). Hashes permanentes em `research/commercial_audio/iowa_steinway_b_verified_original_sha256.json`. **Yamaha C5 Salamander:** 15 FLAC originais já validados nas mesmas notas e 3 camadas. São 30 referências nominais com integridade/codec comprovados; **a afinação efetiva, soltura/pedal e equivalência de intensidade ainda NÃO foram validadas**.

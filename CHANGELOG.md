@@ -1,3 +1,11 @@
+## v1.12.5 — Motor D híbrido experimental dentro do Piano Acústico (23/11/2026)
+
+- Adicionado **D · Stage híbrido · experimental** ao menu existente de motores, sem módulos ou atalhos extras; A/B/C/Clássico preservados.
+- Novo AudioWorklet original `physical-piano-hybrid.js`: excitação de martelo dependente de velocidade, parciais inarmônicos, uníssonos com duplo decaimento, ruídos curtos de mecânica, corpo/tampo e ressonância simpática compartilhados.
+- Preparação sob demanda, mensagens MIDI para nota, liberação, CC64 e mudança de qualidade; fallback clássico caso o Worklet falhe; versão e cache `1.12.5` com arquivo dedicado `v1.12.5.html`.
+- Perfis `eco/balanced/studio` alocam até 32/48/64 notas; **sem benchmark confirmado em hardware real, sem calibração física instrumentada e sem homologação perceptiva**. Código físico externo AGPL, licenças NC e presets de terceiros não foram incorporados.
+- Nova autorização do titular delimita apenas esta implementação experimental. Os 7 R-GATEs globais continuam pendentes para caracterizar o D como piano comercial fiel.
+
 ## v1.12.4 — Comparação A / B / C (experimental no módulo Piano Acústico)
 
 - A: Claude (modal), com DSP existente em piano-worklet.js.

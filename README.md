@@ -1,3 +1,11 @@
+# Stage Synth v1.12.5 — motor D híbrido (experimental)
+
+Acesse **Piano Acústico → Identidade e dinâmica → Motor do piano → D · Stage híbrido · experimental**. Os motores **A · Claude**, **B · Stage físico v1.9.5**, **C · Novo Stage mecânico** e **Clássico** permanecem disponíveis no mesmo menu, sem novos módulos ou links. A seleção do usuário é preservada; o padrão para instalações existentes continua C.
+
+D é um **protótipo original baseado em princípios físicos**, não um Steinway/Yamaha medido. Combina (i) martelo com contato finito por velocidade/dureza, (ii) cordas com inarmonicidade e múltiplos parciais, (iii) uníssonos com batimentos e decaimentos rápido/lento, (iv) ataque mecânico breve e (v) tampo/cordas simpáticas compartilhados, usando o módulo próprio `piano-resonance.js`. Nenhum dado ou DSP AGPL de terceiros foi importado. **Econômico (32), equilibrado (48) e estúdio (64)** são limites de alocação, não prova de desempenho no Moto g04s ou em qualquer hardware.
+
+A implementação foi **expressamente autorizada pelo usuário em 23/11/2026** após a pesquisa (pedido “Vamos gerar um motor com o que temos até aqui”). A autorização é para **um novo motor experimental isolado**, não para afirmar calibragem comercial, integrar modelos de terceiros, promover o D a padrão, modificar os antigos ou considerar os 7 R-GATEs automaticamente fechados. Leia [documentação do D](docs/MOTOR_D_HIBRIDO_EXPERIMENTAL_2026-11-23.md).
+
 # Stage Synth v1.12.4 — comparação de três motores de piano
 
 Em **Piano Acústico → Motor do piano**, selecione **A · Claude (modal)**, **B · Stage físico anterior (v1.9.5)** ou **C · Novo Stage mecânico**. O modo Clássico permanece como compatibilidade. Os três motores A/B/C utilizam DSPs efetivamente distintos, e B preserva o código v1.9.5 como AudioWorklet independente. Não são novos módulos; são opções do piano acústico.
