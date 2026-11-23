@@ -1,3 +1,9 @@
+## 23/11/2026 — E1.2: confirmar afinação de gravações Steinway B/Iowa antes de novo ajuste sonoro
+
+**Decisão:** não presumir erro generalizado de oitava e não alterar DSP para corrigir suposição não comprovada. Pesquisa no CI dos 15 AIFF originais fixados por SHA256: **12/15 dupla consistência de pitch** (YIN temporal e FFT harmônica independentes), **três registros de confiança limitada C2/pp, C2/ff, C6/pp**, sem contradição de oitava verificada por ambos. [Relatório e limitações](AUDITORIA_AFINACAO_IOWA_ORIGINAIS_2026-11-23.md); [run 45178612159](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45178612159), **157/157 Node**. Preservar os originais para comparação (sem incorporação de áudio) e continuar somente para hipótese física medida, sem novos harmônicos artificiais e sem mudar C4–C6 ou A/B/C. R-GATEs **0/7**, Stage v1.12.7 permanece experimental no motor D.
+
+---
+
 ## 23/11/2026 — E1.1: não transformar velocidade de placa fictícia em áudio de madeira (laboratório H1)
 
 O componente passivo compartilhado é consistente matematicamente, porém **não tem unidades físicas nem radiação calibrada**. Decidido construir somente **estimativa offline de transferência complexa aceleração de ponte→pressão aérea**, H1/Welch, coerência e testes sintéticos controlados. Isto **não identifica mobilidade mecânica Y=v/F**, parâmetros de martelo, massa/rigidez ou campo sonoro espacial. No cenário sintético, atraso de sensor gera mudança de fase mesmo com coerência alta: calibração/sincronização documentadas e sinais de um **mesmo instrumento autorizado comercialmente** são condições de entrada. [Protocolo E1.1](VERIFICACAO_TRANSFERENCIA_RADIATIVA_H1_E11_2026-11-23.md). **Sem alteração em DSP/UI/MIDI/FX/presets**, D permanece v1.12.7 experimental; PR #26 continua reprovada e **0/7 R-GATEs**.
