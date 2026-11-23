@@ -6,6 +6,9 @@ on:
   pull_request:
     paths:
       - 'research/passive-string-bridge-cell.mjs'
+      - 'research/shared-passive-piano-bridge.mjs'
+      - 'scripts/benchmark_shared_passive_bridge.mjs'
+      - 'tests/piano_shared_passive_bridge.test.mjs'
       - 'scripts/benchmark_passive_bridge_cell.mjs'
       - 'tests/piano_passive_bridge_cell.test.mjs'
       - 'docs/PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md'
@@ -34,15 +37,23 @@ jobs:
         run: |
           npm run check
           node --check research/passive-string-bridge-cell.mjs
+          node --check research/shared-passive-piano-bridge.mjs
+          node --check scripts/benchmark_shared_passive_bridge.mjs
           node --check scripts/benchmark_passive_bridge_cell.mjs
       - name: Execute energy, passivity, decoupled plate and multi-sample-rate tests
         run: node --test tests/piano_passive_bridge_cell.test.mjs
+      - name: Prove shared O(N) bridge coupling, energy conservation and cross-note sympathy
+        run: node --test tests/piano_shared_passive_bridge.test.mjs
+      - name: Benchmark shared versus independent plate for 16, 32, 64 notes
+        run: node scripts/benchmark_shared_passive_bridge.mjs | tee shared-bridge-node-profile.txt
       - name: Profile bridge-only 16, 32, 64 cells at 48 kHz
         run: node scripts/benchmark_passive_bridge_cell.mjs | tee passive-bridge-node-profile.txt
       - name: Keep only numeric performance evidence (no WAV or recordings)
         uses: actions/upload-artifact@v4
         with:
           name: stage-passive-bridge-cell-numeric-only
-          path: passive-bridge-node-profile.txt
+          path: |
+            passive-bridge-node-profile.txt
+            shared-bridge-node-profile.txt
           retention-days: 7
           if-no-files-found: error
