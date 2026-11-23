@@ -1,5 +1,6 @@
 import {PianoResonanceBody} from './piano-resonance.js';
 import {hybridRadiationGain} from './piano-hybrid-calibration.js';
+import {PianoBassWoodRadiator,PianoBassLongitudinal} from './piano-bass-wood.js';
 
 /**
  * Stage D — original hybrid modal piano prototype (research-informed, NOT measured/calibrated).
@@ -65,6 +66,7 @@ class Voice {
     this.force=new Float64Array(MAX_HAMMER_SAMPLES);
     this.drive=new Float64Array(MAX_MODES);
     this.forceCount=0;this.forceIndex=0;
+    this.longitudinal=null;
     this.tmp=new Float32Array(MAX_BLOCK);
     this.active=false;this.released=false;this.damped=false;
     this.id=0;this.key=60;this.age=0;this.count=0;this.silent=0;this.lastPeak=0;
@@ -75,12 +77,24 @@ class Voice {
   }
 }
 export class HybridPianoEngine {
-  constructor(sampleRate=SRATE,quality='eco'){
+  constructor(sampleRate=SRATE,quality='eco',bassStudy='off'){
     if(!Number.isFinite(sampleRate)||sampleRate<22050)throw new RangeError('sampleRate must be >= 22050');
     this.sr=sampleRate;
     this.voices=Array.from({length:MAX_VOICES},()=>new Voice());
     this.done=[];this.seed=0x736f6e67;this.mixGain=1;this.pedal=0;
     this.keys=new Uint8Array(88);
+    // Strictly isolated research modes. Default 'off' reproduces the exact
+    // published v1.12.7 sound; no user-facing or default DSP change.
+    if(!['off','wood','longitudinal','combined'].includes(bassStudy))
+      throw new RangeError('unsupported bass study mode');
+    this.bassStudy=bassStudy;
+    this.woodEnabled=bassStudy==='wood'||bassStudy==='combined';
+    this.longEnabled=bassStudy==='longitudinal'||bassStudy==='combined';
+    this.wood=this.woodEnabled?new PianoBassWoodRadiator(sampleRate):null;
+    this.bassL=this.woodEnabled?new Float32Array(MAX_BLOCK):null;
+    this.bassR=this.woodEnabled?new Float32Array(MAX_BLOCK):null;
+    if(this.longEnabled)for(const v of this.voices)
+      v.longitudinal=new PianoBassLongitudinal(sampleRate);
     this.body=new PianoResonanceBody({sampleRate,divisor:4,sympathetic:.20,body:.26,mechanical:.12,bridgeLoad:.12});
     this.setQuality(quality);
   }
@@ -213,6 +227,10 @@ export class HybridPianoEngine {
       // Bass drive starts from zero displacement, so normalize drive too.
       if(v.forceCount)v.drive[i]*=normalized;
     }
+    if(key<=48){
+      if(this.longEnabled)v.longitudinal.reset(key,speed);
+      if(this.woodEnabled)this.wood.noteOn(key,speed);
+    }
     v.id=id;v.key=key;v.active=true;v.released=false;v.damped=false;
     v.count=count;v.age=0;v.silent=0;v.lastPeak=0;v.send=clamp(send,0,1);v.sendTarget=v.send;
     // A bridge/soundboard does not radiate every modal component instantly.
@@ -288,6 +306,7 @@ export class HybridPianoEngine {
     if(n>MAX_BLOCK||n<0)throw new RangeError('hybrid render supports <=128 samples/block');
     L.fill(0,0,n);if(R!==L)R.fill(0,0,n);if(S)S.fill(0,0,n);
     const stereo=L!==R;
+    if(this.woodEnabled){this.bassL.fill(0,0,n);this.bassR.fill(0,0,n)}
     let active=0;
     for(let k=0;k<this.maxVoices;k++)if(this.voices[k].active){
       const v=this.voices[k];active++;
@@ -318,7 +337,16 @@ export class HybridPianoEngine {
         // Causal hammer attack: independent mechanical thump and broadband strike.
         lp+=.21*(this.random()-lp);
         const mechanical=lp*noise+impact;
-        const x=tmp[i]*env+mechanical;
+        let x=tmp[i]*env+mechanical;
+        if(this.longEnabled&&v.key<=48){
+          const contactIndex=driveStart+i;
+          const hammer=contactIndex<v.forceCount?v.force[contactIndex]:0;
+          x+=v.longitudinal.step(tmp[i]*env,hammer);
+        }
+        if(this.woodEnabled&&v.key<=48){
+          this.bassL[i]+=x*v.gl;
+          this.bassR[i]+=x*v.gr;
+        }
         peak=Math.max(peak,Math.abs(x));
         L[i]+=x*v.gl;
         if(stereo)R[i]+=x*v.gr;
@@ -337,8 +365,16 @@ export class HybridPianoEngine {
       const dryL=L[i],dryR=stereo?R[i]:dryL;
       this.body.step(dryL*.65,dryR*.65);
       // All resonance is shared; never route through a second piano Convolver.
-      const x=(dryL+this.body.wetL*.48)*this.mixGain;
-      const y=(dryR+this.body.wetR*.48)*this.mixGain;
+      if(this.woodEnabled)this.wood.step(this.bassL[i],this.bassR[i]);
+      // Separate lossy bridge/plate radiator, not global reverb. Direct string
+      // remains intact in the control; only study-enabled bass carries it.
+      // Research rebalances audible BASS radiation instead of merely adding
+      // a barely detectable wet tail. It still leaves every pure C4+ note
+      // exactly unchanged and never touches A/B/C or published v1.12.7.
+      const woodL=this.woodEnabled?(this.wood.outputL*4.0-.17*this.bassL[i]):0;
+      const woodR=this.woodEnabled?(this.wood.outputR*4.0-.17*this.bassR[i]):0;
+      const x=(dryL+this.body.wetL*.48+woodL)*this.mixGain;
+      const y=(dryR+this.body.wetR*.48+woodR)*this.mixGain;
       // Gentle safety curve, not a loudness-maximizing hard limiter.
       L[i]=.96*Math.tanh(x/.96);
       if(stereo)R[i]=.96*Math.tanh(y/.96);
