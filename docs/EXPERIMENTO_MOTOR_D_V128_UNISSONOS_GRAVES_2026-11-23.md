@@ -24,3 +24,13 @@ Fontes:
 - A diferença física de uníssono em uma faixa específica **não resolve por si só madeira, ponte, ressonâncias simpáticas ou radiação do tampo**, que ainda aguardam instrumentação comercial autorizada.
 - Nesta fase **0/7 R-GATEs completos**, sem garantir 32–64 notas em dispositivo real; perfis `eco=32,balanced=48,studio=64` são capacidade de alocação apenas.
 - Qualquer release público posterior deve usar novo cache-busting e preservar tanto a v1.12.6 quanto a v1.12.7 em arquivo de comparação real.
+
+
+## Evidência executada — CI, WAV e comparação independente Iowa
+
+- [GitHub Actions 45183947692](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45183947692): **162/162 regressões Node** e **5/5 testes específicos** aprovados. WAVs **48 kHz/24-bit estéreo** produzidos com os motores reais, mesmo ganho e sem FX, com validação por leitor WAV independente. Todo o DSP público, seleção de motor, UI, MIDI e presets permaneceu congelado neste PR.
+- Foram novamente adquiridos e conferidos no runner **C2 mf e C3 mf Iowa Steinway B originais** (SHA256/tamanho/codec conferidos). Publicou-se somente o relatório numérico; os AIFF/PCM foram eliminados no CI.
+- Primeira tentativa do uníssono (pesos prompt/aftersound 63/37 como nos agudos): **C2 mf:** melhora do erro 0–12ms de **−0,50 dB**, mas piora do erro na cauda 900–1400ms de **+2,03 dB**. **Reprovada como candidata final**.
+- Segunda tentativa com contribuição inicial igual **50/50** dos dois modos **somente F1–C2**: melhora do erro C2 mf 0–12ms de **−0,34 dB**, piora em 12–36ms de **+0,28 dB**, piora da cauda 900–1400ms de **+0,87 dB**. Erro médio relativo dos 7 harmônicos confiáveis diminuiu modestamente nas quatro janelas de 171 ms (**−0,035 / −0,160 / −0,347 / −0,152 dB**); este conjunto já foi usado em calibrações anteriores (**in-sample**, não homologação). **C3 mf ficou numericamente idêntico** em todos os parâmetros, como esperado.
+- Para C2 mf os WAVs novos (não comparáveis a uma gravação real, pois são duas sínteses) indicam cauda 900–1300ms aproximadamente **−1,21 dB** frente ao D v1.12.7, contra −2,48 dB da primeira tentativa. **Isto não prova mais fidelidade**, tampouco demonstra madeira/ponte/radiação físicos. As mudanças são audíveis somente se o ouvinte conseguir diferenciá-las.
+- **Decisão da etapa de pesquisa**: preservar o candidato revisado e seu áudio de teste; **não declarar R-GATE aprovado ou som melhor**. Uma integração posterior no **mesmo seletor D do Piano Acústico** será explicitamente experimental, com caminho histórico verificável para D v1.12.7 e CI separado. Não integrar PR #26 nem inventar harmônicos de "madeira".
