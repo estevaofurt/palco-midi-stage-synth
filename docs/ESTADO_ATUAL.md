@@ -1,3 +1,9 @@
+## E1.3 — WAV dos motores reais D 1.12.6/1.12.7 intercalado por nota (23/11/2026)
+
+Montagem de **WAV real de síntese Stage, 48k/24-bit estéreo**, sem amostras externas e com o mesmo ganho original, alternando v1.12.6 / v1.12.7 em C2 e C3 (pp/mf/ff), C4, A1 e acorde grave. Diagnóstico: **C2 mf 0–12 ms = −4,38 dB na v1.12.7 contra a v1.12.6; corpo 100–220 ms = 0,00 dB; cauda 900–1180 ms = +0,03 dB**. Ou seja: o novo martelo mexeu no começo, quase não no corpo. Mesma tendência C2 pp/ff e A1. D não está aprovado como som de piano real; não reintegrar "wood" aditivo reprovado. Renderizador reproduzível `scripts/assemble_stage_d_bass_interleaved.mjs`; [relatório completo](DIAGNOSTICO_D_GRAVES_AB_INTERCALADO_2026-11-23.md). **Sem alteração de DSP, versão pública v1.12.7, A/B/C e C4–C6 intactos; 0/7 R-GATEs, CPU do dispositivo não validada.**
+
+---
+
 ## Auditoria E1.2 de afinação: Iowa original 15/15, sem erro de oitava confirmado (23/11/2026)
 
 A matriz **15 AIFF originais** Steinway B/Iowa foi novamente adquirida e conferida por **SHA-256/tamanho/codec** no CI, sem guardar PCM. Novo auditor offline `research/iowa-f0-label-audit.mjs` (YIN em duas janelas) e análise independente por `research/iowa-pitch-harmonic-comb.mjs` (FFT harmônicos), com teste de pitch conhecido, fundamental ausente e discrepância de oitava. **13/15 YIN compatíveis**, **14/15 FFT compatíveis**, **12/15 duplamente consistentes**; C2/pp, C2/ff e C6/pp inconclusivos na dupla verificação, **nenhuma divergência de oitava confirmada**. [CI de originais 157/157 + 6/6 + 4/4](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45178612159), [relatório](AUDITORIA_AFINACAO_IOWA_ORIGINAIS_2026-11-23.md). Não alterar automaticamente nomes das fontes ou parâmetros D, nem confundir f0 musical aproximado com f0 instrumentado de uma corda. **Stage público v1.12.7 e todos os motores preservados; 0/7 R-GATEs**, CPU real 32–64 ainda pendente.
