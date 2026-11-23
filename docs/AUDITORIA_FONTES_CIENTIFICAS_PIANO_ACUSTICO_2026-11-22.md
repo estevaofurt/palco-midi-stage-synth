@@ -48,6 +48,18 @@ Dois Yamaha Disklavier **acústicos reais**:
 - **Licença da reedição de 2026: CC BY-NC 4.0**, registrada pelos mantenedores no Zenodo. Versões históricas exigiam termo de compromisso: para qualquer uso aplicar **as condições da versão efetivamente acessada** e manter atribuição; não redistribuir amostras em produto comercial.
 - Excelente para caracterização do **piano por modelo de fabricação e articulação**, mas não fornece medições binaurais calibradas equivalentes às do BiVib.
 
+## 2A. bitKlavier Grand — STEINWAY MODEL D REAL, PRIORIDADE ALTA para timbre American e microfones
+
+**Fonte autoral e downloads (Princeton, Dan Trueman e equipe):** https://bitklavier.com/the-bitklavier-grand/
+**Depoimento institucional:** https://cdh.princeton.edu/blog/bitklavier-30-an-interview-with-professor-dan-trueman/
+
+- **Steinway Model D** real novo, gravado em janeiro de 2021 no Taplin Auditorium, Princeton, com **18 canais / 9 pares estéreo** incluindo Piano Bar (Earthworks, próximo ao martelo e cordas), Harp Omni (DPA 4060 junto à harpa), Lip Cardioid, palco, plateia e binaural (Neumann KU100 na posição do pianista).
+- **16 camadas de velocity** nas **notas amostradas a cada terça menor** começando no A0. Assim, **não são 88 notas gravadas individualmente**: outras são transpostas no sampler. Há sons separados de soltar martelo, ressonâncias de release e pedais.
+- Amostras em 96k/24b, 88.2k/24b, 48k/24b, 44.1k/16b; download de coleções por imagem estéreo no Archive.org; **CC BY 4.0**, inclusive para criar instrumentos derivados com atribuição.
+- **Limitação física fundamental:** as sessões foram **denoised (iZotope RX8)**, recortadas com fades, seleção por RMS e **reequilibradas em ganho (normalmente variações <2 dB)** para homogeneidade de velocity e teclado; **não usar amplitude de arquivos como medição direta da força/massa do martelo**. Os registros podem conter reverb do auditório. Ainda sim são excelente referência para corpo, timbre, expansão espacial e detalhes de pedais/release.
+- Para **American Stage**: usar Piano Bar / Harp Omni como referência de radiador próximo, e binaural/House ORTF como condições de escuta alternativas; **a diferença entre posições é dado sobre microfonação, não um erro intrínseco de corda**.
+- Mais útil que Steinway B Iowa para caracterizar **especificamente Model D** e testar múltiplos radiadores. Complementar RWC para verificar um Steinway real não editado/não nivelado no mesmo padrão artístico.
+
 ## 3. MAPS (ENSTDkCl / ENSTDkAm) — PRIORIDADE ALTA para MIDI controlado e captação
 
 **Grupo de pesquisa original (Telecom Paris):** https://adasp.telecom-paris.fr/resources/2010-07-08-maps-database/
@@ -90,7 +102,7 @@ Dois Yamaha Disklavier **acústicos reais**:
 
 **Fuchs & Möhr Felt Upright, Tom Guder**: https://www.polyphone.io/en/soundfonts/pianos/683-fuchs-mohr-felt-piano ; domínio público declarado pelo autor, três layers e WAVs. Seu felt é uma preparação de **piano vertical**; não substituir por piano de cauda. O controle de força física, o estado do instrumento e o processamento dos reempacotadores não são metrologicamente documentados como BiVib. Para construir uma física de felt confiável, é preciso **medir a diferença** do mesmo instrumento/posicionamento de feltro com e sem preparação ou uma captura calibrada; não temos esse par controlado.
 
-**Yamaha CFX e Steinway Model D de concerto:** nenhum dos conjuntos acima comprova ser **CFX** ou **Model D**. RWC identifica Steinway fabricante, não modelo específico nesta auditoria; Iowa/VCSL são B. **Não confundir modelo e fabricante na calibração.**
+**Yamaha CFX:** continua sem dataset científico aberto, original e controlado verificado nesta auditoria. **Steinway Model D:** está identificado no **bitKlavier Grand (Princeton)**, CC BY 4.0, 16 camadas e 9 pares de microfones, mas o áudio foi editado/denoised e nivelado. RWC identifica o fabricante Steinway, não um modelo específico; Iowa/VCSL são Model B. **Não confundir modelos nem tratar remasterização como medida física bruta.**
 
 ## 7. Outras referências que não entram no benchmark imediato
 
@@ -105,6 +117,7 @@ Dois Yamaha Disklavier **acústicos reais**:
 | Fonte | Nota isolada | Velocity controlada | Gravação sem perdas | Documentação captação | Uso preferencial |
 |---|---|---|---|---|---|
 | BiVib Yamaha DC3 M4/DU1A | **Sim, 88** | **10 valores MIDI explicitados** | **WAV 96k/24b** | **Alta: binaural, sala, equipamentos, calibração** | **Martelo/dinâmica e radiador cauda/vertical** |
+| bitKlavier Grand Steinway D | **Somente notas amostradas a cada terça menor** | **16 layers equalizadas/selecionadas, sem controle físico de hammer velocity** | **WAV até 96k/24b** | **Alta: 9 pares de microfones, pós-produção explicitada** | **Timbre Model D, imagem espacial, release/ruído** |
 | RWC Yamaha/Steinway/Bösendorfer | **Sim, 88 cada** | **p/mf/f subjetivos** | **WAV 44.1k/16b** | Alta: fabricante/articulação, pacote/paper | **Identidade Steinway e variações de pedal/repetição** |
 | MAPS real ENSTDkCl/Am | **Sim** | MIDI anotado/gerado | **WAV CD** | Boa: close/ambient, estúdio | **Correlações de MIDI, mic e transcrição** |
 | Iowa Steinway B | **Sim, nota a nota** | pp/mf/ff não calibrados | AIFF 44.1k/16b | Boa, não anecoico | **Controle independente Steinway B** |
@@ -145,3 +158,22 @@ Dois Yamaha Disklavier **acústicos reais**:
 - A **única referência Felt disponível neste momento continua artisticamente preparada, sem capturas físicas controladas**, não generalizar coeficientes de B desse conjunto.
 - A referência real **Yamaha CFX** ainda não foi encontrada em dados abertos com o mesmo controle; não apresentar um C5/DC3 como CFX.
 - Nenhuma alteração de motores ou versão pública foi executada nesta pesquisa.
+
+
+## 11. Fontes adicionais verificadas depois da hierarquia inicial
+
+### Yamaha CFX verdadeiro (comparação auditiva, NÃO calibração física aberta)
+
+Vienna Symphonic Library **Synchron Yamaha CFX / CFX Essentials**: https://www.vsl.co.at/instruments/synchron-pianos/yamaha-cfx-essentials .
+É um **Yamaha CFX real** gravado com sistema robótico do instrumento, sensores ópticos do movimento das 88 teclas e pedais e sensores de martelo; microfones de palco e proximidade, processos de gravação documentados em marketing técnico. É produto **comercial com motor de sampler/processamento**, com demos e presets (inclusive reverb, EQ, body resonance, release samples). **Não demonstrado como WAV aberto, não baixar/extrair samples do produto**. Serve para avaliar o caráter final de um verdadeiro CFX ao ouvido, **não para extrair constantes de corda ou reempacotar áudio**.
+
+### Piano Sound Quality Dataset — China Conservatory of Music / CCMusic
+
+Site institucional: https://ccmusic-database.github.io/en/database/ccm.html .
+- **1.320 gravações individuais** e 12 arquivos de extensão do teclado, pianos Steinway em sala e teatro, Kawai cauda/vertical, Young Chang vertical, Hsinghai vertical e Pearl River vertical. **Painel de avaliação subjetiva com 29 pessoas**.
+- Existem arquivos WAV e conversões MP3/M4A; para qualquer estudo físico, **usar original WAV do acervo e verificar metadados de áudio**, nunca MP3. O registro de velocidade física e os microfones calibrados não foram demonstrados como no BiVib; utilizar como **validação externa de diferenças percebidas entre marcas, modelos e verticais**.
+- Espelho HF: https://huggingface.co/datasets/ccmusic-database/pianos , cujo cartão marca **CC BY-NC-ND 4.0** para o espelho. Respeitar as restrições e a proveniência autoral; não distribuir arquivos nem derivados incorporáveis ao software sem revisar as condições.
+
+### Felt e Upright
+
+Até aqui não há dataset **comprovadamente controlado** com o **mesmo piano tocado com e sem feltro**, as mesmas posições de microfone e 10 velocidades controladas de marte­lo. O Fuchs & Möhr de Tom Guder continua sendo boa gravação acústica de **piano vertical com feltro**, mas uma amostra preparada não serve para identificar separadamente o efeito do martelo, feltro e instrumento.
