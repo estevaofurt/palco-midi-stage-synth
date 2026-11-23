@@ -7,6 +7,7 @@ on:
       - 'panel.js'
       - 'research/private-wav-note-bank.mjs'
       - 'research/private-pcm-pitch-audit.mjs'
+      - 'scripts/audit_private_piano_bank.mjs'
       - 'scripts/build_private_piano_bank.mjs'
       - 'tests/private_wav_note_bank.test.mjs'
       - 'tests/private_pcm_pitch_audit.test.mjs'
@@ -28,6 +29,8 @@ jobs:
         run: npm run check
       - name: Validate private bank CLI syntax
         run: node --check scripts/build_private_piano_bank.mjs
+      - name: Validate pitch-audit CLI syntax
+        run: node --check scripts/audit_private_piano_bank.mjs
       - name: Protect published audio engines and app routing
         run: |
           git diff --exit-code origin/main...HEAD -- acoustic.js physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js piano-resonance.js app.js stage.js sample-library.js fx-rack.js performance.js package.json
