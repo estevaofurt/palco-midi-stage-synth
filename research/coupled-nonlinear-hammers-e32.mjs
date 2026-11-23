@@ -46,7 +46,7 @@ export class CoupledNonlinearHammerPiano {
  constructor({sampleRate=48000,pianoOptions={},
   hammerMass=.008,feltStiffness=1e10,feltExponent=2.3,
   hammerGap=.0004,maxHammerSpeed=3.2,maxHammers=64,
-  solverPasses=5,rootIterations=36}={}){
+  solverPasses=3,rootIterations=16}={}){
   if(!Number.isInteger(sampleRate)||sampleRate<44100||sampleRate>96000||
     !Number.isFinite(hammerMass)||hammerMass<=0||hammerMass>1||
     !Number.isFinite(feltStiffness)||feltStiffness<=0||feltStiffness>1e12||
@@ -55,7 +55,7 @@ export class CoupledNonlinearHammerPiano {
     !Number.isFinite(maxHammerSpeed)||maxHammerSpeed<=0||maxHammerSpeed>10||
     !Number.isInteger(maxHammers)||maxHammers<1||maxHammers>88||
     !Number.isInteger(solverPasses)||solverPasses<2||solverPasses>12||
-    !Number.isInteger(rootIterations)||rootIterations<20||rootIterations>48)
+    !Number.isInteger(rootIterations)||rootIterations<8||rootIterations>48)
    throw new RangeError('invalid E3.2 physics parameters');
   this.piano=new SharedPassiveModalPiano({
    ...pianoOptions,sampleRate,externalForceMode:true
@@ -69,6 +69,7 @@ export class CoupledNonlinearHammerPiano {
   this.freeRhs=new Float64Array(this.piano.n);
   this.launchWork=0;
   this.steps=0;this.peakForce=0;this.contactSampleCount=0;
+  this.rootEvaluations=0;this.maxForceResidual=0;
   this.bridgeVelocity=0;this.boardPanelVelocity=0;
  }
  stringDisplacement(key){
@@ -153,6 +154,12 @@ export class CoupledNonlinearHammerPiano {
   }
   return rankFactor;
  }
+ /**
+  * Bracketed Newton. U is convex, so F = DG(U, deltaFree - mobility*F)
+  * has exactly one nonnegative solution. Fall back to bisection when Newton
+  * would leave the bracket. The derivative is analytically derived, not
+  * a fitted hammer velocity curve.
+  */
  solveForce(hammer,otherBridgeForce){
   const base=hammer.deltaFree-otherBridgeForce;
   const old=hammer.deltaOld,diagonal=hammer.mobility;
@@ -160,15 +167,41 @@ export class CoupledNonlinearHammerPiano {
   if(!(upper>0))return 0;
   if(!Number.isFinite(upper)||upper>1e7)
    throw new RangeError('unphysical implicit hammer contact');
-  let lo=0,hi=upper;
-  for(let i=0;i<this.rootIterations;i++){
-   const mid=(lo+hi)*.5;
-   const after=base-diagonal*mid;
-   const potentialForce=contactDiscreteGradient(
-    old,after,this.stiffness,this.power);
-   if(mid>potentialForce)hi=mid;else lo=mid;
+  let lo=0,hi=upper,force=upper*.5;
+  const tolerance=2e-11*Math.max(1,upper);
+  const stiffness=this.stiffness,power=this.power;
+  for(let iteration=0;iteration<this.rootIterations;iteration++){
+   const after=base-diagonal*force,difference=after-old;
+   const beforePos=Math.max(0,old),afterPos=Math.max(0,after);
+   let gradient,slope;
+   if(Math.abs(difference)<=1e-13*
+     Math.max(1e-4,Math.abs(old),Math.abs(after))){
+    const contact=Math.max(0,(after+old)*.5);
+    gradient=stiffness*contact**power;
+    slope=.5*stiffness*power*contact**(power-1);
+   }else{
+    const jump=stiffness*(afterPos**(power+1)-
+      beforePos**(power+1))/(power+1);
+    gradient=jump/difference;
+    slope=(stiffness*afterPos**power*difference-jump)/
+     (difference*difference);
+   }
+   slope=Math.max(0,slope);
+   const residual=force-gradient;
+   this.rootEvaluations++;
+   if(Math.abs(residual)<=tolerance)break;
+   if(residual>0)hi=force;else lo=force;
+   const derivative=1+diagonal*slope;
+   const proposal=force-residual/derivative;
+   force=proposal>lo&&proposal<hi?proposal:(lo+hi)*.5;
   }
-  return (lo+hi)*.5;
+  const actual=contactDiscreteGradient(old,base-diagonal*force,
+    stiffness,power);
+  const finalResidual=Math.abs(force-actual);
+  this.maxForceResidual=Math.max(this.maxForceResidual,finalResidual);
+  if(finalResidual>1e-7*Math.max(1,upper))
+   throw new RangeError('nonlinear hammer root failed convergence');
+  return force;
  }
  step(){
   const p=this.piano,h=this.h,forces=p.forces;
