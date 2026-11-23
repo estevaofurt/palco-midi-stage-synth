@@ -220,7 +220,12 @@ export class HybridPianoEngine {
     // attack byte-for-byte. This is a bounded temporal transmission proxy,
     // not a measured hammer-to-bridge transfer function.
     v.attack=0;
-    const attackSeconds=v.forceCount ? (.010+.004*(1-speed))
+    // The bass bridge build-up is register dependent: too long a delay
+    // suppresses the first-cycle energy in low C2, while too short a delay
+    // exaggerates the attack near C3. These are exploratory timings, not
+    // instrument-measured radiation delays.
+    const bassRise=.0048+.0018*clamp((key-24)/24,0,1)+.001*(1-speed);
+    const attackSeconds=v.forceCount ? bassRise
       :(.0012+.0030*(1-key/120)*(1-speed*.5));
     v.attackStep=1/(this.sr*attackSeconds);
     const pan=clamp((key-64.5)/43.5,-1,1)*.30;
