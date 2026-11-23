@@ -19,6 +19,7 @@ on:
       - 'research/reactive-felt-modal-piano-e32.mjs'
       - 'research/passive-distributed-soundboard-e33.mjs'
       - 'research/reactive-felt-distributed-e33.mjs'
+      - 'research/analytic-spatial-plate-radiation-e33.mjs'
       - 'research/coupled-nonlinear-hammers-e32.mjs'
       - 'tests/damper_aware_shared_bridge.test.mjs'
       - 'tests/hammer_driven_passive_piano.test.mjs'
@@ -34,6 +35,7 @@ on:
       - 'tests/reactive_felt_modal_piano_e32.test.mjs'
       - 'tests/passive_distributed_soundboard_e33.test.mjs'
       - 'tests/reactive_felt_distributed_e33.test.mjs'
+      - 'tests/analytic_spatial_plate_radiation_e33.test.mjs'
       - 'tests/coupled_nonlinear_hammers_e32.test.mjs'
       - 'scripts/benchmark_nonlinear_hammers_e32.mjs'
       - 'scripts/diagnose_nonlinear_hammers_e32.mjs'
@@ -48,6 +50,8 @@ on:
       - 'scripts/benchmark_analytic_mesh_e30.mjs'
       - 'scripts/audit_piano_source_e31.mjs'
       - 'scripts/audit_reactive_felt_e32.mjs'
+      - 'scripts/benchmark_distributed_board_e33.mjs'
+      - 'scripts/render_reactive_spatial_e33.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
 jobs:
@@ -89,6 +93,10 @@ jobs:
         run: node scripts/diagnose_nonlinear_hammers_e32.mjs | tee e32-hammer-audit.json
       - name: Audit E3.2 reactive contact energy and acoustic limits
         run: node scripts/audit_reactive_felt_e32.mjs | tee e32-reactive-hammer-run.json
+      - name: Benchmark 32-64 struck keys with distributed 2-4-8 spatial plate modes
+        run: node scripts/benchmark_distributed_board_e33.mjs | tee e33-multimode-benchmark.json
+      - name: Generate sample-free reactive contact and spatial plate stereo E3.3 WAV
+        run: node scripts/render_reactive_spatial_e33.mjs | tee e33-spatial-audio-summary.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -113,6 +121,11 @@ jobs:
             e31-physical-source-diagnostic.json
             e32-reactive-hammer-run.json
             e32-reactive-hammer-diagnostic.json
+            e33-multimode-benchmark.json
+            e33-spatial-audio-summary.json
+            e33-reactive-plate-audition.json
+            e33-reactive-spatial-2-plate-modes.wav
+            e33-reactive-spatial-8-plate-modes.wav
             e32-hammer-benchmark.json
             e32-hammer-audit.json
             e32-hammer-harmonic-audit.json
