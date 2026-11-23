@@ -1,3 +1,11 @@
+## ITERAÇÃO V1.12.6 — REFINO DO D APÓS REPROVAÇÃO SONORA PELO TITULAR (23/11/2026)
+
+Depois de ouvir o v1.12.5, o titular declarou que **o timbre ainda não se parece com um piano real** e pediu continuidade cuidadosa e máxima qualidade. A autorização específica anterior do D inclui **refinar somente o D experimental a partir de evidências verificáveis**, sem mexer em A/B/C, FX, MIDI, presets ou adicionar outros módulos. A v1.12.6 usa **15 AIFF originais Iowa/Steinway B com SHA256 conferido** para perfis NUMÉRICOS de radiação/ataque por registro/velocidade, no arquivo próprio `piano-hybrid-calibration.js`, sem armazenar samples.
+
+As 15 mesmas referências usadas para calibrar mostram melhora do **erro de espectro de ataque 20,30→3,23 dB**, mas isso é in-sample e **não autoriza declarar piano realista, parâmetros físicos medidos, homologação comercial nem 32–64 vozes garantidas no hardware**. A versão permanece experimental, **0/7 gates completos**. Criar e passar testes de regressão, comparar com original e obter escuta do usuário antes de promover versão estável. Registro do [diagnóstico](docs/DIAGNOSTICO_TIMBRE_D_IOWA_15_2026-11-23.md), perfil [calibrado](piano-hybrid-calibration.js) e [documentação](docs/MOTOR_D_HIBRIDO_EXPERIMENTAL_2026-11-23.md).
+
+---
+
 ## AUTORIZAÇÃO POSTERIOR E LIMITADA — MOTOR D EXPERIMENTAL (23/11/2026)
 
 **Nova instrução expressa do titular:** “Vamos gerar um motor com o que temos até aqui”. Essa autorização posterior **permite desenvolver, integrar e testar somente um motor de piano experimental original**, selecionável **dentro do módulo Piano Acústico** ao lado de A Claude, B v1.9.5 e C Novo Stage; **não criar módulos/categorias/links adicionais**, não substituir A/B/C, não alterar o padrão de sessões antigas. Identificação de release: **Stage v1.12.5, D · Stage híbrido**. Documentar hipóteses e limites, executar regressão Node e baseline offline. Não usar dados NC nem copiar código AGPL de terceiros.
