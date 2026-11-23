@@ -18,6 +18,21 @@ Conferir se a solução otimizada O(N) de `research/shared-passive-piano-bridge.
 
 `scripts/benchmark_shared_passive_bridge.mjs` anteriormente utilizava `21 + i % 28`, repetindo notas quando eram solicitadas 32 ou 64. Agora usa `21 + i` para **16/32/64 notas distintas**. O teste ainda representa somente o custo de equações mecânicas em Node/Linux, não a carga de um piano completo de 88 teclas, não o AudioWorklet, não a polifonia do palco com FX e MIDI, e **não compara qualidade acústica equivalente** entre os dois métodos.
 
+
+## Resultados efetivos do CI
+
+**GitHub Actions aprovado:** [workflow do laboratório, run 45173258761](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45173258761). `npm run check` **141/141**, teste denso dedicado **2/2** (além dos testes históricos de células e rede compartilhada, ambos 6/6). A proteção de arquivos públicos congelados passou. Nenhuma alteração sonora ocorreu.
+
+**Benchmark revisado com notas únicas, mesmo runner, Node/Linux/48 kHz, p95 de 128 amostras:**
+
+| Teclas distintas | Tampo compartilhado | Uma placa independente por tecla | Limite real da comparação |
+| ---: | ---: | ---: | --- |
+| 16 | 0,0220 ms | 0,2502 ms | Arquiteturas fisicamente diferentes |
+| 32 | 0,0442 ms | 0,4901 ms | Sem trabalho de síntese Stage/FX |
+| 64 | 0,0896 ms | 0,9857 ms | Sem AudioWorklet e sem Moto g04s |
+
+**Interpretar:** duas soluções do mesmo sistema M/C/K (densa independente versus Schur) coincidem no domínio numérico testado, o que é evidência mais forte de implementação correta que só testar conservação de energia. O benchmark compara *topologias diferentes*, e o menor tempo não estabelece nem equivalência de som nem qualidade auditiva. Teste com 88 teclas verificou estabilidade/passividade por 256 quadros de simulação, não medições de uso em tempo real. O período completo de bloco de 128 amostras a 48 kHz é ~2,667 ms; estes números cobrem apenas o modelo mecânico isolado.
+
 ## Critério de aceite
 
 1. `npm run check` e testes originais passam no CI.
