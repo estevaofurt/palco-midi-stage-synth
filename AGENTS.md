@@ -1,3 +1,9 @@
+## ATUALIZAÇÃO 23/11/2026 — E sampleado local v1.12.9
+
+Autorização posterior do usuário para integrar como opção E a escuta sampleada E2.7. WAVs privados American/Japanese/Felt/Upright não podem ser publicados sem direitos comerciais provados; somente importação local temporária, sem bytes no repositório. Não mudar A/B/C/D/Clássico nem padrão C. O novo Piano V4 continua modelagem física pura (sem samples). [docs/SAMPLER_LOCAL_V129.md](docs/SAMPLER_LOCAL_V129.md).
+
+---
+
 ## ETAPA ATUAL — D v1.12.8, EXPERIMENTAL F1–C2 NO MÓDULO PIANO (23/11/2026)
 
 O usuário autorizou atualizar o **motor D** e produzir WAV. A tentativa 1 de bichord grave (pesos 63/37) piorou a cauda; a tentativa 2 (pesos 50/50 apenas F1–C2) melhorou o ataque **C2 mf −0,34 dB** e alguns espectros contra originais Iowa, porém **PIOROU a cauda +0,87 dB**. [Diagnóstico e áudio](docs/RELEASE_EXPERIMENTAL_MOTOR_D_V128_2026-11-23.md). A integração é **experimental, não homologada**, dentro do seletor D já existente; **A/B/C/Clássico, default C, MIDI/CC64, FX e presets inalterados**, e **C3–C8 bitwise idênticos**. D v1.12.7 deve continuar audível via `v1.12.7.html` e Worklet congelado `acoustic-v127.mjs` + `physical-piano-hybrid-v127.mjs`; a v1.12.6 também intacta. Não alegar madeira, ponte/radiação física calibrada, ABX ou desempenho real Android 32–64 vozes; **0/7 R-GATEs**. NÃO integrar PR #26, nem novos módulos/categorias.

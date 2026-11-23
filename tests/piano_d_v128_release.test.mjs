@@ -20,7 +20,7 @@ const render=(Engine,key,velocity=80,quality='studio')=>{
  }
  return out;
 };
-test('public v1.12.8 D is exactly the acoustically audited 50/50 bass candidate',()=>{
+test('motor D preserva PCM do candidato v1.12.8 auditado',()=>{
  for(const key of [21,28,29,33,36,37,48,49,60,72,84,108])
   for(const quality of ['eco','balanced','studio'])
    assert.deepEqual(render(PublicD,key,80,quality),render(TestedCandidate,key,80,quality),
@@ -47,10 +47,10 @@ test('v1.12.7 historical HTML loads actual 127 acoustics and immutable original 
 test('current D uses original Piano Acoustic selector and historical defaults remain unchanged',()=>{
  const controls=engines.piano.groups.flatMap(x=>x.controls);
  const c=controls.find(x=>x.id==='soundEngine');
- assert.deepEqual(Object.keys(c.options),['modal','physicalLegacy','physical','hybrid','classic']);
+ assert.deepEqual(Object.keys(c.options),['modal','physicalLegacy','physical','hybrid','sampled','classic']);
  assert.equal(loadState(null).patches.piano.values.soundEngine,'physical');
- assert.equal(JSON.parse(read('../package.json')).version,'1.12.8');
+ assert.equal(JSON.parse(read('../package.json')).version,'1.12.9');
  const html=read('../index.html');
- assert.match(html,/Stage Synth · Palco MIDI v1\.12\.8/);
- assert.match(read('../acoustic.js'),/physical-piano-hybrid\.js\?build=1\.12\.8/);
+ assert.match(html,/Stage Synth · Palco MIDI v1\.12\.9/);
+ assert.match(read('../acoustic.js'),/physical-piano-hybrid\.js\?build=1\.12\.9/);
 });

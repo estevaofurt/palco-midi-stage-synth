@@ -8,7 +8,7 @@ import {PianoEngine as ClaudeModal} from '../piano-worklet.js';
 const read=p=>readFileSync(new URL(p,import.meta.url),'utf8');
 test('três motores selecionados no mesmo módulo, sem novos links',()=>{
  const c=engines.piano.groups.flatMap(x=>x.controls).find(x=>x.id==='soundEngine');
- assert.deepEqual(Object.keys(c.options),['modal','physicalLegacy','physical','hybrid','classic']);
+ assert.deepEqual(Object.keys(c.options),['modal','physicalLegacy','physical','hybrid','sampled','classic']);
  assert.match(c.options.modal,/Claude/);
  assert.match(c.options.physicalLegacy,/Stage físico anterior/);
  assert.match(c.options.physical,/Novo Stage mecânico/);
@@ -25,7 +25,7 @@ test('o B usa worklet físico v1.9.5 independente do C',()=>{
  assert.match(current,/PianoResonanceBody/);
  assert.match(acoustic,/prepareLegacyPhysical/);
  assert.match(acoustic,/playPhysical\(part,key,velocity,p,expression,true\)/);
- assert.match(acoustic,/physical-piano-legacy\.js\?build=1\.12\.8/);
+ assert.match(acoustic,/physical-piano-legacy\.js\?build=1\.12\.9/);
 });
 test('B e C produzem saídas diferentes com parâmetros iguais',()=>{
  const older=new LegacyPhysical(48000,'eco');

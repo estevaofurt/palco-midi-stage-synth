@@ -1,3 +1,7 @@
+# Stage Synth v1.12.9 — motor E sampleado
+
+Novo **E · Piano sampleado · WAV local**, em **Piano acústico → Motor do piano**. Escolha American/Japanese/Felt/Upright e importe as notas no grupo **Banco de amostras · motor E**. Os arquivos ficam na sessão local do navegador, sem upload ao servidor ou GitHub. O padrão C, os motores A/B/C/D/Clássico, MIDI e FX permanecem. O novo V4 continua físico e independente. [Documentação](docs/SAMPLER_LOCAL_V129.md).
+
 # Stage Synth v1.12.7 — D experimental com excitação física do martelo nos graves
 
 A experiência está disponível **dentro do módulo Piano Acústico**, na mesma opção **D · Stage híbrido · experimental**. **Não há novo motor, categoria, link interno ou preset obrigatório**. Os motores A (Claude), B (Stage anterior), C (Novo Stage mecânico) e Clássico continuam, e **o padrão segue C**.

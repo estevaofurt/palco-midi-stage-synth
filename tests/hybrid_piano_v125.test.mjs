@@ -28,7 +28,7 @@ function render(engine,seconds){
 
 test('D é seleção ADICIONAL dentro do piano, sem alterar A/B/C ou preset salvo',()=>{
   const c=engines.piano.groups.flatMap(g=>g.controls).find(x=>x.id==='soundEngine');
-  assert.deepEqual(Object.keys(c.options),['modal','physicalLegacy','physical','hybrid','classic']);
+  assert.deepEqual(Object.keys(c.options),['modal','physicalLegacy','physical','hybrid','sampled','classic']);
   assert.match(c.options.hybrid,/Stage híbrido/);
   assert.equal(Object.keys(engines).length,5);
   assert.equal(loadState(null).patches.piano.values.soundEngine,'physical');
@@ -39,7 +39,7 @@ test('D é seleção ADICIONAL dentro do piano, sem alterar A/B/C ou preset salv
   assert.match(read('../acoustic.js'),/prepareHybrid/);
   assert.match(read('../acoustic.js'),/playHybrid/);
   assert.match(read('../app.js'),/prepareHybrid/);
-  assert.match(read('../index.html'),/physical-piano-hybrid\.js\?build=1\.12\.8/);
+  assert.match(read('../index.html'),/physical-piano-hybrid\.js\?build=1\.12\.9/);
   assert.doesNotMatch(read('../index.html'),/enable-mechanical-piano|stage-mechanics-link/);
 });
 

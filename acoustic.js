@@ -95,7 +95,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.physicalPromise){
       this.physicalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./physical-piano.js?build=1.12.8');
+        await this.ctx.audioWorklet.addModule('./physical-piano.js?build=1.12.9');
         const node=new AudioWorkletNode(this.ctx,'palco-physical-piano',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -133,7 +133,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.legacyPhysicalPromise){
       this.legacyPhysicalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./physical-piano-legacy.js?build=1.12.8');
+        await this.ctx.audioWorklet.addModule('./physical-piano-legacy.js?build=1.12.9');
         const node=new AudioWorkletNode(this.ctx,'palco-physical-piano-legacy',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -173,7 +173,7 @@ export class Acoustic {
         const historicalD=globalThis.location?.pathname?.endsWith('/v1.12.6.html')===true;
         await this.ctx.audioWorklet.addModule(historicalD
           ?'./physical-piano-hybrid-v126.js?build=1.12.6'
-          :'./physical-piano-hybrid.js?build=1.12.8');
+          :'./physical-piano-hybrid.js?build=1.12.9');
         const node=new AudioWorkletNode(this.ctx,'palco-piano-hybrid',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -291,7 +291,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.modalPromise){
       this.modalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./piano-worklet.js?build=1.12.8');
+        await this.ctx.audioWorklet.addModule('./piano-worklet.js?build=1.12.9');
         const node=new AudioWorkletNode(this.ctx,'palco-piano',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -361,7 +361,7 @@ export class Acoustic {
     // O motor legado recebe sustain por mensagens 'send' de cada parte MIDI.
     // Sua API v1.9.5 não possuía o tipo de mensagem 'pedal'.
     const now=this.ctx.currentTime;
-    if(now-this.lastPedal<.07||!p?.pedalNoise)return;
+    if(p?.soundEngine==='sampled'||now-this.lastPedal<.07||!p?.pedalNoise)return;
     this.lastPedal=now;
     const src=this.ctx.createBufferSource(),eq=filter(this.ctx,'lowpass',down?330:580),vol=gain(this.ctx,p.pedalNoise*.00015);
     src.buffer=this.noise;src.connect(eq).connect(vol).connect(this.input);
@@ -373,6 +373,13 @@ export class Acoustic {
     if(p.soundEngine==='physical'&&this.physical)return this.playPhysical(part,key,velocity,p,expression);
     if(p.soundEngine==='physicalLegacy'&&this.legacyPhysical)return this.playPhysical(part,key,velocity,p,expression,true);
     if(p.soundEngine==='modal'&&this.modal)return this.playModal(part,key,velocity,p,expression);
+    if(p.soundEngine==='sampled'){
+      // Reproduz WAVs locais, sem somar osciladores, martelo ou clique artificiais.
+      part.releaseSeconds=clamp(p.release*(.55+.75*p.damping/100),.04,3);
+      const dynamic=Math.max(1,Math.round(127*fallbackVelocity(velocity,p.touch)));
+      this.samples.play(p.character,part,key,dynamic,.85);
+      return;
+    }
     const now=this.ctx.currentTime;
     part.releaseSeconds=clamp(p.release*(.55+.75*p.damping/100)*2**((54-key)/110),.035,4);
     const send=gain(this.ctx,expression.pedal?.92:.12);
@@ -392,7 +399,8 @@ export class Acoustic {
       click.buffer=this.noise;a.gain.setTargetAtTime(0,now+.002,.003);
       click.connect(eq).connect(a).connect(part.gate);part.own(eq,a);part.start(click,{pitch:false,until:now+.036});
     }
-    if(this.samples.play(p.character,part,key,velocity,.42+fallbackVelocity(velocity,p.touch)*.32)){
+    if((p.soundEngine==='classic'||p.soundEngine==='modal')&&
+       this.samples.play(p.character,part,key,velocity,.42+fallbackVelocity(velocity,p.touch)*.32)){
       return;
     }
     const regions=this.bank.layers(key,velocity,p);
