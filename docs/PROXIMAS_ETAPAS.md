@@ -1,3 +1,20 @@
+# Auditoria de referências científicas de piano acústico (22/11/2026)
+
+**Documento técnico atualizado:** [AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md](AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md).
+
+- [x] Identificar **BiVib** (88 notas × 10 velocities em dois Disklavier reais, cauda/vertical, 96 kHz/24 bit PCM, binaural e vibrações calibráveis): melhor referência pública verificada para dinâmica e radiação; dataset ~33 GB, licença CC BY-NC-SA.
+- [x] Identificar **RWC** (Yamaha, Steinway, Bösendorfer reais; 3 × 88 × 4 articulações × 3 dinâmicas = 3.168 sons; WAV mono); reedição 2026 CC BY-NC 4.0: melhor comparação independente de fabricantes e releases.
+- [x] Verificar **MAPS**: usar **somente** ENSTDkCl/ENSTDkAm como piano Yamaha Disklavier real, close/ambient. Outros sete grupos são instrumentos **virtuais**, não pianos reais.
+- [x] Verificar MAESTRO v3 (MIDI velocities/pedal com alinhamento ~3 ms, performance musical, não notas secas) e KRAISLER 2026 (piano separado dry/studio/hall e MIDI, **licença descrita com restrições potencialmente conflitantes**).
+- [x] Revisar qualidade das 33 amostras E0: os espectros obtidos **não comprovam realismo, nem uma vantagem perceptual objetiva do A sobre B/C**; velocity, microfones, ambiente e formatos não foram alinhados.
+- [ ] **E1:** obter subconjunto BiVib autorizado, verificar documentação de origem, número MIDI, velocity, estado da tampa, hashes, amplitude e captação. Planejar armazenamento antes de adquirir ~33 GB.
+- [ ] **E1:** obter segmento de **piano Steinway RWC** para comparação por nota e articulação; respeitar CC BY-NC (nenhuma distribuição comercial de samples).
+- [ ] **E1:** implementar rastreamento de parciais por múltiplas janelas e estimativas de incerteza; emparelhar velocidades e microfones antes de comparar motores.
+- [ ] **E2:** derivar martelo/corpo de medidas isoladas, testar B/decay/duas fases e ouvir motores em níveis compatíveis, mantendo 32–64 vozes/CC64/FX e PC/Moto g04s para validação.
+- Nenhuma amostra adicional de terceiro foi baixada nesta auditoria; nenhum DSP, UI, MIDI, FX ou preset alterado.
+
+---
+
 # E0 — aquisição e medição de quatro famílias de pianos (22/11/2026)
 
 - [x] Consultar as licenças e obter 33 gravações individuais: Steinway Model B / Iowa (9 AIFF), Yamaha C5 Salamander (9 AAC), Felt Fuchs & Möhr / Tom Guder (9 WAV) e Knight Upright VCSL (6 AAC).
