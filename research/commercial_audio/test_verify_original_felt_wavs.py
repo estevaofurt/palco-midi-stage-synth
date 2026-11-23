@@ -57,14 +57,20 @@ class FeltSelectiveSourceTests(unittest.TestCase):
         self.assertFalse(r["isPhysicalHammerMeasurement"])
 
     def test_mismatched_sample_format_rejected(self):
-        pcm=wave_pcm()
-        zio=io.BytesIO()
-        with zipfile.ZipFile(zio,"w") as z:z.writestr("forte/f84.wav",pcm)
-        zio.seek(0)
-        with zipfile.ZipFile(zio,"r") as z:
+        payload=io.BytesIO()
+        with wave.open(payload,"wb") as snd:
+            snd.setnchannels(1)   # deliberately not the creator's stereo format
+            snd.setsampwidth(2)
+            snd.setframerate(48000)
+            snd.writeframes(b"\\x00\\x00"*48000)
+        archive=io.BytesIO()
+        with zipfile.ZipFile(archive,"w",compression=zipfile.ZIP_DEFLATED) as z:
+            z.writestr("forte/f84.wav",payload.getvalue())
+        archive.seek(0)
+        with zipfile.ZipFile(archive,"r") as z:
             bad={"member":"forte/f84.wav","id":"bad","midi":84,
                  "layerLabel":"forte","nominalPitch":"C6"}
-            # The expected source is 16-bit stereo, and our fixture is valid.
-            self.assertEqual(verify.verify_member(z,bad)["wav"]["bitDepth"],16)
+            with self.assertRaisesRegex(ValueError,"source format"):
+                verify.verify_member(z,bad)
 
 if __name__=="__main__":unittest.main()
