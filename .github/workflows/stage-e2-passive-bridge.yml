@@ -1,0 +1,33 @@
+name: Stage E2 passive bridge 88-key validation
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'research/damper-aware-shared-bridge.mjs'
+      - 'tests/damper_aware_shared_bridge.test.mjs'
+      - 'scripts/benchmark_damper_aware_shared_bridge.mjs'
+      - '.github/workflows/stage-e2-passive-bridge.yml'
+  workflow_dispatch:
+jobs:
+  bridge-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Stage suite + passive full 88-key bridge regressions
+        run: npm run check
+      - name: Node benchmark 88 physical keys 32/48/64 struck
+        run: node scripts/benchmark_damper_aware_shared_bridge.mjs | tee bridge-benchmark.json
+      - name: Ensure public audio and user interface are unchanged
+        run: |
+          git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
+      - name: Preserve numeric benchmark only
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-e2-88-key-node-benchmark
+          path: bridge-benchmark.json
+          retention-days: 30
