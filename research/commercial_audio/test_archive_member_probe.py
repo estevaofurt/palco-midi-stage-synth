@@ -6,6 +6,9 @@ HERE=Path(__file__).parent
 spec=importlib.util.spec_from_file_location("archive_member_probe",HERE/"archive_member_probe.py")
 app=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(app)
+spec2=importlib.util.spec_from_file_location("probe_archive_wav_access",HERE/"probe_archive_wav_access.py")
+wavprobe=importlib.util.module_from_spec(spec2)
+spec2.loader.exec_module(wavprobe)
 
 class ArchiveMemberTests(unittest.TestCase):
  def test_immutable_archive_url(self):
@@ -30,7 +33,7 @@ class ArchiveMemberTests(unittest.TestCase):
   ident="bitKlavierGrand_PianoBar_44k16b"
   base=f"https://archive.org/download/{ident}/{ident}.zip/"
   content=f'<a href="//archive.org/download/{ident}/{ident}.zip/{ident}%2FC4v8.wav">{ident}/C4v8.wav</a>'
-  link=app.find_member_link(content,"C4v8.wav",base)
+  link=wavprobe.find_member_link(content,"C4v8.wav",base)
   self.assertIsNotNone(link)
   self.assertIn("C4v8.wav",link)
 
