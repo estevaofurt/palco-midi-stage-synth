@@ -58,7 +58,7 @@ Dois Yamaha Disklavier **acústicos reais**:
 - Amostras em 96k/24b, 88.2k/24b, 48k/24b, 44.1k/16b; download de coleções por imagem estéreo no Archive.org; **CC BY 4.0**, inclusive para criar instrumentos derivados com atribuição.
 - **Limitação física fundamental:** as sessões foram **denoised (iZotope RX8)**, recortadas com fades, seleção por RMS e **reequilibradas em ganho (normalmente variações <2 dB)** para homogeneidade de velocity e teclado; **não usar amplitude de arquivos como medição direta da força/massa do martelo**. Os registros podem conter reverb do auditório. Ainda sim são excelente referência para corpo, timbre, expansão espacial e detalhes de pedais/release.
 - Para **American Stage**: usar Piano Bar / Harp Omni como referência de radiador próximo, e binaural/House ORTF como condições de escuta alternativas; **a diferença entre posições é dado sobre microfonação, não um erro intrínseco de corda**.
-- Mais útil que Steinway B Iowa para caracterizar **especificamente Model D** e testar múltiplos radiadores. Complementar RWC para verificar um Steinway real não editado/não nivelado no mesmo padrão artístico.
+- Mais útil que Steinway B Iowa para caracterizar **especificamente Model D** e testar múltiplos radiadores. Complementar RWC para comparar outro Steinway real sob condições de gravação distintas, sem assumir que a cadeia RWC não tenha edições ou processamento.
 
 ## 3. MAPS (ENSTDkCl / ENSTDkAm) — PRIORIDADE ALTA para MIDI controlado e captação
 
