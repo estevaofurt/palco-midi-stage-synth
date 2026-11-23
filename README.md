@@ -1,3 +1,13 @@
+# Stage Synth v1.12.6 — motor D com correção acústica por registro (ainda experimental)
+
+O usuário identificou que o Stage D v1.12.5 não se parecia com um piano real. A investigação com **15 gravações originais Steinway B/Iowa com SHA256 verificado** mostrou que D projetava os graves como cordas quase isoladas: fundamental excessiva e parciais 2–8 muito fracos; no agudo havia harmônicos excessivos.
+
+**Mudança:** no próprio **Piano Acústico → Motor do piano → D · Stage híbrido · experimental**, a geração dos modos agora possui uma **transferência de radiação/ataque numérica, limitada e interpolada por nota/velocidade**, ancorada em 5 regiões × 3 camadas de gravações originais. Não é equalizador geral nem usa samples no aplicativo. **American Grand** recebe a correção integral baseada no Steinway B; outros caracteres recebem uma extrapolação menor, ainda não calibrada em seus respectivos instrumentos. A/B/C/Clássico, demais módulos, MIDI, FX e presets permanecem preservados; o padrão segue C.
+
+**Resultado offline, sobre as referências usadas no ajuste (treino, não homologação):** média absoluta de diferenças de harmônicos confiáveis no ataque de **20,30 → 3,23 dB**, melhor em 15/15 notas/dinâmicas. Em janela mais tardia, **20,33 → 9,38 dB**, melhor em **10 de 14** casos comparáveis, com alguns registros ainda imperfeitos. São medidas limitadas por microfones/sala, velocidades nominais, janelas FFT e dados com pouco sinal nos agudos; **não equivalem a escuta, avaliação ABX, validação física do martelo ou desempenho em hardware**.
+
+**Teste:** iniciar áudio no navegador, selecionar *American Grand* e depois *D* no mesmo módulo Piano; comparar C2/C3/C4/C5/C6, pp/mf/ff, com FX desligados. **32/48/64 notas são tetos de alocação, não polifonia homologada no PC/Moto g04s.** Todas as 65 gravações externas verificadas continuam fora do aplicativo; os 7 R-GATEs comerciais/físicos permanecem sem aprovação integral. Consulte [diagnóstico com fontes](docs/DIAGNOSTICO_TIMBRE_D_IOWA_15_2026-11-23.md) e [motor D](docs/MOTOR_D_HIBRIDO_EXPERIMENTAL_2026-11-23.md).
+
 # Stage Synth v1.12.5 — motor D híbrido (experimental)
 
 Acesse **Piano Acústico → Identidade e dinâmica → Motor do piano → D · Stage híbrido · experimental**. Os motores **A · Claude**, **B · Stage físico v1.9.5**, **C · Novo Stage mecânico** e **Clássico** permanecem disponíveis no mesmo menu, sem novos módulos ou links. A seleção do usuário é preservada; o padrão para instalações existentes continua C.

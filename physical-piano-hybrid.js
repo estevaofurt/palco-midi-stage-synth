@@ -1,4 +1,5 @@
 import {PianoResonanceBody} from './piano-resonance.js';
+import {hybridRadiationGain} from './piano-hybrid-calibration.js';
 
 /**
  * Stage D — original hybrid modal piano prototype (research-informed, NOT measured/calibrated).
@@ -20,10 +21,10 @@ const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const midiHz=k=>440*2**((k-69)/12);
 const CHARACTER=Object.freeze({
   // Inspired by qualitative differences, not measured Yamaha/Steinway constants.
-  japanese:{tone:1.10,body:1.05,decay:1.04,detune:.9,contact:.92,noise:.84},
-  american:{tone:.88,body:1.08,decay:1.13,detune:.86,contact:1.10,noise:.77},
-  felt:{tone:.41,body:.82,decay:.83,detune:.72,contact:2.0,noise:.37},
-  upright:{tone:.79,body:.90,decay:.75,detune:1.65,contact:1.14,noise:1.12}
+  japanese:{tone:1.10,body:1.05,decay:1.04,detune:.9,contact:.92,noise:.84,radiation:.75},
+  american:{tone:.88,body:1.08,decay:1.13,detune:.86,contact:1.10,noise:.77,radiation:1},
+  felt:{tone:.41,body:.82,decay:.83,detune:.72,contact:2.0,noise:.37,radiation:.20},
+  upright:{tone:.79,body:.90,decay:.75,detune:1.65,contact:1.14,noise:1.12,radiation:.52}
 });
 
 export function hybridInharmonicity(key) {
@@ -136,6 +137,12 @@ export class HybridPianoEngine {
       const tilt=Math.exp(-.35*(f/3500)**1.16/tone);
       let a=strike*contact*tilt/n**1.12;
       if(n>1)a*=.65+.55*speed**.55;
+      // Piano sound is not raw string displacement: bridge/body/microphones
+      // radiate frequency-dependent modes. Apply a BOUNDED effective
+      // excitation/radiation transfer at each note-on, before energy
+      // normalization. Steinway B is the only measured acoustic anchor;
+      // other characters receive weaker cross-instrument extrapolation.
+      a*=hybridRadiationGain(key,speed,n)**profile.radiation;
       const phase=-2*Math.atan(ct)+.08*n;
       const decay=baseT60/(1+.052*n*n+.08*f/1000);
       if(n<=this.paired&&!single&&count+2<=MAX_MODES){

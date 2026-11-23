@@ -113,7 +113,9 @@ export function analyzeOne(entry){
  const window=cropFromAttack(pcm,onset,RATE);
  const real=outputMetric(measurePianoNote(window,{sampleRate:RATE,key:entry.key}));
  real.earlySpectrum=measureEarlyPartials(window,entry.key);
- const stage=renderedStage(entry.key,entry.stageCharacter);
+ // Nominal MIDI velocities are a MODEL CONVENTION, not measured hammer speed.
+ const nominalVelocity={pp:32,mf:80,ff:120}[entry.dynamic]??80;
+ const stage=renderedStage(entry.key,entry.stageCharacter,nominalVelocity/127);
  return {
   id:entry.id,instrument:entry.instrument,key:entry.key,dynamic:entry.dynamic,
   provenance:{originalUrl:entry.originalUrl,sha256:entry.sha256,bytes:entry.bytes,
@@ -121,7 +123,8 @@ export function analyzeOne(entry){
    originalFormat:entry.originalFormat,captureNotes:entry.captureNotes,
    processing:entry.processing||'as published',license:entry.license||'see original source'}, 
   analysis:{rate:RATE,downmix:'ffmpeg stereo-to-mono average',offsetSeconds:onset,
-   analysisSeconds:DURATION,recordingRoom:entry.roomType||'unknown',
+   analysisSeconds:DURATION,stageNominalMidiVelocity:nominalVelocity,
+   stageVelocityCalibrated:false,recordingRoom:entry.roomType||'unknown',
    compression:entry.compression||'lossless source',
    caution:entry.compression==='lossy AAC'?'AAC and edits prevent precise physical envelope identification':null}, 
   real,stage,shapeDifferences:Object.fromEntries(Object.entries(stage).map(([name,metric])=>
@@ -137,7 +140,7 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
  const result={schema:'stage-piano-reference-e0-v2',reference:'Identified piano recordings (see per-note provenance)',
   notes:analyses,qualifications:[
    'Recordings may include room response, sample edits or fades: only original lossless non-looped recordings are candidates for individual physical decay estimates.',
-   'Real-world pp/mf/ff or sample layers do not equal a calibrated MIDI/hammer velocity; Stage speed is fixed at 80/127 for diagnostic comparison.',
+   'Iowa pp/mf/ff layers do not equal calibrated MIDI/hammer speed; Stage uses uncalibrated nominal MIDI velocity proxies 32/80/120 only for exploratory comparison.',
    'Different microphones and positions: relative spectral shape is diagnostic, not an objective realism score.',
    'B requires at least three candidate stretched partials; 1–2 candidates are marked inconclusive. Even >=3 is a finite FFT approximation.',
    'Attack-spectrum diagnostic uses a shorter Hann window (8192/16384 samples); it can reveal early harmonics but cannot estimate physical B from nonstationary transients.',

@@ -95,7 +95,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.physicalPromise){
       this.physicalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./physical-piano.js?build=1.12.5');
+        await this.ctx.audioWorklet.addModule('./physical-piano.js?build=1.12.6');
         const node=new AudioWorkletNode(this.ctx,'palco-physical-piano',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -133,7 +133,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.legacyPhysicalPromise){
       this.legacyPhysicalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./physical-piano-legacy.js?build=1.12.5');
+        await this.ctx.audioWorklet.addModule('./physical-piano-legacy.js?build=1.12.6');
         const node=new AudioWorkletNode(this.ctx,'palco-physical-piano-legacy',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -168,7 +168,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.hybridPromise){
       this.hybridPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./physical-piano-hybrid.js?build=1.12.5');
+        await this.ctx.audioWorklet.addModule('./physical-piano-hybrid.js?build=1.12.6');
         const node=new AudioWorkletNode(this.ctx,'palco-piano-hybrid',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });
@@ -286,7 +286,7 @@ export class Acoustic {
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(!this.modalPromise){
       this.modalPromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./piano-worklet.js?build=1.12.5');
+        await this.ctx.audioWorklet.addModule('./piano-worklet.js?build=1.12.6');
         const node=new AudioWorkletNode(this.ctx,'palco-piano',{
           numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]
         });

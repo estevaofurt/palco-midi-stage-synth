@@ -1,3 +1,13 @@
+## Stage v1.12.6 — reparo dirigido do timbre D, sob homologação (23/11/2026)
+
+Após a crítica perceptiva do titular, a análise de [15 AIFF originais Steinway B/Iowa hash-verificados](DIAGNOSTICO_TIMBRE_D_IOWA_15_2026-11-23.md) detectou uma falha sistêmica do D: nos graves, a síntese subestimava fortemente os parciais; no agudo, alguns parciais tinham energia excessiva. Na v1.12.6, o **D recebeu ponderação numérica limitada por nota e intensidade `piano-hybrid-calibration.js`, aplicada à excitação modal**, não no EQ global. Os motores A/B/C e o padrão C permanecem intactos.
+
+**Evidência técnica da versão candidata, não de realismo auditivo:** usando os mesmos 15 registros de orientação do modelo, erro médio absoluto do espectro harmônico do ataque **20,30→3,23 dB (15/15 melhores)**; no espectro de janela mais tardia **20,33→9,38 dB (10/14 melhores)**. A avaliação é **in-sample**, com microfones/sala e velocities não medidas; C5/C6 têm poucos harmônicos confiáveis. **A versão não está homologada em um navegador real nem contra outros instrumentos**. A/B/C têm regressões próprias, e a continuidade do D deve ser testada com números reais e escuta, sem copiar áudio para Git.
+
+**Preservação comercial:** 65 arquivos originais licenciados com hash verificado em sete fontes instrumentais não embutidos; nenhum code/data NC ou AGPL importado. R-GATEs **0/7 integralmente aprovados**; 32–64 vozes só alocadas, sem prova de CPU/callback do Moto g04s. O D só será estável após escuta e testes físicos/hardware. Detalhes [motor D](MOTOR_D_HIBRIDO_EXPERIMENTAL_2026-11-23.md) e [CI de referências](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45116191342).
+
+---
+
 ## Falha timbral do motor D CONFIRMADA por medição acústica (23/11/2026)
 
 **Feedback do titular:** v1.12.5 não soa como um piano acústico real. Em vez de trocar equalização ou gerar mais um motor, foi executado [diagnóstico original de 15 AIFF Steinway B/Iowa, 5 notas × 3 dinâmicas](DIAGNOSTICO_TIMBRE_D_IOWA_15_2026-11-23.md), todos com SHA256 e codec correspondendo ao manifesto aprovado. No C2 mf, o 6º harmônico é **+26,4 dB relativo à fundamental na referência**, mas **−23,4 dB no motor D**; na região central há harmônicos altos ausentes e no C6 há excesso de segundo harmônico. O D tem **perfil de excitação/radiação errado por registro**, não um problema que EQ global resolva. Essas métricas são espectrais, *não* notas de fidelidade ou análise da física interna. A primeira tentativa de CI faltava ffmpeg; o workflow foi corrigido, e o [run 45115134998](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45115134998) concluiu com êxito e publicou apenas parâmetros numéricos; mídia original eliminada no runner.
