@@ -31,9 +31,11 @@ IDs: bitKlavierGrand_PianoBar_44k16b, bitKlavierGrand_Binaural_44k16b, bitKlavie
 **Índice interno do ZIP acessível:** foram localizados os **11/11 nomes escolhidos** de Piano Bar, **3/3** Binaural e **3/3** Harp Omni; nomes incluem C2v1/v8/v16, C4v1/v8/v16, C6v1/v8/v16, rel40 e pedalU1. Execução https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45102770585 . 
 Também foi testada a URL do membro virtual C4v8.wav do ZIP original: retornou **cabeçalho RIFF/WAVE válido em 256 bytes**, mas isso isoladamente não verifica o arquivo todo. Não anunciar esse teste parcial como WAV totalmente íntegro.
 
-**Método de extração seletiva criado:** manifesto research/commercial_audio/steinway_d_selective_pilot.json, script verify_bitklavier_wavs.py e testes offline. Faz download com limite de 30 MB por WAV e 100 MB total, analisa WAV PCM, calcula SHA-256 de toda amostra e apaga os dados originais antes de publicar artifact. **Não copia gravações para o repositório**. O estado de cada arquivo precisa de resultado CI com SHA256, separado da prova do ZIP e do índice.
+**Método de extração seletiva CRIADO E EXECUTADO com sucesso:** manifesto research/commercial_audio/steinway_d_selective_pilot.json, script verify_bitklavier_wavs.py e testes offline. Baixou diretamente **sete WAVs originais de dentro dos ZIPs oficiais**, com limite de 30 MB por WAV e 100 MB no conjunto; verificou WAV PCM e SHA-256 integral e eliminou os bytes de áudio após cada teste. **7/7 aprovados**, total 39.356.676 bytes, sem publicar WAVs. Execução https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45103239343 (**22/22 testes unitários**). Os sete SHA-256 permanentes estão em research/commercial_audio/steinway_d_verified_wav_sha256.json; áudio não está no repositório. Dados disponíveis: Piano Bar C2v8, C4v1/v8/v16, C6v8, Binaural C4v8 e Harp Omni C4v8.
 
 **Usos da referência Steinway D:** comparação de timbre American Grand, variação por posição microfonada, eventos de pedal e ressonância; **não** fornece medição direta de impedância da ponte, velocidade do martelo nem contato do feltro.
+
+**Resumo acumulado:** com a rodada anterior de 28 WAV/FLAC originais de Yamaha C5, Steinway B, Knight e Kawai e os sete WAVs Steinway D atuais, são agora **35 arquivos originais de cinco pianos reais**, **103.753.348 bytes** verificados. Isso não equivale a cinco pianos com física medida nem libera qualquer um dos sete gates.
 
 ## Felt original — Tom Guder / Fuchs & Möhr upright
 
@@ -56,7 +58,7 @@ https://drive.google.com/file/d/1XbIZgTdKoR2KxIyKM-CkEweS3HI4ieHu/view?usp=drive
 
 ## Pendências e liberação
 
-- Completar verificação SHA256 dos **WAVs selecionados do Model D** em mics diferentes e layers; preferir coleção original 48k/24b em calibração física futura se houver necessidade, sabendo que a pós-produção permanece.
+- **CONCLUÍDO PARCIALMENTE:** sete WAVs do Model D foram integralmente verificados em três mics e diferentes layers, com SHA256 persistente. Para ampliar a escala, decidir se é útil obter a coleção 48k/24b em calibração acústica futura; lembrar que a pós-produção dos autores permanece. Ainda NÃO há medidas de martelo e ponte.
 - Baixar/validar o ZIP Felt original do criador e registrar autor, licença e integridade; não publicar bytes no GitHub ou aplicativo.
 - Obter dados de martelo–corda, duas polarizações e mobilidade da ponte de laboratório próprio ou autorizado comercialmente; **microfone sozinho não identifica física interna**.
 - Preparar lista de atribuições, decisão sobre licença do aplicativo, termo de distribuição e prova de direitos de código/fixtures.
