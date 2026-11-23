@@ -51,3 +51,34 @@ test('rejects out-of-range roots, truncated windows, and invalid WAV',()=>{
   offsetSeconds:.8,analysisSeconds:.3}),RangeError);
  assert.throws(()=>auditPrivatePcmPitch(Buffer.from('bad'),{midiRoot:36}),RangeError);
 });
+
+test('offline bank CLI reports evidence and fails on wrong semitone',async()=>{
+ const {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync}=
+   await import('node:fs');
+ const {tmpdir}=await import('node:os');
+ const {join}=await import('node:path');
+ const {spawnSync}=await import('node:child_process');
+ const dir=mkdtempSync(join(tmpdir(),'stage-e27-pitch-'));
+ const script=new URL('../scripts/audit_private_piano_bank.mjs',import.meta.url);
+ try{
+  const good=join(dir,'good'),bad=join(dir,'bad');
+  mkdirSync(good);mkdirSync(bad);
+  writeFileSync(join(good,'MIDI36_v60.wav'),synthetic({key:36}));
+  writeFileSync(join(good,'MIDI60_v110.wav'),synthetic({key:60,
+   frequencies:[1,2,4]}));
+  writeFileSync(join(bad,'MIDI36_v60.wav'),synthetic({key:37}));
+  const reportFile=join(dir,'report.json');
+  const okay=spawnSync(process.execPath,[script.pathname,good,reportFile],
+   {encoding:'utf8',timeout:15000});
+  assert.equal(okay.status,0,okay.stderr);
+  const report=JSON.parse(readFileSync(reportFile,'utf8'));
+  assert.equal(report.count,2);assert.equal(report.passed,2);
+  assert.equal(report.rightsToRedistributeVerified,false);
+  assert.equal(report.absolutePitchVerified,false);
+  const invalid=spawnSync(process.execPath,[script.pathname,bad],
+   {encoding:'utf8',timeout:15000});
+  assert.equal(invalid.status,1,'mislabeled sample must block audit');
+  const badReport=JSON.parse(invalid.stdout);
+  assert.equal(badReport.failed.length,1);
+ }finally{rmSync(dir,{recursive:true,force:true})}
+});
