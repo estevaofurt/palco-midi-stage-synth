@@ -1,0 +1,38 @@
+name: Stage E2.6 private local piano sample audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'patches.js'
+      - 'panel.js'
+      - 'research/private-wav-note-bank.mjs'
+      - 'scripts/build_private_piano_bank.mjs'
+      - 'tests/private_wav_note_bank.test.mjs'
+      - 'docs/LAB_E26_AMOSTRAS_LOCAIS_2026-11-23.md'
+      - '.github/workflows/stage-e26-private-samples.yml'
+  workflow_dispatch:
+jobs:
+  private-samples:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Full Stage syntax and Node regressions
+        run: npm run check
+      - name: Validate private bank CLI syntax
+        run: node --check scripts/build_private_piano_bank.mjs
+      - name: Protect published audio engines and app routing
+        run: |
+          git diff --exit-code origin/main...HEAD -- acoustic.js physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js piano-resonance.js app.js stage.js sample-library.js fx-rack.js performance.js package.json
+      - name: Reject bundled audio or archives in PR
+        run: |
+          git diff --name-only origin/main...HEAD > /tmp/e26-files.txt
+          if grep -Ei '\.(wav|wave|aiff|aif|flac|ogg|mp3|sf2|zip|rar|7z)$' /tmp/e26-files.txt; then
+            echo 'User-supplied audio must remain local, never commit WAV/archives.'
+            exit 1
+          fi
