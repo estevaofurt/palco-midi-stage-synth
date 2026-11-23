@@ -33,3 +33,9 @@ A execução inicial do GitHub Actions em 23/11/2026 (run 45094402305) obteve **
 - Nenhuma conclusão auditiva é permitida a partir desses números. Os modos ressonantes independentes preservam sua própria rigidez: melhorar só a fase da linha de atraso tem efeito limitado no espectro final.
 - O teste foi reestruturado para **isolar o guia de onda** e medir seu efeito real, mantendo o aumento de B global como objetivo ainda não atingido. Isso **não** autoriza integrar o experimento no app.
 - Próximos passos: verificar métricas isoladas, estudar coerência entre modos e linha dispersiva, corrigir perdas por frequência, repetir benchmark de CPU e só depois comparar a audição.
+
+## Diagnóstico isolado aprovado (CI 45094508441)
+- **93 testes Node aprovados, zero falhas** para o código experimental revisado, incluindo 32/64 vozes e estimativa de afinação nas três regiões. Não há teste em hardware real.
+- C4 waveguide somente, sem modos auxiliares: B estimado **0,0000159021 → 0,0000180928** (~13,8%). O filtro novo efetivamente muda o guia de onda.
+- C4 saída completa, com os modos originais: **0,0001102457 → 0,0001129035** (~2,4%). Os modos aditivos limitam o efeito global, e a mistura altera o pico.
+- **Conclusão:** mecanismo matematicamente operacional, mas **critério de fidelidade não atingido**. Manter o experimento sem merge e sem opção no Piano Acústico até redesenhar coerentemente a dispersão da guia e dos modos, sem parâmetros arbitrários e com comparação de áudio seca real.
