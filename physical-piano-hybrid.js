@@ -198,7 +198,11 @@ export class HybridPianoEngine {
     }
     const normalized=.056*speed**1.35*(.72+.45*brightness)*profile.body/
       Math.sqrt(Math.max(1e-8,power));
-    for(let i=0;i<count;i++){v.y1[i]*=normalized;v.y2[i]*=normalized}
+    for(let i=0;i<count;i++){
+      v.y1[i]*=normalized;v.y2[i]*=normalized;
+      // Bass drive starts from zero displacement, so normalize drive too.
+      if(v.forceCount)v.drive[i]*=normalized;
+    }
     v.id=id;v.key=key;v.active=true;v.released=false;v.damped=false;
     v.count=count;v.age=0;v.silent=0;v.lastPeak=0;v.send=clamp(send,0,1);v.sendTarget=v.send;
     v.attack=v.forceCount?1:0;
