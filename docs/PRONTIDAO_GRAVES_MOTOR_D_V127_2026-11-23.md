@@ -18,6 +18,27 @@
 
 A janela de `measureEarlyPartials` começa em 0,018s, mas usa 16.384 pontos @48kHz nas notas graves: **duração ≈341ms**; em notas altas usa 8.192 pontos: **≈171ms**. **Isso não mede isoladamente o impacto inicial do martelo.** A v1.12.6 corrigiu o *espectro integrado de parte do ataque/começo da sustentação*, **não** comprovou a dinâmica física dos primeiros 10ms. Esta distinção encerra a lacuna metodológica sem descartar a melhora já ouvida.
 
+## Resultado real da nova medição temporal — 15/15 originais verificados
+
+**Execução concluída:** [GitHub Actions 45145307816](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45145307816); **15 originais** com SHA256 conferido e relatório `bass-temporal-diagnostics.json` (artefato numérico temporário, sem áudio). **118 testes Node aprovados**, **108 cenários secos antigos A/B/C** não-clipping/não-finitos (workflow [45145307932](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45145307932)). Nenhum motor foi alterado.
+
+Janelas relativas ao RMS de 100–220ms. Diferença **D v1.12.6 menos Steinway B original** em dB; valores negativos significam menos energia relativa no D. **Os números medem forma temporal, não volume absoluto**.
+
+| Nota/dinâmica | Impacto 0–12ms | 12–36ms | Cauda 900–1400ms | Leitura limitada |
+| --- | ---: | ---: | ---: | --- |
+| C2/pp | +3,93 | +7,85 | −15,66 | Transiente relativamente forte/cauda muito curta **ou** original com contribuição de ruído/reverb a verificar |
+| C2/mf | −1,44 | +1,92 | −1,16 | Envelope RMS próximo; timbre ainda incorreto → **apenas o RMS não explica a percepção** |
+| C2/ff | +3,53 | +0,87 | −1,86 | Excesso de início; cauda relativamente próxima |
+| C3/pp | +4,35 | +4,79 | −25,76 | Maior desvio de cauda; conferir piso de ruído e duração real da nota antes de ajustar |
+| C3/mf | +2,79 | +1,42 | +0,85 | Envelope parecido, mas evolução dos parciais e corpo ainda problemáticos |
+| C3/ff | +5,42 | +1,31 | +1,20 | Transiente inicialmente excessivo |
+ 
+**Conclusão mais útil:** C2/mf é próximo no envelope RMS, mas a **sexta parcial** apresenta trajetória diferente. Em janelas Hann de 171ms iniciadas em **20/220/520/850ms**, a relação 6º parcial/fundamental no original foi **+25,82 / +24,88 / +23,89 / +22,12 dB**; no D **+18,99 / +17,38 / +14,98 / +12,33 dB**. A diferença chega a **9,79 dB no final da janela de 850ms**. Isso sustenta priorizar **decaimento/acoplamento variável no tempo** e não reajustar só brilho no ataque.
+
+**Cuidado com pp:** altos harmônicos do original em janelas tardias podem ser influenciados por ruído, reverberação, início/soltura mal delimitados e microfones. O relatório **não mede piso de ruído, damper-off nem força de martelo**; não usar −15,66/−25,76dB como alvo direto para prolongar cordas sem conferir relação sinal-ruído e notas efetivamente sustentadas.
+
+**Conclusão operacional:** a preparação agora mede separadamente o ataque e a evolução do harmônico grave, preservando **C4/C5/C6 como guardas**. Experimentos seguintes devem validar hipóteses de martelo/corpo/duplo decaimento uma de cada vez, com bloqueio de regressão sonora e escuta.
+
 ## Preparação executável (CI real, sem alterar som)
 
 - `scripts/diagnose_piano_bass_envelope.mjs` analisa **15 AIFF originais Steinway B/Iowa**, pré-validados por **SHA256**, com áudio **somente no runner temporário**. Mede energia relativa por janelas **0–12ms, 12–36ms, 36–100ms, 100–220ms, 220–450ms, 450–900ms, 900–1400ms**; alto-passante 900Hz para transiente; FFT **171ms** com início 20/220/520/850ms para evolução dos parciais. Dados são **diferenças numéricas**, não som nem medidas diretas de força de martelo.
