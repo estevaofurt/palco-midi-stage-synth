@@ -3,8 +3,10 @@ on:
   pull_request:
     paths:
       - 'research/iowa-f0-label-audit.mjs'
+      - 'research/iowa-pitch-harmonic-comb.mjs'
       - 'scripts/audit_iowa_original_pitch_labels.mjs'
       - 'tests/iowa_f0_label_audit.test.mjs'
+      - 'tests/iowa_pitch_harmonic_comb.test.mjs'
       - '.github/workflows/iowa-original-pitch-label-audit.yml'
       - 'docs/AUDITORIA_AFINACAO_IOWA_ORIGINAIS_2026-11-23.md'
   workflow_dispatch:
@@ -40,10 +42,12 @@ jobs:
       - name: Check syntax, original Stage regression and deterministic YIN tests
         run: |
           node --check research/iowa-f0-label-audit.mjs
+          node --check research/iowa-pitch-harmonic-comb.mjs
           node --check scripts/audit_iowa_original_pitch_labels.mjs
           node --check tests/iowa_f0_label_audit.test.mjs
           npm run check
           node --test tests/iowa_f0_label_audit.test.mjs
+          node --test tests/iowa_pitch_harmonic_comb.test.mjs
       - name: Install and confirm lossless AIFF decoder
         run: |
           if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
