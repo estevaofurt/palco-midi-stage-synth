@@ -1,3 +1,21 @@
+# Próxima lacuna P0: mobilidade cruzada de ponte e histerese do martelo — 23/11/2026
+
+[Documento científico F01–F08](EVIDENCIA_MARTELO_MOBILIDADE_CRUZADA_E_REDUTORA_2026-11-23.md) e [protocolo M01.1/M04.1 atualizado](PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md).
+
+- [x] Conferir medições publicadas reais de contato F_h(t), compressão/rebote e movimento ortogonal do martelo (1984, 1991, 1998) sem confundir a figura de um Steinway com dados brutos reutilizáveis.
+- [x] Identificar exemplo quantitativo de upright medido por Ege/Boutillon (2010): massa, densidade modal, perdas e mudança de regime estrutural; **somente referência do instrumento publicado**, nunca Yamaha/Steinway calibrados.
+- [x] Confirmar que modelo de ponte para duas polarizações requer resposta complexa cruzada **2×2** para inferir transferência T↔P e double decay; esclarecer que M04 escalar inicial não basta para a alegação de física completa.
+- [x] Verificar evidência de modelo reduzido de **cinco modos** no artigo JASA 2024, **sem afirmar equivalência sonora integral ou 64 vozes em Web Audio**.
+- [x] Verificar direitos do comparador híbrido Simionato et al.: código externo **LGPLv3**, dataset Kaggle com direitos comerciais ainda não verificados; sem copiar código/treinar modelos.
+- [ ] Contratar ou obter autorização comercial de **medidas originais do mesmo piano** para M01.1 (F(t), δ(t), histerese) e M02/M03 (H/V e uníssonos), M04.1 (mobilidade ponte 2×2) e M05 (radiador). Separar conteúdo próprio, permissões de divulgação e parâmetros derivados.
+- [ ] Caso só exista mobilidade escalar normal, registrar explicitamente os termos Y_TP/Y_PT/Y_PP como desconhecidos e avaliar alternativa **offline** sem aprovar R-GATE-2 nem novos motores.
+- [ ] Preparar E1.0 (cadeias A/B/C comparáveis) e E1.1 (estimador com B sintético conhecido), **ainda não implementados** pela regra de congelamento.
+- [ ] Homologar, quando autorizado, comportamento auditivo e callback real com 32 mínimo / 64 meta no PC e Moto g04s, sem prometer resultado antes do teste.
+
+**Situação:** teoria mais precisa; **nenhuma nova série original de martelo ou ponte licenciada**, 50 áudios originais previamente confirmados inalterados, **0/7 R-GATEs integralmente completos**, nenhum DSP/P1/P2 implementado neste ciclo.
+
+---
+
 # Preparação adicional de tampo, toque e nova referência Upright CC0 — 23/11/2026
 
 Ver [relatório técnico N01–N06](RADIACAO_TAMPO_TOQUE_FONTES_COMERCIAIS_2026-11-23.md).

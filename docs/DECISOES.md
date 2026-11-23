@@ -203,3 +203,14 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Dado externo novo:** `facebookincubator/Meta-open-sound` possui CC0 declarado e manifesto de **352 nomes de amostras Upright**, 88 notas × 4 velocities; **somente os textos, SFZ e manifestos foram verificados**. Não baixar, redistribuir ou considerar os arquivos plenamente verificados antes de conferir bytes, origem e condições acústicas. Não somar 352 às 50 gravações Stage com proveniência original e hashes já auditados. Artigos e dados com restrições NC ou licenças não esclarecidas ficam fora de calibração comercial.
 
 **Proteções:** nenhum novo DSP ou integração P1/P2. `main` v1.12.4, motor histórico v1.9.5 preservado. Os **sete R-GATEs permanecem integralmente bloqueados**, e a homologação de 32–64 notas depende de hardware real.
+
+
+## D-028 — Não reduzir contato do martelo a pulso fixo nem mobilidade da ponte a escalar sem declarar hipótese (23/11/2026)
+
+**Decisão de pesquisa:** acrescentar à futura especificação de coleta **M01.1 — curva F_h(t)/δ(t) com compressão e recuperação (histerese)**; e **M04.1 — matriz complexa 2×2 de mobilidades da ponte**, `Y_TT/Y_TP/Y_PT/Y_PP`, captada por força-resposta calibrada em dois planos e pontos identificados. O escalar normal `Y_TT` é um piloto legítimo, **não identifica** por si a transferência entre planos e o duplo decaimento. Reciprocidade, causalidade, passividade, erro/fase e resposta radiada devem ser avaliados com dados adequados e não por coeficientes inventados.
+
+**Evidência:** [EVIDENCIA_MARTELO_MOBILIDADE_CRUZADA_E_REDUTORA_2026-11-23.md](EVIDENCIA_MARTELO_MOBILIDADE_CRUZADA_E_REDUTORA_2026-11-23.md), fontes primárias Yanagisawa/Nakamura (1984), Russell/Rossing (1998), Askenfelt (1991), Ege/Boutillon (2010) e Miranda Valiente et al. (2022/2023, 2024). A literatura demonstra que modelos reduzidos são **plausíveis para investigação**, mas não prova fidelidade do Stage ou tempo real em dispositivo específico. Exemplo de parâmetro medido em outro piano não deve ser transferido como “calibrado” aos quatro timbres.
+
+**Limite de direitos:** artigo científico ≠ arquivo de dados autorizado, nem licença de software de terceiros. Simionato et al. têm código **LGPLv3** e dataset externo de direitos não verificados; estudo conceitual não autoriza copiá-lo sem revisão de obrigações. Qualquer novo dado de calibração do Stage comercial exige autorização expressa.
+
+**Status:** somente documentação e protocolo; nenhuma gravação física nova, implementação DSP/UI/MIDI/FX/preset ou merge de P1/P2; `main` v1.12.4 e v1.9.5 histórica preservadas, **0/7 R-GATEs completos** e 32–64 notas aguardando teste físico.

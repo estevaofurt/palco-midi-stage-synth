@@ -46,6 +46,15 @@ Estado da afinação e umidade, tampa, pedal, posição física do microfone, ga
 | **M07 Felt A/B** | MESMO piano, mesma nota, velocidade física, salas/mics, com e sem feltro | forças/ondas sem processamento; repetições com controle e identificação de mudanças de voicing | Isolar o que decorre do feltro e o que decorre do próprio vertical, mic ou intensidade |
 | **M08 Música real** | MIDI e áudio com forte/leve, acorde, repetição, pedal e dinâmica | MIDI/tempo original mais referência estéreo não processada | Teste futuro em situação musical; sem substituir medições M01–M07 |
 
+### Extensão metodológica M01.1 e M04.1 — carga/descarga do martelo e mobilidade CRUZADA
+
+A auditoria [EVIDENCIA_MARTELO_MOBILIDADE_CRUZADA_E_REDUTORA_2026-11-23.md](EVIDENCIA_MARTELO_MOBILIDADE_CRUZADA_E_REDUTORA_2026-11-23.md) mostrou dois observáveis que o planejamento inicial tratava de forma insuficiente:
+
+- **M01.1 — histerese do feltro:** captar simultaneamente `F_h(t)`, movimento da cabeça do martelo, movimento da corda, compressão `δ(t)` e separação/rebote, incluindo **carregamento e descarregamento**. Registrar nota, velocidade física e voicing, erro e repetições. O único pico de força ou pulso predefinido **não identifica** um martelo viscoelástico; medições publicadas (Yanagisawa & Nakamura, 1984; Russell & Rossing, 1998) não fornecem séries brutas próprias do Stage.
+- **M04.1 — mobilidade 2×2 do ponto de ponte:** quando possível e seguro, medir excitação de força em dois planos transversais `T/P` e respostas de velocidade nos dois planos, formando `[Y_TT, Y_TP; Y_PT, Y_PP]` **complexa** por posição e frequência; registrar sinais originais, eixo/ponto, magnitude, fase, coerência e incerteza. Isto é exigência metodológica para **identificar o acoplamento cruzado H/V e o double decay**, sustentada por Miranda Valiente et al. (2022/2023). Para medição apenas normal ao tampo, declarar que a matriz 2×2 permanece desconhecida e não considerar R-GATE-2 físico integralmente concluído.
+- **Interpretação:** densidade modal, fator de perdas e massa de um upright publicado por Ege/Boutillon (2010) são aproximação **estatística por instrumento**, não substituem os termos cruzados medidos nem podem ser aplicados sem validação a CFX, Steinway ou felt piano.
+- **Contingência:** um piloto de mobilidade escalar `Y_TT` pode orientar estudo preliminar **offline**, mas jamais deve ser apresentado como matriz completa ou validação de uma nova implementação. A instrumentação da ponte deve ser executada por profissional apto para evitar danos.
+
 Os ensaios com ponte e martelo **não devem ser improvisados**: exigir profissional habituado a instrumento acústico, sensores e pontos de toque, sem permitir danos.
 
 ### Prioridade para evitar uma coleta gigantesca
