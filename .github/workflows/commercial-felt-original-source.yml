@@ -24,11 +24,17 @@ jobs:
           mkdir -p "$STAGE_FELT_REPORT_DIR"
           python3 research/commercial_audio/probe_original_felt_drive.py \
             "$STAGE_FELT_REPORT_DIR/original-felt-source-probe.json"
+      - name: Inspect author original ZIP central directory using bounded HTTP Range requests
+        run: |
+          python3 research/commercial_audio/inspect_original_felt_zip_index.py \
+            "$STAGE_FELT_REPORT_DIR/original-felt-zip-directory.json"
       - name: Publish ONLY source-access metadata (not WAV/ZIP bytes)
         uses: actions/upload-artifact@v4
         with:
           name: stage-original-felt-source-metadata-only
-          path: /tmp/stage-felt-author-metadata-only/original-felt-source-probe.json
+          path: |
+            /tmp/stage-felt-author-metadata-only/original-felt-source-probe.json
+            /tmp/stage-felt-author-metadata-only/original-felt-zip-directory.json
           retention-days: 14
           if-no-files-found: error
       - name: Remove metadata-only workdir
