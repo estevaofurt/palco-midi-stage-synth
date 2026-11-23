@@ -205,8 +205,14 @@ export class HybridPianoEngine {
       const decay=baseT60/(1+.052*n*n+.08*f/1000);
       if(n<=this.paired&&!single&&count+2<=MAX_MODES){
         const cents=(.25+.55*(n/this.paired)+.23*((key*7+n*3)%5)/5)*profile.detune;
-        count=this.addMode(v,count,f,decay*.40,a*.63,phase);
-        count=this.addMode(v,count,f*2**(cents/1200),decay*1.65,a*.37,phase+.16);
+        // The newly restored bass bichord should not inherit the same
+        // prompt/aftersound excitation split as existing C#2+ unisons.
+        // Equal contributions are a conservative two-string hypothesis.
+        // Remains a candidate until independent acoustic and listening checks.
+        const bassBichord=key>=29&&key<=36;
+        const fastWeight=bassBichord?.50:.63;
+        count=this.addMode(v,count,f,decay*.40,a*fastWeight,phase);
+        count=this.addMode(v,count,f*2**(cents/1200),decay*1.65,a*(1-fastWeight),phase+.16);
       }else count=this.addMode(v,count,f,decay,a,phase);
       power+=a*a;
     }
