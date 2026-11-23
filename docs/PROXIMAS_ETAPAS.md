@@ -1,3 +1,19 @@
+# E0 — aquisição e medição de quatro famílias de pianos (22/11/2026)
+
+- [x] Consultar as licenças e obter 33 gravações individuais: Steinway Model B / Iowa (9 AIFF), Yamaha C5 Salamander (9 AAC), Felt Fuchs & Möhr / Tom Guder (9 WAV) e Knight Upright VCSL (6 AAC).
+- [x] Validar a nota e a camada pelo SFZ no Felt, registrar SHA-256, codec, tamanho, captação e fonte.
+- [x] Converter arquivos **exclusivamente em disco temporário de CI**, medir ataque/FFT/partials/B com limiar de parciais fortes, comparar com A/B/C e eliminar arquivos externos após gerar artifact JSON.
+- [x] Detectar que B/C divergem na distribuição relativa dos harmônicos especialmente nos graves e que o A é mais próximo em várias observações; **não** interpretar como certificação auditiva.
+- [x] Tratar C6 e pp com menos de três parciais como inconclusivos; instrumentar FFT curta de ataque separada de B para avaliar agudos rapidamente amortecidos.
+- [ ] E1: rastrear parciais em múltiplas janelas, buscar contato físico do martelo e amortecimento individual, avaliar batimentos/direcionalidade e descontar ambiente/edição.
+- [ ] Conferir fontes **originais sem perda** Yamaha e Upright para medir física (AAC é só triagem); obter referência isolada CFX antes de alegar fidelidade ao CFX.
+- [ ] Validar experimentalmente microfones, intensidade real e pedais; escuta com nivelamento de loudness.
+- [ ] Validar 32/64 notas, CC64 e ausência de estalos em PC/Chrome e Moto g04s. **Preservar a v1.9.5.**
+
+Detalhes: [ANALISE_AUDIO_REAL_E0.md](ANALISE_AUDIO_REAL_E0.md). Só pesquisa: **sem alteração em motor, UI, MIDI, FX ou presets**.
+
+---
+
 ## Referências sonoras verificadas para os quatro pianos (22/11/2026)
 
 Catálogo detalhado em [REFERENCIAS_SONORAS_YAMAHA_STEINWAY_FELT_UPRIGHT_2026-11-22.md](REFERENCIAS_SONORAS_YAMAHA_STEINWAY_FELT_UPRIGHT_2026-11-22.md).

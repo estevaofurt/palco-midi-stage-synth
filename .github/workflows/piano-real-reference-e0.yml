@@ -1,0 +1,61 @@
+name: Stage Synth E0 - real piano reference analysis
+on:
+  push:
+    branches:
+      - research/real-piano-audio-analysis-e0
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  acquire-and-analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      STAGE_AUDIO_WORKDIR: /tmp/stage-piano-reference-e0
+      STAGE_PIANO_SELECTION: matrix
+      STAGE_FELT_SELECTION: matrix
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install and verify audio converters
+        run: |
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+          npm run check
+      - name: Download original public recording into runner-only temporary directory
+        run: python3 scripts/fetch_iowa_reference.py
+      - name: Measure real Steinway and compare with all three piano engines
+        run: |
+          node scripts/analyze_reference_audio.mjs "$STAGE_AUDIO_WORKDIR/manifest.json" "$STAGE_AUDIO_WORKDIR/e0-report.json"
+      - name: Download compact Yamaha C5 and Knight upright references (AAC, exploratory)
+        run: python3 scripts/fetch_compact_piano_reference.py
+      - name: Compare compact source spectral fingerprints with A/B/C
+        run: |
+          node scripts/analyze_reference_audio.mjs "$STAGE_AUDIO_WORKDIR/compact-manifest.json" "$STAGE_AUDIO_WORKDIR/e0-compact-report.json"
+      - name: Inspect public-domain Felt Piano sample map (metadata only)
+        continue-on-error: true
+        run: python3 scripts/probe_felt_reference.py
+      - name: Download public-domain Felt WAV after verifying pitch and velocity in SFZ
+        run: python3 scripts/fetch_felt_reference.py
+      - name: Measure real Felt Piano recording against A/B/C
+        run: |
+          node scripts/analyze_reference_audio.mjs "$STAGE_AUDIO_WORKDIR/felt-manifest.json" "$STAGE_AUDIO_WORKDIR/e0-felt-report.json"
+      - name: Publish only numeric measurements and source hashes
+        uses: actions/upload-artifact@v4
+        with:
+          name: piano-real-reference-e0-summary
+          path: |
+            /tmp/stage-piano-reference-e0/e0-report.json
+            /tmp/stage-piano-reference-e0/e0-compact-report.json
+            /tmp/stage-piano-reference-e0/e0-felt-report.json
+          retention-days: 14
+          if-no-files-found: error
+      - name: Delete external audio samples from runner
+        if: always()
+        run: rm -rf /tmp/stage-piano-reference-e0
