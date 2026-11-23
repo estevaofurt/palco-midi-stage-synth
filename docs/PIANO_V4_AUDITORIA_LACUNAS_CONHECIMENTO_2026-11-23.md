@@ -17,6 +17,10 @@ A literatura estabelece fenômenos **gerais** do piano; isso NÃO dá os parâme
 
 Uma nota passar em testes matemáticos mostra estabilidade, **não semelhança auditiva**. A V4 atualmente só demonstra uma **corda rígida transversal com martelo reativo** e parâmetros ilustrativos. Não há ponte móvel, placa real, ar, um instrumento-alvo identificado, múltiplas cordas por nota nem som V4 validado. **176/176 testes anteriores não certificam timbre.**
 
+## Bibliografia por lacuna — cobertura K01–K18
+
+A auditoria foi acompanhada de uma [**bibliografia anotada específica para todas as 18 lacunas**](PIANO_V4_REFERENCIAS_TODAS_AS_18_LACUNAS_2026-11-23.md), com 2–5 referências por tópico, instituições/anos/tipos, contribuições, limites e experimentos que ainda faltam. **Encontrar referência não é o mesmo que identificar parâmetros físicos do piano-alvo**. Os artigos foram classificados pelo escopo; parte da leitura integral de publicações pagas ou PDFs fica pendente. Os códigos do motor não foram alterados.
+
 ## 2. Matriz priorizada: o que ainda NÃO sabemos
 
 Critérios de prioridade: **P0 = bloqueia C4 acústico convincente**, **P1 = importante logo após C4**, **P2 = refinamento ou pesquisa específica do registro**. A prioridade não implica que a causa tenha sido comprovada; cada hipótese precisa ser falsificável.
