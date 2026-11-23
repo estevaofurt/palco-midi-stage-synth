@@ -10,7 +10,7 @@ import {renderPurePhysicalMechanical,encodeNormalizedMechanicalWav16}
  from '../research/pure-physical-audition-e28.mjs';
 
 const output=process.argv[2]||'e28-physical-only-mechanical-proxy.wav';
-if(!/\\.wav$/i.test(output))throw new RangeError('output must end in .wav');
+if(!/\.wav$/i.test(output))throw new RangeError('output must end in .wav');
 const {signal,diagnostics,peakMechanical}=
  renderPurePhysicalMechanical({sampleRate:48000,seconds:13,
   partialsBass:5,partialsTreble:2});
