@@ -33,3 +33,17 @@ Benchmark isolado Linux/Node após warmup, 128 amostras a 48 kHz, **88 teclas se
 | 64 | 0,21570ms | 0,22775ms | 8,54% |
 
 Os números são apenas do núcleo passivo, **sem o D, sem o trabalho do navegador, sem FX, sem áudio real**. Não provaram capacidade de 64 vozes no dispositivo. Tampouco validam melhora perceptível ou licenciamento. A versão em produção continua D 1.12.8 experimental; a PR E2.0 permanece em avaliação.
+
+## Continuação E2.1 — interface causal martelo → cordas → ponte (23/11/2026)
+
+A sequência D v1.12.7–v1.12.9 foi considerada sem avanço timbral perceptível pelo titular. Em vez de alterar a produção pública, foi criado `research/hammer-driven-passive-piano.mjs`, que dirige a rede **mecânica compartilhada e passiva** existente com um pulso de força suave, de comprimento limitado e velocidade MIDI, distribuído entre as duas polarizações mecânicas da mesma tecla. O cálculo emprega o mesmo solver por ponto médio implícito, portanto a saída `boardVelocity` e o retorno da ponte são consequências dos estados acoplados — não um som de madeira sintetizado por senoides adicionais.
+
+**O que a prova numérica demonstra:** para excitação externa com estados inicialmente nulos, vale `E_final - (trabalho_externo - dissipação) ≈ 0`, inclusive após CC64 e soltura das notas. Quando a força do martelo termina, o sistema livre perde energia e não produz energia espontânea. Uma corda não golpeada recebe energia pela ponte apenas com acoplamento diferente de zero. Amortecimento não remove rigidez nem desconecta as demais teclas.
+
+**Testes:** `tests/hammer_driven_passive_piano.test.mjs` cobre 44,1/48/96 kHz, forças finitas, ledger energético, pedal, transferência simpática causal sem martelo na corda receptora, renderização em blocos idêntica a amostras individuais, estresse 32/48/64 notas e rejeição de entradas inválidas.
+
+**CI:** [execução 45193185780](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45193185780) registrou **179/179 testes Node aprovados**, benchmark de ponte isolada e comparação `git diff` dos módulos públicos aprovada. Benchmark do solver anterior E2.0, **não** do motor completo E2.1: 32 teclas p95 0,22709ms; 48 teclas 0,25293ms; 64 teclas 0,24089ms por bloco de 128 amostras @48kHz, com rede física completa de 88 teclas.
+
+**Limitações importantes:** `peakForce` está em unidade normalizada, não newtons; duração do contato é uma hipótese, não uma medição. O protótipo mantém uma coordenada por polarização por tecla, não representa todas as ~230 cordas físicas de um piano real. `boardVelocity` é velocidade mecânica generalizada, **não pressão sonora radiada**. O laboratório não está interligado aos modos do D e nenhum WAV novo deve ser apresentado como melhora de timbre. A v1.12.8 continua pública, A/B/C/Clássico/MIDI/FX/presets intactos, 0/7 R-GATEs e nenhuma certificação de 32–64 notas em PC/Android.
+
+**Próximo gate real:** identificar e calibrar a radiação do tampo; projetar uma integração que substitua a antiga soma modal por uma rede passiva, em vez de apenas misturar mais um corpo como wet FX; comparar C2/C3 em arquivos de referência independentes e escuta nivelada antes de alterar som distribuído.
