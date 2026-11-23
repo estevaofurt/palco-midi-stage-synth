@@ -1,0 +1,36 @@
+{
+  "schema": "stage-commercial-steinway-d-archive-index-v1",
+  "verifiedRun": "https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45102640600",
+  "verification": "Archive.org metadata API returned exact ZIP archive size, MD5, CC BY 4.0 source license metadata; no ZIP or WAV bytes were downloaded",
+  "generatedDateUTC": "2026-11-23",
+  "instrument": "Steinway Model D, Princeton bitKlavier Grand, January 2021",
+  "author": "Dan Trueman / production team",
+  "archiveZipItems": [
+    {
+      "identifier": "bitKlavierGrand_PianoBar_44k16b",
+      "mic": "Piano Bar",
+      "bytes": 976630577,
+      "md5": "d1ff666c99bb1a7298bde9f2c81f8293"
+    },
+    {
+      "identifier": "bitKlavierGrand_Binaural_44k16b",
+      "mic": "Binaural (Neumann KU100)",
+      "bytes": 1012656771,
+      "md5": "a636786c04a480127ef6e879cc311b34"
+    },
+    {
+      "identifier": "bitKlavierGrand_HarpOmni_44k16b",
+      "mic": "Harp Omni",
+      "bytes": 988859574,
+      "md5": "cff1154ba1a8b805b878b137cad22bf2"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "licenseEvidence": "https://bitklavier.com/the-bitklavier-grand/",
+  "status": "ARCHIVE METADATA INDEXED (3/3), not WAV verified",
+  "openTasks": [
+    "Verify ZIP internal member listing and controlled ability to extract selected WAVs without downloading whole ~1 GB archives",
+    "Verify individual WAV length and hash under author permitted license; no user audio in repository",
+    "Keep postprocessed/denoised and velocity rebalanced warnings: no hammer physical velocity inference"
+  ]
+}
