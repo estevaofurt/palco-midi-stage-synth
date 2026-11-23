@@ -1,3 +1,11 @@
+## AVANÇO DE REFERÊNCIAS COMERCIAIS — NÃO LIBERAR DSP (22/11/2026)
+
+Há um **piloto de proveniência aprovado**: 28 arquivos originais de piano real (8 WAV VCSL CC0; 15 FLAC Salamander Yamaha C5 CC BY 3.0; 5 FLAC Kawai Upright KW CC0), SHA256 individual, fonte pinned por SHA Git e codec verificado em CI. Ver research/commercial_audio/verified_source_sha256.json e docs/PREPARACAO_FONTES_COMERCIAIS_PILOTO_2026-11-22.md. Os arquivos não são distribuídos nem guardados no repositório.
+
+**Não confundir** esse avanço com parâmetro físico pronto: Steinway VCSL normalizado, Yamaha v1/v8/v16 não é hammer velocity em m/s, Kawai contém loops graves. **Ainda 0/7 R-GATEs integralmente aprovados** e projeto comercial; manter PROIBIDA a implantação de P1/P2 ou alteração de DSP, MIDI, UI, FX e presets, até referência física e licença completa e aprovação explícita do usuário.
+
+---
+
 ## FINALIDADE COMERCIAL — restrição obrigatória de fontes e código (22/11/2026)
 
 **Decisão expressa do titular:** o Stage Synth é um **produto destinado à comercialização**, não um instrumento acadêmico/pessoal. Essa finalidade prevalece sobre classificações antigas da pesquisa.
