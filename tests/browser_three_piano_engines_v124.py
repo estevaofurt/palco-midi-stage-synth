@@ -18,8 +18,8 @@ with sync_playwright() as pw:
         page.locator('#tab-piano').click()
         selector=page.locator('select[aria-label="Motor do piano"]')
         assert selector.count()==1
-        assert selector.locator('option').all_text_contents()==['A · Claude (modal)','B · Stage físico anterior (v1.9.5)','C · Novo Stage mecânico','Clássico · compatibilidade']
-        for option in ['physicalLegacy','modal','physical']:
+        assert selector.locator('option').all_text_contents()==['A · Claude (modal)','B · Stage físico anterior (v1.9.5)','C · Novo Stage mecânico','D · Stage híbrido · experimental','Clássico · compatibilidade']
+        for option in ['physicalLegacy','modal','physical','hybrid']:
             selector.select_option(option)
             assert page.evaluate('window.__palcoTest.state.patches.piano.values.soundEngine')==option
         assert page.locator('.module').count()==6
