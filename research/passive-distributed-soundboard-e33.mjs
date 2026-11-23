@@ -23,7 +23,9 @@
 const TAU=2*Math.PI;
 const hz=k=>440*2**((k-69)/12);
 const MODE_SHAPES=Object.freeze([
- [1,1],[2,1],[1,2],[2,2],[3,1],[1,3],[3,2],[2,3]
+ [1,1],[2,1],[1,2],[2,2],[3,1],[1,3],[3,2],[2,3],
+ // E3.4 additional spatial bending modes; no synthetic impact mixed at output.
+ [4,1],[3,3],[5,1],[1,4],[2,4],[4,4],[1,5],[1,6]
 ]);
 const MODE_FREQUENCIES=Object.freeze([95,163,214,286,355,424,510,610]);
 const isFiniteIn=(v,low,high)=>Number.isFinite(v)&&v>=low&&v<=high;
@@ -37,7 +39,7 @@ export class PassiveDistributedSoundboardE33 {
   if(!Number.isInteger(sampleRate)||sampleRate<22050||sampleRate>96000||
      !Number.isInteger(partialsBass)||partialsBass<1||partialsBass>8||
      !Number.isInteger(partialsTreble)||partialsTreble<1||partialsTreble>8||
-     !Number.isInteger(panelModes)||panelModes<2||panelModes>8||
+     !Number.isInteger(panelModes)||panelModes<2||panelModes>16||
      !isFiniteIn(inharmonicity,0,.003)||!isFiniteIn(coupling,0,1)||
      !isFiniteIn(releaseDamping,0,400)||
      !isFiniteIn(bridgeU,.05,.95)||!isFiniteIn(bridgeV,.05,.95)||
@@ -87,7 +89,14 @@ export class PassiveDistributedSoundboardE33 {
   this.panelDamper=new Float64Array(panelModes);
   this.panelShapeAtBridge=new Float64Array(panelModes);
   this.panelShapes=MODE_SHAPES.slice(0,panelModes);
-  this.panelFrequencies=MODE_FREQUENCIES.slice(0,panelModes);
+  // Preserve all E3.3 (2..8) frequencies exactly. Additional candidate
+  // modes use ideal simply-supported thin-plate dispersion, anchored at
+  // 95 Hz for (1,1). This is NOT a calibrated spruce soundboard.
+  const ref=(1/1.22)**2+(1/.92)**2;
+  const plateScale=95/ref;
+  this.panelFrequencies=this.panelShapes.map(([mx,my],i)=>
+   i<MODE_FREQUENCIES.length?MODE_FREQUENCIES[i]:
+   plateScale*((mx/1.22)**2+(my/.92)**2));
   for(let i=0;i<panelModes;i++){
    const [mx,my]=this.panelShapes[i];
    const f=this.panelFrequencies[i],mass=2.1/(1+.15*i);
