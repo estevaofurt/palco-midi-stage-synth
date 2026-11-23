@@ -1,0 +1,61 @@
+name: Stage Synth — generate D v126-v127 audio A/B WAV
+on:
+  push:
+    branches:
+      - audio/stage-d-126-127-ab-wav-20261123
+    paths:
+      - 'scripts/render_piano_d_ab_wav.mjs'
+      - '.github/workflows/render-piano-d-ab-audio.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render-original-synth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check existing synth and original render script
+        run: |
+          npm run check
+          node --check scripts/render_piano_d_ab_wav.mjs
+      - name: Render matched v1.12.6 and v1.12.7 Stage D PCM 24-bit audio
+        run: node scripts/render_piano_d_ab_wav.mjs artifacts/stage-d-comparacao-ab
+      - name: Verify all WAV headers, sizes, channels, A/B ordering, duration and provenance
+        run: |
+          python3 - <<'PY'
+          import pathlib,struct,json
+          root=pathlib.Path('artifacts/stage-d-comparacao-ab')
+          meta=json.loads((root/'metadata.json').read_text())
+          tracks=list(sorted(root.glob('*.wav')))
+          assert len(tracks)==3,tracks
+          assert meta['exactSameScheduledEvents']
+          assert not meta['individualNormalization']
+          assert meta['quality']=='studio'
+          assert meta['comparison']['differentStereoSamples']>1000
+          frames=[]
+          for p in tracks:
+              with p.open('rb') as f:
+                  header=f.read(44)
+              assert header[:4]==b'RIFF' and header[8:12]==b'WAVE'
+              assert header[12:16]==b'fmt ' and header[36:40]==b'data'
+              assert struct.unpack_from('<HHIIHH',header,20)==(1,2,48000,48000*6,6,24)
+              assert p.stat().st_size==44+struct.unpack_from('<I',header,40)[0]
+              frames.append(struct.unpack_from('<I',header,40)[0]//6)
+              print('VERIFIED',p.name,'frames',frames[-1],'bytes',p.stat().st_size)
+          assert frames[0]==frames[1],frames
+          assert frames[2]==2*frames[0]+int(meta['abGapSeconds']*48000),frames
+          assert frames[2]/48000>50
+          print('A/B WAV PASS: two distinct original-synth engines, identical MIDI, common gain and one concatenated 24-bit comparison')
+          PY
+      - name: Upload 3 original-synthesis comparison WAV files plus metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-synth-d-v126-v127-comparacao-audio-wav-24bit
+          path: artifacts/stage-d-comparacao-ab/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 4
