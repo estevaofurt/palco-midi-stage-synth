@@ -56,6 +56,10 @@ jobs:
           assert sizes[4]==sum(sizes[:4])+3*round(meta['gapSeconds']*48000)
           print('FOUR MODEL A/B C/D STUDY VALIDATED — original Stage DSP only')
           PY
+      - name: Quantify sustained waveform similarities and relative level by note
+        run: |
+          node --check scripts/measure_bass_abcd_similarity.mjs
+          node scripts/measure_bass_abcd_similarity.mjs artifacts/stage-bass-wood-ABCD
       - name: Save all numeric provenance and listening files
         uses: actions/upload-artifact@v4
         with:
