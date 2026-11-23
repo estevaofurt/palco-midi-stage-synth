@@ -215,8 +215,14 @@ export class HybridPianoEngine {
     }
     v.id=id;v.key=key;v.active=true;v.released=false;v.damped=false;
     v.count=count;v.age=0;v.silent=0;v.lastPeak=0;v.send=clamp(send,0,1);v.sendTarget=v.send;
-    v.attack=v.forceCount?1:0;
-    v.attackStep=1/(this.sr*(.0012+.0030*(1-key/120)*(1-speed*.5)));
+    // A bridge/soundboard does not radiate every modal component instantly.
+    // Limit the candidate ONLY to bass; preserve the original higher-note
+    // attack byte-for-byte. This is a bounded temporal transmission proxy,
+    // not a measured hammer-to-bridge transfer function.
+    v.attack=0;
+    const attackSeconds=v.forceCount ? (.010+.004*(1-speed))
+      :(.0012+.0030*(1-key/120)*(1-speed*.5));
+    v.attackStep=1/(this.sr*attackSeconds);
     const pan=clamp((key-64.5)/43.5,-1,1)*.30;
     v.gl=Math.sqrt(1-pan);v.gr=Math.sqrt(1+pan);
     v.noise=.037*speed**2.4*(.35+.65*hardness)*profile.noise;
