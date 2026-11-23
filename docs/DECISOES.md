@@ -223,3 +223,14 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Ajustes de método:** permitir **M01.2** — reconstruir `F_h(t)` pelo sinal de velocidade *medida na corda*, nos limites de Chaigne 2016 e com validação de erro; não substituir pela simples análise de WAV. Estender **M05** para estudar contribuição perceptível do aro/estrutura no grave, motivada por análise de um Bösendorfer real, mas não declarar parâmetros universais nem adicionar filtros sem ensaio. A licença do programa/arquivo IRCAM e a publicação científica são propriedades distintas de direitos de derivação de dados.
 
 **Proteções:** somente pesquisa/documentação, sem aquisição de dados proprietários, envio de e-mails, código externo ou alteração de DSP, presets, MIDI, FX ou UI. Acervo de 50 originais de seis pianos continua único verificado, Stage v1.12.4 e referência v1.9.5 preservados, **0/7 R-GATEs globais aprovados integralmente**, 32–64 vozes não homologadas.
+
+
+## D-030 — Licenças de modelos e presets não substituem medições físicas; Dryad CC0 (23/11/2026)
+
+**Decisão:** adotar classificação separada por artefato: (1) código do sintetizador, (2) arquivos de parâmetros/presets, (3) fontes sonoras e dados de sensores, (4) artigo científico, (5) parâmetros/outputs derivados. Exemplos auditados: [MODELOS_NUMERICOS_DUSSEK_MF1_DRYAD_CC0_2026-11-23.md](MODELOS_NUMERICOS_DUSSEK_MF1_DRYAD_CC0_2026-11-23.md); Dussek **AGPLv3** no código, **CC BY 4.0** no Grand B e **CC BY-SA 4.0** no Upright C. MF-1 **MIT** no código, tabelas extraídas de gravações de Iowa. O caráter comercial do Stage não autoriza importar código AGPL como se fosse MIT, nem eliminar obrigações de atribuição ou ShareAlike de presets.
+
+**Correção de fonte:** conforme https://datadryad.org/terms e https://datadryad.org/publication_policy, o **dataset Dryad** depositado para Kuromiya et al. (2025) é coberto pelo regime **CC0**, distinto do artigo científico **CC BY-NC-ND**. Isso autoriza considerar os arquivos de **tecla/percepção** como candidatos de uso comercial após inspecionar integridade, eventuais componentes de terceiros e revisão jurídica. O depósito **não** contém força do martelo medida nem mobilidade da ponte, e nenhum byte foi adquirido/hashado nesta auditoria.
+
+**Medição rigorosa:** os modelos numéricos de áudio Dussek/MF-1 constituem **parâmetros de síntese inferidos**, não F_h(t), δ(t), resposta da corda H/V ou Y_ponte 2×2 diretamente medidas. A contagem de 50 arquivos de referência física sonora do Stage **não aumenta**, e a existência de 32 modos/384 osciladores em terceiros **não comprova** 32–64 notas reais no nosso produto.
+
+**Status:** pesquisa só documental, sem importação, DSP/UI/MIDI/FX/presets, sem modelo físico novo e sem alteração de metas; **0/7 R-GATEs completos** e bloqueio expresso mantido.
