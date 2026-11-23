@@ -12,6 +12,7 @@ on:
       - 'tests/private_wav_note_bank.test.mjs'
       - 'tests/private_pcm_pitch_audit.test.mjs'
       - 'docs/LAB_E26_AMOSTRAS_LOCAIS_2026-11-23.md'
+      - 'docs/LAB_E27_QUATRO_BANCOS_PRIVADOS_AUDITORIA_2026-11-23.md'
       - '.github/workflows/stage-e26-private-samples.yml'
   workflow_dispatch:
 jobs:
