@@ -37,6 +37,9 @@ jobs:
       - name: Compare compact source spectral fingerprints with A/B/C
         run: |
           node scripts/analyze_reference_audio.mjs "$STAGE_AUDIO_WORKDIR/compact-manifest.json" "$STAGE_AUDIO_WORKDIR/e0-compact-report.json"
+      - name: Inspect public-domain Felt Piano sample map (metadata only)
+        continue-on-error: true
+        run: python3 scripts/probe_felt_reference.py
       - name: Publish only numeric measurements and source hashes
         uses: actions/upload-artifact@v4
         with:
