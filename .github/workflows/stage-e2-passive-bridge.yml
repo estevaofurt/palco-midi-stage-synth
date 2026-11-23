@@ -53,6 +53,7 @@ on:
       - 'scripts/audit_reactive_felt_e32.mjs'
       - 'scripts/benchmark_distributed_board_e33.mjs'
       - 'scripts/render_reactive_spatial_e33.mjs'
+      - 'scripts/render_percussive_felt_e34.mjs'
       - 'scripts/render_reactive_felt_e32.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
@@ -101,6 +102,8 @@ jobs:
         run: node scripts/benchmark_distributed_board_e33.mjs | tee e33-multimode-benchmark.json
       - name: Generate sample-free reactive contact and spatial plate stereo E3.3 WAV
         run: node scripts/render_reactive_spatial_e33.mjs | tee e33-spatial-audio-summary.json
+      - name: E3.4 render 8/16-plate physical hard felt A/B WAVs
+        run: node scripts/render_percussive_felt_e34.mjs | tee e34-percussive-render-summary.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -134,6 +137,14 @@ jobs:
             e33-reactive-plate-audition.json
             e33-reactive-spatial-2-plate-modes.wav
             e33-reactive-spatial-8-plate-modes.wav
+            e34_percussive_hammer_report.json
+            e34-percussive-render-summary.json
+            e34_8mode_felt_normal.wav
+            e34_8mode_felt_core.wav
+            e34_16mode_felt_normal.wav
+            e34_16mode_felt_core.wav
+            e34_AB_8panel_normal_then_compressed_felt.wav
+            e34_AB_16panel_normal_then_compressed_felt.wav
             e32-hammer-benchmark.json
             e32-hammer-audit.json
             e32-hammer-harmonic-audit.json
