@@ -13,7 +13,8 @@ for(const [file,version] of [['index.html','1.12.7'],['v1.12.7.html','1.12.7'],[
     assert.match(html, /class="build-tag"/);
     const map=JSON.parse(html.match(/<script type="importmap">(.*?)<\/script>/s)[1]);
     for(const [path,url] of Object.entries(map.imports)){
-      assert.equal(url,`${path}?build=${version}`);
+      assert.equal(url,file==='v1.12.6.html'&&path==='./acoustic.js'
+        ?'./acoustic-v126.js?build=1.12.6-archive':`${path}?build=${version}`);
     }
     if(version==='1.12.7'){
       for(const path of readdirSync(dir).filter(x=>x.endsWith('.js')&&x!=='app.js'))
