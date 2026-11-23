@@ -1,3 +1,9 @@
+## 23/11/2026 — E1.3: comparar imediatamente as mesmas notas, não forçar "som de madeira" por ruído
+
+Um teste com os **motores verdadeiros D v1.12.6 e v1.12.7** (WAV 48k 24-bit estéreo) mostrou que a v1.12.7 em **C2 mf atenua 4,38 dB de energia nos primeiros 12 ms**, sem mudança significativa de energia entre 100–220 ms nem em cauda 900–1180 ms. [Diagnóstico E1.3](DIAGNOSTICO_D_GRAVES_AB_INTERCALADO_2026-11-23.md). Decisão: criar render A/B intercalado reprodutível, **não mexer DSP ainda** nem declarar vitória pela troca de martelo. Próximo experimento deve tratar sustain e evolução harmônica/radiação, condicionado a referências e ABX. Preservar Stage público v1.12.7, D histórico 1.12.6, A/B/C/Clássico, C4–C6, MIDI, FX, UI, presets, 32–64 vozes como meta e 0/7 R-GATEs.
+
+---
+
 ## 23/11/2026 — E1.2: confirmar afinação de gravações Steinway B/Iowa antes de novo ajuste sonoro
 
 **Decisão:** não presumir erro generalizado de oitava e não alterar DSP para corrigir suposição não comprovada. Pesquisa no CI dos 15 AIFF originais fixados por SHA256: **12/15 dupla consistência de pitch** (YIN temporal e FFT harmônica independentes), **três registros de confiança limitada C2/pp, C2/ff, C6/pp**, sem contradição de oitava verificada por ambos. [Relatório e limitações](AUDITORIA_AFINACAO_IOWA_ORIGINAIS_2026-11-23.md); [run 45178612159](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45178612159), **157/157 Node**. Preservar os originais para comparação (sem incorporação de áudio) e continuar somente para hipótese física medida, sem novos harmônicos artificiais e sem mudar C4–C6 ou A/B/C. R-GATEs **0/7**, Stage v1.12.7 permanece experimental no motor D.
