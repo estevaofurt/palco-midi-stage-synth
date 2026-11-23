@@ -101,3 +101,12 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Controles:** baixar/manter áudios localmente, registrar hashes e condições, preservar originais, rejeitar trechos em loop/reverberação para inferir T60 de cordas. Validação requer nota isolada, mapeamento correto de pitch e intensidade e escuta nivelada; não supor que pp/mf/ff mapeiem diretamente para velocidades MIDI 32/80/120.
 
 **Referência:** docs/REFERENCIAS_SONORAS_YAMAHA_STEINWAY_FELT_UPRIGHT_2026-11-22.md. **Alteração documental somente**; sem mudança nos motores A/B/C e sem upload de gravações.
+
+
+## D-017 — Referências reais por instrumento e análise espectral não substituem audição controlada (22/11/2026)
+
+**Decisão:** executar o protocolo E0 com notas isoladas de Steinway Model B Iowa (9 AIFF originais), Yamaha C5 Salamander (9 AAC de edição reduzida), Felt Fuchs & Möhr (9 WAV reempacotados, domínio público) e Upright Knight VCSL (6 AAC, CC0). Os 33 arquivos foram analisados em runner temporário do GitHub; o repositório e os artifacts guardam **somente códigos, proveniência/hashes e resultados numéricos**.
+
+**Resultado:** diferenças sistemáticas de amplitude relativa dos parciais, especialmente no grave, foram maiores nos modelos Stage B/C que no modal A em muitos desses exemplos. Não é comprovante de superioridade perceptual; microfones, camadas de velocity, compressão e acústica da sala não são equivalentes. B/C mantidos sem mudanças.
+
+**Exigência E1:** tratar B com menos de três parciais como inconclusivo, medir transientes agudos em janelas curtas sem chamá-los de B e desenvolver identificação por harmônico/tempo antes de qualquer ajuste de DSP. Referência: docs/ANALISE_AUDIO_REAL_E0.md. CI documentado na branch de pesquisa. Nenhum som de terceiro foi embutido.
