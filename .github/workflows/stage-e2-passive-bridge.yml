@@ -9,6 +9,7 @@ on:
       - 'tests/damper_aware_shared_bridge.test.mjs'
       - 'tests/hammer_driven_passive_piano.test.mjs'
       - 'scripts/benchmark_damper_aware_shared_bridge.mjs'
+      - 'scripts/benchmark_hammer_driven_passive_piano.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
 jobs:
@@ -26,6 +27,8 @@ jobs:
         run: npm run check
       - name: Node benchmark 88 physical keys 32/48/64 struck
         run: node scripts/benchmark_damper_aware_shared_bridge.mjs | tee bridge-benchmark.json
+      - name: Node benchmark E2.1 with actual hammer force schedules
+        run: node scripts/benchmark_hammer_driven_passive_piano.mjs | tee hammer-benchmark.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -33,5 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: stage-e2-88-key-node-benchmark
-          path: bridge-benchmark.json
+          path: |
+            bridge-benchmark.json
+            hammer-benchmark.json
           retention-days: 30
