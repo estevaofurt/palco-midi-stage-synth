@@ -16,7 +16,8 @@ export const engines={
     groups:[
       group('Identidade e dinâmica',select('soundEngine','Motor do piano','physical',{modal:'A · Claude (modal)',physicalLegacy:'B · Stage físico anterior (v1.9.5)',physical:'C · Novo Stage mecânico',hybrid:'D · Stage híbrido · experimental',classic:'Clássico · compatibilidade'}),select('physicalQuality','Detalhe físico','eco',{eco:'Econômico · 32 notas',balanced:'Equilibrado · 48 notas',studio:'Estúdio · 64 notas'}),select('character','Instrumento','japanese',{japanese:'Japanese Grand',american:'American Grand',felt:'Felt Piano',upright:'Piano Upright'}),knob('touch','Dinâmica',50),knob('hammer','Dureza de martelo',50),knob('release','Release',.42,.06,3,' s',{step:.01,log:true})),
       group('Mecânica e ressonância',knob('hammerNoise','Hammer noise',26),knob('pedalNoise','Pedal noise',24),select('stringRes','String resonance','on',{on:'Ativada',off:'Desativada'}),select('mechanicalModel','Acoplamento mecânico','on',{on:'Ponte, tampo e cordas simpáticas',off:'Som anterior · comparar'}),knob('resonance','Intensidade',45)),
-      group('Corpo do piano',knob('lid','Tampa',75),knob('brightness','Brilho',51),knob('room','Ambiente',15),knob('damping','Abafamento',37))
+      group('Corpo do piano',knob('lid','Tampa',75),knob('brightness','Brilho',51),knob('room','Ambiente',15),knob('damping','Abafamento',37)),
+       group('Amostras locais · apenas Clássico',{type:'samplepack',id:'privatePianoSamples',label:'Banco WAV local'})
     ]
   },
   electric:{name:'Pianos elétricos',short:'Elétricos',bit:8,level:82,
