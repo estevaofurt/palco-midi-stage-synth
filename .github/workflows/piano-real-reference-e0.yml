@@ -13,7 +13,7 @@ jobs:
     env:
       STAGE_AUDIO_WORKDIR: /tmp/stage-piano-reference-e0
       STAGE_PIANO_SELECTION: matrix
-      STAGE_FELT_SELECTION: C4:v2
+      STAGE_FELT_SELECTION: matrix
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
