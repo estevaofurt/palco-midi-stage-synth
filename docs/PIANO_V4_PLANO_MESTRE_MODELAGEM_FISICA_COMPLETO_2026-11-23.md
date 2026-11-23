@@ -276,6 +276,20 @@ Os módulos devem possuir testes de energia, unidades, limitação espacial/temp
 - Cada PR/commit deve ter rollback viável, evitar alteração de arquivos públicos antes do release e preservar dados/importações atuais.
 - Criar futuramente apenas após iniciar desenvolvimento: registro de unidades e parâmetros, log de energia por subestrutura, testes de convergência, corpus de avaliações auditivas (sem distribuir gravações privadas) e relatório de CPU.
 
+## 10.1. Revisão internacional das interfaces críticas
+
+Após a revisão do plano, foi realizado um [**atlas internacional de estudos martelo–cordas–ponte–tampo**](PIANO_V4_ATLAS_INTERNACIONAL_CORDA_MARTELO_PONTE_TAMPO_2026-11-23.md), com trabalhos de Japão, Canadá, França, Itália, Alemanha, Reino Unido, Estados Unidos, Hungria, Finlândia, Estônia, Suécia, China e contraponto de percepção no Brasil.
+
+**Complementos que se tornam critérios obrigatórios:**
+- A interface martelo–corda deve permitir retroação da **haste e da ação**, e contemplar contato tangencial quando justificado (Waterloo, Canadá).
+- A lei de feltro não se limita a rigidez constante: força, deformação e velocidade foram medidas simultaneamente no Japão; calibrar com dados experimentais por nota e intensidade.
+- O porto corda–ponte deve ser projetado como **vetor de força/velocidade**, com mobilidade complexa multidirecional, mesmo que a primeira bancada escalar sirva para testar potência em um único eixo (Southampton, Reino Unido).
+- Modos e perdas do tampo devem ser revalidados após montagem de nervuras, pontes, aro **e encordoamento**, já que a construção modifica a dinâmica (Japão, Alemanha, Itália).
+- O teste de radiação deve usar **velocidade espacial da placa → pressão do ar**, e verificar fase, posição de excitação/escuta e comportamento direcional (EUA, Hungria, França).
+- Ao conectar F4↔F5↔F6↔F7↔F8, retornar a **testes de contato, mobilidade, energia e decaimento** dos blocos anteriores. Validar partes isoladas não prova o conjunto.
+
+**Limite de conhecimento:** os métodos e muitos resultados de literatura são conhecidos, mas falta um conjunto coerente de parâmetros medidos do MESMO piano-alvo para calibrar os subsistemas. Isso autoriza bancadas físicas, não conclusão de fidelidade acústica.
+
 ## 11. Fontes principais que fundamentam este desenho
 
 1. **Chabassier, Chaigne & Joly, JASA 2013, _Modeling and simulation of a grand piano_** — contato martelo/corda dissipativo, cordas rígidas, tampo ortotrópico, radiação acústica e esquemas que preservam energia: https://pubmed.ncbi.nlm.nih.gov/23862839/
