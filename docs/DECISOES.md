@@ -1,3 +1,9 @@
+## 23/11/2026 — E1.1: não transformar velocidade de placa fictícia em áudio de madeira (laboratório H1)
+
+O componente passivo compartilhado é consistente matematicamente, porém **não tem unidades físicas nem radiação calibrada**. Decidido construir somente **estimativa offline de transferência complexa aceleração de ponte→pressão aérea**, H1/Welch, coerência e testes sintéticos controlados. Isto **não identifica mobilidade mecânica Y=v/F**, parâmetros de martelo, massa/rigidez ou campo sonoro espacial. No cenário sintético, atraso de sensor gera mudança de fase mesmo com coerência alta: calibração/sincronização documentadas e sinais de um **mesmo instrumento autorizado comercialmente** são condições de entrada. [Protocolo E1.1](VERIFICACAO_TRANSFERENCIA_RADIATIVA_H1_E11_2026-11-23.md). **Sem alteração em DSP/UI/MIDI/FX/presets**, D permanece v1.12.7 experimental; PR #26 continua reprovada e **0/7 R-GATEs**.
+
+---
+
 ## 23/11/2026 — verificação independente e benchmark corrigido do tampo passivo compartilhado (PR #28)
 
 **Decisão:** validar numericamente o laboratório de pesquisa do PR #27 antes de qualquer tentativa de integração audível; **não alterar DSP, A/B/C/D/Clássico, UI, FX, MIDI, presets, cache ou versão pública**. Novo teste compara solução densa independente de M/C/K com Schur O(N) por amostra e verifica a rede com 88 teclas. Benchmark passa a usar 16/32/64 notas **distintas**, não 28 notas repetidas. [CI 141/141 + teste novo 2/2](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45173258761). P95 a 64 teclas: 0,0896ms tampo compartilhado vs 0,9857ms múltiplas placas por nota no Node/Linux, **não** AudioWorklet real, não prova auditiva nem CPU do app. Parâmetros mecânicos e saída acústica continuam não medidos; PR #26 permanece reprovada, **0/7 R-GATEs**. Detalhes em [verificação numérica](VERIFICACAO_SOLVER_PASSIVO_REFERENCIA_DENSA_V128_2026-11-23.md).
