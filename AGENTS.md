@@ -1,3 +1,9 @@
+## HOTFIX v1.12.10 — TECLADO E SEM BANCO (23/11/2026)
+
+Usuário relatou motor E sem áudio e teclas virtuais aparentemente travadas. Causa reproduzível no código: E não carrega banco público e Stage descarta vozes sem sample; teclado era desenhado exclusivamente a partir de vozes ativas. Agora teclas mostram toque via activePointers, faixa de banco junto ao teclado e botão para importar WAVs locais. Não inserir áudio privado em páginas públicas nem alegar que E possui banco embutido. Manter V4 puramente físico e DSP A/B/C/D intocados. [doc](docs/SAMPLER_KEYBOARD_V1210.md).
+
+---
+
 ## ATUALIZAÇÃO 23/11/2026 — E sampleado local v1.12.9
 
 Autorização posterior do usuário para integrar como opção E a escuta sampleada E2.7. WAVs privados American/Japanese/Felt/Upright não podem ser publicados sem direitos comerciais provados; somente importação local temporária, sem bytes no repositório. Não mudar A/B/C/D/Clássico nem padrão C. O novo Piano V4 continua modelagem física pura (sem samples). [docs/SAMPLER_LOCAL_V129.md](docs/SAMPLER_LOCAL_V129.md).

@@ -222,3 +222,13 @@ footer .build-tag {font-size: .73rem; padding: 2px 6px; border: 1px solid #4b494
 .profile-selector select{max-width:180px;padding:7px 8px;border:1px solid #5e4d48;background:#262527;color:#f8eee6;border-radius:5px;font:inherit}
 .profile-note{color:#c7baac;font-size:12px;margin:10px 0 4px;padding:8px 12px;border-left:2px solid #b36850;background:rgba(255,255,255,.025)}
 @media(max-width:660px){.profile-selector{flex:1;min-width:170px}.profile-selector select{max-width:160px}.connections{flex-wrap:wrap}.profile-note{font-size:11px}}
+
+/* Piano sampleado: importação explícita junto ao teclado, com aviso acessível. */
+.sample-notice{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;
+  margin:0 12px 9px;padding:9px 11px;background:#372e26;border:1px solid #7e684c;
+  color:#f7e4c9;border-radius:5px;font-size:.85rem;line-height:1.45}
+.sample-notice[hidden]{display:none}
+.sample-notice span{flex:1 1 220px}
+.sample-notice button{min-height:36px;padding:6px 12px;background:#efc69f;color:#231c18;
+  border:1px solid #d6aa7a;border-radius:4px;font-weight:650;cursor:pointer}
+.sample-notice button:hover{filter:brightness(1.12)}

@@ -49,8 +49,8 @@ test('current D uses original Piano Acoustic selector and historical defaults re
  const c=controls.find(x=>x.id==='soundEngine');
  assert.deepEqual(Object.keys(c.options),['modal','physicalLegacy','physical','hybrid','sampled','classic']);
  assert.equal(loadState(null).patches.piano.values.soundEngine,'physical');
- assert.equal(JSON.parse(read('../package.json')).version,'1.12.9');
+ assert.equal(JSON.parse(read('../package.json')).version,'1.12.10');
  const html=read('../index.html');
- assert.match(html,/Stage Synth · Palco MIDI v1\.12\.9/);
+ assert.match(html,/Stage Synth · Palco MIDI v1\.12\.10/);
  assert.match(read('../acoustic.js'),/physical-piano-hybrid\.js\?build=1\.12\.9/);
 });
