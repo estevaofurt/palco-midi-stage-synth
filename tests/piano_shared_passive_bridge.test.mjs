@@ -87,7 +87,7 @@ test('silence, reset and valid parameter boundaries',()=>{
 
 test('research network does not import external PCM or touch published synth',()=>{
  const src=readFileSync(new URL('../research/shared-passive-piano-bridge.mjs',import.meta.url),'utf8');
- assert.match(src,/NOT radiated sound pressure/);
+ assert.match(src,/not radiated sound pressure/i);
  assert.match(src,/O\(N\)/);
  assert.doesNotMatch(src,/from ['"]\.\.\/physical-piano-hybrid|readFileSync|fetch\(|AudioWorkletProcessor|Buffer\.alloc|new AudioBuffer/);
 });
