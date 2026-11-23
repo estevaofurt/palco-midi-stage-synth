@@ -1,3 +1,11 @@
+## Próximo foco único — corrigir o grave de piano em D v1.12.7 (preparação, 23/11/2026)
+
+Escuta do titular confirma **médio-agudo mais realista em D v1.12.6 e grave ainda parecido com violão**. Não reabrir pesquisas genéricas ou retocar equalizador global. **Não mudar DSP nesta fase**. Preparação concluível por [plano técnico fechado](PRONTIDAO_GRAVES_MOTOR_D_V127_2026-11-23.md), testes de energia do *impacto real* e decaimento por parcial na fonte Iowa 15/15. Os primeiros 12ms medem transiente, **não** análise espectral resolvida de C2; os antigos 341ms de FFT não devem ser descritos como força instantânea de martelo.
+
+**Próximo experimento condicionado:** atuar primeiro no pulso de contato do martelo no baixo C1–C3, depois acoplamento passivo ponte/tampo e decaimento/coupling das cordas. Testar cada hipótese isolada versus D v1.12.6 e referências, manter C4–C6, 32/48/64 vozes, pedal e todos os módulos sem regressões. O aceite final inclui **escuta do usuário e teste em hardware**, não só dB de espectro.
+
+---
+
 ## Verificação auditiva de v1.12.6 D depois de ajuste com 15 originais (23/11/2026)
 
 **Não abrir nova pesquisa bibliográfica.** A v1.12.6 corrigiu a distribuição espectral por modo/nota/velocidade que havia mostrado erro grave no D v1.12.5. Agora verificar (1) **escuta real** do American Grand D, com FX desligados em C2/C3/C4/C5/C6 e pianíssimo/forte, comparando A/B/C; (2) estrutura do ataque de martelo, ausência de corda dedilhada e decaimento duplo, sem avaliar realismo por FFT somente; (3) PC e Moto g04s, sustain, alternância de motor, CPU/callback/estalos 32–64 notas; (4) **instrumentos Yamaha/felt/upright** são extrapolações, não Steinway B calibrados; usar fontes próprias antes de mais timbre; (5) fechar R-GATEs por seus critérios comerciais originais, preservando 0/7 até prova explícita.
