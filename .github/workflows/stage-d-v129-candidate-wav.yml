@@ -1,0 +1,43 @@
+name: Stage D v1.12.9 isolated acoustic candidate WAV
+on:
+  push:
+    branches:
+      - experiment/d-v129-bass-polarization-20261123
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Full Stage regression plus candidate guards
+        run: npm run check
+      - name: Render original Stage D 128 / experimental D129 WAV
+        run: node scripts/render_piano_d_v129_polarization_wav.mjs artifacts/stage-d-v129
+      - name: Verify three real WAV files and metadata
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, wave
+          base=pathlib.Path("artifacts/stage-d-v129")
+          m=json.loads((base/"metadata.json").read_text())
+          assert len(m["files"])==3 and m["noExternalAudio"] and m["noFX"]
+          for rec in m["files"]:
+              path=base/rec["name"]
+              with wave.open(str(path),"rb") as wav:
+                  assert wav.getnchannels()==2 and wav.getsampwidth()==3
+                  assert wav.getframerate()==48000 and wav.getnframes()>48000
+              assert path.stat().st_size==rec["bytes"]
+          print("3 PCM24/48k stereo WAV files validated")
+          PY
+      - name: Upload comparison WAV for listening
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-D-v128-versus-v129-48k24-stereo
+          path: artifacts/stage-d-v129/
+          retention-days: 30
