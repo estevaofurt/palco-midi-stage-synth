@@ -1,3 +1,11 @@
+## Próxima etapa após E1.1 — obter evidência de radiação sincronizada, sem mudança de timbre
+
+Existe agora um analisador original offline para sinais **ponte aceleração [m/s²] e microfone pressão [Pa]**, com resposta H1 e coerência Welch. Seu teste apenas sintético foi preparado em `tests/bridge_radiation_h1.test.mjs`; o estágio **não é uma medição acústica** e tampouco comprova a identificação de uma estrutura de madeira. [Definição de instrumento, posicionamento, sincronismo, validação e direitos](VERIFICACAO_TRANSFERENCIA_RADIATIVA_H1_E11_2026-11-23.md).
+
+**Próximo requisito externo específico**: adquirir, com autorização comercial ou captação própria, evento de excitação com acelerômetro e microfone **sincronizados** no mesmo piano, sensores com unidades/calibração, posição e fase documentadas, e execuções independentes de validação. Caso haja múltiplas fontes de radiação, tratar H1 SISO como aproximação condicionada em vez de prova física completa. **Não integrar** na síntese pública até dados reais e ABX/CPU no hardware; 32 vozes mínimo/64 meta; 0/7 R-GATEs.
+
+---
+
 ## Próximo requisito: medir/identificar ponte→tampo→pressão, sem novas senoides inventadas
 
 Concluído: dois protótipos independentes de **sistema mecânico passivo**, com núcleos de placa por nota e **placa compartilhada O(N)**, balanço de energia sem realimentação ativa e teste de 64 notas. [Relatório e benchmarks](PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md). O custo é viável em Node isolado, porém não integra Stage DSP nem mede som de piano real. **Versão pública permanece v1.12.7** e PR #26 de "madeira" artificial continua draft/sem merge.
