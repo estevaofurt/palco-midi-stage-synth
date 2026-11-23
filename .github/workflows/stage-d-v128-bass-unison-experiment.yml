@@ -2,8 +2,8 @@ name: Stage Synth — experimental D v1.12.8 bass unison candidate and true WAV
 on:
   pull_request:
     paths:
-      - 'physical-piano-hybrid-v128-candidate.js'
-      - 'physical-piano-hybrid-v127.js'
+      - 'physical-piano-hybrid-v128-candidate.mjs'
+      - 'physical-piano-hybrid-v127.mjs'
       - 'tests/bass_unison_v128_candidate.test.mjs'
       - 'scripts/render_piano_d_v128_candidate_wav.mjs'
       - '.github/workflows/stage-d-v128-bass-unison-experiment.yml'
@@ -33,8 +33,8 @@ jobs:
       - name: Validate the full Stage Synth code and candidate
         run: |
           npm run check
-          node --check physical-piano-hybrid-v127.js
-          node --check physical-piano-hybrid-v128-candidate.js
+          node --check physical-piano-hybrid-v127.mjs
+          node --check physical-piano-hybrid-v128-candidate.mjs
           node --check scripts/render_piano_d_v128_candidate_wav.mjs
           node --test tests/bass_unison_v128_candidate.test.mjs
       - name: Render original D v1.12.7 and candidate D v1.12.8 genuine WAV
