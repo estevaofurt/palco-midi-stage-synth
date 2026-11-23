@@ -1,3 +1,19 @@
+# Preparação adicional de tampo, toque e nova referência Upright CC0 — 23/11/2026
+
+Ver [relatório técnico N01–N06](RADIACAO_TAMPO_TOQUE_FONTES_COMERCIAIS_2026-11-23.md).
+
+- [x] Conferir artigo de resposta espacial em **14 pontos do tampo**; não confundir T60 de percussão de tampo com decaimento de parciais de cordas.
+- [x] Conferir captura em quatro posições **Yamaha C3 AudioLabs**, IR de alto-falante de contato → microfones que inclui sala; não equiparar a mobilidade mecânica v/F da ponte.
+- [x] Identificar estudo PNAS 2025 sobre percepção do timbre e movimentos de tecla, com publicação NC-ND e direitos do dataset Dryad ainda não confirmados para uso comercial.
+- [x] Auditar a fonte externa **Meta Piano CC0**: 352 nomes no manifesto / 88 pitches × quatro camadas, SFZ e CC0; não há hash dos WAV originais validado. **Conservar total Stage de 50**, sem incorporar amostras no app.
+- [x] Delimitar N05 força tecla/base ≠ força ponte, e N06 resposta medida de rabāb ≠ piano. N06 pode orientar *formato* de ensaio, nunca calibração Stage.
+- [ ] Obter pelo menos um piloto comercialmente autorizado de F_h(t), duas polarizações/1–3 cordas, Y_ponte(f) COMPLEXA e radiação no **mesmo piano**; registrar incerteza, fase, microfones, referência de tempo e condições.
+- [ ] Especificação E1.1 atualizada: verificar f1/B até B=0,003 com misturas H/V, desaparição de parciais de ataque e relação de cadeias A/B/C. **Ainda não executada**.
+- [ ] Somente se houver benefício real para Upright, validar WAV/ZIP, origem acústica e direitos do Meta Piano; não atribuir marca/modelo não declarado.
+- [ ] Manter M01–M09 e R-GATE-1..7 congelados até documentação e dados físicos completos. Sem DSP/P1/P2, sem prometer 32–64 vozes livres de estalos antes dos testes no aparelho.
+
+---
+
 # Pesquisa Yamaha 2026 / ação de tecla — prioridades adicionais (23/11/2026)
 
 Relatório: [AVANCO_PESQUISA_YAMAHA_2026_ACAO_TECLADO_2026-11-23.md](AVANCO_PESQUISA_YAMAHA_2026_ACAO_TECLADO_2026-11-23.md).
