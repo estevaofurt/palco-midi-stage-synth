@@ -15,7 +15,11 @@ SOURCES = [
     "https://theremin.music.uiowa.edu/sound%20files/MIS/Piano_Other/piano/",
     "https://huggingface.co/datasets/sondalex/university-iowa-piano-samples/resolve/main/university_iowa/",
 ]
-NOTES = {"C2": 36, "C4": 60, "C6": 84}
+# Default remains the existing E0 pilot (C2/C4/C6). Research-only, opt-in
+# acquisition can verify the five-register commercial readiness sample.
+NOTES = ({"C2":36, "C3":48, "C4":60, "C5":72, "C6":84}
+         if os.environ.get("STAGE_IOWA_FIVE_REGIONS") == "1"
+         else {"C2": 36, "C4": 60, "C6": 84})
 LEVELS = ("pp", "mf", "ff")
 # Support a first pilot without altering source or needing CLI inputs.
 selected = os.environ.get("STAGE_PIANO_SELECTION", "C4:mf")
@@ -70,19 +74,24 @@ for pitch, velocity in jobs:
     if not probe.get("streams"):
         raise RuntimeError(f"Not an audio file: {filename}")
     info = probe["streams"][0]
-    mono_pcm = directory / f"{pitch}_{velocity}.f32le"
-    subprocess.run([
-        "ffmpeg", "-v", "error", "-nostdin", "-y", "-i", str(original),
-        "-map", "0:a:0", "-ar", "48000", "-ac", "1",
-        "-f", "f32le", "-acodec", "pcm_f32le", str(mono_pcm)
-    ], check=True)
+    # A provenance audit needs original AIFF bytes and ffprobe only; do not
+    # produce converted audio or carry samples into workflow artifacts.
+    if os.environ.get("STAGE_IOWA_METADATA_ONLY") == "1":
+        mono_pcm = None
+    else:
+        mono_pcm = directory / f"{pitch}_{velocity}.f32le"
+        subprocess.run([
+            "ffmpeg", "-v", "error", "-nostdin", "-y", "-i", str(original),
+            "-map", "0:a:0", "-ar", "48000", "-ac", "1",
+            "-f", "f32le", "-acodec", "pcm_f32le", str(mono_pcm)
+        ], check=True)
     manifest["notes"].append({
         "id": f"iowa-steinway-model-b-{pitch}-{velocity}",
         "instrument": "Steinway Model B (University of Iowa)",
         "key": NOTES[pitch],
         "dynamic": velocity,
         "stageCharacter": "american",
-        "pcmPath": str(mono_pcm),
+        "pcmPath": str(mono_pcm) if mono_pcm is not None else None,
         "originalUrl": url,
         "sha256": sha256,
         "bytes": size,
