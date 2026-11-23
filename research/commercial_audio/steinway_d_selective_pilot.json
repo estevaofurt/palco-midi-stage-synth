@@ -1,0 +1,108 @@
+{
+  "schema": "stage-steinway-d-selective-wav-pilot-v1",
+  "created": "2026-11-22",
+  "purpose": "Seven original individual WAVs requested via Archive ZIP virtual member endpoint, with bounded source download, PCM verification and SHA256; not piano physical calibration",
+  "ownerStatement": "https://bitklavier.com/the-bitklavier-grand/",
+  "archiveVerification": "https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45102770585",
+  "license": "CC-BY-4.0",
+  "caveats": [
+    "The archive MIDI velocity layer labels are NOT measured hammer impact speed",
+    "WAVs were denoised and trimmed with 5ms/100ms fades and gain rebalanced by the original authors",
+    "Microphone views sample same physical Steinway Model D but not dry anechoic transfer functions",
+    "No ZIP or WAV may be uploaded as an artifact or committed into the Stage repository",
+    "This manifest does not infer bridge mobility or physical hammer contact"
+  ],
+  "items": [
+    {
+      "id": "steinway-d-pianobar-c2v8",
+      "archiveIdentifier": "bitKlavierGrand_PianoBar_44k16b",
+      "memberName": "C2v8.wav",
+      "zipFile": "bitKlavierGrand_PianoBar_44k16b.zip",
+      "instrument": "Steinway Model D",
+      "mic": "PianoBar",
+      "license": "CC-BY-4.0",
+      "expectedWavRate": 44100,
+      "expectedBits": 16,
+      "expectedChannels": 2,
+      "author": "Dan Trueman/Princeton bitKlavier Grand"
+    },
+    {
+      "id": "steinway-d-pianobar-c4v1",
+      "archiveIdentifier": "bitKlavierGrand_PianoBar_44k16b",
+      "memberName": "C4v1.wav",
+      "zipFile": "bitKlavierGrand_PianoBar_44k16b.zip",
+      "instrument": "Steinway Model D",
+      "mic": "PianoBar",
+      "license": "CC-BY-4.0",
+      "expectedWavRate": 44100,
+      "expectedBits": 16,
+      "expectedChannels": 2,
+      "author": "Dan Trueman/Princeton bitKlavier Grand"
+    },
+    {
+      "id": "steinway-d-pianobar-c4v8",
+      "archiveIdentifier": "bitKlavierGrand_PianoBar_44k16b",
+      "memberName": "C4v8.wav",
+      "zipFile": "bitKlavierGrand_PianoBar_44k16b.zip",
+      "instrument": "Steinway Model D",
+      "mic": "PianoBar",
+      "license": "CC-BY-4.0",
+      "expectedWavRate": 44100,
+      "expectedBits": 16,
+      "expectedChannels": 2,
+      "author": "Dan Trueman/Princeton bitKlavier Grand"
+    },
+    {
+      "id": "steinway-d-pianobar-c4v16",
+      "archiveIdentifier": "bitKlavierGrand_PianoBar_44k16b",
+      "memberName": "C4v16.wav",
+      "zipFile": "bitKlavierGrand_PianoBar_44k16b.zip",
+      "instrument": "Steinway Model D",
+      "mic": "PianoBar",
+      "license": "CC-BY-4.0",
+      "expectedWavRate": 44100,
+      "expectedBits": 16,
+      "expectedChannels": 2,
+      "author": "Dan Trueman/Princeton bitKlavier Grand"
+    },
+    {
+      "id": "steinway-d-pianobar-c6v8",
+      "archiveIdentifier": "bitKlavierGrand_PianoBar_44k16b",
+      "memberName": "C6v8.wav",
+      "zipFile": "bitKlavierGrand_PianoBar_44k16b.zip",
+      "instrument": "Steinway Model D",
+      "mic": "PianoBar",
+      "license": "CC-BY-4.0",
+      "expectedWavRate": 44100,
+      "expectedBits": 16,
+      "expectedChannels": 2,
+      "author": "Dan Trueman/Princeton bitKlavier Grand"
+    },
+    {
+      "id": "steinway-d-binaural-c4v8",
+      "archiveIdentifier": "bitKlavierGrand_Binaural_44k16b",
+      "memberName": "C4v8.wav",
+      "zipFile": "bitKlavierGrand_Binaural_44k16b.zip",
+      "instrument": "Steinway Model D",
+      "mic": "Binaural",
+      "license": "CC-BY-4.0",
+      "expectedWavRate": 44100,
+      "expectedBits": 16,
+      "expectedChannels": 2,
+      "author": "Dan Trueman/Princeton bitKlavier Grand"
+    },
+    {
+      "id": "steinway-d-harpomni-c4v8",
+      "archiveIdentifier": "bitKlavierGrand_HarpOmni_44k16b",
+      "memberName": "C4v8.wav",
+      "zipFile": "bitKlavierGrand_HarpOmni_44k16b.zip",
+      "instrument": "Steinway Model D",
+      "mic": "HarpOmni",
+      "license": "CC-BY-4.0",
+      "expectedWavRate": 44100,
+      "expectedBits": 16,
+      "expectedChannels": 2,
+      "author": "Dan Trueman/Princeton bitKlavier Grand"
+    }
+  ]
+}

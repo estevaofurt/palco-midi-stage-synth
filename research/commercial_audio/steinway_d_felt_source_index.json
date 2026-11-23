@@ -1,0 +1,87 @@
+{
+  "schema": "stage-commercial-archive-source-index-v1",
+  "reviewedOn": "2026-11-22",
+  "purpose": "Source-metadata acquisition and license review ONLY; no embedded external audio and no instrument physics parameters inferred",
+  "references": [
+    {
+      "tag": "steinway-d-pianobar-44k16b",
+      "instrument": "Steinway Model D grand",
+      "mic": "Piano Bar",
+      "archiveIdentifier": "bitKlavierGrand_PianoBar_44k16b",
+      "zipFile": "bitKlavierGrand_PianoBar_44k16b.zip",
+      "sampleRateHz": 44100,
+      "bits": 16,
+      "license": "CC-BY-4.0",
+      "owner": "Dan Trueman/bitKlavier Grand recorded at Princeton",
+      "authorStatement": "https://bitklavier.com/the-bitklavier-grand/",
+      "source": "https://archive.org/details/bitKlavierGrand_PianoBar_44k16b",
+      "expectedMembers": [
+        "C2v1.wav",
+        "C2v8.wav",
+        "C2v16.wav",
+        "C4v1.wav",
+        "C4v8.wav",
+        "C4v16.wav",
+        "C6v1.wav",
+        "C6v8.wav",
+        "C6v16.wav",
+        "rel40.wav",
+        "pedalU1.wav"
+      ]
+    },
+    {
+      "tag": "steinway-d-binaural-44k16b",
+      "instrument": "Steinway Model D grand",
+      "mic": "Binaural / Neumann KU100 at pianist",
+      "archiveIdentifier": "bitKlavierGrand_Binaural_44k16b",
+      "zipFile": "bitKlavierGrand_Binaural_44k16b.zip",
+      "sampleRateHz": 44100,
+      "bits": 16,
+      "license": "CC-BY-4.0",
+      "owner": "Dan Trueman/bitKlavier Grand recorded at Princeton",
+      "authorStatement": "https://bitklavier.com/the-bitklavier-grand/",
+      "source": "https://archive.org/details/bitKlavierGrand_Binaural_44k16b",
+      "expectedMembers": [
+        "C2v8.wav",
+        "C4v8.wav",
+        "C6v8.wav"
+      ]
+    },
+    {
+      "tag": "steinway-d-harpomni-44k16b",
+      "instrument": "Steinway Model D grand",
+      "mic": "Harp Omni / DPA 4060",
+      "archiveIdentifier": "bitKlavierGrand_HarpOmni_44k16b",
+      "zipFile": "bitKlavierGrand_HarpOmni_44k16b.zip",
+      "sampleRateHz": 44100,
+      "bits": 16,
+      "license": "CC-BY-4.0",
+      "owner": "Dan Trueman/bitKlavier Grand recorded at Princeton",
+      "authorStatement": "https://bitklavier.com/the-bitklavier-grand/",
+      "source": "https://archive.org/details/bitKlavierGrand_HarpOmni_44k16b",
+      "expectedMembers": [
+        "C2v8.wav",
+        "C4v8.wav",
+        "C6v8.wav"
+      ]
+    }
+  ],
+  "felt": {
+    "instrument": "Fuchs & Möhr Felt Upright",
+    "author": "Tom Guder",
+    "authorStatement": "https://www.polyphone.io/en/forum/your-creations/850-acoustic-felt-piano-upright-fuchs-mohr",
+    "authorProvidedZip": "FuchsUndMoehrSamplesWAV16bit.zip",
+    "authorDriveFileId": "1XbIZgTdKoR2KxIyKM-CkEweS3HI4ieHu",
+    "declaredLicense": "Public Domain (as declared by the creator in forum post)",
+    "format": "WAV stereo 16-bit; 3 layers",
+    "originValidation": "Author declared source ZIP and license; original ZIP bytes/hashes NOT yet acquired/verified",
+    "criticalLimitation": "Not a paired recording of same instrument with/without felt; cannot identify felt physics separately"
+  },
+  "limitations": [
+    "Princeton bitKlavier WAV are batch denoised, attack-release faded and rebalanced across velocities; not direct measurements of hammer contact force or natural loudness.",
+    "All listed archive members are EXPECTED from author's file listing, not proven to reside in ZIP until central directory/bytes are inspected.",
+    "Archive metadata may expose only one ~1GB ZIP per mic; do not download entire archives in CI without an explicit constrained plan.",
+    "Felt public-domain source has author statement but Google Drive original ZIP hash not verified.",
+    "Do not use any NonCommercial datasets for the commercial product's calibration without additional licenses."
+  ]
+}

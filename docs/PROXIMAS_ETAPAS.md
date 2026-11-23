@@ -1,3 +1,22 @@
+# Continuidade da preparação comercial Steinway D / Felt (22/11/2026)
+
+Documento: [PRINCETON_STEINWAY_D_FELT_FONTES_COMERCIAIS_2026-11-22.md](PRINCETON_STEINWAY_D_FELT_FONTES_COMERCIAIS_2026-11-22.md).
+
+- [x] Conferir em fonte autoral o **Steinway Model D de Princeton**, CC BY 4.0, 16 layers em amostras a cada terça menor, nine microphone positions, denoise e rebalancing.
+- [x] Localizar e validar no Archive.org **três ZIPs Model D** com MD5 e tamanho oficial de Piano Bar/Binaural/Harp Omni (**2.978.146.922 bytes somados**); ZIPs não baixados.
+- [x] Encontrar **17/17 nomes de membros WAV** nos índices e comprovar extração direta de uma nota sem baixar ZIP grande.
+- [x] Conferir integralmente **sete WAVs Model D originais**, PCM 44,1kHz/16bit, SHA256 permanente; **22/22 testes da preparação**, sem publicar áudio. Subconjunto de cinco pianos agora 35 arquivos originais / 103,75 MB.
+- [x] Localizar no fórum do criador Tom Guder o ZIP WAV stereo 16bit, três layers, Felt Fuchs & Möhr, com **declaração Public Domain** e link autoral Google Drive.
+- [ ] Obter e validar **ZIP original Felt** (tamanho, bytes, SHA256), confrontando a proveniência com os nove WAVs CueHarbor E0; não afirmar pares com/sem feltro.
+- [ ] Avaliar se ampliar Model D para 48k/24bit e mais notas/velocity é necessário; nenhum ganho de fidelidade física pode ser alegado apenas por mais WAVs.
+- [ ] Preparar curva de martelo/massa/F(t)/δ(t), mobilidade complexa da ponte por região, two polarizations e captura própria Felt pareada com direito comercial.
+- [ ] Revisar LICENSE do código, notices para CC BY e autoria do fixture mínimo SF2; não assumir distribuição automaticamente permitida.
+- [ ] Completar **os sete R-GATEs** antes de qualquer DSP/P1/P2 e obter autorização expressa para retomar.
+
+**Regra:** preparação e documentação somente, áudio de terceiros fora do repositório e do app.
+
+---
+
 # Preparação concreta de fontes originais comerciais (22/11/2026)
 
 [Relatório do piloto](PREPARACAO_FONTES_COMERCIAIS_PILOTO_2026-11-22.md) e hashes em research/commercial_audio/verified_source_sha256.json (sem gravações).

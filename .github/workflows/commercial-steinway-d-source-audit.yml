@@ -1,0 +1,52 @@
+name: Stage Synth - Steinway D commercial source metadata audit
+on:
+  push:
+    branches:
+      - research/commercial-steinway-d-felt-origin-audit
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit-original-archive-metadata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      STAGE_ARCHIVE_REPORT_DIR: /tmp/stage-steinway-d-source-audit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test fixed source and metadata constraints
+        run: python3 -m unittest discover -s research/commercial_audio -p 'test_*.py' -v
+      - name: Query archive METADATA ONLY (never download ZIP or WAV)
+        run: |
+          mkdir -p "$STAGE_ARCHIVE_REPORT_DIR"
+          python3 research/commercial_audio/audit_archive_metadata.py \
+            research/commercial_audio/steinway_d_felt_source_index.json \
+            "$STAGE_ARCHIVE_REPORT_DIR/archive-metadata.json"
+      - name: Probe Archive ZIP member listing (no ZIP/WAV transfer)
+        run: |
+          python3 research/commercial_audio/archive_member_probe.py \
+            research/commercial_audio/steinway_d_felt_source_index.json \
+            "$STAGE_ARCHIVE_REPORT_DIR/member-listing.json"
+      - name: Bound-only C4v8 Princeton ZIP member WAV header access probe
+        run: python3 research/commercial_audio/probe_archive_wav_access.py
+      - name: Download and SHA256-check seven selected ORIGINAL Steinway D WAV members (bounded)
+        run: |
+          python3 research/commercial_audio/verify_bitklavier_wavs.py \
+            research/commercial_audio/steinway_d_selective_pilot.json \
+            "$STAGE_ARCHIVE_REPORT_DIR/verified-seven-wav.json"
+      - name: Upload metadata hashes ONLY
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-steinway-d-archive-metadata-only
+          path: |
+            /tmp/stage-steinway-d-source-audit/archive-metadata.json
+            /tmp/stage-steinway-d-source-audit/member-listing.json
+            /tmp/stage-steinway-d-source-audit/verified-seven-wav.json
+          retention-days: 14
+          if-no-files-found: error
+      - name: Remove report on runner
+        if: always()
+        run: rm -rf /tmp/stage-steinway-d-source-audit

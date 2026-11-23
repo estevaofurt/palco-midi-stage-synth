@@ -1,3 +1,13 @@
+## Preparação comercial ampliada — 35 gravações ORIGINAIS verificadas (22/11/2026)
+
+**Novo:** sete WAVs originais do **Steinway Model D de Princeton (bitKlavier Grand, CC BY 4.0)** foram obtidos INDIVIDUALMENTE de três coleções do Archive.org, PCM 44,1k/16bit, verificados integralmente com SHA256 e apagados após a verificação. Correspondem a C2v8, C4v1/v8/v16 e C6v8 do Piano Bar, além da mesma C4v8 Binaural e Harp Omni. Teste https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45103239343 — 22/22 testes; SHA256 preservados em research/commercial_audio/steinway_d_verified_wav_sha256.json. Os ZIPs completos **NÃO** foram transferidos; dados de áudio **NÃO** estão no GitHub.
+
+**Total acumulado de referências comerciais originais:** 28 WAV/FLAC anteriores + 7 Model D = **35 arquivos / 103.753.348 bytes / cinco pianos acústicos diferentes**. Os três ZIPs Princeton têm metadados oficiais de tamanho/MD5/licença registrados; os WAVs originais são **denoised, cortados e reequilibrados**, não parâmetros físicos diretos. Fonte do Felt Tom Guder Public Domain e link do ZIP WAV autoral confirmados, mas o ZIP original ainda NÃO foi baixado ou conferido.
+
+**Status de liberação permanece 0/7 gates prontos.** Não alterar timbre, DSP, A/B/C, P1/P2, interface, MIDI ou FX. Referências e limites: docs/PRINCETON_STEINWAY_D_FELT_FONTES_COMERCIAIS_2026-11-22.md .
+
+---
+
 ## Preparação comercial — 28 fontes sonoras ORIGINAIS verificadas (22/11/2026)
 
 A auditoria comercial passou a possuir **dados efetivamente adquiridos e conferidos**, não só links: **8 WAV VCSL (Steinway Model B + Knight Upright) CC0, 15 FLAC Yamaha C5 Salamander CC BY 3.0 e 5 FLAC Kawai KW FreePats CC0**. Quatro pianos acústicos distintos, 28 arquivos originais e **64.396.672 bytes** totais, 24 bits (WAV 44,1 kHz ou FLAC 48/44,1 kHz). Os arquivos foram validados contra commits e Git blob SHA1 de origem, SHA256 por arquivo e decodificação original; **10/10 testes da verificação aprovados** em https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45101876490 . Os 28 SHA256 estão em research/commercial_audio/verified_source_sha256.json. **Nenhum áudio foi incluído no repositório, no app ou nos artifacts.**
