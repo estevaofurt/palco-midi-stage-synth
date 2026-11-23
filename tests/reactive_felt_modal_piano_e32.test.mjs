@@ -128,7 +128,8 @@ test('reactive contact remains passive with an enriched 8x8 string modal bank',(
 test('ideal string modal mass is rho * pi * r² * L / 2 and not a timbral preset',()=>{
  const g={lengthM:.85,radiusM:.0006,densityKgM3:7850};
  const expected=7850*Math.PI*.0006**2*.85/2;
- assert.equal(idealStringModalMassKg(g),expected);
+ assert.ok(Math.abs(idealStringModalMassKg(g)-expected)<=1e-12*Math.max(1,expected),
+  'identical dimensional mass formula must tolerate floating-point reassociation');
  assert.ok(expected>.002&&expected<.006);
  assert.throws(()=>idealStringModalMassKg({...g,radiusM:0}),RangeError);
  assert.throws(()=>idealStringModalMassKg({...g,densityKgM3:-1}),RangeError);
