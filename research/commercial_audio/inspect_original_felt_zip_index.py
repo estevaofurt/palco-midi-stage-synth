@@ -62,12 +62,13 @@ def source_total():
     return total
 
 class RemoteZipReader:
-    def __init__(self,total,fetcher=None,max_transfer=MAX_INDEX_TRANSFER):
+    def __init__(self,total,fetcher=None,max_transfer=MAX_INDEX_TRANSFER,max_requests=MAX_REQUESTS):
         if not SIZE_MIN<=total<=SIZE_MAX:raise ValueError("source ZIP total outside budget")
         self.total=total
         self.pos=0
         self.fetcher=fetcher or (lambda s,e:ranged_get(URL,s,e))
         self.max_transfer=max_transfer
+        self.max_requests=max_requests
         self.transferred=0
         self.requests=0
         self.cache=OrderedDict()
@@ -84,7 +85,7 @@ class RemoteZipReader:
             self.cache.move_to_end(start)
             return self.cache[start]
         end=min(start+BLOCK,self.total)-1
-        if self.requests>=MAX_REQUESTS or self.transferred+end-start+1>self.max_transfer:
+        if self.requests>=self.max_requests or self.transferred+end-start+1>self.max_transfer:
             raise ValueError("ZIP central directory exceeded network budget")
         data,source_size=self.fetcher(start,end)
         if source_size!=self.total:raise ValueError("source ZIP changed during inspection")
