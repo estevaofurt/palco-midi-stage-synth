@@ -1,0 +1,95 @@
+name: Stage Synth — experimental D v1.12.8 bass unison candidate and true WAV
+on:
+  pull_request:
+    paths:
+      - 'physical-piano-hybrid-v128-candidate.mjs'
+      - 'physical-piano-hybrid-v127.mjs'
+      - 'tests/bass_unison_v128_candidate.test.mjs'
+      - 'scripts/render_piano_d_v128_candidate_wav.mjs'
+      - 'scripts/evaluate_d_v128_iowa.mjs'
+      - '.github/workflows/stage-d-v128-bass-unison-experiment.yml'
+      - 'docs/EXPERIMENTO_MOTOR_D_V128_UNISSONOS_GRAVES_2026-11-23.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  v128-bass-unison:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      STAGE_AUDIO_WORKDIR: /tmp/stage-iowa-v128-check
+      STAGE_IOWA_FIVE_REGIONS: '1'
+      STAGE_PIANO_SELECTION: 'C2:mf,C3:mf'
+      STAGE_IOWA_METADATA_ONLY: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Freeze every publicly available motor, historical page, FX and MIDI routing
+        run: |
+          git diff --exit-code b20c4c4f2cd7aaaeb34a3dd9619b5fa92e9ace3f -- \
+            physical-piano-hybrid.js physical-piano-hybrid-v126.js \
+            physical-piano.js physical-piano-legacy.js piano-worklet.js \
+            piano-resonance.js piano-hybrid-calibration.js \
+            acoustic.js acoustic-v126.js index.html v1.12.6.html v1.12.7.html \
+            app.js stage.js panel.js fx-rack.js patches.js package.json
+      - name: Validate the full Stage Synth code and candidate
+        run: |
+          npm run check
+          node --check physical-piano-hybrid-v127.mjs
+          node --check physical-piano-hybrid-v128-candidate.mjs
+          node --check scripts/render_piano_d_v128_candidate_wav.mjs
+          node --check scripts/evaluate_d_v128_iowa.mjs
+          node --test tests/bass_unison_v128_candidate.test.mjs
+      - name: Render original D v1.12.7 and candidate D v1.12.8 genuine WAV
+        run: |
+          node scripts/render_piano_d_v128_candidate_wav.mjs artifacts/stage-d-v128
+      - name: Independently inspect PCM24, A/B ordering, unchanged controls and audio differences
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,wave,math
+          root=pathlib.Path('artifacts/stage-d-v128')
+          meta=json.loads((root/'metadata.json').read_text())
+          assert not meta['individuallyNormalized'] and meta['noFX'] and meta['noExternalAudio']
+          assert len(meta['relativeMetricsDb'])==8
+          tracks=sorted(root.glob('*.wav'))
+          assert len(tracks)==3
+          frames=[]
+          for p in tracks:
+              with wave.open(str(p),'rb') as w:
+                  assert (w.getnchannels(),w.getframerate(),w.getsampwidth())==(2,48000,3)
+                  frames.append(w.getnframes())
+              print('AUDIO',p.name,p.stat().st_size)
+          assert frames[0]==frames[1] and frames[2]>2*frames[0]
+          for item in meta['relativeMetricsDb']:
+              assert all(math.isfinite(item[x]) for x in ('first12msDb','body100to220msDb','late900to1300msDb'))
+              if item['label'].startswith(('C3 ','C4 ')):assert item['changedFrames']==0,item
+          assert any(x['changedFrames']>2000 for x in meta['relativeMetricsDb'] if x['label'].startswith('C2 '))
+          print('CANDIDATE_AUDIT',json.dumps(meta['relativeMetricsDb'],ensure_ascii=False))
+          PY
+      - name: Verify original Iowa C2 mf and C3 mf sources and decode only in CI temp
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          python3 scripts/fetch_iowa_reference.py
+          node scripts/evaluate_d_v128_iowa.mjs \
+            "$STAGE_AUDIO_WORKDIR/manifest.json" artifacts/stage-d-v128/iowa_original_numeric_check.json
+      - name: Remove original Iowa AIFF/PCM before uploading synthetic Stage WAV
+        if: always()
+        run: rm -rf "$STAGE_AUDIO_WORKDIR"
+      - name: Publish only original Stage synth WAV and JSON numbers
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-synth-D-v127-versus-v128-bass-unison-wav
+          path: artifacts/stage-d-v128/
+          retention-days: 7
+          compression-level: 4
+          if-no-files-found: error
