@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
-      STAGE_AUDIO_WORKDIR: ${{ runner.temp }}/stage-iowa-pitch-audit
+      STAGE_AUDIO_WORKDIR: /tmp/stage-iowa-pitch-audit
       STAGE_IOWA_FIVE_REGIONS: "1"
       STAGE_PIANO_SELECTION: matrix
       STAGE_IOWA_METADATA_ONLY: "0"
