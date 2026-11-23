@@ -1,3 +1,12 @@
+## v1.12.7 — primeiro experimento de martelo físico temporal C1–C3 (23/11/2026)
+
+- Motor D **permanece experimental e selecionável dentro do Piano Acústico**; A/B/C/Clássico, FX, MIDI, seleção e preset padrão não alterados.
+- Apenas notas **MIDI 21–48**: primeiro experimento de força de contato de martelo no tempo (semiciclo comprimido com envelope positivo e duração variável), excitação modal causal de segunda ordem, cálculo analítico O(1) do espectro do pulso discreto, e rampa curta de formação de radiação por registro. Os modos médios e agudos MIDI 49–108 continuam **bit a bit iguais** ao D v1.12.6.
+- O D v1.12.6 histórico agora dispõe de **cópia real do motor e carregador `acoustic-v126.js`**: a página `v1.12.6.html` não carrega inadvertidamente o D atualizado. O HTML do novo modelo é `v1.12.7.html`.
+- Verificação original Steinway B/Iowa 15/15 com SHA256 confirma **resultado misto**: melhora da forma temporal do ataque em C2/C3, de **3,58→2,96dB**, mas leve piora de espectro de ataque integrado (3,23→4,30dB) e de sustentação (9,38→10,49dB). Métricas **in-sample**, não prova de fidelidade perceptual. A próxima ação é avaliação real do usuário.
+- Novos testes para força positiva, transformada analítica, CC64, limites de 32–64 vozes e preservação C4–C6; medição CPU Node (não browser). Nenhuma amostra ou código restrito de terceiros importado.
+- D permanece com **0/7 R-GATEs integralmente fechados**, sem homologação perceptiva, Yamaha/Felt ou desempenho real-time do Moto g04s.
+
 ## v1.12.6 — Ajuste espectral de ataque/radiação do motor D (experimental; 23/11/2026)
 
 - Corrigido o problema medido de distribuição harmônica: **C2/C3 com fundamental dominante demais e harmônicos excessivamente fracos; C6 com parcial excessivo**.
