@@ -31,6 +31,8 @@ on:
       - 'tests/nonlinear_felt_contact_e31.test.mjs'
       - 'tests/reactive_felt_modal_piano_e32.test.mjs'
       - 'tests/coupled_nonlinear_hammers_e32.test.mjs'
+      - 'scripts/benchmark_nonlinear_hammers_e32.mjs'
+      - 'scripts/diagnose_nonlinear_hammers_e32.mjs'
       - 'scripts/benchmark_damper_aware_shared_bridge.mjs'
       - 'scripts/benchmark_hammer_driven_passive_piano.mjs'
       - 'scripts/benchmark_shared_passive_modal_piano.mjs'
@@ -76,6 +78,10 @@ jobs:
         run: node scripts/benchmark_analytic_mesh_e30.mjs | tee e30-mesh-benchmark.json
       - name: Diagnose E3.0 physical source mismatch and harmonic deficit
         run: node scripts/audit_piano_source_e31.mjs | tee e31-report.json
+      - name: E3.2 energy-aware hammer attack, CPU cost for 1-64 contacts
+        run: node scripts/benchmark_nonlinear_hammers_e32.mjs | tee e32-hammer-benchmark.json
+      - name: E3.2 C2 C3 C4 C5 harmonic diagnosis without any recordings
+        run: node scripts/diagnose_nonlinear_hammers_e32.mjs | tee e32-hammer-audit.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -98,6 +104,9 @@ jobs:
             e30-mesh-benchmark.json
             e31-report.json
             e31-physical-source-diagnostic.json
+            e32-hammer-benchmark.json
+            e32-hammer-audit.json
+            e32-hammer-harmonic-audit.json
             e30-physical-48-patches.wav
             e30-physical-96-patches.wav
             e30-physical-192-patches.wav
