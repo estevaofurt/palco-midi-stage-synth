@@ -1,3 +1,13 @@
+**Complemento Steinway D (2021/2026):** bitKlavier Grand/Princeton disponibiliza 16 camadas em notas amostradas a cada terça menor, 9 posições estéreo, WAV até 96k/24 bits **CC BY 4.0**, mas o áudio foi denoised/recortado e seus níveis reequilibrados; serve para timbre e radiação, **não** velocidade física do martelo. A Vienna Symphonic Library disponibiliza demonstrações de Yamaha CFX verdadeiro, produto comercial com ressonâncias/FX, referência perceptiva e **não** WAV aberto. CCMusic apresenta 1.320 notas e 29 avaliadores humanos de pianos variados, com licenças restritivas para distribuição.
+
+## Qualificação científica das referências sonoras (22/11/2026)
+
+A comparação E0 de 33 amostras foi revisada: falta sincronização de dinâmica física, mic, sala e condições de gravação; **não tratar seus valores em dB como nota de realismo nem usar como único alvo de DSP**. Foram localizadas fontes experimentais mais apropriadas: **BiVib Yamaha cauda/vertical, 10 velocities × 88 notas, WAV 96k/24b e metadados binaurais/calibração**; **RWC Yamaha/Steinway/Bösendorfer reais, 3168 sons com estilos/pedal e três dinâmicas**; **MAPS Yamaha Disklavier real com close/ambient**; **MAESTRO** para desempenho musical e pedais. Todas exigem respeitar licença de uso não comercial e restrições próprias; nenhum novo áudio foi baixado nem incorporado.
+
+Catálogo com fontes, critérios e o plano E1: docs/AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md. A P1 continua isolada; v1.9.5 está preservada, sem mudanças nos motores A/B/C.
+
+---
+
 ## E0 — comparação de áudio real dos quatro pianos (22/11/2026)
 
 Na branch de pesquisa E0 foi implementado um procedimento de CI que **baixou e analisou efetivamente 33 gravações isoladas** de Yamaha C5, Steinway B, Felt Fuchs & Möhr e Upright Knight (amostras AIFF/WAV/AAC em /tmp somente). Nenhum sample foi incorporado ao GitHub, à aplicação ou ao artifact: somente proveniência e métricas JSON. A análise foi comparada a todos os motores A/B/C em 48 kHz, sem FX, mantendo DSP original e a v1.9.5. O resultado aponta forte diferença de amplitude relativa de parciais nos graves B/C, mas não é uma avaliação subjetiva de realismo; pp/mf/ff e níveis AAC não representam um velocity MIDI comum. Notas com menos de três parciais detectáveis têm estimativa de B nula. A nova observação espectral curta de ataque busca reduzir falsos negativos em C6 sem tratá-la como rigidez de corda.
