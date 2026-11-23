@@ -159,6 +159,11 @@ def main(argv):
       "scope":"original ZIP central directory only, WAV bytes not downloaded",
       "members":items
     }
+    # Filename discovery only, no PCM/WAV access. Print a short source evidence list.
+    import os as _os
+    print("FELT-ORIGINAL-ZIP-FIRST:",json.dumps([x["name"] for x in items[:15]],ensure_ascii=False),flush=True)
+    target=[x for x in items if re.search(r"C[246](?![0-9])",_os.path.basename(x["name"]),re.I)]
+    print("FELT-ORIGINAL-ZIP-KEYS:",json.dumps([x["name"] for x in target[:35]],ensure_ascii=False),flush=True)
     out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
     print(f"FELT-REMOTE-DIRECTORY: totalZip={total} WAVmembers={len(items)} "
           f"transfer={reader.transferred} requests={reader.requests}, "
