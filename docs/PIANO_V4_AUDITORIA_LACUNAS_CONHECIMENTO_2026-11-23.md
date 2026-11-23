@@ -149,7 +149,18 @@ Fontes:
 - Definir medidas de ataque, brilho por faixa, razão espectral entre harmônicos, decaimento por parcial, nível, pitch e reconhecimento auditivo.
 - Planejar teste A/B sem identificação do arquivo e com a mesma cadeia de reprodução. Se o usuário não reconhecer piano, a V4 **não avança**.
 
-## 6. Resultado e decisão para PR #39
+## 6. Dados reais disponíveis para iniciar a validação
+
+Após o levantamento das lacunas, foram identificadas fontes com medições externas verificáveis, catalogadas em [`PIANO_V4_CATALOGO_DADOS_EXPERIMENTAIS_MEDICOES_2026-11-23.md`](PIANO_V4_CATALOGO_DADOS_EXPERIMENTAIS_MEDICOES_2026-11-23.md):
+
+- **Plath/Universidade de Hamburgo (Zenodo, ISMA 2019):** impacto **tecla–keybed** em N, aceleração próxima à ponte em m/s² e pressão binaural em Pa, canais sincronizados 50 kHz. **Não mede diretamente martelo–corda**.
+- **BiVib (Zenodo 2019):** dois Yamaha Disklavier (cauda e vertical), dez níveis MIDI e sinais de **vibração do teclado** mais som binaural. **Não é medição da ponte**.
+- **Iowa/Steinway B:** gravações pp/mf/ff com referência de captação; **não contêm sensores de força/placa**, e a sala não era anecoica.
+- **Fontana et al. (2024):** dados de respostas perceptivas sobre localização de sons mecânicos de piano vertical.
+
+**Nenhum dado externo foi importado ou integrado**; avaliar licenças, metadados, volumes de dezenas de GB e eventuais versões posteriores antes de processamento. O catálogo não transforma uma gravação em instrumentação mecânica faltante.
+
+## 7. Resultado e decisão para PR #39
 
 **Resultado deste estudo:** a V4 está agora fundamentada por um **inventário de 18 lacunas**, referências multidisciplinares e testes correspondentes, sem alegar que a execução prática foi realizada. O **gargalo nº 1 do projeto não é CPU ou MIDI; é a identificação física dos mecanismos e sua transmissão até a pressão no ar sob condições audíveis e reproduzíveis**.
 
