@@ -5,7 +5,9 @@ on:
       - main
     paths:
       - 'research/damper-aware-shared-bridge.mjs'
+      - 'research/hammer-driven-passive-piano.mjs'
       - 'tests/damper_aware_shared_bridge.test.mjs'
+      - 'tests/hammer_driven_passive_piano.test.mjs'
       - 'scripts/benchmark_damper_aware_shared_bridge.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
