@@ -51,6 +51,10 @@ def main():
     if len(html)>2_000_000:raise ValueError("viewer unusually large")
     url=find_member_link(html.decode("utf8",errors="replace"),"C4v8.wav",listing)
     if not url:
+        parser=Links()
+        parser.feed(html.decode("utf8",errors="replace"))
+        candidates=[(label[:70],href[:230]) for label,href in parser.items if "C4v8" in label or "C4v8" in href]
+        print("WAV-C4V8 viewer anchor candidates (no audio fetched): "+json.dumps(candidates[:4]))
         print("WAV-C4V8: no individually addressable ZIP-member link verified")
         return
     print("WAV-C4V8: linked member URL found, attempting bounded RIFF-header check")
