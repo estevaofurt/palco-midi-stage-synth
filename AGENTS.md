@@ -1,3 +1,11 @@
+## PESQUISA DE PONTE/TAMPO PASSIVO COMPARTILHADO — SEM NOVA VERSÃO SONORA (23/11/2026)
+
+Feedback recente do titular: quatro modelos A/B/C/D muito semelhantes, componente agudo parece ruído, som ainda "redondo" e lembra violão. **Não integrar PR #26**, que ficou como draft. O novo estudo está documentado em [docs/PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md](docs/PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md), implementado **somente em `research/`**, com testes e benchmarks. NÃO MUDAR `physical-piano-hybrid.js`, outros motores, painel, UI, MIDI, presets nem `package.json`; v1.12.7 permanece pública e v1.12.6 preservada para comparação.
+
+O laboratório implementa `M x''+C x'+K x=F` com parâmetros positivos, integração de ponto médio implícito, balanço discreto energia-força-amortecimento e transferência corda→ponte→outras cordas. Otimizado para **dois modos de tampo compartilhados** e solução O(N) via complemento de Schur. CI 139/139 testes + 12/12 testes mecânicos dedicados, benchmark isolado p95 para 64 notas **0,156ms compartilhado vs 1,494ms por placa/nota**, **não** AudioWorklet real. **NÃO equivale a som melhor ou resposta de madeira identificada**: massas, rigidez e frequência de placa não medidas; saída é velocidade generalizada, **não pressão acústica**. Sem licença confirmada nos dados de Plath/IR Yamaha, não importar gravações ou parâmetros desses conjuntos. R-GATEs completos **0/7**.
+
+---
+
 ## D v1.12.7 DISPONÍVEL SOMENTE COMO EXPERIMENTO DE GRAVE (23/11/2026)
 
 O titular autorizou prosseguir com o plano depois da auditoria de algoritmo. O experimento v1.12.7 **altera apenas o motor D em MIDI 21–48**, com força de contato temporal por ressonadores e crescimento de radiação de grave, sem qualquer alteração ao caminho C4–C6 (MIDI >=49) nem A/B/C/Clássico, FX, MIDI, interface ou presets. A página histórica `v1.12.6.html` agora utiliza `acoustic-v126.js` e snapshots congelados do D v1.12.6 para **comparação auditiva verdadeira**; a v1.12.7 mantém uma única opção D no módulo Piano.
