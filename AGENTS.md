@@ -1,3 +1,9 @@
+## E1.1 — ESTIMATIVA RADIATIVA OFFLINE, SEM DADOS MEDIDOS E SEM NOVO TIMBRE (23/11/2026)
+
+Após validar o solver passivo compartilhado na PR #28, a próxima etapa foi preparar um **estimador H1 de resposta complexa da aceleração de ponte (m/s²) à pressão aérea (Pa)** em `research/bridge-radiation-h1.mjs`. Testes com **sinais sintéticos**, sem qualquer instrumentação Yamaha/Steinway ou bytes de terceiros. O método usa Welch/coerência, rejeita frequências inválidas e exige que **sincronização, calibração e direitos comerciais** sejam comprovados externamente. H_pa NÃO é mobilidade mecânica `v_ponte/F_ponte`, nem autoriza inferir madeira/pressão completa a partir de `boardVelocity` normalizada. CI [E1.1 147/147 + 6/6](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45175445690), [baseline aprovado](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45175445415). [Documento](docs/VERIFICACAO_TRANSFERENCIA_RADIATIVA_H1_E11_2026-11-23.md). **Não alterar motores A/B/C/D/Clássico, DSP, UI, MIDI, FX, presets, versão nem licenças; Stage v1.12.7 permanece público, v1.12.6 para A/B, PR #26 reprovada, R-GATEs completos 0/7.** Meta 32–64 vozes só após testes em hardware real.
+
+---
+
 ## PESQUISA DE PONTE/TAMPO PASSIVO COMPARTILHADO — SEM NOVA VERSÃO SONORA (23/11/2026)
 
 Feedback recente do titular: quatro modelos A/B/C/D muito semelhantes, componente agudo parece ruído, som ainda "redondo" e lembra violão. **Não integrar PR #26**, que ficou como draft. O novo estudo está documentado em [docs/PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md](docs/PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md), implementado **somente em `research/`**, com testes e benchmarks. NÃO MUDAR `physical-piano-hybrid.js`, outros motores, painel, UI, MIDI, presets nem `package.json`; v1.12.7 permanece pública e v1.12.6 preservada para comparação.
