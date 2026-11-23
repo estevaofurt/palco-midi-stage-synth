@@ -14,6 +14,7 @@ on:
       - 'research/analytic-soundboard-radiation.mjs'
       - 'research/pure-physical-radiation-e29.mjs'
       - 'research/compare-analytic-mesh-e30.mjs'
+      - 'research/diagnose-piano-source-e31.mjs'
       - 'tests/damper_aware_shared_bridge.test.mjs'
       - 'tests/hammer_driven_passive_piano.test.mjs'
       - 'tests/measured_radiation_adapter.test.mjs'
@@ -23,6 +24,7 @@ on:
       - 'tests/pure_physical_audition_e28.test.mjs'
       - 'tests/analytic_soundboard_radiation_e29.test.mjs'
       - 'tests/compare_analytic_mesh_e30.test.mjs'
+      - 'tests/diagnose_piano_source_e31.test.mjs'
       - 'scripts/benchmark_damper_aware_shared_bridge.mjs'
       - 'scripts/benchmark_hammer_driven_passive_piano.mjs'
       - 'scripts/benchmark_shared_passive_modal_piano.mjs'
@@ -32,6 +34,7 @@ on:
       - 'scripts/benchmark_analytic_physical_e29.mjs'
       - 'scripts/render_physical_mesh_e30.mjs'
       - 'scripts/benchmark_analytic_mesh_e30.mjs'
+      - 'scripts/audit_piano_source_e31.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
 jobs:
@@ -65,6 +68,8 @@ jobs:
         run: node scripts/render_physical_mesh_e30.mjs | tee e30-render-summary.json
       - name: Benchmark physical E3.0 32 48 64 notes with 48 96 192 patches
         run: node scripts/benchmark_analytic_mesh_e30.mjs | tee e30-mesh-benchmark.json
+      - name: Diagnose E3.0 physical source mismatch and harmonic deficit
+        run: node scripts/audit_piano_source_e31.mjs | tee e31-report.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -85,6 +90,8 @@ jobs:
             e30-render-summary.json
             e30-mesh-comparison.json
             e30-mesh-benchmark.json
+            e31-report.json
+            e31-physical-source-diagnostic.json
             e30-physical-48-patches.wav
             e30-physical-96-patches.wav
             e30-physical-192-patches.wav
