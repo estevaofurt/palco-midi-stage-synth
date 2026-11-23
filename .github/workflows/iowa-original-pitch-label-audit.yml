@@ -1,0 +1,67 @@
+name: Stage Synth — audit original Iowa pitch labels before spectral calibration
+on:
+  pull_request:
+    paths:
+      - 'research/iowa-f0-label-audit.mjs'
+      - 'scripts/audit_iowa_original_pitch_labels.mjs'
+      - 'tests/iowa_f0_label_audit.test.mjs'
+      - '.github/workflows/iowa-original-pitch-label-audit.yml'
+      - 'docs/AUDITORIA_AFINACAO_IOWA_ORIGINAIS_2026-11-23.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pitch-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      STAGE_AUDIO_WORKDIR: ${{ runner.temp }}/stage-iowa-pitch-audit
+      STAGE_IOWA_FIVE_REGIONS: "1"
+      STAGE_PIANO_SELECTION: matrix
+      STAGE_IOWA_METADATA_ONLY: "0"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Protect Stage public DSP, MIDI, FX, UI, presets, version and comparative snapshots
+        run: |
+          git diff --exit-code 04049ae899fa873c61594d608f62bdb835bb6e1e -- \
+            physical-piano-hybrid.js physical-piano-hybrid-v126.js \
+            physical-piano.js physical-piano-legacy.js piano-worklet.js \
+            piano-resonance.js piano-hybrid-calibration.js \
+            acoustic.js acoustic-v126.js index.html v1.12.6.html v1.12.7.html \
+            app.js stage.js panel.js fx-rack.js package.json
+      - name: Check syntax, original Stage regression and deterministic YIN tests
+        run: |
+          node --check research/iowa-f0-label-audit.mjs
+          node --check scripts/audit_iowa_original_pitch_labels.mjs
+          node --check tests/iowa_f0_label_audit.test.mjs
+          npm run check
+          node --test tests/iowa_f0_label_audit.test.mjs
+      - name: Confirm lossless AIFF decoder
+        run: |
+          ffmpeg -version | head -n 1
+          python3 -m py_compile scripts/fetch_iowa_reference.py
+      - name: Acquire all 15 original AIFF files in ephemeral runner only
+        run: python3 scripts/fetch_iowa_reference.py
+      - name: Evaluate the original pitch labels and persist numeric summary ONLY
+        run: |
+          node scripts/audit_iowa_original_pitch_labels.mjs \
+            "$STAGE_AUDIO_WORKDIR/manifest.json" \
+            "$STAGE_AUDIO_WORKDIR/iowa-pitch-label-numeric-only.json"
+      - name: Publish ONLY numerical pitch audit and no AIFF, PCM or waveform
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-iowa-original-15-pitch-label-numeric-only
+          path: ${{ env.STAGE_AUDIO_WORKDIR }}/iowa-pitch-label-numeric-only.json
+          retention-days: 7
+          if-no-files-found: error
+      - name: Delete all external audio and decoded PCM
+        if: always()
+        run: rm -rf "$STAGE_AUDIO_WORKDIR"
