@@ -1,3 +1,15 @@
+## Atualização de timbre acústico v1.12.6 — correção numérica limitada
+
+**Causa identificada por evidência**, após o usuário rejeitar o timbre v1.12.5: o D sintetizava modos de vibração de cordas com distribuição harmônica distante da radiação registrada no piano real (especialmente graves), embora estivesse estável numericamente. Teste original [CI 45115134998](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45115134998), 15 AIFF Steinway B/Iowa com 15 SHA256 verificados (C2–C6 × pp/mf/ff). A relação do 6º harmônico de C2 mf era **+26,4 dB no original e −23,4 dB em D**; a forma no C6 tinha erro oposto. Ver [diagnóstico](DIAGNOSTICO_TIMBRE_D_IOWA_15_2026-11-23.md).
+
+**Resposta arquitetural:** arquivo independente `piano-hybrid-calibration.js`, código original; corrige os **pesos de excitação/radiação de cada modo** por nota e intensidade, usando tabela numérica de forma espectral relativa extraída do áudio original, não PCM/WAV. O ganho é calculado em `noteOn`, com variação contínua entre cinco âncoras, limites matemáticos, e parciais sem qualidade acústica suficiente não recebem boosts especulativos. Aplicado **antes** da normalização de potência. Não se trata de deslocamento/força medidos no martelo, nem FRF de ponte calibrada. Perfis Yamaha/felt/upright recebem menor extrapolação do Steinway B; a equivalência não foi demonstrada.
+
+**Primeira validação numérica em 15 observações usadas para o ajuste:** erro médio absoluto dos parciais confiáveis na janela curta de ataque **20,30 → 3,23 dB**, 15/15 melhores; janela mais tardia **20,33 → 9,38 dB**, 10/14 melhores. C2 mf após ajuste, 6º parcial **+18,5 dB** (a referência era +26,4 dB; ainda falta aproximadamente 7,9 dB). O maior risco é **sobreajuste ao microfone e sala Iowa**, pois não foi validado em gravações independentes ou na percepção musical do usuário. Média dos parciais não mede qualidade de martelo, amortecedor ou som de instrumento completo.
+
+**Status:** D permanece **experimental**, não pronto comercialmente; os 65 áudios originais verificados não integram o pacote, **0/7 gates completos**. Alocação 32/48/64 não equivale a callback real medido em Moto g04s/PC. Antes de outra alteração: ouvir o D no app v1.12.6 com FX desligados, comparar entre C2–C6 e dinâmica, medir som do corpo/pedais e xruns em hardware; só então prosseguir por etapas. Para código/regressão: `tests/hybrid_calibration_v126.test.mjs` e `scripts/check_iowa_hybrid_improvement.mjs`.
+
+---
+
 # Stage Synth v1.12.5 — D · Híbrido experimental
 
 **Escopo autorizado em 23/11/2026:** gerar um motor com a pesquisa atual, preservando A/B/C e o módulo Piano Acústico. **Protótipo de engenharia, não piano acústico calibrado nem versão estável homologada.**
