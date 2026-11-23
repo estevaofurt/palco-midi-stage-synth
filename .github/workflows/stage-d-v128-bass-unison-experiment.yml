@@ -6,6 +6,7 @@ on:
       - 'physical-piano-hybrid-v127.mjs'
       - 'tests/bass_unison_v128_candidate.test.mjs'
       - 'scripts/render_piano_d_v128_candidate_wav.mjs'
+      - 'scripts/evaluate_d_v128_iowa.mjs'
       - '.github/workflows/stage-d-v128-bass-unison-experiment.yml'
       - 'docs/EXPERIMENTO_MOTOR_D_V128_UNISSONOS_GRAVES_2026-11-23.md'
   workflow_dispatch:
@@ -14,7 +15,12 @@ permissions:
 jobs:
   v128-bass-unison:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
+    env:
+      STAGE_AUDIO_WORKDIR: /tmp/stage-iowa-v128-check
+      STAGE_IOWA_FIVE_REGIONS: '1'
+      STAGE_PIANO_SELECTION: 'C2:mf,C3:mf'
+      STAGE_IOWA_METADATA_ONLY: '0'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,6 +28,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Freeze every publicly available motor, historical page, FX and MIDI routing
         run: |
           git diff --exit-code b20c4c4f2cd7aaaeb34a3dd9619b5fa92e9ace3f -- \
@@ -36,6 +45,7 @@ jobs:
           node --check physical-piano-hybrid-v127.mjs
           node --check physical-piano-hybrid-v128-candidate.mjs
           node --check scripts/render_piano_d_v128_candidate_wav.mjs
+          node --check scripts/evaluate_d_v128_iowa.mjs
           node --test tests/bass_unison_v128_candidate.test.mjs
       - name: Render original D v1.12.7 and candidate D v1.12.8 genuine WAV
         run: |
@@ -63,6 +73,18 @@ jobs:
           assert any(x['changedFrames']>2000 for x in meta['relativeMetricsDb'] if x['label'].startswith('C2 '))
           print('CANDIDATE_AUDIT',json.dumps(meta['relativeMetricsDb'],ensure_ascii=False))
           PY
+      - name: Verify original Iowa C2 mf and C3 mf sources and decode only in CI temp
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          python3 scripts/fetch_iowa_reference.py
+          node scripts/evaluate_d_v128_iowa.mjs \
+            "$STAGE_AUDIO_WORKDIR/manifest.json" artifacts/stage-d-v128/iowa_original_numeric_check.json
+      - name: Remove original Iowa AIFF/PCM before uploading synthetic Stage WAV
+        if: always()
+        run: rm -rf "$STAGE_AUDIO_WORKDIR"
       - name: Publish only original Stage synth WAV and JSON numbers
         uses: actions/upload-artifact@v4
         with:
