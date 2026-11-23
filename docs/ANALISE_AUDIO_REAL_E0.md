@@ -120,3 +120,14 @@ A síntese inicial mostra diferenças espectrais elevadas de B/C nos graves em v
 3. Alinhar intensidade/velocity sem normalizar automaticamente todas as notas, descontar reverberação e distinguir gravações recortadas.
 4. Prototipar, **fora do motor estável**, excitação de martelo fisicamente acoplada, modelagem de duas direções por corda e impedância/transferência do tampo; validar contra essas referências e outros pianos reais independentes.
 5. Fazer testes auditivos controlados, 32/64 vozes, CC64 e CPU nos dispositivos físicos. Não integrar até validar.
+
+
+## Verificação da janela curta do ataque (23/11/2026 UTC)
+
+**Execução 45097372877:** https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45097372877 — análise automática bem-sucedida após introduzir uma FFT Hann de 8192 amostras (~171 ms) para MIDI >=72, iniciada ~18 ms após a detecção do ataque. O método serve **somente para observar parciais transientes**, não para estimar o B físico, porque o evento é não estacionário.
+
+- Yamaha C5 C6 (MIDI 84): amostras v1/v3/v4 revelaram **1/2/3 parciais superiores** acima do limiar de diagnóstico. Apenas a camada mais forte ofereceu três.
+- Felt Fuchs & Möhr C6: v1/v2/v3 revelaram **0/0/1** parcial superior; o resultado continua inconclusivo.
+- Steinway B C6 ff: **1** parcial superior na mesma janela; o procedimento não acrescentou parciais suficientes para estimar rigidez confiavelmente.
+- Isso demonstra que **encurtar a FFT não resolve sozinho** o espectro dos agudos: tradeoff entre resolução temporal, resolução em frequência, relação sinal/ruído, dinâmica do martelo e perdas reais. O próximo estudo deve usar análise tempo-frequência adaptativa e estimar envelopes por parcial ao longo do ataque/sustentação, com validação de ruído e afinação, antes de ajustar qualquer DSP.
+- **Regressão do analisador:** run https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45097378420 — **95/95 testes Node aprovados** em SHA 2bbf6633fcb8...; o workflow de referências do mesmo commit é verificado separadamente. Isso não é certificação acústica em hardware.
