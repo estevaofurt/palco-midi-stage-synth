@@ -368,8 +368,11 @@ export class HybridPianoEngine {
       if(this.woodEnabled)this.wood.step(this.bassL[i],this.bassR[i]);
       // Separate lossy bridge/plate radiator, not global reverb. Direct string
       // remains intact in the control; only study-enabled bass carries it.
-      const woodL=this.woodEnabled?this.wood.outputL*.65:0;
-      const woodR=this.woodEnabled?this.wood.outputR*.65:0;
+      // Research rebalances audible BASS radiation instead of merely adding
+      // a barely detectable wet tail. It still leaves every pure C4+ note
+      // exactly unchanged and never touches A/B/C or published v1.12.7.
+      const woodL=this.woodEnabled?(this.wood.outputL*4.0-.17*this.bassL[i]):0;
+      const woodR=this.woodEnabled?(this.wood.outputR*4.0-.17*this.bassR[i]):0;
       const x=(dryL+this.body.wetL*.48+woodL)*this.mixGain;
       const y=(dryR+this.body.wetR*.48+woodR)*this.mixGain;
       // Gentle safety curve, not a loudness-maximizing hard limiter.
