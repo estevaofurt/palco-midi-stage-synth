@@ -1,3 +1,17 @@
+# P0 em implementação isolada — baseline acústica (22/11/2026)
+
+- [x] Criar branch separada sem modificar os DSPs estáveis.
+- [x] Adicionar medidas FFT de cents, B estimado, parciais, ataque, decaimento, clipping e amostras não finitas; 5 testes unitários locais passaram.
+- [x] Preparar comparação reproduzível de 108 casos A/B/C × 4 pianos × C2/C4/C6 × velocity 32/80/120.
+- [ ] Conferir a execução integrada do workflow CI e preservar o JSON de resultados antes de considerar P0 concluída.
+- [ ] Examinar números do JSON por registro e dinâmica; B é estimativa e não alvo universal.
+- [ ] P1: corrigir dispersão/perdas por frequência **somente num experimento isolado**, reexecutar regressões e comparação sonora nivelada.
+- [ ] Testes em Chrome real, PC e Moto g04s, com 32/64 vozes, MIDI/CC64 e FX; não anunciar homologação antes.
+
+Documentação: docs/BASELINE_ACUSTICA_V124.md. Não há alteração de motor/presets no aplicativo.
+
+---
+
 # Pesquisa externa concluída — 22/11/2026
 
 - [x] Referências científicas/comerciais/código aberto reunidas e mapeadas para os motores **A (modal), B (físico v1.9.5) e C (mecânico)**.
