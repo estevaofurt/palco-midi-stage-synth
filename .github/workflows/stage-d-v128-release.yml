@@ -35,7 +35,7 @@ jobs:
             piano-resonance-v126.js piano-hybrid-calibration-v126.js \
             physical-piano-hybrid-v126.js acoustic-v126.js \
             v1.12.6.html fx-rack.js stage.js \
-            performance.js piano-bank.js sample-library.js panel.css
+            performance.js piano-bank.js sample-library.js
       - name: Validate Stage complete Node test suite and historical routing
         run: |
           node --check acoustic-v127.mjs

@@ -1,3 +1,7 @@
+# Stage Synth v1.12.10 — hotfix do motor E
+
+Correção do teclado virtual quando **E · Piano sampleado** está sem WAVs e adição de botão **Carregar notas WAV** próximo às teclas. A biblioteca continua sendo importada localmente, sem colocar os arquivos de áudio do usuário no site. [Detalhes](docs/SAMPLER_KEYBOARD_V1210.md).
+
 # Stage Synth v1.12.9 — motor E sampleado
 
 Novo **E · Piano sampleado · WAV local**, em **Piano acústico → Motor do piano**. Escolha American/Japanese/Felt/Upright e importe as notas no grupo **Banco de amostras · motor E**. Os arquivos ficam na sessão local do navegador, sem upload ao servidor ou GitHub. O padrão C, os motores A/B/C/D/Clássico, MIDI e FX permanecem. O novo V4 continua físico e independente. [Documentação](docs/SAMPLER_LOCAL_V129.md).
