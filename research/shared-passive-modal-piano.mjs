@@ -227,7 +227,7 @@ export class SharedPassiveModalPiano {
   this.progress.fill(0);this.amplitude.fill(0);
   this.activeContacts=0;this.samples=0;
   this.externalWork=0;this.dissipated=0;
-  this.bridgeVelocity=0;this.boardVelocity=0;
+  this.bridgeVelocity=0;this.boardVelocity=0;this.boardPanelVelocity=0;
   this.updateDampers();
  }
 }
