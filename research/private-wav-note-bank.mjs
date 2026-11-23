@@ -39,7 +39,7 @@ export function parseLocalPcmWav(source){
      fmt.byteRate!==fmt.sampleRate*fmt.blockAlign||
      data.length%fmt.blockAlign)
     throw new RangeError('requires PCM16/24 mono/stereo 22.05–96k WAV');
-  return {...fmt,offset:data.offset,dataBytes:data.length,
+  return {...fmt,bitDepth:fmt.bitsPerSample,offset:data.offset,dataBytes:data.length,
     frames:data.length/fmt.blockAlign,
     durationSeconds:data.length/fmt.blockAlign/fmt.sampleRate};
 }
