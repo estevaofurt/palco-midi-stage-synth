@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {HybridPianoEngine,hybridContactTime} from '../physical-piano-hybrid.js';
+import {HybridPianoEngine,hybridContactTime,bassContactTransferMagnitude} from '../physical-piano-hybrid.js';
 
 const R=48000;
 function samples(engine,seconds=.32){
@@ -81,4 +81,23 @@ test('dense bass loads remain finite across 32/48/64 without NaN',()=>{
   assert.ok(sound.peak<.961);
   e.stopAll();
  }
+});
+
+test('closed-form force spectrum matches direct DFT from the actual discrete pressure kernel',()=>{
+  for(const n of [16,17,32,60,144,333,512]){
+    const e=new HybridPianoEngine(R,'eco');
+    // No need for exact n from MIDI: use the identical normalized raised-cosine
+    // discrete pressure formula to independently verify its analytic spectrum.
+    for(const w of [0,.002,.03,.09,.22,.53,1.21,2.31,2.75,Math.PI]){
+      let re=0,im=0;
+      for(let j=0;j<n;j++){
+        const force=(1-Math.cos(2*Math.PI*(j+.5)/n))/n;
+        re+=force*Math.cos(w*j);im+=force*Math.sin(w*j);
+      }
+      const direct=Math.hypot(re,im);
+      const fast=bassContactTransferMagnitude(n,w);
+      assert.ok(Math.abs(direct-fast)<2e-9,
+        'wrong exact contact transfer n='+n+' w='+w+' diff='+Math.abs(direct-fast));
+    }
+  }
 });
