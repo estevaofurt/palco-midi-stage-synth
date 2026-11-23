@@ -6,8 +6,10 @@ on:
     paths:
       - 'research/damper-aware-shared-bridge.mjs'
       - 'research/hammer-driven-passive-piano.mjs'
+      - 'research/measured-radiation-adapter.mjs'
       - 'tests/damper_aware_shared_bridge.test.mjs'
       - 'tests/hammer_driven_passive_piano.test.mjs'
+      - 'tests/measured_radiation_adapter.test.mjs'
       - 'scripts/benchmark_damper_aware_shared_bridge.mjs'
       - 'scripts/benchmark_hammer_driven_passive_piano.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
