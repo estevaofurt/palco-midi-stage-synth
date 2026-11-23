@@ -28,6 +28,23 @@
 - A alocação das matrizes de estado e blocos é antecipada, um acerto. Há alocação pontual com `done.splice(0)` / mensagem ao finalizar vozes; não é o principal gargalo, mas deve ser monitorada no AudioWorklet por picos de GC.
 - Com blocos de 128 amostras/48kHz, o prazo teórico é **2,667ms** para a **cadeia de áudio completa**, não só o D. Medir custo **p50/p95/p99/worst** de 32/48/64 vozes em dois acordes sintéticos. `scripts/benchmark_piano_d_cpu.mjs` + workflow gravam baseline **Node/Linux** sem alterar DSP; **isso não homologa Chrome, Windows nem Moto g04s**. Repetir em Chrome DevTools WebAudio/Tracing no dispositivo real e observar capacidade de renderização/xruns/GC.
 
+### B.1. Resultado medido em CI (somente Node/Linux, sem DSP alterado)
+
+[Execução GitHub Actions 45154233484](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45154233484), `node scripts/benchmark_piano_d_cpu.mjs` a 48kHz, 128 amostras, 360 blocos medidos por cenário e 32/48/64 vozes. **Esta execução NÃO demonstra que a aplicação cumpre deadline no navegador ou no Moto g04s.**
+
+| Perfil/cenário | Ressonadores ativos | Atualizações modais/s | p95 | p99 | Maior bloco observado |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Eco 32 / graves repetidos | 417 | 20,0 milhões | 0,305 ms | 0,482 ms | **8,623 ms** |
+| Eco 32 / teclado amplo | 431 | 20,7 milhões | 0,245 ms | 0,254 ms | 0,497 ms |
+| Equilibrado 48 / graves repetidos | 904 | 43,4 milhões | 0,358 ms | 0,410 ms | 0,441 ms |
+| Equilibrado 48 / teclado amplo | 874 | 42,0 milhões | 0,348 ms | 0,411 ms | 0,538 ms |
+| Estúdio 64 / graves repetidos | 1.597 | 76,7 milhões | 0,546 ms | 0,560 ms | 0,715 ms |
+| Estúdio 64 / teclado amplo | 1.487 | 71,4 milhões | 0,517 ms | 0,529 ms | 0,560 ms |
+
+**Interpretação correta:** há margem **na média e p99 deste runner**, mas o pico 8,623 ms (>3× o orçamento teórico de 2,667 ms/bloco) surgiu apenas no primeiro cenário, possivelmente devido a JIT/GC/escalonamento — **causa não medida**. Não atribuir a falha à síntese nem garantir que haveria glitch em Chrome. Medições devem incluir **cold start/recompilação do JIT**, aquecimento, trocas de qualidade e notas, e perfil navegador real com ruído ambiental e FX.
+
+**Otimização adicional confirmada pela literatura:** sistemas não lineares podem simplificar gradativamente o modelo quando a vibração perde energia; não há necessidade de calcular todos os parciais acima do limiar audível durante toda a sustentação. Primeiro implementar uma estratégia **sem degraus/estalos** (crossfade e testes) que elimine ressonadores apenas quando sua contribuição ao som esteja inequivocamente desprezível; em modelo futuramente bidirecional, considerar reexcitação. Referência: Julius Smith, *Nonlinear Piano Strings*, https://www.dsprelated.com/freebooks/pasp/Nonlinear_Piano_Strings.html .
+
 ### C. Pesquisas que mudam o caminho do algoritmo
 
 1. **Banco modal/transversal/longitudinal é uma arquitetura válida em tempo real.** Bank, Zambon e Fontana, *A Modal-Based Real-Time Piano Synthesizer*, IEEE TASLP 18(4), 809–821 (2010), https://home.mit.bme.hu/~bank/publist/taslp10.pdf. Physis Piano comercial emprega técnicas modais e waveguides **customizadas**, não um único algoritmo universal: Zambon, Gabrielli e Bank (AES 2013), https://aes.org/publications/elibrary/elibrary-page/?id=16678 . **Não migrar o Stage a C++/Rust/FDTD automaticamente.**
