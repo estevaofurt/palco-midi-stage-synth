@@ -26,3 +26,28 @@ A acústica da Iowa continua com microfones e sala, valores de pp/mf/ff **não s
 2. Original 15/15: hash/tamanho/codec/identidade completos, execução numérica por amostra; resultados **candidatos** publicados somente em JSON e resumidos neste documento depois do CI.
 3. Sem correção automática do nome da fonte, dos pesos de modo, da calibração D ou do motor A/B/C/D. **O objetivo é tornar a referência confiável antes do próximo ajuste perceptivo**, sobretudo no grave C2/C3.
 4. Preservar v1.12.6 A/B, v1.12.7 D experimental, C4–C6, MIDI/CC64, FX, interface, presets e polifonia planejada 32/48/64; esta etapa não constitui homologação no PC/Moto g04s.
+
+
+## Resultado efetivamente obtido — originais 15/15, dupla verificação
+
+Workflow concluído com sucesso: [run 45178612159](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45178612159), **157/157 testes Node aprovados**, **6/6 testes YIN dedicados**, **4/4 testes de FFT/harmônicos dedicados**. Reaquisição oficial dos 15 AIFF com byte count, origem, codec e SHA-256 conferidos com o manifesto fixo. Resultados somente numéricos, sem artefatos WAV/AIFF/PCM; diretório efêmero removido.
+
+**Resultados conservadores:**
+
+| Nota | pp | mf | ff |
+| --- | --- | --- | --- |
+| C2 (MIDI 36) | YIN inconclusivo, espectro apoia rótulo | concordância dupla | YIN consistente, espectro inconclusivo |
+| C3 (MIDI 48) | concordância dupla | concordância dupla | concordância dupla |
+| C4 (MIDI 60) | concordância dupla | concordância dupla | concordância dupla |
+| C5 (MIDI 72) | concordância dupla | concordância dupla | concordância dupla |
+| C6 (MIDI 84) | YIN inconclusivo, espectro apoia rótulo | concordância dupla | concordância dupla |
+
+- **YIN:** 13/15 rótulos consistentes, 2/15 inconclusivos. Os 13 desvios estimados do rótulo ficaram entre aproximadamente **+0,7 e +15,1 cents**; não são medidas instrumentadas de afinação individual de cordas.
+- **FFT/harmonic comb:** apoia o rótulo em 14/15, e é inconclusivo para C2/ff. Usa busca de inarmonicidade ilustrativa, não um ajuste calibrado da rigidez real de cordas.
+- **Dupla concordância:** **12/15** registros. **Três sem confirmação conjunta:** C2/pp, C2/ff e C6/pp. **Zero discrepâncias de oitava confirmadas por dois métodos.**
+- Em **C6/pp**, as estimativas temporais foram contraditórias entre janelas (diferença de aproximadamente 1.207 cents), enquanto o verificador espectral apoia C6. Isso é **ambiguidade do sinal/estimador**, não prova de que a gravação seja outra nota.
+
+### Decisão baseada nos dados
+
+**Não corrigir nome das amostras, não reatribuir notas por suposição e não ajustar o D com base na análise inconclusiva.** A premissa de erro generalizado de oitava **não se sustentou** nos 15 originais inspecionados. O próximo ganho perceptivo deve concentrar-se no **ataque, evolução temporal dos harmônicos, reação da ponte e radiação real**, verificando piano grave contra gravações independentes; a investigação do conjunto Iowa não é substituto de medidas do martelo/ponte. Conservar 0/7 R-GATEs; 32–64 vozes ainda sem homologação no dispositivo.
+
