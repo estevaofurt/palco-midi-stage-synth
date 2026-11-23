@@ -1,0 +1,78 @@
+name: Stage Synth - D versus real Steinway B acoustic diagnosis
+on:
+  pull_request:
+    paths:
+      - 'physical-piano-hybrid.js'
+      - 'scripts/analyze_reference_audio.mjs'
+      - 'scripts/print_real_timbre_gaps.mjs'
+      - '.github/workflows/hybrid-d-iowa-timbre-diagnosis.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  iowa-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      STAGE_AUDIO_WORKDIR: /tmp/stage-iowa-steinway-d-comparison
+      STAGE_PIANO_SELECTION: matrix
+      STAGE_IOWA_FIVE_REGIONS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check all Node tests and research script syntax
+        run: |
+          npm run check
+          node --check scripts/print_real_timbre_gaps.mjs
+          node --check scripts/extract_iowa_spectral_targets.mjs
+      - name: Install and verify ffmpeg and ffprobe
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+      - name: Fetch source-original Iowa Steinway B references into temporary CI storage
+        run: python3 scripts/fetch_iowa_reference.py
+      - name: Enforce exact SHA256 from prior commercial-source audit before calibration
+        run: |
+          python3 - <<'PY'
+          import json,hashlib,os,pathlib
+          source=json.load(open('research/commercial_audio/iowa_steinway_b_verified_original_sha256.json'))
+          manifest=json.load(open(pathlib.Path(os.environ['STAGE_AUDIO_WORKDIR'])/'manifest.json'))
+          expected={x['recordedPitchLabel'].lower()+':'+x['dynamic']:x for x in source['items']}
+          assert len(manifest['notes'])==15
+          for note in manifest['notes']:
+              key=f"{next(k for k,v in {'C2':36,'C3':48,'C4':60,'C5':72,'C6':84}.items() if v==note['key']).lower()}:{note['dynamic']}"
+              ref=expected[key]
+              assert note['sha256']==ref['sha256'], f'SHA mismatch {key}'
+              assert note['bytes']==ref['bytes'], f'byte mismatch {key}'
+              assert note['originalRate']==ref['sampleRateHz']
+              assert note['originalChannels']==ref['channels']
+              print('ORIGINAL VERIFIED',key,note['sha256'][:24])
+          PY
+      - name: Diagnose measured acoustic harmonics of A/B/C/D against all 15 originals
+        run: |
+          node scripts/analyze_reference_audio.mjs "$STAGE_AUDIO_WORKDIR/manifest.json" "$STAGE_AUDIO_WORKDIR/diagnostic.json"
+          node scripts/print_real_timbre_gaps.mjs "$STAGE_AUDIO_WORKDIR/diagnostic.json"
+          node scripts/extract_iowa_spectral_targets.mjs "$STAGE_AUDIO_WORKDIR/diagnostic.json" "$STAGE_AUDIO_WORKDIR/early-spectral-targets.json"
+      - name: Upload NUMERIC diagnostic only; never publish original AIFF/PCM
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-iowa-d-real-timbre-numeric-only
+          path: |
+            /tmp/stage-iowa-steinway-d-comparison/diagnostic.json
+            /tmp/stage-iowa-steinway-d-comparison/early-spectral-targets.json
+          retention-days: 7
+          if-no-files-found: error
+      - name: Delete raw AIFF and intermediate decoded PCM
+        if: always()
+        run: rm -rf /tmp/stage-iowa-steinway-d-comparison

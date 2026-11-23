@@ -11,9 +11,10 @@ import {measurePianoNote,spectrum,findPartial,midiHz} from '../tests/piano_acous
 import {PianoEngine as Modal} from '../piano-worklet.js';
 import {PhysicalPianoEngine as Legacy} from '../physical-piano-legacy.js';
 import {PhysicalPianoEngine as Mechanical} from '../physical-piano.js';
+import {HybridPianoEngine as Hybrid} from '../physical-piano-hybrid.js';
 
 const RATE=48000, BLOCK=128, DURATION=1.7;
-const configs=[['A_modal',Modal],['B_v195',Legacy],['C_mechanical',Mechanical]];
+const configs=[['A_modal',Modal],['B_v195',Legacy],['C_mechanical',Mechanical],['D_hybrid',Hybrid]];
 
 export function decodeF32le(buffer){
  if(buffer.byteLength%4)throw new Error('PCM not aligned to Float32');
