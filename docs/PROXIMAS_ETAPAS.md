@@ -1,3 +1,24 @@
+# BLOQUEIO: aguardar referências científicas completas antes de continuar o DSP (22/11/2026)
+
+**Não programar P2, modificar timbre ou promover P1** enquanto o status de prontidão estiver pendente; solicitação expressa do usuário. Registro detalhado: [PRONTIDAO_REFERENCIAS_PIANO_FISICO_2026-11-22.md](PRONTIDAO_REFERENCIAS_PIANO_FISICO_2026-11-22.md).
+
+- [x] Auditar as 18 lacunas anteriores contra **22 referências científicas/datasets/especificações** com fonte, objetivo, direitos, arquivos disponíveis e limitações.
+- [x] Verificar tamanho de **BiVib 33,1 GB multipartes**, **RWC 14,2 GB ZIP**, **Plath/Hamburgo 4,6 GB** e **Liang/QMUL pedal 222,7 MB**. Metadados de acesso encontrados, mas nenhum conjunto completo baixado ou validado.
+- [x] Localizar Plath/Hamburgo: força tecla–base, aceleração da ponte e pressão binaural; **não confundir keybed force com bridge driving-point force**.
+- [x] Localizar métodos de **admitância passiva** (Bank), acoplamento tampo/string (Miranda Valiente 2024), modelagem de colisão com energia estável (Bilbao), parâmetros de instrumentos (Euphonics/Chabassier) e métodos ITU para escuta.
+- [x] Confirmar que **RWC/BiVib/MAESTRO contêm condições NC** e requerem revisão do uso pretendido; bitKlavier Model D é CC BY 4.0, mas tem edição e normalização.
+- [ ] R-GATE-1 — aquisição/validação local de subconjunto original por instrumento, pitch, velocity e mic com estados conhecidos; 2 instrumentos reais e felt com escopo claro.
+- [ ] R-GATE-2 — parâmetros físicos de cordas, martelo e ponte; obter FRF de ponte por região ou uma aproximação passiva quantitativamente justificável.
+- [ ] R-GATE-3 — revisar licenças e permissões efetivas do uso pretendido, inclusive dataset Plath e QMUL.
+- [ ] R-GATE-4 — manifesto de gravações por arquivo com hashes, limites de edição, pitch gravado, velocity e microfone/sala/pedal.
+- [ ] R-GATE-5 — validar estimador com verdade conhecida e metodologia A/B/C de núcleo seco versus som completo sem comparar cadeias diferentes.
+- [ ] R-GATE-6 — planejar cada experimento físico de uma nota, 1–3 cordas H/V, ponte/radiação, meio-pedal/CC66/67 com critérios objetivos.
+- [ ] R-GATE-7 — definir protocolo auditivo padronizado e critérios de 32–64 vozes, callback/latência, FX e PC/Moto g04s para homologação futura.
+
+**Até liberação:** somente estudo e preparação das referências, sem DSP/P2. Não declarar trabalho concluído só porque links foram encontrados.
+
+---
+
 # Auditoria P0/P1/P2 de modelagem física antes de P2 (22/11/2026)
 
 Documento: [AUDITORIA_LACUNAS_MODELAGEM_FISICA_E1_2026-11-22.md](AUDITORIA_LACUNAS_MODELAGEM_FISICA_E1_2026-11-22.md).
