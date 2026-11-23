@@ -80,3 +80,43 @@ Yamaha C5 é Salamander real gravado por Alexander Holm, **4 das 16 camadas** or
 
 ### Proteção da estabilidade
 **Nenhuma alteração no DSP A/B/C**, interface, presets, MIDI ou FX; nenhum banco externo ou gravação pessoal foi adicionado ao repo; nenhum motor experimental foi promovido. O PR #2 de dispersão continua isolado. A meta de 32–64 notas permanece sujeita a áudio real em PC/Moto g04s.
+
+
+## 9 WAVs Felt originais reempacotados (Fuchs & Möhr / Tom Guder)
+
+**Execução verificada:** https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45097066707 . Nove amostras PCM WAV, SFZ validado por nota e faixa de velocidade. Fonte individual: https://huggingface.co/datasets/cueharbor/starter-instruments/tree/main/felt-piano , com atribuição ao autor e referência ao domínio público declarado: https://www.polyphone.io/en/forum/your-creations/850-acoustic-felt-piano-upright-fuchs-mohr
+
+| Nota / layer | B estimado | parciais B | diferenças espectrais A / B / C (dB) | parciais comparáveis |
+|---|---:|---:|---|---:|
+| C2 v1 (MIDI 1–42) | 0.000376 | 6 | 21.37 / 42.28 / 42.28 | 7 |
+| C2 v2 (43–85) | 0.000378 | 6 | 22.83 / 43.75 / 43.75 | 7 |
+| C2 v3 (86–127) | 0.000291 | 6 | 19.96 / 40.87 / 40.87 | 7 |
+| C4 v1 | 0.001240 | 6 | 8.07 / 17.78 / 17.77 | 6 |
+| C4 v2 | 0.001240 | 6 | 9.12 / 22.83 / 22.83 | 6 |
+| C4 v3 | 0.000948 | 7 | 14.00 / 30.75 / 30.78 | 7 |
+| C6 v1/v2/v3 | inconclusivo | 1 cada | não comparável | 0–1 |
+
+**Atenção:** o fornecedor reteve as amostras originais em resolução WAV mas ajustou início/fim, e o arquivo foi cortado/padronizado para 12 s com fade de 1 s. O próprio felt foi gravado em piano vertical com afinação irregular. A amplitude RMS do C2 *v1* (0.1521) excedeu v2 (0.1084) e v3 (0.1215); logo, **não assumir que os volumes dos arquivos seguem fielmente a força do martelo**. A amplitude/volume pode ter sido ajustada ao preparar a biblioteca; estudar timbre relativo em cada camada e calibrar velocity de forma independente.
+
+## Síntese verificável da rodada E0
+
+**33 gravações individuais foram efetivamente baixadas, verificadas, decodificadas e medidas no GitHub Actions:**
+- 9 AIFF originais do Steinway B (Iowa, som estéreo 16-bit/44.1 kHz, ambiente não anecoico).
+- 9 PCM WAV do Felt Fuchs & Möhr de Tom Guder (public domain, três layers, fonte reempacotada CueHarbor).
+- 9 AAC compactados Yamaha C5 Salamander (CC BY 3.0, mono, 4 das 16 layers originais).
+- 6 AAC compactados Upright Knight / VCSL (CC0, mono, duas layers).
+**São quatro famílias representadas, não quatro gravações igualmente controladas.** Yamaha C5 ≠ Yamaha CFX e Knight upright ≠ Kawai KW.
+
+A síntese inicial mostra diferenças espectrais elevadas de B/C nos graves em vários instrumentos, enquanto A modal frequentemente apresenta menor erro relativo de amplitude dos parciais nestes exemplos. **Não implica que A seja um piano realista**: nenhuma captação comparável, escuta nivelada ou mapeamento de velocity foi homologado. B/C quase idênticos nesta medição demonstram que a camada mecânica, como configurada neste experimento, não altera substancialmente essa componente espectral.
+
+### Limitações estatísticas e nova verificação dos agudos
+- O teste original usa FFT Hann de 32768 pontos na sustentação, que pode começar tarde demais para parciais agudos rápidos. C6 frequentemente tem só 0–2 parciais utilizáveis; nesses casos resultados de B e comparação global ficam **nulos**, nunca viram score.
+- A investigação adicionou **espectro curto de ataque** (8192 pontos agudos, 16384 nos registros inferiores, Hann) e registra **somente visibilidade de harmônicos precoces**, separadamente de B. Esse espectro transitório não deve ser interpretado como rigidez física da corda.
+- Para estimar B e T60 de forma mais confiável será necessário rastreamento temporal adaptativo de frequências e separação de batimentos/duas cordas e da contribuição da sala.
+
+### Próxima investigação antes de modificar DSP
+1. Leitura de espectro de ataque por parcial e diferenças por frequência e por registro.
+2. Estimar envelope por parcial com múltiplas janelas para evitar C6 falso negativo e discriminar ruído de martelo de corda sustentada.
+3. Alinhar intensidade/velocity sem normalizar automaticamente todas as notas, descontar reverberação e distinguir gravações recortadas.
+4. Prototipar, **fora do motor estável**, excitação de martelo fisicamente acoplada, modelagem de duas direções por corda e impedância/transferência do tampo; validar contra essas referências e outros pianos reais independentes.
+5. Fazer testes auditivos controlados, 32/64 vozes, CC64 e CPU nos dispositivos físicos. Não integrar até validar.
