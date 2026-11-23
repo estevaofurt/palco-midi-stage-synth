@@ -1,3 +1,9 @@
+## Escuta necessária do D v1.12.7 (experimental): manter ou descartar martelo grave
+
+O usuário solicitou prosseguir depois da auditoria. C1–C3 agora recebem um pulso causal de martelo em vez de deslocamento inicial + click exponencial, mas **a avaliação offline é mista**. Comparar **página histórica v1.12.6** com **v1.12.7** em C2/C3 pp/mf/ff, sem FX; validar ataques, corpo, impressão de violão, articulação, sustain e 32–64 notas em dispositivo real. C4/C5/C6 estão **bitwise iguais** e não devem sofrer alterações. Detalhes em [EXPERIMENTO_D_MARTELO_V127_2026-11-23.md](EXPERIMENTO_D_MARTELO_V127_2026-11-23.md). Não agregar fisicamente longitudinal, ponte/cauda ou novos presets **antes da escuta**. Se o som piorou, reverter D ao núcleo v1.12.6 e priorizar experimento longitudinal isolado com medidas. Sem R-GATEs novos: **0/7**.
+
+---
+
 ## Auditoria final de algoritmo do motor D antes de implementar a v1.12.7 (23/11/2026)
 
 A pesquisa focalizada acrescentou três rotas técnicas **que não dependem de reescrever tudo**: **(1)** martelo não linear com pulsos físicos computados apenas no ataque; **(2)** poucos modos longitudinais acoplados à corda transversal, especialmente abaixo de A3; **(3)** caudas prompt/aftersound e ponte passiva. **Primeiro corrigir normalização de pares de modos, PRNG ocioso, divisor econômico não aplicado e controles sem efeito**, verificando que cada mudança não causa regressão audível. O D permanece experimental e os médios/agudos da v1.12.6 são a referência fixa.
