@@ -43,7 +43,7 @@
 
 ## 2. Diagrama causal de arquitetura
 
-\`\`\`mermaid
+```mermaid
 flowchart TD
   CTRL[Tecla / MIDI / pedal, gesto]
   ACT[Ação mecânica: alavancas, escape, repetição]
@@ -60,7 +60,7 @@ flowchart TD
   PL <-->|velocidade de superfície / carga radiativa| AIR
   AIR --> OUT
   DAMP[Abafadores / pedais / cordas simpáticas] <--> STR
-\`\`\`
+```
 
 **Interface mecânica não é um cabo de áudio.** Mecanismos adjacentes trocam esforços e movimentos recíprocos. A carga do tampo modifica o movimento da ponte e a vibração das cordas; não basta calcular force em uma corda fixa e “enviá-la” a osciladores de tampo.
 
@@ -74,17 +74,17 @@ flowchart TD
 **Fase inicial:** em bancada, definir a **velocidade física inicial do martelo** como condição de contorno; ainda não modelar a ação inteira. A velocidade MIDI não é m/s.  
 **Fase posterior:** mecanismo com escapamento/repetição e sensores, comparação de pp/mf/ff, captura, ruídos mecânicos apenas se derivados de contatos físicos modelados.
 
-**Martelo/feltro:** deformação unilateral \`δ = x_h - u_strike\`, compressão \`δ_+=max(0,δ)\`. Energia elástica ilustrativa \`U(δ_+)=k δ_+^(p+1)/(p+1)\`; a força sem perdas é a derivada. **Isso é apenas um ponto de partida**, não a lei final do feltro. Estudar leis viscoelásticas com memória e deformação dependente da história (Giordano/Winans; Stulov). Escolher variáveis internas de relaxação ou elemento Kelvin/Maxwell não linear **que garantam produção de entropia não negativa**, e validar em dados de compressão e restituição. A haste flexível pode ser viga de Timoshenko quando estudos/ensaios exigirem. Não produzir “click” de ataque fora dessa cadeia.
+**Martelo/feltro:** deformação unilateral `δ = x_h - u_strike`, compressão `δ_+=max(0,δ)`. Energia elástica ilustrativa `U(δ_+)=k δ_+^(p+1)/(p+1)`; a força sem perdas é a derivada. **Isso é apenas um ponto de partida**, não a lei final do feltro. Estudar leis viscoelásticas com memória e deformação dependente da história (Giordano/Winans; Stulov). Escolher variáveis internas de relaxação ou elemento Kelvin/Maxwell não linear **que garantam produção de entropia não negativa**, e validar em dados de compressão e restituição. A haste flexível pode ser viga de Timoshenko quando estudos/ensaios exigirem. Não produzir “click” de ataque fora dessa cadeia.
 
 **Gate local:** força normal nunca atrativa, sem contato ⇒ força nula, ganho energético sem origem impossível, variação física verificável com velocidade, contato medido/modelado, convergência temporal; perdas medidas como energia dissipada, não como redução ad hoc de amplitude final.
 
 ### 3.2 Cordas: geometria, rigidez, polarização, amortecimento
 
 **Estados:** deslocamentos e velocidades de cada corda (vertical e horizontal; longitudinal adicionado quando justificado), eventual deformação axial, massa linear e rigidez de flexão.  
-**PDE escalar inicial de corda tensa rígida:** \`mu*u_tt = T*u_xx - EI*u_xxxx - D(u_t) + f_h(x,t)\`, com condições de suporte adequadas; \`mu = rho*pi*r²\`, \`EI = E*pi*r⁴/4\` para fio circular homogêneo. Para cordas revestidas, massa linear, rigidez e dissipação dependem de núcleo/enrolamento e **não** devem ser calculadas como se o bordão fosse fio maciço.
-**Inarmonicidade ideal com apoios articulados:** \`f_n = (n/(2L))*sqrt(T/mu)*sqrt(1 + B*n²)\`, \`B=pi² EI/(T L²)\`; usar apenas como cheque do banco simples, NÃO impor mesma fórmula quando a ponte se move ou a geometria é variável.
+**PDE escalar inicial de corda tensa rígida:** `mu*u_tt = T*u_xx - EI*u_xxxx - D(u_t) + f_h(x,t)`, com condições de suporte adequadas; `mu = rho*pi*r²`, `EI = E*pi*r⁴/4` para fio circular homogêneo. Para cordas revestidas, massa linear, rigidez e dissipação dependem de núcleo/enrolamento e **não** devem ser calculadas como se o bordão fosse fio maciço.
+**Inarmonicidade ideal com apoios articulados:** `f_n = (n/(2L))*sqrt(T/mu)*sqrt(1 + B*n²)`, `B=pi² EI/(T L²)`; usar apenas como cheque do banco simples, NÃO impor mesma fórmula quando a ponte se move ou a geometria é variável.
 
-**Discretização de referência:** escolher explicitamente FE 1D com continuidade suficiente para a energia de flexão (ex.: Hermite para termo EI) **ou** diferenças finitas passivas adequadas. Matriz física \`M_s,C_s,K_s\` simétrica onde pertinente, \`M_s>0\`, \`K_s>=0\`, \`C_s>=0\`, contatos e restrições introduzidos por forças generalizadas de trabalho recíproco. Não escolher número fixo de modos sem avaliar espectro e convergência da força de martelo.
+**Discretização de referência:** escolher explicitamente FE 1D com continuidade suficiente para a energia de flexão (ex.: Hermite para termo EI) **ou** diferenças finitas passivas adequadas. Matriz física `M_s,C_s,K_s` simétrica onde pertinente, `M_s>0`, `K_s>=0`, `C_s>=0`, contatos e restrições introduzidos por forças generalizadas de trabalho recíproco. Não escolher número fixo de modos sem avaliar espectro e convergência da força de martelo.
 
 **Tipos por registro:** grupos de 1/2/3 cordas conforme **escala do piano-alvo**; cordas gravíssimas com enrolamento; distribuição de perdas/polarização e localização física. Martelo de uma nota normalmente encontra simultaneamente várias cordas da mesma nota: forças por contato individual, compartilhamento do estado de ação e massa de martelo, diferenças reais de alinhamento.
 
@@ -94,19 +94,19 @@ flowchart TD
 
 ### 3.3 Ponte móvel e condição de contorno — PRIMEIRA REFORMA NECESSÁRIA NA V4
 
-**Erro conhecido do protótipo atual:** o código \`research/piano-v4/stiff-string-hammer.mjs\` possui modos senoidais com as extremidades fixas e calcula \`bridgeShearForceN()\` como reação de um apoio imóvel. **Essa força não pode ser irradiada como se fosse uma ponte/tampo móvel.**
+**Erro conhecido do protótipo atual:** o código `research/piano-v4/stiff-string-hammer.mjs` possui modos senoidais com as extremidades fixas e calcula `bridgeShearForceN()` como reação de um apoio imóvel. **Essa força não pode ser irradiada como se fosse uma ponte/tampo móvel.**
 
 **Escolha de referência:** sistema mecânico conjunto com graus de liberdade de corda/ponte/tampo e restrições na conexão: deslocamento/velocidade do contato iguais nas direções transmitidas; força de ação e reação, trabalho igual e oposto. Para suportes FE, usar nós compartilhados ou restrições de Lagrange que conservem energia. Para solver modal, representar explicitamente o deslocamento do apoio por um campo de “lifting” e todos os termos de massa/rigidez associados, sem dupla contagem.
 
 **Localização:** ponte principal, ponte grave, pinos e segmento secundário das cordas de acordo com o modelo-alvo; diferentes componentes de força (vertical/horizontal) quando necessários. **Não reduzir automaticamente a ponte a uma mola escalar.**
 
-**Grandeza medida prioritária:** mobilidade mecânica complexa \`Y_bridge(f)=V_bridge(f)/F_bridge(f)\`, unidade (m/s)/N, com magnitude **e fase**, local e direção documentados. Uma ponte fisicamente passiva tem impedância/admitância compatível com dissipação não negativa, não uma curva de EQ escolhida.
+**Grandeza medida prioritária:** mobilidade mecânica complexa `Y_bridge(f)=V_bridge(f)/F_bridge(f)`, unidade (m/s)/N, com magnitude **e fase**, local e direção documentados. Uma ponte fisicamente passiva tem impedância/admitância compatível com dissipação não negativa, não uma curva de EQ escolhida.
 
 **Gate:** teste isolado “ponte livre versus ponte rigidamente bloqueada”, reações coerentes, deslocamento/velocidade sem descontinuidade, energia total conservação/dissipação e respostas de mobilidade em frequências NÃO usadas na identificação.
 
 ### 3.4 Tampo harmônico e madeira
 
-**Estrutura:** placa elástica aproximadamente ortotrópica, nervuras, pontes, espessura variável, crown/downbearing, fixação ao aro, massas e perdas. FE de referência com malha e materiais físicos, matriz \`M_p,K_p,C_p\`; efeito de montagem representado em condições de contorno. Um modelo de placa simples é permitido **como bancada experimental claramente incompleta**, mas a nota aprovada deve passar por uma representação com justificativa espacial e modal.
+**Estrutura:** placa elástica aproximadamente ortotrópica, nervuras, pontes, espessura variável, crown/downbearing, fixação ao aro, massas e perdas. FE de referência com malha e materiais físicos, matriz `M_p,K_p,C_p`; efeito de montagem representado em condições de contorno. Um modelo de placa simples é permitido **como bancada experimental claramente incompleta**, mas a nota aprovada deve passar por uma representação com justificativa espacial e modal.
 
 **Identificação:** ajustar geometria e parâmetros materiais usando medidas conhecidas; a parte dinâmica pode depois ser reduzida por autovetores/valores da matriz FE; cada modo deve carregar forma espacial e massa generalizada, nunca uma frequência livremente escolhida para moldar o espectro. As primeiras evidências são mobilidade de ponte e mapas de vibração em vários pontos.
 
@@ -114,9 +114,9 @@ flowchart TD
 
 ### 3.5 Acústica do ar e observador
 
-**Grandeza que queremos:** pressão \`p(x_mic,t)\` em Pascal em posições explícitas, derivada da **velocidade normal da área do tampo** e das condições acústicas externas.
+**Grandeza que queremos:** pressão `p(x_mic,t)` em Pascal em posições explícitas, derivada da **velocidade normal da área do tampo** e das condições acústicas externas.
 
-**Modelo inicial de radiação:** integral causal/retardada de Rayleigh para placa em defletor rígido, **com hipótese de geometria expressa e comparação posterior com campo acústico de maior fidelidade**. Para grande piano aberto, tampa, difração/borda e ar frente/trás importam; métodos BEM/FEM de ar são candidatos para modelo de referência quando o pressuposto baffle falhar. Nenhum microfone virtual recebe diretamente \`F_h\` nem velocidade de um ponto de ponte.
+**Modelo inicial de radiação:** integral causal/retardada de Rayleigh para placa em defletor rígido, **com hipótese de geometria expressa e comparação posterior com campo acústico de maior fidelidade**. Para grande piano aberto, tampa, difração/borda e ar frente/trás importam; métodos BEM/FEM de ar são candidatos para modelo de referência quando o pressuposto baffle falhar. Nenhum microfone virtual recebe diretamente `F_h` nem velocidade de um ponto de ponte.
 
 **Acoplamento:** na referência completa considerar também potência radiada e reação acústica sobre o tampo; se o primeiro cálculo for **unidirecional**, declarar explicitamente a aproximação e NÃO contar energia radiada no balanço mecânico sem carga acústica real de retorno.
 
@@ -139,7 +139,7 @@ flowchart TD
 - **ILLUSTRATIVE:** plausível e rotulado como hipótese, restrito a bancada, sujeito a análise de sensibilidade; nunca anunciado como “piano calibrado”.
 
 ### 4.2 Esquema obrigatório para registro de parâmetros — SPEC, não arquivo implementado
-\`\`\`json
+```json
 {
   "parameter_id": "string.C4.length_m",
   "component": "string",
@@ -154,8 +154,8 @@ flowchart TD
   "valid_range": null,
   "validation_split": "not_assigned"
 }
-\`\`\`
-- Campos numéricos sem evidência permanecem \`null\`. O protótipo atual (L=0,62m; r=0,48mm etc.) deve ser migrado como **ILLUSTRATIVE**, não como verdade física.
+```
+- Campos numéricos sem evidência permanecem `null`. O protótipo atual (L=0,62m; r=0,48mm etc.) deve ser migrado como **ILLUSTRATIVE**, não como verdade física.
 - **Nunca ajustar parâmetros ao mesmo conjunto usado para relatar validade.** Separar notas, velocidades, tomadas, microfones e condições de treino/validação/holdout.
 - Guardar hash, versão e licença de dados **diagnósticos** sem colocá-los nos outputs do motor.
 
@@ -173,13 +173,13 @@ Identidade do piano-alvo; número de cordas C4; comprimentos/raios/tensão/posi�
 
 ### 5.1 Formulação geral de acoplamento
 Equações discretizadas em forma de energia para graus de liberdade da estrutura, em uma aproximação linear por trecho:
-\`\`\`text
+```text
  M q_ddot + C q_dot + K q = F_contact(q, q_dot, z) + J^T lambda + F_ext
  C(q, q_dot, z) governam perdas materiais; lambda impõe restrições conjuntas.
  H = 1/2 q_dot^T M q_dot + 1/2 q^T K q + U_felt + H_internal
  Delta(H) + D_material + W_radiation = W_external   (acoplamento completo)
-\`\`\`
-**Nota de notação:** o \`C\` da matriz amortecedora e o operador de restrição serão tratados com símbolos diferentes no código final; a apresentação acima é um esquema, não contrato de API. **Ao usar radiação unilateral, não subtrair W_radiation sem modelar reação radiativa.**
+```
+**Nota de notação:** o `C` da matriz amortecedora e o operador de restrição serão tratados com símbolos diferentes no código final; a apresentação acima é um esquema, não contrato de API. **Ao usar radiação unilateral, não subtrair W_radiation sem modelar reação radiativa.**
 
 ### 5.2 Escolha de integrador
 - Preferir midpoint implícito, variantes discrete-gradient/energy quadratization ou métodos passivos com prova/ensaio de balanceamento para contato não linear e mecanismos dissipativos; estabilidade com rigidez elevada e múltiplos contatos.
@@ -189,7 +189,7 @@ Equações discretizadas em forma de energia para graus de liberdade da estrutur
 - Se dividir a integração em sub-sistemas, garantir **o mesmo fluxo de energia** nos dois sentidos a cada passo (integração port-Hamiltoniana/estrutura passiva ou correção iterativa convergida), não acoplar apenas pelo sinal de força/áudio.
 
 ### 5.3 Critérios numéricos iniciais (não perceptuais)
-- **Energia:** com fonte desligada após o golpe, \`H + dissipação\` compatível com energia inicial; proposta inicial |erro relativo| ≤ 10⁻⁶ em ensaios especificados, com tolerâncias absolutas para estado quase silencioso. Não certifica realismo.
+- **Energia:** com fonte desligada após o golpe, `H + dissipação` compatível com energia inicial; proposta inicial |erro relativo| ≤ 10⁻⁶ em ensaios especificados, com tolerâncias absolutas para estado quase silencioso. Não certifica realismo.
 - **Unidades:** f em Hz, T e forças em N, deslocamento em m, velocidade m/s, massa em kg, pressão em Pa, potência W, energia J; contratos impedem confundir força de ponte com pressão.
 - **Convergência:** verificar refinamentos de malha, modos, discretização de radiação, passo de tempo e precisão; tornar mais precisos os critérios após observar ensaios. Não aceitar “48 patches próximos a 192” como validação estrutural.
 - **Amostragem:** comparar 44,1/48/96 kHz; oversampling somente nos subsistemas/contatos que exigirem, com redução de amostragem antialiasing de método matemático explícito.
@@ -243,7 +243,7 @@ Canais sincronizados do motor: evento da tecla, velocidade do martelo, força/pr
 |---|---|---|
 | Som de piano elétrico/sintetizador | Espectro estável sem transientes/decay/ponte/acústica convincentes | Abrir diagnóstico físico da cadeia, rejeitar candidato |
 | Endurecer feltro melhora força mas não pressão | Força aumenta e ataque radiado continua apagado | Investigar mobilidade/transferência/área ativa, não adicionar ruído |
-| Ponte fixa mascarada de ponte móvel | \`bridgeShearForceN\` emitida por radiador sem realimentação | Bloquear áudio, refazer condição de contorno conjunta |
+| Ponte fixa mascarada de ponte móvel | `bridgeShearForceN` emitida por radiador sem realimentação | Bloquear áudio, refazer condição de contorno conjunta |
 | Mais modos, mesma qualidade | Convergência numérica mas timbre não melhora | Verificar geometria, material, ponto de acoplamento e dados |
 | Mistura de modelos de pianos diferentes | Escala de um, tampo de outro e mic de terceiro como se fosse instrumento único | Etiquetar fontes e incerteza, não alegar emulação de instrumento |
 | Equalização, samples ou IR no motor V4 | Efeito oculto na função de som que não representa mecanismo físico | Remover, falha de gate de pureza |
@@ -255,22 +255,22 @@ Canais sincronizados do motor: evento da tecla, velocidade do martelo, força/pr
 ## 9. Contratos de arquitetura a implementar DEPOIS da aprovação do plano
 
 **Interfaces lógicas, ainda não código:**
-- \`ActionInput → HammerState\`: posição [m], velocidade [m/s], energia [J], gatilho de escape;
-- \`HammerContact ↔ StringGroup\`: deformação [m], força [N], velocidade relativa [m/s], potência [W], estado interno de feltro;
-- \`StringGroup ↔ BridgePort\`: deslocamento [m], velocidade [m/s], força [N], potência [W], mesmo ponto e direção de contato;
-- \`BridgePort ↔ Soundboard\`: vetor de força e velocidade em múltiplos pontos, dissipação/radiação contabilizadas;
-- \`Soundboard ↔ Radiation\`: campo de velocidade normal [m/s] e pressão radiada [Pa], atraso geométrico [s], carga acústica opcional bidirecional;
-- \`Damper ↔ StringGroup\`: contato e forças dissipativas, pedais e estados.
-- \`DiagnosticRecorder\`: salvar metadados e séries internas para análise **sem se tornar camada sonora do motor**.
+- `ActionInput → HammerState`: posição [m], velocidade [m/s], energia [J], gatilho de escape;
+- `HammerContact ↔ StringGroup`: deformação [m], força [N], velocidade relativa [m/s], potência [W], estado interno de feltro;
+- `StringGroup ↔ BridgePort`: deslocamento [m], velocidade [m/s], força [N], potência [W], mesmo ponto e direção de contato;
+- `BridgePort ↔ Soundboard`: vetor de força e velocidade em múltiplos pontos, dissipação/radiação contabilizadas;
+- `Soundboard ↔ Radiation`: campo de velocidade normal [m/s] e pressão radiada [Pa], atraso geométrico [s], carga acústica opcional bidirecional;
+- `Damper ↔ StringGroup`: contato e forças dissipativas, pedais e estados.
+- `DiagnosticRecorder`: salvar metadados e séries internas para análise **sem se tornar camada sonora do motor**.
 
 Os módulos devem possuir testes de energia, unidades, limitação espacial/temporal e contratos de origem de parâmetros. O caminho de saída para WAV só existe no **estágio F7/F8**, não na bancada F2.
 
 ## 10. Gestão do repositório, documentação e evidência
 
 - V4 permanece na PR #39 em draft e em branch separada, sem tocar no motor publicamente ativo.
-- \`main\` foi verificada em **v1.12.10**, commit \`1129e2e46a8a8bc373b43c1284b668ceea3e05ca\`; a branch V4 partiu da v1.12.8. **Antes de merge**, atualizar base e reexecutar CI da versão atual.
-- Nenhum trabalho de código será iniciado nesta tarefa: **a entrega é este plano completo**. O arquivo existente \`StiffStringHammerV4\` continua classificado como **bancada física já existente**, não o novo motor completo.
-- Em cada etapa: relatório \`hipótese → referência → parâmetros com origem → implementação → teste → áudio quando permitido → avaliação → decisão GO/NO-GO\`.
+- `main` foi verificada em **v1.12.10**, commit `1129e2e46a8a8bc373b43c1284b668ceea3e05ca`; a branch V4 partiu da v1.12.8. **Antes de merge**, atualizar base e reexecutar CI da versão atual.
+- Nenhum trabalho de código será iniciado nesta tarefa: **a entrega é este plano completo**. O arquivo existente `StiffStringHammerV4` continua classificado como **bancada física já existente**, não o novo motor completo.
+- Em cada etapa: relatório `hipótese → referência → parâmetros com origem → implementação → teste → áudio quando permitido → avaliação → decisão GO/NO-GO`.
 - Sem sucesso de CI = correção imediata antes de promover. CI verde sem som natural = **falha de timbre**, não sucesso musical.
 - Cada PR/commit deve ter rollback viável, evitar alteração de arquivos públicos antes do release e preservar dados/importações atuais.
 - Criar futuramente apenas após iniciar desenvolvimento: registro de unidades e parâmetros, log de energia por subestrutura, testes de convergência, corpus de avaliações auditivas (sem distribuir gravações privadas) e relatório de CPU.
