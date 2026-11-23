@@ -45,13 +45,46 @@ function save(){
   clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveState(storage,state),140);
 }
 function report(text){const s=byId('status');s.textContent=text;s.hidden=!text}
+function sampleBankCount(){
+  const model=state.patches.piano.values.character;
+  return stage?.instruments?.piano?.samples?.count(model)||0;
+}
+function syncSampleUI(){
+  const active=state.patches.piano.values.soundEngine==='sampled'&&Boolean(state.mask&engines.piano.bit);
+  const notice=byId('sample-notice');
+  notice.hidden=!active;
+  if(!active)return;
+  const model=state.patches.piano.values.character;
+  const count=sampleBankCount();
+  byId('sample-notice-text').textContent=count
+    ?`Motor E · ${model}: ${count} amostras carregadas. Algumas notas podem ficar sem som se não houver gravação próxima.`
+    :`Motor E · ${model}: nenhuma nota WAV carregada. O teclado funciona, mas não haverá som até importar o banco privado.`;
+  byId('sample-upload-shortcut').textContent=count?'Substituir notas WAV':'Carregar notas WAV';
+}
+byId('sample-upload-shortcut').onclick=()=>{
+  if(state.editor!=='piano'){state.editor='piano';panel.sync();save();}
+  const picker=document.querySelector('#editors .sample-upload input[type="file"]');
+  if(picker)picker.click();
+  else report('Escolha o motor E em Piano acústico para importar o banco WAV.');
+};
+function warnMissingSample(key,velocity){
+  if(state.patches.piano.values.soundEngine!=='sampled'||!(state.mask&engines.piano.bit))return;
+  const model=state.patches.piano.values.character,lib=stage?.instruments?.piano?.samples;
+  if(!lib?.count(model)){
+    report('Motor E sem amostras: clique em Carregar notas WAV e selecione os arquivos do piano '+model+'.');
+    return;
+  }
+  if(!lib.choose(model,key,velocity))
+    report('A nota '+midiLabel(key)+' não tem amostra próxima no banco '+model+'. Importe mais notas WAV.');
+  else report('');
+}
 function syncScene(){
   const selected=scenes.find(s=>s.mask===state.mask&&Boolean(s.duo)===state.duo);
   byId('custom').textContent=state.duo?'Duo personalizado':'Camadas livres';
   byId('scene').value=selected?.id||'custom';
   const count=Object.values(engines).filter(d=>state.mask&d.bit).length;
   byId('layer-count').textContent=count+(count===1?' motor ligado':' motores ligados');
-  panel.sync();
+  panel.sync();syncSampleUI();
 }
 for(const s of scenes)addOption(byId('scene'),s.id,s.name);
 const custom=addOption(byId('scene'),'custom','Camadas livres');custom.id='custom';custom.disabled=true;
@@ -78,7 +111,7 @@ panel=new Panel(state,{
         if(!ok)report('Motor A indisponível neste navegador. O clássico será usado como alternativa.');
       });
     }
-  }save()},listen,
+  }if(id==='piano')syncSampleUI();save()},listen,
   fxEnabled(id,enabled){state.fx.enabled[id]=enabled;stage?.updateEffects();panel.sync();save()},
   fxChange(id,key,value){state.fx.slots[id][key]=value;stage?.updateEffects();save()},
   loadSF,clearSF,setProgram,loadSamples,clearSamples
@@ -91,12 +124,12 @@ async function loadSamples(id,model,files){
     await startAudio();
     report(`Carregando ${files.length} amostras para ${model}…`);
     const count=await stage.instruments[id].samples.load(model,files);
-    panel.updateSamples(id,model,count);
+    panel.updateSamples(id,model,count);syncSampleUI();
     report(`${count} amostras carregadas para ${model}. São usadas ao tocar e permanecem apenas nesta sessão.`);
   }catch(e){report('Falha nas amostras: '+e.message)}
 }
 function clearSamples(id,model){
-  stage?.instruments[id]?.samples.clear(model);panel.updateSamples(id,model,0);
+  stage?.instruments[id]?.samples.clear(model);panel.updateSamples(id,model,0);syncSampleUI();
   report('Amostras retiradas. O instrumento voltou à síntese interna.');
 }
 
@@ -182,7 +215,10 @@ byId('power').onclick=()=>startAudio().then(()=>{
       (state.patches.piano.values.soundEngine==='physical'&&!stage.instruments.piano.physical)||
       (state.patches.piano.values.soundEngine==='physicalLegacy'&&!stage.instruments.piano.legacyPhysical)))
     report('Este navegador não iniciou o AudioWorklet. O piano usa síntese clássica como alternativa.');
+  else if(state.patches.piano.values.soundEngine==='sampled'&&!sampleBankCount())
+    report('Motor E sem WAVs: use Carregar notas WAV, próximo ao teclado, para ativar o som.');
   else report('');
+  syncSampleUI();
 }).catch(e=>report(e.message));
 function stopPreview(){previewToken++;clearTimeout(previewTimer);if(stage)stage.disconnect('preview')}
 async function listen(id){
@@ -216,6 +252,8 @@ function paintKeys(){
   byId('voice-status').textContent=stats?`${stats.active}/${stats.limit} vozes · ${stats.held} teclas`:`0/${mobileLite?32:64} vozes`;
   const held=new Set();
   if(stage)for(const v of stage.voices.values())if(v.held)held.add(v.key);
+  // O teclado deve indicar que foi pressionado mesmo sem amostra e sem voz.
+  for(const slot of activePointers.values())held.add(slot.key);
   for(const [key,button] of keyboardButtons)button.classList.toggle('down',held.has(key));
 }
 function paintPedal(){
@@ -269,16 +307,18 @@ async function press(pointer,button,velocity){
   if(!Number.isInteger(key))return;
   lift(pointer);
   const slot={key,id:null};
-  activePointers.set(pointer,slot);
+  activePointers.set(pointer,slot);paintKeys();
   try{
     if(!stage||ctx?.state!=='running')await startAudio();
     if(activePointers.get(pointer)!==slot)return;
+    warnMissingSample(key,velocity);
     slot.id=performer.noteOn('touch',0,key,velocity);
-  }catch(e){activePointers.delete(pointer);report(e.message)}
+    paintKeys();
+  }catch(e){activePointers.delete(pointer);paintKeys();report(e.message)}
 }
 function lift(pointer){
   const slot=activePointers.get(pointer);if(!slot)return;
-  activePointers.delete(pointer);performer.noteOffId(slot.id);
+  activePointers.delete(pointer);performer.noteOffId(slot.id);paintKeys();
 }
 byId('oct-down').onclick=()=>{if(octave>0)octave--;setKeys()};
 byId('oct-up').onclick=()=>{if(octave<6)octave++;setKeys()};
