@@ -1,3 +1,11 @@
+## AUDITORIA DE ALGORITMO ANTES DE v1.12.7 (23/11/2026)
+
+**Pedido atual:** revisar profundamente algoritmo físico e custo computacional, com fontes primárias, **sem prosseguir com DSP ainda**. Resultado e decisões: [docs/AUDITORIA_ALGORITMO_MOTOR_D_2026-11-23.md](docs/AUDITORIA_ALGORITMO_MOTOR_D_2026-11-23.md). Preservar explicitamente o D v1.12.6 nos médios/agudos, seus motores A/B/C/Clássico, UI, FX, MIDI e default. Não chamar regressão numérica de fidelidade sonora.
+
+Principais lacunas confirmadas: vibrações longitudinais não modeladas, martelo tratado como ponderação inicial, ponte sem retorno físico ao modo e com unidades não calibradas; divisão de uníssono sem normalização coerente da potência; `bodyDivisor` eco declarativo mas ignorado; `v.brightness` sem efeito após note-on; PRNG calculado mesmo com ruído já decaído. **Antes de acrescentar processamento** usar benchmark Node `scripts/benchmark_piano_d_cpu.mjs` e **depois** perfil no browser Android/PC; os primeiros são só pistas de custo, não comprovação de 32/64 notas em tempo real. Gates integrais **0/7**.
+
+---
+
 ## PROTEÇÃO DO TIMBRE MÉDIO-AGUDO / PLANO GRAVES D v1.12.7 (23/11/2026)
 
 O titular ouviu D v1.12.6: **médio-agudo passou a parecer com piano real, mas grave ainda parece violão**. Preservar explicitamente o avanço de C4–C6 e os motores A/B/C/Clássico. A solicitação atual é **TERMINAR A PREPARAÇÃO** para a próxima versão, não substituir motores, adicionar menu, publicar versão nova ou mexer em DSP/FX/MIDI/UI/presets. Criar somente instrumentação, testes, documentos e CI com fontes verificadas; a v1.12.6 principal permanece intacta.

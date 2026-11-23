@@ -1,0 +1,56 @@
+name: Stage Synth — D read-only computational cost audit
+on:
+  push:
+    branches:
+      - research/auditoria-algoritmo-piano-d-20261123
+    paths:
+      - 'scripts/benchmark_piano_d_cpu.mjs'
+      - '.github/workflows/piano-d-cpu-audit.yml'
+  pull_request:
+    paths:
+      - 'scripts/benchmark_piano_d_cpu.mjs'
+      - 'docs/AUDITORIA_ALGORITMO_MOTOR_D_2026-11-23.md'
+      - '.github/workflows/piano-d-cpu-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify existing synth does not regress
+        run: npm run check
+      - name: Verify profiling script syntax
+        run: node --check scripts/benchmark_piano_d_cpu.mjs
+      - name: Measure six 128-frame, 48kHz scenarios without changing sound
+        run: |
+          node scripts/benchmark_piano_d_cpu.mjs > stage-d-cpu-baseline.json
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const result=JSON.parse(readFileSync('stage-d-cpu-baseline.json','utf8'));
+          if(result.data?.length!==6)throw Error('Expected 32/48/64 x 2 workloads');
+          for(const r of result.data){
+            if(r.activeVoices!==r.requestedVoices||!Number.isFinite(r.p99BlockMs)||
+               !Number.isFinite(r.peak)||r.peak>=1||r.peak<=0)
+              throw Error('Invalid profiling scenario: '+JSON.stringify(r));
+            console.log('D_CPU '+r.profile+' '+r.arrangement+
+              ' voices='+r.activeVoices+
+              ' modes='+r.resonators+
+              ' modalUpdatesPerSec='+r.theoreticalResonatorUpdatesPerSecond+
+              ' p50='+r.p50BlockMs+'ms p95='+r.p95BlockMs+
+              'ms p99='+r.p99BlockMs+'ms worst='+r.worstBlockMs+
+              'ms budget='+result.theoreticalBlockTimeMs.toFixed(3)+'ms');
+          }
+          console.log('IMPORTANT: NODE/GITHUB RUNNER IS NOT A BROWSER OR ANDROID REAL-TIME CERTIFICATION.');
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stage-d-readonly-cpu-profile-numeric
+          path: stage-d-cpu-baseline.json
+          retention-days: 14
+          if-no-files-found: error
