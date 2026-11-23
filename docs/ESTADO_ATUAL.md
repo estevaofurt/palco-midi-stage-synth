@@ -1,3 +1,9 @@
+## Laboratório passivo de ponte e tampo compartilhado — sem alteração no som público (23/11/2026)
+
+Feedback: modelos D/wood/longitudinal quase idênticos, agudo soa como ruído, grave ainda redondo e semelhante a violão. A tentativa "wood" aditiva da PR #26 foi reprovada e não mesclada. Criado **laboratório em `research/passive-string-bridge-cell.mjs` e `research/shared-passive-piano-bridge.mjs`**, com troca de energia cordas/ponte/tampo em equações passivas e integrador de ponto médio implícito. O núcleo compartilhado usa 2 modos totais de tampo + 2 polarizações de corda/nota, sem armazenamento de áudio externo. **Teste CI 139 Node + 12 testes dedicados, p95 64 notas 0,1556ms compartilhado contra 1,4939ms independentes** em Node/Linux. Os motores A/B/C/D/Clássico e página Stage v1.12.7 estão inalterados: não há atualização sonora nem validação do som de madeira. [Estudo técnico detalhado](PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md). Dados físicos ainda não identificados e licença comercial do conjunto de Plath/IR Yamaha não confirmada. **0/7 R-GATEs completos.**
+
+---
+
 ## Stage v1.12.7 — martelo grave EXPERIMENTAL, antes de homologação (23/11/2026)
 
 **Novo candidato D em C1–C3**, dentro do mesmo seletor Piano; C4–C6 intactos (45 cenários, **3.240.000 amostras estéreo bitwise iguais**), A/B/C intactos, default C intacto. A v1.12.6 agora tem **worklets e roteador de áudio congelados** para comparação verdadeira em `v1.12.6.html`. Modelagem: força de pressão comprimida no tempo e modos excitados ao longo do pulso, com resposta O(1) e tempo curto de radiação por nota, NÃO uma simulação validada de massa/força de martelo reais.
