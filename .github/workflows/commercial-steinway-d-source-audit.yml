@@ -32,6 +32,11 @@ jobs:
             "$STAGE_ARCHIVE_REPORT_DIR/member-listing.json"
       - name: Bound-only C4v8 Princeton ZIP member WAV header access probe
         run: python3 research/commercial_audio/probe_archive_wav_access.py
+      - name: Download and SHA256-check seven selected ORIGINAL Steinway D WAV members (bounded)
+        run: |
+          python3 research/commercial_audio/verify_bitklavier_wavs.py \
+            research/commercial_audio/steinway_d_selective_pilot.json \
+            "$STAGE_ARCHIVE_REPORT_DIR/verified-seven-wav.json"
       - name: Upload metadata hashes ONLY
         uses: actions/upload-artifact@v4
         with:
@@ -39,6 +44,7 @@ jobs:
           path: |
             /tmp/stage-steinway-d-source-audit/archive-metadata.json
             /tmp/stage-steinway-d-source-audit/member-listing.json
+            /tmp/stage-steinway-d-source-audit/verified-seven-wav.json
           retention-days: 14
           if-no-files-found: error
       - name: Remove report on runner
