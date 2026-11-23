@@ -1,3 +1,19 @@
+# Investigação de acesso real aos dados físicos do piano — 23/11/2026
+
+[Auditoria PAPA / IRCAM / força inversa](ACESSO_DADOS_FISICOS_PAPA_IRCAM_FORCA_INVERSA_2026-11-23.md).
+
+- [x] Localizar relatório oficial **FWF PAPA**: cerca de seis instrumentos reais medidos, modelo global 3D, parâmetros martelo/corda/ponte/campo acústico; **arquivo bruto e direito comercial ainda não identificados**.
+- [x] Verificar o método JASA 2016 de estimar `F_h(t)` por **vibrometria física de corda** e filtro inverso, não por amostra de microfone; inserir M01.2 com necessidade de comparação/erro.
+- [x] Confirmar no estudo TU/e de **Bösendorfer 280VC-9** que tampo domina e que estrutura/aro no grave pode contribuir; planejar M05 estendido e futura ablação, não simulação automática de peça adicional.
+- [x] Confirmar que o **IRCAM Modalys** documenta modelos de tampo baseados em medição, malha 13×13 e arquivos `.dat` distribuídos no programa; **bytes e licença comercial não verificados**.
+- [x] Confirmar que Purdue apresenta `p/v_b` por posições e excitações normal/paralela, mas **não verificamos dados brutos**.
+- [ ] Esclarecer com custodiante **PAPA/FPM2** existência de dados originais, unidades, sincronização, direitos e subconjunto comercial; **nenhum contato enviado**.
+- [ ] Esclarecer com **IRCAM** uso independente de dados modais no Stage comercial, além da existência/atribuição do arquivo; **não extrair modelo não licenciado**.
+- [ ] Se fontes históricas não forem licenciáveis, elaborar escopo e adquirir, por profissional, piloto M01.1/M01.2+M02–M05 do **mesmo instrumento**, inclusive mobilidade cruzada 2×2 e radiação do aro no grave.
+- [ ] Manter R-GATE-1..7 sem aprovação; sem novo DSP/P1/P2 até dados, direitos e liberação expressa; sem garantia 32–64 vozes antes da homologação.
+
+---
+
 # Próxima lacuna P0: mobilidade cruzada de ponte e histerese do martelo — 23/11/2026
 
 [Documento científico F01–F08](EVIDENCIA_MARTELO_MOBILIDADE_CRUZADA_E_REDUTORA_2026-11-23.md) e [protocolo M01.1/M04.1 atualizado](PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md).
