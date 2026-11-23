@@ -1,0 +1,224 @@
+{
+  "schema": "stage-commercial-lossless-flac-pilot-v1",
+  "goal": "commercial-safe, verified original lossless FLAC subset for reference PREPARATION only; no extraction of piano mechanics parameters yet",
+  "sourceCatalog": [
+    {
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "instrument": "Yamaha C5",
+      "license": "CC-BY-3.0",
+      "author": "Alexander Holm",
+      "licenseEvidenceUrl": "https://github.com/sfzinstruments/SalamanderGrandPiano/blob/3382bf9496bba2486f5ab0de55a264d1dfc38404/README.md",
+      "capture": "Yamaha C5, AKG C414 spaced AB approx 12cm above strings; 48kHz 24bit; 16 layers original recording, natural vs retuned sample bank options",
+      "knownLimitations": [
+        "sample layers v1/v8/v16 are not measured physical hammer velocities",
+        "recording microphones are near strings; not dry anechoic or a Yamaha CFX",
+        "SFZ includes retuned/natural keyswitch; apply original note map and do not treat retuned variants as independent piano recordings"
+      ]
+    },
+    {
+      "repository": "freepats/upright-piano-KW",
+      "commit": "570f6c60ed2eff67accad3b85d5b452e57a3ad28",
+      "instrument": "Kawai KW Upright",
+      "license": "CC0-1.0",
+      "author": "Gonzalo and Roberto / FreePats",
+      "licenseEvidenceUrl": "https://github.com/freepats/upright-piano-KW/blob/570f6c60ed2eff67accad3b85d5b452e57a3ad28/LICENSE",
+      "capture": "Kawai upright, Zoom H1 near pianist head, living room; released edited stereo FLAC, two layers in some keys",
+      "knownLimitations": [
+        "bass notes contain edited loops: never use looped tails to infer acoustic string T60",
+        "original captures cropped and processed",
+        "C4vH.flac does not exist at the pinned commit; only C4vL.flac explicitly located. Never invent missing high velocity sample."
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "yamaha-c5-c2v1",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C2v1.flac",
+      "bytes": 1980907,
+      "gitBlobSha": "3548d64c6bcd0927130d8f9590814b5edb09b45c",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C2",
+      "velocityLayer": "v1",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c2v8",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C2v8.flac",
+      "bytes": 2561685,
+      "gitBlobSha": "377ae98aa10f4e1698b1a0492c24a5817a9293ec",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C2",
+      "velocityLayer": "v8",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c2v16",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C2v16.flac",
+      "bytes": 2698276,
+      "gitBlobSha": "d8d276b57d9f27c28b797f4792dc3102639b4472",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C2",
+      "velocityLayer": "v16",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c4v1",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C4v1.flac",
+      "bytes": 1265676,
+      "gitBlobSha": "acf46f2ea8b395cf5609f1411199410f7e93a975",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C4",
+      "velocityLayer": "v1",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c4v8",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C4v8.flac",
+      "bytes": 1774472,
+      "gitBlobSha": "5d1c81dd7ee1d21cbec2fa1f2f605c098cf19679",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C4",
+      "velocityLayer": "v8",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c4v16",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C4v16.flac",
+      "bytes": 1772214,
+      "gitBlobSha": "0ab0b0700532f483468a0b299fd2902eaaa59599",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C4",
+      "velocityLayer": "v16",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c6v1",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C6v1.flac",
+      "bytes": 567727,
+      "gitBlobSha": "8ea5cab9449ab6e59601aae94da384099c96d734",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C6",
+      "velocityLayer": "v1",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c6v8",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C6v8.flac",
+      "bytes": 695617,
+      "gitBlobSha": "4728c69c56c82a98e54cf93a289afd282705317d",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C6",
+      "velocityLayer": "v8",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c6v16",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C6v16.flac",
+      "bytes": 730412,
+      "gitBlobSha": "d9a3c6e69c421f7ee92869a3a4a0577a02c7cb82",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C6",
+      "velocityLayer": "v16",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "kawai-kw-c2vl",
+      "repository": "freepats/upright-piano-KW",
+      "commit": "570f6c60ed2eff67accad3b85d5b452e57a3ad28",
+      "path": "samples/C2vL.flac",
+      "bytes": 1254880,
+      "gitBlobSha": "8ec3ea6e5314a73af46eb657941f0f1bf68e61e3",
+      "instrument": "Kawai KW Upright",
+      "recordedPitch": "C2",
+      "velocityLayer": "vL",
+      "license": "CC0-1.0",
+      "role": "upright timbre / attack; bass loops and room disqualify physical T60"
+    },
+    {
+      "id": "kawai-kw-c2vh",
+      "repository": "freepats/upright-piano-KW",
+      "commit": "570f6c60ed2eff67accad3b85d5b452e57a3ad28",
+      "path": "samples/C2vH.flac",
+      "bytes": 724830,
+      "gitBlobSha": "a69fddb0aecee69764a70f2bbe8ed966195",
+      "instrument": "Kawai KW Upright",
+      "recordedPitch": "C2",
+      "velocityLayer": "vH",
+      "license": "CC0-1.0",
+      "role": "upright timbre / attack; bass loops and room disqualify physical T60"
+    },
+    {
+      "id": "kawai-kw-c4vl",
+      "repository": "freepats/upright-piano-KW",
+      "commit": "570f6c60ed2eff67accad3b85d5b452e57a3ad28",
+      "path": "samples/C4vL.flac",
+      "bytes": 892521,
+      "gitBlobSha": "a96cb6aed312706f66a2453d56730a5c20559e50",
+      "instrument": "Kawai KW Upright",
+      "recordedPitch": "C4",
+      "velocityLayer": "vL",
+      "license": "CC0-1.0",
+      "role": "upright timbre / attack; bass loops and room disqualify physical T60"
+    },
+    {
+      "id": "kawai-kw-c6vl",
+      "repository": "freepats/upright-piano-KW",
+      "commit": "570f6c60ed2eff67accad3b85d5b452e57a3ad28",
+      "path": "samples/C6vL.flac",
+      "bytes": 230370,
+      "gitBlobSha": "e64089024c5cec961e7723fef4a0d509aee9ac6a",
+      "instrument": "Kawai KW Upright",
+      "recordedPitch": "C6",
+      "velocityLayer": "vL",
+      "license": "CC0-1.0",
+      "role": "upright timbre / attack; bass loops and room disqualify physical T60"
+    },
+    {
+      "id": "kawai-kw-c6vh",
+      "repository": "freepats/upright-piano-KW",
+      "commit": "570f6c60ed2eff67accad3b85d5b452e57a3ad28",
+      "path": "samples/C6vH.flac",
+      "bytes": 221663,
+      "gitBlobSha": "982b69822cbdf4d8fee6d1ad786e7ce6d3b0e2aa",
+      "instrument": "Kawai KW Upright",
+      "recordedPitch": "C6",
+      "velocityLayer": "vH",
+      "license": "CC0-1.0",
+      "role": "upright timbre / attack; bass loops and room disqualify physical T60"
+    }
+  ],
+  "restrictions": [
+    "No FLAC/WAV uploaded to GitHub or Actions artifacts, no audio in product, no DSP edits",
+    "Attribution required for Yamaha C5 under CC BY 3.0 if samples adapted/distributed; preserve source author and modification notices",
+    "These are NOT calibrated physical hammer/bridge measurements",
+    "Source Git commit and Git blob SHA are reviewed; computed SHA256 supplied by acquisition workflow"
+  ]
+}
