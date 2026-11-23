@@ -1,3 +1,11 @@
+## Próximo requisito: medir/identificar ponte→tampo→pressão, sem novas senoides inventadas
+
+Concluído: dois protótipos independentes de **sistema mecânico passivo**, com núcleos de placa por nota e **placa compartilhada O(N)**, balanço de energia sem realimentação ativa e teste de 64 notas. [Relatório e benchmarks](PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md). O custo é viável em Node isolado, porém não integra Stage DSP nem mede som de piano real. **Versão pública permanece v1.12.7** e PR #26 de "madeira" artificial continua draft/sem merge.
+
+Próxima tarefa: obter gravação própria ou permissão comercial documentada com aceleração da ponte e pressão aérea SINCRONIZADAS; não confundir força da tecla com força de ponte e aceleração→pressão com mobilidade. Ajustar parâmetros `M/C/K` e resposta radiativa, com passividade e validação fora das 15 notas Iowa usadas no treinamento, antes de integração ao D **somente dentro de Piano**, mantendo C4–C6 e A/B/C/Clássico. Qualquer comparação deve incluir transiente 0–12ms, evolução de parciais, pedal/CC64, 32–64 vozes e CPU do AudioWorklet real. **R-GATEs 0/7**.
+
+---
+
 ## Escuta necessária do D v1.12.7 (experimental): manter ou descartar martelo grave
 
 O usuário solicitou prosseguir depois da auditoria. C1–C3 agora recebem um pulso causal de martelo em vez de deslocamento inicial + click exponencial, mas **a avaliação offline é mista**. Comparar **página histórica v1.12.6** com **v1.12.7** em C2/C3 pp/mf/ff, sem FX; validar ataques, corpo, impressão de violão, articulação, sustain e 32–64 notas em dispositivo real. C4/C5/C6 estão **bitwise iguais** e não devem sofrer alterações. Detalhes em [EXPERIMENTO_D_MARTELO_V127_2026-11-23.md](EXPERIMENTO_D_MARTELO_V127_2026-11-23.md). Não agregar fisicamente longitudinal, ponte/cauda ou novos presets **antes da escuta**. Se o som piorou, reverter D ao núcleo v1.12.6 e priorizar experimento longitudinal isolado com medidas. Sem R-GATEs novos: **0/7**.
