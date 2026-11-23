@@ -30,3 +30,11 @@ Os rótulos `MIDI36_v60.wav` etc. são compatíveis com `sampleDescriptor()`. Os
 O fato de o usuário ter carregado uma gravação permite análise privada solicitada, **não comprova que detém os direitos comerciais da biblioteca original** nem permite redistribuição do áudio num site público. Há bloqueio até prova explícita de licença e origem. As referências C2/C3/C4 também não foram gravadas com mesmas condições/velocities do Stage D. Não afirmar que uma nova síntese de piano foi concluída.
 
 **Decisão:** disponibilizar apenas acesso local opcional no motor Clássico, em PR independente DRAFT; manter D v1.12.8, default C, A/B/C, FX/MIDI, bibliotecas atuais e pesquisa física PR #37 intactas. R-GATEs comerciais continuam 0/7; 32–64 vozes no dispositivo real pendentes.
+
+## Validação GitHub E2.6 — 23/11/2026
+
+[GitHub Actions 45207770813](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45207770813): **172/172 testes Node aprovados** após corrigir discrepância de nomenclatura `bitsPerSample`/ `bitDepth` no parser privado. Também aprovados `node --check` do CLI, comparação `git diff` dos motores DSP/roteamento publicados e proibição de blobs WAV/ZIP/AIFF/MP3/SF2 dentro da PR.
+
+[Baseline Stage 45207770796](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45207770796): aprovado. Os únicos arquivos de produto alterados por esta PR são a **declaração visual do campo de importação em `patches.js`** e a **mensagem de orientação em `panel.js`**. O código de áudio publicado e a configuração padrão C são idênticos à main v1.12.8.
+
+**BLOQUEIO:** os testes unitários usam WAVs construídos matematicamente, não o arquivo pessoal do usuário; a captura/reprodução de 12 samples locais com o navegador real no PC/Android ainda não foi homologada. O A/B pessoal C2/C3/C4 não controla os mesmos parâmetros MIDI/ambiente das gravações de referência e **não estabelece superioridade objetiva**. Ainda precisa de escuta do usuário antes de qualquer mudança no D.
