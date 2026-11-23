@@ -1,0 +1,48 @@
+name: Stage Synth — standalone passive bridge physics laboratory
+on:
+  push:
+    branches:
+      - research/passive-string-bridge-soundboard-v128-20261123
+  pull_request:
+    paths:
+      - 'research/passive-string-bridge-cell.mjs'
+      - 'scripts/benchmark_passive_bridge_cell.mjs'
+      - 'tests/piano_passive_bridge_cell.test.mjs'
+      - 'docs/PRONTIDAO_PONTE_TAMPO_PASSIVO_V128_2026-11-23.md'
+      - '.github/workflows/passive-bridge-laboratory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bridge-passivity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Original Stage engines MUST remain byte-for-byte untouched
+        run: |
+          git diff --exit-code a610e6d6fe6e803d86650a298611efcaf46e2b35 -- \
+            physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js \
+            piano-worklet.js piano-resonance.js piano-hybrid-calibration.js \
+            index.html acoustic.js app.js fx-rack.js package.json
+      - name: Check all original tests and bridge laboratory syntax
+        run: |
+          npm run check
+          node --check research/passive-string-bridge-cell.mjs
+          node --check scripts/benchmark_passive_bridge_cell.mjs
+      - name: Execute energy, passivity, decoupled plate and multi-sample-rate tests
+        run: node --test tests/piano_passive_bridge_cell.test.mjs
+      - name: Profile bridge-only 16, 32, 64 cells at 48 kHz
+        run: node scripts/benchmark_passive_bridge_cell.mjs | tee passive-bridge-node-profile.txt
+      - name: Keep only numeric performance evidence (no WAV or recordings)
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-passive-bridge-cell-numeric-only
+          path: passive-bridge-node-profile.txt
+          retention-days: 7
+          if-no-files-found: error
