@@ -1,3 +1,11 @@
+## Stage v1.12.7 — martelo grave EXPERIMENTAL, antes de homologação (23/11/2026)
+
+**Novo candidato D em C1–C3**, dentro do mesmo seletor Piano; C4–C6 intactos (45 cenários, **3.240.000 amostras estéreo bitwise iguais**), A/B/C intactos, default C intacto. A v1.12.6 agora tem **worklets e roteador de áudio congelados** para comparação verdadeira em `v1.12.6.html`. Modelagem: força de pressão comprimida no tempo e modos excitados ao longo do pulso, com resposta O(1) e tempo curto de radiação por nota, NÃO uma simulação validada de massa/força de martelo reais.
+
+**Iowa 15 originais hash-verificados**: melhora forma temporal grave (erro médio 0–12ms **3,58→2,96dB**), mas espectro em janela longa 3,23→4,30dB e cauda 9,38→10,49dB, ou seja resultado **misto**. Precisa de escuta do usuário para julgar o caráter de piano; não declarar homologação, mudança de default, nem R-GATE aprovado (**0/7**). Sem áudio original no pacote. Ver [documentação completa do experimento](EXPERIMENTO_D_MARTELO_V127_2026-11-23.md).
+
+---
+
 ## Preparação exclusiva dos graves para o próximo D (v1.12.7) — sem DSP novo (23/11/2026)
 
 **Nova escuta do titular:** o motor **D v1.12.6 melhorou no médio-agudo**, mas o **grave permanece parecido com violão**. O progresso de C4–C6 está protegido. A auditoria de código localizou três candidatos técnicos específicos: (1) pulso/contato de martelo usado só para pesos estáticos + ruído mecânico curto, (2) som de cordas misturado ao ressonador de corpo sem reação de ponte de volta aos modos, (3) envoltória/decaimento de parciais fixa e transição de população modal em MIDI 37 sem mapa de cordas reais validado. **Ainda não se comprovou qual falha domina a percepção.**
