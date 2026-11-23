@@ -20,3 +20,16 @@ O solver anterior `research/shared-passive-piano-bridge.mjs` provou por equaçõ
 4. Separar notas de calibração/validação, exigir mudança perceptiva útil versus piano real em C2/C3, manter C4–C6, e depois aferir 32/48/64 vozes no AudioWorklet real.
 
 **Decisão:** preparar infraestrutura física que responda ao pedal e acoplamento compartilhado; não anunciar nova versão sonora enquanto a escuta continuar sem melhoria.
+
+## Execução reproduzível — GitHub Actions 45192238684
+[Workflow de validação passiva](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45192238684) com **173/173 testes Node aprovados**, incluindo sete novos. A comparação de arquivos públicos por `git diff` passou: nenhum motor distribuído nem UI/FX/MIDI/presets/package foi alterado.
+
+Benchmark isolado Linux/Node após warmup, 128 amostras a 48 kHz, **88 teclas sempre ligadas à ponte**, independentemente de quantas estão acionadas:
+
+| Teclas acionadas | Mediana do bloco | p95 do bloco | Parcela do orçamento de 2,667ms (p95) |
+|---|---:|---:|---:|
+| 32 | 0,21704ms | 0,22583ms | 8,47% |
+| 48 | 0,21676ms | 0,22559ms | 8,46% |
+| 64 | 0,21570ms | 0,22775ms | 8,54% |
+
+Os números são apenas do núcleo passivo, **sem o D, sem o trabalho do navegador, sem FX, sem áudio real**. Não provaram capacidade de 64 vozes no dispositivo. Tampouco validam melhora perceptível ou licenciamento. A versão em produção continua D 1.12.8 experimental; a PR E2.0 permanece em avaliação.
