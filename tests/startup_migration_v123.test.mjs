@@ -6,6 +6,6 @@ test('HTML principal carrega arquivos da mesma versão',()=>{
  const html=read('../index.html');
  const imports=JSON.parse(html.match(/<script type="importmap">(.*?)<\/script>/s)[1]).imports;
  for(const path of ['./acoustic.js','./physical-piano.js','./piano-resonance.js','./patches.js'])
-  assert.equal(imports[path],path+'?build=1.12.8');
+  assert.equal(imports[path],path+'?build=1.12.9');
  assert.match(html,/app\.js\?build=1\.12\.8/);
 });

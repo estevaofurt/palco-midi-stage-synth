@@ -133,6 +133,7 @@ export class Panel {
       rememberPatch(this.state,id);
       const p=fromPreset(id,select.value), saved=this.state.edits[id][select.value];
       if(saved)p.values=structuredClone(saved);
+      if(id==='piano'&&patch.values.soundEngine==='sampled')p.values.soundEngine='sampled';
       p.level=patch.level;this.state.patches[id]=p;
       this.drawEditor(id);this.sync();this.actions.set(id);pane.querySelector('.tone-field select').focus({preventScroll:true});
     };
@@ -150,6 +151,7 @@ export class Panel {
     top.append(title,field,listen,restore);
     const groups=elem('div','groups');
     for(const g of def.groups){
+      if(id==='piano'&&g.controls.some(c=>c.type==='samplepack')&&patch.values.soundEngine!=='sampled')continue;
       const section=elem('div','ctrl-group'),choices=elem('div','choices'),dials=elem('div','dial-grid');
       section.append(elem('h3','',g.label));let n=0;
       const change=(name,value)=>{
@@ -159,11 +161,15 @@ export class Panel {
           rememberPatch(this.state,id);
           const fresh=presetForInstrument(id,value),next=fromPreset(id,fresh.id);
           if(this.state.edits[id][fresh.id])next.values=structuredClone(this.state.edits[id][fresh.id]);
+          if(id==='piano')next.values.soundEngine=patch.values.soundEngine;
           next.level=patch.level;this.state.patches[id]=next;
           this.drawEditor(id);this.sync();this.actions.set(id,name);
           return;
         }
         patch.values[name]=value;rememberPatch(this.state,id);
+        if(id==='piano'&&name==='soundEngine'){
+          this.drawEditor(id);this.sync();this.actions.set(id,name);return;
+        }
         restore.hidden=!this.state.edits[id][patch.preset];this.sync();this.actions.set(id,name);
       };
       for(const control of g.controls){
@@ -196,8 +202,8 @@ export class Panel {
           const remove=elem('button','editor-btn','Retirar amostras');remove.type='button';
           remove.disabled=count===0;remove.onclick=()=>this.actions.clearSamples(id,model);
           const hint=elem('p','sample-hint',count
-            ?`${count} amostras reais carregadas para ${instrumentName(id,patch.values)}. Permanecem apenas nesta sessão.`
-            :'Para timbres mais realistas, selecione gravações WAV com nomes C4_v40.wav, C4_v100.wav, MIDI64_v100.wav. Carregamento local, sem envio de dados.');
+            ?`${count} amostras carregadas para ${instrumentName(id,patch.values)}. Motor E pronto; somente nesta sessão.`
+            :'Carregue os WAVs das notas isoladas deste piano (MIDI60_v60.wav, MIDI60_v110.wav etc). Os arquivos ficam apenas nesta sessão, sem envio ao servidor.');
           picker.append(input,remove,hint);section.append(picker);
         }else if(control.type==='soundfont'){
           const upload=elem('div','sf-upload');
