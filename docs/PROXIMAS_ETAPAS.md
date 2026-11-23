@@ -1,3 +1,11 @@
+## Auditoria final de algoritmo do motor D antes de implementar a v1.12.7 (23/11/2026)
+
+A pesquisa focalizada acrescentou três rotas técnicas **que não dependem de reescrever tudo**: **(1)** martelo não linear com pulsos físicos computados apenas no ataque; **(2)** poucos modos longitudinais acoplados à corda transversal, especialmente abaixo de A3; **(3)** caudas prompt/aftersound e ponte passiva. **Primeiro corrigir normalização de pares de modos, PRNG ocioso, divisor econômico não aplicado e controles sem efeito**, verificando que cada mudança não causa regressão audível. O D permanece experimental e os médios/agudos da v1.12.6 são a referência fixa.
+
+Plano/estudos/limites e custo: [AUDITORIA_ALGORITMO_MOTOR_D_2026-11-23.md](AUDITORIA_ALGORITMO_MOTOR_D_2026-11-23.md). `scripts/benchmark_piano_d_cpu.mjs` mede 32/48/64 vozes em Node CI, **não em dispositivo real**. Não liberar DSP de v1.12.7 até comparar benchmarks, guardar baseline C4–C6 e validar o próximo experimento. **R-GATEs 0/7**.
+
+---
+
 ## Próximo foco único — corrigir o grave de piano em D v1.12.7 (preparação, 23/11/2026)
 
 Escuta do titular confirma **médio-agudo mais realista em D v1.12.6 e grave ainda parecido com violão**. Não reabrir pesquisas genéricas ou retocar equalizador global. **Não mudar DSP nesta fase**. Preparação concluível por [plano técnico fechado](PRONTIDAO_GRAVES_MOTOR_D_V127_2026-11-23.md), testes de energia do *impacto real* e decaimento por parcial na fonte Iowa 15/15. Os primeiros 12ms medem transiente, **não** análise espectral resolvida de C2; os antigos 341ms de FFT não devem ser descritos como força instantânea de martelo.
