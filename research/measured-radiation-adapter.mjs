@@ -11,7 +11,7 @@
  * alone is not an impulse response: phase, causality, windowing, alignment
  * and calibration must first be independently resolved offline.
  *
- * No allocations inside step() or render(); direct FIR O(taps)/sample,
+ * No allocations inside render() or renderBlock(); direct FIR O(taps)/sample,
  * practical only for SHORT validated filters, never assert full 64-note CPU.
  */
 import {HammerDrivenPassivePiano} from './hammer-driven-passive-piano.mjs';
@@ -68,7 +68,7 @@ export class MeasuredRadiationAdapter {
   }
   this.cursor=(at+1)%this.length;
   this.samples++;
-  return {left:l,right:r};
+  return {left:l,right:r}; // offline-only convenience allocation
  }
  /**
   * Allocate-free caller API for production-style sample loops. The object
@@ -128,8 +128,3 @@ export class CalibratedPassivePianoResearchChain {
  }
  reset(){this.mechanics.reset();this.radiation.reset();}
 }
-MeasuredRadiationAdapter.prototype.renderBlock=function(velocities,left,right,n){
- if(!Number.isInteger(n)||n<0||n>velocities.length||n>left.length||n>right.length)
-  throw new RangeError('invalid block');
- for(let i=0;i<n;i++)this._sample(velocities[i],left,right,i);
-};
