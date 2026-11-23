@@ -249,8 +249,8 @@ export class HybridPianoEngine {
       const x=(dryL+this.body.wetL*.48)*this.mixGain;
       const y=(dryR+this.body.wetR*.48)*this.mixGain;
       // Gentle safety curve, not a loudness-maximizing hard limiter.
-      L[i]=x/(1+.28*Math.abs(x));
-      if(stereo)R[i]=y/(1+.28*Math.abs(y));
+      L[i]=.96*Math.tanh(x/.96);
+      if(stereo)R[i]=.96*Math.tanh(y/.96);
       if(S)S[i]*=this.mixGain*.30;
     }
   }
