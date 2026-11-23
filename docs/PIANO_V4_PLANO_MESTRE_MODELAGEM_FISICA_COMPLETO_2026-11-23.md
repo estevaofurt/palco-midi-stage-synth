@@ -84,7 +84,7 @@ flowchart TD
 **PDE escalar inicial de corda tensa rígida:** `mu*u_tt = T*u_xx - EI*u_xxxx - D(u_t) + f_h(x,t)`, com condições de suporte adequadas; `mu = rho*pi*r²`, `EI = E*pi*r⁴/4` para fio circular homogêneo. Para cordas revestidas, massa linear, rigidez e dissipação dependem de núcleo/enrolamento e **não** devem ser calculadas como se o bordão fosse fio maciço.
 **Inarmonicidade ideal com apoios articulados:** `f_n = (n/(2L))*sqrt(T/mu)*sqrt(1 + B*n²)`, `B=pi² EI/(T L²)`; usar apenas como cheque do banco simples, NÃO impor mesma fórmula quando a ponte se move ou a geometria é variável.
 
-**Discretização de referência:** escolher explicitamente FE 1D com continuidade suficiente para a energia de flexão (ex.: Hermite para termo EI) **ou** diferenças finitas passivas adequadas. Matriz física `M_s,C_s,K_s` simétrica onde pertinente, `M_s>0`, `K_s>=0`, `C_s>=0`, contatos e restrições introduzidos por forças generalizadas de trabalho recíproco. Não escolher número fixo de modos sem avaliar espectro e convergência da força de martelo.
+**DECISÃO NUMÉRICA FIXADA — referência primária:** elementos finitos unidimensionais **Hermite cúbicos (C¹)** para os deslocamentos transversais de corda rígida, com massa consistente, energia de tensão e flexão, forças de contato projetadas por funções de forma; as **condições móveis de apoio entram como graus de liberdade e restrições compartilhadas**, não como sinal de excitação pós-processado. Uma implementação independente por diferenças finitas de energia servirá **apenas para contraprova de convergência**, não como segunda teoria sonora. Matriz física `M_s,C_s,K_s` simétrica onde pertinente, `M_s>0`, `K_s>=0`, `C_s>=0`, contatos e restrições introduzidos por forças generalizadas de trabalho recíproco. Não escolher número fixo de modos sem avaliar espectro e convergência da força de martelo.
 
 **Tipos por registro:** grupos de 1/2/3 cordas conforme **escala do piano-alvo**; cordas gravíssimas com enrolamento; distribuição de perdas/polarização e localização física. Martelo de uma nota normalmente encontra simultaneamente várias cordas da mesma nota: forças por contato individual, compartilhamento do estado de ação e massa de martelo, diferenças reais de alinhamento.
 
@@ -106,7 +106,7 @@ flowchart TD
 
 ### 3.4 Tampo harmônico e madeira
 
-**Estrutura:** placa elástica aproximadamente ortotrópica, nervuras, pontes, espessura variável, crown/downbearing, fixação ao aro, massas e perdas. FE de referência com malha e materiais físicos, matriz `M_p,K_p,C_p`; efeito de montagem representado em condições de contorno. Um modelo de placa simples é permitido **como bancada experimental claramente incompleta**, mas a nota aprovada deve passar por uma representação com justificativa espacial e modal.
+**DECISÃO NUMÉRICA FIXADA — tampo de referência:** elementos finitos de **placa/casca ortotrópica** com geometria física da madeira, nervuras, pontes, espessura variável, crown/downbearing, fixação ao aro, massas e perdas. O refinamento de malha e o tipo de elemento de placa/casca serão testados por convergência; um modelo modal reduzido será derivado das matrizes desse FE, **jamais de uma lista arbitrária de frequências**. Matrizes `M_p,K_p,C_p`; efeito de montagem representado em condições de contorno. Um modelo de placa simples é permitido **como bancada experimental claramente incompleta**, mas a nota aprovada deve passar por uma representação com justificativa espacial e modal.
 
 **Identificação:** ajustar geometria e parâmetros materiais usando medidas conhecidas; a parte dinâmica pode depois ser reduzida por autovetores/valores da matriz FE; cada modo deve carregar forma espacial e massa generalizada, nunca uma frequência livremente escolhida para moldar o espectro. As primeiras evidências são mobilidade de ponte e mapas de vibração em vários pontos.
 
@@ -174,12 +174,13 @@ Identidade do piano-alvo; número de cordas C4; comprimentos/raios/tensão/posi�
 ### 5.1 Formulação geral de acoplamento
 Equações discretizadas em forma de energia para graus de liberdade da estrutura, em uma aproximação linear por trecho:
 ```text
- M q_ddot + C q_dot + K q = F_contact(q, q_dot, z) + J^T lambda + F_ext
- C(q, q_dot, z) governam perdas materiais; lambda impõe restrições conjuntas.
+ M q_ddot + D q_dot + K q = F_contact(q, q_dot, z) + G^T lambda + F_ext
+ g(q) = 0                   (interface corda/ponte/tampo; idealmente G q = 0)
+ M = M^T > 0, K = K^T >= 0, D = D^T >= 0  (onde aplicável)
  H = 1/2 q_dot^T M q_dot + 1/2 q^T K q + U_felt + H_internal
- Delta(H) + D_material + W_radiation = W_external   (acoplamento completo)
+ Delta(H) + Dissipacao_material + Trabalho_radiado = Trabalho_externo
 ```
-**Nota de notação:** o `C` da matriz amortecedora e o operador de restrição serão tratados com símbolos diferentes no código final; a apresentação acima é um esquema, não contrato de API. **Ao usar radiação unilateral, não subtrair W_radiation sem modelar reação radiativa.**
+O estado interno viscoelástico `z` deve possuir **potencial armazenado e/ou dissipação definida**; a força de contato não deve fazer trabalho positivo sem energia de origem. Os multiplicadores `lambda` impõem as restrições de interface, com trabalho ideal nulo; eventuais juntas dissipativas devem contabilizar perdas próprias. A equação acima é **esquemática**, não uma implementação pronta: geometria não linear, deformações axiais e radiação acústica podem exigir termos extras. **Se a radiação for unilateral, não subtrair trabalho radiado do balanço mecânico sem incluir a carga acústica de reação.**
 
 ### 5.2 Escolha de integrador
 - Preferir midpoint implícito, variantes discrete-gradient/energy quadratization ou métodos passivos com prova/ensaio de balanceamento para contato não linear e mecanismos dissipativos; estabilidade com rigidez elevada e múltiplos contatos.
@@ -220,7 +221,7 @@ Canais sincronizados do motor: evento da tecla, velocidade do martelo, força/pr
 
 | Etapa | Entregável técnico verificável | Gate obrigatório | Situação atual |
 |---|---|---|---|
-| **F0 — especificação** | Este plano mestre, caderno científico, matriz K01–K18, limites, decisões e testes | Revisão e congelamento da arquitetura; nada de áudio novo | **Documento em elaboração/concluído nesta tarefa; código não iniciado** |
+| **F0 — especificação** | Este plano mestre, caderno científico, matriz K01–K18, limites, decisões e testes | Documento finalizado e decisões de método explícitas; nada de áudio novo | **Plano documentado; nenhum componente novo implementado** |
 | **F1 — dados/proveniência** | Ficha do piano-alvo, escala C4, pacote de medições disponíveis e placeholders marcados | Cada parâmetro medido/literatura/hipótese, licença e unidade | **Pendente** |
 | **F2 — infraestrutura numérica** | Tipos de grandezas, matrizes físicas, integradores, energia e banco de testes isolados | Massa/rigidez válidas, conservação, convergência, ausência de fonte escondida | **Pendente; V4.0 atual é bancada anterior, não engine** |
 | **F3 — corda rígida verificável** | FE/FDTD C4 com rigidez, perdas físicas, força/posição de golpe | f_n/B, inarmonicidade, perdas, ensaio de resolução, zero input | **Pendente reestruturação** |
