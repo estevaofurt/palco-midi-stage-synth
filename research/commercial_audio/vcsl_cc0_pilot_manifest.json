@@ -16,11 +16,12 @@
     "Knight upright sampled in whole steps; C#2/C#4/C#6 are original pitched files, not transposed C2/C4/C6.",
     "vl1/vl2/vl3 are layer labels and not measured hammer speed.",
     "Do not upload, bundle, redistribute or publish original audio in the Stage Synth repository by this workflow.",
-    "Instrument brand/model identification is for internal reference; no brand endorsement."
+    "Instrument brand/model identification is for internal reference; no brand endorsement.",
+    "No MIDI velocity numerical value is implied by source labels vl1/vl2/vl3; earlier internal pilot IDs that said 'mf' were corrected to 'vl3'."
   ],
   "items": [
     {
-      "id": "vcsl-steinway-b-c2-mf-nosus",
+      "id": "vcsl-steinway-b-c2-vl3-nosus",
       "path": "Chordophones/Zithers/Grand Piano, Steinway B/NoSus/JHPiano_NoSus_Close_C2_vl3_rr1.wav",
       "bytes": 8402212,
       "gitBlobSha": "16f98223b4fd59606d8cc712b0238f922a88ae8a",
@@ -34,7 +35,7 @@
       "downloadStatus": "metadata-located-not-yet-downloaded-at-commit-time"
     },
     {
-      "id": "vcsl-steinway-b-c4-mf-nosus",
+      "id": "vcsl-steinway-b-c4-vl3-nosus",
       "path": "Chordophones/Zithers/Grand Piano, Steinway B/NoSus/JHPiano_NoSus_Close_C4_vl3_rr1.wav",
       "bytes": 4808380,
       "gitBlobSha": "6042681e62e98fe2c0af4a491151d05ddf584669",
@@ -48,7 +49,7 @@
       "downloadStatus": "metadata-located-not-yet-downloaded-at-commit-time"
     },
     {
-      "id": "vcsl-steinway-b-c6-mf-nosus",
+      "id": "vcsl-steinway-b-c6-vl3-nosus",
       "path": "Chordophones/Zithers/Grand Piano, Steinway B/NoSus/JHPiano_NoSus_Close_C6_vl3_rr1.wav",
       "bytes": 2307556,
       "gitBlobSha": "f0e2c1298e9c52bbb965f57ad46347e7ca8bc947",
@@ -62,7 +63,7 @@
       "downloadStatus": "metadata-located-not-yet-downloaded-at-commit-time"
     },
     {
-      "id": "vcsl-steinway-b-c4-mf-sus",
+      "id": "vcsl-steinway-b-c4-vl3-sus",
       "path": "Chordophones/Zithers/Grand Piano, Steinway B/Sus/JHPiano_Sus_Close_C4_vl3_rr1.wav",
       "bytes": 8362948,
       "gitBlobSha": "8a98b9adf092d11585c401889f4cc58c773e798b",
