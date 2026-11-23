@@ -19,16 +19,19 @@ const TWOPI=2*Math.PI;
 const midiHz=k=>440*2**((k-69)/12);
 export class SharedPassiveModalPiano {
  constructor({sampleRate=48000,coupling=.12,partialsBass=5,partialsTreble=2,
-              releaseDamping=110,inharmonicity=.00010,maxContactMs=12}={}){
+              releaseDamping=110,inharmonicity=.00010,maxContactMs=12,
+              externalForceMode=false}={}){
   if(!Number.isFinite(sampleRate)||sampleRate<22050||sampleRate>192000||
      !Number.isFinite(coupling)||coupling<0||coupling>1||
      !Number.isInteger(partialsBass)||partialsBass<1||partialsBass>8||
      !Number.isInteger(partialsTreble)||partialsTreble<1||partialsTreble>8||
      !Number.isFinite(releaseDamping)||releaseDamping<0||releaseDamping>400||
      !Number.isFinite(inharmonicity)||inharmonicity<0||inharmonicity>.003||
-     !Number.isFinite(maxContactMs)||maxContactMs<=0||maxContactMs>25)
+     !Number.isFinite(maxContactMs)||maxContactMs<=0||maxContactMs>25||
+     typeof externalForceMode!=='boolean')
    throw new RangeError('invalid passive modal configuration');
   this.sampleRate=sampleRate;this.dt=1/sampleRate;
+  this.externalForceMode=externalForceMode;
   this.keyStart=new Uint16Array(89);
   const keyOf=[],partialOf=[],polarOf=[],frequency=[];
   for(let key=21;key<=108;key++){
@@ -123,6 +126,8 @@ export class SharedPassiveModalPiano {
      !Number.isFinite(peakForce)||peakForce<0||peakForce>1e5||
      !Number.isFinite(contactMs)||contactMs<=0)
    throw new RangeError('invalid strike');
+  if(this.externalForceMode)
+   throw new RangeError('use external modal forces and explicit damper control');
   const duration=Math.max(2,Math.round(contactMs*this.sampleRate/1000));
   if(duration>this.maxContactSamples)throw new RangeError('contact too long');
   const k=key-21;
@@ -145,7 +150,7 @@ export class SharedPassiveModalPiano {
   // Apply the same hammer pulse to the physical partial degrees of freedom,
   // with position-dependent force projections. No post-synthesis harmonic sum.
   const force=this.forces;
-  for(let k=0;k<88;k++){
+  if(!this.externalForceMode)for(let k=0;k<88;k++){
    let f=0;
    if(this.remaining[k]>0){
     const phase=(this.progress[k]+.5)/this.duration[k];
