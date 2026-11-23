@@ -1,3 +1,23 @@
+# Preparação autoral Felt concluída para 15 WAVs; física comercial ainda pendente (23/11/2026)
+
+**Fontes e protocolo:** [PREPARACAO_FELT_ORIGINAL_COMERCIAL_2026-11-23.md](PREPARACAO_FELT_ORIGINAL_COMERCIAL_2026-11-23.md) · [PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md](PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md).
+
+- [x] Confirmar declaração original **Public Domain** de Tom Guder para Fuchs & Möhr Felt (WAV estéreo 16bit, três camadas), diferenciando-a de arquivos de espelhos.
+- [x] Acessar o ZIP original por HTTP Range sem transferir o pacote inteiro (**648.995.046 bytes**).
+- [x] Indexar **264 WAVs no ZIP original = 88 notas × 3 layers**; auditar os nomes f21–f108, m21–m108, p21–p108.
+- [x] Verificar **15 WAVs originais** MIDI nominais 36/48/60/72/84, camadas piano/mezzo/forte, **CRC32, PCM 48 kHz/16bit estéreo, SHA256** e integridade; **36/36 testes** em https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45105332553 .
+- [x] Preservar 15 hashes SHA256 apenas como metadados; nenhum WAV/ZIP enviado ao repositório, app ou artifact.
+- [x] Formalizar **M01–M08 ensaios físicos** com medições de martelo, corda H/V, uníssonos, ponte mobilidade complexa, radiador, pedal e Felt A/B com direitos comerciais.
+- [ ] Confirmar juridicamente a cadeia de direitos da declaração PD e condições de comercialização com créditos apropriados, além dos CC BY/CC0.
+- [ ] Obter **mesmo piano com e sem feltro** com mic/dinâmica/afinação controladas; as 15 gravações originais não isolam a física do feltro.
+- [ ] Obter/parar de procurar e contratar medições autorizadas **F_h(t), δ(t), corda H/V e Y_ponte(f)=v/F complexa** em instrumentos-alvo, com incerteza e procedência.
+- [ ] Verificar direitos do arquivo \`tests/fixture_minimal.sf2\`, licença de distribuição do código Stage e notices de terceiros antes de comercializar.
+- [ ] Completar os **sete R-GATEs** e só então solicitar liberação de implementação; permanecem **0/7 integralmente aprovados**.
+
+**Total de fontes sonoras de referência verificadas:** 50 originais de seis instrumentos reais, sem alteração em DSP, MIDI, UI, FX, presets ou P1/P2.
+
+---
+
 # Continuidade da preparação comercial Steinway D / Felt (22/11/2026)
 
 Documento: [PRINCETON_STEINWAY_D_FELT_FONTES_COMERCIAIS_2026-11-22.md](PRINCETON_STEINWAY_D_FELT_FONTES_COMERCIAIS_2026-11-22.md).
