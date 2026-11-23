@@ -7,11 +7,14 @@ on:
       - 'research/damper-aware-shared-bridge.mjs'
       - 'research/hammer-driven-passive-piano.mjs'
       - 'research/measured-radiation-adapter.mjs'
+      - 'research/shared-passive-modal-piano.mjs'
       - 'tests/damper_aware_shared_bridge.test.mjs'
       - 'tests/hammer_driven_passive_piano.test.mjs'
       - 'tests/measured_radiation_adapter.test.mjs'
+      - 'tests/shared_passive_modal_piano.test.mjs'
       - 'scripts/benchmark_damper_aware_shared_bridge.mjs'
       - 'scripts/benchmark_hammer_driven_passive_piano.mjs'
+      - 'scripts/benchmark_shared_passive_modal_piano.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
 jobs:
@@ -31,6 +34,8 @@ jobs:
         run: node scripts/benchmark_damper_aware_shared_bridge.mjs | tee bridge-benchmark.json
       - name: Node benchmark E2.1 with actual hammer force schedules
         run: node scripts/benchmark_hammer_driven_passive_piano.mjs | tee hammer-benchmark.json
+      - name: Node benchmark E2.3 shared multi-partial bank
+        run: node scripts/benchmark_shared_passive_modal_piano.mjs | tee modal-benchmark.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -41,4 +46,5 @@ jobs:
           path: |
             bridge-benchmark.json
             hammer-benchmark.json
+            modal-benchmark.json
           retention-days: 30
