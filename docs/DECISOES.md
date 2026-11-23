@@ -156,3 +156,12 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Restrições imediatas:** congelar novos motores P2, alterações de timbre e promoção de P1 (PR #2). **Permitir somente pesquisa, verificação de direitos/acesso, documentação, contatos a autores com autorização e preparação de conjuntos de referência e planos de testes**; não declarar GATE concluído sem demonstrar evidência original. Manter A/B/C e B v1.9.5 intactos e metas 32–64 notas.
 
 **Liberação:** somente revisão explícita dos 7 R-GATEs, fonte e documentação atualizadas e aprovação da etapa de implementação após os requisitos estarem verificados.
+
+## D-023 — Stage Synth é software destinado à comercialização (22/11/2026)
+
+**Decisão expressa do usuário:** objetivo comercial do Stage Synth. Pesquisas, desenvolvimento, calibração, dados, recursos de áudio, código adaptado e eventual distribuição **devem respeitar licenças compatíveis com utilização comercial**. A prioridade científica de um dataset **não substitui** autorização legal para seu uso no produto.
+
+**Reclassificação obrigatória:** **BiVib CC BY-NC-SA, RWC CC BY-NC, MAPS NC, MAESTRO CC BY-NC-SA** ficam fora do pipeline comercial de calibração/treinamento/teste sobre os arquivos até obter permissão específica. Referências científicas podem continuar sendo **lidas** para aprender métodos, sem usar arquivos restritos. Priorizar VCSL/CC0, Salamander Yamaha C5/CC BY 3.0, bitKlavier Steinway D/CC BY 4.0, Kawai KW/CC0, Fuchs & Möhr Felt com declaração PD do autor, Iowa Model B com permissão expressa sem restrição de projeto e **gravações/medições próprias com autorização para uso comercial**. Todos ainda requerem manifesto de origem, licença, hash, qualidade e condições experimentais; nenhum é automaticamente considerado pronto.
+
+**Status de distribuição:** não foi encontrado LICENSE na raiz do repo; o dono deve decidir a licença do próprio código, conferir dependências e atribuições, bem como marcas/modelos comerciais sem alegar endosso. O projeto pode ser comercial e usar bibliotecas com atribuição, mas EULAs e direitos de terceiros devem ser revisados. **NÃO mexer no motor; congelamento de P1/P2 segue em vigor.** Documento: docs/POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md.
+
