@@ -15,6 +15,7 @@ on:
       - 'scripts/benchmark_damper_aware_shared_bridge.mjs'
       - 'scripts/benchmark_hammer_driven_passive_piano.mjs'
       - 'scripts/benchmark_shared_passive_modal_piano.mjs'
+      - 'scripts/compare_passive_modal_profiles.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
 jobs:
@@ -36,6 +37,8 @@ jobs:
         run: node scripts/benchmark_hammer_driven_passive_piano.mjs | tee hammer-benchmark.json
       - name: Node benchmark E2.3 shared multi-partial bank
         run: node scripts/benchmark_shared_passive_modal_piano.mjs | tee modal-benchmark.json
+      - name: Compare sparse/full modal bank CPU and mechanical proxy
+        run: node scripts/compare_passive_modal_profiles.mjs | tee modal-tradeoff.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -47,4 +50,5 @@ jobs:
             bridge-benchmark.json
             hammer-benchmark.json
             modal-benchmark.json
+            modal-tradeoff.json
           retention-days: 30
