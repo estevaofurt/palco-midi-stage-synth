@@ -29,5 +29,7 @@ test('E0 reports relative spectral differences and excludes a weak partial',()=>
  const reference={harmonics:[{n:1,relativeDb:0},{n:2,relativeDb:-6},{n:3,relativeDb:-10},{n:4,relativeDb:-17}]};
  const c=compareSpectralShape(measured,reference);
  assert.equal(c.comparablePartials,2);
- assert.ok(Math.abs(c.meanAbsDb-3)<1e-9);
+ assert.equal(c.meanAbsDb,null,'two partials are insufficient to rank a spectrum');
+ assert.equal(c.insufficientPartials,true);
+ assert.ok(Math.abs(c.exploratoryMeanAbsDb-3)<1e-9);
 });
