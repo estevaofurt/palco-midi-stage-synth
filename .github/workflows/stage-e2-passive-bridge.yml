@@ -54,6 +54,7 @@ on:
       - 'scripts/benchmark_distributed_board_e33.mjs'
       - 'scripts/render_reactive_spatial_e33.mjs'
       - 'scripts/render_percussive_felt_e34.mjs'
+      - 'scripts/render_e34_scales_chords.mjs'
       - 'scripts/render_reactive_felt_e32.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
@@ -104,6 +105,18 @@ jobs:
         run: node scripts/render_reactive_spatial_e33.mjs | tee e33-spatial-audio-summary.json
       - name: E3.4 render 8/16-plate physical hard felt A/B WAVs
         run: node scripts/render_percussive_felt_e34.mjs | tee e34-percussive-render-summary.json
+      - name: Render E3.4 physical scales, arpeggios, chords WAVs
+        run: node scripts/render_e34_scales_chords.mjs | tee stage-e34-performance-summary.json
+      - name: Upload E3.4 scales and chords WAVs
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-e34-escalas-acordes-fisica-pura
+          path: |
+            Stage_Synth_E34_Escalas_Arpejos_Acordes_Fisica_Pura.wav
+            Stage_Synth_E34_Escalas_Fisica_Pura.wav
+            Stage_Synth_E34_Acordes_Fisica_Pura.wav
+            stage-e34-scales-chords-report.json
+          retention-days: 30
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
