@@ -1,3 +1,11 @@
+## Verificação auditiva de v1.12.6 D depois de ajuste com 15 originais (23/11/2026)
+
+**Não abrir nova pesquisa bibliográfica.** A v1.12.6 corrigiu a distribuição espectral por modo/nota/velocidade que havia mostrado erro grave no D v1.12.5. Agora verificar (1) **escuta real** do American Grand D, com FX desligados em C2/C3/C4/C5/C6 e pianíssimo/forte, comparando A/B/C; (2) estrutura do ataque de martelo, ausência de corda dedilhada e decaimento duplo, sem avaliar realismo por FFT somente; (3) PC e Moto g04s, sustain, alternância de motor, CPU/callback/estalos 32–64 notas; (4) **instrumentos Yamaha/felt/upright** são extrapolações, não Steinway B calibrados; usar fontes próprias antes de mais timbre; (5) fechar R-GATEs por seus critérios comerciais originais, preservando 0/7 até prova explícita.
+
+**Evidência candidata:** [15 AIFF, relatório causal](DIAGNOSTICO_TIMBRE_D_IOWA_15_2026-11-23.md), [motor D](MOTOR_D_HIBRIDO_EXPERIMENTAL_2026-11-23.md) e GitHub Actions [45116191342](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45116191342). Não reproduzir nenhuma amostra externa no produto sem resolver os direitos aplicáveis.
+
+---
+
 # Motor D — ações depois da integração experimental (23/11/2026)
 
 1. **Prioridade imediata:** testar D em navegador real em PC e Moto g04s: inicialização do AudioWorklet, troca A/B/C/D, MIDI, sustain, sem estalos, uso de CPU e 32/64 notas simultâneas. Testes Node/callback simulado **não são homologação**.
