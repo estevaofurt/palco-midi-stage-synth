@@ -1,3 +1,9 @@
+## Pesquisa P0 — baseline acústica A/B/C (branch experimental, 22/11/2026)
+
+Na branch research/piano-acoustic-metrics-v124, derivada do main bcfb40a8, foram adicionados analisador FFT/inharmonicidade/decaimento, testes unitários, diagnóstico reproduzível de 108 casos A/B/C e workflow CI; consultar docs/BASELINE_ACUSTICA_V124.md. **Não há alteração de DSP, interface, presets nem publicação do aplicativo.** Os 5 testes locais isolados do analisador passaram; a suíte integrada, artefato de diagnóstico e teste em hardware dependem de conferência do workflow. A v1.9.5 permanece a referência relatada sem estalos; não promover a branch automaticamente.
+
+---
+
 # Atualização do aplicativo principal — Stage Synth v1.12.4 (22/11/2026)
 
 **Confirmado no código publicado:** o módulo Piano Acústico possui três implementações selecionáveis em **Motor do piano**, sem módulos ou links extras.
