@@ -93,6 +93,15 @@ export class MeasuredRadiationAdapter {
   this.samples++;
   outL[i]=l;outR[i]=r;
  }
+ renderBlock(velocities,left,right,n){
+  if(!(velocities instanceof Float32Array||velocities instanceof Float64Array)||
+     !(left instanceof Float32Array||left instanceof Float64Array)||
+     !(right instanceof Float32Array||right instanceof Float64Array)||
+     left===right||left===velocities||right===velocities||
+     !Number.isInteger(n)||n<0||n>velocities.length||n>left.length||n>right.length)
+   throw new RangeError('invalid radiation block buffers');
+  for(let i=0;i<n;i++)this._sample(velocities[i],left,right,i);
+ }
  render(velocities,left,right){
   if(!(velocities instanceof Float32Array||velocities instanceof Float64Array)||
      !(left instanceof Float32Array||left instanceof Float64Array)||
