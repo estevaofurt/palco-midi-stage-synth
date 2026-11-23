@@ -4,7 +4,7 @@ import {readFileSync, readdirSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {dirname,resolve} from 'node:path';
 const dir=resolve(dirname(fileURLToPath(import.meta.url)),'..');
-for(const [file,version] of [['index.html','1.12.5'],['v1.12.5.html','1.12.5'],['v1.12.4.html','1.12.4'],['v1.8.4.html','1.8.4'],['v1.8.3.html','1.8.3'],['v1.8.2.html','1.8.2']]) {
+for(const [file,version] of [['index.html','1.12.6'],['v1.12.6.html','1.12.6'],['v1.12.5.html','1.12.5'],['v1.12.4.html','1.12.4'],['v1.8.4.html','1.8.4'],['v1.8.3.html','1.8.3'],['v1.8.2.html','1.8.2']]) {
   test(`${file} identifica e carrega v${version}`,()=>{
     const html=readFileSync(resolve(dir,file),'utf8');
     assert.ok(html.includes(`Stage Synth · Palco MIDI v${version}`));
@@ -15,7 +15,7 @@ for(const [file,version] of [['index.html','1.12.5'],['v1.12.5.html','1.12.5'],[
     for(const [path,url] of Object.entries(map.imports)){
       assert.equal(url,`${path}?build=${version}`);
     }
-    if(version==='1.12.5'){
+    if(version==='1.12.6'){
       for(const path of readdirSync(dir).filter(x=>x.endsWith('.js')&&x!=='app.js'))
         assert.equal(map.imports[`./${path}`],`./${path}?build=${version}`);
     }
