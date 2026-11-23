@@ -1,3 +1,19 @@
+## Referências sonoras verificadas para os quatro pianos (22/11/2026)
+
+Catálogo detalhado em [REFERENCIAS_SONORAS_YAMAHA_STEINWAY_FELT_UPRIGHT_2026-11-22.md](REFERENCIAS_SONORAS_YAMAHA_STEINWAY_FELT_UPRIGHT_2026-11-22.md).
+
+- Yamaha: Salamander Grand Piano **Yamaha C5 real**, 16 intensidades CC BY 3.0; **CFX** GSi Venice Grand apenas para referência perceptiva até conseguir arquivos brutos licenciados.
+- Steinway: Universidade de Iowa **Model B**, notas AIFF individuais pp/mf/ff e site de permissão sem licença SPDX; Ivy Piano in 162 com 5 camadas, 2 posições e pedal up/down, uso de amostras limitado aos termos da biblioteca.
+- Felt: Fuchs & Möhr felt upright de Tom Guder, 3 camadas WAV estéreo, declarado domínio público pelo autor.
+- Upright: FreePats Kawai KW, 2 intensidades, CC0 1.0; graves editados com loop, **não adequados para T60 real**.
+- [ ] Adquirir e verificar localmente pequenos subconjuntos de notas, medir metadados e licenças. NENHUM arquivo de som foi incluído no GitHub.
+- [ ] Alinhar C2/C4/C6 e intensidades reais dos bancos, sem atribuir velocities MIDI fictícias a pp/mf/ff. Medir canais, ataque, parciais, B e decaimentos, verificando reverb e loops.
+- [ ] Comparar A/B/C com áudio nivelado e laboratório de CPU antes de qualquer modificação de timbre.
+
+**Nenhum DSP, interface, módulo, preset, áudio de terceiros ou conteúdo privado do usuário foi alterado/publicado nesta pesquisa.**
+
+---
+
 ## Pesquisa aprofundada de física de piano (22/11/2026)
 
 Estudo científico/arquitetural de martelo, cordas rígidas e acopladas, ponte/tampo, radiador e amortecedores: docs/FUNDAMENTOS_MODELAGEM_FISICA_PIANO_2026-11-22.md. **Sem alterações do DSP ou do aplicativo.** O experimento P1 de duas seções allpass continua isolado no PR #2 e não é versão integrada. A próxima implementação exige calibração com notas secas licenciadas e comparação auditiva, preservando v1.9.5/32–64 notas.
