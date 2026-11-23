@@ -73,3 +73,7 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Implementação v1.12.4:** A = modal derivado da linha Claude, B = código original da v1.9.5 (processador independente), C = Stage atual com mecânica integrada. O modo Clássico permanece. B NÃO é o Novo Stage v1.11.0 originalmente desenvolvido noutra conversa, cujo código não está disponível; esse item ainda requer localização/importação da fonte exata. Presets `physical` existentes continuam C.
 
 **Critérios de aceite:** motores DSP diferentes, teste de seleção/persistência, regressão 32/64 nos físicos B/C, nenhum novo módulo; validar AudioWorklet no hardware do usuário. Teste acústico ainda não significa equivalência a piano real.
+
+## D-013 — Medir a inarmonicidade e o decaimento antes de alterar o DSP (22/11/2026)
+
+**Decisão:** começar a evolução acústica com uma suíte offline, reprodutível, sem tocar nos motores A/B/C. Medir C2/C4/C6, velocities 32/80/120 e quatro pianos; registrar picos, espectro, desvios, B aproximado e decaimento. O histórico B v1.9.5 não é alterado. **Limitação:** números de FFT não atestam timbre realista ou 32/64 vozes em hardware. Só comparar/potencialmente promover uma mudança de DSP depois de CI, testes de áudio em navegador e escuta real. Evidência: branch research/piano-acoustic-metrics-v124 e docs/BASELINE_ACUSTICA_V124.md.
