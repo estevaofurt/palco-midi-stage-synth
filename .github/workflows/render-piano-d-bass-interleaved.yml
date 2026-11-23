@@ -1,0 +1,70 @@
+name: Stage Synth — real D bass WAV note-by-note A/B
+on:
+  pull_request:
+    paths:
+      - 'scripts/assemble_stage_d_bass_interleaved.mjs'
+      - '.github/workflows/render-piano-d-bass-interleaved.yml'
+      - 'docs/DIAGNOSTICO_D_GRAVES_AB_INTERCALADO_2026-11-23.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  actual-stage-ab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Freeze all public Stage DSP, UI, MIDI, FX, presets and releases
+        run: |
+          git diff --exit-code b8826506d8f87bfa674990bc77ed1dbdcd99d79a -- \
+            physical-piano-hybrid.js physical-piano-hybrid-v126.js \
+            physical-piano.js physical-piano-legacy.js piano-worklet.js \
+            piano-resonance.js piano-hybrid-calibration.js \
+            acoustic.js acoustic-v126.js index.html v1.12.6.html v1.12.7.html \
+            app.js stage.js panel.js fx-rack.js patches.js package.json
+      - name: Validate original Stage and A/B assembly syntax
+        run: |
+          npm run check
+          node --check scripts/render_piano_d_ab_wav.mjs
+          node --check scripts/assemble_stage_d_bass_interleaved.mjs
+      - name: Render both actual Stage DSP versions with common audio gain
+        run: node scripts/render_piano_d_ab_wav.mjs artifacts/stage-d-comparacao-ab
+      - name: Interleave authentic A/B recordings without EQ, reverb or new DSP
+        run: |
+          node scripts/assemble_stage_d_bass_interleaved.mjs \
+            artifacts/stage-d-comparacao-ab artifacts/stage-d-bass-interleaved
+      - name: Independently validate all PCM24 WAV properties and identical note events
+        run: |
+          python3 - <<'PY'
+          import pathlib,wave,json,hashlib
+          root=pathlib.Path('artifacts/stage-d-bass-interleaved')
+          meta=json.loads((root/'stage-d-bass-interleaved-report.json').read_text())
+          files=list(root.glob('*.wav'))
+          assert len(files)==1,files
+          with wave.open(str(files[0]),'rb') as w:
+              assert w.getnchannels()==2 and w.getframerate()==48000 and w.getsampwidth()==3
+              assert abs(w.getnframes()/48000-meta['durationSeconds'])<0.001
+              assert 42<w.getnframes()/48000<44
+          assert meta['sameOutputGain'] is True
+          assert meta['sourceVersionsUnchanged'] is True
+          assert meta['noExternalSamples'] is True
+          assert len(meta['program'])==9 and len(meta['relativeEnergyDb'])==9
+          c2=next(x for x in meta['relativeEnergyDb'] if x['note']=='C2' and x['dynamic']=='mf')
+          assert -10 < c2['deltaD122_first12ms'] < -1,c2
+          print('STAGE TRUE-ENGINE INTERLEAVED A/B VERIFIED',files[0].name,
+                'size',files[0].stat().st_size,'sha256',hashlib.sha256(files[0].read_bytes()).hexdigest())
+          print('C2 MIDDLE first 12 ms version difference',c2['deltaD122_first12ms'],'dB (NOT realism)')
+          PY
+      - name: Upload reproducible Stage comparison WAV and numeric analysis ONLY
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-synth-d-v126-v127-bass-interleaved-wav
+          path: artifacts/stage-d-bass-interleaved/
+          retention-days: 7
+          compression-level: 5
+          if-no-files-found: error
