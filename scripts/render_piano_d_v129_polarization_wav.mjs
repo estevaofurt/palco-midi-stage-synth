@@ -1,5 +1,5 @@
 /**
- * Original Stage D v1.12.7 vs. isolated D bass-unison v1.12.8 candidate.
+ * Original Stage D v1.12.8 vs. isolated D bass-polarization v1.12.9 candidate.
  * The PCM is rendered by THE PROJECT'S ENGINES (no sampled pianos).
  *
  * node scripts/render_piano_d_v129_polarization_wav.mjs <output-dir>
@@ -126,10 +126,10 @@ const dir=process.argv[2]||'artifacts/stage-d-v129';
 mkdirSync(dir,{recursive:true});
 const files=[
  encode(join(dir,'01_Stage_D_v128_original.wav'),a),
- encode(join(dir,'02_Stage_D_v129_bass_unison_experimental.wav'),b),
+ encode(join(dir,'02_Stage_D_v129_bass_polarization_experimental.wav'),b),
  encode(join(dir,'03_AB_D_v128_depois_v129_experimental.wav'),composeAB(a,b))
 ];
-const meta={schema:'stage-original-d-v129-v129-bass-unison-ab-v1',
+const meta={schema:'stage-original-d-v128-v129-bass-polarization-ab-v1',
   source:'actual Stage Synth HybridPianoEngine source files',
   sampleRate:RATE,channels:2,bits:24,quality:'studio',
   sourceVersions:['physical-piano-hybrid.js','physical-piano-hybrid-v129-candidate.mjs'],
