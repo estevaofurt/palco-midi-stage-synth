@@ -1,3 +1,18 @@
+# Pesquisa Yamaha 2026 / ação de tecla — prioridades adicionais (23/11/2026)
+
+Relatório: [AVANCO_PESQUISA_YAMAHA_2026_ACAO_TECLADO_2026-11-23.md](AVANCO_PESQUISA_YAMAHA_2026_ACAO_TECLADO_2026-11-23.md).
+
+- [x] Auditar estudo de pesquisadores da Yamaha (preprint 2026): martelo viscoelástico, polarizações com apoios anisotrópicos, cordas ↔ ponte/tampo ↔ radiação, redução CMS, CFX real suplementar mas dados físicos proprietários.
+- [x] Verificar existência de dados públicos DAFx25 de ação de tecla/martelo (quatro CSV, 229.397.740 bytes listados), **sem licença confirmada de uso comercial** e sem baixar.
+- [x] Identificar limite jurídico da implementação aberta Unsampled Piano (**GPLv3**); somente referência conceitual, sem importar código.
+- [ ] Esclarecer direitos e efetiva disponibilidade do suplemento WAV CFX de Yamaha; não somar às 50 fontes validadas antes de integridade/hashes/direitos.
+- [ ] Preparar **M09** (evento MIDI → tecla → let-off → velocidade real do martelo e repetição) e autorização de dados de ação se fizerem parte do produto.
+- [ ] Prosseguir M01–M08 medidos e licenciados, E1.0/E1.1 e sete R-GATEs. **Não iniciar DSP/P1/P2 antes da liberação expressa.**
+
+**Invariantes:** main v1.12.4; v1.9.5 preservada; 50 arquivos originais/seis pianos; **0/7 R-GATEs liberados**; objetivo 32–64 vozes ainda não homologado.
+
+---
+
 # Preparação autoral Felt concluída para 15 WAVs; física comercial ainda pendente (23/11/2026)
 
 **Fontes e protocolo:** [PREPARACAO_FELT_ORIGINAL_COMERCIAL_2026-11-23.md](PREPARACAO_FELT_ORIGINAL_COMERCIAL_2026-11-23.md) · [PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md](PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md).
