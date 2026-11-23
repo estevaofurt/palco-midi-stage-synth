@@ -1,0 +1,83 @@
+name: Stage Synth - Iowa Steinway B 15 original provenance check
+on:
+  push:
+    branches:
+      - research/fast-track-piano-readiness-20261123
+    paths:
+      - 'scripts/fetch_iowa_reference.py'
+      - '.github/workflows/research-iowa-15-originals.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  iowa-15-originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      STAGE_PIANO_SELECTION: matrix
+      STAGE_IOWA_FIVE_REGIONS: "1"
+      STAGE_IOWA_METADATA_ONLY: "1"
+      STAGE_AUDIO_WORKDIR: /tmp/stage-iowa-15-audit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install and verify lossless AIFF decoder
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          ffprobe -version | head -n 1
+          python3 -m py_compile scripts/fetch_iowa_reference.py
+      - name: Download selected ORIGINAL Iowa AIFF in ephemeral runner only
+        run: |
+          python3 scripts/fetch_iowa_reference.py
+      - name: Verify 15 source hashes, shape, Iowa origin and publish metadata-only report
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root=Path(os.environ["STAGE_AUDIO_WORKDIR"])
+          m=json.loads((root/"manifest.json").read_text(encoding="utf-8"))
+          expected={(p,v) for p in ("C2","C3","C4","C5","C6") for v in ("pp","mf","ff")}
+          seen=set()
+          rows=[]
+          for item in m["notes"]:
+              pitch=item["id"].split("-")[-2].upper()
+              dyn=item["dynamic"]
+              assert (pitch,dyn) in expected and (pitch,dyn) not in seen, (pitch,dyn)
+              seen.add((pitch,dyn))
+              assert item["originalUrl"].startswith("https://theremin.music.uiowa.edu/"), "Official Iowa only"
+              assert item["originalRate"]==44100 and item["originalChannels"]==2, item["id"]
+              assert item["originalFormat"] in ("pcm_s16be","pcm_s16le"), item
+              f=root/f"Piano.{dyn}.{pitch}.aiff"
+              assert f.exists() and f.stat().st_size==item["bytes"] and f.read_bytes()[:4]==b"FORM"
+              digest=hashlib.sha256(f.read_bytes()).hexdigest()
+              assert digest==item["sha256"] and len(digest)==64
+              rows.append({"id":item["id"],"instrument":item["instrument"],
+                           "pitch":pitch,"dynamic":dyn,"sourceURL":item["originalUrl"],
+                           "sha256":digest,"bytes":item["bytes"],
+                           "sampleRate":item["originalRate"],"channels":item["originalChannels"],
+                           "codec":item["originalFormat"],"rights":"Iowa MIS: any project without restrictions",
+                           "observations":"Original AIFF structure/codec/hash verified; musical pitch and pedal not independently measured",
+                           "physicalHammerSpeedMeasured":False})
+          assert seen==expected,(seen^expected)
+          report={"schema":"stage-iowa-original-aiff-15-v1",
+                  "metadataVerified":len(rows),"licenseSource":"https://theremin.music.uiowa.edu/MIS.html",
+                  "recordingsSource":"https://theremin.music.uiowa.edu/MISpiano.html",
+                  "rawAudioUploaded":False,"acousticModelCalibrationApproved":False,"items":rows}
+          (root/"verified-15-metadata.json").write_text(json.dumps(report,indent=2)+"\n")
+          print(f"ORIGINAL-IOWA-VERIFIED {len(rows)}/15 recordings; source, codec, bytes, SHA256; no pitch/pedal metrology claimed")
+          PY
+      - name: Upload hashes and metadata ONLY (never AIFF/PCM)
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-iowa-15-metadata-only
+          path: /tmp/stage-iowa-15-audit/verified-15-metadata.json
+          retention-days: 14
+          if-no-files-found: error
+      - name: Erase all third-party audio from runner
+        if: always()
+        run: rm -rf "$STAGE_AUDIO_WORKDIR"

@@ -1,3 +1,11 @@
+## NOVA PRIORIDADE: FECHAR, NÃO AMPLIAR A PESQUISA (23/11/2026)
+
+Plano operacional curto: `docs/PLANO_ENXUTO_FECHAMENTO_LACUNAS_2026-11-23.md`. **15 AIFF originais Steinway Model B (Iowa)** nas notas C2/C3/C4/C5/C6 × pp/mf/ff passaram por download oficial, codec, SHA256 e eliminação dos bytes na auditoria GitHub [run 45111873583](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45111873583). Manifesto completo `research/commercial_audio/iowa_steinway_b_verified_original_sha256.json`. **Acervo total agora: 65 gravações originais verificadas em sete fontes instrumentais de piano**, mas *pitch independente, pedal/soltura, física interna e homologação* ainda pendentes.
+
+O gate físico original **R-GATE-2 autoriza aproximação de ponte passiva justificável e calibrável**. Não tornar mobilidade 2×2, histerese instrumentada ou seis pianos pré-requisitos absolutos para a etapa mínima de preparação. **0/7 gates integralmente aprovados**; nenhum DSP/P1/P2/FX/UI/MIDI/preset alterado ou autorizado. Preservar v1.9.5 como referência histórica de estabilidade e medir meta de 32–64 vozes no hardware após autorização.
+
+---
+
 ## ÚLTIMA SITUAÇÃO: FELT ORIGINAL VERIFICADO, IMPLANTAÇÃO PROIBIDA (23/11/2026)
 
 O criador **Tom Guder** publicou \`FuchsUndMoehrSamplesWAV16bit.zip\` (Fuchs & Möhr Felt, Public Domain declarado). O ZIP original do Drive, de **648.995.046 bytes**, foi indexado seletivamente: **264 WAVs, 88 notas × 3 camadas**. Quinze WAVs originais nas cinco regiões MIDI 36/48/60/72/84 × piano/mezzo/forte receberam CRC32/PCM WAV 48kHz/16bit/2 canais e SHA256. Evidência https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45105332553 ; SHA256 permanentes em research/commercial_audio/felt_original_verified_sha256.json; nenhum WAV enviado ao GitHub/app.
