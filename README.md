@@ -1,3 +1,13 @@
+# Stage Synth v1.12.7 — D experimental com excitação física do martelo nos graves
+
+A experiência está disponível **dentro do módulo Piano Acústico**, na mesma opção **D · Stage híbrido · experimental**. **Não há novo motor, categoria, link interno ou preset obrigatório**. Os motores A (Claude), B (Stage anterior), C (Novo Stage mecânico) e Clássico continuam, e **o padrão segue C**.
+
+**Comparação real entre versões:** [D v1.12.6](v1.12.6.html) carrega **arquivos JavaScript de áudio congelados** (`acoustic-v126.js`, `physical-piano-hybrid-v126.js`, `piano-resonance-v126.js`, `piano-hybrid-calibration-v126.js`), e [D candidato v1.12.7](v1.12.7.html) carrega o novo martelo. A diferença fica **somente C1–C3**; 45 testes demonstraram **3,24 milhões de amostras idênticas de C4 para cima**. Desligue os efeitos e compare a resposta em C2/C3, ataques pp/mf/ff e acordes.
+
+A v1.12.7 substitui a rampa única dos graves por um **pulso de contato do martelo distribuído no tempo**, com compressão não linear simplificada, ressonadores excitados causalmente e início de radiação que depende do registro. É original Stage, **não uma medição da força do martelo**. Dados reais Iowa Steinway B (15 fontes originais hash-verificadas, não embutidas) mostram resultado **misto**: erro do envelope dos primeiros 12ms de C2/C3 **3,58→2,96dB**, mas erro do espectro harmônico integrado **3,23→4,30dB** e cauda harmônica **9,38→10,49dB**. **A melhoria auditiva não está demonstrada**. A versão é um **experimento para escuta**, não uma promoção de fidelidade comercial. Leia [experimento e limites](docs/EXPERIMENTO_D_MARTELO_V127_2026-11-23.md).
+
+Os 32/48/64 são limites de alocação de vozes, não certificação real-time PC/Moto g04s. R-GATEs de calibração/licença/aceite **0/7 plenamente aprovados**. A/B/C/FX/MIDI e dados atuais preservados.
+
 # Stage Synth v1.12.6 — motor D com correção acústica por registro (ainda experimental)
 
 O usuário identificou que o Stage D v1.12.5 não se parecia com um piano real. A investigação com **15 gravações originais Steinway B/Iowa com SHA256 verificado** mostrou que D projetava os graves como cordas quase isoladas: fundamental excessiva e parciais 2–8 muito fracos; no agudo havia harmônicos excessivos.

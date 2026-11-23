@@ -16,9 +16,25 @@ export const HYBRID_QUALITY = Object.freeze({
   studio: Object.freeze({voices:64,partials:23,paired:5,bodyDivisor:4})
 });
 const SRATE = 48000, TWO_PI = 2*Math.PI, MAX_VOICES = 64, MAX_MODES = 32;
-const MAX_BLOCK = 128, T60_DB = 6.907755278982137;
+const MAX_BLOCK = 128, MAX_HAMMER_SAMPLES=512, T60_DB = 6.907755278982137;
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const midiHz=k=>440*2**((k-69)/12);
+/**
+ * Magnitude of the *normalized* raised-cosine contact pulse's discrete Fourier
+ * transform. Closed-form Dirichlet sums are O(1) per mode vs O(contactSamples).
+ * The pulse is a compressed half-sine squared (F ∝ compression²): a simple
+ * nonlinear compression model, NOT measured felt law or Hammer F(t).
+ */
+function dirichletSum(n,x){
+  const half=x*.5,s=Math.sin(half);
+  return Math.abs(s)<1e-8?n:Math.sin(n*half)/s;
+}
+export function bassContactTransferMagnitude(n,w){
+  if(!Number.isInteger(n)||n<16||n>MAX_HAMMER_SAMPLES||
+      !Number.isFinite(w)||w<0||w>Math.PI)throw new RangeError('invalid contact spectrum');
+  const d=TWO_PI/n;
+  return Math.abs(dirichletSum(n,w)+.5*dirichletSum(n,w+d)+.5*dirichletSum(n,w-d))/n;
+}
 const CHARACTER=Object.freeze({
   // Inspired by qualitative differences, not measured Yamaha/Steinway constants.
   japanese:{tone:1.10,body:1.05,decay:1.04,detune:.9,contact:.92,noise:.84,radiation:.75},
@@ -45,6 +61,10 @@ class Voice {
   constructor(){
     this.y1=new Float64Array(MAX_MODES);this.y2=new Float64Array(MAX_MODES);
     this.c=new Float64Array(MAX_MODES);this.r2=new Float64Array(MAX_MODES);
+    // Preallocate contact force and per-mode driving coefficients (bass only).
+    this.force=new Float64Array(MAX_HAMMER_SAMPLES);
+    this.drive=new Float64Array(MAX_MODES);
+    this.forceCount=0;this.forceIndex=0;
     this.tmp=new Float32Array(MAX_BLOCK);
     this.active=false;this.released=false;this.damped=false;
     this.id=0;this.key=60;this.age=0;this.count=0;this.silent=0;this.lastPeak=0;
@@ -82,7 +102,7 @@ export class HybridPianoEngine {
   kill(v){
     if(!v.active)return;
     if(!v.released)this.keyUp(v.key);
-    v.active=false;v.count=0;this.done.push(v.id);
+    v.active=false;v.count=0;v.forceCount=0;v.forceIndex=0;this.done.push(v.id);
   }
   keyDown(key,speed){
     const idx=key-21;if(idx<0||idx>=88)return;
@@ -103,12 +123,42 @@ export class HybridPianoEngine {
     }
     this.kill(chosen);return chosen;
   }
+  /**
+   * Finite causal contact pulse (a Hertz-inspired compressed half-sine, NOT
+   * physically measured hammer force). Both peak and pulse width depend on
+   * MIDI speed and felt hardness. Normalized area makes the impulse energy
+   * explicit; high-frequency suppression comes from its Fourier transform.
+   */
+  prepareBassContact(v,seconds){
+    const n=clamp(Math.round(seconds*this.sr),16,MAX_HAMMER_SAMPLES);
+    // A positive raised-cosine pressure envelope, normalized to unit area.
+    // Recurrence avoids one transcendental call per force sample on note-on.
+    // Hardness and MIDI velocity affect duration through hybridContactTime.
+    const phase=TWO_PI/n,cw=Math.cos(phase),sw=Math.sin(phase);
+    let c=Math.cos(phase*.5),sn=Math.sin(phase*.5);
+    for(let i=0;i<n;i++){
+      v.force[i]=Math.max(0,(1-c)/n);
+      const nextC=c*cw-sn*sw;sn=sn*cw+c*sw;c=nextC;
+    }
+    v.forceCount=n;v.forceIndex=0;
+  }
   addMode(v,mode,f,t60,amp,phase){
     if(mode>=MAX_MODES)return mode;
     const w=TWO_PI*f/this.sr,r=Math.exp(-T60_DB/(Math.max(.08,t60)*this.sr));
     v.c[mode]=2*r*Math.cos(w);v.r2[mode]=r*r;
-    v.y1[mode]=amp*Math.sin(phase);
-    v.y2[mode]=amp*Math.sin(phase-w)/r;
+    if(v.forceCount){
+      // Response of this second-order resonator to one finite force pulse.
+      // Match its *post-contact modal amplitude* to the measured spectral
+      // target, rather than injecting an arbitrary global noise/thump.
+      // Phase is produced by propagation and the hammer-force waveform.
+      const response=Math.max(.045,bassContactTransferMagnitude(v.forceCount,w));
+      v.drive[mode]=amp*Math.abs(Math.sin(w))/response;
+      v.y1[mode]=0;v.y2[mode]=0;
+    }else{
+      v.drive[mode]=0;
+      v.y1[mode]=amp*Math.sin(phase);
+      v.y2[mode]=amp*Math.sin(phase-w)/r;
+    }
     return mode+1;
   }
   noteOn({id,key,speed=.6,hardness=.5,send=.12,character='american',
@@ -125,6 +175,10 @@ export class HybridPianoEngine {
     const tone=clamp((.24+.7*brightness+.42*hardness)*profile.tone,.15,1.8);
     const baseT60=16*2**(-(key-21)/39)*profile.decay*clamp(decayScale,.35,1.7);
     const single=key<37,nyquist=this.sr*.44;
+    // Only the bass gets the candidate physical contact experiment.
+    // C4–C6 are guaranteed to keep the original oscillator path.
+    if(key<=48)this.prepareBassContact(v,t);
+    else {v.forceCount=0;v.forceIndex=0;}
     let count=0,power=0;
     // Save normalized partial weights locally in voice state; no unlicensed tables.
     for(let n=1;n<=this.maxPartials;n++){
@@ -154,15 +208,33 @@ export class HybridPianoEngine {
     }
     const normalized=.056*speed**1.35*(.72+.45*brightness)*profile.body/
       Math.sqrt(Math.max(1e-8,power));
-    for(let i=0;i<count;i++){v.y1[i]*=normalized;v.y2[i]*=normalized}
+    for(let i=0;i<count;i++){
+      v.y1[i]*=normalized;v.y2[i]*=normalized;
+      // Bass drive starts from zero displacement, so normalize drive too.
+      if(v.forceCount)v.drive[i]*=normalized;
+    }
     v.id=id;v.key=key;v.active=true;v.released=false;v.damped=false;
     v.count=count;v.age=0;v.silent=0;v.lastPeak=0;v.send=clamp(send,0,1);v.sendTarget=v.send;
-    v.attack=0;v.attackStep=1/(this.sr*(.0012+.0030*(1-key/120)*(1-speed*.5)));
+    // A bridge/soundboard does not radiate every modal component instantly.
+    // Limit the candidate ONLY to bass; preserve the original higher-note
+    // attack byte-for-byte. This is a bounded temporal transmission proxy,
+    // not a measured hammer-to-bridge transfer function.
+    v.attack=0;
+    // The bass bridge build-up is register dependent: too long a delay
+    // suppresses the first-cycle energy in low C2, while too short a delay
+    // exaggerates the attack near C3. These are exploratory timings, not
+    // instrument-measured radiation delays.
+    const bassRise=.0048+.0018*clamp((key-24)/24,0,1)+.001*(1-speed);
+    const attackSeconds=v.forceCount ? bassRise
+      :(.0012+.0030*(1-key/120)*(1-speed*.5));
+    v.attackStep=1/(this.sr*attackSeconds);
     const pan=clamp((key-64.5)/43.5,-1,1)*.30;
     v.gl=Math.sqrt(1-pan);v.gr=Math.sqrt(1+pan);
     v.noise=.037*speed**2.4*(.35+.65*hardness)*profile.noise;
     v.noiseDecay=Math.exp(-1/(this.sr*(.0028+.0018*(1-speed))));
-    v.noiseLP=0;v.impact=.014*speed**2*profile.body;
+    // Bass: the force pulse is the mechanical strike; do not add the old
+    // one-sided exponential thump on top of it.
+    v.noiseLP=0;v.impact=v.forceCount?0:.014*speed**2*profile.body;
     v.impactDecay=Math.exp(-1/(this.sr*.017));
     v.character=character;v.decayScale=decayScale;v.brightness=brightness;
     v.releaseTime=.38;
@@ -220,14 +292,25 @@ export class HybridPianoEngine {
     for(let k=0;k<this.maxVoices;k++)if(this.voices[k].active){
       const v=this.voices[k];active++;
       const tmp=v.tmp;tmp.fill(0,0,n);
+      const driveStart=v.forceIndex;
+      const driving=driveStart<v.forceCount;
       for(let m=0;m<v.count;m++){
         const c=v.c[m],r2=v.r2[m];
         let a=v.y1[m],b=v.y2[m];
-        for(let i=0;i<n;i++){
-          const next=c*a-r2*b; b=a;a=next;tmp[i]+=next;
+        if(driving){
+          const forceGain=v.drive[m],force=v.force,limit=v.forceCount;
+          for(let i=0;i<n;i++){
+            const d=driveStart+i<limit?force[driveStart+i]*forceGain:0;
+            const next=c*a-r2*b+d; b=a;a=next;tmp[i]+=next;
+          }
+        }else{
+          for(let i=0;i<n;i++){
+            const next=c*a-r2*b; b=a;a=next;tmp[i]+=next;
+          }
         }
         v.y1[m]=a;v.y2[m]=b;
       }
+      if(driving)v.forceIndex=Math.min(v.forceCount,driveStart+n);
       let env=v.attack,noise=v.noise,impact=v.impact,lp=v.noiseLP,peak=0;
       let send=v.send;
       for(let i=0;i<n;i++){

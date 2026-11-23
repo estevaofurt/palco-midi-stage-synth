@@ -25,7 +25,7 @@ test('o B usa worklet físico v1.9.5 independente do C',()=>{
  assert.match(current,/PianoResonanceBody/);
  assert.match(acoustic,/prepareLegacyPhysical/);
  assert.match(acoustic,/playPhysical\(part,key,velocity,p,expression,true\)/);
- assert.match(acoustic,/physical-piano-legacy\.js\?build=1\.12\.6/);
+ assert.match(acoustic,/physical-piano-legacy\.js\?build=1\.12\.7/);
 });
 test('B e C produzem saídas diferentes com parâmetros iguais',()=>{
  const older=new LegacyPhysical(48000,'eco');

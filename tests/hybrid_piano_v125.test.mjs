@@ -39,7 +39,7 @@ test('D é seleção ADICIONAL dentro do piano, sem alterar A/B/C ou preset salv
   assert.match(read('../acoustic.js'),/prepareHybrid/);
   assert.match(read('../acoustic.js'),/playHybrid/);
   assert.match(read('../app.js'),/prepareHybrid/);
-  assert.match(read('../index.html'),/physical-piano-hybrid\.js\?build=1\.12\.6/);
+  assert.match(read('../index.html'),/physical-piano-hybrid\.js\?build=1\.12\.7/);
   assert.doesNotMatch(read('../index.html'),/enable-mechanical-piano|stage-mechanics-link/);
 });
 

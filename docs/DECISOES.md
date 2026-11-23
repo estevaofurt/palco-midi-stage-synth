@@ -263,3 +263,14 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Decisão de arquitetura:** NÃO abandonar D v1.12.6 nem migrar imediatamente para FDTD completo, neural, Rust ou banco de samples. Preservar o bom médio/agudo e conduzir **experimentos isolados C1–C3**: martelo não linear de curta duração; modos longitudinais limitados; decaimento/uníssonos e ponte bidirecional **somente com energia e unidades justificadas**. A revisão de código também detectou normalização incompleta em modos duplicados (`.63²+.37²=.5338`), transição MIDI 36–37 não aferida, `bodyDivisor` ignorado em eco, brilho durante nota sustentada sem efeito e RNG por amostra mesmo com ruído extinto.
 
 **Performance:** agora existe `scripts/benchmark_piano_d_cpu.mjs` (perfil Node/Linux não homologatório 32/48/64, sem alterar PCM) e workflow numérico. Só o navegador real em PC e Moto g04s comprova render em tempo, CPU, xruns e estabilidade. **Este PR é estritamente pesquisa/diagnóstico e não altera DSP, MIDI, FX, UI, presets, áudio, versão ou R-GATEs (0/7).**
+
+
+## D-034 — Abrir teste auditivo do D v1.12.7 com pulso temporal de martelo no grave (23/11/2026)
+
+**Autorização:** o titular pediu “prossiga” após a auditoria técnica do D, que identificou como primeira intervenção a excitação real no tempo para C1–C3. A v1.12.7 mantém o **mesmo motor D experimental no módulo Piano Acústico**, aplica apenas a notas MIDI 21–48 uma força temporal positiva de contato comprimido, com transformada espectral analítica e deslocamento inicial zero, e cria a página `v1.12.7.html`. Não muda A/B/C/Clássico, MIDI, FX, outras categorias ou default C.
+
+**Preservação real de referência:** `v1.12.6.html` usa importação de `acoustic-v126.js` e snapshots independentes `physical-piano-hybrid-v126.js`, `piano-resonance-v126.js`, `piano-hybrid-calibration-v126.js`. Evitar afirmar que apenas o query string `?build=1.12.6` congela código no GitHub Pages. Testes preservam 45 casos MIDI 49–108, pp/mf/ff e perfis de qualidade (3.240.000 amostras idênticas).
+
+**Medição do primeiro experimento após três iterações:** referências Iowa Steinway B 15/15 com hash verificado, C2/C3 0–12ms erro absoluto médio **3,58→2,96dB**; parciais de janela longa **3,23→4,30dB**, parciais sustentados **9,38→10,49dB**. Logo a evidência é mista e **não declara melhor som, física medida ou estabilidade comercial**. Próxima decisão depende de o usuário ouvir D v1.12.6 versus v1.12.7 sem FX; se o grave piorar, descartar experimento e passar a vibrações longitudinais sem ampliar todo o motor.
+
+**Performance:** otimizado cálculo da resposta do pulso de O(N×modos) para O(modos) usando transformada discreta analítica do cosseno levantado. Testes Node com 32/48/64 vozes são apenas exploratórios; cache, JIT e dispositivo real permanecem não homologados. Nenhum dado ou código restrito de terceiros usado, **0/7 R-GATEs inteiramente aprovados**.
