@@ -173,3 +173,13 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 
 **Estado dos sete gates:** 0/7 integralmente aprovados. Fonte confiável e licença compatível não dispensam medição de ponte/martelo, controle de dinâmica, parametrização física, protótipos isolados e validação de hardware. P1/P2 e DSP permanecem congelados.
 
+
+## D-025 — Steinway Model D Princeton CC BY 4.0: sete WAVs originais verificados; Felt autoral ainda não adquirido (22/11/2026)
+
+**Executado:** três coleções autorais bitKlavier Grand do **Steinway Model D real**, gravado em Princeton, com posições **Piano Bar**, **Binaural** e **Harp Omni**, tiveram identidade do Archive, licença **CC BY 4.0**, tamanho e MD5 do ZIP verificados por metadados oficiais. Em seguida foram **baixados somente sete WAVs individuais selecionados**, diretamente das pastas virtuais dos ZIPs originais, verificados por PCM WAV 44,1k/16bit e SHA256 de todos os bytes, descartados ao fim do teste. **7/7 arquivos / 39.356.676 bytes**, 22/22 testes unitários da preparação; sem ZIP completo, gravações no repositório nem artifacts de áudio. SHA256: research/commercial_audio/steinway_d_verified_wav_sha256.json. Evidência CI: https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45103239343 .
+
+**Ressalva:** o bitKlavier é editado, denoised e reequilibrado por velocity; não é força real do martelo/ponte. Essa evidência apenas melhora a preparação para calibração comercial e escuta.
+
+**Felt:** foi identificado no fórum do criador Tom Guder o ZIP autoral FuchsUndMoehrSamplesWAV16bit.zip (WAV stereo, três camadas, domínio público declarado). Link do Google Drive está documentado, mas **nenhum ZIP autoral foi integralmente transferido ou conferido por SHA**; a E0 anterior usou arquivos de um espelho reempacotado. Falta ainda o mesmo piano com e sem feltro em condição controlada.
+
+**Prontidão acumulada:** 35 fontes originais verificadas de **cinco pianos acústicos** (103.753.348 bytes), com permissões de uso comercial verificadas ao nível de acervo. **Zero dos sete R-GATEs globais integralmente aprovados**; P1/P2 e qualquer DSP permanecem congelados até autorização do usuário e referências físicas identificáveis. Detalhes em docs/PRINCETON_STEINWAY_D_FELT_FONTES_COMERCIAIS_2026-11-22.md .
