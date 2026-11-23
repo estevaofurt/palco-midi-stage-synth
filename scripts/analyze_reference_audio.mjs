@@ -7,7 +7,7 @@
  */
 import {readFileSync,writeFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
-import {measurePianoNote} from '../tests/piano_acoustic_metrics.mjs';
+import {measurePianoNote,spectrum,findPartial,midiHz} from '../tests/piano_acoustic_metrics.mjs';
 import {PianoEngine as Modal} from '../piano-worklet.js';
 import {PhysicalPianoEngine as Legacy} from '../physical-piano-legacy.js';
 import {PhysicalPianoEngine as Mechanical} from '../physical-piano.js';
@@ -71,8 +71,25 @@ function renderedStage(key,character='american',speed=80/127){
    for(let k=0;k<n;k++)out[pos+k]=(left[k]+right[k])*.5;
   }
   result[engineId]=outputMetric(measurePianoNote(out,{sampleRate:RATE,key}));
+  result[engineId].earlySpectrum=measureEarlyPartials(out,key);
  }
  return result;
+}
+/** Short attack snapshot; unlike the longer FFT, it can see quickly dying treble harmonics.
+ * No B estimate: energy is nonstationary, the bin width is coarse, and note onset contains hammer noise.
+ */
+export function measureEarlyPartials(samples,key){
+ const fftSize=key>=72?8192:16384,windowStart=.018;
+ const spec=spectrum(samples,RATE,windowStart,fftSize),f0=midiHz(key);
+ const fundamental=findPartial(spec,f0,{relativeWindow:.02,minHz:7});
+ const harmonics=[];
+ for(let n=1;n<=8&&n*f0<RATE*.43;n++){
+  const peak=findPartial(spec,n*f0,{relativeWindow:.024,minHz:7});
+  const relativeDb=20*Math.log10(Math.max(1e-12,peak.amplitude/Math.max(fundamental.amplitude,1e-12)));
+  harmonics.push({n,peakHz:peak.frequency,relativeDb,detectable:n>1&&relativeDb>=-27});
+ }
+ return {fftSize,windowStart,frequencyResolutionHz:RATE/fftSize,
+  visibleUpperPartials:harmonics.filter(x=>x.detectable).length,harmonics};
 }
 export function compareSpectralShape(real,stage){
  const bands=[];
@@ -92,7 +109,9 @@ export function analyzeOne(entry){
  if(!['american','japanese','felt','upright'].includes(entry.stageCharacter))throw new Error('Invalid character');
  const pcm=decodeF32le(readFileSync(entry.pcmPath));
  const onset=locateAttack(pcm,RATE);
- const real=outputMetric(measurePianoNote(cropFromAttack(pcm,onset,RATE),{sampleRate:RATE,key:entry.key}));
+ const window=cropFromAttack(pcm,onset,RATE);
+ const real=outputMetric(measurePianoNote(window,{sampleRate:RATE,key:entry.key}));
+ real.earlySpectrum=measureEarlyPartials(window,entry.key);
  const stage=renderedStage(entry.key,entry.stageCharacter);
  return {
   id:entry.id,instrument:entry.instrument,key:entry.key,dynamic:entry.dynamic,
@@ -120,6 +139,7 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
    'Real-world pp/mf/ff or sample layers do not equal a calibrated MIDI/hammer velocity; Stage speed is fixed at 80/127 for diagnostic comparison.',
    'Different microphones and positions: relative spectral shape is diagnostic, not an objective realism score.',
    'B requires at least three candidate stretched partials; 1–2 candidates are marked inconclusive. Even >=3 is a finite FFT approximation.',
+   'Attack-spectrum diagnostic uses a shorter Hann window (8192/16384 samples); it can reveal early harmonics but cannot estimate physical B from nonstationary transients.',
    'Sources, SHA256 and numeric summaries only: no sample files are retained in GitHub artifacts.'
   ]};
  writeFileSync(outputFile,JSON.stringify(result,null,2)+'\n');
@@ -128,6 +148,7 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
   console.log('E0 '+r.instrument+' MIDI '+r.key+' '+r.dynamic+' onset='+r.analysis.offsetSeconds.toFixed(3)+
    's rms='+r.real.rms.toFixed(5)+' B='+r.real.bMedian+' reliableB='+r.real.bSampleCount+
    ' harmonics='+r.real.harmonics.length);
+  console.log('  attack spectrum visible upper partials='+r.real.earlySpectrum.visibleUpperPartials+'; window='+r.real.earlySpectrum.fftSize);
   for(const [name,c] of Object.entries(r.shapeDifferences)){
    console.log('  '+name+' relative spectral delta (NOT fidelity score): '+
     (c.meanAbsDb==null?'n/a':c.meanAbsDb.toFixed(2)+'dB')+' ('+c.comparablePartials+' partials)');
