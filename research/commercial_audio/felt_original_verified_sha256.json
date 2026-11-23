@@ -1,0 +1,176 @@
+{
+  "schema": "stage-commercial-felt-author-original-sha256-v1",
+  "verifiedAtUTC": "2026-11-23",
+  "sourceProof": "https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45105332553",
+  "creator": "Tom Guder",
+  "instrument": "Fuchs & Möhr felt upright",
+  "authorSource": "https://www.polyphone.io/en/forum/your-creations/850-acoustic-felt-piano-upright-fuchs-mohr",
+  "declaredLicense": "Public Domain (creator statement)",
+  "sourceDriveFileId": "1XbIZgTdKoR2KxIyKM-CkEweS3HI4ieHu",
+  "sourceOriginalZipFilename": "FuchsUndMoehrSamplesWAV16bit.zip",
+  "originalZipBytesFromRange": 648995046,
+  "zipWavMemberCount": 264,
+  "verifiedOriginalWavCount": 15,
+  "verifiedOriginalWavBytes": 70189788,
+  "networkBytesTransferredForSelectiveUnzip": 46588134,
+  "verifiedFormat": "48 kHz, 16 bit, 2 channel PCM WAV",
+  "verification": "HTTP byte-range ZIP central directory, compressed-member CRC32 check, full WAV PCM decode, per-WAV SHA256, ephemeral audio deleted; WAVs NOT published",
+  "limits": [
+    "Does not establish original entire ZIP SHA256; only 15 extracted WAV hashes",
+    "Layers piano/mezzo/forte are not measured physical hammer velocities",
+    "No before-after felt pair, no measured bridge admittance or martlet contact data",
+    "No audio is bundled in Stage Synth, only unreconstructible digests and file headers are retained"
+  ],
+  "items": [
+    {
+      "sourceMember": "piano/p36.wav",
+      "layer": "piano",
+      "midi": 36,
+      "sourceUncompressedBytes": 4234988,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "713f3a39f02babad6123a0653c5c1ca3ff61a1021155ac550f192e6f89bd117b"
+    },
+    {
+      "sourceMember": "piano/p48.wav",
+      "layer": "piano",
+      "midi": 48,
+      "sourceUncompressedBytes": 5519656,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "1e221cf41da939df85d9d9e99dd74becd029d4856e3b80f666a33d2d45b9b86c"
+    },
+    {
+      "sourceMember": "piano/p60.wav",
+      "layer": "piano",
+      "midi": 60,
+      "sourceUncompressedBytes": 5621036,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "a78864c44eff675604fca75e13cd97c4c8a4711a09280a7e4723239444e1be0f"
+    },
+    {
+      "sourceMember": "piano/p72.wav",
+      "layer": "piano",
+      "midi": 72,
+      "sourceUncompressedBytes": 4168732,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "07ab565a115710752bef3e9e69685eda72f85688a47cd5d30d079cc6f6552d2f"
+    },
+    {
+      "sourceMember": "piano/p84.wav",
+      "layer": "piano",
+      "midi": 84,
+      "sourceUncompressedBytes": 2626348,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "d1416333b492571d6c118e1da51e406f9c748c004ca92d2c58e9fbd285f1ca70"
+    },
+    {
+      "sourceMember": "mezzo/m36.wav",
+      "layer": "mezzo",
+      "midi": 36,
+      "sourceUncompressedBytes": 4234988,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "e8f13ecc552d8b2261d79a1db9c7ed666c464926f86205b0cb3787fde0e267b1"
+    },
+    {
+      "sourceMember": "mezzo/m48.wav",
+      "layer": "mezzo",
+      "midi": 48,
+      "sourceUncompressedBytes": 5519656,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "acc091bce91138e4fa5d1ba38db68e7c50285ff0dd15b50d2896cc749c919451"
+    },
+    {
+      "sourceMember": "mezzo/m60.wav",
+      "layer": "mezzo",
+      "midi": 60,
+      "sourceUncompressedBytes": 5621036,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "ac4e192a27990f0e734c8b324815e7840dd441ed003ee73951ab69654b3d36bd"
+    },
+    {
+      "sourceMember": "mezzo/m72.wav",
+      "layer": "mezzo",
+      "midi": 72,
+      "sourceUncompressedBytes": 4168732,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "f9f76f547d8e20b343fc04eed95373bb219eb0fdb3a1eeca157bcce559be4bee"
+    },
+    {
+      "sourceMember": "mezzo/m84.wav",
+      "layer": "mezzo",
+      "midi": 84,
+      "sourceUncompressedBytes": 2626348,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "efc6190d12103847a798f3fd94f9511dbcc4bc4b8d32637172a9b098720ef6d6"
+    },
+    {
+      "sourceMember": "forte/f36.wav",
+      "layer": "forte",
+      "midi": 36,
+      "sourceUncompressedBytes": 7360364,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "4508d7b63584a4b293cb98e904c19af71f0fc30aa66b897b9852ee647e34b8ea"
+    },
+    {
+      "sourceMember": "forte/f48.wav",
+      "layer": "forte",
+      "midi": 48,
+      "sourceUncompressedBytes": 6178284,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "86f9f77f366c0b724863aa811f947530cb75ce77a41c9330821e9eb1a926abed"
+    },
+    {
+      "sourceMember": "forte/f60.wav",
+      "layer": "forte",
+      "midi": 60,
+      "sourceUncompressedBytes": 4961036,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "0c8cdf2fbcc750b5a61932cbbaac4e9285742ffdfd9963560727b02757c7c657"
+    },
+    {
+      "sourceMember": "forte/f72.wav",
+      "layer": "forte",
+      "midi": 72,
+      "sourceUncompressedBytes": 4399884,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "93ead76e9c8b1099161422fa994937948e5e4900cbf46305da3bd8c60860b99e"
+    },
+    {
+      "sourceMember": "forte/f84.wav",
+      "layer": "forte",
+      "midi": 84,
+      "sourceUncompressedBytes": 2948700,
+      "sampleRateHz": 48000,
+      "bitDepth": 16,
+      "channels": 2,
+      "sha256": "f7d4acd38bb8edd8d01a224c6ee3c3d5102414e961b3adb3c6d325220c0c9801"
+    }
+  ]
+}

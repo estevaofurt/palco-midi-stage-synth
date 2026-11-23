@@ -1,0 +1,158 @@
+{
+  "schema": "stage-commercial-felt-author-original-selective-v1",
+  "preparedOn": "2026-11-23",
+  "instrument": "Fuchs & Möhr prepared felt upright",
+  "author": "Tom Guder",
+  "authorPublication": "https://www.polyphone.io/en/forum/your-creations/850-acoustic-felt-piano-upright-fuchs-mohr",
+  "authorDeclaredLicense": "Public Domain",
+  "sourceFilename": "FuchsUndMoehrSamplesWAV16bit.zip",
+  "sourceProvider": "Google Drive",
+  "sourceFileId": "1XbIZgTdKoR2KxIyKM-CkEweS3HI4ieHu",
+  "sourceByteLengthByHTTPRange": 648995046,
+  "sourceDirectoryEvidence": "https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45105179654",
+  "sourceDirectoryWavCount": 264,
+  "sourceLayers": [
+    {
+      "name": "piano",
+      "wavCount": 88
+    },
+    {
+      "name": "mezzo",
+      "wavCount": 88
+    },
+    {
+      "name": "forte",
+      "wavCount": 88
+    }
+  ],
+  "selectionPurpose": "five piano registers C2-C6 with 3 original dynamics each; origin/integrity only, not calibrated physical hammer or felt effect",
+  "limits": [
+    "Author says original ZIP is public domain; verify rights file-by-file before commercial release",
+    "Layer names piano/mezzo/forte are not measured hammer velocities or equalized SPL",
+    "These are samples with felt installed, NOT paired with same instrument before felt",
+    "ZIP whole-file SHA256 unknown; CRC32 is ZIP internal check, not signed publisher checksum",
+    "No WAV or original ZIP uploaded to repo/Artifacts; only metadata and per-original-file SHA256"
+  ],
+  "items": [
+    {
+      "id": "felt-piano-midi-36",
+      "member": "piano/p36.wav",
+      "midi": 36,
+      "nominalPitch": "C2",
+      "layerLabel": "piano",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-piano-midi-48",
+      "member": "piano/p48.wav",
+      "midi": 48,
+      "nominalPitch": "C3",
+      "layerLabel": "piano",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-piano-midi-60",
+      "member": "piano/p60.wav",
+      "midi": 60,
+      "nominalPitch": "C4",
+      "layerLabel": "piano",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-piano-midi-72",
+      "member": "piano/p72.wav",
+      "midi": 72,
+      "nominalPitch": "C5",
+      "layerLabel": "piano",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-piano-midi-84",
+      "member": "piano/p84.wav",
+      "midi": 84,
+      "nominalPitch": "C6",
+      "layerLabel": "piano",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-mezzo-midi-36",
+      "member": "mezzo/m36.wav",
+      "midi": 36,
+      "nominalPitch": "C2",
+      "layerLabel": "mezzo",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-mezzo-midi-48",
+      "member": "mezzo/m48.wav",
+      "midi": 48,
+      "nominalPitch": "C3",
+      "layerLabel": "mezzo",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-mezzo-midi-60",
+      "member": "mezzo/m60.wav",
+      "midi": 60,
+      "nominalPitch": "C4",
+      "layerLabel": "mezzo",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-mezzo-midi-72",
+      "member": "mezzo/m72.wav",
+      "midi": 72,
+      "nominalPitch": "C5",
+      "layerLabel": "mezzo",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-mezzo-midi-84",
+      "member": "mezzo/m84.wav",
+      "midi": 84,
+      "nominalPitch": "C6",
+      "layerLabel": "mezzo",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-forte-midi-36",
+      "member": "forte/f36.wav",
+      "midi": 36,
+      "nominalPitch": "C2",
+      "layerLabel": "forte",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-forte-midi-48",
+      "member": "forte/f48.wav",
+      "midi": 48,
+      "nominalPitch": "C3",
+      "layerLabel": "forte",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-forte-midi-60",
+      "member": "forte/f60.wav",
+      "midi": 60,
+      "nominalPitch": "C4",
+      "layerLabel": "forte",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-forte-midi-72",
+      "member": "forte/f72.wav",
+      "midi": 72,
+      "nominalPitch": "C5",
+      "layerLabel": "forte",
+      "physicalHammerVelocityMeasured": false
+    },
+    {
+      "id": "felt-forte-midi-84",
+      "member": "forte/f84.wav",
+      "midi": 84,
+      "nominalPitch": "C6",
+      "layerLabel": "forte",
+      "physicalHammerVelocityMeasured": false
+    }
+  ]
+}

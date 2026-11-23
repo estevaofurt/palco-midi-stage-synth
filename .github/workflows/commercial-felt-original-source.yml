@@ -1,0 +1,48 @@
+name: Stage Synth - commercial Felt author-original access
+on:
+  push:
+    branches:
+      - research/commercial-felt-original-availability-audit
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe-author-wav-zip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      STAGE_FELT_REPORT_DIR: /tmp/stage-felt-author-metadata-only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test original-source security and rights guardrails
+        run: python3 -m unittest discover -s research/commercial_audio -p 'test_*.py' -v
+      - name: Probe author's public-domain Felt ZIP with bounded 512-byte requests
+        run: |
+          mkdir -p "$STAGE_FELT_REPORT_DIR"
+          python3 research/commercial_audio/probe_original_felt_drive.py \
+            "$STAGE_FELT_REPORT_DIR/original-felt-source-probe.json"
+      - name: Inspect author original ZIP central directory using bounded HTTP Range requests
+        run: |
+          python3 research/commercial_audio/inspect_original_felt_zip_index.py \
+            "$STAGE_FELT_REPORT_DIR/original-felt-zip-directory.json"
+      - name: Verify 15 author-original Felt WAV members using bounded ZIP ranges and SHA256
+        run: |
+          python3 research/commercial_audio/verify_original_felt_wavs.py \
+            research/commercial_audio/felt_original_selective_manifest.json \
+            "$STAGE_FELT_REPORT_DIR/verified-felt-original-wavs.json"
+      - name: Publish ONLY source-access metadata (not WAV/ZIP bytes)
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-original-felt-source-metadata-only
+          path: |
+            /tmp/stage-felt-author-metadata-only/original-felt-source-probe.json
+            /tmp/stage-felt-author-metadata-only/original-felt-zip-directory.json
+            /tmp/stage-felt-author-metadata-only/verified-felt-original-wavs.json
+          retention-days: 14
+          if-no-files-found: error
+      - name: Remove metadata-only workdir
+        if: always()
+        run: rm -rf /tmp/stage-felt-author-metadata-only

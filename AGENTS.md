@@ -1,3 +1,11 @@
+## ÚLTIMA SITUAÇÃO: FELT ORIGINAL VERIFICADO, IMPLANTAÇÃO PROIBIDA (23/11/2026)
+
+O criador **Tom Guder** publicou \`FuchsUndMoehrSamplesWAV16bit.zip\` (Fuchs & Möhr Felt, Public Domain declarado). O ZIP original do Drive, de **648.995.046 bytes**, foi indexado seletivamente: **264 WAVs, 88 notas × 3 camadas**. Quinze WAVs originais nas cinco regiões MIDI 36/48/60/72/84 × piano/mezzo/forte receberam CRC32/PCM WAV 48kHz/16bit/2 canais e SHA256. Evidência https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45105332553 ; SHA256 permanentes em research/commercial_audio/felt_original_verified_sha256.json; nenhum WAV enviado ao GitHub/app.
+
+**Acervo acumulado:** 50 gravações comerciais originais de seis pianos acústicos, 173.943.136 bytes. **Física continua não calibrada**: não há par antes/depois felt no mesmo instrumento, força de martelo, duas polarizações e mobilidade de ponte medida. O protocolo de medições próprio/comercial está em docs/PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md. **TODOS os sete gates globais ainda NÃO integralmente aprovados.** Congelamento de novo DSP/P1/P2/alteração de timbre, MIDI, FX, interface e presets **OBRIGATÓRIO** até o usuário expressamente autorizar após evidências.
+
+---
+
 ## REFERÊNCIAS COMERCIAIS ATUALIZADAS — 35 ORIGINAIS, DSP CONGELADO (22/11/2026)
 
 A partir do último piloto: **sete WAVs originais Steinway Model D Princeton CC BY 4.0** foram obtidos diretamente do Internet Archive (sem baixar ZIPs inteiros), verificados integralmente e receberam SHA256. São cinco notas/camadas Piano Bar e duas C4v8 correspondentes em Binaural/Harp Omni; áudio foi eliminado, somente metadados persistiram. Somando 28 arquivos anteriores, **35 originais / cinco instrumentos reais / 103.753.348 bytes**, mas **sem medir parâmetros físicos internos**. CI https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45103239343 ; manifesto research/commercial_audio/steinway_d_verified_wav_sha256.json.

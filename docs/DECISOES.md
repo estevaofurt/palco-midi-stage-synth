@@ -183,3 +183,14 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Felt:** foi identificado no fórum do criador Tom Guder o ZIP autoral FuchsUndMoehrSamplesWAV16bit.zip (WAV stereo, três camadas, domínio público declarado). Link do Google Drive está documentado, mas **nenhum ZIP autoral foi integralmente transferido ou conferido por SHA**; a E0 anterior usou arquivos de um espelho reempacotado. Falta ainda o mesmo piano com e sem feltro em condição controlada.
 
 **Prontidão acumulada:** 35 fontes originais verificadas de **cinco pianos acústicos** (103.753.348 bytes), com permissões de uso comercial verificadas ao nível de acervo. **Zero dos sete R-GATEs globais integralmente aprovados**; P1/P2 e qualquer DSP permanecem congelados até autorização do usuário e referências físicas identificáveis. Detalhes em docs/PRINCETON_STEINWAY_D_FELT_FONTES_COMERCIAIS_2026-11-22.md .
+
+
+## D-026 — Gravações FELT originais obtidas e verificadas seletivamente; física interna ainda não medida (23/11/2026)
+
+**Execução comprovada:** o ZIP autoral de Tom Guder \`FuchsUndMoehrSamplesWAV16bit.zip\`, explicitamente declarado **Public Domain** na publicação do próprio criador, foi acessado por **HTTP Range** da origem Google Drive sem baixar seus 648.995.046 bytes integralmente. Índice do original contém **264 WAVs = 88 teclas × 3 camadas** (piano/mezzo/forte). Foram extraídos **15 WAVs originais nas notas MIDI nominais 36/48/60/72/84 × 3 camadas**, com integridade CRC32, PCM estéreo **48 kHz/16bits**, SHA256 por arquivo e descarte de áudio. A conferência transferiu 46.588.134 bytes compactados e examinou 70.189.788 bytes WAV. **36/36 testes** da preparação passaram: https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45105332553 .
+
+**Manifesto permanente:** research/commercial_audio/felt_original_verified_sha256.json. Documento: docs/PREPARACAO_FELT_ORIGINAL_COMERCIAL_2026-11-23.md . Os arquivos de áudio não foram publicados no Git nem distribuídos no app. O digest inteiro do ZIP original ainda não está verificado, apenas os 15 membros e o diretório.
+
+**Acervo comercialmente elegível preparado até aqui:** **50 WAV/FLAC originais / seis pianos reais / 173.943.136 bytes totais**. A declaração de domínio público do autor precisa de avaliação de direitos e condições de exploração comercial no lançamento, como as demais licenças.
+
+**Atenção física:** Felt com/sem no mesmo piano ainda não medido; camadas p/m/f não são velocidades de martelo; faltam força F(t), duas polarizações e mobilidade complexa da ponte. O protocolo de ensaios foi formalizado em docs/PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md. **Todos os R-GATEs ainda NÃO integralmente aprovados (0/7), e P1/P2/DSP continuam congelados por determinação do usuário.**
