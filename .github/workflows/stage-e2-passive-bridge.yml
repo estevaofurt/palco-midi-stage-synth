@@ -107,6 +107,19 @@ jobs:
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
+      - name: Package E3.4 percussive hammer A/B WAVs for listening
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-e34-hammer-percussion-physical-ab
+          path: |
+            e34_8mode_felt_normal.wav
+            e34_8mode_felt_core.wav
+            e34_16mode_felt_normal.wav
+            e34_16mode_felt_core.wav
+            e34_AB_8panel_normal_then_compressed_felt.wav
+            e34_AB_16panel_normal_then_compressed_felt.wav
+            e34_percussive_hammer_report.json
+          retention-days: 30
       - name: Preserve numeric benchmark only
         uses: actions/upload-artifact@v4
         with:
