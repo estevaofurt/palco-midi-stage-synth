@@ -67,7 +67,7 @@ A pesquisa pesquisou registros de artigos/anais, abstracts nas páginas das edit
 
 ### FR-01 | Chabassier, Chaigne & Joly, *Modeling and simulation of a grand piano* (2013)
 **Fonte:** https://pubmed.ncbi.nlm.nih.gov/23862839/  
-**Tipo:** MOD, JASA, DOI **10.1121/1.4810425** (conferir referência de edição antes de reproduzir DOI).  
+**Tipo:** MOD, JASA, DOI **10.1121/1.4809649** (confirmado pelo registro bibliográfico da publicação JASA 134, 648–665).  
 **Resultado:** cordas rígidas com perdas e não linearidades, contato dissipativo de feltro, ponte/tampo ortotrópico com nervuras, ondas transversais/longitudinais e acoplamento ao ar. Não é um sample player nem prova de que toda implementação reduzida terá mesmo timbre.
 
 ### FR-02 | Chabassier, Chaigne & Joly, *Time domain simulation of a piano. Part 1: Model description* (2014)
@@ -137,10 +137,11 @@ A pesquisa pesquisou registros de artigos/anais, abstracts nas páginas das edit
 
 ## 7. Estados Unidos — medição física do som ao redor da ponte
 
-### US-01 | Nicholas Giordano, *Mechanical impedance of a piano soundboard* (JASA 1998)
-**Fonte de pesquisa institucional:** https://www.physics.purdue.edu/piano/articles.shtml  
-**Tipo:** EXP/MOD.  
-**Resultado:** mostra importância das nervuras e propriedades ortotrópicas ao explicar impedância mecânica da ponte e do tampo; a geometria não pode ser substituída por uma única mola sem comparar banda de validade. **Conferir os trabalhos separadamente na página institucional antes de extrair coeficientes numéricos**.
+### US-01 | Nicholas Giordano, *Simple model of a piano soundboard* (JASA 1997), mais *Mechanical impedance of a piano soundboard* (JASA 1998)
+**Fonte primária de modelo:** https://www.physics.purdue.edu/piano/articles.shtml  
+**Fonte experimental de impedância:** https://www.scispace.com/papers/mechanical-impedance-of-a-piano-soundboard-4alm9wsiiz  
+**Tipo:** o primeiro é MOD/FE (JASA **102**, 1159–1168, 1997); o segundo é EXP (JASA **103**, 2128–2133, 1998).  
+**Resultados distintos:** o estudo de 1997 modela **anisotropia e nervuras** para explicar impedância da placa; o estudo de 1998 **mede diretamente** a impedância de uma placa de piano na faixa de 50Hz–10kHz, encontrando diferenças com alguns resultados anteriores. Não confundir o modelo FE de 1997 com a campanha de medição de 1998.
 
 ### US-02 | Nicholas Giordano, *Sound Production by a Vibrating Piano Soundboard* (JASA 1998)
 **Fonte institucional:** https://www.physics.purdue.edu/piano/articles.shtml  
