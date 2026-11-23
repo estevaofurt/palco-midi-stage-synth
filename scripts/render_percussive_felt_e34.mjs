@@ -92,7 +92,7 @@ function encode(left,right,gain,{slotFades=true}={}){
  wav.writeUInt32LE(rate*4,28);wav.writeUInt16LE(4,32);
  wav.writeUInt16LE(16,34);wav.write('data',36);
  wav.writeUInt32LE(count*4,40);
- const fadeIn=Math.round(.006*rate),fadeOut=Math.round(.055*rate);
+ const fadeIn=Math.round(.0015*rate),fadeOut=Math.round(.055*rate);
  for(let i=0;i<count;i++){
   const rel=slotFades?i%frames:i;
   const last=slotFades?frames-i%frames:count-i;
@@ -126,9 +126,16 @@ for(const pair of [[0,1],[2,3]]){
  const framesTotal=renders[pair[0]].left.length*2+pauseFrames;
  const l=new Float64Array(framesTotal),rr=new Float64Array(framesTotal);
  const first=renders[pair[0]],second=renders[pair[1]];
- l.set(first.left,0);rr.set(first.right,0);
  const offset=first.left.length+pauseFrames;
- l.set(second.left,offset);rr.set(second.right,offset);
+ // The AB WAV must not add sharp EDIT boundaries that could be mistaken
+ // for hammer percussion. The same short boundary fade is applied to BOTH.
+ const fadeIn=Math.round(.0015*rate),fadeOut=Math.round(.055*rate);
+ for(let i=0;i<first.left.length;i++){
+  const phase=i%frames;
+  const fade=Math.min(1,(phase+1)/fadeIn,(frames-phase)/fadeOut);
+  l[i]=first.left[i]*fade;rr[i]=first.right[i]*fade;
+  l[offset+i]=second.left[i]*fade;rr[offset+i]=second.right[i]*fade;
+ }
  const name='e34_AB_'+configurations[pair[0]].panelModes+
    'panel_normal_then_compressed_felt.wav';
  const bytes=encode(l,rr,gain,{slotFades:false});
