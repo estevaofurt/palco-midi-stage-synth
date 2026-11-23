@@ -33,3 +33,16 @@ A janela finita (~1,46 Hz de espaçamento entre bins), vazamento espectral, bati
 
 ## Próxima etapa
 Ler o relatório completo para priorizar problemas por registro/velocity/modelo. Depois prototipar dispersão de ordem superior e perdas dependentes de frequência **isoladamente**, reexecutar a matriz e validar 32/64 vozes, efeitos, MIDI, estalos e escuta antes de qualquer integração.
+
+## Resultados P0 verificados no GitHub Actions (22/11/2026; UTC da execução em 23/11)
+
+- Commit de diagnóstico: 2b27cf51ed921ab2254ed3a5af2b26126752c063.
+- Workflow: https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45094083550 — **90/90 testes Node aprovados, 0 falhas**.
+- Matriz completa: **108/108 combinações renderizadas**, sem clipping ou amostras não finitas no sinal seco médio (FX desligados). JSON disponível como artifact do workflow por 14 dias.
+- Japanese / velocidade 80: estimativa B por FFT em C2, C4, C6:
+  - A modal: 0,00024496; 0,00035775; 0,00148165.
+  - B waveguide v1.9.5: 0,00005294; 0,00010944; 0,00027679.
+  - C acoplado: 0,00005478; 0,00011025; 0,00027700.
+- B e C têm estimativas de inarmonicidade e níveis RMS muito semelhantes nessa condição; **o acoplamento mecânico não resolveu a dispersão original das cordas**. Isso não prova que os sons sejam perceptualmente idênticos.
+- Não declarar B-alvo universal com base nesses números: FFT finita, ajustes de modelo, perfis de registro, batimentos e sinais fracos podem enviesar a estimativa. É necessário comparar com referência seca autorizada e escuta nivelada.
+- **Recomendação P1:** modificar dispersão e perdas dependentes de frequência **em branch experimental isolada**, mantendo B v1.9.5 e A/C atuais como referência. Atingir 32/64 vozes em hardware continua pendente.
