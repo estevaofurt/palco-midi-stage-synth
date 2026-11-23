@@ -93,3 +93,12 @@ Mesmo a conclusão da coleta não validará por si só a experiência no navegad
 - Plath/Hamburgo dataset: https://zenodo.org/records/3274772 — aceleração de ponte e pressão, mas força medida é na **base da tecla**, não driving-point da ponte.
 
 **Status:** documento preparatório para aquisição legal e física, sem amostras/contratos externos firmados. **Não libera DSP.**
+
+
+## Extensão documental M01.2 / M05 para eventual aquisição licenciada — 23/11/2026
+
+**Método alternativo M01.2 — força inversa:** Chaigne, *Reconstruction of piano hammer force from string velocity*, JASA 2016, DOI https://doi.org/10.1121/1.4965965, documenta reconstrução de `F_h(t)` por **medição física sem contato da velocidade da corda** com inversão de pulsos de onda. Não é extração de força de amostras WAV no microfone. Se utilizada, fornecer localização óptica, geometria/rigidez/tensão da corda, velocidade medida com calibração, relógios sincronizados, filtro inverso, incerteza e comparação com força direta em piloto quando possível. `F_est(t)` é estimativa sujeita a ruído/hipóteses; nunca rotular força reconstruída como diretamente medida.
+
+**Radiadores M05 estendidos:** no piloto de um piano real, considerar medições sincronizadas de vibração/pressão de tampo, aro esquerdo e outras partes rígidas nos graves e na posição do ouvinte. Evidência em *Operational transfer path analysis of a piano*, Tan/Chaigne/Acri (Applied Acoustics 2018), relativa a **Bösendorfer 280VC-9**, e no relatório oficial FWF PAPA. A relevância varia por piano/registro; exigir comparação e teste de ablação antes de adicionar custo a DSP. A resposta de corpo de radiador não substitui mobilidade de ponte `Y_ponte(f)`.
+
+**Ordem de acesso:** investigar primeiro acervo **FWF PAPA/FPM2** e o possível objeto modal medido **IRCAM Modalys** por metadados, custódia e **direitos comerciais expressos**; somente depois planejar downloads de arquivo específico ou contrato. Nenhum dado externo, instrumento, ou contato foi obtido na redação deste protocolo. Ver [auditoria de fontes](ACESSO_DADOS_FISICOS_PAPA_IRCAM_FORCA_INVERSA_2026-11-23.md). O bloqueio 0/7 R-GATEs e ausência de integração DSP permanecem vigentes.
