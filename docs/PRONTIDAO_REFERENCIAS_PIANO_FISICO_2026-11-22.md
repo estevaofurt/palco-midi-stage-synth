@@ -1,3 +1,13 @@
+## ATUALIZAÇÃO DE ESCOPO — FINALIDADE COMERCIAL (22/11/2026)
+
+**Decisão posterior e expressa do usuário:** o projeto é **comercial**. Todas as avaliações abaixo são subordinadas ao novo filtro de compatibilidade com uso comercial definido em [POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md](POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md).
+
+**Importante:** BiVib/RWC/MAPS/MAESTRO continuam cientificamente úteis para leitura e pesquisa bibliográfica, mas não são datasets aprovados para gerar/calibrar o software comercial sem permissão adicional, devido às licenças NC. O plano anterior que priorizava **baixar** esses corpora deve ser considerado **SUPERADO** na parte de aquisição para fins comerciais. Substitutos para obtenção lícita: VCSL CC0, Salamander Yamaha C5 CC BY 3.0, bitKlavier Steinway D CC BY 4.0, Kawai KW CC0, Felt PD do autor, University of Iowa com texto expresso de permissão para quaisquer projetos, ou **medições próprias contratualmente licenciadas**. Ainda é preciso verificar cada arquivo e qualidade física.
+
+**R-GATE-3 continua NÃO APROVADO** até haver política de direitos e arquivos realmente conferidos; **0/7 gates aprovados**. O motor continua congelado, inclusive P1/P2. Este cabeçalho atualiza prioridades e direitos sem apagar o histórico das fontes científicas avaliadas.
+
+---
+
 # Stage Synth — GATE DE PRONTIDÃO DAS REFERÊNCIAS FÍSICAS (22/11/2026)
 
 **Projeto:** estevaofurt/palco-midi-stage-synth  
