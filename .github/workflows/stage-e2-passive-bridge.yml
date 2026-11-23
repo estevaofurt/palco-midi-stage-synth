@@ -27,6 +27,7 @@ on:
       - 'scripts/compare_passive_modal_profiles.mjs'
       - 'scripts/render_pure_physical_e28.mjs'
       - 'scripts/render_pure_physical_e29.mjs'
+      - 'scripts/benchmark_analytic_physical_e29.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
 jobs:
@@ -54,6 +55,8 @@ jobs:
         run: node scripts/render_pure_physical_e28.mjs e28-physical-only-mechanical-proxy.wav | tee e28-physical-audition.json
       - name: Render sample-free E2.9 analytic air radiation WAV
         run: node scripts/render_pure_physical_e29.mjs e29-physical-piano-analytic-air.wav | tee e29-air-radiation.json
+      - name: Benchmark 32/48/64 fully coupled notes plus analytic radiation
+        run: node scripts/benchmark_analytic_physical_e29.mjs | tee e29-physical-benchmark.json
       - name: Ensure public audio and user interface are unchanged
         run: |
           git diff --exit-code origin/main...HEAD -- physical-piano-hybrid.js physical-piano.js physical-piano-legacy.js acoustic.js app.js stage.js panel.js patches.js fx-rack.js performance.js index.html package.json
@@ -69,5 +72,6 @@ jobs:
             e28-physical-audition.json
             e28-physical-only-mechanical-proxy.wav
             e29-air-radiation.json
+            e29-physical-benchmark.json
             e29-physical-piano-analytic-air.wav
           retention-days: 30
