@@ -1,3 +1,11 @@
+## Pesquisa industrial Yamaha 2026 e ação de tecla DAFx25 (23/11/2026)
+
+**Somente pesquisa:** [auditoria específica](AVANCO_PESQUISA_YAMAHA_2026_ACAO_TECLADO_2026-11-23.md). Preprint Yamaha Corporation de 06/04/2026 descreve martelo viscoelástico, cordas 3D com apoios anisotrópicos, retorno bidirecional ponte/cordas, corpo+ar reduzidos e sons suplementares de Yamaha CFX real; os dados físicos completos não são públicos, o paper não certifica tempo real e **nenhum WAV CFX foi adquirido ou verificado** neste ciclo. O estudo DAFx25 de ação de tecla/martelo fornece quatro CSV públicos (229.397.740 bytes listados), mas sem licença identificada no repositório de origem: **não baixados nem liberados para calibração comercial**. Projeto aberto de síntese Rust GPLv3 consultado só conceitualmente, sem copiar código. Proposto M09: mapeamento da ação/velocity de teclado para velocidade real do martelo e repetição.
+
+**Status inalterado:** biblioteca original 50 arquivos/seis pianos; `main` v1.12.4, referência histórica v1.9.5, A/B/C experimentais, P1/P2 congelados, **0/7 R-GATEs globais integralmente aprovados**. Sem alterações de DSP, UI, MIDI, FX, samples ou presets. Testes Node/CI neste ciclo devem ser anotados conforme execução efetiva, não presumidos a partir de commits anteriores.
+
+---
+
 ## Felt original comercial preparado: 15 arquivos íntegros (23/11/2026)
 
 O ZIP **original** \`FuchsUndMoehrSamplesWAV16bit.zip\`, publicado como **Public Domain** pelo criador **Tom Guder**, foi lido seletivamente via HTTP Range da origem Google Drive, sem baixar os 649 MB completos. Seus 264 WAVs estão organizados por **88 notas × 3 camadas**. **15 WAVs originais** de MIDI nominal 36/48/60/72/84, camadas piano/mezzo/forte, foram verificados integralmente (**CRC32, WAV 48kHz/16bit/2 canais e SHA256**), com **36/36 testes aprovados**: https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45105332553 . Os SHA256 estão em research/commercial_audio/felt_original_verified_sha256.json. Não há áudio em GitHub nem no app.
