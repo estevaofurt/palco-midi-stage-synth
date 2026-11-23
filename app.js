@@ -8,7 +8,7 @@ let storage;try{storage=localStorage}catch{storage=null}
 const state=loadState(storage);
 const profile=getProfile(storage,typeof navigator!=='undefined'?navigator:{});
 const mobileLite=profile==='lite';
-const engineLabel={modal:'A · Claude (modal)',physicalLegacy:'B · Stage físico anterior (v1.9.5)',physical:'C · Novo Stage mecânico',classic:'Clássico'};
+const engineLabel={modal:'A · Claude (modal)',physicalLegacy:'B · Stage físico anterior (v1.9.5)',physical:'C · Novo Stage mecânico',hybrid:'D · Stage híbrido (experimental)',classic:'Clássico'};
 // Configurações temporárias da sessão leve: preserva os presets e endereçamentos.
 if(mobileLite){
   // A seleção do motor permanece sob controle do usuário, inclusive no Android.
@@ -67,6 +67,7 @@ panel=new Panel(state,{
   edit,toggle,
   level(id,level){state.patches[id].level=level;stage?.update(id,'level');panel.sync();save()},
   set(id,key){if(id==='piano'&&key==='soundEngine')stage?.releaseInstrument('piano');stage?.update(id,key);if(id==='piano')paintEngineLabel();if(id==='piano'&&(key==='soundEngine'||key==='physicalQuality')){
+    if(state.patches.piano.values.soundEngine==='hybrid')stage?.instruments.piano.prepareHybrid(state.patches.piano.values.physicalQuality).then(ok=>{if(!ok)report('Motor D indisponível neste navegador. Tente outro motor de piano.');});
     if(state.patches.piano.values.soundEngine==='physical')stage?.instruments.piano.preparePhysical(state.patches.piano.values.physicalQuality);
     if(state.patches.piano.values.soundEngine==='physicalLegacy')stage?.instruments.piano.prepareLegacyPhysical(state.patches.piano.values.physicalQuality);
     if(state.patches.piano.values.soundEngine==='modal'){
@@ -167,13 +168,15 @@ async function startAudio(){
     await resume;
   }else if(ctx.state!=='running')await ctx.resume();
   displayAudio();if(ctx.state!=='running')throw Error('Toque em Ativar áudio para liberar o som.');
-  if(state.patches.piano.values.soundEngine==='physical')await stage.instruments.piano.preparePhysical(state.patches.piano.values.physicalQuality);
+  if(state.patches.piano.values.soundEngine==='hybrid')await stage.instruments.piano.prepareHybrid(state.patches.piano.values.physicalQuality);
+  else if(state.patches.piano.values.soundEngine==='physical')await stage.instruments.piano.preparePhysical(state.patches.piano.values.physicalQuality);
   else if(state.patches.piano.values.soundEngine==='physicalLegacy')await stage.instruments.piano.prepareLegacyPhysical(state.patches.piano.values.physicalQuality);
   else if(state.patches.piano.values.soundEngine==='modal')await stage.instruments.piano.prepareModal();
   else stage.instruments.piano.bank.load();
 }
 byId('power').onclick=()=>startAudio().then(()=>{
-  if(((state.patches.piano.values.soundEngine==='physical'&&!stage.instruments.piano.physical)||
+  if(((state.patches.piano.values.soundEngine==='hybrid'&&!stage.instruments.piano.hybrid)||
+      (state.patches.piano.values.soundEngine==='physical'&&!stage.instruments.piano.physical)||
       (state.patches.piano.values.soundEngine==='physicalLegacy'&&!stage.instruments.piano.legacyPhysical)))
     report('Este navegador não iniciou o AudioWorklet. O piano usa síntese clássica como alternativa.');
   else report('');
@@ -184,7 +187,8 @@ async function listen(id){
   try{
     await startAudio();
     if(id==='piano'){
-      if(state.patches.piano.values.soundEngine==='physical')await stage.instruments.piano.preparePhysical(state.patches.piano.values.physicalQuality);
+      if(state.patches.piano.values.soundEngine==='hybrid')await stage.instruments.piano.prepareHybrid(state.patches.piano.values.physicalQuality);
+      else if(state.patches.piano.values.soundEngine==='physical')await stage.instruments.piano.preparePhysical(state.patches.piano.values.physicalQuality);
       else if(state.patches.piano.values.soundEngine==='physicalLegacy')await stage.instruments.piano.prepareLegacyPhysical(state.patches.piano.values.physicalQuality);
       else if(state.patches.piano.values.soundEngine==='modal')await stage.instruments.piano.prepareModal();
       else if(!stage.instruments.piano.bank.atlas)await stage.instruments.piano.bank.load();
