@@ -29,6 +29,18 @@
 import {SharedPassiveModalPiano} from './shared-passive-modal-piano.mjs';
 
 const finite=(n,lo,hi)=>Number.isFinite(n)&&n>=lo&&n<=hi;
+/** Effective modal mass for ideal sinusoidal steel-wire displacement.
+ * This applies to a SINGLE local string model; identical geometry across
+ * 88 different keys is NOT a physically measured full piano.
+ */
+export function idealStringModalMassKg({
+ lengthM=.85,radiusM=.0006,densityKgM3=7850
+}={}){
+ if(!finite(lengthM,.1,2.5)||!finite(radiusM,.0001,.003)||
+    !finite(densityKgM3,1000,20000))
+  throw new RangeError('invalid illustrative string dimensions/density');
+ return densityKgM3*Math.PI*radiusM**2*lengthM/2;
+}
 export class ReactiveFeltModalPiano {
  constructor({
   sampleRate=48000,key=48,
@@ -36,7 +48,7 @@ export class ReactiveFeltModalPiano {
   feltStiffness=1e10,feltExponent=2.3,
   partialsBass=5,partialsTreble=2,
   coupling=.12,inharmonicity=.00010,
-  sustain=127
+  stringGeometry=null,sustain=127
  }={}){
   if(!Number.isInteger(sampleRate)||sampleRate<22050||sampleRate>96000||
      !Number.isInteger(key)||key<21||key>108||
@@ -46,9 +58,13 @@ export class ReactiveFeltModalPiano {
      !finite(feltExponent,1.1,4)||
      !finite(sustain,0,127))
    throw new RangeError('invalid reactive hammer contact setup');
+  if(stringGeometry!==null&&(typeof stringGeometry!=='object'||Array.isArray(stringGeometry)))
+   throw new RangeError('invalid local string geometry');
+  this.localModalMassKg=stringGeometry===null?null:
+   idealStringModalMassKg(stringGeometry);
   this.piano=new SharedPassiveModalPiano({
    sampleRate,externalForceMode:true,partialsBass,partialsTreble,
-   coupling,inharmonicity
+   coupling,inharmonicity,uniformModalMassKg:this.localModalMassKg
   });
   this.sampleRate=sampleRate;this.h=1/sampleRate;
   this.key=key;this.mass=hammerMassKg;
