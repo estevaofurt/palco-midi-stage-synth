@@ -1,0 +1,57 @@
+name: Stage Synth — D v1.12.7 isolated bass hammer candidate
+on:
+  push:
+    branches:
+      - experimental/stage-d-bass-v127-step1-20261123
+  pull_request:
+    paths:
+      - 'physical-piano-hybrid.js'
+      - 'tests/bass_hammer_v127.test.mjs'
+      - 'scripts/check_piano_d_candidate_v127.mjs'
+      - '.github/workflows/piano-d-bass-candidate-v127.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify syntax and all Node tests
+        run: |
+          npm run check
+          node --check scripts/check_piano_d_candidate_v127.mjs
+      - name: Get immutable previous D motor from the approved v1.12.6 commit
+        run: |
+          git show 3a104f114642cee4051108faf08d765d79ef9439:physical-piano-hybrid.js > .stage-d-v126-baseline.mjs
+          node --check .stage-d-v126-baseline.mjs
+      - name: Compare bitwise C4+ baseline and C1-C3 altered bass, 32–64 voices
+        run: node scripts/check_piano_d_candidate_v127.mjs
+      - name: Profile candidate 32/48/64 voice processing budget, informational
+        run: |
+          node scripts/benchmark_piano_d_cpu.mjs > stage-d-v127-cpu-candidate.json
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const r=JSON.parse(readFileSync('stage-d-v127-cpu-candidate.json','utf8'));
+          if(r.data.length!==6)throw Error('incomplete profile');
+          for(const d of r.data){
+            if(d.activeVoices!==d.requestedVoices||!Number.isFinite(d.p99BlockMs)||d.peak>=1)
+              throw Error('invalid test: '+JSON.stringify(d));
+            console.log('BENCH '+d.profile+'/'+d.arrangement+' modes='+d.resonators+
+              ' noteOnMs='+d.noteOnBatchMs+' p95='+d.p95BlockMs+
+              ' p99='+d.p99BlockMs+' worst='+d.worstBlockMs);
+          }
+          NODE
+      - name: Preserve numerical CPU evidence, no piano source audio
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-v127-bass-candidate-node-profile
+          path: stage-d-v127-cpu-candidate.json
+          retention-days: 7
+          if-no-files-found: error
