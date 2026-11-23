@@ -35,6 +35,7 @@ on:
       - 'tests/reactive_felt_modal_piano_e32.test.mjs'
       - 'tests/passive_distributed_soundboard_e33.test.mjs'
       - 'tests/reactive_felt_distributed_e33.test.mjs'
+      - 'tests/percussive_felt_attack_e34.test.mjs'
       - 'tests/analytic_spatial_plate_radiation_e33.test.mjs'
       - 'tests/coupled_nonlinear_hammers_e32.test.mjs'
       - 'scripts/benchmark_nonlinear_hammers_e32.mjs'
