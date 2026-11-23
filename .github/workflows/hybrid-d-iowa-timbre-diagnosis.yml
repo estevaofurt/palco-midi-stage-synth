@@ -1,5 +1,12 @@
 name: Stage Synth - D versus real Steinway B acoustic diagnosis
 on:
+  push:
+    branches:
+      - research/bass-piano-v127-readiness-20261123
+    paths:
+      - 'scripts/diagnose_piano_bass_envelope.mjs'
+      - 'tests/piano_bass_preparation_v127.test.mjs'
+      - '.github/workflows/hybrid-d-iowa-timbre-diagnosis.yml'
   pull_request:
     paths:
       - 'physical-piano-hybrid.js'
