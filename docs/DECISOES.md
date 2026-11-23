@@ -214,3 +214,12 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Limite de direitos:** artigo científico ≠ arquivo de dados autorizado, nem licença de software de terceiros. Simionato et al. têm código **LGPLv3** e dataset externo de direitos não verificados; estudo conceitual não autoriza copiá-lo sem revisão de obrigações. Qualquer novo dado de calibração do Stage comercial exige autorização expressa.
 
 **Status:** somente documentação e protocolo; nenhuma gravação física nova, implementação DSP/UI/MIDI/FX/preset ou merge de P1/P2; `main` v1.12.4 e v1.9.5 histórica preservadas, **0/7 R-GATEs completos** e 32–64 notas aguardando teste físico.
+
+
+## D-029 — Priorizar obtenção de dados físicos correlacionados por instrumento e validar força inversa (23/11/2026)
+
+**Decisão:** selecionar **FWF PAPA/FPM2 (MDW/IWK)** como candidato institucional prioritário a consultar sobre sinais físicos reais de um mesmo piano, e **IRCAM Modalys** como candidato secundário para dados modais de tampo. Relatório de pesquisa [ACESSO_DADOS_FISICOS_PAPA_IRCAM_FORCA_INVERSA_2026-11-23.md](ACESSO_DADOS_FISICOS_PAPA_IRCAM_FORCA_INVERSA_2026-11-23.md). Não presumir que autores possuam ou disponibilizem arquivos preservados ou com licença comercial.
+
+**Ajustes de método:** permitir **M01.2** — reconstruir `F_h(t)` pelo sinal de velocidade *medida na corda*, nos limites de Chaigne 2016 e com validação de erro; não substituir pela simples análise de WAV. Estender **M05** para estudar contribuição perceptível do aro/estrutura no grave, motivada por análise de um Bösendorfer real, mas não declarar parâmetros universais nem adicionar filtros sem ensaio. A licença do programa/arquivo IRCAM e a publicação científica são propriedades distintas de direitos de derivação de dados.
+
+**Proteções:** somente pesquisa/documentação, sem aquisição de dados proprietários, envio de e-mails, código externo ou alteração de DSP, presets, MIDI, FX ou UI. Acervo de 50 originais de seis pianos continua único verificado, Stage v1.12.4 e referência v1.9.5 preservados, **0/7 R-GATEs globais aprovados integralmente**, 32–64 vozes não homologadas.
