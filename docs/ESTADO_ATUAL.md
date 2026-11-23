@@ -1,3 +1,11 @@
+## E0 — comparação de áudio real dos quatro pianos (22/11/2026)
+
+Na branch de pesquisa E0 foi implementado um procedimento de CI que **baixou e analisou efetivamente 33 gravações isoladas** de Yamaha C5, Steinway B, Felt Fuchs & Möhr e Upright Knight (amostras AIFF/WAV/AAC em /tmp somente). Nenhum sample foi incorporado ao GitHub, à aplicação ou ao artifact: somente proveniência e métricas JSON. A análise foi comparada a todos os motores A/B/C em 48 kHz, sem FX, mantendo DSP original e a v1.9.5. O resultado aponta forte diferença de amplitude relativa de parciais nos graves B/C, mas não é uma avaliação subjetiva de realismo; pp/mf/ff e níveis AAC não representam um velocity MIDI comum. Notas com menos de três parciais detectáveis têm estimativa de B nula. A nova observação espectral curta de ataque busca reduzir falsos negativos em C6 sem tratá-la como rigidez de corda.
+
+Detalhes e cautelas: docs/ANALISE_AUDIO_REAL_E0.md. A meta 32/64, áudio real em PC/Moto g04s e o experimento isolado P1 permanecem sem homologação.
+
+---
+
 ## Referências sonoras verificadas para os quatro pianos (22/11/2026)
 
 Catálogo detalhado em [REFERENCIAS_SONORAS_YAMAHA_STEINWAY_FELT_UPRIGHT_2026-11-22.md](REFERENCIAS_SONORAS_YAMAHA_STEINWAY_FELT_UPRIGHT_2026-11-22.md).
