@@ -92,3 +92,12 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Decisão:** diferenciar gravações polifônicas com FX de notas isoladas secas; medir rigidez, decaimento por parcial, resposta à velocity, releases, ressonância simpática e função de transferência da ponte/tampo por registro. Usar instrumentos/referências licenciados e metadados claros. Gravações privadas não devem ser publicadas nem copiadas como samples.
 
 **Validação:** medições observacionais, teste auditivo nivelado, CI e CPU em AudioWorklet real (PC e Moto g04s). Mínimo 32, meta 64; sem homologação por benchmark Node. Decisão de arquitetura depende da evidência, não do rótulo do motor.
+
+
+## D-016 — Fontes de áudio identificadas por modelo, licença e condições de captura (22/11/2026)
+
+**Decisão:** usar Yamaha Salamander C5 (CC BY 3.0), Steinway Model B University of Iowa (permissão pública sem SPDX), Felt Fuchs & Möhr (domínio público declarado pelo autor) e Upright Kawai FreePats (CC0) como **referências físicas diferentes**. Usar Yamaha CFX GSi somente como referência de escuta: o CFX não equivale ao Yamaha C5 e os WAVs brutos não estão licenciados para incorporação no Stage. O Ivy Audio Piano in 162 é fonte adicional para avaliação de pedal, microfone e dinâmica; distribuição de samples não é presumidamente autorizada.
+
+**Controles:** baixar/manter áudios localmente, registrar hashes e condições, preservar originais, rejeitar trechos em loop/reverberação para inferir T60 de cordas. Validação requer nota isolada, mapeamento correto de pitch e intensidade e escuta nivelada; não supor que pp/mf/ff mapeiem diretamente para velocidades MIDI 32/80/120.
+
+**Referência:** docs/REFERENCIAS_SONORAS_YAMAHA_STEINWAY_FELT_UPRIGHT_2026-11-22.md. **Alteração documental somente**; sem mudança nos motores A/B/C e sem upload de gravações.
