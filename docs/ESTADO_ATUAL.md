@@ -1,3 +1,13 @@
+## Felt original comercial preparado: 15 arquivos íntegros (23/11/2026)
+
+O ZIP **original** \`FuchsUndMoehrSamplesWAV16bit.zip\`, publicado como **Public Domain** pelo criador **Tom Guder**, foi lido seletivamente via HTTP Range da origem Google Drive, sem baixar os 649 MB completos. Seus 264 WAVs estão organizados por **88 notas × 3 camadas**. **15 WAVs originais** de MIDI nominal 36/48/60/72/84, camadas piano/mezzo/forte, foram verificados integralmente (**CRC32, WAV 48kHz/16bit/2 canais e SHA256**), com **36/36 testes aprovados**: https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45105332553 . Os SHA256 estão em research/commercial_audio/felt_original_verified_sha256.json. Não há áudio em GitHub nem no app.
+
+**Acervo comercialmente elegível acumulado: 50 gravações originais de seis pianos acústicos distintos, 173.943.136 bytes conferidos**, sem ganho em R-GATE físico. A declaração PD e direitos de terceiros serão revisados no lançamento. Continuam faltando par com/sem feltro no mesmo piano, força martelo–corda real, duas polarizações e mobilidade complexa da ponte por região. Plano concreto de medição/contratação em docs/PROTOCOLO_MEDICOES_FISICAS_PIANO_COMERCIAL_2026-11-23.md.
+
+**Bloqueio expresso permanece: 0/7 R-GATEs integralmente satisfeitos.** Não modificar DSP, A/B/C/P1/P2, FX, MIDI, UI ou presets. Relatório: docs/PREPARACAO_FELT_ORIGINAL_COMERCIAL_2026-11-23.md.
+
+---
+
 ## Preparação comercial ampliada — 35 gravações ORIGINAIS verificadas (22/11/2026)
 
 **Novo:** sete WAVs originais do **Steinway Model D de Princeton (bitKlavier Grand, CC BY 4.0)** foram obtidos INDIVIDUALMENTE de três coleções do Archive.org, PCM 44,1k/16bit, verificados integralmente com SHA256 e apagados após a verificação. Correspondem a C2v8, C4v1/v8/v16 e C6v8 do Piano Bar, além da mesma C4v8 Binaural e Harp Omni. Teste https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45103239343 — 22/22 testes; SHA256 preservados em research/commercial_audio/steinway_d_verified_wav_sha256.json. Os ZIPs completos **NÃO** foram transferidos; dados de áudio **NÃO** estão no GitHub.
