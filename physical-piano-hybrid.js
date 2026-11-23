@@ -25,15 +25,15 @@ const midiHz=k=>440*2**((k-69)/12);
  * The pulse is a compressed half-sine squared (F ∝ compression²): a simple
  * nonlinear compression model, NOT measured felt law or Hammer F(t).
  */
+function dirichletSum(n,x){
+  const half=x*.5,s=Math.sin(half);
+  return Math.abs(s)<1e-8?n:Math.sin(n*half)/s;
+}
 export function bassContactTransferMagnitude(n,w){
   if(!Number.isInteger(n)||n<16||n>MAX_HAMMER_SAMPLES||
       !Number.isFinite(w)||w<0||w>Math.PI)throw new RangeError('invalid contact spectrum');
   const d=TWO_PI/n;
-  const dirichlet=x=>{
-    const half=x*.5,s=Math.sin(half);
-    return Math.abs(s)<1e-8?n:Math.sin(n*half)/s;
-  };
-  return Math.abs(dirichlet(w)+.5*dirichlet(w+d)+.5*dirichlet(w-d))/n;
+  return Math.abs(dirichletSum(n,w)+.5*dirichletSum(n,w+d)+.5*dirichletSum(n,w-d))/n;
 }
 const CHARACTER=Object.freeze({
   // Inspired by qualitative differences, not measured Yamaha/Steinway constants.
@@ -129,7 +129,7 @@ export class HybridPianoEngine {
    * MIDI speed and felt hardness. Normalized area makes the impulse energy
    * explicit; high-frequency suppression comes from its Fourier transform.
    */
-  prepareBassContact(v,seconds,hardness){
+  prepareBassContact(v,seconds){
     const n=clamp(Math.round(seconds*this.sr),16,MAX_HAMMER_SAMPLES);
     // A positive raised-cosine pressure envelope, normalized to unit area.
     // Recurrence avoids one transcendental call per force sample on note-on.
@@ -177,7 +177,7 @@ export class HybridPianoEngine {
     const single=key<37,nyquist=this.sr*.44;
     // Only the bass gets the candidate physical contact experiment.
     // C4–C6 are guaranteed to keep the original oscillator path.
-    if(key<=48)this.prepareBassContact(v,t,hardness);
+    if(key<=48)this.prepareBassContact(v,t);
     else {v.forceCount=0;v.forceIndex=0;}
     let count=0,power=0;
     // Save normalized partial weights locally in voice state; no unlicensed tables.
