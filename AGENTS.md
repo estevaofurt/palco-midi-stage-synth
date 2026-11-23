@@ -1,3 +1,17 @@
+## FINALIDADE COMERCIAL — restrição obrigatória de fontes e código (22/11/2026)
+
+**Decisão expressa do titular:** o Stage Synth é um **produto destinado à comercialização**, não um instrumento acadêmico/pessoal. Essa finalidade prevalece sobre classificações antigas da pesquisa.
+
+- **Não usar** áudios, MIDI, dados de calibração ou código de terceiros com licença **NC/research-only/uso pessoal** no pipeline do software comercial sem **autorização comercial explícita** e comprovada. LER artigos e aprender princípios científicos continua permitido; não confundir artigo com direito de usar o dataset.
+- Priorizar corpus próprio com contrato de uso comercial, **CC0, CC BY 3.0/4.0** com atribuições, domínio público comprovado e permissões explícitas para qualquer projeto (por exemplo, texto do acervo Iowa). Cada arquivo exige prova de origem/licença e revisão do caso concreto.
+- **BiVib, RWC, MAPS e MAESTRO NÃO estão liberados** para calibração do produto sob as condições NC conhecidas. Não aceitar a ausência dos arquivos no pacote final como prova de autorização para treinamento ou calibração.
+- Software comercial não significa automaticamente **código fechado**; a licença do próprio Stage é decisão do titular. Não existe LICENSE na raiz nesta auditoria e a propriedade/licença de cada dependência, código adaptado, modelo e recurso sonoro ainda precisa ser revisada.
+- Não usar marcas (Yamaha/Steinway) ou modelos como se houvesse endosso do fabricante, nem copiar amostras de produtos comerciais sob EULA. Nenhum DSP/P1/P2 novo enquanto os sete R-GATEs não estiverem efetivamente comprovados e o usuário não autorizar retomada.
+
+**Fonte da política:** docs/POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md. Manter inalterado o bloqueio anterior de implementação.
+
+---
+
 # Stage Synth — Instruções compartilhadas para IAs e colaboradores
 
 **Projeto:** `estevaofurt/palco-midi-stage-synth`  
