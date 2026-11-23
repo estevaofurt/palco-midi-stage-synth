@@ -1,3 +1,9 @@
+
+### Correção posterior de licenças do N03 — 23/11/2026
+
+A ressalva N03 acima mistura duas situações jurídicas que devem ser distinguidas: **o artigo publicado** tem licença CC BY-NC-ND, mas **os datasets publicados no Dryad são disponibilizados sob CC0 pela política do próprio repositório**, conforme https://datadryad.org/terms e https://datadryad.org/publication_policy. Assim, o dataset de Kuromiya et al. é **candidato juridicamente permissivo** para estudar movimentos da tecla e percepção, sujeito à verificação de bytes, eventuais componentes de terceiros e revisão jurídica. Sua pasta contém `Code_Data.zip` (29,36 KB) e `README.md` (3,18 KB), mas **nenhum foi adquirido/hashado**; acesso pela ferramenta de pesquisa respondeu 403. Isso **não** autoriza considerar que martelo–corda e mobilidade física da ponte estejam medidos. Detalhes na nova [auditoria H04](MODELOS_NUMERICOS_DUSSEK_MF1_DRYAD_CC0_2026-11-23.md).
+
+---
 # Stage Synth — avaliação de radiador por posição, ação perceptiva e fonte CC0 Upright (23/11/2026)
 
 **Tipo:** auditoria e preparação documental de pesquisa. **Nenhum DSP, MIDI, UI, FX, preset ou WAV do Stage alterado.**
