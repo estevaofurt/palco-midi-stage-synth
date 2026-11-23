@@ -32,11 +32,18 @@ jobs:
       - name: Measure real Steinway and compare with all three piano engines
         run: |
           node scripts/analyze_reference_audio.mjs "$STAGE_AUDIO_WORKDIR/manifest.json" "$STAGE_AUDIO_WORKDIR/e0-report.json"
+      - name: Download compact Yamaha C5 and Knight upright references (AAC, exploratory)
+        run: python3 scripts/fetch_compact_piano_reference.py
+      - name: Compare compact source spectral fingerprints with A/B/C
+        run: |
+          node scripts/analyze_reference_audio.mjs "$STAGE_AUDIO_WORKDIR/compact-manifest.json" "$STAGE_AUDIO_WORKDIR/e0-compact-report.json"
       - name: Publish only numeric measurements and source hashes
         uses: actions/upload-artifact@v4
         with:
           name: piano-real-reference-e0-summary
-          path: /tmp/stage-piano-reference-e0/e0-report.json
+          path: |
+            /tmp/stage-piano-reference-e0/e0-report.json
+            /tmp/stage-piano-reference-e0/e0-compact-report.json
           retention-days: 14
           if-no-files-found: error
       - name: Delete external audio samples from runner
