@@ -196,8 +196,8 @@ export class Panel {
           const remove=elem('button','editor-btn','Retirar amostras');remove.type='button';
           remove.disabled=count===0;remove.onclick=()=>this.actions.clearSamples(id,model);
           const hint=elem('p','sample-hint',count
-            ?`${count} amostras reais carregadas para ${instrumentName(id,patch.values)}. Permanecem apenas nesta sessão.`
-            :'Para timbres mais realistas, selecione gravações WAV com nomes C4_v40.wav, C4_v100.wav, MIDI64_v100.wav. Carregamento local, sem envio de dados.');
+            ?`${count} WAV locais carregados para ${instrumentName(id,patch.values)}. Funcionam no motor Clássico, não nos motores A/B/C/D. Permanecem apenas nesta sessão.`
+            :'Importe notas WAV nomeadas C4_v40.wav, C4_v100.wav ou MIDI64_v100.wav. Usadas apenas no motor Clássico; A/B/C/D permanecem originais. Os arquivos não são enviados ao servidor.');
           picker.append(input,remove,hint);section.append(picker);
         }else if(control.type==='soundfont'){
           const upload=elem('div','sf-upload');
