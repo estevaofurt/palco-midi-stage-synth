@@ -1,3 +1,19 @@
+# Fontes de modelos numéricos e distinção de licenças — 23/11/2026
+
+[Relatório H01–H04](MODELOS_NUMERICOS_DUSSEK_MF1_DRYAD_CC0_2026-11-23.md).
+
+- [x] Auditar **Dussek** em GitHub: licença do MOTOR **AGPLv3**, preset **Grand B CC BY 4.0**, preset Upright C **CC BY-SA 4.0**; manifesto 88 notas, parâmetros derivados de gravações e arquivo `data.bin` de **514.040 bytes** com SHA256 **declarado**, não recalculado neste ciclo.
+- [x] Auditar **MF-1** MIT e `piano_tables.inc`: 30 notas amostradas, 970 parciais, corpo de 32 modos e máximo de 384 osciladores; sem confundir limite de osciladores com 32–64 VOZES completas; lacunas de ressonância simpática e abafadores reconhecidas.
+- [x] Corrigir classificação do **Dryad**: datasets publicados **CC0**, enquanto artigo publicado pode ser NC-ND; `Code_Data.zip` e `README.md` listados, mas não adquiridos/hashados devido a acesso 403; sensores documentados são de **movimento de tecla**, não força martelo–corda nem ponte.
+- [x] Revisar riscos de novos corpora: Zenodo localização de tecla = **respostas de participantes**, não WAV de teclado; dataset 2026 pedal on/off baseado em **VST e MIDI de terceiro**, não em medição do sistema físico de abafadores.
+- [ ] Antes de usar números de terceiros, conferir **hash original** do `data.bin` e autorização de derivados/atribuições, e medir acurácia para notas não amostradas; **não importar nem integrar enquanto bloqueio de DSP estiver ativo**.
+- [ ] Resolver disputa de possíveis rótulos da série Iowa via **áudio original** e pitch detector aferido, sem presumir qual projeto externo está correto.
+- [ ] Se útil para M09, adquirir e auditar somente dados Dryad CC0 de posição/gestos de tecla, descartando dependências de código não verificadas; não somar à biblioteca de 50 WAV.
+- [ ] Seguir busca de **F_h(t)/δ(t)/H/V/Y_ponte 2×2 efetivamente medidos** em um piano com permissão comercial. PAPA/IRCAM e medições próprias continuam vias prioritárias.
+- [ ] Manter **0/7 R-GATEs integralmente aprovados**; nenhum DSP/P1/P2 nem garantia de 32/64 vozes até referências essenciais, testes e autorização expressa.
+
+---
+
 # Investigação de acesso real aos dados físicos do piano — 23/11/2026
 
 [Auditoria PAPA / IRCAM / força inversa](ACESSO_DADOS_FISICOS_PAPA_IRCAM_FORCA_INVERSA_2026-11-23.md).
