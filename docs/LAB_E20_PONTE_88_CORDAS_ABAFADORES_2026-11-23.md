@@ -47,3 +47,16 @@ A sequência D v1.12.7–v1.12.9 foi considerada sem avanço timbral perceptíve
 **Limitações importantes:** `peakForce` está em unidade normalizada, não newtons; duração do contato é uma hipótese, não uma medição. O protótipo mantém uma coordenada por polarização por tecla, não representa todas as ~230 cordas físicas de um piano real. `boardVelocity` é velocidade mecânica generalizada, **não pressão sonora radiada**. O laboratório não está interligado aos modos do D e nenhum WAV novo deve ser apresentado como melhora de timbre. A v1.12.8 continua pública, A/B/C/Clássico/MIDI/FX/presets intactos, 0/7 R-GATEs e nenhuma certificação de 32–64 notas em PC/Android.
 
 **Próximo gate real:** identificar e calibrar a radiação do tampo; projetar uma integração que substitua a antiga soma modal por uma rede passiva, em vez de apenas misturar mais um corpo como wet FX; comparar C2/C3 em arquivos de referência independentes e escuta nivelada antes de alterar som distribuído.
+
+## Benchmark E2.1 real do agendador de martelos + ponte, CI 45193514810
+[Run](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45193514810): **179/179 testes passaram**, incluindo os seis dedicados à interface de força, benchmark numérico E2.0 e E2.1, e verificação sem alterações em DSP/UI público. `scripts/benchmark_hammer_driven_passive_piano.mjs` mede o agendador de força e a **rede de 88 teclas/176 coordenadas** no Node/Linux, em blocos de 128 amostras a 48kHz:
+
+| Teclas/contatos acionados | Mediana (ms) | p95 (ms) | Fração do orçamento de 2,667ms |
+|---|---:|---:|---:|
+| 32 | 0,24291 | 0,25961 | 9,74% |
+| 48 | 0,24154 | 0,25342 | 9,50% |
+| 64 | 0,28571 | 0,40321 | 15,12% |
+
+Erro do ledger energético em todos os casos: cerca de `3e-14` na normalização ilustrativa; nenhum valor não finito. Os números **não incluem** síntese D, AudioWorklet no Chrome/Android, efeitos, radiatividade ou custos de interface. O custo elevado do caso 64 é sinal para monitorar e repetir com mais condições, não para considerar 64 notas homologadas.
+
+**Limite acústico:** ainda não existe filtro medido para transformar velocidade/aceleração da ponte em pressão sonora. Gerar um WAV de `boardVelocity` seria apenas uma demonstração mecânica e não um piano acústico. Não declarar evolução timbral nem promover para `main` por estes resultados.
