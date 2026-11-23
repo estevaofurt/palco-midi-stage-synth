@@ -21,6 +21,13 @@ Implementação: estimador H1 por médias de Welch, janela Hann periódica, remo
 
 Os testes são **somente sintéticos** e a função é destinada a análise offline; não gera/importa WAV, não usa código restrito e não executa em AudioWorklet. O workflow congela explicitamente os motores, UI, MIDI, FX, presets e `package.json` frente ao commit público.
 
+
+## Validação executada em GitHub Actions
+
+- [Run E1.1 45175445690](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45175445690): `npm run check` **147/147**, suíte H1 dedicada **6/6**, proteção de arquivos públicos e verificação de sintaxe concluídas sem falhas.
+- [Run acústico geral 45175445415](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45175445415): **147/147** regressões Node aprovadas, sem evidência de alteração de timbre.
+- Os ensaios usam sinais gerados no teste (FIR causal e ruído sintético). Nenhuma série original acelerômetro/microfone de piano foi obtida ou validada. **Não homologar desempenho da síntese em navegador nem licenças comerciais por estes resultados.**
+
 ## Próxima decisão
 
 Não migrar para o DSP até a chegada de pelo menos um conjunto de sinais reais `a_ponte(t)` e `p_L/R(t)` com calibração, sincronização e autorização de uso comercial, preferencialmente com excitação controlada e séries independentes de validação. Mesmo esse conjunto **não determina automaticamente** a matriz complexa de mobilidade 2×2, o impacto de feltro ou ressonâncias de todas as partes do corpo. A prioridade permanece o **grave sem caráter de violão**, sem danificar C4–C6; avaliar a contribuição física do caminho de radiação em A/B e escuta cega somente após haver medições.
