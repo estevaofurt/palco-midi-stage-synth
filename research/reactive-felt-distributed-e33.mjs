@@ -26,6 +26,7 @@ export class ReactiveFeltDistributedPianoE33 {
   sampleRate=48000,key=48,
   hammerVelocityMps=2,hammerMassKg=.008,hammerGapM=.0004,
   feltStiffness=1e10,feltExponent=2.3,
+  feltHardeningRatio=0,feltHardeningThresholdM=.00016,
   panelModes=8,partialsBass=5,partialsTreble=2,sustain=127
  }={}){
   if(!Number.isInteger(key)||key<21||key>108||
@@ -34,6 +35,8 @@ export class ReactiveFeltDistributedPianoE33 {
      !bounded(hammerGapM,0,.01)||
      !bounded(feltStiffness,1e5,1e12)||
      !bounded(feltExponent,1.1,4)||
+     !bounded(feltHardeningRatio,0,32)||
+     !bounded(feltHardeningThresholdM,0,.002)||
      !bounded(sustain,0,127))
     throw new RangeError('invalid reactive distributed plate contact');
   this.piano=new PassiveDistributedSoundboardE33({
@@ -42,6 +45,10 @@ export class ReactiveFeltDistributedPianoE33 {
   this.h=1/sampleRate;this.key=key;this.mass=hammerMassKg;
   this.hammerX=-hammerGapM;this.hammerV=hammerVelocityMps;
   this.k=feltStiffness;this.exponent=feltExponent;
+  // E3.4 opt-in: compliant outer felt compresses into denser inner felt.
+  // A second convex potential, NOT sampled impact noise or EQ.
+  this.hardeningRatio=feltHardeningRatio;
+  this.hardeningThresholdM=feltHardeningThresholdM;
   this.start=this.piano.keyStart[key-21];
   this.end=this.piano.keyStart[key-20];
   this.freeRhs=new Float64Array(this.piano.n);
@@ -57,14 +64,23 @@ export class ReactiveFeltDistributedPianoE33 {
   return q;
  }
  potential(delta){
-  return delta>0?
-   this.k*delta**(this.exponent+1)/(this.exponent+1):0;
+  if(delta<=0)return 0;
+  const power=this.exponent+1;
+  const core=Math.max(0,delta-this.hardeningThresholdM);
+  return this.k*delta**power/power+
+   this.k*this.hardeningRatio*core**power/power;
+ }
+ forceAtCompression(delta){
+  if(delta<=0)return 0;
+  const core=Math.max(0,delta-this.hardeningThresholdM);
+  return this.k*delta**this.exponent+
+   this.k*this.hardeningRatio*core**this.exponent;
  }
  gradient(previous,current){
   if(previous<=0&&current<=0)return 0;
   const dx=current-previous;
   if(Math.abs(dx)<1e-14)
-   return this.k*Math.max(0,.5*(previous+current))**this.exponent;
+   return this.forceAtCompression(Math.max(0,.5*(previous+current)));
   return Math.max(0,(this.potential(current)-this.potential(previous))/dx);
  }
  totalEnergy(){
