@@ -1,6 +1,6 @@
 {
   "schema": "stage-commercial-lossless-flac-pilot-v1",
-  "goal": "commercial-safe, verified original lossless FLAC subset for reference PREPARATION only; no extraction of piano mechanics parameters yet",
+  "goal": "commercial-safe 5 registers × 3 Yamaha C5 velocity layers and selected Kawai KW originals; no DSP calibration authorized",
   "sourceCatalog": [
     {
       "repository": "sfzinstruments/SalamanderGrandPiano",
@@ -213,6 +213,84 @@
       "velocityLayer": "vH",
       "license": "CC0-1.0",
       "role": "upright timbre / attack; bass loops and room disqualify physical T60"
+    },
+    {
+      "id": "yamaha-c5-c3v1",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C3v1.flac",
+      "bytes": 1624899,
+      "gitBlobSha": "208ad6b0a8788653ad57356a11b2b2da71e9a171",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C3",
+      "velocityLayer": "v1",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c3v8",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C3v8.flac",
+      "bytes": 1741485,
+      "gitBlobSha": "c2d2a2019e13bf292923667a3db1df8a47ea5cfc",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C3",
+      "velocityLayer": "v8",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c3v16",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C3v16.flac",
+      "bytes": 1875350,
+      "gitBlobSha": "05391ccf3a7fd724920ffefda57eac91a935fc56",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C3",
+      "velocityLayer": "v16",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c5v1",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C5v1.flac",
+      "bytes": 1238975,
+      "gitBlobSha": "3194ad58ac43d0868ecada1893a2710298875c46",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C5",
+      "velocityLayer": "v1",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c5v8",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C5v8.flac",
+      "bytes": 1516971,
+      "gitBlobSha": "8f2a4baab012730693c1b173ce463056c22e42d0",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C5",
+      "velocityLayer": "v8",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
+    },
+    {
+      "id": "yamaha-c5-c5v16",
+      "repository": "sfzinstruments/SalamanderGrandPiano",
+      "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+      "path": "Samples/C5v16.flac",
+      "bytes": 1531778,
+      "gitBlobSha": "42c23f6132943738fd1ccadaae374e874adaf9c3",
+      "instrument": "Yamaha C5",
+      "recordedPitch": "C5",
+      "velocityLayer": "v16",
+      "license": "CC-BY-3.0",
+      "role": "timbre and attack spectrum (not absolute measured hammer velocity)"
     }
   ],
   "restrictions": [
