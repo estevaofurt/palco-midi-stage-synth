@@ -52,6 +52,7 @@ on:
       - 'scripts/audit_reactive_felt_e32.mjs'
       - 'scripts/benchmark_distributed_board_e33.mjs'
       - 'scripts/render_reactive_spatial_e33.mjs'
+      - 'scripts/render_reactive_felt_e32.mjs'
       - '.github/workflows/stage-e2-passive-bridge.yml'
   workflow_dispatch:
 jobs:
@@ -93,6 +94,8 @@ jobs:
         run: node scripts/diagnose_nonlinear_hammers_e32.mjs | tee e32-hammer-audit.json
       - name: Audit E3.2 reactive contact energy and acoustic limits
         run: node scripts/audit_reactive_felt_e32.mjs | tee e32-reactive-hammer-run.json
+      - name: Generate E3.2 reactive felt with original and geometric modal mass WAV
+        run: node scripts/render_reactive_felt_e32.mjs | tee e32-listening-summary.json
       - name: Benchmark 32-64 struck keys with distributed 2-4-8 spatial plate modes
         run: node scripts/benchmark_distributed_board_e33.mjs | tee e33-multimode-benchmark.json
       - name: Generate sample-free reactive contact and spatial plate stereo E3.3 WAV
@@ -121,6 +124,10 @@ jobs:
             e31-physical-source-diagnostic.json
             e32-reactive-hammer-run.json
             e32-reactive-hammer-diagnostic.json
+            e32-listening-summary.json
+            e32-listening-audit.json
+            e32-reactive-old-mass-physical.wav
+            e32-reactive-geometry-mass-physical.wav
             e33-multimode-benchmark.json
             e33-spatial-audio-summary.json
             e33-reactive-plate-audition.json
