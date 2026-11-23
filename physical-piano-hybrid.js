@@ -19,6 +19,22 @@ const SRATE = 48000, TWO_PI = 2*Math.PI, MAX_VOICES = 64, MAX_MODES = 32;
 const MAX_BLOCK = 128, MAX_HAMMER_SAMPLES=512, T60_DB = 6.907755278982137;
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const midiHz=k=>440*2**((k-69)/12);
+/**
+ * Magnitude of the *normalized* raised-cosine contact pulse's discrete Fourier
+ * transform. Closed-form Dirichlet sums are O(1) per mode vs O(contactSamples).
+ * The pulse is a compressed half-sine squared (F ∝ compression²): a simple
+ * nonlinear compression model, NOT measured felt law or Hammer F(t).
+ */
+export function bassContactTransferMagnitude(n,w){
+  if(!Number.isInteger(n)||n<16||n>MAX_HAMMER_SAMPLES||
+      !Number.isFinite(w)||w<0||w>Math.PI)throw new RangeError('invalid contact spectrum');
+  const d=TWO_PI/n;
+  const dirichlet=x=>{
+    const half=x*.5,s=Math.sin(half);
+    return Math.abs(s)<1e-8?n:Math.sin(n*half)/s;
+  };
+  return Math.abs(dirichlet(w)+.5*dirichlet(w+d)+.5*dirichlet(w-d))/n;
+}
 const CHARACTER=Object.freeze({
   // Inspired by qualitative differences, not measured Yamaha/Steinway constants.
   japanese:{tone:1.10,body:1.05,decay:1.04,detune:.9,contact:.92,noise:.84,radiation:.75},
@@ -115,15 +131,15 @@ export class HybridPianoEngine {
    */
   prepareBassContact(v,seconds,hardness){
     const n=clamp(Math.round(seconds*this.sr),16,MAX_HAMMER_SAMPLES);
-    const p=1.45+1.25*clamp(hardness,0,1);
-    let sum=0;
+    // A positive raised-cosine pressure envelope, normalized to unit area.
+    // Recurrence avoids one transcendental call per force sample on note-on.
+    // Hardness and MIDI velocity affect duration through hybridContactTime.
+    const phase=TWO_PI/n,cw=Math.cos(phase),sw=Math.sin(phase);
+    let c=Math.cos(phase*.5),sn=Math.sin(phase*.5);
     for(let i=0;i<n;i++){
-      const compression=Math.sin(Math.PI*(i+.5)/n);
-      const pressure=compression**p;
-      v.force[i]=pressure;sum+=pressure;
+      v.force[i]=Math.max(0,(1-c)/n);
+      const nextC=c*cw-sn*sw;sn=sn*cw+c*sw;c=nextC;
     }
-    const inv=1/sum;
-    for(let i=0;i<n;i++)v.force[i]*=inv;
     v.forceCount=n;v.forceIndex=0;
   }
   addMode(v,mode,f,t60,amp,phase){
@@ -135,14 +151,8 @@ export class HybridPianoEngine {
       // Match its *post-contact modal amplitude* to the measured spectral
       // target, rather than injecting an arbitrary global noise/thump.
       // Phase is produced by propagation and the hammer-force waveform.
-      const cw=Math.cos(w),sw=Math.sin(w);
-      let cr=1,ci=0,fr=0,fi=0;
-      for(let j=0;j<v.forceCount;j++){
-        const force=v.force[j];fr+=force*cr;fi+=force*ci;
-        const nr=cr*cw-ci*sw;ci=cr*sw+ci*cw;cr=nr;
-      }
-      const response=Math.max(.045,Math.hypot(fr,fi));
-      v.drive[mode]=amp*Math.abs(sw)/response;
+      const response=Math.max(.045,bassContactTransferMagnitude(v.forceCount,w));
+      v.drive[mode]=amp*Math.abs(Math.sin(w))/response;
       v.y1[mode]=0;v.y2[mode]=0;
     }else{
       v.drive[mode]=0;
