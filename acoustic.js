@@ -170,8 +170,7 @@ export class Acoustic {
       this.hybridPromise=(async()=>{
         // Historical v1.12.6 HTML must *actually* load its frozen D core:
         // URL query strings alone do not pin an old GitHub Pages JS asset.
-        const historicalD=(typeof globalThis.location?.pathname==='string')&&
-          /\\/v1\\.12\\.6\\.html$/i.test(globalThis.location.pathname);
+        const historicalD=globalThis.location?.pathname?.endsWith('/v1.12.6.html')===true;
         await this.ctx.audioWorklet.addModule(historicalD
           ?'./physical-piano-hybrid-v126.js?build=1.12.6'
           :'./physical-piano-hybrid.js?build=1.12.7');
