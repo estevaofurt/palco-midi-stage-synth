@@ -77,7 +77,7 @@
 4. **Iowa MIS piano** — **DATA**, https://theremin.music.uiowa.edu/MISpiano.html. Comparação externa de notas pp/mf/ff com cadeia de gravação descrita, mas não uma medição neutra sem ambiente.
 **Falta:** protocolo A/B/X com controle de nível, referência única, julgamento cego, C4 em três dinâmicas com escuta e relatório de erro/semelhança; subjetividade do titular é gate de produto.
 
-## P1 — sete lacunas de caráter de piano completo
+## P1/P2 — sete lacunas de caráter de piano completo (K10–K15 P1 ou P1/P2, K16 P2)
 
 ### K10 — 2/3 cordas por nota, batimentos, aftersound e polarizações
 1. **Gabriel Weinreich, _Coupled piano strings_**, JASA 1977 — **EXP/MOD**, https://cir.nii.ac.jp/crid/1361699993945382016. Relação entre admitância da ponte, estado de afinação, batimentos, aftersound e duas polarizações.
@@ -149,7 +149,7 @@
 | Prioridade | K IDs | Fontes científicas ou técnicas verificáveis localizadas | Ainda carece de medição no piano-alvo? |
 |---|---|---|---|
 | P0 | K01–K09 | Todos têm 2–5 entradas individualizadas | **Sim, todos** |
-| P1 | K10–K16 | Todos têm 2–5 entradas individualizadas | **Sim, todos** |
+| P1/P2 | K10–K16 | Todos têm 2–5 entradas individualizadas | **Sim, todos** |
 | P2 | K17–K18 | Todos têm ≥3 entradas individualizadas | **Sim, todos** |
 
 **Por que a bibliografia ainda não torna o V4 um piano?** Porque muitos artigos descrevem instrumentos diferentes e alguns nem fornecem curvas de força, tempo, mobilidade complexa ou microfone em tabelas transferíveis. Não temos um único piano-alvo com parâmetros C4/ação/corda/ponte/tampo/campo acústico medidos e ligados pela mesma linha temporal.
