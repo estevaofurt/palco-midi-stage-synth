@@ -9,6 +9,7 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {auditPitchLabel} from '../research/iowa-f0-label-audit.mjs';
+import {compareOctaveHarmonicSupport} from '../research/iowa-pitch-harmonic-comb.mjs';
 const EXPECTED=new URL('../research/commercial_audio/iowa_steinway_b_verified_original_sha256.json',import.meta.url);
 const meta=JSON.parse(readFileSync(EXPECTED,'utf8'));
 const pitches=new Map([['C2',36],['C3',48],['C4',60],['C5',72],['C6',84]]);
@@ -61,14 +62,25 @@ export function evaluateManifest(manifest){
   }
   const aligned=pcm.subarray(onsetFrame,onsetFrame+Math.floor(48000*1.5));
   const result=auditPitchLabel(aligned,{key:item.key,sampleRate:48000});
+  const spectral=compareOctaveHarmonicSupport(aligned,{key:item.key,sampleRate:48000});
+  const jointLabelAssessment=result.classification==='label-consistent'&&spectral.classification==='spectral-supports-label'?
+   'dual-method-consistent':
+   result.classification==='label-mismatch-candidate'&&spectral.classification==='spectral-mismatch-candidate'?
+   'dual-method-mismatch-candidate':
+   result.classification==='label-consistent'&&spectral.classification==='spectral-mismatch-candidate'?
+   'contradictory-methods':
+   'not-dual-verified';
   output.push({id:item.id,key:item.key,dynamic:item.dynamic,
    sourceSha256:item.sha256,bytes:item.bytes,
    onsetSeconds:Number((onsetFrame/48000).toFixed(3)),
-   ...result});
+   ...result,spectral,jointLabelAssessment});
  }
  if(seen.size!==15)throw Error('incomplete 15-note matrix');
- const counts={};
- for(const o of output)counts[o.classification]=(counts[o.classification]||0)+1;
+ const counts={},jointCounts={};
+ for(const o of output){
+  counts[o.classification]=(counts[o.classification]||0)+1;
+  jointCounts[o.jointLabelAssessment]=(jointCounts[o.jointLabelAssessment]||0)+1;
+ }
  return {
   schema:'stage-iowa-original-pitch-label-audit-v1',
   method:'two independent windows, YIN CMND, 48->24 kHz',
@@ -76,7 +88,7 @@ export function evaluateManifest(manifest){
   noPhysicalParametersIdentified:true,
   noAudioUploaded:true,doesNotCalibrateStage:true,
   warning:'YIN may yield octave bias under inharmonic piano partials; mismatch is a candidate to inspect, not proof of mislabelling. Nominal Iowa pp/mf/ff not calibrated MIDI velocity.',
-  counts,results:output
+  counts,jointCounts,results:output
  };
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
@@ -87,6 +99,8 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
  for(const item of report.results)
   console.log('IOWA_PITCH '+item.id+' '+item.classification+
    ' f0='+item.f0Hz+' Hz offset='+item.centsFromLabel+
-   'c agreement='+item.agreementCents+'c');
+   'c agreement='+item.agreementCents+'c spectral='+item.spectral.classification+
+   ' joint='+item.jointLabelAssessment);
  console.log('IOWA_PITCH_COUNTS '+JSON.stringify(report.counts));
+ console.log('IOWA_PITCH_JOINT '+JSON.stringify(report.jointCounts));
 }
