@@ -136,8 +136,9 @@ test('ideal string modal mass is rho * pi * r² * L / 2 and not a timbral preset
  assert.equal(legacy.uniformModalMassKg,null);
  const dimensional=new SharedPassiveModalPiano({uniformModalMassKg:expected});
  assert.equal(dimensional.mass[0],expected);
- assert.equal(dimensional.ground[0]/dimensional.mass[0],
-              legacy.ground[0]/legacy.mass[0]);
+ assert.ok(Math.abs(dimensional.ground[0]/dimensional.mass[0]-
+              legacy.ground[0]/legacy.mass[0])<1e-10,
+  'mass scaling must preserve modal frequencies within floating-point roundoff');
  assert.throws(()=>new SharedPassiveModalPiano({uniformModalMassKg:-1}),RangeError);
 });
 
