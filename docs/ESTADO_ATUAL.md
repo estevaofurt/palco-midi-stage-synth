@@ -1,3 +1,11 @@
+## Pesquisa de radiação por posição e gestos de tecla — 23/11/2026
+
+Relatório: [RADIACAO_TAMPO_TOQUE_FONTES_COMERCIAIS_2026-11-23.md](RADIACAO_TAMPO_TOQUE_FONTES_COMERCIAIS_2026-11-23.md). Revisados **14 pontos de excitação** e T60 acústico do tampo em dois estágios na literatura (não T60 de corda); **quatro IRs Yamaha C3** medidas com alto-falante de contato (não uma FRF mecânica com força de ponte); resultados PNAS 2025 sobre movimentos de tecla e percepção. Auditado novo candidato **Meta Piano CC0** no GitHub: 352 nomes WAV A0–C8 × quatro layers, 352 entradas SFZ, manifestos e licença textualmente verificados, **mas nenhum áudio baixado ou hashado**; fabricante/captação/edição não determinados, sem inclusão no acervo Stage. Reconfirmado que o dataset Hamburgo mede força tecla–base, não ponte; exemplo de FRF de rabāb não oferece parâmetros de piano.
+
+**Sem liberação técnica:** `main` v1.12.4, referência de estabilidade relatada v1.9.5; **50 originais verificadas/seis pianos** inalteradas, **0/7 R-GATEs completos**, P1/P2 e DSP congelados. Não foram executados novos estudos acústicos ou medições reais nesta etapa documental. CI a registrar quando executado.
+
+---
+
 ## Pesquisa industrial Yamaha 2026 e ação de tecla DAFx25 (23/11/2026)
 
 **Validação efetiva da branch documental:** GitHub Actions [run 45108088429](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45108088429), job `audio-regression` concluído com sucesso: **95/95 testes Node**, **108 renderizações secas A/B/C, zero cenários com clipping ou amostras não finitas**, conforme logs. Não houve teste acústico/perceptivo em PC ou Moto g04s nesta rodada; CI não libera os R-GATEs nem prova 32–64 vozes livres de estalos em hardware. Mudança limitada aos arquivos documentais.
