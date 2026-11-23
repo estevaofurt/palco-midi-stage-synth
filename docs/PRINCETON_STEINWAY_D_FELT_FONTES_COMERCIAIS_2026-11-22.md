@@ -1,3 +1,9 @@
+## Atualização de 23/11/2026 — FELT autoral adquirido e verificado
+
+A situação Felt pendente descrita abaixo foi **superada parcialmente**: 15 WAVs originais do ZIP do próprio Tom Guder foram transferidos seletivamente e verificados por CRC32/PCM/SHA256, com 264 entradas autorais catalogadas, sem baixar o ZIP inteiro. **Não há ainda par controlado do piano sem feltro**, nem parâmetros de martelo e ponte. Referência vigente: [PREPARACAO_FELT_ORIGINAL_COMERCIAL_2026-11-23.md](PREPARACAO_FELT_ORIGINAL_COMERCIAL_2026-11-23.md). Não liberar nenhum DSP.
+
+---
+
 # Preparação comercial — Steinway Model D Princeton e Felt Fuchs & Möhr
 
 **Data de pesquisa:** 22/11/2026 (execuções automáticas em UTC 23/11).
