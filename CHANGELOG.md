@@ -1,3 +1,12 @@
+## v1.12.6 — Ajuste espectral de ataque/radiação do motor D (experimental; 23/11/2026)
+
+- Corrigido o problema medido de distribuição harmônica: **C2/C3 com fundamental dominante demais e harmônicos excessivamente fracos; C6 com parcial excessivo**.
+- `piano-hybrid-calibration.js` codifica apenas **perfis espectrais numéricos observados** de 15 AIFF originais Steinway B/Iowa, auditados por SHA256, cinco notas × três intensidades. `physical-piano-hybrid.js` aplica ganho por parcial **na excitação modal**, antes da normalização; nenhuma forma de onda, amostra, EQ de saída ou código externo foi incorporado.
+- Correção suave e limitada por nota e dinâmica, com filtro de confiabilidade para parciais abaixo de −34 dB. American Grand recebe referência completa; outros perfis recebem extrapolação atenuada (ainda não calibrada).
+- Comparação **in-sample** do ataque: erro médio 20,30 → 3,23 dB, 15/15 melhores. Janela sustentada: 20,33 → 9,38 dB, 10/14 melhores. **Não é resultado de escuta nem fidelidade demonstrada.**
+- Perfil de 32/48/64 notas e MIDI/CC64 preservados. Testes de continuidade da calibração, áudio finito, headroom e compatibilidade de sessões; workflow dedicado agora falha se os espectros originais regredirem fortemente.
+- Atualização de versão/cache para v1.12.6, `v1.12.6.html`; A/B/C/Clássico, FX, interface e presets permanecem sem modificações de DSP. R-GATEs 0/7 integrais; falta escuta/CPU no hardware real.
+
 ## v1.12.5 — Motor D híbrido experimental dentro do Piano Acústico (23/11/2026)
 
 - Adicionado **D · Stage híbrido · experimental** ao menu existente de motores, sem módulos ou atalhos extras; A/B/C/Clássico preservados.
