@@ -25,11 +25,18 @@ jobs:
           python3 research/commercial_audio/audit_archive_metadata.py \
             research/commercial_audio/steinway_d_felt_source_index.json \
             "$STAGE_ARCHIVE_REPORT_DIR/archive-metadata.json"
+      - name: Probe Archive ZIP member listing (no ZIP/WAV transfer)
+        run: |
+          python3 research/commercial_audio/archive_member_probe.py \
+            research/commercial_audio/steinway_d_felt_source_index.json \
+            "$STAGE_ARCHIVE_REPORT_DIR/member-listing.json"
       - name: Upload metadata hashes ONLY
         uses: actions/upload-artifact@v4
         with:
           name: stage-steinway-d-archive-metadata-only
-          path: /tmp/stage-steinway-d-source-audit/archive-metadata.json
+          path: |
+            /tmp/stage-steinway-d-source-audit/archive-metadata.json
+            /tmp/stage-steinway-d-source-audit/member-listing.json
           retention-days: 14
           if-no-files-found: error
       - name: Remove report on runner
