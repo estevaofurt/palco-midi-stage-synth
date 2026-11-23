@@ -165,3 +165,11 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 
 **Status de distribuição:** não foi encontrado LICENSE na raiz do repo; o dono deve decidir a licença do próprio código, conferir dependências e atribuições, bem como marcas/modelos comerciais sem alegar endosso. O projeto pode ser comercial e usar bibliotecas com atribuição, mas EULAs e direitos de terceiros devem ser revisados. **NÃO mexer no motor; congelamento de P1/P2 segue em vigor.** Documento: docs/POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md.
 
+## D-024 — Proveniência de 28 arquivos ORIGINAIS licenciados, sem incorporar áudio ao Stage (22/11/2026)
+
+**Decisão executada:** preparar concretamente um pequeno corpus para desenvolvimento COMERCIAL sem utilizar datasets NC nem modificar motores. Verificados **28 arquivos de quatro instrumentos acústicos**: 8 WAVs VCSL CC0 (Steinway Model B e Knight upright), 15 FLACs Salamander Yamaha C5 CC BY 3.0 e 5 FLACs FreePats Kawai KW CC0. Os WAVs e FLACs foram transferidos somente para /tmp no GitHub Actions, comparados ao SHA1 Git blob do commit original, ao tamanho, SHA256 e estrutura WAV/FLAC; FLAC também passou teste integral de decodificação. **Nenhum áudio distribuído ou introduzido no aplicativo.**
+
+**Proveniência permanente:** research/commercial_audio/vcsl_cc0_pilot_manifest.json, research/commercial_audio/cc_flac_pilot_manifest.json, research/commercial_audio/verified_source_sha256.json e docs/PREPARACAO_FONTES_COMERCIAIS_PILOTO_2026-11-22.md. CI principal: https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45101876490 (10/10 testes offline, 28 verificações). VCSL Steinway usa samples **normalizados**, Knight amostra tons inteiros, Kawai KW possui **loops graves** e o arquivo C4vH não existe; nenhuma camada é prova de hammer velocity física.
+
+**Estado dos sete gates:** 0/7 integralmente aprovados. Fonte confiável e licença compatível não dispensam medição de ponte/martelo, controle de dinâmica, parametrização física, protótipos isolados e validação de hardware. P1/P2 e DSP permanecem congelados.
+

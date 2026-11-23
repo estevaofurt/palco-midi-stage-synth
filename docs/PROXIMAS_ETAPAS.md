@@ -1,3 +1,21 @@
+# Preparação concreta de fontes originais comerciais (22/11/2026)
+
+[Relatório do piloto](PREPARACAO_FONTES_COMERCIAIS_PILOTO_2026-11-22.md) e hashes em research/commercial_audio/verified_source_sha256.json (sem gravações).
+
+- [x] Fixar versão de origem por commit e arquivo Git blob para VCSL CC0, Salamander C5 CC BY 3.0 e Kawai KW CC0.
+- [x] Validar **8 WAV VCSL originais**, **15 FLAC Yamaha C5** em C2–C6 (5 regiões, 3 layers) e **5 FLAC Kawai KW**; 28 arquivos / 64,4 MB com tamanho, integridade e codec confirmados, sem armazenar samples nos artifacts.
+- [x] Executar **10 testes offline** e decodificação FLAC integral em runner; guardar SHA256 em manifesto permanente não reversível.
+- [x] Verificar que **VCSL Steinway é normalizado**, Knight amostra cada tom inteiro e que **C4vH Kawai não existe**, sem inventar velocidade física.
+- [ ] Preparar audio de Princeton bitKlavier Steinway D CC BY 4.0 por mic; download é ZIP grande e arquivos têm denoise/ajuste de níveis.
+- [ ] Verificar áudio Felt do autor e uma captação controlada com/sem feltro; reconhecer repacotamento anterior.
+- [ ] Obter e documentar **medidas físicas próprias autorizadas** de martelo, mobilidade da ponte, uníssonos e polarizações; o sinal de microfone não basta para identificá-las.
+- [ ] Revisar ATTRIBUTIONS, direitos dos assets existentes e LICENSE do código antes de comercialização.
+- [ ] Validar os sete R-GATEs e pedir autorização explícita para retomar o motor.
+
+**Continuar sem DSP, UI, FX, MIDI ou P1/P2.** A fonte original comercialmente elegível não é automaticamente física calibrada.
+
+---
+
 # Critério comercial obrigatório para todas as referências (22/11/2026)
 
 **O Stage Synth é comercial.** Documento: [POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md](POLITICA_COMERCIAL_DADOS_LICENCAS_2026-11-22.md). Nenhuma implantação de novo DSP até haver corpus e parâmetros fisicamente adequados **E legalmente utilizáveis para esse fim**.
