@@ -1,0 +1,58 @@
+name: Stage Synth — D v1.12.8 experimental integration and historical rollback
+on:
+  pull_request:
+    paths:
+      - 'physical-piano-hybrid.js'
+      - 'acoustic.js'
+      - 'acoustic-v127.mjs'
+      - 'v1.12.7.html'
+      - 'index.html'
+      - 'package.json'
+      - 'tests/piano_d_v128_release.test.mjs'
+      - 'tests/cache_version.test.mjs'
+      - '.github/workflows/stage-d-v128-release.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  release-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify A/B/C/Classic, MIDI, FX, presets and original calibration remain untouched
+        run: |
+          git diff --exit-code 1baf9ee3243feb9903f6765be778e5582861c83d -- \
+            piano-worklet.js physical-piano.js physical-piano-legacy.js \
+            piano-resonance.js piano-hybrid-calibration.js \
+            piano-resonance-v126.js piano-hybrid-calibration-v126.js \
+            physical-piano-hybrid-v126.js acoustic-v126.js \
+            v1.12.6.html patches.js fx-rack.js stage.js app.js \
+            performance.js piano-bank.js sample-library.js panel.js panel.css
+      - name: Validate Stage complete Node test suite and historical routing
+        run: |
+          node --check acoustic-v127.mjs
+          node --check physical-piano-hybrid-v127.mjs
+          node --check physical-piano-hybrid.js
+          npm run check
+          node --test tests/piano_d_v128_release.test.mjs
+      - name: Profile 32, 48 and 64 Stage D voices in Node only (not hardware approval)
+        run: |
+          node scripts/benchmark_piano_d_cpu.mjs > /tmp/stage-d-v128-node-bench.json
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const out=JSON.parse(readFileSync('/tmp/stage-d-v128-node-bench.json','utf8'));
+          if(out.data?.length!==6)throw Error('incomplete 32/48/64 profiling');
+          for(const d of out.data){
+            if(d.activeVoices!==d.requestedVoices || !Number.isFinite(d.p99BlockMs) || d.peak>=1)
+              throw Error('invalid CPU benchmark '+JSON.stringify(d));
+            console.log('D128',d.profile,d.arrangement,'voices',d.activeVoices,
+              'resonators',d.resonators,'p99 ms',d.p99BlockMs);
+          }
+          console.log('Node/Linux evidence ONLY; AudioWorklet Android/PC xrun NOT certified');
+          NODE
