@@ -126,3 +126,20 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Decisão:** para American/Steinway Model D, incorporar à pesquisa o **bitKlavier Grand**, com áudio gravado em Princeton de **um Steinway D real**, 16 layers nas notas amostradas a cada terça menor, 9 pares de microfones e CC BY 4.0. O processamento incluiu denoise, recortes, fades e nivelamento das layers; adequado para comparar caráter timbral e radiador, mas **não** derivar relação física de velocity. Para Yamaha CFX, a biblioteca **Vienna Synchron Yamaha CFX** identifica o instrumento real, mas apresenta produto/amostras comerciais e processamento; usar apenas como referência de escuta mediante termos.
 
 **Proteção:** CFX, C5 e Disklavier DC3 M4 são modelos distintos; Steinway Model D e Model B também. Não afirmar termos físicos equivalentes apenas por fabricante. Não importar gravações ao aplicativo nesta revisão. Evidências e fontes: docs/AUDITORIA_FONTES_CIENTIFICAS_PIANO_ACUSTICO_2026-11-22.md.
+
+
+## D-020 — Lacunas P0 bloqueiam promoção de P1/P2 como motores realistas (22/11/2026)
+
+**Decisão:** a auditoria de código e pesquisa acústica encontrou **18 lacunas**. As sete condições P0 são: colisão martelo–corda, cordas/uníssonos/polarizações, ponte/tampo e energia passiva, dispersão/perdas por parcial, medidor acústico robusto, referência física identificável e validação de CPU/escuta. **Nenhum novo motor deverá ser integrado em main somente com mais modos, filtros allpass ou mudanças de B.** O motor histórico B v1.9.5 permanece preservado e PR #2 continua experimental.
+
+**Evidência verificável:** a pesquisa em docs/AUDITORIA_LACUNAS_MODELAGEM_FISICA_E1_2026-11-22.md confronta physical-piano.js, piano-resonance.js, piano-worklet.js, stage.js e acoustic.js com Smith, Weinreich, Bank, Chabassier e trabalhos experimentais. **Não são bugs sonoros conclusivamente reproduzidos**: P0 distingue mecanismo comprovadamente ausente de efeito perceptivo ainda não medido.
+
+**Permissão de avanço:** podem ser iniciados **protótipos isolados**, instrumentação e medição E1.1–E1.5, sem alterar timbres públicos ou criar links/módulos. A escolha entre modal, waveguide e híbrido só será feita com resultados controlados e budget 32/64 notas.
+
+## D-021 — Medidor E0 não pode certificar inarmonicidade para altos valores B (22/11/2026)
+
+**Decisão:** a busca fixa por picos de ±2,5% de n×f_ET no tests/piano_acoustic_metrics.mjs é insuficiente quando B cresce. Analiticamente, B=0,0012 e n=8 produzem deslocamento relativo de +3,707%; o medidor pode tomar outro pico ou não encontrar a parcial física. Uma taxa mínima de três picos não prova correspondência física. Além disso, mono L/R e velocidades diferentes limitam a fidelidade das comparações de 33 áudios E0.
+
+**Ação:** testar primeiro com sinais sintéticos conhecidos (f1, B até 0,003, envelope por parcial, cordas duplicadas, ruído, ataque curto), implementar E1 STFT/peak tracking e registrar intervalos de incerteza. Reprocessar 33 referências sem apagar a baseline original. **Não afirmar melhora ou piora do timbre por esses escores sozinhos.**
+
+**Proveniência:** docs/AUDITORIA_LACUNAS_MODELAGEM_FISICA_E1_2026-11-22.md. Nenhum DSP ou método de medição foi alterado nesta decisão.
