@@ -62,7 +62,7 @@ class FeltSelectiveSourceTests(unittest.TestCase):
             snd.setnchannels(1)   # deliberately not the creator's stereo format
             snd.setsampwidth(2)
             snd.setframerate(48000)
-            snd.writeframes(b"\\x00\\x00"*48000)
+            snd.writeframes(bytes(2*48000))
         archive=io.BytesIO()
         with zipfile.ZipFile(archive,"w",compression=zipfile.ZIP_DEFLATED) as z:
             z.writestr("forte/f84.wav",payload.getvalue())
