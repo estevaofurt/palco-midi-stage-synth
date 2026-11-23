@@ -4,6 +4,16 @@
 **Idioma de trabalho:** português (Brasil).  
 **Data de adoção deste protocolo:** 22/11/2026.
 
+## BLOQUEIO EXPLÍCITO — fontes ainda não preparadas (22/11/2026)
+
+**Pedido mais recente do usuário:** NÃO prosseguir com programação, alterações de timbre, nova arquitetura P2 ou merge de P1 no módulo Piano enquanto não estiverem reunidas e verificadas as referências essenciais para as lacunas de modelagem física.
+
+**Estado atual: NÃO PRONTO**, conforme docs/PRONTIDAO_REFERENCIAS_PIANO_FISICO_2026-11-22.md (22 referências/famílias auditadas, 18 lacunas relacionadas, 7 critérios R-GATE-1..7 ainda não aprovados). É permitido realizar **somente pesquisa, auditoria de metadados/licenças, organização e aquisição legítima de dados originais e documentação** até o usuário expressamente autorizar retomada após a checagem completa.
+
+DOI/artigo encontrado não significa sinal original verificado; não assumir como prontos BiVib/RWC/Plath/QMUL/bitKlavier, nem afirmar que parâmetros estão identificados apenas por uma gravação. **NÃO integrar P1/P2, não alterar A/B/C, presets, módulos, MIDI e efeitos** durante o congelamento. Mantemos a referência histórica B v1.9.5 preservada.
+
+---
+
 ## Objetivo
 
 Desenvolver um instrumento MIDI com módulos de piano acústico, elétrico, órgão, sintetizador, SoundFont e efeitos. Priorizar **fidelidade sonora, estabilidade em tempo real e consumo compatível com hardware modesto**, especialmente Moto g04s.

@@ -143,3 +143,16 @@ Usar formato: ID, data, decisão, motivo, impacto nas versões, evidência (comm
 **Ação:** testar primeiro com sinais sintéticos conhecidos (f1, B até 0,003, envelope por parcial, cordas duplicadas, ruído, ataque curto), implementar E1 STFT/peak tracking e registrar intervalos de incerteza. Reprocessar 33 referências sem apagar a baseline original. **Não afirmar melhora ou piora do timbre por esses escores sozinhos.**
 
 **Proveniência:** docs/AUDITORIA_LACUNAS_MODELAGEM_FISICA_E1_2026-11-22.md. Nenhum DSP ou método de medição foi alterado nesta decisão.
+
+
+## D-022 — Congelamento da implementação do próximo motor por ausência de referências preparadas (22/11/2026)
+
+**Pedido expresso do usuário:** não continuar implementação do novo modelo físico até ter todas as referências essenciais prontas e lacunas preenchíveis com dados e métodos confiáveis.
+
+**Resultado da auditoria:** fontes primárias de modelagem foram identificadas, mas a prontidão geral é **NÃO PRONTA**. O inventário de **22 fontes/famílias** e 18 lacunas está em docs/PRONTIDAO_REFERENCIAS_PIANO_FISICO_2026-11-22.md, com **sete R-GATEs ainda não comprovados integralmente**. Obter um paper não equivale a ter parâmetro medido, WAV/CSV original, checksum, licença e uma comparação justa. BiVib (33,1 GB multipartes), RWC (14,2 GB ZIP), Plath/Hamburgo (4,6 GB CSV compactados), QMUL pedal (222,7 MB) e bitKlavier Model D não foram integralmente preparados.
+
+**Descoberta:** Plath/Hamburgo publicou pressão binaural [Pa] e aceleração da ponte [m/s²] sincronizadas à força tecla–base [N]; é valioso para validar radiador, MAS a força não é aplicada diretamente na ponte e não permite inferir automaticamente sua mobilidade complexa. O grupo Plath/Bader mediu FRFs reais na ponte, mas os arquivos numéricos brutos não foram localizados. Liang/QMUL publicou som de pedal e trajetória contínua, que ainda requer direitos e análise.
+
+**Restrições imediatas:** congelar novos motores P2, alterações de timbre e promoção de P1 (PR #2). **Permitir somente pesquisa, verificação de direitos/acesso, documentação, contatos a autores com autorização e preparação de conjuntos de referência e planos de testes**; não declarar GATE concluído sem demonstrar evidência original. Manter A/B/C e B v1.9.5 intactos e metas 32–64 notas.
+
+**Liberação:** somente revisão explícita dos 7 R-GATEs, fonte e documentação atualizadas e aprovação da etapa de implementação após os requisitos estarem verificados.

@@ -1,3 +1,11 @@
+## BLOQUEIO DE IMPLEMENTAÇÃO — auditoria de referências (22/11/2026)
+
+**Situação: NÃO PRONTO. O usuário solicitou não prosseguir com a implantação de novos motores físicos até estarem preparadas todas as referências essenciais.** Foram verificadas 22 fontes/famílias primárias e as 18 lacunas anteriores. A teoria física é ampla, porém **0/7 critérios de prontidão integralmente comprovados**: originais de BiVib/RWC/bitKlavier e medidas da ponte/martelo ainda não estão adquiridos/alinhados; há restrições de licenças NC, incertezas de parâmetros e o medidor E0 precisa de validação sintética. Nova fonte Plath/Hamburgo reúne força tecla–base, aceleração da ponte e pressão binaural a 50 kHz, mas NÃO mede força martelo–corda/força aplicada na ponte. Liang/QMUL tem posição contínua de pedal e som real. P1 permanece experimental e **a programação do P2 está congelada**.
+
+Auditoria principal: docs/PRONTIDAO_REFERENCIAS_PIANO_FISICO_2026-11-22.md. Não houve mudança em DSP, UI, MIDI, FX, presets ou arquivos de áudio; somente documentação.
+
+---
+
 ## E1 — auditoria das lacunas físicas antes de nova implementação (22/11/2026)
 
 A pesquisa verificou **18 lacunas P0/P1/P2** no Stage Synth a partir do código do main commit ba224226 e de Smith/Bank/Weinreich/Chabassier. Os P0 são martelo–corda não linear, uníssonos e polarizações, ponte/tampo passivos, perdas/rigidez por parcial, **falha de faixa da análise de B**, identificação de parâmetros e validação auditiva/CPU em hardware. **O medidor E0 procura apenas ±2,5% em n×f_ET**, ao passo que B=0,0012 desloca a oitava parcial +3,707%; os números relativos de 33 referências não autorizam calibrar um novo motor. CC64 perde valores intermediários antes da camada mecânica; CC66/67 ainda não são modelados. **Não houve mudança de DSP, UI, presets, MIDI nem FX nesta auditoria.** O P1 permanece isolado no PR #2.
