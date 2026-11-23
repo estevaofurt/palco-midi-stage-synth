@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {decodeF32le,locateAttack,compareSpectralShape} from '../scripts/analyze_reference_audio.mjs';
+import {decodeF32le,locateAttack,compareSpectralShape,measureEarlyPartials} from '../scripts/analyze_reference_audio.mjs';
 
 test('E0 decodes little-endian mono PCM without modifying velocity',()=>{
  const buf=Buffer.alloc(48000*2*4);
@@ -32,4 +32,18 @@ test('E0 reports relative spectral differences and excludes a weak partial',()=>
  assert.equal(c.meanAbsDb,null,'two partials are insufficient to rank a spectrum');
  assert.equal(c.insufficientPartials,true);
  assert.ok(Math.abs(c.exploratoryMeanAbsDb-3)<1e-9);
+});
+
+test('E0 short attack window identifies fast-decaying C6 harmonics without inventing a B coefficient',()=>{
+ const RATE=48000,f0=440*2**((84-69)/12),pcm=new Float32Array(Math.round(1.7*RATE));
+ for(let i=0;i<pcm.length;i++){
+  const t=i/RATE;
+  let x=0;
+  for(let n=1;n<=6;n++)x+=.12*Math.exp(-t*3*n)/n*Math.sin(2*Math.PI*f0*n*t);
+  pcm[i]=x;
+ }
+ const early=measureEarlyPartials(pcm,84);
+ assert.equal(early.fftSize,8192);
+ assert.ok(early.visibleUpperPartials>=3,'detected='+early.visibleUpperPartials);
+ assert.equal('bMedian' in early,false,'attack is not a stationary B measurement');
 });
