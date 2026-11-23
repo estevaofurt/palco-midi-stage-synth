@@ -6,7 +6,7 @@
  * Spectra use overlapped, detrended Hann-windowed FFTs (Welch averaging).
  * This IS a linear estimate of driving-point mobility v_bridge/F_bridge
  * when probes measure those TWO quantities at the same bridge location.
- * Hammer shank / key-bed force is NOT F_bridge. It is NOT sound bridgeVelocity.
+ * Hammer shank / key-bed force is NOT F_bridge. It is NOT airborne sound pressure.
  * Calibration, shared clock, location, sample alignment, permission and
  * provenance must be established by an independent acquisition protocol.
  */
@@ -147,8 +147,7 @@ export function estimateDocumentedBridgeMobility({force,velocity,sampleRate,meta
     metadata.transferUnit!=='(m/s)/N'||
     metadata.forceLocation!=='bridge'||
     metadata.velocityLocation!=='same-bridge-point'||
-    metadata.synchronized!==true||metadata.calibrated===false||
-    metadata.calibrated!==true||
+    metadata.synchronized!==true||metadata.calibrated!==true||
     metadata.sourceType!=='instrumented-bridge-force-velocity'||
     !metadata.sourceId||!metadata.rightsDocumentId||
     metadata.commercialUseAuthorized!==true||
