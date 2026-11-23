@@ -37,7 +37,7 @@ A mobilidade mecânica é definida por `Y(f)=v(f)/F(f)`, mas **v e F são vetore
 
 ## 3. Novo requisito de ensaio de martelo — M01 deve registrar memória/histerese
 
-M01 deve pedir **ambas as fases de compressão e relaxamento do feltro**, não apenas pico máximo: `F_h(t)`, deslocamento cabeça/cor da corda, `δ(t)`, velocidade real ao impacto, duração total do contato, perdas em cada ciclo, condições de voicing/feltro e repetição. O estudo F01 comprova que uma lei **sem estado** não descreve integralmente os dados. O estudo F02 demonstra o quanto a largura/forma do pulso variam.
+M01 deve pedir **ambas as fases de compressão e relaxamento do feltro**, não apenas pico máximo: `F_h(t)`, deslocamento da cabeça do martelo e da corda, `δ(t)`, velocidade real ao impacto, duração total do contato, perdas em cada ciclo, condições de voicing/feltro e repetição. O estudo F01 comprova que uma lei **sem estado** não descreve integralmente os dados. O estudo F02 demonstra o quanto a largura/forma do pulso variam.
 
 Se não houver F/δ medidos, pulsos parametrizados por registro e intensidade são **proxies de síntese** e devem ser marcados como hipótese, nunca martelo físico calibrado. Usar literatura para definir plausibilidade e forma de ensaio, não atribuir os valores experimentais de Steinway a um Yamaha/vertical.
 
