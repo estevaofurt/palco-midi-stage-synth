@@ -51,7 +51,8 @@ export class PianoBassWoodRadiator{
       this.pan[i]=pan;
     }
     this.tick=0;this.acc=0;this.strike=0;
-    this.filter=0;this.left=0;this.right=0;
+    this.pre1=0;this.pre2=0;this.pre3=0;this.pre4=0;this.low=0;
+    this.left=0;this.right=0;
     this.outputL=0;this.outputR=0;
   }
   // Small non-tonal plate impact independent of decay of the main string.
@@ -65,8 +66,16 @@ export class PianoBassWoodRadiator{
     // a calibrated force or velocity. Do NOT close a mechanical feedback loop
     // using this signal; that would silently create energy.
     const x=(inputL+inputR)*.5;
-    this.filter+=.09*(x-this.filter);
-    this.acc+=(x-.55*this.filter);
+    // Cascaded input low-passes strongly reduce folding above the 6 kHz
+    // Nyquist of the 12 kHz board model. This is a *proxy* for bridge drive.
+    // Reject the previous high-pass-before-decimation, which would alias
+    // some string overtones into false wooden resonances.
+    this.pre1+=.30*(x-this.pre1);
+    this.pre2+=.30*(this.pre1-this.pre2);
+    this.pre3+=.30*(this.pre2-this.pre3);
+    this.pre4+=.30*(this.pre3-this.pre4);
+    this.low+=.024*(this.pre4-this.low);
+    this.acc+=(this.pre4-.38*this.low);
     if(++this.tick===this.divisor){
       const drive=this.acc/this.divisor+this.strike;
       this.tick=0;this.acc=0;this.strike*=.49;
@@ -107,7 +116,7 @@ export class PianoBassLongitudinal{
       const freq=f*(i+1),w=PI2*freq/this.sr;
       const r=Math.exp(-1/(this.sr*(i===0?.058:.034)));
       this.c[i]=2*r*Math.cos(w);this.r2[i]=r*r;
-      this.g[i]=Math.sin(w)*(1-r)*(i===0?5.4:2.0);
+      this.g[i]=Math.sin(w)*(1-r)*(i===0?125:50);
     }
     this.gain=.9*clamp(speed,0,1)**.65;
   }
