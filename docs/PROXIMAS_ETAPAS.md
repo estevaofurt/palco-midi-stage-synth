@@ -1,9 +1,25 @@
+
+## Resultados P0 verificados no GitHub Actions (22/11/2026; UTC da execução em 23/11)
+
+- Commit de diagnóstico: 2b27cf51ed921ab2254ed3a5af2b26126752c063.
+- Workflow: https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45094083550 — **90/90 testes Node aprovados, 0 falhas**.
+- Matriz completa: **108/108 combinações renderizadas**, sem clipping ou amostras não finitas no sinal seco médio (FX desligados). JSON disponível como artifact do workflow por 14 dias.
+- Japanese / velocidade 80: estimativa B por FFT em C2, C4, C6:
+  - A modal: 0,00024496; 0,00035775; 0,00148165.
+  - B waveguide v1.9.5: 0,00005294; 0,00010944; 0,00027679.
+  - C acoplado: 0,00005478; 0,00011025; 0,00027700.
+- B e C têm estimativas de inarmonicidade e níveis RMS muito semelhantes nessa condição; **o acoplamento mecânico não resolveu a dispersão original das cordas**. Isso não prova que os sons sejam perceptualmente idênticos.
+- Não declarar B-alvo universal com base nesses números: FFT finita, ajustes de modelo, perfis de registro, batimentos e sinais fracos podem enviesar a estimativa. É necessário comparar com referência seca autorizada e escuta nivelada.
+- **Recomendação P1:** modificar dispersão e perdas dependentes de frequência **em branch experimental isolada**, mantendo B v1.9.5 e A/C atuais como referência. Atingir 32/64 vozes em hardware continua pendente.
+
+---
+
 # P0 em implementação isolada — baseline acústica (22/11/2026)
 
 - [x] Criar branch separada sem modificar os DSPs estáveis.
 - [x] Adicionar medidas FFT de cents, B estimado, parciais, ataque, decaimento, clipping e amostras não finitas; 5 testes unitários locais passaram.
 - [x] Preparar comparação reproduzível de 108 casos A/B/C × 4 pianos × C2/C4/C6 × velocity 32/80/120.
-- [ ] Conferir a execução integrada do workflow CI e preservar o JSON de resultados antes de considerar P0 concluída.
+- [x] Conferir workflow de regressões: 90/90 testes; 108/108 renders concluídos; 0 clipping/NaN no sinal seco, artifact preservado.
 - [ ] Examinar números do JSON por registro e dinâmica; B é estimativa e não alvo universal.
 - [ ] P1: corrigir dispersão/perdas por frequência **somente num experimento isolado**, reexecutar regressões e comparação sonora nivelada.
 - [ ] Testes em Chrome real, PC e Moto g04s, com 32/64 vozes, MIDI/CC64 e FX; não anunciar homologação antes.
