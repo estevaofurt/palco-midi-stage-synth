@@ -1,0 +1,49 @@
+{
+  "sourceCommit": "ec68a3b2093be007e1b3b507e33a8a49b948ee82",
+  "runId": 45417915009,
+  "testsPassed": 7,
+  "smoke": {
+    "off": {
+      "cents": 0,
+      "connected": false,
+      "seconds": 0.05,
+      "modeCount": 101,
+      "secondaryP2Hz": 261.6255653005987,
+      "initialEnergyJ": 0.00010000000000000002,
+      "peakOtherJ": 0,
+      "maxResidual": 1.191267137018448e-17,
+      "maxIncrease": 0,
+      "windows": [
+        {
+          "timeS": 0.049999999999999996,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00008302290699224451,
+          "boardPortVelocityRmsMps": 0.0015704790095108982,
+          "energyJ": 0.00009605814540008515,
+          "lossJ": 0.000003941854599903803
+        }
+      ]
+    },
+    "on": {
+      "cents": 0,
+      "connected": true,
+      "seconds": 0.05,
+      "modeCount": 101,
+      "secondaryP2Hz": 261.6255653005987,
+      "initialEnergyJ": 0.00010000000000000002,
+      "peakOtherJ": 3.1058804903033976e-7,
+      "maxResidual": 1.0354130747236567e-17,
+      "maxIncrease": 0,
+      "windows": [
+        {
+          "timeS": 0.049999999999999996,
+          "secondaryWireJ": 2.995121701584475e-7,
+          "sourceWireJ": 0.00008387445825009064,
+          "boardPortVelocityRmsMps": 0.0015841605627048853,
+          "energyJ": 0.0000961182705057912,
+          "lossJ": 0.000003881729494198463
+        }
+      ]
+    }
+  }
+}
