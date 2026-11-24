@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-24",
+  "comments": [
+    "nesse teste com a dinamica completa pude perceber que há um som de vibração junto a nota. Parecido com uma vibração do instrumento, como se houvesse alguma peça sola",
+    "solta"
+  ],
+  "file": "02_MIDI_DINAMICA_COMPLETA.wav",
+  "runId": 45464139346,
+  "artifactId": 14954032000,
+  "scope": "ruído percebido junto à nota, semelhante a peça solta; nível, janela, canal e ambiente não identificados; não há arquivo local novo",
+  "decision": "reopen C4 timbre quality gate; diagnose verified source WAVs and distinguish off-partial spectral energy from beating, board modes, and playback effects; no EQ or damping change yet"
+}

@@ -1,0 +1,34 @@
+name: Concert Grand F9.19 rattle diagnostic
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f919.yml'
+      - 'research/stage-concert-grand/f9-rattle-*'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 45464139346
+          name: F918A-progressao-MIDI-WAV24
+          path: /tmp/input
+      - run: |
+          node research/stage-concert-grand/f9-rattle-spectrum.test.mjs
+          node research/stage-concert-grand/f9-rattle-demo.mjs /tmp/input /tmp/rattle.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F919-rattle-numeric
+          path: /tmp/rattle.json
+          if-no-files-found: error

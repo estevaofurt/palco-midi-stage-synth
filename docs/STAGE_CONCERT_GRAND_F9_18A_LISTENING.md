@@ -5,3 +5,7 @@ Base 9c5b42c182088f64fb534b8f8d53d826408dc8a7. CI F9.18 concluída com 19 testes
 ## Resultado confirmado
 
 CI [45464139346](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45464139346) 14 jobs concluídos, 17 testes (10+7), 12 renders de 2 s, zero clipping, PCM16/24 verificados, 2 sequências PCM24. [Pacote](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45464139346/artifacts/14954032000) 15.207.891 bytes. Durações 17,034854 e 29,559750 s. RMS inicial estritamente crescente nos 12 pontos, faixa 39.221549 dB, centroide 0–50 ms crescente 252,266→447,277 Hz; fração 1–12 kHz NÃO estritamente crescente (.000115458→.000073787 entre MIDI1 e 4), não corrigir por EQ; diagnosticar todos os níveis. Relatório audio/analysis_f9_18a_ci.json. Aceite de novas sequências pendente. F9.18b mede 127 ataques independentes de .1 s sem mudar parâmetros ou renderizar demos longas. Main intacta.
+
+## Feedback de vibração
+
+Usuário percebeu som de vibração junto da nota na sequência completa, semelhante a peça solta. Não homologar som completo apesar dos testes de curva e integridade. Registro audio/feedback_f9_18a_rattle.json. F9.19 audita espectro dos WAVs originais, sem alterar ganho, feltro, perdas ou timbre aprovado. Não inferir em qual intensidade ou em qual momento ocorreu. Main preservada.

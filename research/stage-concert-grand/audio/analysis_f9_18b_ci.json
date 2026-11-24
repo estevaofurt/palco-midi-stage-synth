@@ -1,0 +1,241 @@
+{
+  "runId": 45464672337,
+  "artifactId": 14953532664,
+  "testsPassed": 8,
+  "summary": {
+    "count": 127,
+    "rangeRmsDb": 39.2598367999266,
+    "maxBalanceJ": 1.923808334858279e-14,
+    "maxIncreaseJ": 0,
+    "metrics": {
+      "rmsDb": {
+        "min": 0.15347083215054766,
+        "max": 0.8733025094280895,
+        "negative": [],
+        "zero": []
+      },
+      "peakDb": {
+        "min": 0.1451518856161747,
+        "max": 0.852685126947844,
+        "negative": [],
+        "zero": []
+      },
+      "forceDb": {
+        "min": 0.1588189992347444,
+        "max": 0.654886409204209,
+        "negative": [],
+        "zero": []
+      },
+      "centroidDeltaHz": {
+        "min": 0.2424094096725753,
+        "max": 2.7811616311976195,
+        "negative": [],
+        "zero": []
+      },
+      "upperFractionDelta": {
+        "min": -0.000035910695065582266,
+        "max": 0.0016369856952897638,
+        "negative": [
+          2,
+          3
+        ],
+        "zero": []
+      },
+      "contactDeltaS": {
+        "min": -0.00008333333333334671,
+        "max": 0.00001041666666666682,
+        "negative": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          72,
+          73,
+          74,
+          76,
+          77,
+          78,
+          80,
+          81,
+          83,
+          84,
+          85,
+          86,
+          89,
+          90,
+          91,
+          93,
+          94,
+          96,
+          97,
+          98,
+          99,
+          102,
+          104,
+          105,
+          106,
+          108,
+          109,
+          111,
+          112,
+          114,
+          115,
+          117,
+          119,
+          120,
+          122,
+          123,
+          125,
+          126
+        ],
+        "zero": [
+          71,
+          75,
+          79,
+          82,
+          87,
+          88,
+          92,
+          95,
+          100,
+          101,
+          103,
+          107,
+          110,
+          113,
+          116,
+          121,
+          124,
+          127
+        ]
+      }
+    },
+    "parity": [
+      {
+        "midiVelocity": 1,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 4,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 8,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 12,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 16,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 20,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 24,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 36,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 52,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 76,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 100,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      },
+      {
+        "midiVelocity": 127,
+        "rmsDifferencePa": 0,
+        "forceDifferenceN": 0
+      }
+    ]
+  }
+}

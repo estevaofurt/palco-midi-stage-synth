@@ -1,0 +1,15 @@
+import {partialCenters,inspectRattleWindow} from './f9-rattle-spectrum.mjs';
+import {fft} from './f8-render.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};const reject=f=>{try{f();return false}catch{return true;}};
+const rate=48000,f1=261.6255653005986,B=.0002964404840492155;
+const f2=partialCenters(f1,B,6000)[1].f;
+const tone=(extra=0,gain=1)=>[0,1].map(ch=>Float64Array.from({length:rate/2},(_,i)=>gain*(Math.sin(2*Math.PI*f1*i/rate+ch)+.3*Math.sin(2*Math.PI*f2*i/rate)+extra*Math.sin(2*Math.PI*703*i/rate))));
+const a=inspectRattleWindow(tone(),rate,fft),b=inspectRattleWindow(tone(.25),rate,fft),c=inspectRattleWindow(tone(.25,.1),rate,fft);
+check('stiff string center',f2>2*f1&&partialCenters(f1,B,6000)[0].f===f1);
+check('harmonic leakage bounded',a.wideOffFraction<.001&&a.narrowOffFraction>=a.wideOffFraction);
+check('off-partial tone detected',b.wideOffFraction>.04&&Math.abs(b.offPeaks[0].frequencyHz-703)<2);
+check('scale invariant ratio',Math.abs(b.wideOffFraction-c.wideOffFraction)<1e-12);
+check('band fractions bounded',[a,b,c].every(x=>x.wideOffFraction>=0&&x.wideOffFraction<=x.narrowOffFraction&&x.narrowOffFraction<=1));
+check('reject short input',reject(()=>inspectRattleWindow([new Float64Array(10)],rate,fft)));
+check('reject silent input',reject(()=>inspectRattleWindow([new Float64Array(rate/2)],rate,fft)));
+console.log('F9.19 rattle spectrum tests passed:',n);
