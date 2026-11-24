@@ -1,0 +1,307 @@
+{
+  "runId": 45420388507,
+  "matched": [
+    {
+      "artifactId": 14935680667,
+      "listening": {
+        "velocity": 0.5,
+        "gain": 0.36767023440034063,
+        "peak": 0.14232808972542224,
+        "clipped": 0,
+        "referenceRms": 0.07754173247928428,
+        "comparisonLevel": 0.0006518758466381057,
+        "crossing": {
+          "status": "observed-window",
+          "threshold": 0.0006518758466381058,
+          "startS": 9.5,
+          "endS": 10,
+          "confirmedThroughS": 10.5
+        },
+        "relativeDrops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3.5,
+            "endS": 4,
+            "confirmedThroughS": 4.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 13.5,
+            "endS": 14,
+            "confirmedThroughS": 14.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 28.5,
+            "endS": 29,
+            "confirmedThroughS": 29.5
+          }
+        }
+      },
+      "precision": [
+        {
+          "startS": 0,
+          "endS": 0.5,
+          "floatRms": 0.03560283801341979,
+          "pcmRms": 0.03560268031862174,
+          "errorRms": 0.000008804310805381326,
+          "floatDbFS": -28.97030763355265,
+          "pcmDbFS": -28.97034610584088,
+          "quantizationSnrDb": 72.13578505847241,
+          "zeroFraction": 0.010333333333333333,
+          "peak": 0.14232808972542224,
+          "clipped": 0
+        },
+        {
+          "startS": 10,
+          "endS": 10.5,
+          "floatRms": 0.0005628816333206787,
+          "pcmRms": 0.0005629987974649733,
+          "errorRms": 0.00000884062770675616,
+          "floatDbFS": -64.99165844046144,
+          "pcmDbFS": -64.98985065554444,
+          "quantizationSnrDb": 36.07867951741682,
+          "zeroFraction": 0.01575,
+          "peak": 0.0011786368987877504,
+          "clipped": 0
+        },
+        {
+          "startS": 14,
+          "endS": 14.5,
+          "floatRms": 0.00030620082022131715,
+          "pcmRms": 0.00030643174108698206,
+          "errorRms": 0.000008879891190569435,
+          "floatDbFS": -70.27987300579794,
+          "pcmDbFS": -70.27332502459042,
+          "quantizationSnrDb": 30.751974110217404,
+          "zeroFraction": 0.026708333333333334,
+          "peak": 0.0006069085487048515,
+          "clipped": 0
+        },
+        {
+          "startS": 19,
+          "endS": 19.5,
+          "floatRms": 0.0001449230750756894,
+          "pcmRms": 0.000144623673902201,
+          "errorRms": 0.000008844688661431681,
+          "floatDbFS": -76.77724918772178,
+          "pcmDbFS": -76.79521220396336,
+          "quantizationSnrDb": 24.289099810725688,
+          "zeroFraction": 0.05591666666666667,
+          "peak": 0.0002809964013104779,
+          "clipped": 0
+        },
+        {
+          "startS": 24,
+          "endS": 24.5,
+          "floatRms": 0.00006877886184611859,
+          "pcmRms": 0.00007015261545306023,
+          "errorRms": 0.000008264151355792763,
+          "floatDbFS": -83.25090030335367,
+          "pcmDbFS": -83.07912265645942,
+          "quantizationSnrDb": 18.405134445138035,
+          "zeroFraction": 0.11866666666666667,
+          "peak": 0.0001265815733379344,
+          "clipped": 0
+        },
+        {
+          "startS": 29,
+          "endS": 29.5,
+          "floatRms": 0.00003209493479563418,
+          "pcmRms": 0.000035467510907830465,
+          "errorRms": 0.000008438618783084357,
+          "floatDbFS": -89.87127004590972,
+          "pcmDbFS": -89.0033857805613,
+          "quantizationSnrDb": 11.603302594974448,
+          "zeroFraction": 0.2645625,
+          "peak": 0.00005976285951180915,
+          "clipped": 0
+        },
+        {
+          "startS": 34,
+          "endS": 34.5,
+          "floatRms": 0.000014947251417960704,
+          "pcmRms": 0.000016888900129076115,
+          "errorRms": 0.00000910233175227367,
+          "floatDbFS": -96.50877320867394,
+          "pcmDbFS": -95.44797264910855,
+          "quantizationSnrDb": 4.30817358792258,
+          "zeroFraction": 0.69375,
+          "peak": 0.00002803192804430075,
+          "clipped": 0
+        },
+        {
+          "startS": 39,
+          "endS": 39.5,
+          "floatRms": 0.000007177871237790493,
+          "pcmRms": 0,
+          "errorRms": 0.000007177871237790493,
+          "floatDbFS": -102.88008673286873,
+          "pcmDbFS": null,
+          "quantizationSnrDb": 0,
+          "zeroFraction": 1,
+          "peak": 0.000013454532145643228,
+          "clipped": 0
+        }
+      ],
+      "export": {
+        "frames": 1920239,
+        "peak": 0.14232808972542224,
+        "clipped": 0,
+        "pcm16Bytes": 7681000,
+        "pcm24Bytes": 11521478
+      }
+    },
+    {
+      "artifactId": 14935660302,
+      "listening": {
+        "velocity": 2.5,
+        "gain": 0.36767023440034063,
+        "peak": 0.7961336311415415,
+        "clipped": 0,
+        "referenceRms": 0.07754173247928428,
+        "comparisonLevel": 0.0006518758466381057,
+        "crossing": {
+          "status": "observed-window",
+          "threshold": 0.0006518758466381058,
+          "startS": 20.5,
+          "endS": 21,
+          "confirmedThroughS": 21.5
+        },
+        "relativeDrops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3.5,
+            "endS": 4,
+            "confirmedThroughS": 4.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 13,
+            "endS": 13.5,
+            "confirmedThroughS": 14
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 28,
+            "endS": 28.5,
+            "confirmedThroughS": 29
+          }
+        }
+      },
+      "precision": [
+        {
+          "startS": 0,
+          "endS": 0.5,
+          "floatRms": 0.20682567826930648,
+          "pcmRms": 0.20682567105058502,
+          "errorRms": 0.000008750243911922607,
+          "floatDbFS": -13.68791085524114,
+          "pcmDbFS": -13.687911158399917,
+          "quantizationSnrDb": 87.4716859628825,
+          "zeroFraction": 0.0088125,
+          "peak": 0.7961336311415415,
+          "clipped": 0
+        },
+        {
+          "startS": 10,
+          "endS": 10.5,
+          "floatRms": 0.003257688394438948,
+          "pcmRms": 0.00325771033697998,
+          "errorRms": 0.00000875456520069873,
+          "floatDbFS": -49.74180918660137,
+          "pcmDbFS": -49.74175068197329,
+          "quantizationSnrDb": 51.41349918279662,
+          "zeroFraction": 0.0036666666666666666,
+          "peak": 0.007394866555674934,
+          "clipped": 0
+        },
+        {
+          "startS": 14,
+          "endS": 14.5,
+          "floatRms": 0.0016976952465656882,
+          "pcmRms": 0.0016978160486843606,
+          "errorRms": 0.000008798201724680316,
+          "floatDbFS": -55.40280534678217,
+          "pcmDbFS": -55.40218731092245,
+          "quantizationSnrDb": 45.70931634852283,
+          "zeroFraction": 0.00425,
+          "peak": 0.0035402061757849167,
+          "clipped": 0
+        },
+        {
+          "startS": 19,
+          "endS": 19.5,
+          "floatRms": 0.0007915230427077212,
+          "pcmRms": 0.0007916166562122606,
+          "errorRms": 0.000008840814096693766,
+          "floatDbFS": -62.03072874995179,
+          "pcmDbFS": -62.02970152971272,
+          "quantizationSnrDb": 39.03942608231423,
+          "zeroFraction": 0.009833333333333333,
+          "peak": 0.0015803209817038676,
+          "clipped": 0
+        },
+        {
+          "startS": 24,
+          "endS": 24.5,
+          "floatRms": 0.0003750959931179279,
+          "pcmRms": 0.000375058777057937,
+          "errorRms": 0.000008719513424256835,
+          "floatDbFS": -68.51715150163326,
+          "pcmDbFS": -68.5180133360252,
+          "quantizationSnrDb": 32.67300348562422,
+          "zeroFraction": 0.021875,
+          "peak": 0.0006856732843823982,
+          "clipped": 0
+        },
+        {
+          "startS": 29,
+          "endS": 29.5,
+          "floatRms": 0.00017483265567273863,
+          "pcmRms": 0.00017493661342697623,
+          "errorRms": 0.000008816516872230385,
+          "floatDbFS": -75.14754891070284,
+          "pcmDbFS": -75.14238570348773,
+          "quantizationSnrDb": 25.94651023006536,
+          "zeroFraction": 0.0484375,
+          "peak": 0.0003297148147328823,
+          "clipped": 0
+        },
+        {
+          "startS": 34,
+          "endS": 34.5,
+          "floatRms": 0.00008128746214371308,
+          "pcmRms": 0.00008166422302806467,
+          "errorRms": 0.000009084746386283523,
+          "floatDbFS": -81.79952870477524,
+          "pcmDbFS": -81.7593633110957,
+          "quantizationSnrDb": 19.03421513801785,
+          "zeroFraction": 0.10279166666666667,
+          "peak": 0.0001540390232338435,
+          "clipped": 0
+        },
+        {
+          "startS": 39,
+          "endS": 39.5,
+          "floatRms": 0.000039022807338318425,
+          "pcmRms": 0.00003859867621739822,
+          "errorRms": 0.00000769022657493686,
+          "floatDbFS": -88.17362980509148,
+          "pcmDbFS": -88.26855179326836,
+          "quantizationSnrDb": 14.107587485238186,
+          "zeroFraction": 0.2156875,
+          "peak": 0.00007443768801636649,
+          "clipped": 0
+        }
+      ],
+      "export": {
+        "frames": 1920239,
+        "peak": 0.7961336311415415,
+        "clipped": 0,
+        "pcm16Bytes": 7681000,
+        "pcm24Bytes": 11521478
+      }
+    }
+  ]
+}

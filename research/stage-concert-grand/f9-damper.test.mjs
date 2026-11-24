@@ -1,0 +1,13 @@
+import {damperCoefficient,viscousStep,DAMPER_C} from './f9-damper.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};
+check('key held',damperCoefficient(.1)===0);
+check('key release ramp',Math.abs(damperCoefficient(.5125)-.5)<1e-12);
+check('key released',damperCoefficient(.6)===DAMPER_C);
+check('pedal held',damperCoefficient(1,{pedal:1})===0);
+check('half pedal',damperCoefficient(1,{pedal:.5})===.5);
+check('pedal released',damperCoefficient(1.6,{pedal:1})===DAMPER_C);
+let x=0,called=0;const net={h:.01,wires:[{}],contactDisplacement:()=>x,freeContacts:()=>[x+.01],contactCompliance:()=>[[.02]],step:(f=[0])=>{x+=.01+.02*f[0];called++;}};
+const d=viscousStep(net,1);check('implicit displacement',Math.abs(x-.01/3)<1e-12);
+check('positive energy dissipation',Math.abs(d-x*x/.01)<1e-12&&d>0);
+const prev=x;check('zero damper bypass',viscousStep(net,0)===0&&Math.abs(x-prev-.01)<1e-12&&called===2);
+console.log('F9.14 damper tests passed:',n);
