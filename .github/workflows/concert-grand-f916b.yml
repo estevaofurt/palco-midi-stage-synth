@@ -1,0 +1,60 @@
+name: Concert Grand F9.16b board resolution sensitivity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f916b.yml'
+      - 'research/stage-concert-grand/f9-board-resolution*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-board-resolution-analysis.test.mjs
+          node research/stage-concert-grand/f9-board-resolution-render.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        resolution: [reference, basis8, cutoff5, basis12]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-board-resolution-demo.mjs /tmp/f916b 3 1 .5 .5 .5 both-half ${{ matrix.resolution }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F916B-${{ matrix.resolution }}
+          path: /tmp/f916b/
+          if-no-files-found: error
+  compare:
+    needs: render
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F916B-*
+          path: /tmp/f916b-input
+      - run: node research/stage-concert-grand/f9-board-resolution-compare.mjs /tmp/f916b-input /tmp/f916b-comparison.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F916B-comparison
+          path: /tmp/f916b-comparison.json
+          if-no-files-found: error
