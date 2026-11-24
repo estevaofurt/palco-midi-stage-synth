@@ -1,0 +1,40 @@
+name: Concert Grand F9.10b matched listening gain
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f910b.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    strategy:
+      fail-fast: false
+      matrix:
+        velocity: [0.5, 2.5]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reproduce F9.9 listening gain with original renderer
+        run: node research/stage-concert-grand/f9-precision-demo.mjs /tmp/f910b 40 ${{ matrix.velocity }} .5 .5 .5 both-half
+      - name: Verify gain, headroom and feedback comparison level
+        run: |
+          STEM=/tmp/f910b/C4_v${{ matrix.velocity }}_board0.5_angle0.5_spread0.5_both-half_40s
+          node --input-type=module - "$STEM" <<'JS'
+          import {readFileSync} from 'node:fs';
+          import {commonCrossing} from './research/stage-concert-grand/f9-dynamics-analysis.mjs';
+          const stem=process.argv[2],m=JSON.parse(readFileSync(stem+'.json')),a=JSON.parse(readFileSync(stem+'_float_analysis.json'));
+          if(m.gain!==.36767023440034063||m.clipped!==0||m.peak>=.9||m.lossCase!=='both-half'||m.duration!==40||m.chunks.length!==40)throw Error('matched listening gate');
+          const reference=.07754173247928428,level=.0006518758466381057,drop=20*Math.log10(reference/level);
+          console.log('F910B_LISTENING '+JSON.stringify({velocity:m.velocity,gain:m.gain,peak:m.peak,clipped:m.clipped,referenceRms:reference,comparisonLevel:level,crossing:commonCrossing(a.windows.map(w=>w.rms),a.windowS,reference,drop),relativeDrops:a.broadband.drops}));
+          JS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F910B-velocity-${{ matrix.velocity }}-matched-gain
+          path: /tmp/f910b/
+          if-no-files-found: error

@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-24",
+  "comment": "na minha percepção o sustain ficou abaixo de 14s mesmo no toque forte",
+  "scope": "F9.10 listening feedback; playback gain, environment and file resolution unknown",
+  "oldGain": 0.36767023440034063,
+  "newGain": 0.1,
+  "deltaDb": 11.309169439425787,
+  "results": [
+    {
+      "velocity": 0.5,
+      "peakOriginal": 0.0387108001705809,
+      "calculatedPeakAtF99Gain": 0.14232808972542227,
+      "windows": [
+        {
+          "startS": 0,
+          "floatRms": 0.009683361524080692,
+          "floatDbFS": -40.279477072978416,
+          "calculatedDbFSAtF99Gain": -28.97030763355263
+        },
+        {
+          "startS": 10,
+          "floatRms": 0.0001530941535799664,
+          "floatDbFS": -76.30082787988721,
+          "calculatedDbFSAtF99Gain": -64.99165844046142
+        },
+        {
+          "startS": 14,
+          "floatRms": 0.00008328137324489161,
+          "floatDbFS": -81.58904244522377,
+          "calculatedDbFSAtF99Gain": -70.27987300579798
+        },
+        {
+          "startS": 19,
+          "floatRms": 0.000039416591694471593,
+          "floatDbFS": -88.0864186271476,
+          "calculatedDbFSAtF99Gain": -76.77724918772181
+        },
+        {
+          "startS": 24,
+          "floatRms": 0.000018706671199069174,
+          "floatDbFS": -94.56006974277946,
+          "calculatedDbFSAtF99Gain": -83.25090030335367
+        },
+        {
+          "startS": 29,
+          "floatRms": 0.000008729271992327612,
+          "floatDbFS": -101.18043948533548,
+          "calculatedDbFSAtF99Gain": -89.8712700459097
+        },
+        {
+          "startS": 34,
+          "floatRms": 0.000004065396112997605,
+          "floatDbFS": -107.81794264809977,
+          "calculatedDbFSAtF99Gain": -96.50877320867399
+        },
+        {
+          "startS": 39,
+          "floatRms": 0.00000195225791108638,
+          "floatDbFS": -114.1892561722945,
+          "calculatedDbFSAtF99Gain": -102.88008673286872
+        }
+      ]
+    },
+    {
+      "velocity": 1,
+      "peakOriginal": 0.08343591576241666,
+      "calculatedPeakAtF99Gain": 0.30676902705774806,
+      "windows": [
+        {
+          "startS": 0,
+          "floatRms": 0.021090021770664463,
+          "floatDbFS": -33.51845943899447,
+          "calculatedDbFSAtF99Gain": -22.209289999568682
+        },
+        {
+          "startS": 10,
+          "floatRms": 0.00033255646712380407,
+          "floatDbFS": -69.5626920431176,
+          "calculatedDbFSAtF99Gain": -58.253522603691806
+        },
+        {
+          "startS": 14,
+          "floatRms": 0.00017729905378424107,
+          "floatDbFS": -75.02587164301598,
+          "calculatedDbFSAtF99Gain": -63.71670220359019
+        },
+        {
+          "startS": 19,
+          "floatRms": 0.00008339565922319326,
+          "floatDbFS": -81.57713107944559,
+          "calculatedDbFSAtF99Gain": -70.2679616400198
+        },
+        {
+          "startS": 24,
+          "floatRms": 0.00003956372802597163,
+          "floatDbFS": -88.05405584563026,
+          "calculatedDbFSAtF99Gain": -76.74488640620447
+        },
+        {
+          "startS": 29,
+          "floatRms": 0.00001845352067099235,
+          "floatDbFS": -94.67841528698868,
+          "calculatedDbFSAtF99Gain": -83.3692458475629
+        },
+        {
+          "startS": 34,
+          "floatRms": 0.000008586013150058555,
+          "floatDbFS": -101.32416901409528,
+          "calculatedDbFSAtF99Gain": -90.01499957466949
+        },
+        {
+          "startS": 39,
+          "floatRms": 0.0000041217560165690755,
+          "floatDbFS": -107.69835438890314,
+          "calculatedDbFSAtF99Gain": -96.38918494947735
+        }
+      ]
+    },
+    {
+      "velocity": 2.5,
+      "peakOriginal": 0.2165346978495586,
+      "calculatedPeakAtF99Gain": 0.7961336311415415,
+      "windows": [
+        {
+          "startS": 0,
+          "floatRms": 0.056253038434463776,
+          "floatDbFS": -24.997080294666922,
+          "calculatedDbFSAtF99Gain": -13.687910855241135
+        },
+        {
+          "startS": 10,
+          "floatRms": 0.0008860353897704402,
+          "floatDbFS": -61.05097862602715,
+          "calculatedDbFSAtF99Gain": -49.741809186601365
+        },
+        {
+          "startS": 14,
+          "floatRms": 0.0004617439998466507,
+          "floatDbFS": -66.71197478620795,
+          "calculatedDbFSAtF99Gain": -55.40280534678216
+        },
+        {
+          "startS": 19,
+          "floatRms": 0.00021528069684473492,
+          "floatDbFS": -73.33989818937755,
+          "calculatedDbFSAtF99Gain": -62.03072874995176
+        },
+        {
+          "startS": 24,
+          "floatRms": 0.00010201967905552607,
+          "floatDbFS": -79.82632094105905,
+          "calculatedDbFSAtF99Gain": -68.51715150163326
+        },
+        {
+          "startS": 29,
+          "floatRms": 0.000047551484812983534,
+          "floatDbFS": -86.45671835012861,
+          "calculatedDbFSAtF99Gain": -75.14754891070282
+        },
+        {
+          "startS": 34,
+          "floatRms": 0.000022108796018337196,
+          "floatDbFS": -93.10869814420099,
+          "calculatedDbFSAtF99Gain": -81.7995287047752
+        },
+        {
+          "startS": 39,
+          "floatRms": 0.0000106135345446072,
+          "floatDbFS": -99.48279924451728,
+          "calculatedDbFSAtF99Gain": -88.1736298050915
+        }
+      ]
+    }
+  ],
+  "decision": "do not homologate; restore exact F9.9 common gain in separate soft/strong renders; reuse F9.9 medium artifact; fixed whole-note scale, no change to physical model or tail envelope; confirm clipping gate; then assess acoustic sympathetic integration; not a hearing threshold"
+}
