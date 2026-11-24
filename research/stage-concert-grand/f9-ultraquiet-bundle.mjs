@@ -16,4 +16,4 @@ const medium=rows.find(r=>r.velocity===.15);
 const result={scope:'matched digital gain, experimental hammer speeds, not calibrated MIDI dynamics',rows:rows.map(r=>({...r,initialRelativeTo015Db:20*Math.log10(r.pcm.rms24/medium.pcm.rms24)}))};
 writeFileSync(out+'/manifest.json',JSON.stringify(result,null,2),{flag:'wx'});
 writeFileSync(out+'/LEIA-ME.txt','Dó4 - comparação de toques muito suaves, WAV24 estéreo 48 kHz. 0.15 m/s é o arquivo original escolhido pelo usuário. 0.06/0.09/0.12 m/s são novos ensaios de percussão, todos com mesmo ganho, feltro 150% e perdas B. Desative normalização automática. Não são pp/ppp calibrados.\n'.replace(/\n/g,' '),{flag:'wx'});
-console.log('F917C_BUNDLE '+JSON.stringify(result.rows.map(r=>({velocity:r.velocity,initialDbFS:r.initialDbFS,relativeDb:r.initialRelativeToMediumDb,contactSpanS:r.attack.contactSpanS,peak:r.pcm.peak24}))));
+console.log('F917C_BUNDLE '+JSON.stringify(result.rows.map(r=>({velocity:r.velocity,initialDbFS:r.initialDbFS,relativeDb:r.initialRelativeTo015Db,contactSpanS:r.attack.contactSpanS,peak:r.pcm.peak24}))));
