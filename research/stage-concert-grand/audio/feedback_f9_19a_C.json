@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-24",
+  "comment": "a vibração foi corrigida no modelo C",
+  "scope": "Modelo C da comparação F9.19a: dissipação estrutural global 4×; usuário confirma correção perceptiva da vibração, sem especificar intensidade ou aprovar sustain/timbre integral",
+  "sourceRunId": 45467693980,
+  "artifactIds": [
+    14955364269,
+    14954639986,
+    14955742156
+  ],
+  "decision": "congelar C como referência perceptiva de correção; comparar seletivo 4×; não promover antes de revalidar sustain e escuta"
+}

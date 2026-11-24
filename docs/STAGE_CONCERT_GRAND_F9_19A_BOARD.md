@@ -5,3 +5,7 @@ Base 59e85ecb348d55a4eb04a1f597cde977a3bb91a5. F9.19 verificou picos fora das ba
 ## Resultados confirmados
 
 CI [45467693980](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45467693980), oito testes, nove renders, 27 chunks, zero clipping. Frequências livres próximas aos picos: 222,731/241,086/280,425/372,598 Hz; modo secundário 227,681 Hz. Forte: fração fora das bandas amplas janela .525–1.025 s 3,460181/0,785549/0,035515% em 1/2/4×; redução de 98,97% relativa da fração em 4×, não da totalidade de ruído. Médio RMS inicial 0,079310/0,071215/0,060830 FS; aos 2 s 0,016992/0,011294/0,007689 FS. A perda global prejudica a intensidade no decaimento; não promover. Picos próximos ao tampo e sensibilidade à perda sustentam hipótese de modos carregados, sem prova auditiva da causa. Relatório audio/analysis_f9_19a_ci.json. F9.19b testa cinco modos livres identificados, com perda seletiva 4/8×, demais coeficientes e matriz radiativa preservados. A alteração é experimental, não propriedade material medida; exige escuta e comparação longa antes de adotar. Main intacta.
+
+## Aceite auditivo da correção
+
+Titular: “a vibração foi corrigida no modelo C”. C corresponde à perda estrutural global 4× na F9.19a. Congelar como referência auditiva de ausência da vibração, sem afirmar aceite de sustain, timbre integral ou de cada intensidade. Registro audio/feedback_f9_19a_C.json. Não descartar C; comparação longa com seletivo 4× na F9.19c. Sem promoção.

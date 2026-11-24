@@ -5,3 +5,7 @@ Base 804601ac81dc7da969cb80833151fa7f66ec9119. Feedback do titular: percebeu vib
 ## Diagnóstico concluído e esclarecimento auditivo
 
 CI [45465603213](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45465603213) sete testes, 12 WAV24 com hashes verificados, 36 janelas. [Relatório completo](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45465603213/artifacts/14953693183). Picos recorrentes 279,785/221,191/240,234 Hz, 279,785 Hz em todas as intensidades nas três janelas. Forte: nível relativo ao maior bin -6,006/-13,413/-20,953 dB; fração fora das bandas amplas 18,696/3,460/0,624%. Não confundir com nível absoluto ou ruído total. Diferença 279,785-261,626≈18,16 Hz pode produzir tremulação, hipótese não confirmação. Titular esclareceu: “Acontece no momento da batida e continua ressoando junto com os harmônicos”. Registro atualizado. F9.19a testa perda estrutural do tampo 1/2/4× com cordas, feltro, ângulo, uníssono, junta, radiação e ganho preservados. Paridade exata controle, 3 níveis MIDI 24/76/127, 3 s, comparar picos e RMS/P1–P10, não homologar nem inferir sustain longo. Investigar frequência natural do tampo próxima aos picos, sem presumir correspondência causal dos modos carregados. Main intacta.
+
+## Correção percebida
+
+Titular confirma que a vibração foi corrigida no modelo C (global 4×). Referência positiva para investigação; não homologar sustain ou toda dinâmica. F9.19c revalida duração e compara seletivo4, sem alterar parâmetros aprovados. F9 aberta.
