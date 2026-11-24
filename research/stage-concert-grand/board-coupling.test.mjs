@@ -25,10 +25,10 @@ function checks(hp){
  }
  function transfer(from,loss=true,jointK=1e7){
   const b=make({rate:48000,loss,jointK,jointC:jointK===0?0:1});
-  if(from==='board')b.board.x[0]=1e-5;else b.bridge.vAxis.x[0]=1e-4;
-  const e0=b.energy();let maxOther=0,maxBalance=0,maxIncrease=0,prev=e0;
+  if(from==='board')b.board.v[0]=Math.sqrt(2*24.935874721567115e-6);else b.bridge.vAxis.x[0]=1e-4;
+  const e0=b.energy(),initialBoard=b.board.energy(),initialJoint=.5*b.k*b.relative()**2;let maxOther=0,maxBalance=0,maxIncrease=0,prev=e0;
   for(let i=0;i<4800;i++){b.step();const e=b.energy(),other=from==='board'?b.bridge.energy():b.board.energy();maxOther=Math.max(maxOther,other);maxBalance=Math.max(maxBalance,Math.abs(e+b.lossJ-e0));maxIncrease=Math.max(maxIncrease,e-prev);prev=e;}
-  return {from,loss,jointK,e0,maxOther,maxBalance,maxIncrease,boardWork:b.board.workJ,boardLoss:b.board.lossJ};
+  return {from,loss,jointK,e0,initialBoard,initialJoint,maxOther,maxBalance,maxIncrease,boardWork:b.board.workJ,boardLoss:b.board.lossJ};
  }
  const dyn=[.5,1,2.5].map(v=>impact(96000,v)),rates=[impact(48000),dyn[1],impact(192000)],enrich=[impact(96000,1,{basisHz:1000}),impact(96000,1,{basisHz:2000}),dyn[1]],band=[impact(96000,1,{boardCut:500}),dyn[1],impact(96000,1,{boardCut:1500})],trans=[transfer('wire'),transfer('board'),transfer('wire',false),transfer('wire',true,0)];
  const iso=make({jointK:0,jointC:0}),base=iso.bridge;const old=new hp.PolarizedBridge(wires,{sampleRate:96000,stiffness:[0,2e6],damping:[0,5]},hp);
@@ -41,7 +41,7 @@ function checks(hp){
  ['affine hammer contact prediction',()=>a(affine<1e-15,'affine')],
  ['reciprocal contact compliance',()=>a(G.every((row,i)=>row.every((v,j)=>v>=0&&Math.abs(v-G[j][i])<1e-18)),'G')],
  ['zero joint recovers bridge and silent board',()=>a(parity<1e-15&&iso.board.energy()===0,'parity')],
- ['wire excites board and board excites wire',()=>a(trans[0].maxOther>1e-12&&trans[1].maxOther>1e-12&&trans[3].maxOther===0,'transfer')],
+ ['wire excites board and board excites wire',()=>a(trans[0].maxOther>1e-12&&trans[1].maxOther>1e-12&&trans[1].initialBoard===trans[1].e0&&trans[1].initialJoint===0&&trans[3].maxOther===0,'transfer')],
  ['lossless coupled system conserves energy',()=>a(trans[2].maxBalance<1e-12&&trans[2].maxIncrease<1e-12,'lossless')],
  ['free coupled motion passive',()=>a(trans.every(q=>q.maxBalance<1e-12&&q.maxIncrease<1e-12),'passivity')],
  ['reciprocal bridge board port response',()=>a(reciprocal<1e-13,'reciprocal '+reciprocal)],
