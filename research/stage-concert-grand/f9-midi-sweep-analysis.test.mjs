@@ -1,0 +1,14 @@
+import {summarizeVelocitySweep} from './f9-midi-sweep-analysis.mjs';
+import {hammerSpeed} from './f9-midi-velocity.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};const reject=f=>{try{f();return false}catch{return true;}};
+const rows=Array.from({length:127},(_,i)=>({midiVelocity:i+1,velocity:hammerSpeed(i+1),rmsPa:i+1,peakPa:i+1,peakForce:i+1,contactSpanS:1/(i+1),impulseNs:1,reboundMps:-1,maxBalance:0,maxIncrease:0,centroidHz:200+i,upperFraction:i/127}));
+const q=summarizeVelocitySweep(rows,hammerSpeed);
+check('complete sweep',q.count===127&&q.steps.length===126);
+check('positive steps',q.metrics.rmsDb.negative.length===0&&q.metrics.forceDb.min>0);
+check('correct range',Math.abs(q.rangeRmsDb-20*Math.log10(127))<1e-12);
+check('missing row rejected',reject(()=>summarizeVelocitySweep(rows.slice(1),hammerSpeed)));
+const bad=rows.map(r=>({...r}));bad[7].midiVelocity=7;check('wrong order rejected',reject(()=>summarizeVelocitySweep(bad,hammerSpeed)));
+const zero=rows.map(r=>({...r}));zero[7].rmsPa=0;check('zero RMS rejected',reject(()=>summarizeVelocitySweep(zero,hammerSpeed)));
+const dip=rows.map(r=>({...r}));dip[7].rmsPa=6;check('dip reported',summarizeVelocitySweep(dip,hammerSpeed).metrics.rmsDb.negative.includes(8));
+const energy=rows.map(r=>({...r}));energy[0].maxIncrease=1e-8;check('energy error rejected',reject(()=>summarizeVelocitySweep(energy,hammerSpeed)));
+console.log('F9.18b sweep analysis tests passed:',n);

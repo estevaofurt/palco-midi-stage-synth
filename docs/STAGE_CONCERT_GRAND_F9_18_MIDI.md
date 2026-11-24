@@ -5,3 +5,7 @@ Base d9b86bb8a8e61f6e10288d175d3c8ccac84824d2. F9.17c: usuário gostou da progre
 ## Validação concluída
 
 CI [45463467507](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45463467507) 19 testes (10+9), 127 valores de mapeamento verificados, 12 ataques físicos amostrados, monotonia RMS/força e paridade exata mínimo e médio em .1 s. Máximo residual 1.0963452368173421e-14 J. [Tabela](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45463467507/artifacts/14954900984). Relatório audio/analysis_f9_18_ci.json. F9.18a prepara escuta de 12 níveis, sem alegar validação auditiva dos 127 nem alteração de física. Main intacta.
+
+## Sequências e verificação integral em preparação
+
+F9.18a concluída, 17 testes e 12 renders, [escuta](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45464139346/artifacts/14954032000). Faixa RMS 39.222 dB, monotonia dos 12 pontos. F9.18b expande testes físicos a todos os 127 níveis, sem recalibrar curva nem confundir métrica espectral com percepção. Aceite auditivo e teclado real pendentes.

@@ -1,0 +1,860 @@
+{
+  "runId": 45464139346,
+  "artifactId": 14954032000,
+  "testsPassed": 17,
+  "listening": {
+    "scope": "independent physical strikes concatenated losslessly, 2s per strike plus acoustic delay and .5s silence, editorial 40ms end fade from original export; not repeated-note/pedal simulation",
+    "gain": 0.36767023440034063,
+    "rows": [
+      {
+        "midiVelocity": 1,
+        "velocity": 0.06,
+        "file": "C4_MIDI001_2s_24bit.wav",
+        "sha256": "b933617c7dd8457f4676d64852d5bb66153257aaee4bb51fd22e4edeb0d423b4",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.002297881011815711,
+          "rms24": 0.0022978767607860023,
+          "peak16": 0.008575701162755212,
+          "peak24": 0.008567215033437613,
+          "maxPairError": 0.000015307031958423098
+        },
+        "attack": {
+          "firstForceS": 0.0033333333333333496,
+          "lastForceEndS": 0.008479166666666623,
+          "contactSpanS": 0.005145833333333273,
+          "activeContactS": 0.005145833333333333,
+          "activeSteps": 494,
+          "peakForceN": 0.47704585536130256,
+          "peakCompressionM": 0.00008292052063552253,
+          "impulseNs": 0.001147439321202564,
+          "reboundMps": -0.054743932120256286,
+          "hammerLossJ": 0.0000011903684660156903
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.0026243531296652406,
+          "centroidHz": 252.26635331707982,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.000010256234212524503,
+              "fraction": 0.9998845415725557
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 1.184137059313694e-9,
+              "fraction": 0.00011544201469824988
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 1.6804440566030222e-13,
+              "fraction": 1.6382719040512787e-8
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 3.080111887738308e-16,
+              "fraction": 3.002813897426915e-11
+            }
+          ],
+          "upperFraction": 0.00011545842744542936
+        }
+      },
+      {
+        "midiVelocity": 4,
+        "velocity": 0.07208893723463809,
+        "file": "C4_MIDI004_2s_24bit.wav",
+        "sha256": "eca782d6e141cdc1a3e8589d276f1b0bf9dbe3873087ab5298298dfbef39b3f9",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.00309922301580084,
+          "rms24": 0.0030992810245118125,
+          "peak16": 0.011474959562974944,
+          "peak24": 0.011468292649780828,
+          "maxPairError": 0.000015317236801620565
+        },
+        "attack": {
+          "firstForceS": 0.0027708333333333413,
+          "lastForceEndS": 0.00766666666666659,
+          "contactSpanS": 0.004895833333333249,
+          "activeContactS": 0.004895833333333333,
+          "activeSteps": 470,
+          "peakForceN": 0.5962958453947812,
+          "peakCompressionM": 0.00009104287633906058,
+          "impulseNs": 0.0013676110657407966,
+          "reboundMps": -0.06467216933944156,
+          "hammerLossJ": 0.00000172876004502008
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.0035716214116099224,
+          "centroidHz": 255.09268110065597,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.000018627640915650223,
+              "fraction": 0.9999262133749091
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 1.3740595660576767e-9,
+              "fraction": 0.00007375910804063637
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 5.122404288342512e-13,
+              "fraction": 2.7496913573819195e-8
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 3.7517705623544404e-16,
+              "fraction": 2.0139392577160263e-11
+            }
+          ],
+          "upperFraction": 0.00007378662509360278
+        }
+      },
+      {
+        "midiVelocity": 8,
+        "velocity": 0.09,
+        "file": "C4_MIDI008_2s_24bit.wav",
+        "sha256": "db7367c774717d6d2a454d71b35354d2a73b1468565037ecb4e7d8984208f3ff",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.0043452315076826,
+          "rms24": 0.004345256281731873,
+          "peak16": 0.015900143436994536,
+          "peak24": 0.015911581028888348,
+          "maxPairError": 0.00001531445366256671
+        },
+        "attack": {
+          "firstForceS": 0.00221875,
+          "lastForceEndS": 0.006843749999999945,
+          "contactSpanS": 0.004624999999999945,
+          "activeContactS": 0.004625,
+          "activeSteps": 444,
+          "peakForceN": 0.7781900212627124,
+          "peakCompressionM": 0.00010178403301466958,
+          "impulseNs": 0.0016900939955090822,
+          "reboundMps": -0.07900939955090812,
+          "hammerLossJ": 0.000002678228504751942
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.005023098612515373,
+          "centroidHz": 258.2099254559762,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.0000365583305269865,
+              "fraction": 0.999549984362804
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 1.6457812828228115e-8,
+              "fraction": 0.0004499769633341999
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 1.4140145788577147e-12,
+              "fraction": 3.866090791926844e-8
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 4.738281555085665e-16,
+              "fraction": 1.2955047963134761e-11
+            }
+          ],
+          "upperFraction": 0.0004500156371971671
+        }
+      },
+      {
+        "midiVelocity": 12,
+        "velocity": 0.10530263751838928,
+        "file": "C4_MIDI012_2s_24bit.wav",
+        "sha256": "462791c9d9262f1fa6b7ff9b7137febb4deda2e33ee1d128324a41696dc9eec5",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.005444815836004347,
+          "rms24": 0.005444780992408444,
+          "peak16": 0.019745475630970184,
+          "peak24": 0.019743683307609953,
+          "maxPairError": 0.00001531398798701282
+        },
+        "attack": {
+          "firstForceS": 0.0018958333333333297,
+          "lastForceEndS": 0.006343749999999959,
+          "contactSpanS": 0.0044479166666666296,
+          "activeContactS": 0.004447916666666667,
+          "activeSteps": 427,
+          "peakForceN": 0.9373096950994133,
+          "peakCompressionM": 0.00011003420720220232,
+          "impulseNs": 0.0019633529478543152,
+          "reboundMps": -0.09103265726704228,
+          "hammerLossJ": 0.0000036164134002721764
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.006283449986071889,
+          "centroidHz": 260.02640363601546,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.00005729730262919062,
+              "fraction": 0.9991320340106788
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 4.9773232394638645e-8,
+              "fraction": 0.0008679297041883105
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 2.0801033910019187e-12,
+              "fraction": 3.6272177513386996e-8
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 7.428753545419435e-16,
+              "fraction": 1.295402278888012e-11
+            }
+          ],
+          "upperFraction": 0.0008679659893198467
+        }
+      },
+      {
+        "midiVelocity": 16,
+        "velocity": 0.12,
+        "file": "C4_MIDI016_2s_24bit.wav",
+        "sha256": "57f08df9783b408372553a17597e2554ae402ae4d637bdb43598357fabd14be2",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.006518384727759994,
+          "rms24": 0.0065183562053022686,
+          "peak16": 0.023407696768089847,
+          "peak24": 0.02340066711910571,
+          "maxPairError": 0.000015316309088602613
+        },
+        "attack": {
+          "firstForceS": 0.0016666666666666644,
+          "lastForceEndS": 0.005947916666666636,
+          "contactSpanS": 0.004281249999999972,
+          "activeContactS": 0.0042812499999999995,
+          "activeSteps": 411,
+          "peakForceN": 1.0926240277766237,
+          "peakCompressionM": 0.00011733157277507279,
+          "impulseNs": 0.002224625785044579,
+          "reboundMps": -0.10246257850445802,
+          "hammerLossJ": 0.000004614808770809697
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.0075351233181387344,
+          "centroidHz": 261.2535064456894,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.00008198623913586916,
+              "fraction": 0.9988228572192596
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 9.661739023017806e-8,
+              "fraction": 0.0011770714059324873
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 5.857700041214191e-12,
+              "fraction": 7.136325258441076e-8
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 9.484804616067198e-16,
+              "fraction": 1.1555158215132621e-11
+            }
+          ],
+          "upperFraction": 0.0011771427807402298
+        }
+      },
+      {
+        "midiVelocity": 20,
+        "velocity": 0.13391959003781162,
+        "file": "C4_MIDI020_2s_24bit.wav",
+        "sha256": "4935f883bf76f55d952a124400bb346e924cc753a2496694e836fa363fdf2aa8",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.007545735752327137,
+          "rms24": 0.0075457448124897535,
+          "peak16": 0.026825769829401533,
+          "peak24": 0.02683270297440326,
+          "maxPairError": 0.00001531352594954876
+        },
+        "attack": {
+          "firstForceS": 0.0014895833333333321,
+          "lastForceEndS": 0.0056354166666666445,
+          "contactSpanS": 0.004145833333333312,
+          "activeContactS": 0.004145833333333333,
+          "activeSteps": 398,
+          "peakForceN": 1.2415273773397213,
+          "peakCompressionM": 0.00012377896081170917,
+          "impulseNs": 0.00247133279285559,
+          "reboundMps": -0.11321368924774738,
+          "hammerLossJ": 0.000005640303455657412
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.00875039690006228,
+          "centroidHz": 262.25737977149527,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.0001097167933351358,
+              "fraction": 0.9985291383387885
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 1.616085499898665e-7,
+              "fraction": 0.0014707944086248179
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 7.388273895982058e-12,
+              "fraction": 6.72404519208946e-8
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 1.3332719431486865e-15,
+              "fraction": 1.2134066664680765e-11
+            }
+          ],
+          "upperFraction": 0.0014708616612108055
+        }
+      },
+      {
+        "midiVelocity": 24,
+        "velocity": 0.15,
+        "file": "C4_MIDI024_2s_24bit.wav",
+        "sha256": "499e10b4eff9a286853fb273d5ba6c0c72553347185c310dcc7fd486aea83543",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.00874360491853091,
+          "rms24": 0.008743699862433896,
+          "peak16": 0.03076265755180517,
+          "peak24": 0.03077388176606676,
+          "maxPairError": 0.00001531445366256671
+        },
+        "attack": {
+          "firstForceS": 0.001333333333333333,
+          "lastForceEndS": 0.005322916666666653,
+          "contactSpanS": 0.00398958333333332,
+          "activeContactS": 0.003989583333333333,
+          "activeSteps": 383,
+          "peakForceN": 1.4153583851534839,
+          "peakCompressionM": 0.00013075573645528668,
+          "impulseNs": 0.0027555523597763377,
+          "reboundMps": -0.12555523597763393,
+          "hammerLossJ": 0.00000691448006951201
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.010176731896943321,
+          "centroidHz": 263.57375935009804,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.00014708953287613264,
+              "fraction": 0.9980012289822959
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 2.9456966299333895e-7,
+              "fraction": 0.0019986526569216916
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 1.7442417558598363e-11,
+              "fraction": 1.1834665471786378e-7
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 2.0824371151466628e-15,
+              "fraction": 1.4129318106849095e-11
+            }
+          ],
+          "upperFraction": 0.001998771017705728
+        }
+      },
+      {
+        "midiVelocity": 36,
+        "velocity": 0.25,
+        "file": "C4_MIDI036_2s_24bit.wav",
+        "sha256": "5da9a398a78fb25d41e6d46193f431da26ed64cc8f1e5867d66282d76fb8fb99",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.016475820350832213,
+          "rms24": 0.016475838152235467,
+          "peak16": 0.06335642567217017,
+          "peak24": 0.06336487094937217,
+          "maxPairError": 0.000015312139837157443
+        },
+        "attack": {
+          "firstForceS": 0.0007916666666666677,
+          "lastForceEndS": 0.004250000000000015,
+          "contactSpanS": 0.003458333333333347,
+          "activeContactS": 0.0034583333333333332,
+          "activeSteps": 332,
+          "peakForceN": 2.525633518938718,
+          "peakCompressionM": 0.0001664985472961852,
+          "impulseNs": 0.004502850349868515,
+          "reboundMps": -0.20028503498685152,
+          "hammerLossJ": 0.000016637068744529085
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.019315493912373218,
+          "centroidHz": 277.586678871131,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.0005142665350867262,
+              "fraction": 0.9898865442552213
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 0.0000052539054160449156,
+              "fraction": 0.010112986012701431
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 2.440097519689612e-10,
+              "fraction": 4.6968245775586957e-7
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 2.5777846839278645e-14,
+              "fraction": 4.961851877406468e-11
+            }
+          ],
+          "upperFraction": 0.010113455744777707
+        }
+      },
+      {
+        "midiVelocity": 52,
+        "velocity": 0.5,
+        "file": "C4_MIDI052_2s_24bit.wav",
+        "sha256": "11ecbdff72c808df7be4e45c464aa9fc99a94cee9773ae536f7b72b5981a7bdb",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.0370101662640755,
+          "rms24": 0.03701019522426229,
+          "peak16": 0.14835047456282235,
+          "peak24": 0.14834274629864053,
+          "maxPairError": 0.000015313515035277753
+        },
+        "attack": {
+          "firstForceS": 0.00039583333333333316,
+          "lastForceEndS": 0.0034062500000000173,
+          "contactSpanS": 0.0030104166666666842,
+          "activeContactS": 0.0030104166666666664,
+          "activeSteps": 289,
+          "peakForceN": 5.474113021470236,
+          "peakCompressionM": 0.00022925500254178646,
+          "impulseNs": 0.00876274116381254,
+          "reboundMps": -0.3762741163812532,
+          "hammerLossJ": 0.000050632131310932816
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.04323035638137978,
+          "centroidHz": 305.0790824025348,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.0025062013462699945,
+              "fraction": 0.9759328430077742
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 0.00006179247040203114,
+              "fraction": 0.02406243273537499
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 1.2131132840691622e-8,
+              "fraction": 0.000004723950443862586
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 7.868612706524821e-13,
+              "fraction": 3.0640944234727803e-10
+            }
+          ],
+          "upperFraction": 0.0240671569922283
+        }
+      },
+      {
+        "midiVelocity": 76,
+        "velocity": 1,
+        "file": "C4_MIDI076_2s_24bit.wav",
+        "sha256": "d0486296ef11c7e0693ea17ad49a19d4eb6ed746dfa26f3409f420640c48d5f8",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.07930980943570876,
+          "rms24": 0.07930976640393018,
+          "peak16": 0.3095187231055635,
+          "peak24": 0.3095051419145038,
+          "maxPairError": 0.000015312121646703092
+        },
+        "attack": {
+          "firstForceS": 0.00019791666666666663,
+          "lastForceEndS": 0.0028854166666666763,
+          "contactSpanS": 0.0026875000000000098,
+          "activeContactS": 0.0026875,
+          "activeSteps": 258,
+          "peakForceN": 11.95780084325923,
+          "peakCompressionM": 0.00031618039756126884,
+          "impulseNs": 0.01707169795098102,
+          "reboundMps": -0.7071697950981005,
+          "hammerLossJ": 0.0001477522373486792
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.09298335378712241,
+          "centroidHz": 340.0543836362746,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.011176554590961493,
+              "fraction": 0.9577602119574774
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 0.0004917880163545106,
+              "fraction": 0.04214313015235969
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 0.0000011279179878932354,
+              "fraction": 0.00009665545516405365
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 2.8415183766874582e-11,
+              "fraction": 2.435001968261422e-9
+            }
+          ],
+          "upperFraction": 0.042239788042525706
+        }
+      },
+      {
+        "midiVelocity": 100,
+        "velocity": 1.5898478405355054,
+        "file": "C4_MIDI100_2s_24bit.wav",
+        "sha256": "5e736ae16751b4a420e6ef1fa50100ffb71024cffacd545d87f78952df0e6195",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.1300909603005607,
+          "rms24": 0.13009091099144962,
+          "peak16": 0.4968108157597583,
+          "peak24": 0.4968110915197243,
+          "maxPairError": 0.00001531262006507217
+        },
+        "attack": {
+          "firstForceS": 0.00012500000000000003,
+          "lastForceEndS": 0.0026458333333333394,
+          "contactSpanS": 0.0025208333333333393,
+          "activeContactS": 0.0025208333333333333,
+          "activeSteps": 242,
+          "peakForceN": 20.175735645822357,
+          "peakCompressionM": 0.00039153497906891386,
+          "impulseNs": 0.026720390475452452,
+          "reboundMps": -1.0821912070097406,
+          "hammerLossJ": 0.00030291512918405143
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.1539456303840633,
+          "centroidHz": 383.86010925423716,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.02939905823788655,
+              "fraction": 0.9308978253291941
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 0.002166510856043992,
+              "fraction": 0.06860084524219193
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 0.000015832197683051244,
+              "fraction": 0.0005013139629874691
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 4.88426403783744e-10,
+              "fraction": 1.546563408380567e-8
+            }
+          ],
+          "upperFraction": 0.06910217467081349
+        }
+      },
+      {
+        "midiVelocity": 127,
+        "velocity": 2.5,
+        "file": "C4_MIDI127_2s_24bit.wav",
+        "sha256": "6de680031159aaf843d9577dcbb78f9a1ff2f9950e8b83de7e940e0f9bd3a21c",
+        "pcm": {
+          "frames": 96239,
+          "rate": 48000,
+          "rms16": 0.2100894513779523,
+          "rms24": 0.21008942359273056,
+          "peak16": 0.826837977233192,
+          "peak24": 0.8268528970304605,
+          "maxPairError": 0.00001531344227345688
+        },
+        "attack": {
+          "firstForceS": 0.00007291666666666667,
+          "lastForceEndS": 0.0024583333333333367,
+          "contactSpanS": 0.00238541666666667,
+          "activeContactS": 0.0023854166666666668,
+          "activeSteps": 229,
+          "peakForceN": 33.590546206379486,
+          "peakCompressionM": 0.0004817329655791222,
+          "impulseNs": 0.04147137831080549,
+          "reboundMps": -1.6471378310805527,
+          "hammerLossJ": 0.0006158245900666308
+        },
+        "spectrum": {
+          "startS": 0,
+          "endS": 0.05,
+          "rms": 0.25161300983582013,
+          "centroidHz": 447.2765355971078,
+          "bands": [
+            {
+              "loHz": 0,
+              "hiHz": 1000,
+              "energy": 0.07444172149323218,
+              "fraction": 0.892445269788098
+            },
+            {
+              "loHz": 1000,
+              "hiHz": 3000,
+              "energy": 0.008820716356768775,
+              "fraction": 0.10574723999976918
+            },
+            {
+              "loHz": 3000,
+              "hiHz": 6000,
+              "energy": 0.00015075888974151202,
+              "fraction": 0.0018073743504245774
+            },
+            {
+              "loHz": 6000,
+              "hiHz": 12000,
+              "energy": 9.664396966957672e-9,
+              "fraction": 1.1586171283397776e-7
+            }
+          ],
+          "upperFraction": 0.10755473021190659
+        }
+      }
+    ],
+    "sequences": [
+      {
+        "file": "01_MIDI_SUAVE_CRESCENTE.wav",
+        "seconds": 17.034854166666666,
+        "placements": [
+          {
+            "startFrame": 0,
+            "frames": 96239,
+            "midiVelocity": 1,
+            "startS": 0
+          },
+          {
+            "startFrame": 120239,
+            "frames": 96239,
+            "midiVelocity": 4,
+            "startS": 2.5049791666666668
+          },
+          {
+            "startFrame": 240478,
+            "frames": 96239,
+            "midiVelocity": 8,
+            "startS": 5.0099583333333335
+          },
+          {
+            "startFrame": 360717,
+            "frames": 96239,
+            "midiVelocity": 12,
+            "startS": 7.5149375
+          },
+          {
+            "startFrame": 480956,
+            "frames": 96239,
+            "midiVelocity": 16,
+            "startS": 10.019916666666667
+          },
+          {
+            "startFrame": 601195,
+            "frames": 96239,
+            "midiVelocity": 20,
+            "startS": 12.524895833333334
+          },
+          {
+            "startFrame": 721434,
+            "frames": 96239,
+            "midiVelocity": 24,
+            "startS": 15.029875
+          }
+        ]
+      },
+      {
+        "file": "02_MIDI_DINAMICA_COMPLETA.wav",
+        "seconds": 29.55975,
+        "placements": [
+          {
+            "startFrame": 0,
+            "frames": 96239,
+            "midiVelocity": 1,
+            "startS": 0
+          },
+          {
+            "startFrame": 120239,
+            "frames": 96239,
+            "midiVelocity": 4,
+            "startS": 2.5049791666666668
+          },
+          {
+            "startFrame": 240478,
+            "frames": 96239,
+            "midiVelocity": 8,
+            "startS": 5.0099583333333335
+          },
+          {
+            "startFrame": 360717,
+            "frames": 96239,
+            "midiVelocity": 12,
+            "startS": 7.5149375
+          },
+          {
+            "startFrame": 480956,
+            "frames": 96239,
+            "midiVelocity": 16,
+            "startS": 10.019916666666667
+          },
+          {
+            "startFrame": 601195,
+            "frames": 96239,
+            "midiVelocity": 20,
+            "startS": 12.524895833333334
+          },
+          {
+            "startFrame": 721434,
+            "frames": 96239,
+            "midiVelocity": 24,
+            "startS": 15.029875
+          },
+          {
+            "startFrame": 841673,
+            "frames": 96239,
+            "midiVelocity": 36,
+            "startS": 17.534854166666666
+          },
+          {
+            "startFrame": 961912,
+            "frames": 96239,
+            "midiVelocity": 52,
+            "startS": 20.039833333333334
+          },
+          {
+            "startFrame": 1082151,
+            "frames": 96239,
+            "midiVelocity": 76,
+            "startS": 22.5448125
+          },
+          {
+            "startFrame": 1202390,
+            "frames": 96239,
+            "midiVelocity": 100,
+            "startS": 25.049791666666668
+          },
+          {
+            "startFrame": 1322629,
+            "frames": 96239,
+            "midiVelocity": 127,
+            "startS": 27.554770833333333
+          }
+        ]
+      }
+    ],
+    "monotoneInitialRms": true
+  }
+}

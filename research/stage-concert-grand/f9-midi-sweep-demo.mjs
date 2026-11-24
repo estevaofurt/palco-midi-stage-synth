@@ -1,0 +1,34 @@
+import {polarizationLedger,validateAngle} from './f9-aftersound-ledger.mjs';
+import {renderStringLoss} from './f9-string-loss.mjs';
+import {stringLossCase} from './f9-string-loss-parameters.mjs';
+import {renderUnison} from './f9-unison.mjs';
+import {solidWire} from '../c3x-physical/c4-wire-consistency.mjs';
+import {makeDesign} from './c4-design.mjs';
+import {stringMode,spatialWeight} from './stiff-string.mjs';
+import {plateDesign,plateModes,patchWeight} from './orthotropic-plate.mjs';
+import {ribDesign,generalizedEigen} from './ribbed-plate.mjs';
+import {mindlinModes} from './mindlin-plate.mjs';
+import {PolarizedBridge,PolarizedHammer} from './polarized-bridge.mjs';
+import {BoardCoupledBridge} from './board-coupling.mjs';
+import {radiationGrid,surfaceShape,radiationKernel} from './surface-radiation.mjs';
+import {ResistiveBoard} from './radiation-loading.mjs';
+import {relaxMemory} from './felt-memory.mjs';
+import {fft} from './f8-render.mjs';
+const hp={fft,solidWire,makeDesign,stringMode,spatialWeight,plateDesign,plateModes,patchWeight,ribDesign,generalizedEigen,mindlinModes,PolarizedBridge,PolarizedHammer,BoardCoupledBridge,radiationGrid,surfaceShape,radiationKernel,ResistiveBoard,relaxMemory};
+import {writeFileSync} from 'node:fs';
+import {hammerSpeed} from './f9-midi-velocity.mjs';
+import {renderMidiStrike} from './f9-midi-strike.mjs';
+import {attackSpectrum} from './f9-attack-spectrum.mjs';
+const [shardArg,out]=process.argv.slice(2),shard=Number(shardArg);
+if(!Number.isInteger(shard)||shard<0||shard>7||!out)throw RangeError('shard 0–7 and output required');
+const rows=[];
+for(let m=shard*16+1;m<=Math.min(127,(shard+1)*16);m++){
+ const q=renderMidiStrike(hp,{seconds:.1,midiVelocity:m}),a=q.meta.attack;
+ if(q.meta.midiVelocity!==m||q.meta.velocity!==hammerSpeed(m)||q.meta.feltFactor!==1.5||q.meta.maxBalance>1e-9||q.meta.maxIncrease>1e-9||!(a.reboundMps<0)||q.channels.some(c=>c.some(v=>!Number.isFinite(v))))throw Error('invalid physical strike '+m);
+ const rmsPa=Math.sqrt(q.channels.reduce((s,c)=>s+c.reduce((z,x)=>z+x*x,0),0)/q.channels.reduce((s,c)=>s+c.length,0));
+ const spectrum=attackSpectrum(q.channels,48000,hp.fft,{startS:0,endS:.05});
+ const row={midiVelocity:m,velocity:q.meta.velocity,rmsPa,peakPa:q.meta.peakPa,peakForce:q.meta.peakForce,contactSpanS:a.contactSpanS,impulseNs:a.impulseNs,reboundMps:a.reboundMps,maxBalance:q.meta.maxBalance,maxIncrease:q.meta.maxIncrease,centroidHz:spectrum.centroidHz,upperFraction:spectrum.upperFraction};
+ rows.push(row);
+ console.log('F918B_STRIKE '+JSON.stringify(row));
+}
+writeFileSync(out,JSON.stringify({shard,rows},null,2),{flag:'wx'});
