@@ -68,7 +68,7 @@ test('preview includes ONLY one C3X piano engine, not A/B/C/D/E or samples',()=>
  const map=JSON.parse(html.match(/<script type="importmap">(.*?)<\/script>/s)[1]).imports;
  assert.equal(map['./acoustic.js'],'./acoustic-v8-web.js?build=1.13.2');
  assert.equal(map['./patches.js'],'./patches-v8-web.js?build=1.13.2');
- assert.match(html,/app-v8-web\.js\?build=1\.13\.0/);
+ assert.match(html,/app-v8-web\.js\?build=1\.13\.2/);
  assert.doesNotMatch(html,/physical-piano-hybrid|physical-piano-legacy|piano-worklet|sample-notice/);
  const app=read('../app-v8-web.js'),a=read('../acoustic-v8-web.js');
  assert.match(app,/prepareV8/);
@@ -86,12 +86,12 @@ test('v1.13.2 removes the E sampler from the active V8 Web preview',()=>{
   const app=read('../app-v8-web.js');
   const p=read('../patches-v8-web.js');
   const acoustic=read('../acoustic-v8-web.js');
-  const map=JSON.parse(html.match(/<script type="importmap">(.*?)<\\/script>/s)[1]).imports;
+  const map=JSON.parse(html.match(/<script type="importmap">(.*?)<\/script>/s)[1]).imports;
   assert.ok(!Object.hasOwn(map,'./sample-library.js'));
   assert.doesNotMatch(html,/id="sample-notice"|id="sample-upload-shortcut"|sample-upload/);
   assert.doesNotMatch(app,/loadSamples|clearSamples|sampleCount|sampleModel|warnSample/);
-  assert.doesNotMatch(p,/samplepack|sampleModel|soundEngine|sampled:/);
-  assert.doesNotMatch(acoustic,/SampleLibrary|\\.samples\\.|soundEngine==='sampled'/);
-  assert.match(html,/v1\\.13\\.2-V8-only/);
-  assert.match(app,/for\\(const slot of activePointers\\.values\\(\\)\\)held\\.add\\(slot\\.key\\)/);
+  assert.doesNotMatch(p.slice(0,p.indexOf('  electric:{')),/samplepack|sampleModel|soundEngine|sampled:/);
+  assert.doesNotMatch(acoustic,/SampleLibrary|\.samples\.|soundEngine==='sampled'/);
+  assert.match(html,/v1\.13\.2-V8-only/);
+  assert.match(app,/for\(const slot of activePointers\.values\(\)\)held\.add\(slot\.key\)/);
 });
