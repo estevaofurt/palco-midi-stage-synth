@@ -1,0 +1,253 @@
+{
+  "sourceCommit": "494bcafd524bdc7e81543e08546920e574d9b81a",
+  "runId": 45416470232,
+  "artifactIds": {
+    "soft": 14931834125,
+    "medium": 14931293564,
+    "strong": 14933241448,
+    "comparison": 14932463234
+  },
+  "gain": 0.1,
+  "summary": [
+    {
+      "velocity": 0.5,
+      "initialRms": 0.009683361524080692,
+      "initialDbRelativeToMedium": -6.761017633983945,
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "observed-window",
+          "startS": 13.5,
+          "endS": 14,
+          "confirmedThroughS": 14.5
+        },
+        "60": {
+          "status": "observed-window",
+          "startS": 28.5,
+          "endS": 29,
+          "confirmedThroughS": 29.5
+        }
+      },
+      "commonDrops": {
+        "20": {
+          "status": "observed-window",
+          "threshold": 0.0021090021770664466,
+          "startS": 2,
+          "endS": 2.5,
+          "confirmedThroughS": 3
+        },
+        "40": {
+          "status": "observed-window",
+          "threshold": 0.00021090021770664463,
+          "startS": 8.5,
+          "endS": 9,
+          "confirmedThroughS": 9.5
+        },
+        "60": {
+          "status": "observed-window",
+          "threshold": 0.000021090021770664464,
+          "startS": 23.5,
+          "endS": 24,
+          "confirmedThroughS": 24.5
+        },
+        "80": {
+          "status": "not-observed",
+          "threshold": 0.000002109002177066446,
+          "analyzedThroughS": 39.5
+        }
+      },
+      "windows": [
+        {
+          "startS": 0,
+          "dbRelativeToMedium": -6.761017633983945,
+          "dbRelativeToOwnStart": 0
+        },
+        {
+          "startS": 10,
+          "dbRelativeToMedium": -42.78236844089274,
+          "dbRelativeToOwnStart": -36.02135080690879
+        },
+        {
+          "startS": 19,
+          "dbRelativeToMedium": -54.567959188153125,
+          "dbRelativeToOwnStart": -47.80694155416918
+        },
+        {
+          "startS": 29,
+          "dbRelativeToMedium": -67.66198004634103,
+          "dbRelativeToOwnStart": -60.900962412357075
+        },
+        {
+          "startS": 39,
+          "dbRelativeToMedium": -80.67079673330005,
+          "dbRelativeToOwnStart": -73.9097790993161
+        }
+      ]
+    },
+    {
+      "velocity": 1,
+      "initialRms": 0.021090021770664463,
+      "initialDbRelativeToMedium": 0,
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "observed-window",
+          "startS": 13,
+          "endS": 13.5,
+          "confirmedThroughS": 14
+        },
+        "60": {
+          "status": "observed-window",
+          "startS": 28.5,
+          "endS": 29,
+          "confirmedThroughS": 29.5
+        }
+      },
+      "commonDrops": {
+        "20": {
+          "status": "observed-window",
+          "threshold": 0.0021090021770664466,
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "observed-window",
+          "threshold": 0.00021090021770664463,
+          "startS": 13,
+          "endS": 13.5,
+          "confirmedThroughS": 14
+        },
+        "60": {
+          "status": "observed-window",
+          "threshold": 0.000021090021770664464,
+          "startS": 28.5,
+          "endS": 29,
+          "confirmedThroughS": 29.5
+        },
+        "80": {
+          "status": "not-observed",
+          "threshold": 0.000002109002177066446,
+          "analyzedThroughS": 39.5
+        }
+      },
+      "windows": [
+        {
+          "startS": 0,
+          "dbRelativeToMedium": 0,
+          "dbRelativeToOwnStart": 0
+        },
+        {
+          "startS": 10,
+          "dbRelativeToMedium": -36.044232604123124,
+          "dbRelativeToOwnStart": -36.044232604123124
+        },
+        {
+          "startS": 19,
+          "dbRelativeToMedium": -48.058671640451124,
+          "dbRelativeToOwnStart": -48.058671640451124
+        },
+        {
+          "startS": 29,
+          "dbRelativeToMedium": -61.159955847994205,
+          "dbRelativeToOwnStart": -61.159955847994205
+        },
+        {
+          "startS": 39,
+          "dbRelativeToMedium": -74.17989494990869,
+          "dbRelativeToOwnStart": -74.17989494990869
+        }
+      ]
+    },
+    {
+      "velocity": 2.5,
+      "initialRms": 0.056253038434463776,
+      "initialDbRelativeToMedium": 8.521379144327549,
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "observed-window",
+          "startS": 13,
+          "endS": 13.5,
+          "confirmedThroughS": 14
+        },
+        "60": {
+          "status": "observed-window",
+          "startS": 28,
+          "endS": 28.5,
+          "confirmedThroughS": 29
+        }
+      },
+      "commonDrops": {
+        "20": {
+          "status": "observed-window",
+          "threshold": 0.0021090021770664466,
+          "startS": 6.5,
+          "endS": 7,
+          "confirmedThroughS": 7.5
+        },
+        "40": {
+          "status": "observed-window",
+          "threshold": 0.00021090021770664463,
+          "startS": 19.5,
+          "endS": 20,
+          "confirmedThroughS": 20.5
+        },
+        "60": {
+          "status": "observed-window",
+          "threshold": 0.000021090021770664464,
+          "startS": 34.5,
+          "endS": 35,
+          "confirmedThroughS": 35.5
+        },
+        "80": {
+          "status": "not-observed",
+          "threshold": 0.000002109002177066446,
+          "analyzedThroughS": 39.5
+        }
+      },
+      "windows": [
+        {
+          "startS": 0,
+          "dbRelativeToMedium": 8.521379144327549,
+          "dbRelativeToOwnStart": 0
+        },
+        {
+          "startS": 10,
+          "dbRelativeToMedium": -27.532519187032683,
+          "dbRelativeToOwnStart": -36.05389833136023
+        },
+        {
+          "startS": 19,
+          "dbRelativeToMedium": -39.82143875038308,
+          "dbRelativeToOwnStart": -48.342817894710635
+        },
+        {
+          "startS": 29,
+          "dbRelativeToMedium": -52.938258911134135,
+          "dbRelativeToOwnStart": -61.45963805546168
+        },
+        {
+          "startS": 39,
+          "dbRelativeToMedium": -65.96433980552281,
+          "dbRelativeToOwnStart": -74.48571894985037
+        }
+      ]
+    }
+  ]
+}
