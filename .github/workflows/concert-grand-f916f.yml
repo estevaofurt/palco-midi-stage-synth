@@ -1,0 +1,42 @@
+name: Concert Grand F9.16f felt stiffness sensitivity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f916f.yml'
+      - 'research/stage-concert-grand/f9-felt-sensitivity*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-string-loss.test.mjs
+          node research/stage-concert-grand/f9-felt-sensitivity.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        factor: [0.75, 1.5]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-felt-sensitivity-demo.mjs /tmp/f916f 20 1 .5 .5 .5 both-half ${{ matrix.factor }}
+      - run: node research/stage-concert-grand/f9-f99-summary.mjs /tmp/f916f/C4_v1_board0.5_angle0.5_spread0.5_both-half_felt${{ matrix.factor }}_20s_float_analysis.json FLOAT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F916F-felt-${{ matrix.factor }}-20s
+          path: /tmp/f916f/
+          if-no-files-found: error
