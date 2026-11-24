@@ -1,0 +1,65 @@
+name: Concert Grand F10g S50 pilot and S25 sensitivity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f10g-d4.yml'
+      - 'research/stage-concert-grand/f10g-d4-*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10f-d4-sustain.test.mjs
+      - run: node research/stage-concert-grand/f10g-d4-loss-pilot.test.mjs
+  s50:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [53, 55, 57, 60, 64, 67, 72]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10g-d4-s50-demo.mjs /tmp/f10g-s50 ${{ matrix.midi }} 127
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10G-S50-midi${{ matrix.midi }}-touch127
+          path: /tmp/f10g-s50/
+          if-no-files-found: error
+  sustain:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {midi: 60, touch: 24, factor: 0.25, label: S25}
+          - {midi: 60, touch: 76, factor: 0.25, label: S25}
+          - {midi: 60, touch: 127, factor: 0.25, label: S25}
+          - {midi: 67, touch: 76, factor: 0.25, label: S25}
+          - {midi: 67, touch: 127, factor: 0.25, label: S25}
+          - {midi: 60, touch: 76, factor: 0.5, label: S50}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10g-d4-long-demo.mjs /tmp/f10g-long ${{ matrix.midi }} ${{ matrix.touch }} ${{ matrix.factor }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10G-${{ matrix.label }}-midi${{ matrix.midi }}-touch${{ matrix.touch }}-long
+          path: /tmp/f10g-long/
+          if-no-files-found: error
