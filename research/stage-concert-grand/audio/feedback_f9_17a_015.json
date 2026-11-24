@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-24",
+  "comment": "esse foi o mais suave, mas acredito que possa ser ainda mais suave",
+  "file": "C4_v0.15_felt150_12s_24bit.wav",
+  "sha256": "2b5a3a4c29d259ae8ee80b8742374e7d51f73795b44a986b57f9ab1780255087",
+  "artifactId": 14950379962,
+  "runId": 45460537781,
+  "verifiedLocal": true,
+  "rate": 48000,
+  "channels": 2,
+  "frames": 576239,
+  "initialRms": 0.008743698820103594,
+  "initialDbFS": -41.1660962046524,
+  "scope": "preferência auditiva relativa; solicita toque ainda mais suave, não homologação pp",
+  "decision": "test .06/.09/.12; maintain felt150 and B and common gain"
+}

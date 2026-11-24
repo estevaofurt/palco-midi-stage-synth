@@ -1,0 +1,66 @@
+name: Concert Grand F9.17c very quiet dynamics
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f917c.yml'
+      - 'research/stage-concert-grand/f9-ultraquiet-*'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-ultraquiet.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        velocity: [0.06, 0.09, 0.12]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-ultraquiet-demo.mjs /tmp/quiet 12 ${{ matrix.velocity }} .5 .5 .5 both-half 1.5
+      - run: node research/stage-concert-grand/f9-soft-verify.mjs /tmp/quiet /tmp/verified ${{ matrix.velocity }} 12
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F917C-v${{ matrix.velocity }}
+          path: /tmp/verified/
+          if-no-files-found: error
+  bundle:
+    needs: render
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F917C-v*
+          path: /tmp/inputs
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 45460537781
+          name: F917A-quiet-0.15
+          path: /tmp/inputs/reference
+      - run: node research/stage-concert-grand/f9-ultraquiet-bundle.mjs /tmp/inputs /tmp/listening
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F917C-very-quiet-comparison-24bit
+          path: /tmp/listening/
+          if-no-files-found: error

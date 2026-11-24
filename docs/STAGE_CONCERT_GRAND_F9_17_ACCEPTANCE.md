@@ -17,3 +17,7 @@ CI [45452369072](https://github.com/estevaofurt/palco-midi-stage-synth/actions/r
 ## Auditoria e novas dinâmicas concluídas
 
 F9.17a CI 45460537781 concluída, 12 testes, [seis intensidades comparáveis WAV24](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45460537781/artifacts/14951389524). Artefatos históricos íntegros e correspondentes a seus metadados; cópia local não verificada. Novos candidatos .15/.25/.35 m/s ficam -19,153/-13,650/-10,179 dB abaixo do médio no RMS inicial; toque médio e forte não alterados. Não homologar suave antes de escuta. F9.17b diagnóstico espectral sem modificação de áudio. F10 piloto independente concluído tecnicamente, não equivale a desbloqueio do roteiro.
+
+## Continuidade da dinâmica muito suave
+
+Usuário selecionou .15 m/s como o mais suave, solicitando toque ainda mais suave. Arquivo anexado coincide byte a byte por SHA256 com F917A-quiet-0.15. Registrar em audio/feedback_f9_17a_015.json. F9.17b cinco testes e análise espectral concluídos. F9.17c ensaia .06/.09/.12 m/s sem reduzir ganho ou perdas, mantendo .15 como comparação. Não inferir calibração pp/ppp, nem homologação final; C4 médio e main preservados.
