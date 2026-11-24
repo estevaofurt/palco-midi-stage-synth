@@ -14,3 +14,7 @@ f10f-d4-headroom-demo.mjs, f10f-d4-sustain.mjs, .test.mjs, -demo.mjs, workflow c
 ## Execução
 
 Run 45508716694: in_progress / sem conclusão, 0 artefatos. [CI](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45508716694). Main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536. F10e ainda com três renders fortes em execução na consulta.
+
+## Resultados finais
+
+30/30 checks, 12/12 renders. Sete notas D4 ff aprovadas com ganho comum .75, A3 pico .8175173 FS, zero clipping. S50 C4 ff crossing 33s (D4 19.5s), RMS2 +21.08%, potência fora de bandas inicial +.152%, janela tardia 2.025–2.525s +49.10%. Não equivale a duração audível nem prova de fidelidade. S50 C4 pp 2.5s, mf crossing não observado até 19.5s; G4 mf 12s, ff 17s. Dados completos em audio/analysis_f10f_d4_ci.json. F10g amplia S50 e compara S25; main preservada.
