@@ -3,6 +3,7 @@
  * Acoustic is intentionally independent of the A/B/C/D/Classic/sample engines.
  */
 import {clamp,filter,gain,smooth} from './voice.js';
+import {SampleLibrary} from './sample-library.js';
 export const c3xTouch=(velocity,touch=50)=>
   clamp((velocity/127)**(2**((50-touch)/55)),.001,1);
 export class Acoustic{
@@ -13,13 +14,15 @@ export class Acoustic{
     this.input.connect(this.lid).connect(bus);
     this.current=null;this.node=null;this.nodePromise=null;this.quality='eco';
     this.parts=new Map();this.serial=0;this.pedalDown=false;
+    // Mesmo banco local WAV do motor E da versão anterior, separado do físico.
+    this.samples=new SampleLibrary(ctx);
   }
   async prepareV8(quality='eco'){
     if(!this.ctx.audioWorklet||typeof AudioWorkletNode==='undefined')return false;
     if(this.node){this.setV8Quality(quality);return true;}
     if(!this.nodePromise){
       this.nodePromise=(async()=>{
-        await this.ctx.audioWorklet.addModule('./piano-c3x-v8-web.js?build=1.13.0');
+        await this.ctx.audioWorklet.addModule('./piano-c3x-v8-web.js?build=1.13.1');
         const node=new AudioWorkletNode(this.ctx,'stage-c3x-v8-web',{
           numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]
         });
@@ -72,6 +75,14 @@ export class Acoustic{
     this.node?.port.postMessage({type:'pedal',value:down?127:0});
   }
   play(part,key,velocity,p,_expression){
+    if(p.soundEngine==='sampled'){
+      // O E é estritamente sampleado: sem WAV não gera síntese fictícia.
+      const model=p.sampleModel||'american';
+      part.releaseSeconds=clamp(p.release*(.65+.6*p.damping/100),.05,2.8);
+      const sampledVelocity=Math.round(c3xTouch(velocity,p.touch)*127);
+      this.samples.play(model,part,key,sampledVelocity,.85);
+      return;
+    }
     if(!this.node)throw Error('Motor V8 Web não carregado. Toque em Ativar áudio.');
     if(key<21||key>108)return;
     const id=++this.serial,marker=this.ctx.createConstantSource();

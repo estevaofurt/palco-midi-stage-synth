@@ -167,7 +167,7 @@ export class Panel {
           return;
         }
         patch.values[name]=value;rememberPatch(this.state,id);
-        if(id==='piano'&&name==='soundEngine'){
+        if(id==='piano'&&(name==='soundEngine'||name==='sampleModel')){
           this.drawEditor(id);this.sync();this.actions.set(id,name);return;
         }
         restore.hidden=!this.state.edits[id][patch.preset];this.sync();this.actions.set(id,name);
@@ -194,15 +194,19 @@ export class Panel {
           section.append(bars);
         }else if(control.type==='samplepack'){
           const picker=elem('div','sample-upload');
-          const model=patch.values[instrumentField[id]];
+          const model=id==='piano'&&patch.values.sampleModel
+            ?patch.values.sampleModel:patch.values[instrumentField[id]];
           const count=this.sampleCounts[id]?.[model]||0;
+          const modelName=id==='piano'&&patch.values.sampleModel
+            ?({american:'American Grand',japanese:'Japanese Grand',felt:'Felt Piano',upright:'Piano Upright'}[model]||model)
+            :instrumentName(id,patch.values);
           const input=elem('input');input.type='file';input.multiple=true;input.accept='.wav,.wave,.ogg,.mp3,audio/wav,audio/mpeg,audio/ogg';
-          input.setAttribute('aria-label','Carregar amostras do '+instrumentName(id,patch.values));
+          input.setAttribute('aria-label','Carregar amostras do '+modelName);
           input.onchange=()=>{if(input.files?.length)this.actions.loadSamples(id,model,input.files)};
           const remove=elem('button','editor-btn','Retirar amostras');remove.type='button';
           remove.disabled=count===0;remove.onclick=()=>this.actions.clearSamples(id,model);
           const hint=elem('p','sample-hint',count
-            ?`${count} amostras carregadas para ${instrumentName(id,patch.values)}. Motor E pronto; somente nesta sessão.`
+            ?`${count} amostras carregadas para ${modelName}. Motor E pronto; somente nesta sessão.`
             :'Carregue os WAVs das notas isoladas deste piano (MIDI60_v60.wav, MIDI60_v110.wav etc). Os arquivos ficam apenas nesta sessão, sem envio ao servidor.');
           picker.append(input,remove,hint);section.append(picker);
         }else if(control.type==='soundfont'){
