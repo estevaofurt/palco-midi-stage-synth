@@ -1,0 +1,73 @@
+name: Concert Grand F9.5 sustain measurement
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f95.yml'
+      - 'research/stage-concert-grand/f9-long-analysis*'
+      - 'research/stage-concert-grand/f9-sustain-candidate*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reference-analysis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'numpy>=1.26,<3' 'scipy>=1.12,<2' 'soundfile>=0.12,<1'
+      - name: Unit tests
+        run: |
+          node research/stage-concert-grand/f9-long-analysis.test.mjs
+          node research/stage-concert-grand/f9-decay-analysis.test.mjs
+      - name: Analyze frozen F9.2 PCM
+        run: |
+          mkdir -p /tmp/f95-results
+          node research/stage-concert-grand/f9-long-analysis-cli.mjs research/stage-concert-grand/audio/C4_medio_R_10s.wav /tmp/f95-results/stage-f92.json 0 48000 2 .04
+      - name: Verify and decode original C5 recordings (temporary only)
+        run: |
+          PYTHONPATH=research/c3x-physical python - <<'PY'
+          from pathlib import Path
+          from download_analyze_c5 import download_sources
+          from c5_c4_analysis import SOURCES
+          import soundfile as sf
+          p=Path('/tmp/f95-c5')
+          download_sources(p)
+          for k, d in SOURCES.items():
+              x,rate=sf.read(p/d['file'],dtype='float32',always_2d=True)
+              assert rate==48000 and x.shape[1]==2
+              x.astype('<f4').tofile(p/(k+'.f32'))
+          PY
+          for k in v1 v8 v16; do
+            node research/stage-concert-grand/f9-long-analysis-cli.mjs "/tmp/f95-c5/$k.f32" "/tmp/f95-results/c5-$k.json" .005 48000 2
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F95-reference-numeric-only
+          path: /tmp/f95-results/*.json
+          if-no-files-found: error
+      - if: always()
+        run: rm -rf /tmp/f95-c5
+  candidate-five-seconds:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Render isolated board-loss candidate (fixed gain)
+        run: node research/stage-concert-grand/f9-sustain-candidate-demo.mjs /tmp/f95-candidate 5 1 .5
+      - name: Analyze candidate
+        run: node research/stage-concert-grand/f9-long-analysis-cli.mjs /tmp/f95-candidate/C4_v1_board0.5_5s.wav /tmp/f95-candidate/analysis.json 0 48000 2 .04
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F95-stage-original-candidate
+          path: /tmp/f95-candidate/
+          if-no-files-found: error
