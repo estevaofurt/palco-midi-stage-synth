@@ -10,3 +10,7 @@ MIDI 53/55/57/60/64/67/72 (F3/G3/A3/C4/E4/G4/C5), comprimento .65 / 2^((midi-60)
 
 ## Implementação
 f10e-d4-extension.mjs, .test.mjs, -demo.mjs, f10e-d4-long-demo.mjs, workflow concert-grand-f10e-d4.yml commit 4faa487fb37b28680adbf987302e6f59ebcc7e3e. 18 checks F10d e 18 novos; 20 renders dependem do smoke. CI [45507422898](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45507422898) inicialmente queued, não confirmar êxito antes dos jobs/artefatos. Sem mudança em D original, D4 F10d ou main. Simulações monofônicas offline, não polifonia compartilhada nem integração. 
+
+## Consulta de execução
+
+CI 45507422898: smoke in_progress / sem conclusão, 0 artefatos na consulta. Main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536. Somente pesquisa, CI, dados e documentação alterados.
