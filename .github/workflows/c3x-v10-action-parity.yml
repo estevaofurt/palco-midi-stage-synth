@@ -1,0 +1,32 @@
+name: Stage Synth C3X V10 - Python key action parity
+on:
+  pull_request:
+    paths:
+      - 'research/c3x-python/v10/stage_synth_c3x/action.py'
+      - 'research/c3x-python/v10/stage_synth_c3x/continuous_action.py'
+      - 'research/c3x-v10-port/continuous-action-v10.mjs'
+      - 'research/c3x-v10-port/continuous-action-v10.test.mjs'
+      - 'research/c3x-v10-port/reference_action_v10.py'
+      - '.github/workflows/c3x-v10-action-parity.yml'
+      - 'research/c3x-v10-port/scale-v10.mjs'
+      - 'research/c3x-v10-port/scale-v10.test.mjs'
+      - 'research/c3x-v10-port/reference_scale_v10.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare-python-and-js:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate direct V10 action translation against original Python
+        run: |
+          python3 --version
+          python3 -m pip install "numpy>=1.26,<3" --quiet
+          node --check research/c3x-v10-port/continuous-action-v10.mjs
+          python3 -m py_compile research/c3x-v10-port/reference_action_v10.py
+          node --test research/c3x-v10-port/continuous-action-v10.test.mjs research/c3x-v10-port/scale-v10.test.mjs
