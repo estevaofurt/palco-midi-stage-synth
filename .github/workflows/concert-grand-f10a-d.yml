@@ -1,0 +1,41 @@
+name: Concert Grand F10a model D register pilot
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f10a-d.yml'
+      - 'research/stage-concert-grand/f10-model-d-register*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-rattle-hybrid.test.mjs
+      - run: node research/stage-concert-grand/f10-model-d-register.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [55, 60, 67]
+        touch: [24, 76, 127]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10-model-d-register-demo.mjs /tmp/f10a-d ${{ matrix.midi }} ${{ matrix.touch }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10A-D-midi${{ matrix.midi }}-touch${{ matrix.touch }}
+          path: /tmp/f10a-d/
+          if-no-files-found: error
