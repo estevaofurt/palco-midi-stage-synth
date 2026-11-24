@@ -1,0 +1,28 @@
+name: Concert Grand F9.16c radiation quadrature sensitivity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f916c.yml'
+      - 'research/stage-concert-grand/f9-radiation-convergence*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-loaded-mobility.test.mjs
+          node research/stage-concert-grand/f9-radiation-convergence.test.mjs
+      - run: node research/stage-concert-grand/f9-radiation-convergence-demo.mjs /tmp/f916c
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F916C-radiation-numeric
+          path: /tmp/f916c/
+          if-no-files-found: error

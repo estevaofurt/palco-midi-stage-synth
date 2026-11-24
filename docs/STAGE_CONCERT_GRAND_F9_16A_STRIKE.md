@@ -5,3 +5,7 @@ Base 2fabbe3490800b1afd07387d80f21f2831e845d1. F9.15 concluída, manter rigidez 
 ## Smoke confirmado
 
 CI [45433863116](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45433863116), 16 testes Node (9+7), paridade controle exatamente zero, força de pico .08/.10/.13 L 13.984549 / 12.469589 / 11.545991 N, L2 relativa pressão .08/.10 0.349193 / 0.214502; aumento de energia zero, passividade aprovada. Renders longos pendentes na leitura. Relatório audio/analysis_f9_16a_smoke.json. Não promover candidatos. F9.16b investiga resolução numérica do tampo independentemente, com posição .13 mantida.
+
+## Renders confirmados
+
+CI 45433863116, três jobs concluídos. 40 blocos sem clipping. Ganho absoluto vs B, .08/.10 L: janela inicial -2,309/-1,131 dB; 14 s -2,157/-1,092 dB; 19 s -2,462/-1,234 dB. Queda global -40 dB 13 s em ambos, P2 -40 dB 13 s em ambos, sem resolver decaimento. P2/P1 cresce aproximadamente 6,06/3,77 dB na janela 1 s, P8/P1 20,24/21,04 dB; P10 .10 perto de nó, não interpretar sem contraste. Sem melhora de intensidade absoluta tardia. Manter .13 L B, não promover posições. Relatório audio/analysis_f9_16a_ci.json, [8%](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45433863116/artifacts/14939942960), [10%](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45433863116/artifacts/14941920166). Main preservada.
