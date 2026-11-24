@@ -1,3 +1,9 @@
+## 24/11/2026 — USER REMOVEU MOTOR E DA PRÉVIA V8
+
+Usuário relatou que o modelo de samples não funcionou bem e **pediu removê-lo**. A prévia v1.13.2 `v8-preview.html` deve oferecer **somente C3X V8 Web físico experimental**, sem importação de WAVs e sem A/B/C/D/E no painel. Os históricos de versões anteriores são preservados, sem reivindicar paridade V8 original. Referência do pacote Python `Stage_Synth_C3X_Etapa_08.zip` recuperada na conversa anterior, mas **o ZIP não está acessível fisicamente aqui nem no GitHub**, portanto NÃO alegar que a versão original foi portada. [Detalhes](docs/C3X_V8_WEB_PREVIEW.md).
+
+---
+
 ## 24/11/2026 — C3X V8 WEB + E SAMPLEADO, RESTAURAÇÃO PARCIAL
 
 Novo pedido: o usuário confirmou que o V8 Web da prévia não reproduz integralmente o timbre original Python e exigiu manter também o motor E baseado em amostras. **A fonte Python do V8 `Stage_Synth_C3X_Etapa_08.zip` não está acessível no GitHub nem no contêiner desta conversa**. NÃO alegar port fiel nem publicar a prévia como substituta definitiva de index.html. `v8-preview.html` deve apresentar dois motores, V8 Web (prévia) e E sampleado, com bancos American/Japanese/Felt/Upright privados, teclado virtual responsivo e alerta sem WAV; não restaurar A/B/C/D como opções de piano. [Documento](docs/C3X_V8_WEB_PREVIEW.md).
