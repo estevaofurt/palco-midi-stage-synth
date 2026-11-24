@@ -1,0 +1,8 @@
+{
+  "date": "2026-11-24",
+  "comment": "o zip do toque suave nao corresponde a batida suave",
+  "runId": 45452369072,
+  "artifactId": 14947664365,
+  "context": "Usuário refere-se ao ZIP suave indicado na resposta anterior; não forneceu os bytes baixados nem afirmou se era intensidade ou timbre, sem confirmar reprodução/normalização.",
+  "decision": "Não homologar dinâmica suave. Logs indicam v=.5 e metadados compatíveis, mas arquivo ZIP ainda não inspecionado. Auditar pares PCM16/24 recuperados dos artefatos históricos e comparar velocidades .15/.25/.35 sem ganho artificial. Preservar C4 médio aprovado e forte de referência; não alterar feltro ou perdas."
+}

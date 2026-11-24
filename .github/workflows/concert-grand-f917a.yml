@@ -1,0 +1,96 @@
+name: Concert Grand F9.17a quiet attack and ZIP integrity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f917a.yml'
+      - 'research/stage-concert-grand/f9-soft-*'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 45452369072
+          name: F917-felt150-v0.5-40s
+          path: /tmp/soft
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 45449233643
+          name: F916F-felt-1.5-20s
+          path: /tmp/medium
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 45452369072
+          name: F917-felt150-v2.5-40s
+          path: /tmp/strong
+      - run: |
+          node research/stage-concert-grand/f9-soft-pcm-audit.test.mjs
+          node research/stage-concert-grand/f9-soft-verify.mjs /tmp/soft /tmp/verified 0.5 40
+          node research/stage-concert-grand/f9-soft-verify.mjs /tmp/medium /tmp/verified 1 20
+          node research/stage-concert-grand/f9-soft-verify.mjs /tmp/strong /tmp/verified 2.5 40
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F917A-verified-originals
+          path: /tmp/verified/
+          if-no-files-found: error
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-soft-dynamics.test.mjs
+  render:
+    needs: [audit, smoke]
+    strategy:
+      fail-fast: false
+      matrix:
+        velocity: [0.15, 0.25, 0.35]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-soft-demo.mjs /tmp/quiet 12 ${{ matrix.velocity }} .5 .5 .5 both-half 1.5
+      - run: node research/stage-concert-grand/f9-soft-verify.mjs /tmp/quiet /tmp/verified ${{ matrix.velocity }} 12
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F917A-quiet-${{ matrix.velocity }}
+          path: /tmp/verified/
+          if-no-files-found: error
+  bundle:
+    needs: render
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F917A-*
+          path: /tmp/inputs
+      - run: node research/stage-concert-grand/f9-soft-bundle.mjs /tmp/inputs /tmp/listening
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F917A-comparacao-toques-24bit
+          path: /tmp/listening/
+          if-no-files-found: error

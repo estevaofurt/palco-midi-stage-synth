@@ -1,0 +1,13 @@
+import {readFileSync,writeFileSync,mkdirSync,copyFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {inspectPair} from './f9-soft-pcm-audit.mjs';
+const [input,out,velocityArg,durationArg]=process.argv.slice(2),velocity=Number(velocityArg),duration=Number(durationArg);
+const stem=input+'/C4_v'+velocity+'_board0.5_angle0.5_spread0.5_both-half_felt1.5_'+duration+'s';
+const m=JSON.parse(readFileSync(stem+'.json')),a=JSON.parse(readFileSync(stem+'_float_analysis.json'));
+if(m.velocity!==velocity||m.duration!==duration||m.feltFactor!==1.5||m.gain!==.36767023440034063||m.clipped!==0||m.chunks.length!==duration||m.chunks.some(c=>c.velocity!==velocity||c.feltFactor!==1.5||c.maxBalance>1e-9||c.maxIncrease>1e-9)||a.rate!==48000||a.windowS!==.5)throw Error('render metadata mismatch');
+const pcm16=readFileSync(stem+'.wav'),pcm24=readFileSync(stem+'_24bit.wav'),q=inspectPair(pcm16,pcm24);
+if(q.frames!==duration*48000+239||Math.abs(q.rms16-a.windows[0].rms)>.5/32767+1e-12||Math.abs(q.rms24-a.windows[0].rms)>.5/8388607+1e-12||Math.abs(q.peak24-m.peak)>.5/8388607+1e-12)throw Error('PCM/float metadata mismatch');
+const name='C4_v'+velocity+'_felt150_'+duration+'s_24bit.wav',sha256=b=>createHash('sha256').update(b).digest('hex');
+const result={velocity,duration,gain:m.gain,feltFactor:m.feltFactor,pcm:q,attack:m.chunks[0].attack,initialDbFS:20*Math.log10(q.rms24),sha256:{pcm16:sha256(pcm16),pcm24:sha256(pcm24)},file:name,relativeDrops:a.broadband.drops};
+mkdirSync(out,{recursive:true});copyFileSync(stem+'_24bit.wav',out+'/'+name);writeFileSync(out+'/v'+velocity+'.json',JSON.stringify(result,null,2),{flag:'wx'});
+console.log('F917A_VERIFIED '+JSON.stringify(result));

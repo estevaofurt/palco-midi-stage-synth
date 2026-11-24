@@ -1,0 +1,13 @@
+import {inspectPair} from './f9-soft-pcm-audit.mjs';
+import {waveBytes} from './f8-render.mjs';
+import {wave24} from './f9-wave24.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};const rejects=f=>{try{f();return false}catch{return true;}};
+const c=[0,1].map(ch=>Float64Array.from({length:48000},(_,i)=>.3*Math.sin(2*Math.PI*261.6255653*i/48000+ch)));
+const a=waveBytes(c,48000,1),b=wave24(c,48000,1),q=inspectPair(a.bytes,b.bytes);
+check('frames and rate',q.frames===48000&&q.rate===48000);
+check('quantized peaks',Math.abs(q.peak16-a.peak)<=.5/32767+1e-12&&Math.abs(q.peak24-b.peak)<=.5/8388607+1e-12);
+check('matched PCM',q.maxPairError<.000016);
+check('different gain rejected',rejects(()=>inspectPair(a.bytes,wave24(c,48000,.5).bytes)));
+check('swapped format rejected',rejects(()=>inspectPair(b.bytes,a.bytes)));
+check('truncated data rejected',rejects(()=>inspectPair(a.bytes,b.bytes.slice(0,-6))));
+console.log('F9.17a PCM audit tests passed:',n);
