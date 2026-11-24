@@ -1,0 +1,41 @@
+{
+  "sourceCommit": "87f11959e4d43fb236ac0f445a626dfb1d109a60",
+  "mechanicalDurationS": 0.025,
+  "velocityMps": 1,
+  "acousticResistanceScale": 1,
+  "baseline": {
+    "peakForceN": 11.54616657317385,
+    "peakPa": 0.7509270143881331,
+    "energyJ": 0.00472394857707622,
+    "boardEnergyJ": 0.0006309775695048978,
+    "structuralLossJ": 0.00004842621682341634,
+    "radLossJ": 0.000024420393493867935,
+    "maxBalanceJ": 8.58427912087123e-15
+  },
+  "candidateFactorHalf": {
+    "peakForceN": 11.5461665731738,
+    "peakPa": 0.7627607913029097,
+    "energyJ": 0.004746976509575122,
+    "boardEnergyJ": 0.0006545271882680402,
+    "structuralLossJ": 0.000024802792931153897,
+    "radLossJ": 0.000025021413421340432,
+    "maxBalanceJ": 8.583411759133242e-15
+  },
+  "factorOne": {
+    "allPressureSamplesNumericallyIdentical": true,
+    "finalEnergyExactlyEqual": true
+  },
+  "candidatePressureRelativeL2": 0.013046181568646542,
+  "observedEnergyIncreaseJ": 0,
+  "checkpointFactor": 0.5,
+  "environment": "V8, fetched exact commit modules",
+  "ciRunsObserved": [
+    {
+      "id": 45408747339,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45408747339"
+    }
+  ],
+  "limitations": "25 ms only, pre-export acoustic pressure, no long WAV, no hardware or subjective acceptance"
+}
