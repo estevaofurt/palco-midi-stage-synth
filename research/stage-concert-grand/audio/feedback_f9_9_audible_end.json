@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-24",
+  "comment": "nao ouço nada apos 14s",
+  "context": "F99-both-half-40s shared immediately before feedback; exact WAV resolution and listening gain/environment unspecified",
+  "perceivedEndS": 14,
+  "window": {
+    "startS": 14,
+    "endS": 14.5,
+    "globalRelativeDb": -41.50741220402143,
+    "floatDbFS": -63.71670220359018,
+    "floatRms": 0.0006518758466381057,
+    "quantizationSnrDb": 37.369392022131464
+  },
+  "decision": "F9 not accepted; preserve B; distinguish physical decay from perception; use a fixed-gain comparative proxy, not calibrated hearing threshold. Compare dynamics first, then physical redistribution of energy and sympathetic resonance. No arbitrary tail gain or blind loss reduction."
+}
