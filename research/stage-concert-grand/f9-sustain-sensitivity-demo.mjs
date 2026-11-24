@@ -1,0 +1,12 @@
+import {solidWire} from '../c3x-physical/c4-wire-consistency.mjs';
+import {makeDesign} from './c4-design.mjs';
+import {stringMode,spatialWeight} from './stiff-string.mjs';
+import {plateDesign,plateModes,patchWeight} from './orthotropic-plate.mjs';
+import {ribDesign,generalizedEigen} from './ribbed-plate.mjs';
+import {mindlinModes} from './mindlin-plate.mjs';
+import {PolarizedBridge,PolarizedHammer} from './polarized-bridge.mjs';
+import {BoardCoupledBridge} from './board-coupling.mjs';
+import {ResistiveBoard} from './radiation-loading.mjs';
+import {diagnoseSustain} from './f9-sustain-sensitivity.mjs';
+const hp={solidWire,makeDesign,stringMode,spatialWeight,plateDesign,plateModes,patchWeight,ribDesign,generalizedEigen,mindlinModes,PolarizedBridge,PolarizedHammer,BoardCoupledBridge,ResistiveBoard};
+for(const [lossFactor,boardFactor] of [[1,1],[.5,1],[1,.5]])console.log(JSON.stringify(diagnoseSustain(hp,{seconds:.3,lossFactor,boardFactor})));

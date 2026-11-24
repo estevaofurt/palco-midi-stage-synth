@@ -1,0 +1,101 @@
+{
+  "sourceCommit": "d425cc024afe71613f38782c619a62f7e6f7cb22",
+  "method": "full mechanical 96 kHz F9.2 equations; radiation resistance active; no acoustic observation convolution; norm of mass-normalized modal velocities is not pressure",
+  "seconds": 0.3,
+  "baseline": {
+    "lossFactor": 1,
+    "boardFactor": 1,
+    "maxBalance": 8.58427912087123e-15,
+    "maxIncrease": 0,
+    "peakForce": 11.54616657317385,
+    "finalEnergyJ": 0.003688332684163858,
+    "windows": [
+      {
+        "time": 0.1,
+        "boardVelocityNormRms": 0.023982667421977983
+      },
+      {
+        "time": 0.2,
+        "boardVelocityNormRms": 0.018632507220177338
+      },
+      {
+        "time": 0.3,
+        "boardVelocityNormRms": 0.014860039486383795,
+        "boardEnergyJ": 0.0002579143820569725,
+        "stringLossJ": 0.0002591501658389121,
+        "bridgeLossJ": 0.0000022579843576166706,
+        "jointLossJ": 1.2775007774060138e-7,
+        "radLossJ": 0.0002194495747199374,
+        "structuralLossJ": 0.0006633540056436265,
+        "hammerLossJ": 0.00016732783519640023
+      }
+    ]
+  },
+  "stringHalf": {
+    "lossFactor": 0.5,
+    "boardFactor": 1,
+    "maxBalance": 8.586013844347207e-15,
+    "maxIncrease": 0,
+    "peakForce": 11.546017667460044,
+    "finalEnergyJ": 0.0037873445090139267,
+    "windows": [
+      {
+        "time": 0.1,
+        "boardVelocityNormRms": 0.024102164072127046
+      },
+      {
+        "time": 0.2,
+        "boardVelocityNormRms": 0.018940487702261893
+      },
+      {
+        "time": 0.3,
+        "boardVelocityNormRms": 0.015298256421985922,
+        "boardEnergyJ": 0.00027613878239773334,
+        "stringLossJ": 0.00013539461118268614,
+        "bridgeLossJ": 0.000002362594134326301,
+        "radLossJ": 0.0002261606227358588,
+        "structuralLossJ": 0.0006812804244757915,
+        "hammerLossJ": 0.00016732297752514625
+      }
+    ]
+  },
+  "boardHalf": {
+    "lossFactor": 1,
+    "boardFactor": 0.5,
+    "maxBalance": 8.583411759133242e-15,
+    "maxIncrease": 0,
+    "peakForce": 11.5461665731738,
+    "finalEnergyJ": 0.0039019456048953642,
+    "windows": [
+      {
+        "time": 0.1,
+        "boardVelocityNormRms": 0.024958499515357755
+      },
+      {
+        "time": 0.2,
+        "boardVelocityNormRms": 0.02087064573110727
+      },
+      {
+        "time": 0.3,
+        "boardVelocityNormRms": 0.017599124324953277,
+        "boardEnergyJ": 0.0003806913532000411,
+        "stringLossJ": 0.00027522153171944124,
+        "bridgeLossJ": 0.000002385900066429622,
+        "jointLossJ": 1.3425654524703464e-7,
+        "radLossJ": 0.0002563119204619104,
+        "structuralLossJ": 0.00039667295111341897,
+        "hammerLossJ": 0.0001673278351962504
+      }
+    ]
+  },
+  "relativeThirdWindowDb": {
+    "stringHalf": 0.2524394527975119,
+    "boardHalf": 1.46942191665003
+  },
+  "tests": {
+    "globalEnergyResidualBelow1e_9": true,
+    "noObservedEnergyGrowth": true,
+    "noRecontact": true,
+    "fullNodeSuite": "not run"
+  }
+}
