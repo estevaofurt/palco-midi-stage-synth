@@ -5,3 +5,7 @@ Base 322147c5acc43eca38ceb8f8177876010a926c4f. F10f 30/30 checks, 12/12 renders.
 F10h completa 14 renders S50 pp/mf, sete notas, ganho comum .75 (mesmo dos sete ff F10g). Gate pico <=.85, zero clipping, passividade. Não alterar mecânica, curva MIDI, ganho diagnóstico ou modelos anteriores. Compara 6 WAVs já gerados C4 pp/ff D4/S50/S25 no ganho original, sem normalização. PCM24 48k, SHA256, metadata, prefixo PCM exato, 50ms fade e 1s gap. Sequência pp 47s (15s cada; inícios 0/16/32), ff 107s (35s cada; inícios 0/36/72). Analisa JSON de ponto flutuante de origem e verifica crossings absolutos/relativos, não reanálise acústica de gravação real. Cross-run artifacts F10e/f/g; nenhum áudio novo até CI confirmar. 
 
 Workflow commit 46e9e0bc2c038b1f04a3c6b8ac0afcc40026e7ad. Próximo: revisar dinâmica e escuta; só então ampliar escala e tratar tampo compartilhado/pedais. Não homologar 32–64 vozes ou 88 teclas. D original e main preservados.
+
+## Execução
+
+CI 45511128271: {"success":5,"failed":0,"active":10,"queued":0}, 6 artefatos. [CI](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45511128271). Main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536; alterações apenas de pesquisa/documentação/dados/CI.
