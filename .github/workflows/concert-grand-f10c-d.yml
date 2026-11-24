@@ -1,0 +1,41 @@
+name: Concert Grand F10c D local modal sensitivity G4
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f10c-d.yml'
+      - 'research/stage-concert-grand/f10c-d-local*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10-model-d-register.test.mjs
+      - run: node research/stage-concert-grand/f10c-d-local.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [local6, local8]
+        touch: [24, 76, 127]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10c-d-local-demo.mjs /tmp/f10c ${{ matrix.variant }} ${{ matrix.touch }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10C-D-G4-${{ matrix.variant }}-touch${{ matrix.touch }}
+          path: /tmp/f10c/
+          if-no-files-found: error
