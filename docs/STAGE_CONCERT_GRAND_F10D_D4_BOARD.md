@@ -9,3 +9,7 @@ Arquivos f10d-d4-board.mjs, .test.mjs, -demo.mjs, workflow concert-grand-f10d-d4
 ## Execução
 
 CI 45490795427: smoke in_progress / sem conclusão, 0 artefatos na consulta. [Run](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45490795427). Main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536; alterações restritas a pesquisa, dados, CI e documentação.
+
+## Resultados finais
+
+CI 45490795427: 22+18 testes aprovados, 6/6 novos renders G3/C4, sem clipping; G4 exato no teste de 25 ms e no estado, reaproveitar F10c. Dados em audio/analysis_f10d_d4_ci.json com logs/artefatos. Em ff, potência absoluta fora de bandas .025–.525s relativa ao D: G3 .623900, C4 .961914, G4 .259074. RMS2 relativo .994099, .983411, .932951 respectivamente. Os seis novos casos têm potência fora de bandas menor nas quatro janelas; não inferir homologação auditiva. D4 priorizado para pesquisa de sustain e extensão restrita, não substitui D original. C4 e main originais preservados.
