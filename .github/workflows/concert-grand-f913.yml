@@ -1,0 +1,44 @@
+name: Concert Grand F9.13 sympathetic acoustic experiment
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f913.yml'
+      - 'research/stage-concert-grand/f9-sympathetic*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-shared-board.test.mjs
+          node research/stage-concert-grand/f9-sympathetic-render.test.mjs
+          node research/stage-concert-grand/f9-string-loss.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        sympathetic: ['off', nominal, offset50]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-sympathetic-demo.mjs /tmp/f913 20 1 .5 .5 .5 both-half ${{ matrix.sympathetic }}
+      - name: Analyze pre-PCM signal
+        run: node research/stage-concert-grand/f9-f99-summary.mjs /tmp/f913/C4_v1_board0.5_angle0.5_spread0.5_both-half_${{ matrix.sympathetic }}_20s_float_analysis.json FLOAT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F913-${{ matrix.sympathetic }}-20s
+          path: /tmp/f913/
+          if-no-files-found: error
