@@ -1,0 +1,1974 @@
+{
+  "runId": 45429277647,
+  "artifactId": 14939300383,
+  "testsPassed": 32,
+  "hashes": [
+    "C5_SHA256_VERIFIED v1 ca44d2e906110ebc2f67ae4c233e84cbbf0e657fe53e1c6724e4f31409478f11",
+    "C5_SHA256_VERIFIED v8 36fb0535a1f21fe1dfc367c361dedda73710144e8c4940b40e97e6e5f8a3c694",
+    "C5_SHA256_VERIFIED v16 e2944a0d1b31ea0ff8eb82b20ae2108027f111d96fb680c6e36d01f40582c252"
+  ],
+  "summary": [
+    {
+      "layer": "v1",
+      "byPartial": [
+        {
+          "h": 1,
+          "balance": {
+            "count": 7,
+            "meanAbsoluteDb": 0
+          },
+          "decay": {
+            "count": 0,
+            "meanAbsoluteDb": null
+          }
+        },
+        {
+          "h": 2,
+          "balance": {
+            "count": 6,
+            "meanAbsoluteDb": 7.5614916528807266
+          },
+          "decay": {
+            "count": 7,
+            "meanAbsoluteDb": 13.931249160509244
+          }
+        },
+        {
+          "h": 3,
+          "balance": {
+            "count": 7,
+            "meanAbsoluteDb": 8.447274669119661
+          },
+          "decay": {
+            "count": 8,
+            "meanAbsoluteDb": 3.878891038348732
+          }
+        },
+        {
+          "h": 4,
+          "balance": {
+            "count": 6,
+            "meanAbsoluteDb": 11.531241501098561
+          },
+          "decay": {
+            "count": 7,
+            "meanAbsoluteDb": 10.71034237319128
+          }
+        },
+        {
+          "h": 5,
+          "balance": {
+            "count": 5,
+            "meanAbsoluteDb": 3.681585252807042
+          },
+          "decay": {
+            "count": 6,
+            "meanAbsoluteDb": 2.6484641900172416
+          }
+        },
+        {
+          "h": 6,
+          "balance": {
+            "count": 5,
+            "meanAbsoluteDb": 14.676892740797664
+          },
+          "decay": {
+            "count": 6,
+            "meanAbsoluteDb": 8.718003569688435
+          }
+        },
+        {
+          "h": 7,
+          "balance": {
+            "count": 3,
+            "meanAbsoluteDb": 4.983445769232799
+          },
+          "decay": {
+            "count": 4,
+            "meanAbsoluteDb": 8.78319578410336
+          }
+        },
+        {
+          "h": 8,
+          "balance": {
+            "count": 1,
+            "meanAbsoluteDb": 6.473420371171201
+          },
+          "decay": {
+            "count": 0,
+            "meanAbsoluteDb": null
+          }
+        },
+        {
+          "h": 9,
+          "balance": {
+            "count": 0,
+            "meanAbsoluteDb": null
+          },
+          "decay": {
+            "count": 1,
+            "meanAbsoluteDb": 0
+          }
+        },
+        {
+          "h": 10,
+          "balance": {
+            "count": 0,
+            "meanAbsoluteDb": null
+          },
+          "decay": {
+            "count": 1,
+            "meanAbsoluteDb": 0
+          }
+        }
+      ],
+      "windows": [
+        {
+          "startS": 0,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 10.432206647630156,
+              "referenceContrastDb": 41.52428200583301,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 16.42122746287256,
+              "referenceContrastDb": 44.90072148521871,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 32.566788142151616,
+              "referenceContrastDb": 37.59236396696744,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 27.85340453675733,
+              "referenceContrastDb": 40.214145670166694,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 34.963092004599744,
+              "referenceContrastDb": 43.040617552571476,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 20.536209262180233,
+              "referenceContrastDb": 43.06911250754808,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 35.44004156182937,
+              "referenceContrastDb": 30.789046455233876,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 31.930992884795153,
+              "referenceContrastDb": 14.987895169396314,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 25.504959314823278,
+              "referenceContrastDb": 16.77269563276254,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 30.584017693509345,
+              "referenceContrastDb": 21.646026864286114,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 24.952651791107208,
+              "referenceContrastDb": 38.8724337371004,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 38.301589267217665,
+              "referenceContrastDb": 43.825465874667714,
+              "stageBalanceDb": -12.176209145369608,
+              "referenceBalanceDb": -4.708211314747363,
+              "balanceErrorDb": -7.467997830622245,
+              "stageDecayDb": -4.431993221838589,
+              "referenceDecayDb": -25.449022645854825,
+              "decayErrorDb": 21.017029424016236
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 76.35224210104654,
+              "referenceContrastDb": 50.39946462316114,
+              "stageBalanceDb": -7.200901857166925,
+              "referenceBalanceDb": -6.951834577441089,
+              "balanceErrorDb": -0.24906727972583642,
+              "stageDecayDb": -4.856640999656879,
+              "referenceDecayDb": -6.790090308624538,
+              "decayErrorDb": 1.933449308967659
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 68.69148807330855,
+              "referenceContrastDb": 50.64791952100655,
+              "stageBalanceDb": -26.124342114073404,
+              "referenceBalanceDb": -10.686836179455025,
+              "balanceErrorDb": -15.437505934618379,
+              "stageDecayDb": -14.85135650673902,
+              "referenceDecayDb": -7.528993593714612,
+              "decayErrorDb": -7.322362913024407
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 86.24517156176296,
+              "referenceContrastDb": 42.4257761806965,
+              "stageBalanceDb": -20.62032717405345,
+              "referenceBalanceDb": -15.635427279818309,
+              "balanceErrorDb": -4.9848998942351415,
+              "stageDecayDb": -6.318742535131653,
+              "referenceDecayDb": -5.804437879082015,
+              "decayErrorDb": -0.5143046560496378
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 45.39786291874803,
+              "referenceContrastDb": 27.452344694090762,
+              "stageBalanceDb": -49.334219602175565,
+              "referenceBalanceDb": -30.35986541994089,
+              "balanceErrorDb": -18.974354182234677,
+              "stageDecayDb": -24.372931020921,
+              "referenceDecayDb": -17.900127353785873,
+              "decayErrorDb": -6.472803667135128
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 85.90189609046519,
+              "referenceContrastDb": 29.055528555281942,
+              "stageBalanceDb": -37.37780311025891,
+              "referenceBalanceDb": -29.996841537688404,
+              "balanceErrorDb": -7.380961572570506,
+              "stageDecayDb": -17.210530121484474,
+              "referenceDecayDb": -5.926594934835528,
+              "decayErrorDb": -11.283935186648947
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 74.68796668981474,
+              "referenceContrastDb": 12.513281801221707,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 84.87892643998224,
+              "referenceContrastDb": 7.156538029532337,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 94.70184250652046,
+              "referenceContrastDb": 3.371208030656331,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            }
+          ]
+        },
+        {
+          "startS": 4,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 61.966535717363335,
+              "referenceContrastDb": 34.80098065962186,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 67.91737267152321,
+              "referenceContrastDb": 42.8258560541522,
+              "stageBalanceDb": -1.216255515533112,
+              "referenceBalanceDb": -3.847243829767014,
+              "balanceErrorDb": 2.630988314233902,
+              "stageDecayDb": -13.104389479409825,
+              "referenceDecayDb": -28.502222333156748,
+              "decayErrorDb": 15.397832853746923
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 78.13456781303897,
+              "referenceContrastDb": 36.11118468264695,
+              "stageBalanceDb": -0.14485824947188053,
+              "referenceBalanceDb": -17.488596841564885,
+              "balanceErrorDb": 17.343738592093004,
+              "stageDecayDb": -17.432947279369564,
+              "referenceDecayDb": -21.241019745030606,
+              "decayErrorDb": 3.8080724656610414
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 82.47801520543331,
+              "referenceContrastDb": 35.45022410346532,
+              "stageBalanceDb": -32.018662846785986,
+              "referenceBalanceDb": -20.84260188367823,
+              "balanceErrorDb": -11.176060963107755,
+              "stageDecayDb": -40.37802712685934,
+              "referenceDecayDb": -21.59892647022009,
+              "decayErrorDb": -18.779100656639248
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 90.75090390049357,
+              "referenceContrastDb": 30.970982770288494,
+              "stageBalanceDb": -13.05313427939094,
+              "referenceBalanceDb": -21.422301986931906,
+              "balanceErrorDb": 8.369167707540965,
+              "stageDecayDb": -18.383899527876878,
+              "referenceDecayDb": -15.505479758477884,
+              "decayErrorDb": -2.8784197693989935
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 91.16789439888302,
+              "referenceContrastDb": 27.852685842513033,
+              "stageBalanceDb": -40.81768998377606,
+              "referenceBalanceDb": -27.355987900980764,
+              "balanceErrorDb": -13.461702082795298,
+              "stageDecayDb": -35.48875128992924,
+              "referenceDecayDb": -18.81041700710802,
+              "decayErrorDb": -16.678334282821222
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 87.46412298451179,
+              "referenceContrastDb": 13.418770568050606,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 97.13424600072373,
+              "referenceContrastDb": -3.0027995158585616,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 99.51364391585871,
+              "referenceContrastDb": -3.31082112284929,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 96.99635192069664,
+              "referenceContrastDb": 2.376383574584026,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            }
+          ]
+        },
+        {
+          "startS": 10,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 70.36960980930753,
+              "referenceContrastDb": 27.359000285211824,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 65.43371979243605,
+              "referenceContrastDb": 14.94511974527828,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 77.70786931645571,
+              "referenceContrastDb": 22.38029393029782,
+              "stageBalanceDb": -19.57884272379337,
+              "referenceBalanceDb": -22.588407375646167,
+              "balanceErrorDb": 3.009564651852795,
+              "stageDecayDb": -44.64761932788102,
+              "referenceDecayDb": -36.79520512275589,
+              "decayErrorDb": -7.852414205125129
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 77.34366757489501,
+              "referenceContrastDb": 17.65002221899287,
+              "stageBalanceDb": -49.65264822904612,
+              "referenceBalanceDb": -27.30562504827208,
+              "balanceErrorDb": -22.34702318077404,
+              "stageDecayDb": -65.79270008330943,
+              "referenceDecayDb": -38.51632447845794,
+              "decayErrorDb": -27.276375604851488
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 86.42462669237273,
+              "referenceContrastDb": 13.738281895099899,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 91.17019319389382,
+              "referenceContrastDb": 6.269886497386543,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 96.9311447792373,
+              "referenceContrastDb": 0.919065441990944,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 89.81720021200945,
+              "referenceContrastDb": -2.344852436111476,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 82.55491511698767,
+              "referenceContrastDb": -2.6198282284263383,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 85.99227198918513,
+              "referenceContrastDb": 1.052304358660487,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "layer": "v8",
+      "byPartial": [
+        {
+          "h": 1,
+          "balance": {
+            "count": 9,
+            "meanAbsoluteDb": 0
+          },
+          "decay": {
+            "count": 0,
+            "meanAbsoluteDb": null
+          }
+        },
+        {
+          "h": 2,
+          "balance": {
+            "count": 9,
+            "meanAbsoluteDb": 5.577432432386107
+          },
+          "decay": {
+            "count": 10,
+            "meanAbsoluteDb": 16.5941142872442
+          }
+        },
+        {
+          "h": 3,
+          "balance": {
+            "count": 9,
+            "meanAbsoluteDb": 8.011973174230937
+          },
+          "decay": {
+            "count": 10,
+            "meanAbsoluteDb": 6.559967612181916
+          }
+        },
+        {
+          "h": 4,
+          "balance": {
+            "count": 8,
+            "meanAbsoluteDb": 11.07440082604814
+          },
+          "decay": {
+            "count": 9,
+            "meanAbsoluteDb": 3.512418369685493
+          }
+        },
+        {
+          "h": 5,
+          "balance": {
+            "count": 8,
+            "meanAbsoluteDb": 7.891613133634887
+          },
+          "decay": {
+            "count": 9,
+            "meanAbsoluteDb": 3.878391576663421
+          }
+        },
+        {
+          "h": 6,
+          "balance": {
+            "count": 6,
+            "meanAbsoluteDb": 25.989890494300923
+          },
+          "decay": {
+            "count": 7,
+            "meanAbsoluteDb": 3.468666034893732
+          }
+        },
+        {
+          "h": 7,
+          "balance": {
+            "count": 7,
+            "meanAbsoluteDb": 27.42258148052593
+          },
+          "decay": {
+            "count": 8,
+            "meanAbsoluteDb": 12.022516176514173
+          }
+        },
+        {
+          "h": 8,
+          "balance": {
+            "count": 6,
+            "meanAbsoluteDb": 40.840799271214145
+          },
+          "decay": {
+            "count": 7,
+            "meanAbsoluteDb": 14.776849741530622
+          }
+        },
+        {
+          "h": 9,
+          "balance": {
+            "count": 4,
+            "meanAbsoluteDb": 31.834131588052642
+          },
+          "decay": {
+            "count": 5,
+            "meanAbsoluteDb": 2.401327279623362
+          }
+        },
+        {
+          "h": 10,
+          "balance": {
+            "count": 5,
+            "meanAbsoluteDb": 25.34333810933148
+          },
+          "decay": {
+            "count": 6,
+            "meanAbsoluteDb": 6.267844168524159
+          }
+        }
+      ],
+      "windows": [
+        {
+          "startS": 0,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 10.432206647630156,
+              "referenceContrastDb": 44.24314198768974,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 16.42122746287256,
+              "referenceContrastDb": 44.90593945343513,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 32.566788142151616,
+              "referenceContrastDb": 37.93223414884595,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 27.85340453675733,
+              "referenceContrastDb": 42.68795781448463,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 34.963092004599744,
+              "referenceContrastDb": 45.62689818091812,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 20.536209262180233,
+              "referenceContrastDb": 49.10124221666898,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 35.44004156182937,
+              "referenceContrastDb": 44.06683845393683,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 31.930992884795153,
+              "referenceContrastDb": 36.43165927933973,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 25.504959314823278,
+              "referenceContrastDb": 38.8088846729034,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 30.584017693509345,
+              "referenceContrastDb": 48.096289883303044,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 24.952651791107208,
+              "referenceContrastDb": 43.89184399691046,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 38.301589267217665,
+              "referenceContrastDb": 55.23407622750825,
+              "stageBalanceDb": -12.176209145369608,
+              "referenceBalanceDb": 0.32772596176012514,
+              "balanceErrorDb": -12.503935107129733,
+              "stageDecayDb": -4.431993221838589,
+              "referenceDecayDb": -25.856644207527935,
+              "decayErrorDb": 21.424650985689347
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 76.35224210104654,
+              "referenceContrastDb": 57.65925823938497,
+              "stageBalanceDb": -7.200901857166925,
+              "referenceBalanceDb": -4.128386076949183,
+              "balanceErrorDb": -3.072515780217742,
+              "stageDecayDb": -4.856640999656879,
+              "referenceDecayDb": -10.903050322395707,
+              "decayErrorDb": 6.046409322738828
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 68.69148807330855,
+              "referenceContrastDb": 62.57413374267845,
+              "stageBalanceDb": -26.124342114073404,
+              "referenceBalanceDb": -2.399506230905833,
+              "balanceErrorDb": -23.72483588316757,
+              "stageDecayDb": -14.85135650673902,
+              "referenceDecayDb": -13.524729665662395,
+              "decayErrorDb": -1.3266268410766244
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 86.24517156176296,
+              "referenceContrastDb": 61.47662770202252,
+              "stageBalanceDb": -20.62032717405345,
+              "referenceBalanceDb": -2.829694533828999,
+              "balanceErrorDb": -17.79063264022445,
+              "stageDecayDb": -6.318742535131653,
+              "referenceDecayDb": -10.356680435157221,
+              "decayErrorDb": 4.037937900025568
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 45.39786291874803,
+              "referenceContrastDb": 49.95254385531602,
+              "stageBalanceDb": -49.334219602175565,
+              "referenceBalanceDb": -13.60716782592517,
+              "balanceErrorDb": -35.72705177625039,
+              "stageDecayDb": -24.372931020921,
+              "referenceDecayDb": -21.105262218616055,
+              "decayErrorDb": -3.2676688023049465
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 85.90189609046519,
+              "referenceContrastDb": 53.7013007951418,
+              "stageBalanceDb": -37.37780311025891,
+              "referenceBalanceDb": -9.178694477303823,
+              "balanceErrorDb": -28.199108632955088,
+              "stageDecayDb": -17.210530121484474,
+              "referenceDecayDb": -14.033442844043622,
+              "decayErrorDb": -3.1770872774408527
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 74.68796668981474,
+              "referenceContrastDb": 43.317115188304136,
+              "stageBalanceDb": -56.894280101625455,
+              "referenceBalanceDb": -19.77865495466352,
+              "balanceErrorDb": -37.11562514696193,
+              "stageDecayDb": -14.737343765231174,
+              "referenceDecayDb": -11.985217482676731,
+              "decayErrorDb": -2.7521262825544426
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 84.87892643998224,
+              "referenceContrastDb": 43.17712503259011,
+              "stageBalanceDb": -58.77919922575867,
+              "referenceBalanceDb": -22.287048444049105,
+              "balanceErrorDb": -36.49215078170956,
+              "stageDecayDb": -10.06661085729248,
+              "referenceDecayDb": -11.858496596283171,
+              "decayErrorDb": 1.7918857389906915
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 94.70184250652046,
+              "referenceContrastDb": 42.45597649895884,
+              "stageBalanceDb": -46.103707457820626,
+              "referenceBalanceDb": -24.550419060281826,
+              "balanceErrorDb": -21.5532883975388,
+              "stageDecayDb": -7.346548551977472,
+              "referenceDecayDb": -18.307224064952067,
+              "decayErrorDb": 10.960675512974595
+            }
+          ]
+        },
+        {
+          "startS": 4,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 61.966535717363335,
+              "referenceContrastDb": 40.293037124322254,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 67.91737267152321,
+              "referenceContrastDb": 54.11479956892498,
+              "stageBalanceDb": -1.216255515533112,
+              "referenceBalanceDb": -1.285492749889172,
+              "balanceErrorDb": 0.06923723435605988,
+              "stageDecayDb": -13.104389479409825,
+              "referenceDecayDb": -30.177126097860118,
+              "decayErrorDb": 17.072736618450293
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 78.13456781303897,
+              "referenceContrastDb": 43.19760917379465,
+              "stageBalanceDb": -0.14485824947188053,
+              "referenceBalanceDb": -18.97084090427678,
+              "balanceErrorDb": 18.8259826548049,
+              "stageDecayDb": -17.432947279369564,
+              "referenceDecayDb": -28.452768328406194,
+              "decayErrorDb": 11.01982104903663
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 82.47801520543331,
+              "referenceContrastDb": 45.05176630482122,
+              "stageBalanceDb": -32.018662846785986,
+              "referenceBalanceDb": -19.68061491091931,
+              "balanceErrorDb": -12.338047935866676,
+              "stageDecayDb": -40.37802712685934,
+              "referenceDecayDb": -33.51310152435876,
+              "decayErrorDb": -6.864925602500577
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 90.75090390049357,
+              "referenceContrastDb": 47.999271564472714,
+              "stageBalanceDb": -13.05313427939094,
+              "referenceBalanceDb": -14.66095563635026,
+              "balanceErrorDb": 1.6078213569593185,
+              "stageDecayDb": -18.383899527876878,
+              "referenceDecayDb": -24.89520471636137,
+              "decayErrorDb": 6.511305188484492
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 91.16789439888302,
+              "referenceContrastDb": 40.93053311164678,
+              "stageBalanceDb": -40.81768998377606,
+              "referenceBalanceDb": -21.349057358110567,
+              "balanceErrorDb": -19.468632625665496,
+              "stageDecayDb": -35.48875128992924,
+              "referenceDecayDb": -31.554414929484338,
+              "decayErrorDb": -3.9343363604449024
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 87.46412298451179,
+              "referenceContrastDb": 39.66801583077938,
+              "stageBalanceDb": -51.62116417409156,
+              "referenceBalanceDb": -22.179408382090216,
+              "balanceErrorDb": -29.441755792001345,
+              "stageDecayDb": -51.08624107272486,
+              "referenceDecayDb": -29.741419927512904,
+              "decayErrorDb": -21.344821145211956
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 97.13424600072373,
+              "referenceContrastDb": 30.56327449040635,
+              "stageBalanceDb": -62.02186296767785,
+              "referenceBalanceDb": -30.433010232898926,
+              "balanceErrorDb": -31.58885273477892,
+              "stageDecayDb": -39.497276518691294,
+              "referenceDecayDb": -25.346835939595024,
+              "decayErrorDb": -14.15044057909627
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 99.51364391585871,
+              "referenceContrastDb": 25.773045944211333,
+              "stageBalanceDb": -63.9357638133921,
+              "referenceBalanceDb": -37.313245644268015,
+              "balanceErrorDb": -26.622518169124085,
+              "stageDecayDb": -34.85552533233364,
+              "referenceDecayDb": -29.59195697518497,
+              "decayErrorDb": -5.263568357148671
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 96.99635192069664,
+              "referenceContrastDb": 25.394512573835406,
+              "stageBalanceDb": -67.0264059988956,
+              "referenceBalanceDb": -39.789201740269554,
+              "balanceErrorDb": -27.237204258626043,
+              "stageDecayDb": -47.90159698046018,
+              "referenceDecayDb": -36.25326992362269,
+              "decayErrorDb": -11.648327056837488
+            }
+          ]
+        },
+        {
+          "startS": 10,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 70.36960980930753,
+              "referenceContrastDb": 30.497415538547624,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 65.43371979243605,
+              "referenceContrastDb": 31.71761925037398,
+              "stageBalanceDb": -12.202978407733426,
+              "referenceBalanceDb": -11.187474421984845,
+              "balanceErrorDb": -1.0155039857485804,
+              "stageDecayDb": -31.8717999458001,
+              "referenceDecayDb": -49.982819265713594,
+              "decayErrorDb": 18.111019319913495
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 77.70786931645571,
+              "referenceContrastDb": 31.462580817498868,
+              "stageBalanceDb": -19.57884272379337,
+              "referenceBalanceDb": -21.05495863618717,
+              "balanceErrorDb": 1.476115912393798,
+              "stageDecayDb": -44.64761932788102,
+              "referenceDecayDb": -40.44059755607439,
+              "decayErrorDb": -4.20702177180663
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 77.34366757489501,
+              "referenceContrastDb": 16.04463142841501,
+              "stageBalanceDb": -49.65264822904612,
+              "referenceBalanceDb": -37.2015934762264,
+              "balanceErrorDb": -12.451054752819722,
+              "stageDecayDb": -65.79270008330943,
+              "referenceDecayDb": -60.93779158542367,
+              "decayErrorDb": -4.854908497885759
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 86.42462669237273,
+              "referenceContrastDb": 28.194970597121088,
+              "stageBalanceDb": -35.87152741536362,
+              "referenceBalanceDb": -24.417988267209225,
+              "balanceErrorDb": -11.453539148154398,
+              "stageDecayDb": -48.982980238039524,
+              "referenceDecayDb": -44.55594884297814,
+              "decayErrorDb": -4.427031395061384
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 91.17019319389382,
+              "referenceContrastDb": 16.39989573360227,
+              "stageBalanceDb": -59.2811045714008,
+              "referenceBalanceDb": -35.93900826167324,
+              "balanceErrorDb": -23.342096309727566,
+              "stageDecayDb": -61.732853451743935,
+              "referenceDecayDb": -56.048077328804816,
+              "decayErrorDb": -5.68477612293912
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 96.9311447792373,
+              "referenceContrastDb": 19.28824722792488,
+              "stageBalanceDb": -66.28776094178866,
+              "referenceBalanceDb": -33.51143155646343,
+              "balanceErrorDb": -32.77632938532523,
+              "stageDecayDb": -73.53352541461192,
+              "referenceDecayDb": -50.97715459764392,
+              "decayErrorDb": -22.556370816968
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 89.81720021200945,
+              "referenceContrastDb": 3.166926930081287,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 82.55491511698767,
+              "referenceContrastDb": -1.0311011360091422,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 85.99227198918513,
+              "referenceContrastDb": 2.3559747776750113,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            }
+          ]
+        },
+        {
+          "startS": 14,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 70.06115856383428,
+              "referenceContrastDb": 25.926956342857554,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 73.41412385682678,
+              "referenceContrastDb": 23.706429276517827,
+              "stageBalanceDb": -14.12340882415762,
+              "referenceBalanceDb": -14.22424776336948,
+              "balanceErrorDb": 0.10083893921185982,
+              "stageDecayDb": -39.04786716028126,
+              "referenceDecayDb": -61.967453140025945,
+              "decayErrorDb": 22.91958597974469
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 72.35592476845336,
+              "referenceContrastDb": 19.228315156352352,
+              "stageBalanceDb": -33.22587933289739,
+              "referenceBalanceDb": -24.12247181199399,
+              "balanceErrorDb": -9.103407520903403,
+              "stageDecayDb": -63.55029273504201,
+              "referenceDecayDb": -52.455971264808916,
+              "decayErrorDb": -11.09432147023309
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 86.14778252564015,
+              "referenceContrastDb": 12.443195992778639,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 89.47029019707564,
+              "referenceContrastDb": 12.904314147879397,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 88.56576988262157,
+              "referenceContrastDb": 14.553732448517383,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 88.90666931351817,
+              "referenceContrastDb": 6.728777162391426,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 82.28237869214678,
+              "referenceContrastDb": -3.3091434306460332,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 82.43123105768984,
+              "referenceContrastDb": -2.9418518426768427,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 72.82062829919244,
+              "referenceContrastDb": 0.4543000118848489,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "layer": "v16",
+      "byPartial": [
+        {
+          "h": 1,
+          "balance": {
+            "count": 9,
+            "meanAbsoluteDb": 0
+          },
+          "decay": {
+            "count": 0,
+            "meanAbsoluteDb": null
+          }
+        },
+        {
+          "h": 2,
+          "balance": {
+            "count": 9,
+            "meanAbsoluteDb": 6.179802226805145
+          },
+          "decay": {
+            "count": 10,
+            "meanAbsoluteDb": 17.799638172975754
+          }
+        },
+        {
+          "h": 3,
+          "balance": {
+            "count": 9,
+            "meanAbsoluteDb": 9.029194334857916
+          },
+          "decay": {
+            "count": 10,
+            "meanAbsoluteDb": 7.11824555438308
+          }
+        },
+        {
+          "h": 4,
+          "balance": {
+            "count": 9,
+            "meanAbsoluteDb": 12.299977212978659
+          },
+          "decay": {
+            "count": 10,
+            "meanAbsoluteDb": 4.2708377814271765
+          }
+        },
+        {
+          "h": 5,
+          "balance": {
+            "count": 9,
+            "meanAbsoluteDb": 7.912912221724066
+          },
+          "decay": {
+            "count": 10,
+            "meanAbsoluteDb": 6.332259767077497
+          }
+        },
+        {
+          "h": 6,
+          "balance": {
+            "count": 9,
+            "meanAbsoluteDb": 26.298583844593725
+          },
+          "decay": {
+            "count": 10,
+            "meanAbsoluteDb": 3.9523146200792376
+          }
+        },
+        {
+          "h": 7,
+          "balance": {
+            "count": 7,
+            "meanAbsoluteDb": 28.07155058670549
+          },
+          "decay": {
+            "count": 8,
+            "meanAbsoluteDb": 9.050328279067184
+          }
+        },
+        {
+          "h": 8,
+          "balance": {
+            "count": 6,
+            "meanAbsoluteDb": 44.10594033807547
+          },
+          "decay": {
+            "count": 7,
+            "meanAbsoluteDb": 11.967088711395636
+          }
+        },
+        {
+          "h": 9,
+          "balance": {
+            "count": 5,
+            "meanAbsoluteDb": 35.26995257921966
+          },
+          "decay": {
+            "count": 6,
+            "meanAbsoluteDb": 2.317436509576581
+          }
+        },
+        {
+          "h": 10,
+          "balance": {
+            "count": 5,
+            "meanAbsoluteDb": 31.29810556116548
+          },
+          "decay": {
+            "count": 6,
+            "meanAbsoluteDb": 5.88023738452785
+          }
+        }
+      ],
+      "windows": [
+        {
+          "startS": 0,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 10.432206647630156,
+              "referenceContrastDb": 45.58250891835198,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 16.42122746287256,
+              "referenceContrastDb": 44.96774217136667,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 32.566788142151616,
+              "referenceContrastDb": 38.364952449347015,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 27.85340453675733,
+              "referenceContrastDb": 42.73402908830441,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 34.963092004599744,
+              "referenceContrastDb": 45.90100411385676,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 20.536209262180233,
+              "referenceContrastDb": 47.92375955525322,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 35.44004156182937,
+              "referenceContrastDb": 44.7538487827822,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 31.930992884795153,
+              "referenceContrastDb": 36.50380426883954,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 25.504959314823278,
+              "referenceContrastDb": 38.91046354806708,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 30.584017693509345,
+              "referenceContrastDb": 50.52946816801503,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": 0,
+              "referenceDecayDb": 0,
+              "decayErrorDb": 0
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 24.952651791107208,
+              "referenceContrastDb": 50.91733141794684,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 38.301589267217665,
+              "referenceContrastDb": 60.13278724102031,
+              "stageBalanceDb": -12.176209145369608,
+              "referenceBalanceDb": 2.748302210327336,
+              "balanceErrorDb": -14.924511355696943,
+              "stageDecayDb": -4.431993221838589,
+              "referenceDecayDb": -25.578144108190394,
+              "decayErrorDb": 21.146150886351805
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 76.35224210104654,
+              "referenceContrastDb": 58.12772737195694,
+              "stageBalanceDb": -7.200901857166925,
+              "referenceBalanceDb": -5.0572191141027005,
+              "balanceErrorDb": -2.1436827430642245,
+              "stageDecayDb": -4.856640999656879,
+              "referenceDecayDb": -14.477476718015474,
+              "decayErrorDb": 9.620835718358595
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 68.69148807330855,
+              "referenceContrastDb": 65.97275880503594,
+              "stageBalanceDb": -26.124342114073404,
+              "referenceBalanceDb": -1.8762003509661562,
+              "balanceErrorDb": -24.24814176310725,
+              "stageDecayDb": -14.85135650673902,
+              "referenceDecayDb": -16.08147780085822,
+              "decayErrorDb": 1.2301212941192006
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 86.24517156176296,
+              "referenceContrastDb": 64.97041173416035,
+              "stageBalanceDb": -20.62032717405345,
+              "referenceBalanceDb": -0.4805533650805411,
+              "balanceErrorDb": -20.139773808972908,
+              "stageDecayDb": -6.318742535131653,
+              "referenceDecayDb": -12.117377700741805,
+              "decayErrorDb": 5.798635165610152
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 45.39786291874803,
+              "referenceContrastDb": 47.930685916531715,
+              "stageBalanceDb": -49.334219602175565,
+              "referenceBalanceDb": -10.777352387945037,
+              "balanceErrorDb": -38.55686721423053,
+              "stageDecayDb": -24.372931020921,
+              "referenceDecayDb": -19.824783563467193,
+              "decayErrorDb": -4.548147457453808
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 85.90189609046519,
+              "referenceContrastDb": 53.450837630896956,
+              "stageBalanceDb": -37.37780311025891,
+              "referenceBalanceDb": -7.17381401064264,
+              "balanceErrorDb": -30.20398909961627,
+              "stageDecayDb": -17.210530121484474,
+              "referenceDecayDb": -17.949270933594313,
+              "decayErrorDb": 0.7387408121098389
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 74.68796668981474,
+              "referenceContrastDb": 45.14761643189023,
+              "stageBalanceDb": -56.894280101625455,
+              "referenceBalanceDb": -16.130080789196025,
+              "balanceErrorDb": -40.764199312429426,
+              "stageDecayDb": -14.737343765231174,
+              "referenceDecayDb": -15.787861795975594,
+              "decayErrorDb": 1.0505180307444206
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 84.87892643998224,
+              "referenceContrastDb": 49.25418015879536,
+              "stageBalanceDb": -58.77919922575867,
+              "referenceBalanceDb": -17.705019036733326,
+              "balanceErrorDb": -41.07418018902534,
+              "stageDecayDb": -10.06661085729248,
+              "referenceDecayDb": -16.145300544014113,
+              "decayErrorDb": 6.078689686721633
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 94.70184250652046,
+              "referenceContrastDb": 52.27521778532501,
+              "stageBalanceDb": -46.103707457820626,
+              "referenceBalanceDb": -16.4966278025991,
+              "balanceErrorDb": -29.607079655221526,
+              "stageDecayDb": -7.346548551977472,
+              "referenceDecayDb": -21.823091708206917,
+              "decayErrorDb": 14.476543156229445
+            }
+          ]
+        },
+        {
+          "startS": 4,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 61.966535717363335,
+              "referenceContrastDb": 49.04801739748686,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 67.91737267152321,
+              "referenceContrastDb": 55.62699122614725,
+              "stageBalanceDb": -1.216255515533112,
+              "referenceBalanceDb": -0.8062465070798852,
+              "balanceErrorDb": -0.41000900845322685,
+              "stageDecayDb": -13.104389479409825,
+              "referenceDecayDb": -31.272371130743903,
+              "decayErrorDb": 18.167981651334077
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 78.13456781303897,
+              "referenceContrastDb": 44.24785020711614,
+              "stageBalanceDb": -0.14485824947188053,
+              "referenceBalanceDb": -21.797211344156526,
+              "balanceErrorDb": 21.652353094684646,
+              "stageDecayDb": -17.432947279369564,
+              "referenceDecayDb": -33.35714725321559,
+              "decayErrorDb": 15.924199973846022
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 82.47801520543331,
+              "referenceContrastDb": 47.95409725328403,
+              "stageBalanceDb": -32.018662846785986,
+              "referenceBalanceDb": -20.676368125285336,
+              "balanceErrorDb": -11.34229472150065,
+              "stageDecayDb": -40.37802712685934,
+              "referenceDecayDb": -37.021323880323685,
+              "decayErrorDb": -3.356703246535652
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 90.75090390049357,
+              "referenceContrastDb": 51.31633469115245,
+              "stageBalanceDb": -13.05313427939094,
+              "referenceBalanceDb": -16.011288001469815,
+              "balanceErrorDb": 2.9581537220788743,
+              "stageDecayDb": -18.383899527876878,
+              "referenceDecayDb": -29.78779064227737,
+              "decayErrorDb": 11.40389111440049
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 91.16789439888302,
+              "referenceContrastDb": 41.615686882611385,
+              "stageBalanceDb": -40.81768998377606,
+              "referenceBalanceDb": -25.913352818851614,
+              "balanceErrorDb": -14.90433716492445,
+              "stageDecayDb": -35.48875128992924,
+              "referenceDecayDb": -37.10046229952006,
+              "decayErrorDb": 1.6117110095908203
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 87.46412298451179,
+              "referenceContrastDb": 43.337579805201415,
+              "stageBalanceDb": -51.62116417409156,
+              "referenceBalanceDb": -21.670216681179735,
+              "balanceErrorDb": -29.950947492911826,
+              "stageDecayDb": -51.08624107272486,
+              "referenceDecayDb": -34.5853519092777,
+              "decayErrorDb": -16.500889163447162
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 97.13424600072373,
+              "referenceContrastDb": 38.48202001225446,
+              "stageBalanceDb": -62.02186296767785,
+              "referenceBalanceDb": -27.461563026285422,
+              "balanceErrorDb": -34.56029994139243,
+              "stageDecayDb": -39.497276518691294,
+              "referenceDecayDb": -29.25902233821128,
+              "decayErrorDb": -10.238254180480013
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 99.51364391585871,
+              "referenceContrastDb": 33.209243215285824,
+              "stageBalanceDb": -63.9357638133921,
+              "referenceBalanceDb": -33.47849350737369,
+              "balanceErrorDb": -30.45727030601841,
+              "stageDecayDb": -34.85552533233364,
+              "referenceDecayDb": -34.058453319800776,
+              "decayErrorDb": -0.7970720125328654
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 96.99635192069664,
+              "referenceContrastDb": 33.96267818106199,
+              "stageBalanceDb": -67.0264059988956,
+              "referenceBalanceDb": -35.2963681755091,
+              "balanceErrorDb": -31.730037823386496,
+              "stageDecayDb": -47.90159698046018,
+              "referenceDecayDb": -42.76251038626321,
+              "decayErrorDb": -5.139086594196968
+            }
+          ]
+        },
+        {
+          "startS": 10,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 70.36960980930753,
+              "referenceContrastDb": 38.18299492370485,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 65.43371979243605,
+              "referenceContrastDb": 36.26102145883986,
+              "stageBalanceDb": -12.202978407733426,
+              "referenceBalanceDb": -10.144978418019901,
+              "balanceErrorDb": -2.057999989713524,
+              "stageDecayDb": -31.8717999458001,
+              "referenceDecayDb": -51.04000268233361,
+              "decayErrorDb": 19.16820273653351
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 77.70786931645571,
+              "referenceContrastDb": 30.23606926984746,
+              "stageBalanceDb": -19.57884272379337,
+              "referenceBalanceDb": -24.084890246877613,
+              "balanceErrorDb": 4.506047523084241,
+              "stageDecayDb": -44.64761932788102,
+              "referenceDecayDb": -46.073725796586366,
+              "decayErrorDb": 1.426106468705349
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 77.34366757489501,
+              "referenceContrastDb": 30.160354940882293,
+              "stageBalanceDb": -49.65264822904612,
+              "referenceBalanceDb": -27.57729988415423,
+              "balanceErrorDb": -22.075348344891893,
+              "stageDecayDb": -65.79270008330943,
+              "referenceDecayDb": -54.35115527984227,
+              "decayErrorDb": -11.44154480346716
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 86.42462669237273,
+              "referenceContrastDb": 32.5364296574026,
+              "stageBalanceDb": -35.87152741536362,
+              "referenceBalanceDb": -25.337615435476334,
+              "balanceErrorDb": -10.53391197988729,
+              "stageDecayDb": -48.982980238039524,
+              "referenceDecayDb": -49.543017716933576,
+              "decayErrorDb": 0.5600374788940528
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 91.17019319389382,
+              "referenceContrastDb": 21.896132777336874,
+              "stageBalanceDb": -59.2811045714008,
+              "referenceBalanceDb": -33.884287541292736,
+              "balanceErrorDb": -25.396817030108068,
+              "stageDecayDb": -61.732853451743935,
+              "referenceDecayDb": -55.50029666261088,
+              "decayErrorDb": -6.232556789133056
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 96.9311447792373,
+              "referenceContrastDb": 24.93489421941728,
+              "stageBalanceDb": -66.28776094178866,
+              "referenceBalanceDb": -32.65728158278586,
+              "balanceErrorDb": -33.6304793590028,
+              "stageDecayDb": -73.53352541461192,
+              "referenceDecayDb": -56.00131645153351,
+              "decayErrorDb": -17.532208963078403
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 89.81720021200945,
+              "referenceContrastDb": 6.42528926732319,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 82.55491511698767,
+              "referenceContrastDb": 0.2451788104630347,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 85.99227198918513,
+              "referenceContrastDb": 7.415350703011843,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            }
+          ]
+        },
+        {
+          "startS": 14,
+          "partials": [
+            {
+              "h": 1,
+              "stageContrastDb": 70.06115856383428,
+              "referenceContrastDb": 31.975640895020888,
+              "stageBalanceDb": 0,
+              "referenceBalanceDb": 0,
+              "balanceErrorDb": 0,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 2,
+              "stageContrastDb": 73.41412385682678,
+              "referenceContrastDb": 23.948701227973043,
+              "stageBalanceDb": -14.12340882415762,
+              "referenceBalanceDb": -15.19300726787613,
+              "balanceErrorDb": 1.06959844371851,
+              "stageDecayDb": -39.04786716028126,
+              "referenceDecayDb": -67.92840152824124,
+              "decayErrorDb": 28.88053436795998
+            },
+            {
+              "h": 3,
+              "stageContrastDb": 72.35592476845336,
+              "referenceContrastDb": 18.778304345295286,
+              "stageBalanceDb": -33.22587933289739,
+              "referenceBalanceDb": -29.51559544581139,
+              "balanceErrorDb": -3.7102838870860033,
+              "stageDecayDb": -63.55029273504201,
+              "referenceDecayDb": -63.34480099157154,
+              "decayErrorDb": -0.20549174347046772
+            },
+            {
+              "h": 4,
+              "stageContrastDb": 86.14778252564015,
+              "referenceContrastDb": 23.003543685214332,
+              "stageBalanceDb": -37.330952453666924,
+              "referenceBalanceDb": -28.41092232125014,
+              "balanceErrorDb": -8.920030132416784,
+              "stageDecayDb": -58.726641105987206,
+              "referenceDecayDb": -67.02514771298958,
+              "decayErrorDb": 8.298506607002373
+            },
+            {
+              "h": 5,
+              "stageContrastDb": 89.47029019707564,
+              "referenceContrastDb": 17.76568111276515,
+              "stageBalanceDb": -39.541206890129196,
+              "referenceBalanceDb": -32.850687121042334,
+              "balanceErrorDb": -6.690519769086862,
+              "stageDecayDb": -57.90829651086206,
+              "referenceDecayDb": -68.89645939855097,
+              "decayErrorDb": 10.988162887688915
+            },
+            {
+              "h": 6,
+              "stageContrastDb": 88.56576988262157,
+              "referenceContrastDb": 15.281202333139234,
+              "stageBalanceDb": -70.03249357961154,
+              "referenceBalanceDb": -35.49796951784395,
+              "balanceErrorDb": -34.53452406176759,
+              "stageDecayDb": -77.73987925801164,
+              "referenceDecayDb": -68.95434863521348,
+              "decayErrorDb": -8.785530622798163
+            },
+            {
+              "h": 7,
+              "stageContrastDb": 88.90666931351817,
+              "referenceContrastDb": 10.247697563702541,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 8,
+              "stageContrastDb": 82.28237869214678,
+              "referenceContrastDb": 2.72709503786702,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 9,
+              "stageContrastDb": 82.43123105768984,
+              "referenceContrastDb": -1.8812067395668168,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            },
+            {
+              "h": 10,
+              "stageContrastDb": 72.82062829919244,
+              "referenceContrastDb": 2.561732029270256,
+              "stageBalanceDb": null,
+              "referenceBalanceDb": null,
+              "balanceErrorDb": null,
+              "stageDecayDb": null,
+              "referenceDecayDb": null,
+              "decayErrorDb": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "scope": "log summary; complete numeric windows in CI artifact"
+}
