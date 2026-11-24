@@ -1,0 +1,15 @@
+import {matrixDifference,resistancePower,compareBlocks,dbRatio} from './f9-radiation-load-audit.mjs';
+import {radiationResistance} from './radiation-loading.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};const rejects=f=>{try{f();return false}catch{return true;}};
+const a=[[2,1],[1,2]],b=[[4,2],[2,4]],blocks=[{f:100,indices:[0,1],R:a}],velocity=[[1,2],[3,4]];
+check('identical matrices',matrixDifference(a,a).relativeFrobenius===0);
+check('known scaling',matrixDifference(a,b).relativeFrobenius===1);
+check('complex velocity quadratic power',resistancePower(blocks,velocity).power===41&&resistancePower(blocks,velocity).passive);
+check('negative power detected',!resistancePower([{indices:[0],R:[[-1]]}],[[1,0]]).passive);
+check('zero reference censored',matrixDifference([[0]],[[1]]).relativeFrobenius===null);
+check('membership mismatch',rejects(()=>compareBlocks(blocks,[{f:100,indices:[1,0],R:a}])));
+check('power ratio',Math.abs(dbRatio(2,1)-3.010299956639812)<1e-12&&dbRatio(0,1)===null);
+const p={lengthM:1,widthM:1},m=[{components:[{m:1,n:1,coefficient:1}]},{components:[{m:2,n:1,coefficient:1}]}];
+const R=radiationResistance(p,m,500,{nt:12,np:24});
+check('quadrature symmetric positive',R[0][1]===R[1][0]&&R[0][0]>0&&R[1][1]>0&&R[0][0]*R[1][1]-R[0][1]**2>=-1e-15);
+console.log('F9.16d load audit tests passed:',n);

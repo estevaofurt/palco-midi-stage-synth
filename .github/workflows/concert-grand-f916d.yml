@@ -1,0 +1,29 @@
+name: Concert Grand F9.16d radiation load audit
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f916d.yml'
+      - 'research/stage-concert-grand/f9-radiation-load-audit*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-loaded-mobility.test.mjs
+          node research/stage-concert-grand/f9-radiation-convergence.test.mjs
+          node research/stage-concert-grand/f9-radiation-load-audit.test.mjs
+      - run: node research/stage-concert-grand/f9-radiation-load-audit-demo.mjs /tmp/f916d
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F916D-radiation-load-numeric
+          path: /tmp/f916d/
+          if-no-files-found: error

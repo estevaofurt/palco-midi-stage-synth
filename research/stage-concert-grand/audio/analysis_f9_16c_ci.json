@@ -1,0 +1,1594 @@
+{
+  "sourceCommit": "ec0c5d3ea2895a8a43255abae399dc4261e8ece8",
+  "runId": 45439498822,
+  "artifactId": 14941069175,
+  "testsPassed": 17,
+  "summary": [
+    {
+      "resolution": "reference",
+      "modeCount": 337,
+      "metrics": {
+        "coarseToFine": {
+          "maxComplex": {
+            "h": 9,
+            "ch": 0,
+            "relativeComplexError": 0.05113422578764655,
+            "magnitudeDeltaDb": 0.4238244670046484
+          },
+          "maxDb": {
+            "h": 9,
+            "ch": 0,
+            "relativeComplexError": 0.05113422578764655,
+            "magnitudeDeltaDb": 0.4238244670046484
+          }
+        },
+        "mediumToFine": {
+          "maxComplex": {
+            "h": 9,
+            "ch": 0,
+            "relativeComplexError": 0.007694702833762022,
+            "magnitudeDeltaDb": 0.06508323278624306
+          },
+          "maxDb": {
+            "h": 9,
+            "ch": 0,
+            "relativeComplexError": 0.007694702833762022,
+            "magnitudeDeltaDb": 0.06508323278624306
+          }
+        },
+        "coarseDelay": {
+          "maxComplex": {
+            "h": 9,
+            "ch": 0,
+            "relativeComplexError": 0.013845925345005483,
+            "magnitudeDeltaDb": -0.11623571092575287
+          },
+          "maxDb": {
+            "h": 9,
+            "ch": 0,
+            "relativeComplexError": 0.013845925345005483,
+            "magnitudeDeltaDb": -0.11623571092575287
+          }
+        },
+        "fineDelay": {
+          "maxComplex": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.011151500010490829,
+            "magnitudeDeltaDb": -0.09738733591524994
+          },
+          "maxDb": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.011151500010490829,
+            "magnitudeDeltaDb": -0.09738733591524994
+          }
+        }
+      }
+    },
+    {
+      "resolution": "basis8",
+      "modeCount": 358,
+      "metrics": {
+        "coarseToFine": {
+          "maxComplex": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.09214918273227325,
+            "magnitudeDeltaDb": 0.7364884879489608
+          },
+          "maxDb": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.09214918273227325,
+            "magnitudeDeltaDb": 0.7364884879489608
+          }
+        },
+        "mediumToFine": {
+          "maxComplex": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.013365260695449166,
+            "magnitudeDeltaDb": 0.11024636400412585
+          },
+          "maxDb": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.013365260695449166,
+            "magnitudeDeltaDb": 0.11024636400412585
+          }
+        },
+        "coarseDelay": {
+          "maxComplex": {
+            "h": 10,
+            "ch": 1,
+            "relativeComplexError": 0.022193164436615655,
+            "magnitudeDeltaDb": -0.17053102349426227
+          },
+          "maxDb": {
+            "h": 10,
+            "ch": 1,
+            "relativeComplexError": 0.022193164436615655,
+            "magnitudeDeltaDb": -0.17053102349426227
+          }
+        },
+        "fineDelay": {
+          "maxComplex": {
+            "h": 10,
+            "ch": 1,
+            "relativeComplexError": 0.011291946627373204,
+            "magnitudeDeltaDb": -0.0985967914249456
+          },
+          "maxDb": {
+            "h": 10,
+            "ch": 1,
+            "relativeComplexError": 0.011291946627373204,
+            "magnitudeDeltaDb": -0.0985967914249456
+          }
+        }
+      }
+    },
+    {
+      "resolution": "basis12",
+      "modeCount": 713,
+      "metrics": {
+        "coarseToFine": {
+          "maxComplex": {
+            "h": 8,
+            "ch": 1,
+            "relativeComplexError": 0.06879396916372073,
+            "magnitudeDeltaDb": 0.21842239061879454
+          },
+          "maxDb": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.03851375943643861,
+            "magnitudeDeltaDb": 0.2562245007278547
+          }
+        },
+        "mediumToFine": {
+          "maxComplex": {
+            "h": 8,
+            "ch": 1,
+            "relativeComplexError": 0.010195786237893176,
+            "magnitudeDeltaDb": 0.02979979191633824
+          },
+          "maxDb": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.005609265381555275,
+            "magnitudeDeltaDb": 0.03732050732869231
+          }
+        },
+        "coarseDelay": {
+          "maxComplex": {
+            "h": 8,
+            "ch": 0,
+            "relativeComplexError": 0.042649421287168365,
+            "magnitudeDeltaDb": 0.2392662371779529
+          },
+          "maxDb": {
+            "h": 8,
+            "ch": 0,
+            "relativeComplexError": 0.042649421287168365,
+            "magnitudeDeltaDb": 0.2392662371779529
+          }
+        },
+        "fineDelay": {
+          "maxComplex": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.011950496931464947,
+            "magnitudeDeltaDb": -0.10408823673569838
+          },
+          "maxDb": {
+            "h": 10,
+            "ch": 0,
+            "relativeComplexError": 0.011950496931464947,
+            "magnitudeDeltaDb": -0.10408823673569838
+          }
+        }
+      }
+    }
+  ],
+  "cases": [
+    {
+      "resolution": "reference",
+      "modeCount": 337,
+      "rows": [
+        {
+          "h": 1,
+          "f": 261.6255653005987,
+          "maxRelativeResidual": 4.573357797079531e-16,
+          "powerResidualW": -2.574980159653073e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.003913488767757661,
+                "magnitudeDeltaDb": 0.03216676675079072
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0006105064687158923,
+                "magnitudeDeltaDb": 0.005025447030711925
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00008407341619709849,
+                "magnitudeDeltaDb": -0.000729632663508869
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.00009514064052889306,
+                "magnitudeDeltaDb": -0.000826385927716432
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.00333102529593414,
+                "magnitudeDeltaDb": 0.02871436467258626
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0005196306146563769,
+                "magnitudeDeltaDb": 0.004485616633807646
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00009339199875437933,
+                "magnitudeDeltaDb": -0.0008112106772723617
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0000976721197367592,
+                "magnitudeDeltaDb": -0.0008483915487494591
+              }
+            }
+          ]
+        },
+        {
+          "h": 2,
+          "f": 523.4836792009017,
+          "maxRelativeResidual": 4.248633188414945e-16,
+          "powerResidualW": 0,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.006252961529838584,
+                "magnitudeDeltaDb": 0.036831949532330495
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0009738624240905092,
+                "magnitudeDeltaDb": 0.005734687100492647
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00036813087385048886,
+                "magnitudeDeltaDb": -0.0031932949175885426
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0003862606520120399,
+                "magnitudeDeltaDb": -0.0033349549490711726
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.009359325961801432,
+                "magnitudeDeltaDb": 0.04100487391075466
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0014579764872956677,
+                "magnitudeDeltaDb": 0.006361780828714188
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00041072615406583977,
+                "magnitudeDeltaDb": -0.0035575786815516615
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0003742269914794621,
+                "magnitudeDeltaDb": -0.003246866426680561
+              }
+            }
+          ]
+        },
+        {
+          "h": 3,
+          "f": 785.8065462029502,
+          "maxRelativeResidual": 5.772323916946411e-16,
+          "powerResidualW": 1.0164395367051604e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.003184431887527777,
+                "magnitudeDeltaDb": 0.026684135500316584
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0004951583905980725,
+                "magnitudeDeltaDb": 0.0041539982283314925
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0008157027634484333,
+                "magnitudeDeltaDb": -0.007081261591700589
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0008110566288680538,
+                "magnitudeDeltaDb": -0.007034586953634254
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.0035435640870766067,
+                "magnitudeDeltaDb": 0.030010573748231354
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0005509138846548664,
+                "magnitudeDeltaDb": 0.004671665275363046
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0008509875900534577,
+                "magnitudeDeltaDb": -0.007298126651490785
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0008659668102538807,
+                "magnitudeDeltaDb": -0.007516089927339852
+              }
+            }
+          ]
+        },
+        {
+          "h": 4,
+          "f": 1048.8256847481164,
+          "maxRelativeResidual": 6.343418343980138e-16,
+          "powerResidualW": 2.168404344971009e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.009533930402975996,
+                "magnitudeDeltaDb": 0.024785002631249553
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0014788890599671208,
+                "magnitudeDeltaDb": 0.0037932864862870452
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.001583832343219471,
+                "magnitudeDeltaDb": -0.013491600721970063
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0014937288622471833,
+                "magnitudeDeltaDb": -0.012979922739621312
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.0053826745236658265,
+                "magnitudeDeltaDb": 0.03509527888632188
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0008317297694608932,
+                "magnitudeDeltaDb": 0.005406831007523787
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0016201196340517967,
+                "magnitudeDeltaDb": -0.01369961019718332
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.001637063534721103,
+                "magnitudeDeltaDb": -0.014070615679481112
+              }
+            }
+          ]
+        },
+        {
+          "h": 5,
+          "f": 1312.7715894951111,
+          "maxRelativeResidual": 3.87914583871682e-16,
+          "powerResidualW": 6.776263578034403e-21,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.007425964571212171,
+                "magnitudeDeltaDb": -0.03737677340088982
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0011475182817025746,
+                "magnitudeDeltaDb": -0.005788330218260121
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.002435146156739454,
+                "magnitudeDeltaDb": -0.02088445230850764
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0021367135231091525,
+                "magnitudeDeltaDb": -0.018554082489342077
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.0042283586433963785,
+                "magnitudeDeltaDb": 0.03663496813878795
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0006543276378802471,
+                "magnitudeDeltaDb": 0.005679210242371356
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0026349413435001446,
+                "magnitudeDeltaDb": -0.022857007560850504
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.002474153182776529,
+                "magnitudeDeltaDb": -0.021449754035868983
+              }
+            }
+          ]
+        },
+        {
+          "h": 6,
+          "f": 1577.87339988937,
+          "maxRelativeResidual": 4.812105700581879e-16,
+          "powerResidualW": 0,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.0155556553110932,
+                "magnitudeDeltaDb": -0.02453295251063909
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0023080391374597415,
+                "magnitudeDeltaDb": -0.0037201105924321203
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00425670154605689,
+                "magnitudeDeltaDb": -0.022629902193952167
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.00335145871265656,
+                "magnitudeDeltaDb": -0.025765389469617688
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.035163158321930704,
+                "magnitudeDeltaDb": -0.1372332526595615
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.005434135335025629,
+                "magnitudeDeltaDb": -0.022289680491825434
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.007906300338449924,
+                "magnitudeDeltaDb": -0.06742281623488186
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0039012399138712455,
+                "magnitudeDeltaDb": -0.03392158325131694
+              }
+            }
+          ]
+        },
+        {
+          "h": 7,
+          "f": 1844.358576991797,
+          "maxRelativeResidual": 4.2654202244120226e-16,
+          "powerResidualW": 0,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.003936522464494076,
+                "magnitudeDeltaDb": 0.0207636536830223
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0006008317227493937,
+                "magnitudeDeltaDb": 0.0032251618942040726
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00426132515775719,
+                "magnitudeDeltaDb": -0.03708231057062438
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.004663604260845539,
+                "magnitudeDeltaDb": -0.04059473480576313
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.007631415009225713,
+                "magnitudeDeltaDb": 0.04094384007795687
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0011046210073606423,
+                "magnitudeDeltaDb": 0.005735424777416636
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0044137165162847596,
+                "magnitudeDeltaDb": -0.03310991294648114
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.004934932220033863,
+                "magnitudeDeltaDb": -0.04276051748827922
+              }
+            }
+          ]
+        },
+        {
+          "h": 8,
+          "f": 2112.4525904278858,
+          "maxRelativeResidual": 4.58918250537194e-16,
+          "powerResidualW": -2.168404344971009e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.01286214665953789,
+                "magnitudeDeltaDb": 0.09411390452830055
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0019345421417029782,
+                "magnitudeDeltaDb": 0.014393888852917647
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.004913456493801242,
+                "magnitudeDeltaDb": -0.04273622910631394
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.005366105680878307,
+                "magnitudeDeltaDb": -0.046707258910743156
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.022504046784591954,
+                "magnitudeDeltaDb": 0.08876127692970107
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.003360704322670995,
+                "magnitudeDeltaDb": 0.013215856336452355
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.007037744055094951,
+                "magnitudeDeltaDb": -0.05913618972967373
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.006716369182359382,
+                "magnitudeDeltaDb": -0.05839149204508266
+              }
+            }
+          ]
+        },
+        {
+          "h": 9,
+          "f": 2382.378617189026,
+          "maxRelativeResidual": 5.333981880861305e-16,
+          "powerResidualW": 0,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.05113422578764655,
+                "magnitudeDeltaDb": 0.4238244670046484
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.007694702833762022,
+                "magnitudeDeltaDb": 0.06508323278624306
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.013845925345005483,
+                "magnitudeDeltaDb": -0.11623571092575287
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.002304251482161883,
+                "magnitudeDeltaDb": -0.01855404565488513
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.014006625211713548,
+                "magnitudeDeltaDb": 0.11052457730240067
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.002136816552594254,
+                "magnitudeDeltaDb": 0.01697057255460869
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00834651858398635,
+                "magnitudeDeltaDb": -0.07228006204740506
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.00727659371102272,
+                "magnitudeDeltaDb": -0.06342678092223158
+              }
+            }
+          ]
+        },
+        {
+          "h": 10,
+          "f": 2654.3572538691965,
+          "maxRelativeResidual": 4.040324204921053e-16,
+          "powerResidualW": 1.0842021724855044e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.004977767873038312,
+                "magnitudeDeltaDb": 0.0422604497410082
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0007767593320608949,
+                "magnitudeDeltaDb": 0.006567761055916136
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.01116529858938893,
+                "magnitudeDeltaDb": -0.09657226271676476
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.011151500010490829,
+                "magnitudeDeltaDb": -0.09738733591524994
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.006942336094886828,
+                "magnitudeDeltaDb": -0.051785366913121994
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0010375109493358506,
+                "magnitudeDeltaDb": -0.007470144268889912
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.012843745628070596,
+                "magnitudeDeltaDb": -0.11180072678096718
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.010156329668236567,
+                "magnitudeDeltaDb": -0.08771745512661076
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "resolution": "basis8",
+      "modeCount": 358,
+      "rows": [
+        {
+          "h": 1,
+          "f": 261.6255653005987,
+          "maxRelativeResidual": 6.161434504529748e-16,
+          "powerResidualW": 4.0657581468206416e-20,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.0038347150623803243,
+                "magnitudeDeltaDb": 0.031591224655922706
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0005982557812230407,
+                "magnitudeDeltaDb": 0.004935726840236003
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00008428962566418355,
+                "magnitudeDeltaDb": -0.0007315762955778739
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0000951469785895078,
+                "magnitudeDeltaDb": -0.0008264421813570177
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.0032951667918472574,
+                "magnitudeDeltaDb": 0.028409989539478885
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0005140575231924124,
+                "magnitudeDeltaDb": 0.004438187591412526
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00009346938035317153,
+                "magnitudeDeltaDb": -0.0008118776332135289
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0000977227612978156,
+                "magnitudeDeltaDb": -0.0008488314832834603
+              }
+            }
+          ]
+        },
+        {
+          "h": 2,
+          "f": 523.4836792009017,
+          "maxRelativeResidual": 3.982366626988916e-16,
+          "powerResidualW": -1.8634724839594607e-20,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.006243269875897691,
+                "magnitudeDeltaDb": 0.03634019609408506
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0009721910945728911,
+                "magnitudeDeltaDb": 0.005657239555655936
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00036829424224113294,
+                "magnitudeDeltaDb": -0.003194507056288415
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0003857261180210812,
+                "magnitudeDeltaDb": -0.0033299169120433033
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.009310150134691317,
+                "magnitudeDeltaDb": 0.04060489484924428
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0014502492602493397,
+                "magnitudeDeltaDb": 0.006297995473724013
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00041059681361693305,
+                "magnitudeDeltaDb": -0.0035575062189234768
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0003750727818586421,
+                "magnitudeDeltaDb": -0.003254892243948753
+              }
+            }
+          ]
+        },
+        {
+          "h": 3,
+          "f": 785.8065462029502,
+          "maxRelativeResidual": 5.22298078231571e-16,
+          "powerResidualW": -5.421010862427522e-20,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.003451909675501797,
+                "magnitudeDeltaDb": 0.02963826261500895
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0005369517217373345,
+                "magnitudeDeltaDb": 0.004616201200718591
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0010192522034720639,
+                "magnitudeDeltaDb": -0.008824403186706149
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.000934053491104169,
+                "magnitudeDeltaDb": -0.007710884016368297
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.004747568185296541,
+                "magnitudeDeltaDb": 0.03272950562978642
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0007381991105389083,
+                "magnitudeDeltaDb": 0.005087849837214354
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.000812801810697623,
+                "magnitudeDeltaDb": -0.005707862844452605
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0009838634064912935,
+                "magnitudeDeltaDb": -0.008527461945923917
+              }
+            }
+          ]
+        },
+        {
+          "h": 4,
+          "f": 1048.8256847481164,
+          "maxRelativeResidual": 5.373340264251143e-16,
+          "powerResidualW": 2.710505431213761e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.0075491643038759805,
+                "magnitudeDeltaDb": 0.02603656019978036
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.001171002587259446,
+                "magnitudeDeltaDb": 0.004005197306687087
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0016100895454662124,
+                "magnitudeDeltaDb": -0.013776160377918942
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0015030419629166992,
+                "magnitudeDeltaDb": -0.013056383053089133
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.004170381317167,
+                "magnitudeDeltaDb": 0.02582861634645656
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.000642177966425277,
+                "magnitudeDeltaDb": 0.003953433155827684
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0017290570351744389,
+                "magnitudeDeltaDb": -0.01449575777897211
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.001706561150569612,
+                "magnitudeDeltaDb": -0.014573328001527585
+              }
+            }
+          ]
+        },
+        {
+          "h": 5,
+          "f": 1312.7715894951111,
+          "maxRelativeResidual": 5.935471824849065e-16,
+          "powerResidualW": 1.3552527156068805e-20,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.013128714340053086,
+                "magnitudeDeltaDb": -0.0997364563195573
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0020218785649224785,
+                "magnitudeDeltaDb": -0.015302665157136833
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0021967375826722146,
+                "magnitudeDeltaDb": -0.0181777353684476
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0018204387360039151,
+                "magnitudeDeltaDb": -0.01581525152500734
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.006893532136206799,
+                "magnitudeDeltaDb": 0.055452458565563155
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0010607733736622432,
+                "magnitudeDeltaDb": 0.008561021232611168
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.002669861323810419,
+                "magnitudeDeltaDb": -0.022928330190238475
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0024429912897300917,
+                "magnitudeDeltaDb": -0.021102421173592137
+              }
+            }
+          ]
+        },
+        {
+          "h": 6,
+          "f": 1577.87339988937,
+          "maxRelativeResidual": 4.660490622120791e-16,
+          "powerResidualW": 6.505213034913027e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.02406179284372645,
+                "magnitudeDeltaDb": 0.20420503496032139
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.003670599425763936,
+                "magnitudeDeltaDb": 0.031433370489375494
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.003273041556276691,
+                "magnitudeDeltaDb": -0.026153729111131972
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.004072370844314163,
+                "magnitudeDeltaDb": -0.03440930220417397
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.024498143643279475,
+                "magnitudeDeltaDb": 0.19540710322772764
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.003714431533034349,
+                "magnitudeDeltaDb": 0.029759514721161
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.005986133411694672,
+                "magnitudeDeltaDb": -0.05125326697408602
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0040793109866860125,
+                "magnitudeDeltaDb": -0.035044075734492725
+              }
+            }
+          ]
+        },
+        {
+          "h": 7,
+          "f": 1844.358576991797,
+          "maxRelativeResidual": 6.32065538574695e-16,
+          "powerResidualW": -4.336808689942018e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.011619930727638528,
+                "magnitudeDeltaDb": -0.061386814437822665
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0017337712363428024,
+                "magnitudeDeltaDb": -0.00903972745556763
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.004438375039177309,
+                "magnitudeDeltaDb": -0.03797051181100434
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.004803224776299892,
+                "magnitudeDeltaDb": -0.04169911781053518
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.027142929209143574,
+                "magnitudeDeltaDb": 0.14828221629574329
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.004033627109795088,
+                "magnitudeDeltaDb": 0.021786542698443854
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.004908675374498431,
+                "magnitudeDeltaDb": -0.021872033976762274
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.004699892097834195,
+                "magnitudeDeltaDb": -0.040561022387762206
+              }
+            }
+          ]
+        },
+        {
+          "h": 8,
+          "f": 2112.4525904278858,
+          "maxRelativeResidual": 4.2324546684819244e-16,
+          "powerResidualW": 0,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.012984067405931148,
+                "magnitudeDeltaDb": 0.0981335788227069
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.001915739736181786,
+                "magnitudeDeltaDb": 0.014497669981713224
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.006514257330659623,
+                "magnitudeDeltaDb": -0.05353188856543728
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.008615132134980342,
+                "magnitudeDeltaDb": -0.07429328769084223
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.011552493927350221,
+                "magnitudeDeltaDb": -0.06801841732436843
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0016677432912599439,
+                "magnitudeDeltaDb": -0.009934843419040239
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.012851001057020191,
+                "magnitudeDeltaDb": -0.11234325664734723
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0071685725507286725,
+                "magnitudeDeltaDb": -0.06082446016971231
+              }
+            }
+          ]
+        },
+        {
+          "h": 9,
+          "f": 2382.378617189026,
+          "maxRelativeResidual": 4.445594769104386e-16,
+          "powerResidualW": 2.168404344971009e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.027872384612264836,
+                "magnitudeDeltaDb": 0.2375653504078435
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.004163499161763877,
+                "magnitudeDeltaDb": 0.035946512398437935
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.009690750933366668,
+                "magnitudeDeltaDb": -0.08099828849558803
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.005763614169146988,
+                "magnitudeDeltaDb": -0.04963224001121226
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.011102266245811681,
+                "magnitudeDeltaDb": 0.09551756368146251
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0016975878402190686,
+                "magnitudeDeltaDb": 0.014686999503000925
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.009565258825706182,
+                "magnitudeDeltaDb": -0.08319702018767802
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.006752804229630783,
+                "magnitudeDeltaDb": -0.05803100850997202
+              }
+            }
+          ]
+        },
+        {
+          "h": 10,
+          "f": 2654.3572538691965,
+          "maxRelativeResidual": 5.300303538136334e-16,
+          "powerResidualW": 3.2526065174565133e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.09214918273227325,
+                "magnitudeDeltaDb": 0.7364884879489608
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.013365260695449166,
+                "magnitudeDeltaDb": 0.11024636400412585
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.014639657608465147,
+                "magnitudeDeltaDb": -0.119800920179922
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.010847680572641346,
+                "magnitudeDeltaDb": -0.08921733767100665
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.08865943131169042,
+                "magnitudeDeltaDb": -0.12208122415795379
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.012873749285271255,
+                "magnitudeDeltaDb": -0.02074177678706485
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.022193164436615655,
+                "magnitudeDeltaDb": -0.17053102349426227
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.011291946627373204,
+                "magnitudeDeltaDb": -0.0985967914249456
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "resolution": "basis12",
+      "modeCount": 713,
+      "rows": [
+        {
+          "h": 1,
+          "f": 261.6255653005987,
+          "maxRelativeResidual": 6.237817948267646e-16,
+          "powerResidualW": -6.098637220230962e-20,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.0038499258577772977,
+                "magnitudeDeltaDb": 0.03172044882480221
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0006005408150545738,
+                "magnitudeDeltaDb": 0.004955172910799649
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0000842908213297537,
+                "magnitudeDeltaDb": -0.0007315874937939692
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.00009515375640964406,
+                "magnitudeDeltaDb": -0.0008265012196254067
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.003303216185406141,
+                "magnitudeDeltaDb": 0.028480337897602258
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0005152621467116511,
+                "magnitudeDeltaDb": 0.004448754068827931
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00009344393974838721,
+                "magnitudeDeltaDb": -0.0008116557523761471
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.00009772411978580518,
+                "magnitudeDeltaDb": -0.0008488431902221215
+              }
+            }
+          ]
+        },
+        {
+          "h": 2,
+          "f": 523.4836792009017,
+          "maxRelativeResidual": 7.252535379471084e-16,
+          "powerResidualW": -3.3881317890172014e-21,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.006170985368361574,
+                "magnitudeDeltaDb": 0.03673447898765597
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0009606701183360821,
+                "magnitudeDeltaDb": 0.0057172473639995735
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00036969514825051464,
+                "magnitudeDeltaDb": -0.0032052882797651027
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0003861584899847644,
+                "magnitudeDeltaDb": -0.0033337393617486255
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.009057498685434198,
+                "magnitudeDeltaDb": 0.04074470707392777
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0014104099954324336,
+                "magnitudeDeltaDb": 0.006322338085111472
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00041178546364129323,
+                "magnitudeDeltaDb": -0.0035687927897202192
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0003760435835963419,
+                "magnitudeDeltaDb": -0.003263664630213294
+              }
+            }
+          ]
+        },
+        {
+          "h": 3,
+          "f": 785.8065462029502,
+          "maxRelativeResidual": 6.177583818659137e-16,
+          "powerResidualW": -2.439454888092385e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.003472430363550436,
+                "magnitudeDeltaDb": 0.02934248048430984
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0005398986128634565,
+                "magnitudeDeltaDb": 0.004566893138693904
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0009552828322137256,
+                "magnitudeDeltaDb": -0.008078493534198926
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0007637169042522128,
+                "magnitudeDeltaDb": -0.006085036084134527
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.002587907259866283,
+                "magnitudeDeltaDb": 0.009425094082282346
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0004025365925387678,
+                "magnitudeDeltaDb": 0.0014641884475188967
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00039025403413153726,
+                "magnitudeDeltaDb": -0.0031814465607267134
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0009152836675971006,
+                "magnitudeDeltaDb": -0.007774509710164454
+              }
+            }
+          ]
+        },
+        {
+          "h": 4,
+          "f": 1048.8256847481164,
+          "maxRelativeResidual": 6.648728190758047e-16,
+          "powerResidualW": 1.463672932855431e-18,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.008164859534460743,
+                "magnitudeDeltaDb": 0.05671728990219249
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.001265600699570718,
+                "magnitudeDeltaDb": 0.008797984314364252
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0016685344968940523,
+                "magnitudeDeltaDb": -0.014392127491522359
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0015691760109048227,
+                "magnitudeDeltaDb": -0.013594384267271218
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.002909477710447697,
+                "magnitudeDeltaDb": 0.019498127960934083
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0004469169314535123,
+                "magnitudeDeltaDb": 0.0029943011696792754
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.001966047927388359,
+                "magnitudeDeltaDb": -0.016142209246031682
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0017873179722328414,
+                "magnitudeDeltaDb": -0.01542913574814071
+              }
+            }
+          ]
+        },
+        {
+          "h": 5,
+          "f": 1312.7715894951111,
+          "maxRelativeResidual": 7.791830271399026e-16,
+          "powerResidualW": 6.776263578034403e-20,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.00842959916988821,
+                "magnitudeDeltaDb": -0.07324083587334969
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0012930353137724062,
+                "magnitudeDeltaDb": -0.011196204562507858
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0016534041513347507,
+                "magnitudeDeltaDb": -0.003364938644609286
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0011169088973725042,
+                "magnitudeDeltaDb": -0.009497273214001907
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.009405443516524335,
+                "magnitudeDeltaDb": 0.07703042798243213
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.001444649435043462,
+                "magnitudeDeltaDb": 0.011888626090735668
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0029944093994881808,
+                "magnitudeDeltaDb": -0.025184063662268302
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.002645120595543019,
+                "magnitudeDeltaDb": -0.02264920491308931
+              }
+            }
+          ]
+        },
+        {
+          "h": 6,
+          "f": 1577.87339988937,
+          "maxRelativeResidual": 6.514134491339777e-16,
+          "powerResidualW": 0,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.017308646135285717,
+                "magnitudeDeltaDb": 0.083236153418173
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0026501443365350608,
+                "magnitudeDeltaDb": 0.012800849972323997
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.00284195373158932,
+                "magnitudeDeltaDb": -0.024694270086448766
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0033621110750063085,
+                "magnitudeDeltaDb": -0.029219380262995823
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.02806190138722073,
+                "magnitudeDeltaDb": 0.06426116656495619
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.004297736983675205,
+                "magnitudeDeltaDb": 0.008480451026364081
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.0074346296875660725,
+                "magnitudeDeltaDb": -0.06456175567217962
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.003828090437883344,
+                "magnitudeDeltaDb": -0.031822679771171786
+              }
+            }
+          ]
+        },
+        {
+          "h": 7,
+          "f": 1844.358576991797,
+          "maxRelativeResidual": 6.466480493497735e-16,
+          "powerResidualW": 0,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.01199269280059477,
+                "magnitudeDeltaDb": 0.06395370116226459
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0018084273888642306,
+                "magnitudeDeltaDb": 0.009734426642326348
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.005024408601967138,
+                "magnitudeDeltaDb": -0.04368018129683432
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.004249761123267775,
+                "magnitudeDeltaDb": -0.03697477637841226
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.02853764279077301,
+                "magnitudeDeltaDb": 0.244344659634338
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.004246244111799257,
+                "magnitudeDeltaDb": 0.03679895491834688
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.002115645728510567,
+                "magnitudeDeltaDb": -0.01837526082838477
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.0050615894605767495,
+                "magnitudeDeltaDb": -0.04401990640568703
+              }
+            }
+          ]
+        },
+        {
+          "h": 8,
+          "f": 2112.4525904278858,
+          "maxRelativeResidual": 7.091605697515645e-16,
+          "powerResidualW": 3.2526065174565133e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.017160488203941948,
+                "magnitudeDeltaDb": 0.08849785137399566
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0021717787526574824,
+                "magnitudeDeltaDb": 0.010196523224299179
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.042649421287168365,
+                "magnitudeDeltaDb": 0.2392662371779529
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.006535961653443088,
+                "magnitudeDeltaDb": -0.029674000187318566
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.06879396916372073,
+                "magnitudeDeltaDb": 0.21842239061879454
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.010195786237893176,
+                "magnitudeDeltaDb": 0.02979979191633824
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.039886871824902845,
+                "magnitudeDeltaDb": 0.1544442637069684
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.005341604290201282,
+                "magnitudeDeltaDb": -0.0413956881466547
+              }
+            }
+          ]
+        },
+        {
+          "h": 9,
+          "f": 2382.378617189026,
+          "maxRelativeResidual": 6.456280755165082e-16,
+          "powerResidualW": -3.0357660829594124e-18,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.022697853060609285,
+                "magnitudeDeltaDb": 0.10418896549916057
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.003298224222287775,
+                "magnitudeDeltaDb": 0.015314358267857252
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.009506124577111245,
+                "magnitudeDeltaDb": -0.07819782347712793
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.007097046449965595,
+                "magnitudeDeltaDb": -0.0607536403998538
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.0011622400384973355,
+                "magnitudeDeltaDb": 0.0016515285437509676
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.00018823735248383583,
+                "magnitudeDeltaDb": 0.0006773699780883798
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.012043992998527252,
+                "magnitudeDeltaDb": -0.10508119667360058
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.008102514570131924,
+                "magnitudeDeltaDb": -0.06968633389727186
+              }
+            }
+          ]
+        },
+        {
+          "h": 10,
+          "f": 2654.3572538691965,
+          "maxRelativeResidual": 6.809923734693683e-16,
+          "powerResidualW": -1.0842021724855044e-19,
+          "channels": [
+            {
+              "channel": 0,
+              "coarseToFine": {
+                "relativeComplexError": 0.03851375943643861,
+                "magnitudeDeltaDb": 0.2562245007278547
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.005609265381555275,
+                "magnitudeDeltaDb": 0.03732050732869231
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.014005833442716534,
+                "magnitudeDeltaDb": -0.12249994367166192
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.011950496931464947,
+                "magnitudeDeltaDb": -0.10408823673569838
+              }
+            },
+            {
+              "channel": 1,
+              "coarseToFine": {
+                "relativeComplexError": 0.012869765639363632,
+                "magnitudeDeltaDb": -0.019183421912039103
+              },
+              "mediumToFine": {
+                "relativeComplexError": 0.0019056156058809008,
+                "magnitudeDeltaDb": -0.0027241443064699783
+              },
+              "coarseDelay": {
+                "relativeComplexError": 0.010227567811977513,
+                "magnitudeDeltaDb": -0.08885106751172772
+              },
+              "fineDelay": {
+                "relativeComplexError": 0.009721943258456352,
+                "magnitudeDeltaDb": -0.08485505425151878
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
