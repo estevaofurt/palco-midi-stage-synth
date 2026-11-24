@@ -1,0 +1,72 @@
+{
+  "sourceCommit": "576e5388462a42513cef8839f422dc7af7d99d8a",
+  "runId": 45411276258,
+  "environment": "V8 exact modules fetched from GitHub",
+  "seconds": 0.025,
+  "velocityMps": 1,
+  "angleRad": 0.5,
+  "boardFactor": 0.5,
+  "referenceParity": {
+    "pressureSamplesIdentical": true,
+    "energyIdentical": true
+  },
+  "variants": [
+    {
+      "spreadCents": 0.5,
+      "peakForceN": 11.546166573172037,
+      "peakPa": 0.7176163809367284,
+      "relativeL2": 0,
+      "maxBalanceJ": 8.59468746172709e-15,
+      "maxIncreaseJ": 0
+    },
+    {
+      "spreadCents": 0.25,
+      "peakForceN": 11.546166617520143,
+      "peakPa": 0.7176371382929674,
+      "relativeL2": 0.000060582006690221684,
+      "maxBalanceJ": 8.578207588705311e-15,
+      "maxIncreaseJ": 0
+    },
+    {
+      "spreadCents": 1,
+      "peakForceN": 11.54616639578262,
+      "peakPa": 0.7175333905105936,
+      "relativeL2": 0.00024205017350297062,
+      "maxBalanceJ": 8.572136056539392e-15,
+      "maxIncreaseJ": 0
+    }
+  ],
+  "nodeTests": [
+    "2026-11-24T14:11:26.4205851Z F9.7 tests passed: 8",
+    "2026-11-24T14:11:33.9238866Z F9.6 tests passed: 9",
+    "2026-11-24T14:11:34.0166290Z F9.5 tests passed: 13",
+    "2026-11-24T14:11:34.0516196Z F9.3 tests passed: 12"
+  ],
+  "status": [
+    {
+      "id": 138505406527,
+      "name": "smoke",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 138505407027,
+      "name": "render (0.5)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 138505407093,
+      "name": "render (0.25)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 138505407259,
+      "name": "render (1)",
+      "status": "in_progress",
+      "conclusion": null
+    }
+  ],
+  "limitations": "short test only, not audibility or long sustain; no hardware"
+}
