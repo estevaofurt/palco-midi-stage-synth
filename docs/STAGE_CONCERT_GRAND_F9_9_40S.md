@@ -9,3 +9,7 @@ Após resultados: comparar dinâmica em velocidades .5/1/2.5 m/s, sem rotular pp
 ## Atualização de validação e escuta
 
 Feedback positivo de sustentação F98-both-half-20s registrado em docs/STAGE_CONCERT_GRAND_F9_8_STRING_LOSS.md. B passa a ser candidato prioritário de pesquisa, não homologado. Preservar A e controle como comparadores. CI [45415259799](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45415259799): 67 testes Node aprovados no job smoke (F9.9 PCM24 tests passed: 8; Precision audit tests passed: 8; F9.8 tests passed: 9; F9.7 tests passed: 8; F9.6 tests passed: 9; F9.5 tests passed: 13; F9.3 tests passed: 12). Estado observado: render (both-half): in_progress; render (horizontal-half): in_progress; render (control): in_progress; smoke: success. Não alegar resultado de 40 s sem leitura dos logs e verificação dos artefatos. Nenhuma mudança física ou DSP adicional neste registro.
+
+## Candidato B de 40 s confirmado
+
+CI 45415259799, artefato 14932760494: 40 blocos, 1920239 frames, zero clipping, pico 0,306769 FS, PCM16/24. Float e PCM16 concordam nas quedas globais -40 13 s e -60 28,5 s, fundamental -60 31 s. Aos 39–39,5 s float -96,389 dBFS (-74,180 dB relativo), PCM16 69,065% zeros e SNR de quantização 4,413 dB. Não inferir audibilidade. Relatório completo do candidato em audio/analysis_f9_9_both_half_ci.json; os outros dois jobs não confirmados nesta leitura. [Áudio B](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45415259799/artifacts/14932760494).

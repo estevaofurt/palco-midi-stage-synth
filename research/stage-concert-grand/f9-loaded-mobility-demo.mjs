@@ -1,0 +1,30 @@
+import {polarizationLedger,validateAngle} from './f9-aftersound-ledger.mjs';
+import {writeFileSync,mkdirSync} from 'node:fs';
+import {scanBand} from './f9-loaded-mobility.mjs';
+import {stringLossCase} from './f9-string-loss-parameters.mjs';
+
+import {solidWire} from '../c3x-physical/c4-wire-consistency.mjs';
+import {makeDesign} from './c4-design.mjs';
+import {stringMode,spatialWeight} from './stiff-string.mjs';
+import {plateDesign,plateModes,patchWeight} from './orthotropic-plate.mjs';
+import {ribDesign,generalizedEigen} from './ribbed-plate.mjs';
+import {mindlinModes} from './mindlin-plate.mjs';
+import {PolarizedBridge,PolarizedHammer} from './polarized-bridge.mjs';
+import {BoardCoupledBridge} from './board-coupling.mjs';
+import {radiationGrid,surfaceShape,radiationKernel} from './surface-radiation.mjs';
+import {ResistiveBoard} from './radiation-loading.mjs';
+import {relaxMemory} from './felt-memory.mjs';
+import {fft} from './f8-render.mjs';
+const hp={fft,solidWire,makeDesign,stringMode,spatialWeight,plateDesign,plateModes,patchWeight,ribDesign,generalizedEigen,mindlinModes,PolarizedBridge,PolarizedHammer,BoardCoupledBridge,radiationGrid,surfaceShape,radiationKernel,ResistiveBoard,relaxMemory};
+
+const p=hp.plateDesign(),ribs=[.14,.31,.48,.65,.82,.99,1.16,1.29].map(xM=>hp.ribDesign(p,{xM})),patch={xM:.83,yM:.46,dxM:.04,dyM:.025},wires=[-.5,0,.5].map(c=>hp.makeDesign(hp.solidWire,{f1Hz:440*2**(-9/12+c/1200)}));
+const modes=hp.mindlinModes(p,ribs,{basisHz:4000},hp).modes.filter(m=>m.frequencyHz<3000);
+const bridge=new hp.PolarizedBridge(wires,{sampleRate:96000,stiffness:[0,2e6],damping:[0,5],angleRad:.5,...stringLossCase('both-half')},hp),board=new hp.ResistiveBoard(p,modes,patch,bridge.h,{loss0:1,lossSlope:.00025,radiation:{scale:1}},hp);
+const b=new hp.BoardCoupledBridge(bridge,board);
+const bands=[1,2,3,4,5].map(n=>{const centerHz=hp.stringMode(wires[1],n).frequencyHz,rows=scanBand(bridge,board,{centerHz,halfWidthHz:4,stepHz:.05,jointK:b.k,jointC:b.c});
+ const stats=key=>{const a=rows.map(r=>r[key].vv[0]);return {min:Math.min(...a),max:Math.max(...a),mean:a.reduce((s,x)=>s+x,0)/a.length};};
+ return {n,centerHz,rows,summary:{bareVerticalReal:stats('bare'),loadedVerticalReal:stats('loaded'),center:rows[(rows.length-1)/2],maxBoardPowerResidualW:Math.max(...rows.map(r=>Math.abs(r.board.powerResidualW))),minBoardInputW:Math.min(...rows.map(r=>r.board.inputW)),minLoadedRealDet:Math.min(...rows.map(r=>r.loaded.realDet)),minBridgeAndStringsW:Math.min(...rows.map(r=>r.loaded.bridgeAndStringsW)),maxLinearResidual:Math.max(...rows.map(r=>r.board.maxRelativeResidual))}};
+});
+if(bands.some(q=>q.rows.some(r=>r.board.maxRelativeResidual>1e-9||Math.abs(r.board.powerResidualW)>1e-10||r.board.inputW<0||r.loaded.vv[0]<0||r.loaded.hh[0]<0||r.loaded.realDet<-1e-14||r.loaded.bridgeAndStringsW<-1e-10)))throw Error('mobility passivity/residual');
+const dir=process.argv[2]??'f911-output';mkdirSync(dir,{recursive:true});writeFileSync(dir+'/mobility.json',JSON.stringify({method:'continuous harmonic surrogate with existing blockwise radiation resistance, not discrete response or measured piano',modeCount:modes.length,bands},null,2),{flag:'wx'});
+console.log('F911_MOBILITY '+JSON.stringify(bands.map(({n,centerHz,summary})=>({n,centerHz,...summary}))));

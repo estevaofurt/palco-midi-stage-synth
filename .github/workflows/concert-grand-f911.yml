@@ -1,0 +1,27 @@
+name: Concert Grand F9.11 loaded mobility diagnosis
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f911.yml'
+      - 'research/stage-concert-grand/f9-loaded-mobility*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-loaded-mobility.test.mjs
+          node research/stage-concert-grand/f9-loaded-mobility-demo.mjs /tmp/f911
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F911-loaded-mobility
+          path: /tmp/f911/
+          if-no-files-found: error
