@@ -1,0 +1,41 @@
+{
+  "runId": 45470420899,
+  "scope": "summary of selected logged windows; full metrics in artifacts",
+  "threshold": 0.0006518758466381057,
+  "cases": [
+    {
+      "midiVelocity": 76,
+      "case": "global4",
+      "artifactId": 14957391937,
+      "crossingS": 13,
+      "rms14": 0.0005472773933619586,
+      "rms19": 0.0002453416735390323
+    },
+    {
+      "midiVelocity": 76,
+      "case": "selective4",
+      "artifactId": 14956642415,
+      "crossingS": 14,
+      "rms14": 0.0006389490876479125,
+      "rms19": 0.0002957932697969749
+    },
+    {
+      "midiVelocity": 127,
+      "case": "global4",
+      "artifactId": 14957612721,
+      "crossingS": 19,
+      "rms14": 0.0013995092958989286,
+      "rms19": 0.0006272811580255627,
+      "rms39": 0.000024032016581519604
+    },
+    {
+      "midiVelocity": 127,
+      "case": "selective4",
+      "artifactId": 14955959994,
+      "crossingS": 20,
+      "rms14": 0.0016479931102850078,
+      "rms19": 0.0007570886800842469,
+      "rms39": 0.000035165420561574254
+    }
+  ]
+}

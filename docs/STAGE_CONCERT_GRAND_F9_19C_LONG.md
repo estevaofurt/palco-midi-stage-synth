@@ -5,3 +5,7 @@ Base 721a9866b43d3fbd21dcf272bcb18531709ee0f5. C global4 aprovado pelo titular q
 ## Resultado parcial confirmado
 
 CI [45470420899](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45470420899), C médio 20 s concluído, [WAV](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45470420899/artifacts/14957391937), limiar contextual cruzado aos 13s (não audibilidade), RMS14 0.0005472773933619586, RMS19 0.0002453416735390323. Demais renders pendentes na consulta; relatório parcial audio/analysis_f9_19c_global4_medium.json. Feedback seletivo com ruído residual no ataque, C referência de limpeza; F9.19d híbrido, não alterar C.
+
+## Resultados completos confirmados
+
+CI [45470420899](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45470420899) smoke e quatro renders 20/40s concluídos, PCM16/24 conferidos pelo gate do renderer, zero clipping. Limiar contextual histórico .0006518758466381057 FS: médio C 13s, seletivo4 14s; forte C 19s, seletivo4 20s (referência felt150 forte 20.5s). Isso não é duração auditiva medida. RMS14 médio C/seletivo .000547277/.000638949; RMS19 forte .000627281/.000757089. C é referência auditiva sem vibração, seletivo tem ruído residual reportado sem versão específica. Registro resumido audio/analysis_f9_19c_ci.json; artefatos contêm análise integral. F9.19e compara híbridos D/E nas mesmas durações, sem modificar C.

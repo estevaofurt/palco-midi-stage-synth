@@ -1,0 +1,54 @@
+{
+  "runId": 45471436400,
+  "scope": "selected logged metrics; off fractions in .025–.525 and .525–1.025s; RMS2 2–2.5s; full metrics in artifacts",
+  "cases": [
+    {
+      "midiVelocity": 24,
+      "multiplier": 2,
+      "artifactId": 14956593912,
+      "offInitial": 0.0668950750834802,
+      "offSecond": 0.0008737088738433672,
+      "rms2": 0.0006812279041305175
+    },
+    {
+      "midiVelocity": 24,
+      "multiplier": 3,
+      "artifactId": 14958046716,
+      "offInitial": 0.07737919613625166,
+      "offSecond": 0.0006155188840076316,
+      "rms2": 0.0005747782348555144
+    },
+    {
+      "midiVelocity": 76,
+      "multiplier": 2,
+      "artifactId": 14957962344,
+      "offInitial": 0.05744907813059531,
+      "offSecond": 0.0005439910983887035,
+      "rms2": 0.010336691678373155
+    },
+    {
+      "midiVelocity": 76,
+      "multiplier": 3,
+      "artifactId": 14957977335,
+      "offInitial": 0.06264902551586345,
+      "offSecond": 0.0003567295746506403,
+      "rms2": 0.008790291557654959
+    },
+    {
+      "midiVelocity": 127,
+      "multiplier": 2,
+      "artifactId": 14957517156,
+      "offInitial": 0.055206900741527266,
+      "offSecond": 0.0005286950425576393,
+      "rms2": 0.029251504925716335
+    },
+    {
+      "midiVelocity": 127,
+      "multiplier": 3,
+      "artifactId": 14956978325,
+      "offInitial": 0.058973683822760435,
+      "offSecond": 0.0003343085389032639,
+      "rms2": 0.02493373729904327
+    }
+  ]
+}
