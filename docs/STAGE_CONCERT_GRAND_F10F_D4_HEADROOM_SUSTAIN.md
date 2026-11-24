@@ -10,3 +10,7 @@ Ensaio D4-loss50, redução de 50% somente da parcela de perda de corda independ
 
 ## Implementação
 f10f-d4-headroom-demo.mjs, f10f-d4-sustain.mjs, .test.mjs, -demo.mjs, workflow concert-grand-f10f-d4.yml (17ed123ce321af378657e8014ea5589f93ce2e0a). 18 regressões extensão + 12 novos checks; 7+5 renders dependem do smoke. Execução ainda não listada na primeira consulta; não declarar aprovação. 
+
+## Execução
+
+Run 45508716694: in_progress / sem conclusão, 0 artefatos. [CI](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45508716694). Main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536. F10e ainda com três renders fortes em execução na consulta.
