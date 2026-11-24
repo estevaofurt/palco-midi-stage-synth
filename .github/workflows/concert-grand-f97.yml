@@ -1,0 +1,47 @@
+name: Concert Grand F9.7 unison 20 seconds
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f97.yml'
+      - 'research/stage-concert-grand/f9-unison*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-unison.test.mjs
+          node research/stage-concert-grand/f9-aftersound.test.mjs
+          node research/stage-concert-grand/f9-long-analysis.test.mjs
+          node research/stage-concert-grand/f9-decay-analysis.test.mjs
+  render:
+    strategy:
+      fail-fast: false
+      matrix:
+        spread: [0.25, 0.5, 1]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Render 20 continuous seconds
+        run: node research/stage-concert-grand/f9-unison-demo.mjs /tmp/f97 20 1 .5 .5 ${{ matrix.spread }}
+      - name: Analyze all ten partials
+        run: |
+          node research/stage-concert-grand/f9-long-analysis-cli.mjs /tmp/f97/C4_v1_board0.5_angle0.5_spread${{ matrix.spread }}_20s.wav /tmp/f97/analysis.json 0 48000 2 .04
+          node research/stage-concert-grand/f9-unison-summary.mjs /tmp/f97/analysis.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F97-spread-${{ matrix.spread }}-20s
+          path: /tmp/f97/
+          if-no-files-found: error
