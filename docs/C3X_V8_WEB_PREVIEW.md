@@ -1,25 +1,15 @@
-# Stage Synth — C3X V8 Web + E sampleado (prévia 1.13.1)
+# Stage Synth — C3X V8 Web 1.13.2 (sem motor sampleado)
 
-## O que foi recuperado
+## O que foi alterado em 24/11/2026
+Pedido do usuário: **retirar o modelo de samples, pois a implementação E não funcionou bem**. A página ativa de prévia `v8-preview.html` voltou a expor **apenas o motor C3X V8 Web físico e dry**. Não há motor E, carregamento local de WAVs, banco de amostras, opções A/B/C/D nem menu de comparação nessa prévia. Foram restaurados os módulos `app-v8-web.js`, `acoustic-v8-web.js`, `patches-v8-web.js` de uma revisão anterior à integração do E; o import map também deixa de referenciar `sample-library.js`. São mantidos teclado virtual, MIDI/CC64, perfis, cenas, efeitos, Electric, Organ, Synth e SF2.
 
-O **código real do sampler E** foi reencontrado no repositório (`SampleLibrary`) e reconectado à prévia `v8-preview.html`. Os bancos `American`, `Japanese`, `Felt` e `Upright` são separados, carregados pelo usuário como WAV local; não são publicados no GitHub. Sem áudio importado o E fica silencioso, mas a tecla virtual é destacada e aparece aviso específico. O motor E não depende do AudioWorklet do piano V8.
+## Restrição crítica do motor V8 original
+O usuário informou que o pacote `Stage_Synth_C3X_Etapa_08.zip` **está disponível na conversa anterior**. A referência textual a `sandbox:/mnt/data/Stage_Synth_C3X_Etapa_08.zip` foi recuperada do histórico. Porém, **o arquivo não está montado na sessão atual, não aparece na Biblioteca nem no repositório GitHub**. Portanto, **não foi possível abrir, comparar, compilar nem portar a implementação Python original**.
 
-## O que NÃO foi recuperado
+O módulo `piano-c3x-v8-web.js` é uma modelagem física experimental de navegador; o usuário já relatou que **não corresponde ao timbre integral do V8 original**. Esta alteração **não afirma recuperar tal timbre nem equivalência com os testes/afinação V8 Python**. O código original precisa ser fornecido como anexo acessível ou adicionado ao repositório para portar fielmente o DSP, comparar PCM e afinação 88 notas e validar a escuta.
 
-O **V8 Python aprovado na Etapa 8** era distribuído como `Stage_Synth_C3X_Etapa_08.zip`, contendo código e relatórios. O nome e a documentação foram encontrados no histórico da conversa, **mas o ZIP não estava acessível pelo sistema de arquivos atual, arquivos da conversa, Biblioteca, nem repositório GitHub**. Portanto esta entrega **NÃO restaura o timbre original do V8**; o seletor `C3X V8 Web (prévia)` conserva uma modelagem física web experimental, declarada explicitamente como não equivalente.
+## Preservação
+A antiga página principal `index.html` v1.12.10 permanece inalterada como versão histórica legada. Isso inclui implementações antigas A/B/C/D/E; **não confundir a rota histórica com a prévia V8-only**. A remoção do motor de samples aqui se aplica à **página V8 ativa `v8-preview.html`**, não é exclusão irreversível de históricos de projeto.
 
-O usuário relatou que o timbre da prévia não reproduz todas as qualidades do original. Esse parecer é válido e requer a transposição do **código Python original**, não especulação ou retimbragem arbitrária.
-
-## Como usar
-
-1. Abrir `v8-preview.html`, ativar áudio.
-2. Escolher **Motor do piano**: `C3X V8 Web · físico experimental` ou `E · Piano sampleado · WAV local`.
-3. No E, selecionar **Piano sampleado**: American, Japanese, Felt ou Upright.
-4. Descompactar `Stage_Synth_E_48_Amostras_Privadas_para_Importar.zip` que já foi gerado e importar as notas WAV da pasta correspondente, em `Carregar notas WAV`. Arquivos nomeados `MIDI60_v60.wav` etc.
-5. Notas/velocidades, sustain/teclado/MIDI, FX e demais instrumentos continuam integrados. O arquivo WAV fica apenas na sessão, não no GitHub e não persiste após atualizar a página.
-
-## Próximo passo técnico fiel ao pedido
-
-O titular deve anexar **`Stage_Synth_C3X_Etapa_08.zip`** à conversa atual ou colocá-lo no projeto/repositório. Só com fonte/coeficientes reais é possível portar integralmente o V8 a AudioWorklet/WASM, comparar PCM/afinação 88 notas/ataque/caudas/harmônicos com as referências originais e então torná-lo motor principal sem o qualificativo de prévia.
-
-A antiga rota principal `index.html` permanece intacta por segurança até o V8 original ser acessado e reproduzido. A/B/C/D não aparecem na prévia V8+E. O sampler está independente e funcional com banco local.
+## Validação
+`node --test tests/v8_web_preview.test.mjs` e `npm run check` (quando executados pelo CI) garantem que a prévia usa apenas o C3X V8 Web, sem caminho sampleado, e que as versões históricas continuam testáveis. Escuta no navegador, CPU real 32/48/64 vozes, e paridade com Python V8 não estão homologadas.

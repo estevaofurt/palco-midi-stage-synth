@@ -9,18 +9,11 @@ export const engines={
   piano:{name:'Piano acústico · C3X V8 Web (prévia)',short:'C3X · V8',bit:1,level:82,
     presets:[
       preset('c3x','Yamaha C3X · V8 Web',{character:'c3x',touch:50,hammer:51,
-        soundEngine:'v8',sampleModel:'american',physicalQuality:'eco',resonance:45,damping:37,brightness:51,lid:81,
+        physicalQuality:'eco',resonance:45,damping:37,brightness:51,lid:81,
         release:.43})
     ],
     groups:[
-      group('Motor e instrumento',
-        select('soundEngine','Motor do piano','v8',{
-          v8:'C3X V8 Web · físico experimental',
-          sampled:'E · Piano sampleado · WAV local'
-        }),
-        select('sampleModel','Piano sampleado','american',{
-          american:'American Grand',japanese:'Japanese Grand',felt:'Felt Piano',upright:'Piano Upright'
-        }),
+      group('Instrumento físico',
         select('character','Modelo','c3x',{c3x:'Yamaha C3X · 88 teclas'}),
         select('physicalQuality','Qualidade','eco',{
           eco:'Econômico · 32 notas',
@@ -34,9 +27,7 @@ export const engines={
         knob('resonance','Acoplamento do tampo',45),
         knob('damping','Abafamento',37),
         knob('brightness','Harmônicos',51),
-        knob('lid','Abertura da tampa',81)),
-      group('Banco de amostras · motor E',
-        {type:'samplepack',id:'sampledPianoFiles',label:'Notas WAV locais do piano selecionado'})
+        knob('lid','Abertura da tampa',81))
     ]
   },
   electric:{name:'Pianos elétricos',short:'Elétricos',bit:8,level:82,

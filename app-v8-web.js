@@ -28,9 +28,7 @@ byId('profile-note').textContent=mobileLite
   :'Completo: até 64 notas; efeitos são ativados somente quando necessários.';
 
 function paintEngineLabel(){
-  const e=state.patches.piano.values.soundEngine;
-  const engine=e==='sampled'?'E · Piano sampleado (WAV local)':'C3X V8 Web · físico experimental e dry';
-  byId('profile-note').textContent=(mobileLite?'Leve · 32 notas':'Completo · 64 notas')+' · '+engine+'. Efeitos opcionais.';
+  byId('profile-note').textContent=(mobileLite?'Leve · 32 notas':'Completo · 64 notas')+' · Yamaha C3X V8 Web: físico e dry. Efeitos opcionais.';
 }
 paintEngineLabel();
 let ctx,stage,access,panel,performer,saveTimer,previewTimer,previewToken=0;
@@ -45,38 +43,13 @@ function save(){
   clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveState(storage,state),140);
 }
 function report(text){const s=byId('status');s.textContent=text;s.hidden=!text}
-function sampleModel(){return state.patches.piano.values.sampleModel||'american';}
-function sampleCount(){return stage?.instruments?.piano?.samples?.count(sampleModel())||0;}
-function syncSampleUI(){
-  const active=state.patches.piano.values.soundEngine==='sampled'&&Boolean(state.mask&engines.piano.bit);
-  const notice=byId('sample-notice');
-  notice.hidden=!active;if(!active)return;
-  const model=sampleModel(),count=sampleCount();
-  byId('sample-notice-text').textContent=count
-    ?'Motor E · '+model+': '+count+' notas WAV carregadas. Use o teclado e o sustain.'
-    :'Motor E · '+model+': sem notas WAV. As teclas funcionam, mas é preciso carregar o banco privado para produzir som.';
-  byId('sample-upload-shortcut').textContent=count?'Trocar banco WAV':'Carregar notas WAV';
-}
-byId('sample-upload-shortcut').onclick=()=>{
-  if(state.editor!=='piano'){state.editor='piano';panel.sync();save();}
-  const picker=document.querySelector('#editors .sample-upload input[type="file"]');
-  if(picker)picker.click();else report('Ative o motor E e escolha o piano sampleado.');
-};
-function warnSample(key,velocity){
-  if(state.patches.piano.values.soundEngine!=='sampled'||!(state.mask&engines.piano.bit))return;
-  const model=sampleModel(),lib=stage?.instruments?.piano?.samples;
-  if(!lib?.count(model))report('Motor E · '+model+': carregue as notas WAV no botão junto ao teclado.');
-  else if(!lib.choose(model,key,velocity))
-    report('Motor E: a tecla '+midiLabel(key)+' está fora das notas disponíveis. Carregue mais amostras WAV.');
-  else report('');
-}
 function syncScene(){
   const selected=scenes.find(s=>s.mask===state.mask&&Boolean(s.duo)===state.duo);
   byId('custom').textContent=state.duo?'Duo personalizado':'Camadas livres';
   byId('scene').value=selected?.id||'custom';
   const count=Object.values(engines).filter(d=>state.mask&d.bit).length;
   byId('layer-count').textContent=count+(count===1?' motor ligado':' motores ligados');
-  panel.sync();syncSampleUI();
+  panel.sync();
 }
 for(const s of scenes)addOption(byId('scene'),s.id,s.name);
 const custom=addOption(byId('scene'),'custom','Camadas livres');custom.id='custom';custom.disabled=true;
@@ -92,38 +65,19 @@ panel=new Panel(state,{
   edit,toggle,
   level(id,level){state.patches[id].level=level;stage?.update(id,'level');panel.sync();save()},
   set(id,key){
-    if(id==='piano'&&key==='soundEngine')stage?.releaseInstrument('piano');
     stage?.update(id,key);
-    if(id==='piano'){
-      paintEngineLabel();syncSampleUI();
-      if((key==='physicalQuality'||key==='soundEngine')&&
-         state.patches.piano.values.soundEngine==='v8'&&stage)
-        stage.instruments.piano.prepareV8(state.patches.piano.values.physicalQuality)
-          .then(ok=>{if(!ok)report('C3X V8 Web precisa de navegador com AudioWorklet.');});
-    }
+    if(id==='piano'&&key==='physicalQuality')
+      stage?.instruments.piano.setV8Quality(state.patches.piano.values.physicalQuality);
+    if(id==='piano')paintEngineLabel();
     save();
   },listen,
   fxEnabled(id,enabled){state.fx.enabled[id]=enabled;stage?.updateEffects();panel.sync();save()},
   fxChange(id,key,value){state.fx.slots[id][key]=value;stage?.updateEffects();save()},
-  loadSF,clearSF,setProgram,loadSamples,clearSamples
+  loadSF,clearSF,setProgram
 });
 syncScene();
 performer=new Performance(()=>stage,state.performance,updatePerformanceUI);
 function setProgram(value){if(!stage)return;stage.instruments.sf.program=value;panel.soundfontInfo.selected=value;save()}
-async function loadSamples(id,model,files){
-  try{
-    await startAudio();
-    report('Importando '+files.length+' WAVs para '+model+'…');
-    const count=await stage.instruments[id].samples.load(model,files);
-    panel.updateSamples(id,model,count);syncSampleUI();
-    report(count+' notas WAV carregadas para '+model+'. São armazenadas apenas nesta sessão.');
-  }catch(e){report('Falha ao importar WAVs: '+e.message);}
-}
-function clearSamples(id,model){
-  stage?.instruments[id]?.samples.clear(model);
-  panel.updateSamples(id,model,0);syncSampleUI();
-  report('Banco WAV de '+model+' removido desta sessão.');
-}
 function clearSF(){stage?.instruments.sf.unload();panel.updateSoundFont(null,[]);report('Banco SF2 retirado. Timbres internos disponíveis.');}
 async function loadSF(file){
   try{
@@ -195,17 +149,11 @@ async function startAudio(){
     await resume;
   }else if(ctx.state!=='running')await ctx.resume();
   displayAudio();if(ctx.state!=='running')throw Error('Toque em Ativar áudio para liberar o som.');
-  if(state.patches.piano.values.soundEngine==='v8'){
-    const ok=await stage.instruments.piano.prepareV8(state.patches.piano.values.physicalQuality);
-    if(!ok)throw Error('Motor C3X V8 Web precisa de navegador com AudioWorklet.');
-  }
+  const ok=await stage.instruments.piano.prepareV8(state.patches.piano.values.physicalQuality);
+  if(!ok)throw Error('Motor C3X V8 Web não suportado: use navegador com AudioWorklet.');
 }
 byId('power').onclick=()=>startAudio().then(()=>{
-  if(state.patches.piano.values.soundEngine==='sampled'&&!sampleCount())
-    report('Motor E ativo, mas sem WAV. Clique em Carregar notas WAV próximo ao teclado.');
-  else report(state.patches.piano.values.soundEngine==='sampled'
-    ?'Piano E pronto com banco WAV local.':'C3X V8 Web físico dry pronto (prévia experimental).');
-  syncSampleUI();
+  report('C3X V8 Web pronto. Piano físico dry, sem WAVs ou reverb interno.');
 }).catch(e=>report(e.message));
 function stopPreview(){previewToken++;clearTimeout(previewTimer);if(stage)stage.disconnect('preview')}
 async function listen(id){
@@ -213,13 +161,8 @@ async function listen(id){
   try{
     await startAudio();
     if(id==='piano'){
-      if(state.patches.piano.values.soundEngine==='v8'){
-        const ok=await stage.instruments.piano.prepareV8(state.patches.piano.values.physicalQuality);
-        if(!ok)throw Error('Motor C3X V8 Web não suportado.');
-      }else if(!sampleCount()){
-        report('Importe as notas WAV do piano '+sampleModel()+' para ouvir o motor E.');
-        return;
-      }
+      const ok=await stage.instruments.piano.prepareV8(state.patches.piano.values.physicalQuality);
+      if(!ok)throw Error('Motor C3X V8 Web não suportado.');
     }
     if(token!==previewToken)return;
     const mask=engines[id].bit;
@@ -295,7 +238,6 @@ async function press(pointer,button,velocity){
   try{
     if(!stage||ctx?.state!=='running')await startAudio();
     if(activePointers.get(pointer)!==slot)return;
-    warnSample(key,velocity);
     slot.id=performer.noteOn('touch',0,key,velocity);
     paintKeys();
   }catch(e){activePointers.delete(pointer);paintKeys();report(e.message)}
