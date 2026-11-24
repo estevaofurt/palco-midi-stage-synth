@@ -1,0 +1,25 @@
+{
+  "phase": "F1",
+  "status": "PENDENTE",
+  "method_tests_passed": 9,
+  "generated_references": {
+    "F1_C4_TESTE_DOBLETE_3_CENTS_relatorio": {
+      "note_hz": 261.625647,
+      "B": 0.000449992,
+      "detected_partials": 10,
+      "doublet_cents": 2.9922,
+      "artifact_type": "synthetic_audio_not_Yamaha_C3X",
+      "sha256_wav": "83baedc2e2e54c7b48ced07062af1c92cdbbeaac9307da400ec0e70d01289895"
+    },
+    "F1_C4_TESTE_B_00045_relatorio": {
+      "note_hz": 261.625566,
+      "B": 0.000449999,
+      "detected_partials": 10,
+      "doublet_cents": null,
+      "artifact_type": "synthetic_audio_not_Yamaha_C3X",
+      "sha256_wav": "027012b96b82c71e123a016761ea6c5814fb825f0556de51c8574fc3bee6cf26"
+    }
+  },
+  "external_real_C3X_recordings": 0,
+  "commercial_recording_license_validated": false
+}

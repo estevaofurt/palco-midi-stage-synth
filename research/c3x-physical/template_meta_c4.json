@@ -1,0 +1,45 @@
+{
+  "schema": "F1_C4_capture_metadata_v1",
+  "status": "PENDENTE_SEM_MEDICAO",
+  "model": "Yamaha C3X convencional — preencher e confirmar",
+  "instrument_reference_id": null,
+  "instrument_identity_evidence": null,
+  "instrument_revision_or_year": null,
+  "tuning_date_utc": null,
+  "A4_measured_hz": null,
+  "C4_unison_string_count_verified": null,
+  "string_measurements": {
+    "L_m": null,
+    "tension_N": null,
+    "linear_mass_kg_per_m": null,
+    "diameter_mm": null,
+    "impact_position_fraction": null
+  },
+  "recording": {
+    "take_id": null,
+    "note": "C4",
+    "midi_note": 60,
+    "velocity_midi": null,
+    "hammer_speed_m_per_s_measured": null,
+    "pedal_position": "down=0 unless specified",
+    "lid_state": null,
+    "microphone_make_model": null,
+    "microphone_position_m": null,
+    "audio_interface": null,
+    "calibration_info": null,
+    "file_sha256": null,
+    "sample_rate_hz": null,
+    "sample_bit_depth": null,
+    "onset_time_seconds": null,
+    "key_release_seconds": null,
+    "processing": "none; no EQ/reverb/noise reduction/normalization"
+  },
+  "commercial_use": {
+    "source_rights_holder": null,
+    "calibration_rights_confirmed": false,
+    "derivative_model_rights_confirmed": false,
+    "distribution_rights_confirmed": false,
+    "evidence_document": null
+  },
+  "operator_note": "Modelo em branco: nenhum valor nulo constitui medida, nenhum preenchimento autoriza automaticamente aceite F1."
+}

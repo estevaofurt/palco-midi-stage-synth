@@ -1,0 +1,53 @@
+{
+  "version": "F1.3",
+  "phase": "F1",
+  "phase_status": "PENDENTE",
+  "c3x_C4_physical_recordings_acquired": 0,
+  "c3x_C4_physical_measurements_validated": 0,
+  "c3x_same_instrument_metadata_verified": false,
+  "rights_for_commercial_calibration_verified": false,
+  "signal_analysis_tool_completed": true,
+  "synthetic_reference_wav_count": 2,
+  "measured_reference_wav_count": 0,
+  "method_unit_test_count": 9,
+  "benchmark_synthetic": {
+    "frequency_target_hz": 261.6255653005986,
+    "B_target": 0.00045,
+    "doublet_target_cents": 3.0,
+    "sound_source": "mathematical_sines_only",
+    "piano_brand_audio": "none"
+  },
+  "external_source_audit": [
+    {
+      "id": "KEMP_PLOS_2023",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0292515",
+      "scope": "real_C3X_G2_spectral_figure",
+      "physical_C4_proven": false
+    },
+    {
+      "id": "OSF_TBZDC",
+      "url": "https://osf.io/tbzdc/",
+      "scope": "deposit_cited_in_Kemp_2023",
+      "archive_contents_inspected": false,
+      "license_of_raw_audio_verified": false,
+      "note": "web access to OSF/API failed during this audit; cannot infer content"
+    },
+    {
+      "id": "PCD_AUDIOLABS",
+      "url": "https://audiolabs-erlangen.de/resources/MIR/PCD",
+      "archive_url": "https://audiolabs-erlangen.de/resources/MIR/PCD/PCD_2.0.1.zip",
+      "published_zip_original_wavs": true,
+      "archive_bytes_acquired": false,
+      "C3X_R2_performance_excerpts": 15,
+      "raw_C4_isolated": false,
+      "commercial_WAV_license_verified": false
+    },
+    {
+      "id": "KARP_ACUSTICA_1986",
+      "url": "https://loopholes.blog/wp-content/publications/Karp-Inharmonicity-1986.pdf",
+      "scope": "bridge_stiffness_C4_other_pianos",
+      "physical_C3X_parameters_proven": false
+    }
+  ],
+  "next_gate": "Original C3X C4 recording + same-exemplar physical metadata + licensed commercial rights"
+}
