@@ -1,3 +1,7 @@
 # F9.19c — revalidação de sustain após correção de vibração
 
 Base 721a9866b43d3fbd21dcf272bcb18531709ee0f5. C global4 aprovado pelo titular quanto à ausência da vibração. Seletivo4 reduz picos e preserva mais amplitude aos 2s, mas tem ressonâncias residuais diferentes e não foi aprovado na escuta. Renderizar C global4 e seletivo4 com MIDI76 (20s) e MIDI127 (40s), mesmo ganho, feltro, cordas, geometria, ponte e curva. Reutilizar renderers, confirmar passividade, PCM16/24, ausência de clipping, métricas de rattle e decaimento, limiar contextual histórico .0006518758466381057 (não é previsão de audibilidade). Comparar com felt150 original F9.16f 20s e F9.17 forte 40s, sem normalização. Não escolher candidato pelo maior RMS isoladamente; ouvir vibração, timbre e sustain. Testes de regressão de ambos e quatro renders configurados, ainda pendentes. Main preservada; F9 aberta.
+
+## Resultado parcial confirmado
+
+CI [45470420899](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45470420899), C médio 20 s concluído, [WAV](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45470420899/artifacts/14957391937), limiar contextual cruzado aos 13s (não audibilidade), RMS14 0.0005472773933619586, RMS19 0.0002453416735390323. Demais renders pendentes na consulta; relatório parcial audio/analysis_f9_19c_global4_medium.json. Feedback seletivo com ruído residual no ataque, C referência de limpeza; F9.19d híbrido, não alterar C.

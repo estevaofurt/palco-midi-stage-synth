@@ -1,0 +1,6 @@
+{
+  "date": "2026-11-24",
+  "comment": "ha um pequeno ruido na batida da nota em comparação ao modelo C",
+  "scope": "comparação dos seletivos apresentados com C global4; versão seletiva específica, intensidade e arquivo não identificados; nenhum novo WAV da comparação anexado",
+  "decision": "C permanece referência de ataque limpo; não homologar seletivo; testar amortecimento híbrido 2/3× global e 4× cinco modos; longos em andamento"
+}

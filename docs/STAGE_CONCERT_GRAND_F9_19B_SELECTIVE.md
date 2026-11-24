@@ -5,3 +5,7 @@ Base 1bacde5dd8c8775cbd5a8c9c746f9d53170dd2d6. F9.19a global 2/4× reduz picos m
 ## Resultado confirmado
 
 CI [45468208025](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45468208025), 11 testes, seis renders 3s, 18 chunks sem clipping. Forte: frações fora das bandas amplas no início .0541004/.0244564 para 4/8×; no intervalo .525–1.025s .0020360/.0025086 (global4 .0003551). RMS aos 2s .03570466/.03276877 FS vs original .04583798 e global4 .02176136. Seletivo 4× conserva mais amplitude, mas não reproduz toda a redução fora de banda de global4 nas janelas seguintes; picos 468,75/76,17 Hz permanecem. Não confundir redução medida e ausência perceptiva da vibração. C global4 foi aprovado pelo usuário quanto à vibração. Seletivos aguardam escuta. F9.19c compara C global4 e seletivo4 em 20s médio e 40s forte; seletivo8 permanece disponível em 3s. Relatório audio/analysis_f9_19b_ci.json. Main intacta.
+
+## Feedback adicional
+
+Titular percebe pequeno ruído na batida em comparação ao modelo C. Não especificou seletivo4/8 ou intensidade. Não homologar seletivo; C permanece referência perceptiva de ataque limpo. Picos residuais 76,17 e 468,75 Hz são hipótese, não identificação auditiva. F9.19d ensaia híbridos 2/3× global, cinco modos em 4× original. Registro audio/feedback_f9_19b_attack.json.

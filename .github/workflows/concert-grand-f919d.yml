@@ -1,0 +1,40 @@
+name: Concert Grand F9.19d hybrid structural damping
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f919d.yml'
+      - 'research/stage-concert-grand/f9-rattle-hybrid*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-rattle-hybrid.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [24, 76, 127]
+        multiplier: [2, 3]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-rattle-hybrid-demo.mjs /tmp/f919d ${{ matrix.midi }} ${{ matrix.multiplier }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F919D-midi${{ matrix.midi }}-hybridGlobal${{ matrix.multiplier }}
+          path: /tmp/f919d/
+          if-no-files-found: error
