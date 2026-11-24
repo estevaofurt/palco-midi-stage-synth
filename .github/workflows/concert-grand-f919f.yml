@@ -1,0 +1,40 @@
+name: Concert Grand F9.19f fixed-gain listening comparison
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f919f.yml'
+      - 'research/stage-concert-grand/f9-rattle-comparison*.mjs'
+      - 'audio/analysis_f9_19e_long_comparison.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-rattle-comparison-demo.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 45470420899
+          github-token: ${{ github.token }}
+          pattern: F919C-midi*-global4
+          path: /tmp/f919c
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 45472486673
+          github-token: ${{ github.token }}
+          pattern: F919E-midi*-hybridGlobal*
+          path: /tmp/f919e
+      - run: node research/stage-concert-grand/f9-rattle-comparison-demo.mjs /tmp/f919c /tmp/f919e /tmp/f919f
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F919F-C-D-E-fixed-gain-comparison
+          path: /tmp/f919f/
+          if-no-files-found: error
