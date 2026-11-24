@@ -136,6 +136,8 @@ def compare(reference, v10):
         common=[n for n in range(2,9) if n in rp and n in vp]
         out[label]={'mean_absolute_difference_db':round(float(np.mean([abs(rp[n]-vp[n]) for n in common])),3) if common else None,
                     'per_partial_reference_minus_v10_db':{str(n):round(rp[n]-vp[n],2) for n in common},
+                    'salient_partials_2_8':[n for n in common if rp[n]>-40 and vp[n]>-40],
+                    'mean_absolute_difference_salient_db':round(float(np.mean([abs(rp[n]-vp[n]) for n in common if rp[n]>-40 and vp[n]>-40])),3) if any(rp[n]>-40 and vp[n]>-40 for n in common) else None,
                     'notes':'Comparacao espectral descritiva entre C5 real e C3X V10 estimado; camadas nao calibradas por velocidade fisica'}
     return out
 

@@ -13,8 +13,9 @@
       "duration_s": 1.8,
       "onset_s": 0.06,
       "peak": 0.528386,
-      "rms": 0.1142537,
-      "digital_clip_samples": 0,
+      "rms": 0.1145614,
+      "samples_at_or_above_unit_amplitude": 0,
+      "note_on_level_limitations": "Float V10 has no PCM full-scale restriction; this count is NOT evidence of digital clipping",
       "spectral_windows": {
         "attack_35_255ms": [
           {
@@ -191,87 +192,87 @@
         "tail_900_1400ms": [
           {
             "n": 1,
-            "freq_hz": 261.7885,
-            "amplitude": 0.015321948,
-            "contrast_db": 17.64,
+            "freq_hz": 261.67178,
+            "amplitude": 0.016135304,
+            "contrast_db": 20.35,
             "relative_db": 0.0
           },
           {
             "n": 2,
-            "freq_hz": 523.63872,
-            "amplitude": 0.023606566,
-            "contrast_db": 40.8,
-            "relative_db": 3.75
+            "freq_hz": 523.63798,
+            "amplitude": 0.023777523,
+            "contrast_db": 41.0,
+            "relative_db": 3.37
           },
           {
             "n": 3,
-            "freq_hz": 786.33681,
-            "amplitude": 0.000696293,
-            "contrast_db": 38.74,
-            "relative_db": -26.85
+            "freq_hz": 786.42761,
+            "amplitude": 0.000707522,
+            "contrast_db": 51.47,
+            "relative_db": -27.16
           },
           {
             "n": 4,
-            "freq_hz": 1051.84474,
-            "amplitude": 0.000469608,
-            "contrast_db": 47.24,
-            "relative_db": -30.27
+            "freq_hz": 1051.78174,
+            "amplitude": 0.000483993,
+            "contrast_db": 54.43,
+            "relative_db": -30.46
           },
           {
             "n": 5,
-            "freq_hz": 1317.50342,
-            "amplitude": 3.6303e-05,
-            "contrast_db": 26.62,
-            "relative_db": -52.51
+            "freq_hz": 1317.1676,
+            "amplitude": 3.9675e-05,
+            "contrast_db": 74.31,
+            "relative_db": -52.19
           },
           {
             "n": 6,
-            "freq_hz": 1584.40451,
-            "amplitude": 0.00033786,
-            "contrast_db": 61.03,
-            "relative_db": -33.13
+            "freq_hz": 1584.39241,
+            "amplitude": 0.000351161,
+            "contrast_db": 87.33,
+            "relative_db": -33.25
           },
           {
             "n": 7,
-            "freq_hz": 1854.83505,
-            "amplitude": 0.000382452,
-            "contrast_db": 89.49,
-            "relative_db": -32.05
+            "freq_hz": 1854.81893,
+            "amplitude": 0.000383273,
+            "contrast_db": 89.82,
+            "relative_db": -32.49
           },
           {
             "n": 8,
-            "freq_hz": 2126.46659,
-            "amplitude": 8.86e-07,
-            "contrast_db": 55.94,
-            "relative_db": -84.76
+            "freq_hz": 2126.47434,
+            "amplitude": 9.48e-07,
+            "contrast_db": 83.93,
+            "relative_db": -84.62
           },
           {
             "n": 9,
-            "freq_hz": 2403.49107,
-            "amplitude": 6.371e-06,
-            "contrast_db": 71.57,
-            "relative_db": -67.62
+            "freq_hz": 2403.71751,
+            "amplitude": 6.705e-06,
+            "contrast_db": 91.3,
+            "relative_db": -67.63
           },
           {
             "n": 10,
-            "freq_hz": 2684.24157,
-            "amplitude": 1.962e-05,
-            "contrast_db": 80.48,
-            "relative_db": -57.85
+            "freq_hz": 2684.24001,
+            "amplitude": 2.0504e-05,
+            "contrast_db": 99.85,
+            "relative_db": -57.92
           },
           {
             "n": 11,
-            "freq_hz": 2967.62066,
-            "amplitude": 1.629e-06,
-            "contrast_db": 61.87,
-            "relative_db": -79.47
+            "freq_hz": 2967.78234,
+            "amplitude": 1.63e-06,
+            "contrast_db": 100.64,
+            "relative_db": -79.91
           },
           {
             "n": 12,
-            "freq_hz": 3256.69131,
-            "amplitude": 5.17e-06,
-            "contrast_db": 88.54,
-            "relative_db": -69.44
+            "freq_hz": 3256.68643,
+            "amplitude": 5.215e-06,
+            "contrast_db": 109.57,
+            "relative_db": -69.81
           }
         ]
       },
@@ -302,8 +303,9 @@
       "duration_s": 1.8,
       "onset_s": 0.04,
       "peak": 1.281014,
-      "rms": 0.2980202,
-      "digital_clip_samples": 820,
+      "rms": 0.2987451,
+      "samples_at_or_above_unit_amplitude": 820,
+      "note_on_level_limitations": "Float V10 has no PCM full-scale restriction; this count is NOT evidence of digital clipping",
       "spectral_windows": {
         "attack_35_255ms": [
           {
@@ -480,87 +482,87 @@
         "tail_900_1400ms": [
           {
             "n": 1,
-            "freq_hz": 261.72629,
-            "amplitude": 0.034964293,
-            "contrast_db": 19.61,
+            "freq_hz": 261.67132,
+            "amplitude": 0.035881509,
+            "contrast_db": 20.35,
             "relative_db": 0.0
           },
           {
             "n": 2,
-            "freq_hz": 523.63657,
-            "amplitude": 0.063490833,
-            "contrast_db": 40.63,
-            "relative_db": 5.18
+            "freq_hz": 523.63649,
+            "amplitude": 0.063703727,
+            "contrast_db": 41.0,
+            "relative_db": 4.99
           },
           {
             "n": 3,
-            "freq_hz": 786.37548,
-            "amplitude": 0.00147646,
-            "contrast_db": 43.16,
-            "relative_db": -27.49
+            "freq_hz": 786.42726,
+            "amplitude": 0.001488111,
+            "contrast_db": 51.46,
+            "relative_db": -27.64
           },
           {
             "n": 4,
-            "freq_hz": 1051.82834,
-            "amplitude": 0.001692421,
-            "contrast_db": 48.46,
-            "relative_db": -26.3
+            "freq_hz": 1051.79132,
+            "amplitude": 0.001716217,
+            "contrast_db": 54.44,
+            "relative_db": -26.41
           },
           {
             "n": 5,
-            "freq_hz": 1317.37239,
-            "amplitude": 7.4277e-05,
-            "contrast_db": 30.15,
-            "relative_db": -53.46
+            "freq_hz": 1317.15158,
+            "amplitude": 7.8333e-05,
+            "contrast_db": 74.34,
+            "relative_db": -53.22
           },
           {
             "n": 6,
-            "freq_hz": 1584.40439,
-            "amplitude": 0.001554055,
-            "contrast_db": 64.21,
-            "relative_db": -27.04
+            "freq_hz": 1584.39376,
+            "amplitude": 0.001583333,
+            "contrast_db": 87.54,
+            "relative_db": -27.11
           },
           {
             "n": 7,
-            "freq_hz": 1854.82745,
-            "amplitude": 0.002757856,
-            "contrast_db": 90.15,
-            "relative_db": -22.06
+            "freq_hz": 1854.82092,
+            "amplitude": 0.002758956,
+            "contrast_db": 89.65,
+            "relative_db": -22.28
           },
           {
             "n": 8,
-            "freq_hz": 2126.44827,
-            "amplitude": 1.0667e-05,
-            "contrast_db": 61.78,
-            "relative_db": -70.31
+            "freq_hz": 2126.46461,
+            "amplitude": 1.1086e-05,
+            "contrast_db": 83.12,
+            "relative_db": -70.2
           },
           {
             "n": 9,
-            "freq_hz": 2403.61584,
-            "amplitude": 4.7803e-05,
-            "contrast_db": 73.49,
-            "relative_db": -57.28
+            "freq_hz": 2403.75094,
+            "amplitude": 4.9009e-05,
+            "contrast_db": 91.66,
+            "relative_db": -57.29
           },
           {
             "n": 10,
-            "freq_hz": 2684.25025,
-            "amplitude": 0.000154558,
-            "contrast_db": 83.15,
-            "relative_db": -47.09
+            "freq_hz": 2684.24655,
+            "amplitude": 0.000157858,
+            "contrast_db": 100.15,
+            "relative_db": -47.13
           },
           {
             "n": 11,
-            "freq_hz": 2967.69159,
-            "amplitude": 1.5092e-05,
-            "contrast_db": 71.02,
-            "relative_db": -67.3
+            "freq_hz": 2967.77748,
+            "amplitude": 1.5048e-05,
+            "contrast_db": 101.81,
+            "relative_db": -67.55
           },
           {
             "n": 12,
-            "freq_hz": 3256.69743,
-            "amplitude": 0.000115519,
-            "contrast_db": 96.09,
-            "relative_db": -49.62
+            "freq_hz": 3256.69518,
+            "amplitude": 0.000115892,
+            "contrast_db": 112.47,
+            "relative_db": -49.82
           }
         ]
       },
@@ -591,8 +593,9 @@
       "duration_s": 1.8,
       "onset_s": 0.03,
       "peak": 2.188962,
-      "rms": 0.501201,
-      "digital_clip_samples": 12836,
+      "rms": 0.5023842,
+      "samples_at_or_above_unit_amplitude": 12836,
+      "note_on_level_limitations": "Float V10 has no PCM full-scale restriction; this count is NOT evidence of digital clipping",
       "spectral_windows": {
         "attack_35_255ms": [
           {
@@ -769,87 +772,87 @@
         "tail_900_1400ms": [
           {
             "n": 1,
-            "freq_hz": 261.70704,
-            "amplitude": 0.056243486,
-            "contrast_db": 20.14,
+            "freq_hz": 261.67178,
+            "amplitude": 0.057217256,
+            "contrast_db": 20.35,
             "relative_db": 0.0
           },
           {
             "n": 2,
-            "freq_hz": 523.63797,
-            "amplitude": 0.108393532,
-            "contrast_db": 41.07,
-            "relative_db": 5.7
+            "freq_hz": 523.63804,
+            "amplitude": 0.108626203,
+            "contrast_db": 41.0,
+            "relative_db": 5.57
           },
           {
             "n": 3,
-            "freq_hz": 786.39137,
-            "amplitude": 0.002179196,
-            "contrast_db": 44.81,
-            "relative_db": -28.24
+            "freq_hz": 786.42765,
+            "amplitude": 0.002189447,
+            "contrast_db": 51.47,
+            "relative_db": -28.34
           },
           {
             "n": 4,
-            "freq_hz": 1051.80417,
-            "amplitude": 0.003171263,
-            "contrast_db": 49.5,
-            "relative_db": -24.98
+            "freq_hz": 1051.77957,
+            "amplitude": 0.003198428,
+            "contrast_db": 54.44,
+            "relative_db": -25.05
           },
           {
             "n": 5,
-            "freq_hz": 1317.33985,
-            "amplitude": 8.0617e-05,
-            "contrast_db": 32.06,
-            "relative_db": -56.87
+            "freq_hz": 1317.16897,
+            "amplitude": 8.3781e-05,
+            "contrast_db": 74.35,
+            "relative_db": -56.69
           },
           {
             "n": 6,
-            "freq_hz": 1584.40235,
-            "amplitude": 0.002711986,
-            "contrast_db": 65.96,
-            "relative_db": -26.34
+            "freq_hz": 1584.3931,
+            "amplitude": 0.002745468,
+            "contrast_db": 87.31,
+            "relative_db": -26.38
           },
           {
             "n": 7,
-            "freq_hz": 1854.82451,
-            "amplitude": 0.00634385,
-            "contrast_db": 89.84,
-            "relative_db": -18.95
+            "freq_hz": 1854.82059,
+            "amplitude": 0.006344871,
+            "contrast_db": 89.8,
+            "relative_db": -19.1
           },
           {
             "n": 8,
-            "freq_hz": 2126.4634,
-            "amplitude": 3.1739e-05,
-            "contrast_db": 63.17,
-            "relative_db": -64.97
+            "freq_hz": 2126.47383,
+            "amplitude": 3.259e-05,
+            "contrast_db": 84.12,
+            "relative_db": -64.89
           },
           {
             "n": 9,
-            "freq_hz": 2403.61833,
-            "amplitude": 0.000121612,
-            "contrast_db": 74.98,
-            "relative_db": -53.3
+            "freq_hz": 2403.71933,
+            "amplitude": 0.000123494,
+            "contrast_db": 91.4,
+            "relative_db": -53.32
           },
           {
             "n": 10,
-            "freq_hz": 2684.24419,
-            "amplitude": 0.000367827,
-            "contrast_db": 84.61,
-            "relative_db": -43.69
+            "freq_hz": 2684.24057,
+            "amplitude": 0.000373024,
+            "contrast_db": 99.93,
+            "relative_db": -43.72
           },
           {
             "n": 11,
-            "freq_hz": 2967.7221,
-            "amplitude": 4.6414e-05,
-            "contrast_db": 72.86,
-            "relative_db": -61.67
+            "freq_hz": 2967.78272,
+            "amplitude": 4.6269e-05,
+            "contrast_db": 104.45,
+            "relative_db": -61.84
           },
           {
             "n": 12,
-            "freq_hz": 3256.69791,
-            "amplitude": 0.000173488,
-            "contrast_db": 94.04,
-            "relative_db": -50.22
+            "freq_hz": 3256.69648,
+            "amplitude": 0.000173821,
+            "contrast_db": 112.12,
+            "relative_db": -50.35
           }
         ]
       },

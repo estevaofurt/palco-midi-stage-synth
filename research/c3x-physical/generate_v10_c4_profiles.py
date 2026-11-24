@@ -3,7 +3,10 @@
 from pathlib import Path
 import argparse,json,sys
 here=Path(__file__).resolve().parent
-sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'research/c3x-python/v10'))
+repo_root=Path(__file__).resolve().parents[2]
+package=repo_root/'research/c3x-python/v10'
+if not package.is_dir():package=here.parent/'Stage_Synth_C3X_Etapa_10'
+sys.path.insert(0,str(package))
 from stage_synth_c3x.continuous_engine import render_sequence_v10_action
 from c5_c4_analysis import measure
 
@@ -15,7 +18,7 @@ def generate(output:Path):
       'layers':{}}
     for layer,vel in mapping.items():
         print('rendering',layer,vel,flush=True)
-        wav=render_sequence_v10_action([(.025,60,1.30,vel)],length=1.80,fs=48000,normalize=False)
+        wav=render_sequence_v10_action([(.025,60,1.74,vel)],length=1.80,fs=48000,normalize=False)
         obj['layers'][layer]=measure(wav,48000,'V10 estimated MIDI velocity '+str(vel))
         obj['layers'][layer]['virtual_velocity']=vel
     output.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

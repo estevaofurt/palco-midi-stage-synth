@@ -31,3 +31,21 @@ class TestC5Analysis(unittest.TestCase):
         self.assertTrue(all(len(x['sha256'])==64 for x in SOURCES.values()))
 
 if __name__=='__main__': unittest.main()
+
+# Additional validation: salience and reference integrity (not physical C3X proof).
+class TestC5Salience(unittest.TestCase):
+    def test_suppress_extremely_weak_comparison_bins(self):
+        from c5_c4_analysis import compare
+        def make(a,b):
+            return {'spectral_windows':{'attack_35_255ms':[
+                {'n':1,'relative_db':0},
+                {'n':2,'relative_db':a},
+                {'n':8,'relative_db':b}]}}
+        x=make(-10,-75);y=make(-20,-90)
+        d=compare(x,y)['attack_35_255ms']
+        self.assertEqual(d['salient_partials_2_8'],[2])
+        self.assertEqual(d['mean_absolute_difference_salient_db'],10)
+    def test_data_never_named_c3x(self):
+        from c5_c4_analysis import SAMPLE_LICENSE
+        self.assertIn('Yamaha C5',SAMPLE_LICENSE)
+        self.assertNotIn('Yamaha C3X',SAMPLE_LICENSE)

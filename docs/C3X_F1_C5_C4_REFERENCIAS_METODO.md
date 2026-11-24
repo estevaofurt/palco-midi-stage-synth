@@ -23,3 +23,9 @@ Métrica `mean_absolute_difference_db` é distância descritiva de harmônicos 2
 1. Confirmar os três hashes no CI (não basta existir URL).
 2. Comparar evolução de parciais do C5 com V10. Se os resultados forem inadequados, preparar hipóteses de instrumentação **antes** de mudanças de DSP.
 3. Manter a F1 Yamaha C3X como pendente; um C5 nunca deve ser rotulado como medição C3X.
+
+## Primeira execução com C5 real — verificada
+
+GitHub Actions [run #45313270498](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45313270498) aprovou 6 testes sintéticos, obteve os três FLACs originais, verificou os três hashes e analisou os parciais; somente JSON numérico foi publicado. O relatório `RELATORIO_F1_C5_REAL_V10.md` descreve o resultado. **Antes de fechar a comparação**, o protocolo de referência V10 foi corrigido para manter a nota pressionada até 1,765 s e os harmônicos quase inaudíveis foram excluídos da métrica complementar `mean_absolute_difference_salient_db`.
+
+As observações C5 real mais relevantes incluem B~0,00028–0,00030 e 4º/5º parciais muito diferentes da V10. Essas são características dos sinais captados e **não são dados físicos internos identificados do Yamaha C3X**.
