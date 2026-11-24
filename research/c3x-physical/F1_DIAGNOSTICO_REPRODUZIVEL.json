@@ -1,0 +1,42 @@
+{
+  "version": "F1_diagnostico_2026-11-23",
+  "git_source_branch": "research/import-c3x-v10-20261123",
+  "model": "Yamaha C3X normal; nao C3X espressivo",
+  "f1_status": "PENDENTE",
+  "specifications_source": "https://br.yamaha.com/pt/musical-instruments/pianos/products/grand-pianos/cx-series/",
+  "research_sources": {
+    "YAMAHA_BR": "https://br.yamaha.com/pt/musical-instruments/pianos/products/grand-pianos/cx-series/",
+    "YAMAHA_US": "https://usa.yamaha.com/musical-instruments/pianos/products/grand-pianos/cx-series/specs.html",
+    "PLOS_KEMP_2023": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0292515",
+    "PCD_2023": "https://reference-global.com/article/10.5334/tismir.160?tab=article",
+    "V10_PARAMETERS": "research/c3x-python/v10/stage_synth_c3x/parameters.py",
+    "V10_ENGINE": "research/c3x-python/v10/stage_synth_c3x/continuous_engine.py",
+    "V10_BODY": "research/c3x-python/v10/stage_synth_c3x/harmonic_dry.py"
+  },
+  "inventory_rows": 35,
+  "v10_c4": {
+    "f0_target_hz": 261.6255653005986,
+    "length_estimated_m": 0.545,
+    "tension_estimated_N": 702.6315789473684,
+    "linear_density_derived_kg_per_m": 0.00864001127832923,
+    "B_estimated": 0.0005284491799769235
+  },
+  "wav_checks": [
+    {
+      "file": "C3X_V10_DEMONSTRACAO_DRY_14s.wav",
+      "note": "Conferido 686400 frames @ 48000 Hz, peak 0.620811, RMS 0.075474. Não demonstra realismo nem compara piano real.",
+      "clip_frames": 0
+    },
+    {
+      "file": "C3X_V10_DEMONSTRACAO_PEDAL_14s.wav",
+      "note": "Conferido 686400 frames @ 48000 Hz, peak 0.850000, RMS 0.096752. Não demonstra realismo nem compara piano real.",
+      "clip_frames": 0
+    },
+    {
+      "file": "C3X_V10_DO4_DINAMICA_DRY_3_TOQUES.wav",
+      "note": "Conferido 208800 frames @ 48000 Hz, peak 0.270868, RMS 0.047262. Não demonstra realismo nem compara piano real.",
+      "clip_frames": 0
+    }
+  ],
+  "license": "Dados externos NÃO transferidos/calibrados nesta etapa; licenças e proveniência de WAVs continuam pendentes"
+}
