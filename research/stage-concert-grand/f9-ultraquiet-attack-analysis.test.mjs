@@ -1,0 +1,11 @@
+import {compareQuietAttacks} from './f9-ultraquiet-attack-analysis.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};const rejects=f=>{try{f();return false}catch{return true;}};
+const rows=[.06,.09,.12,.15].map((velocity,i)=>({velocity,windows:[[0,.05],[.05,.15],[.15,.5]].map(([startS,endS])=>({startS,endS,rms:2**(i-3),centroidHz:260+i,upperFraction:.001*(i+1)}))}));
+const q=compareQuietAttacks(rows);
+check('reference identity',q.rows[3].windows.every(w=>w.relativeRmsDb===0&&w.centroidDeltaHz===0&&w.upperFractionRatio===1));
+check('relative gain',Math.abs(q.rows[0].windows[0].relativeRmsDb-20*Math.log10(.125))<1e-12);
+check('spectral fraction ratio',q.rows[0].windows[0].upperFractionRatio===.25&&q.rows[0].windows[0].centroidDeltaHz===-3);
+check('missing row',rejects(()=>compareQuietAttacks(rows.slice(0,3))));
+const bad=JSON.parse(JSON.stringify(rows));bad[0].windows[0].endS=.06;check('window mismatch',rejects(()=>compareQuietAttacks(bad)));
+const zero=JSON.parse(JSON.stringify(rows));zero[3].windows[0].upperFraction=0;check('zero fraction censored',compareQuietAttacks(zero).rows[0].windows[0].upperFractionRatio===null);
+console.log('F9.17c spectral comparison tests passed:',n);

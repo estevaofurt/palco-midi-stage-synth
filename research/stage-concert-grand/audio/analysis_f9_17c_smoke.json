@@ -1,0 +1,84 @@
+{
+  "sourceCommit": "607e81d3de111d90513035fd72ebd646d3358928",
+  "runId": 45462131637,
+  "testsPassed": 6,
+  "smoke": [
+    {
+      "velocity": 0.06,
+      "pressureRms": 0.008045596461588493,
+      "attack": {
+        "firstForceS": 0.0033333333333333496,
+        "lastForceEndS": 0.008479166666666623,
+        "contactSpanS": 0.005145833333333273,
+        "activeContactS": 0.005145833333333333,
+        "activeSteps": 494,
+        "peakForceN": 0.47704585536130256,
+        "peakCompressionM": 0.00008292052063552253,
+        "impulseNs": 0.001147439321202564,
+        "reboundMps": -0.054743932120256286,
+        "hammerLossJ": 0.0000011903684660156903
+      },
+      "peakPa": 0.023301424193341587,
+      "maxBalance": 1.7966077031032063e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 0.09,
+      "pressureRms": 0.015201196420960378,
+      "attack": {
+        "firstForceS": 0.00221875,
+        "lastForceEndS": 0.006843749999999945,
+        "contactSpanS": 0.004624999999999945,
+        "activeContactS": 0.004625,
+        "activeSteps": 444,
+        "peakForceN": 0.7781900212627124,
+        "peakCompressionM": 0.00010178403301466958,
+        "impulseNs": 0.0016900939955090822,
+        "reboundMps": -0.07900939955090812,
+        "hammerLossJ": 0.000002678228504751942
+      },
+      "peakPa": 0.043276811328635006,
+      "maxBalance": 1.7915221172878915e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 0.12,
+      "pressureRms": 0.02276783822799565,
+      "attack": {
+        "firstForceS": 0.0016666666666666644,
+        "lastForceEndS": 0.005947916666666636,
+        "contactSpanS": 0.004281249999999972,
+        "activeContactS": 0.0042812499999999995,
+        "activeSteps": 411,
+        "peakForceN": 1.0926240277766237,
+        "peakCompressionM": 0.00011733157277507279,
+        "impulseNs": 0.002224625785044579,
+        "reboundMps": -0.10246257850445802,
+        "hammerLossJ": 0.000004614808770809697
+      },
+      "peakPa": 0.06364571801555959,
+      "maxBalance": 2.2108373074966603e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 0.15,
+      "pressureRms": 0.03053807700590818,
+      "attack": {
+        "firstForceS": 0.001333333333333333,
+        "lastForceEndS": 0.005322916666666653,
+        "contactSpanS": 0.00398958333333332,
+        "activeContactS": 0.003989583333333333,
+        "activeSteps": 383,
+        "peakForceN": 1.4153583851534839,
+        "peakCompressionM": 0.00013075573645528668,
+        "impulseNs": 0.0027555523597763377,
+        "reboundMps": -0.12555523597763393,
+        "hammerLossJ": 0.00000691448006951201
+      },
+      "peakPa": 0.08369952490617077,
+      "maxBalance": 1.9197696817657706e-15,
+      "maxIncrease": 0
+    }
+  ],
+  "scope": "0.1s mechanical smoke; long render pending"
+}
