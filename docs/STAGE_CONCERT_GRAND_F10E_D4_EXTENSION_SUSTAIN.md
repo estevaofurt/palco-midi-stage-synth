@@ -14,3 +14,7 @@ f10e-d4-extension.mjs, .test.mjs, -demo.mjs, f10e-d4-long-demo.mjs, workflow con
 ## Consulta de execução
 
 CI 45507422898: smoke in_progress / sem conclusão, 0 artefatos na consulta. Main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536. Somente pesquisa, CI, dados e documentação alterados.
+
+## Resultados finais
+
+36/36 checks, 19/20 renders: 11/12 curtos, 8/8 longos. A3 ff rejeitado por 52 amostras saturadas, pico 1.090023 FS. Todos os longos concluídos: C4 pp D/D4 2/2s, C4 mf D4 13.5s, C4 ff D4 19.5s, G4 mf D/D4 11/9.5s, G4 ff D/D4 15.5/13s no limiar técnico (não audibilidade). Dados e artefatos em audio/analysis_f10e_d4_ci.json. F10f trata margem de saída e perdas separadamente.
