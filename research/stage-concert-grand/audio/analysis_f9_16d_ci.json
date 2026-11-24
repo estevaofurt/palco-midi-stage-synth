@@ -1,0 +1,2062 @@
+{
+  "sourceCommit": "55622f7d7c2e888a758f79730f6070b104f01925",
+  "runId": 45448614899,
+  "artifactId": 14946342885,
+  "testsPassed": 25,
+  "audit": {
+    "scope": "reference B board alone, forced continuous unit peak force, resistance quadrature and block-center approximation; not full impedance, not free decay",
+    "quality": {
+      "basisCount": 516,
+      "modeCount": 337,
+      "eigenResidual": 4.61165979217926e-8,
+      "massOrthogonality": 2.1316282072803006e-14,
+      "maxModeHz": 2971.7313557028133
+    },
+    "levels": [
+      {
+        "nt": 12,
+        "np": 24
+      },
+      {
+        "nt": 24,
+        "np": 48
+      },
+      {
+        "nt": 48,
+        "np": 96
+      }
+    ],
+    "coarseMatrix": {
+      "relativeFrobenius": 0.6986304326951496,
+      "blocks": [
+        {
+          "centerHz": 26.486577358982384,
+          "modeCount": 1,
+          "relativeFrobenius": 0.000009683139388707193,
+          "referenceSquaredNorm": 10.17578641050983,
+          "squaredDifference": 9.541141785418346e-10,
+          "maxAbs": 3.189919958924916,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 42.04482076268573,
+          "modeCount": 1,
+          "relativeFrobenius": 0.0008380383442156256,
+          "referenceSquaredNorm": 0.03614844547820288,
+          "squaredDifference": 2.538735207597199e-8,
+          "maxAbs": 0.19028677944708614,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 74.91535384383408,
+          "modeCount": 1,
+          "relativeFrobenius": 0.000356403460181372,
+          "referenceSquaredNorm": 4.022872194252193,
+          "squaredDifference": 5.109990102008882e-7,
+          "maxAbs": 2.004995055882035,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 105.94630943592954,
+          "modeCount": 2,
+          "relativeFrobenius": 0.0009468012137417599,
+          "referenceSquaredNorm": 17.161273765087763,
+          "squaredDifference": 0.00001538392420243452,
+          "maxAbs": 4.123463245008206,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 133.48398541700342,
+          "modeCount": 2,
+          "relativeFrobenius": 0.001472180417616586,
+          "referenceSquaredNorm": 7.193235239544754,
+          "squaredDifference": 0.00001559000794246163,
+          "maxAbs": 2.5591981821006398,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 168.17928305074292,
+          "modeCount": 1,
+          "relativeFrobenius": 0.000015343590345572,
+          "referenceSquaredNorm": 0.7400010842948249,
+          "squaredDifference": 1.742153211435587e-10,
+          "maxAbs": 0.860246356002759,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 188.7748625363387,
+          "modeCount": 1,
+          "relativeFrobenius": 0.005246339580845178,
+          "referenceSquaredNorm": 3.3201305463445343,
+          "squaredDifference": 0.00009138353543974177,
+          "maxAbs": 1.812563065187596,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 211.89261887185907,
+          "modeCount": 1,
+          "relativeFrobenius": 0.005467163464999797,
+          "referenceSquaredNorm": 32.70111769262998,
+          "squaredDifference": 0.0009774323644385456,
+          "maxAbs": 5.687225194518572,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 237.8414230005442,
+          "modeCount": 3,
+          "relativeFrobenius": 0.00412509074868243,
+          "referenceSquaredNorm": 26.647580853414794,
+          "squaredDifference": 0.00045344519359936974,
+          "maxAbs": 4.764360983151368,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 266.96797083400685,
+          "modeCount": 2,
+          "relativeFrobenius": 0.013136074489698741,
+          "referenceSquaredNorm": 5.55158146308904,
+          "squaredDifference": 0.0009579612058051663,
+          "maxAbs": 2.198589164172135,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 299.66141537533633,
+          "modeCount": 2,
+          "relativeFrobenius": 0.006051603638470487,
+          "referenceSquaredNorm": 4.559137904699257,
+          "squaredDifference": 0.00016696432250941882,
+          "maxAbs": 1.8622394973830774,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 377.5497250726774,
+          "modeCount": 6,
+          "relativeFrobenius": 0.012907244375554188,
+          "referenceSquaredNorm": 197.87344032046542,
+          "squaredDifference": 0.03296511310177828,
+          "maxAbs": 8.495232543786395,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 423.78523774371814,
+          "modeCount": 1,
+          "relativeFrobenius": 0.001753741598518123,
+          "referenceSquaredNorm": 9.788463915545135,
+          "squaredDifference": 0.00003010549353282355,
+          "maxAbs": 3.1341389397643553,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 475.6828460010884,
+          "modeCount": 5,
+          "relativeFrobenius": 0.011137286195323405,
+          "referenceSquaredNorm": 49.05818818039361,
+          "squaredDifference": 0.006085135658105624,
+          "maxAbs": 3.373250538568049,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 533.9359416680137,
+          "modeCount": 4,
+          "relativeFrobenius": 0.02570991528874323,
+          "referenceSquaredNorm": 206.53396093695355,
+          "squaredDifference": 0.1365188953385114,
+          "maxAbs": 9.936933371763779,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 599.3228307506727,
+          "modeCount": 3,
+          "relativeFrobenius": 0.011616500318403661,
+          "referenceSquaredNorm": 268.36024935077575,
+          "squaredDifference": 0.036213358502357275,
+          "maxAbs": 12.881480887142539,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 672.7171322029717,
+          "modeCount": 6,
+          "relativeFrobenius": 0.010982288895076709,
+          "referenceSquaredNorm": 287.6472358684873,
+          "squaredDifference": 0.03469332566194525,
+          "maxAbs": 12.74277036544981,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 755.0994501453547,
+          "modeCount": 11,
+          "relativeFrobenius": 0.014292964332843692,
+          "referenceSquaredNorm": 1668.4011675204574,
+          "squaredDifference": 0.3408357215156187,
+          "maxAbs": 28.172977369275205,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 847.5704754874363,
+          "modeCount": 7,
+          "relativeFrobenius": 0.010261446066727511,
+          "referenceSquaredNorm": 2093.249640128124,
+          "squaredDifference": 0.22041348379640532,
+          "maxAbs": 32.847980073332835,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 951.3656920021768,
+          "modeCount": 16,
+          "relativeFrobenius": 0.19107022502314527,
+          "referenceSquaredNorm": 14218.113185022305,
+          "squaredDifference": 519.072471739295,
+          "maxAbs": 69.92536650391119,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1067.8718833360274,
+          "modeCount": 15,
+          "relativeFrobenius": 0.5746446148992348,
+          "referenceSquaredNorm": 13730.952596266692,
+          "squaredDifference": 4534.18619397252,
+          "maxAbs": 75.26760742700996,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1198.6456615013453,
+          "modeCount": 16,
+          "relativeFrobenius": 0.11723658783897314,
+          "referenceSquaredNorm": 11837.582461812952,
+          "squaredDifference": 162.70067587877017,
+          "maxAbs": 85.33694833549117,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1345.4342644059434,
+          "modeCount": 24,
+          "relativeFrobenius": 0.17008582362821603,
+          "referenceSquaredNorm": 38383.74219569718,
+          "squaredDifference": 1110.4104710653055,
+          "maxAbs": 133.3653531075283,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1510.1989002907094,
+          "modeCount": 26,
+          "relativeFrobenius": 0.2645077081476341,
+          "referenceSquaredNorm": 57088.11014481173,
+          "squaredDifference": 3994.1312442049134,
+          "maxAbs": 130.87433334181182,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1695.140950974872,
+          "modeCount": 27,
+          "relativeFrobenius": 0.2530009157447935,
+          "referenceSquaredNorm": 82894.8978316274,
+          "squaredDifference": 5306.057926123127,
+          "maxAbs": 194.1169153824421,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1902.7313840043537,
+          "modeCount": 28,
+          "relativeFrobenius": 0.4659516610326955,
+          "referenceSquaredNorm": 116372.89718055639,
+          "squaredDifference": 25265.83030989805,
+          "maxAbs": 193.06442013836465,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 2135.7437666720552,
+          "modeCount": 28,
+          "relativeFrobenius": 0.5574408623462194,
+          "referenceSquaredNorm": 306607.9550503896,
+          "squaredDifference": 95275.45253794076,
+          "maxAbs": 387.680571932873,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 2397.2913230026898,
+          "modeCount": 36,
+          "relativeFrobenius": 0.7719567904672144,
+          "referenceSquaredNorm": 913836.8751592146,
+          "squaredDifference": 544571.19081002,
+          "maxAbs": 552.1187374286415,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 2690.868528811887,
+          "modeCount": 44,
+          "relativeFrobenius": 0.781879226984284,
+          "referenceSquaredNorm": 1041941.050146026,
+          "squaredDifference": 636975.1627479197,
+          "maxAbs": 422.6455110295624,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 3020.3978005814197,
+          "modeCount": 17,
+          "relativeFrobenius": 0.5917211559531006,
+          "referenceSquaredNorm": 346604.3699737465,
+          "squaredDifference": 121357.9489671635,
+          "maxAbs": 355.0017615514843,
+          "maxAsymmetry": 0
+        }
+      ]
+    },
+    "mediumMatrix": {
+      "relativeFrobenius": 0.1399576874968648,
+      "blocks": [
+        {
+          "centerHz": 26.486577358982384,
+          "modeCount": 1,
+          "relativeFrobenius": 0.0000019366568618443298,
+          "referenceSquaredNorm": 10.17578641050983,
+          "squaredDifference": 3.816570951293752e-11,
+          "maxAbs": 3.189944669823419,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 42.04482076268573,
+          "modeCount": 1,
+          "relativeFrobenius": 0.0001676193519198508,
+          "referenceSquaredNorm": 0.03614844547820288,
+          "squaredDifference": 1.0156356578112198e-9,
+          "maxAbs": 0.19015931439676173,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 74.91535384383408,
+          "modeCount": 1,
+          "relativeFrobenius": 0.00007131012262996145,
+          "referenceSquaredNorm": 4.022872194252193,
+          "squaredDifference": 2.0456842521257953e-8,
+          "maxAbs": 2.0055668704109673,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 105.94630943592954,
+          "modeCount": 2,
+          "relativeFrobenius": 0.00018944069857218353,
+          "referenceSquaredNorm": 17.161273765087763,
+          "squaredDifference": 6.158799878069148e-7,
+          "maxAbs": 4.120331085480352,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 133.48398541700342,
+          "modeCount": 2,
+          "relativeFrobenius": 0.0002950602637481178,
+          "referenceSquaredNorm": 7.193235239544754,
+          "squaredDifference": 6.262470827220043e-7,
+          "maxAbs": 2.5561930061873532,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 168.17928305074292,
+          "modeCount": 1,
+          "relativeFrobenius": 9.955686385452758e-7,
+          "referenceSquaredNorm": 0.7400010842948249,
+          "squaredDifference": 7.334571911069342e-13,
+          "maxAbs": 0.8602340133587502,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 188.7748625363387,
+          "modeCount": 1,
+          "relativeFrobenius": 0.0010554689925769683,
+          "referenceSquaredNorm": 3.3201305463445343,
+          "squaredDifference": 0.000003698674547606734,
+          "maxAbs": 1.8201993449436062,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 211.89261887185907,
+          "modeCount": 1,
+          "relativeFrobenius": 0.001097354119767191,
+          "referenceSquaredNorm": 32.70111769262998,
+          "squaredDifference": 0.00003937823020824892,
+          "maxAbs": 5.7122139016687905,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 237.8414230005442,
+          "modeCount": 3,
+          "relativeFrobenius": 0.0008350795812388301,
+          "referenceSquaredNorm": 26.647580853414794,
+          "squaredDifference": 0.00001858290121060444,
+          "maxAbs": 4.751880379259471,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 266.96797083400685,
+          "modeCount": 2,
+          "relativeFrobenius": 0.002688393793324981,
+          "referenceSquaredNorm": 5.55158146308904,
+          "squaredDifference": 0.000040123839556431234,
+          "maxAbs": 2.180795339190517,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 299.66141537533633,
+          "modeCount": 2,
+          "relativeFrobenius": 0.0012528732354388295,
+          "referenceSquaredNorm": 4.559137904699257,
+          "squaredDifference": 0.000007156439305468714,
+          "maxAbs": 1.8618554069133115,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 377.5497250726774,
+          "modeCount": 6,
+          "relativeFrobenius": 0.002697242012199197,
+          "referenceSquaredNorm": 197.87344032046542,
+          "squaredDifference": 0.0014395519293735287,
+          "maxAbs": 8.418730263263791,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 423.78523774371814,
+          "modeCount": 1,
+          "relativeFrobenius": 0.00014876267453864037,
+          "referenceSquaredNorm": 9.788463915545135,
+          "squaredDifference": 2.1662196929733933e-7,
+          "maxAbs": 3.1291175190955207,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 475.6828460010884,
+          "modeCount": 5,
+          "relativeFrobenius": 0.0026930456914283597,
+          "referenceSquaredNorm": 49.05818818039361,
+          "squaredDifference": 0.0003557942692028785,
+          "maxAbs": 3.327028966617842,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 533.9359416680137,
+          "modeCount": 4,
+          "relativeFrobenius": 0.005757105327409203,
+          "referenceSquaredNorm": 206.53396093695355,
+          "squaredDifference": 0.0068454156617411225,
+          "maxAbs": 9.877439578782413,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 599.3228307506727,
+          "modeCount": 3,
+          "relativeFrobenius": 0.003294263173099963,
+          "referenceSquaredNorm": 268.36024935077575,
+          "squaredDifference": 0.0029122910079205097,
+          "maxAbs": 12.987424464320915,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 672.7171322029717,
+          "modeCount": 6,
+          "relativeFrobenius": 0.00467165991214503,
+          "referenceSquaredNorm": 287.6472358684873,
+          "squaredDifference": 0.006277730156659503,
+          "maxAbs": 12.781998902621948,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 755.0994501453547,
+          "modeCount": 11,
+          "relativeFrobenius": 0.004687724710111726,
+          "referenceSquaredNorm": 1668.4011675204574,
+          "squaredDifference": 0.03666272017476558,
+          "maxAbs": 27.848971728116197,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 847.5704754874363,
+          "modeCount": 7,
+          "relativeFrobenius": 0.001734323005066378,
+          "referenceSquaredNorm": 2093.249640128124,
+          "squaredDifference": 0.006296235953015267,
+          "maxAbs": 33.13290130824134,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 951.3656920021768,
+          "modeCount": 16,
+          "relativeFrobenius": 0.00429779771978947,
+          "referenceSquaredNorm": 14218.113185022305,
+          "squaredDifference": 0.2626236962334868,
+          "maxAbs": 75.2312351461538,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1067.8718833360274,
+          "modeCount": 15,
+          "relativeFrobenius": 0.0018907437872832953,
+          "referenceSquaredNorm": 13730.952596266692,
+          "squaredDifference": 0.04908694815732553,
+          "maxAbs": 76.12756951123521,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1198.6456615013453,
+          "modeCount": 16,
+          "relativeFrobenius": 0.00633641790475383,
+          "referenceSquaredNorm": 11837.582461812952,
+          "squaredDifference": 0.47528120704398163,
+          "maxAbs": 88.42726686573675,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1345.4342644059434,
+          "modeCount": 24,
+          "relativeFrobenius": 0.00690822434578383,
+          "referenceSquaredNorm": 38383.74219569718,
+          "squaredDifference": 1.8318089623306963,
+          "maxAbs": 126.88832691669985,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1510.1989002907094,
+          "modeCount": 26,
+          "relativeFrobenius": 0.010174661518726412,
+          "referenceSquaredNorm": 57088.11014481173,
+          "squaredDifference": 5.9099745016375085,
+          "maxAbs": 128.48057575504365,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1695.140950974872,
+          "modeCount": 27,
+          "relativeFrobenius": 0.025779277887130365,
+          "referenceSquaredNorm": 82894.8978316274,
+          "squaredDifference": 55.08955910486191,
+          "maxAbs": 171.52421796078067,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 1902.7313840043537,
+          "modeCount": 28,
+          "relativeFrobenius": 0.04276533088669943,
+          "referenceSquaredNorm": 116372.89718055639,
+          "squaredDifference": 212.83131077985433,
+          "maxAbs": 170.74730119734997,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 2135.7437666720552,
+          "modeCount": 28,
+          "relativeFrobenius": 0.07304819697366847,
+          "referenceSquaredNorm": 306607.9550503896,
+          "squaredDifference": 1636.072030726217,
+          "maxAbs": 231.58885676926155,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 2397.2913230026898,
+          "modeCount": 36,
+          "relativeFrobenius": 0.08454693735705814,
+          "referenceSquaredNorm": 913836.8751592146,
+          "squaredDifference": 6532.274692965434,
+          "maxAbs": 366.91979373775143,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 2690.868528811887,
+          "modeCount": 44,
+          "relativeFrobenius": 0.17679170272455952,
+          "referenceSquaredNorm": 1041941.050146026,
+          "squaredDifference": 32566.1865149099,
+          "maxAbs": 358.5525463947335,
+          "maxAsymmetry": 0
+        },
+        {
+          "centerHz": 3020.3978005814197,
+          "modeCount": 17,
+          "relativeFrobenius": 0.21978486197239575,
+          "referenceSquaredNorm": 346604.3699737465,
+          "squaredDifference": 16742.85772566788,
+          "maxAbs": 371.7065537133579,
+          "maxAsymmetry": 0
+        }
+      ]
+    },
+    "rows": [
+      {
+        "h": 1,
+        "f": 261.6255653005987,
+        "values": [
+          {
+            "Y": [
+              0.00022481714951438315,
+              0.0044118490719591875
+            ],
+            "inputW": 0.00011240857475719157,
+            "radiationW": 0.00003877108611956486,
+            "structuralW": 0.00007363748863762697,
+            "fixedVelocityRadiationW": 0.0000387715280148635,
+            "powerResidualW": -2.574980159653073e-19,
+            "maxRelativeResidual": 4.573357797079531e-16,
+            "pressure": [
+              [
+                -0.028268870363024893,
+                -0.04491554619550846
+              ],
+              [
+                -0.05152908885897375,
+                -0.09181768036222607
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0002240158769070802,
+              0.004411910099805117
+            ],
+            "inputW": 0.0001120079384535401,
+            "radiationW": 0.00003836967730645454,
+            "structuralW": 0.0000736382611470856,
+            "fixedVelocityRadiationW": 0.00003836976670177732,
+            "powerResidualW": -3.3881317890172014e-20,
+            "maxRelativeResidual": 5.448901158581885e-16,
+            "pressure": [
+              [
+                -0.02825915404449272,
+                -0.04491905237875837
+              ],
+              [
+                -0.051513825055067346,
+                -0.09182581919393133
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.00022381268247759732,
+              0.004411925808713013
+            ],
+            "inputW": 0.00011190634123879866,
+            "radiationW": 0.000038267880610961164,
+            "structuralW": 0.00007363846062783751,
+            "fixedVelocityRadiationW": 0.000038267880610961136,
+            "powerResidualW": -1.3552527156068805e-20,
+            "maxRelativeResidual": 4.06203640135302e-16,
+            "pressure": [
+              [
+                -0.028256651563459703,
+                -0.044919933256883496
+              ],
+              [
+                -0.051509876376568585,
+                -0.09182790275354066
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0002626998638810148,
+              0.004414400142435945
+            ],
+            "inputW": 0.0001313499319405074,
+            "radiationW": 0.000057711075801035117,
+            "structuralW": 0.00007363885613947236,
+            "fixedVelocityRadiationW": 0.000057776203119141356,
+            "powerResidualW": -6.776263578034403e-20,
+            "maxRelativeResidual": 4.352801031086267e-16,
+            "pressure": [
+              [
+                -0.03143967198203109,
+                -0.04454300450463196
+              ],
+              [
+                -0.05435863267014329,
+                -0.09083689913894258
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.00022804105345804095,
+            "magnitudeDeltaDb": -0.00005040022983965218
+          },
+          "radiationPowerDb": 0.05673556979927892,
+          "fixedVelocityPowerDb": 0.056785068437398,
+          "pressure": [
+            {
+              "relativeComplexError": 0.00024463786505071956,
+              "magnitudeDeltaDb": 0.0004573039252231476
+            },
+            {
+              "relativeComplexError": 0.00020669659496250754,
+              "magnitudeDeltaDb": 0.00004009182343219692
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.00004613382696131876,
+            "magnitudeDeltaDb": -0.000010596690171845364
+          },
+          "radiationPowerDb": 0.011537363749734672,
+          "fixedVelocityPowerDb": 0.011547482117389457,
+          "pressure": [
+            {
+              "relativeComplexError": 0.000049992047941244756,
+              "magnitudeDeltaDb": 0.00009606076416139074
+            },
+            {
+              "relativeComplexError": 0.00004240423183808354,
+              "magnitudeDeltaDb": 0.000009462642532965224
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.008774923085786299,
+            "magnitudeDeltaDb": 0.00907158307384042
+          },
+          "radiationPowerDb": 1.7727102338883902,
+          "fixedVelocityPowerDb": 1.7775983931730521,
+          "pressure": [
+            {
+              "relativeComplexError": 0.06034939080649436,
+              "magnitudeDeltaDb": 0.2344749372209887
+            },
+            {
+              "relativeComplexError": 0.028605157526651263,
+              "magnitudeDeltaDb": 0.046971246775775875
+            }
+          ]
+        }
+      },
+      {
+        "h": 2,
+        "f": 523.4836792009017,
+        "values": [
+          {
+            "Y": [
+              0.000049327974885308525,
+              -0.0014496387615933728
+            ],
+            "inputW": 0.000024663987442654262,
+            "radiationW": 0.000012050746902350328,
+            "structuralW": 0.000012613240540303934,
+            "fixedVelocityRadiationW": 0.000012050740063391869,
+            "powerResidualW": 0,
+            "maxRelativeResidual": 4.248633188414945e-16,
+            "pressure": [
+              [
+                -0.01385232956626239,
+                -0.03281211739490855
+              ],
+              [
+                -0.016876550652699794,
+                -0.014963469183923559
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.00004921639180185382,
+              -0.0014496412455423764
+            ],
+            "inputW": 0.00002460819590092691,
+            "radiationW": 0.000011994953624030054,
+            "structuralW": 0.000012613242276896878,
+            "fixedVelocityRadiationW": 0.000011994951433702862,
+            "powerResidualW": -2.0328790734103208e-20,
+            "maxRelativeResidual": 5.112012878185375e-16,
+            "pressure": [
+              [
+                -0.013859372239613987,
+                -0.03280910083541203
+              ],
+              [
+                -0.01687622299672511,
+                -0.014960102759357306
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.00004920316697716343,
+              -0.001449641737374135
+            ],
+            "inputW": 0.000024601583488581715,
+            "radiationW": 0.000011988340622129568,
+            "structuralW": 0.000012613242866452143,
+            "fixedVelocityRadiationW": 0.000011988340622129577,
+            "powerResidualW": 3.3881317890172014e-21,
+            "maxRelativeResidual": 4.3001490608443537e-16,
+            "pressure": [
+              [
+                -0.013861188055663632,
+                -0.03280779732844867
+              ],
+              [
+                -0.016875657816032643,
+                -0.014959007928351028
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.000088215841977254,
+              -0.0014478973426343131
+            ],
+            "inputW": 0.000044107920988627,
+            "radiationW": 0.00003149614291514367,
+            "structuralW": 0.000012611778073483376,
+            "fixedVelocityRadiationW": 0.000031528389585793395,
+            "powerResidualW": -4.743384504624082e-20,
+            "maxRelativeResidual": 5.25145669701817e-16,
+            "pressure": [
+              [
+                -0.0130200405294248,
+                -0.033349197746047395
+              ],
+              [
+                -0.016993995323899513,
+                -0.015636812547842674
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.000086070596441764,
+            "magnitudeDeltaDb": 0.000007575476654469228
+          },
+          "radiationPowerDb": 0.022548912469215462,
+          "fixedVelocityPowerDb": 0.022546447789812865,
+          "pressure": [
+            {
+              "relativeComplexError": 0.00027672421630723634,
+              "magnitudeDeltaDb": 0.00013003977823356614
+            },
+            {
+              "relativeComplexError": 0.00020175009510057742,
+              "magnitudeDeltaDb": 0.0013971000675191757
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.000009123875513777593,
+            "magnitudeDeltaDb": -2.5674773560721543e-7
+          },
+          "radiationPowerDb": 0.0023949923455083453,
+          "fixedVelocityPowerDb": 0.0023941993060911343,
+          "pressure": [
+            {
+              "relativeComplexError": 0.00006275994241827562,
+              "magnitudeDeltaDb": 0.00012050207653402504
+            },
+            {
+              "relativeComplexError": 0.000054635752913476724,
+              "magnitudeDeltaDb": 0.00044260928989428973
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.026914204907285647,
+            "magnitudeDeltaDb": 0.0006331749897322933
+          },
+          "radiationPowerDb": 4.192587992184361,
+          "fixedVelocityPowerDb": 4.197032944280345,
+          "pressure": [
+            {
+              "relativeComplexError": 0.028023404245935333,
+              "magnitudeDeltaDb": 0.04486068874815421
+            },
+            {
+              "relativeComplexError": 0.03045711900371369,
+              "magnitudeDeltaDb": 0.20590052126921543
+            }
+          ]
+        }
+      },
+      {
+        "h": 3,
+        "f": 785.8065462029502,
+        "values": [
+          {
+            "Y": [
+              0.0001544362236530237,
+              -0.0031862330435779426
+            ],
+            "inputW": 0.00007721811182651185,
+            "radiationW": 0.000054924985798613866,
+            "structuralW": 0.000022293126027897887,
+            "fixedVelocityRadiationW": 0.000054930021654452494,
+            "powerResidualW": 1.0164395367051604e-19,
+            "maxRelativeResidual": 5.772323916946411e-16,
+            "pressure": [
+              [
+                -0.07052850115473318,
+                -0.08886583872271259
+              ],
+              [
+                -0.11233969054057925,
+                -0.00968767530557128
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.00015345140038352015,
+              -0.00318632968812051
+            ],
+            "inputW": 0.00007672570019176008,
+            "radiationW": 0.00005443179766071473,
+            "structuralW": 0.00002229390253104539,
+            "fixedVelocityRadiationW": 0.000054433546844738036,
+            "powerResidualW": -4.743384504624082e-20,
+            "maxRelativeResidual": 5.522863904019226e-16,
+            "pressure": [
+              [
+                -0.07055734454249801,
+                -0.08882585384414912
+              ],
+              [
+                -0.1123335339681831,
+                -0.009662769416676957
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.00015304601564399345,
+              -0.0031863908223930966
+            ],
+            "inputW": 0.00007652300782199673,
+            "radiationW": 0.00005422877273902844,
+            "structuralW": 0.000022294235082968222,
+            "fixedVelocityRadiationW": 0.00005422877273902839,
+            "powerResidualW": 6.098637220230962e-20,
+            "maxRelativeResidual": 4.4178500535285905e-16,
+            "pressure": [
+              [
+                -0.07056675034480832,
+                -0.08879829734368103
+              ],
+              [
+                -0.11233467061830711,
+                -0.009648284369182034
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.00022749169834634502,
+              -0.0031781589027438067
+            ],
+            "inputW": 0.00011374584917317251,
+            "radiationW": 0.00009149662699275708,
+            "structuralW": 0.000022249222180415508,
+            "fixedVelocityRadiationW": 0.00009185190185163235,
+            "powerResidualW": -8.131516293641283e-20,
+            "maxRelativeResidual": 4.340046141425904e-16,
+            "pressure": [
+              [
+                -0.06884015437490498,
+                -0.09143029303738816
+              ],
+              [
+                -0.11202950180516248,
+                -0.011550445266573003
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.0004385907834967721,
+            "magnitudeDeltaDb": -0.00024667561419841865
+          },
+          "radiationPowerDb": 0.05540177350283198,
+          "fixedVelocityPowerDb": 0.05579994277242421,
+          "pressure": [
+            {
+              "relativeComplexError": 0.0006843387267511762,
+              "magnitudeDeltaDb": 0.002228458462539245
+            },
+            {
+              "relativeComplexError": 0.0003521962802083492,
+              "magnitudeDeltaDb": 0.0006454780529224285
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.00012851419090278643,
+            "magnitudeDeltaDb": -0.00011323939710698779
+          },
+          "radiationPowerDb": 0.01622901581644816,
+          "fixedVelocityPowerDb": 0.01636857555838314,
+          "pressure": [
+            {
+              "relativeComplexError": 0.00025671589699491544,
+              "magnitudeDeltaDb": 0.0012040994417150332
+            },
+            {
+              "relativeComplexError": 0.00012886741925169132,
+              "magnitudeDeltaDb": 0.000008319665226959788
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.02335086302885484,
+            "magnitudeDeltaDb": -0.010168119134245012
+          },
+          "radiationPowerDb": 2.2555240663810885,
+          "fixedVelocityPowerDb": 2.272215195693497,
+          "pressure": [
+            {
+              "relativeComplexError": 0.02750019763404936,
+              "magnitudeDeltaDb": 0.07696835857821649
+            },
+            {
+              "relativeComplexError": 0.01695814560622089,
+              "magnitudeDeltaDb": -0.009634538235517699
+            }
+          ]
+        }
+      },
+      {
+        "h": 4,
+        "f": 1048.8256847481164,
+        "values": [
+          {
+            "Y": [
+              0.0006703450401986055,
+              0.0009012033318380816
+            ],
+            "inputW": 0.00033517252009930277,
+            "radiationW": 0.0002610141113721248,
+            "structuralW": 0.00007415840872717773,
+            "fixedVelocityRadiationW": 0.00026155368422538363,
+            "powerResidualW": 2.168404344971009e-19,
+            "maxRelativeResidual": 6.343418343980138e-16,
+            "pressure": [
+              [
+                -0.02654384929627651,
+                -0.08657458267364795
+              ],
+              [
+                0.024830840874853623,
+                0.09144613120174647
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0006560064269807092,
+              0.0009045183251167262
+            ],
+            "inputW": 0.0003280032134903546,
+            "radiationW": 0.0002536859276892734,
+            "structuralW": 0.00007431728580108075,
+            "fixedVelocityRadiationW": 0.0002536866647859276,
+            "powerResidualW": 4.87890977618477e-19,
+            "maxRelativeResidual": 4.399595635905248e-16,
+            "pressure": [
+              [
+                -0.027294571367235405,
+                -0.08702371103923083
+              ],
+              [
+                0.025139478042528935,
+                0.09156474971486436
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0006558827933666946,
+              0.0009044158826652113
+            ],
+            "inputW": 0.0003279413966833473,
+            "radiationW": 0.0002536243054631942,
+            "structuralW": 0.00007431709122015358,
+            "fixedVelocityRadiationW": 0.000253624305463192,
+            "powerResidualW": -4.87890977618477e-19,
+            "maxRelativeResidual": 3.654919745116998e-16,
+            "pressure": [
+              [
+                -0.027252789920485958,
+                -0.08701879674537571
+              ],
+              [
+                0.025150795925835936,
+                0.09154508060073085
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0006533273344794124,
+              0.000904845044267462
+            ],
+            "inputW": 0.0003266636672397062,
+            "radiationW": 0.00025221060729796176,
+            "structuralW": 0.0000744530599417444,
+            "fixedVelocityRadiationW": 0.0002518541880601152,
+            "powerResidualW": 5.421010862427522e-20,
+            "maxRelativeResidual": 4.126850748639275e-16,
+            "pressure": [
+              [
+                -0.02226115045670596,
+                -0.08593705950596774
+              ],
+              [
+                0.02652017835832252,
+                0.08902158719847901
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.013260537427785705,
+            "magnitudeDeltaDb": 0.04630659629193065
+          },
+          "radiationPowerDb": 0.12473116761685361,
+          "fixedVelocityPowerDb": 0.13369971095258626,
+          "pressure": [
+            {
+              "relativeComplexError": 0.009174752717133054,
+              "magnitudeDeltaDb": -0.0606171860492782
+            },
+            {
+              "relativeComplexError": 0.003527662753973689,
+              "magnitudeDeltaDb": -0.016461639665308885
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.0001437161929917047,
+            "magnitudeDeltaDb": 0.0012089778639605944
+          },
+          "radiationPowerDb": 0.0010550622136717008,
+          "fixedVelocityPowerDb": 0.0010676808302573302,
+          "pressure": [
+            {
+              "relativeComplexError": 0.0004613560306712812,
+              "magnitudeDeltaDb": 0.0016367801886774203
+            },
+            {
+              "relativeComplexError": 0.00023903093552655376,
+              "magnitudeDeltaDb": 0.001460929944031668
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.0024154579415870225,
+            "magnitudeDeltaDb": -0.010157620477742274
+          },
+          "radiationPowerDb": -0.025330290959903464,
+          "fixedVelocityPowerDb": -0.03148461736734069,
+          "pressure": [
+            {
+              "relativeComplexError": 0.056460217112500516,
+              "magnitudeDeltaDb": -0.23458341468429617
+            },
+            {
+              "relativeComplexError": 0.03047596237026347,
+              "magnitudeDeltaDb": -0.1910022987049949
+            }
+          ]
+        }
+      },
+      {
+        "h": 5,
+        "f": 1312.7715894951111,
+        "values": [
+          {
+            "Y": [
+              0.00015344477863935436,
+              -0.0020376884705327345
+            ],
+            "inputW": 0.00007672238931967718,
+            "radiationW": 0.000059004381438140506,
+            "structuralW": 0.000017718007881536666,
+            "fixedVelocityRadiationW": 0.00005938369392507381,
+            "powerResidualW": 6.776263578034403e-21,
+            "maxRelativeResidual": 3.87914583871682e-16,
+            "pressure": [
+              [
+                0.040948553855757776,
+                0.030179861641687615
+              ],
+              [
+                0.07532848112874425,
+                -0.037791482986456335
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.00014262054820549807,
+              -0.0020378551211722488
+            ],
+            "inputW": 0.00007131027410274904,
+            "radiationW": 0.000053603587728195655,
+            "structuralW": 0.000017706686374553442,
+            "fixedVelocityRadiationW": 0.00005360223465265847,
+            "powerResidualW": -6.098637220230962e-20,
+            "maxRelativeResidual": 4.809075951833392e-16,
+            "pressure": [
+              [
+                0.04124393390968304,
+                0.031068579558928822
+              ],
+              [
+                0.07427856839682097,
+                -0.036250787671852185
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0001425723488399875,
+              -0.002037780017762707
+            ],
+            "inputW": 0.00007128617441999376,
+            "radiationW": 0.00005357999204988611,
+            "structuralW": 0.000017706182370107513,
+            "fixedVelocityRadiationW": 0.000053579992049886104,
+            "powerResidualW": 1.3552527156068805e-19,
+            "maxRelativeResidual": 5.56785530966879e-16,
+            "pressure": [
+              [
+                0.04125064252765213,
+                0.031116611140569975
+              ],
+              [
+                0.07428895423626018,
+                -0.03620969626862527
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.00016744746634201019,
+              -0.0020355224093234403
+            ],
+            "inputW": 0.00008372373317100509,
+            "radiationW": 0.00006600158034895201,
+            "structuralW": 0.000017722152822053268,
+            "fixedVelocityRadiationW": 0.00006553565456418992,
+            "powerResidualW": -1.7618285302889447e-19,
+            "maxRelativeResidual": 4.92895499166989e-16,
+            "pressure": [
+              [
+                0.041155676103058904,
+                0.03194831597810344
+              ],
+              [
+                0.07330839688281801,
+                -0.03459631892193762
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.0053226064640775035,
+            "magnitudeDeltaDb": 0.0029602832191056765
+          },
+          "radiationPowerDb": 0.4188161704304063,
+          "fixedVelocityPowerDb": 0.4466456428122999,
+          "pressure": [
+            {
+              "relativeComplexError": 0.019048610710736304,
+              "magnitudeDeltaDb": -0.13589821862116822
+            },
+            {
+              "relativeComplexError": 0.022903036406523112,
+              "magnitudeDeltaDb": 0.16995784840200584
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.000043685752589902906,
+            "magnitudeDeltaDb": 0.0003328629303686934
+          },
+          "radiationPowerDb": 0.0019121348761363913,
+          "fixedVelocityPowerDb": 0.0018025077632847304,
+          "pressure": [
+            {
+              "relativeComplexError": 0.0009385945759479622,
+              "magnitudeDeltaDb": -0.0057626389515875185
+            },
+            {
+              "relativeComplexError": 0.0005128468890733349,
+              "magnitudeDeltaDb": 0.0009120539127700549
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.0122066683499994,
+            "magnitudeDeltaDb": -0.0018777683138411713
+          },
+          "radiationPowerDb": 0.9036047614035365,
+          "fixedVelocityPowerDb": 0.8729474587231465,
+          "pressure": [
+            {
+              "relativeComplexError": 0.017122656268171405,
+              "magnitudeDeltaDb": 0.0777531536720342
+            },
+            {
+              "relativeComplexError": 0.023204899635918895,
+              "magnitudeDeltaDb": -0.16878117859105782
+            }
+          ]
+        }
+      },
+      {
+        "h": 6,
+        "f": 1577.87339988937,
+        "values": [
+          {
+            "Y": [
+              0.0027648329978293743,
+              -0.003076374534140934
+            ],
+            "inputW": 0.0013824164989146872,
+            "radiationW": 0.0011004113500278803,
+            "structuralW": 0.00028200514888680685,
+            "fixedVelocityRadiationW": 0.0010210159306095236,
+            "powerResidualW": 0,
+            "maxRelativeResidual": 4.812105700581879e-16,
+            "pressure": [
+              [
+                -0.04439912030542622,
+                -0.00255393227715939
+              ],
+              [
+                0.008658490329841,
+                0.040091709240522626
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.002614852638467194,
+              -0.0029884085296139644
+            ],
+            "inputW": 0.001307426319233597,
+            "radiationW": 0.0010472952375625347,
+            "structuralW": 0.000260131081671064,
+            "fixedVelocityRadiationW": 0.0010483140569403748,
+            "powerResidualW": -1.734723475976807e-18,
+            "maxRelativeResidual": 4.897729379778218e-16,
+            "pressure": [
+              [
+                -0.03908717311489031,
+                -0.003617030085745451
+              ],
+              [
+                0.0018502567330777487,
+                0.04107796801860135
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0026179800629877407,
+              -0.0029916023020702853
+            ],
+            "inputW": 0.0013089900314938703,
+            "radiationW": 0.001048661334365739,
+            "structuralW": 0.00026032869712813147,
+            "fixedVelocityRadiationW": 0.0010486613343657413,
+            "powerResidualW": -2.168404344971009e-19,
+            "maxRelativeResidual": 4.889476691442101e-16,
+            "pressure": [
+              [
+                -0.039085602624471714,
+                -0.0035954213082680987
+              ],
+              [
+                0.002017257535249932,
+                0.04102840733922801
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0026850377499882012,
+              -0.003044462793002787
+            ],
+            "inputW": 0.0013425188749941006,
+            "radiationW": 0.001074798671844166,
+            "structuralW": 0.00026772020314993475,
+            "fixedVelocityRadiationW": 0.0010449955129749307,
+            "powerResidualW": -2.168404344971009e-19,
+            "maxRelativeResidual": 4.152560952059414e-16,
+            "pressure": [
+              [
+                -0.044239186442986723,
+                -0.0016644769291526142
+              ],
+              [
+                0.003349464551310021,
+                0.03614919334886077
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.04265384730372662,
+            "magnitudeDeltaDb": 0.3445554398560017
+          },
+          "radiationPowerDb": 0.20919805961495092,
+          "fixedVelocityPowerDb": -0.11602736936470978,
+          "pressure": [
+            {
+              "relativeComplexError": 0.13795005383114314,
+              "magnitudeDeltaDb": 1.084902471019876
+            },
+            {
+              "relativeComplexError": 0.16327401108593956,
+              "magnitudeDeltaDb": -0.013107103761422769
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.001124427743789422,
+            "magnitudeDeltaDb": -0.009756800114876675
+          },
+          "radiationPowerDb": -0.0056612660332348175,
+          "fixedVelocityPowerDb": -0.001438459140057723,
+          "pressure": [
+            {
+              "relativeComplexError": 0.0005519854494171506,
+              "magnitudeDeltaDb": 0.0007853569924930655
+            },
+            {
+              "relativeComplexError": 0.004240708225791749,
+              "magnitudeDeltaDb": 0.008801972809479561
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.02262012009389748,
+            "magnitudeDeltaDb": 0.1913157077485656
+          },
+          "radiationPowerDb": 0.11257992451567987,
+          "fixedVelocityPowerDb": -0.01376983662833614,
+          "pressure": [
+            {
+              "relativeComplexError": 0.14035708609522213,
+              "magnitudeDeltaDb": 1.0445697782748584
+            },
+            {
+              "relativeComplexError": 0.12528671699606136,
+              "magnitudeDeltaDb": -1.081882837792262
+            }
+          ]
+        }
+      },
+      {
+        "h": 7,
+        "f": 1844.358576991797,
+        "values": [
+          {
+            "Y": [
+              0.0016467762672111514,
+              0.0005060484469811561
+            ],
+            "inputW": 0.0008233881336055757,
+            "radiationW": 0.0007311023626655071,
+            "structuralW": 0.00009228577094006866,
+            "fixedVelocityRadiationW": 0.0005858905993429882,
+            "powerResidualW": 0,
+            "maxRelativeResidual": 4.2654202244120226e-16,
+            "pressure": [
+              [
+                -0.20885514820601273,
+                0.3325500196348328
+              ],
+              [
+                -0.0432895280744057,
+                0.10476376955230685
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0015721745542274105,
+              0.0002534456151133052
+            ],
+            "inputW": 0.0007860872771137052,
+            "radiationW": 0.000711800136852122,
+            "structuralW": 0.00007428714026158393,
+            "fixedVelocityRadiationW": 0.000692412130212304,
+            "powerResidualW": -7.589415207398531e-19,
+            "maxRelativeResidual": 4.395093445701944e-16,
+            "pressure": [
+              [
+                -0.151920507583364,
+                0.2871687844235975
+              ],
+              [
+                -0.0275213122506772,
+                0.09365798179199405
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0015611105272568936,
+              0.00022284067642000047
+            ],
+            "inputW": 0.0007805552636284468,
+            "radiationW": 0.0007077732794256299,
+            "structuralW": 0.00007278198420281679,
+            "fixedVelocityRadiationW": 0.0007077732794256277,
+            "powerResidualW": 2.168404344971009e-19,
+            "maxRelativeResidual": 4.022105232631471e-16,
+            "pressure": [
+              [
+                -0.14481762981606242,
+                0.2837617606264211
+              ],
+              [
+                -0.025989555186725993,
+                0.09330574457740314
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0015212610284040268,
+              0.0012006857985224421
+            ],
+            "inputW": 0.0007606305142020134,
+            "radiationW": 0.000643629170217245,
+            "structuralW": 0.00011700134398476924,
+            "fixedVelocityRadiationW": 0.0003962687475559436,
+            "powerResidualW": -7.589415207398531e-19,
+            "maxRelativeResidual": 4.126846828840016e-16,
+            "pressure": [
+              [
+                -0.3596246592114107,
+                0.30440843369106074
+              ],
+              [
+                -0.07046284348643804,
+                0.09596577665777238
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.18763010530244323,
+            "magnitudeDeltaDb": 0.7683002612817469
+          },
+          "radiationPowerDb": 0.14084024708132786,
+          "fixedVelocityPowerDb": -0.820776329083569,
+          "pressure": [
+            {
+              "relativeComplexError": 0.25270073175662766,
+              "magnitudeDeltaDb": 1.8167691681739464
+            },
+            {
+              "relativeComplexError": 0.21423495890228825,
+              "magnitudeDeltaDb": 1.366153539767663
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.020637142081422106,
+            "magnitudeDeltaDb": 0.08516091208370369
+          },
+          "radiationPowerDb": 0.0246390448073644,
+          "fixedVelocityPowerDb": -0.09529495108120038,
+          "pressure": [
+            {
+              "relativeComplexError": 0.024727686496393442,
+              "magnitudeDeltaDb": 0.1700516801203851
+            },
+            {
+              "relativeComplexError": 0.01622725442738282,
+              "magnitudeDeltaDb": 0.06789742468895342
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.5956823094173619,
+            "magnitudeDeltaDb": 1.7056819698313277
+          },
+          "radiationPowerDb": -0.43722348430743174,
+          "fixedVelocityPowerDb": -2.4237484530419535,
+          "pressure": [
+            {
+              "relativeComplexError": 0.6415280245134853,
+              "magnitudeDeltaDb": 3.229012436545075
+            },
+            {
+              "relativeComplexError": 0.4405291672671338,
+              "magnitudeDeltaDb": 1.724477162932955
+            }
+          ]
+        }
+      },
+      {
+        "h": 8,
+        "f": 2112.4525904278858,
+        "values": [
+          {
+            "Y": [
+              0.0034479948811267673,
+              -0.0024323073972802537
+            ],
+            "inputW": 0.0017239974405633836,
+            "radiationW": 0.0015161811721274008,
+            "structuralW": 0.00020781626843598315,
+            "fixedVelocityRadiationW": 0.0009805269494360582,
+            "powerResidualW": -2.168404344971009e-19,
+            "maxRelativeResidual": 4.58918250537194e-16,
+            "pressure": [
+              [
+                -0.13629005397383182,
+                0.11176897584765352
+              ],
+              [
+                -0.1736203181731195,
+                0.0035654580914987843
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0024849348561237425,
+              -0.0029699656972462275
+            ],
+            "inputW": 0.0012424674280618712,
+            "radiationW": 0.0010897509001334556,
+            "structuralW": 0.00015271652792841597,
+            "fixedVelocityRadiationW": 0.0011256889646210726,
+            "powerResidualW": -4.336808689942018e-19,
+            "maxRelativeResidual": 4.3907543999101454e-16,
+            "pressure": [
+              [
+                -0.12002378434545857,
+                0.05973877140799502
+              ],
+              [
+                -0.14946558493464887,
+                0.005937936656052505
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0025527750899972034,
+              -0.0029633985609350847
+            ],
+            "inputW": 0.0012763875449986017,
+            "radiationW": 0.001123236989618259,
+            "structuralW": 0.0001531505553803439,
+            "fixedVelocityRadiationW": 0.0011232369896182598,
+            "powerResidualW": -1.0842021724855044e-18,
+            "maxRelativeResidual": 5.158030423768447e-16,
+            "pressure": [
+              [
+                -0.11838294581491518,
+                0.06361870692181638
+              ],
+              [
+                -0.15272392970596332,
+                0.004536501189131354
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.002438293037095356,
+              -0.0030012047674714717
+            ],
+            "inputW": 0.001219146518547678,
+            "radiationW": 0.0010689571965987507,
+            "structuralW": 0.00015018932194892518,
+            "fixedVelocityRadiationW": 0.0011571016826269268,
+            "powerResidualW": 2.168404344971009e-18,
+            "maxRelativeResidual": 3.7058900015629435e-16,
+            "pressure": [
+              [
+                -0.12138422821780984,
+                0.05480583174304977
+              ],
+              [
+                -0.14814797258038162,
+                0.0077181398303583565
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.2661257017388677,
+            "magnitudeDeltaDb": 0.6589103017935867
+          },
+          "radiationPowerDb": 1.3027970239767142,
+          "fixedVelocityPowerDb": -0.5901186229125386,
+          "pressure": [
+            {
+              "relativeComplexError": 0.3822502074599027,
+              "magnitudeDeltaDb": 2.3554075710476496
+            },
+            {
+              "relativeComplexError": 0.13691184945761906,
+              "magnitudeDeltaDb": 1.1118701002119868
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.01742568343665871,
+            "magnitudeDeltaDb": -0.08682001755556999
+          },
+          "radiationPowerDb": -0.1314416047237275,
+          "fixedVelocityPowerDb": 0.009470117354723164,
+          "pressure": [
+            {
+              "relativeComplexError": 0.03134527246812438,
+              "magnitudeDeltaDb": -0.0210739546110457
+            },
+            {
+              "relativeComplexError": 0.023214326154413354,
+              "magnitudeDeltaDb": -0.18429882381673532
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.014496583468934903,
+            "magnitudeDeltaDb": -0.012498764359142572
+          },
+          "radiationPowerDb": -0.08366920967741168,
+          "fixedVelocityPowerDb": 0.11953116501168363,
+          "pressure": [
+            {
+              "relativeComplexError": 0.03816772310281145,
+              "magnitudeDeltaDb": -0.057551179138434536
+            },
+            {
+              "relativeComplexError": 0.014806275870992678,
+              "magnitudeDeltaDb": -0.07198748811457574
+            }
+          ]
+        }
+      },
+      {
+        "h": 9,
+        "f": 2382.378617189026,
+        "values": [
+          {
+            "Y": [
+              0.0022624406940029555,
+              0.0010062658044860697
+            ],
+            "inputW": 0.0011312203470014777,
+            "radiationW": 0.001036044005020322,
+            "structuralW": 0.0000951763419811558,
+            "fixedVelocityRadiationW": 0.00044846620796978913,
+            "powerResidualW": 0,
+            "maxRelativeResidual": 5.333981880861305e-16,
+            "pressure": [
+              [
+                -0.0388330301942032,
+                0.01990246914535725
+              ],
+              [
+                0.08779043693017738,
+                0.08807169989456168
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0015656658866820274,
+              0.00008329625486845717
+            ],
+            "inputW": 0.0007828329433410137,
+            "radiationW": 0.0007470153393926081,
+            "structuralW": 0.000035817603948405724,
+            "fixedVelocityRadiationW": 0.0007706558404399462,
+            "powerResidualW": -1.0842021724855044e-19,
+            "maxRelativeResidual": 4.610218042521403e-16,
+            "pressure": [
+              [
+                -0.007447165518504797,
+                0.018826982061102546
+              ],
+              [
+                0.04908044186951351,
+                0.03773624531687912
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0015999450103278139,
+              0.00006752860780493297
+            ],
+            "inputW": 0.0007999725051639069,
+            "radiationW": 0.0007634755827796443,
+            "structuralW": 0.00003649692238426332,
+            "fixedVelocityRadiationW": 0.0007634755827796443,
+            "powerResidualW": -6.505213034913027e-19,
+            "maxRelativeResidual": 4.2706082698971283e-16,
+            "pressure": [
+              [
+                -0.006962828753687243,
+                0.018890362356185287
+              ],
+              [
+                0.04773067406273934,
+                0.03628510590330557
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0015873591748267572,
+              0.00008273311969748193
+            ],
+            "inputW": 0.0007936795874133786,
+            "radiationW": 0.0007576475240323927,
+            "structuralW": 0.00003603206338098647,
+            "fixedVelocityRadiationW": 0.0007740350194911377,
+            "powerResidualW": -6.505213034913027e-19,
+            "maxRelativeResidual": 6.038919808414312e-16,
+            "pressure": [
+              [
+                -0.007209073527637291,
+                0.0181243618647181
+              ],
+              [
+                0.04847406661631737,
+                0.036362708506689496
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.7174910507784221,
+            "magnitudeDeltaDb": 3.7856302004260716
+          },
+          "radiationPowerDb": 1.3258304990747896,
+          "fixedVelocityPowerDb": -2.3106542772839958,
+          "pressure": [
+            {
+              "relativeComplexError": 1.5838025890148404,
+              "magnitudeDeltaDb": 6.718873144660847
+            },
+            {
+              "relativeComplexError": 1.091991738687475,
+              "magnitudeDeltaDb": 6.33637913694765
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.023562110825938086,
+            "magnitudeDeltaDb": -0.1835740076670318
+          },
+          "radiationPowerDb": -0.09465632339605715,
+          "fixedVelocityPowerDb": 0.040653219187760645,
+          "pressure": [
+            {
+              "relativeComplexError": 0.02426229127510488,
+              "magnitudeDeltaDb": 0.04889077526505866
+            },
+            {
+              "relativeComplexError": 0.03305438124444644,
+              "magnitudeDeltaDb": 0.2785118019376711
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.013840724452155279,
+            "magnitudeDeltaDb": 0.11902887941726963
+          },
+          "radiationPowerDb": 0.06137688495743386,
+          "fixedVelocityPowerDb": 0.019001357416369255,
+          "pressure": [
+            {
+              "relativeComplexError": 0.036641851022499144,
+              "magnitudeDeltaDb": -0.3238167459391351
+            },
+            {
+              "relativeComplexError": 0.024251620938002625,
+              "magnitudeDeltaDb": -0.18628564612149176
+            }
+          ]
+        }
+      },
+      {
+        "h": 10,
+        "f": 2654.3572538691965,
+        "values": [
+          {
+            "Y": [
+              0.0011334301541837284,
+              -0.0015254516424003171
+            ],
+            "inputW": 0.0005667150770918642,
+            "radiationW": 0.0005350146551729867,
+            "structuralW": 0.00003170042191887742,
+            "fixedVelocityRadiationW": 0.0010162114458699108,
+            "powerResidualW": 1.0842021724855044e-19,
+            "maxRelativeResidual": 4.040324204921053e-16,
+            "pressure": [
+              [
+                -0.05884919153154157,
+                0.08552777556955404
+              ],
+              [
+                0.07058580569516153,
+                -0.07796189509719313
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0015402884414742963,
+              -0.0016215435521727574
+            ],
+            "inputW": 0.0007701442207371481,
+            "radiationW": 0.0007270800466965825,
+            "structuralW": 0.00004306417404056518,
+            "fixedVelocityRadiationW": 0.0006837224787275998,
+            "powerResidualW": 4.336808689942018e-19,
+            "maxRelativeResidual": 4.720003529331808e-16,
+            "pressure": [
+              [
+                -0.04516073518391345,
+                0.1087400577295358
+              ],
+              [
+                0.06833044498120226,
+                -0.07587976654144483
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0015057907650205258,
+              -0.0015807372087445557
+            ],
+            "inputW": 0.0007528953825102629,
+            "radiationW": 0.0007121093893856024,
+            "structuralW": 0.00004078599312466033,
+            "fixedVelocityRadiationW": 0.0007121093893856037,
+            "powerResidualW": 2.168404344971009e-19,
+            "maxRelativeResidual": 3.7873875591281397e-16,
+            "pressure": [
+              [
+                -0.04406407612475157,
+                0.10619216958211644
+              ],
+              [
+                0.06393062681135527,
+                -0.07679252825896346
+              ]
+            ]
+          },
+          {
+            "Y": [
+              0.0015162482315692377,
+              -0.0016205116350830515
+            ],
+            "inputW": 0.0007581241157846189,
+            "radiationW": 0.0007164587792661655,
+            "structuralW": 0.000041665336518453127,
+            "fixedVelocityRadiationW": 0.0007006577333805823,
+            "powerResidualW": 2.168404344971009e-19,
+            "maxRelativeResidual": 5.297054088538313e-16,
+            "pressure": [
+              [
+                -0.04537229908870415,
+                0.10672167405686546
+              ],
+              [
+                0.06843797018315154,
+                -0.07494852599280981
+              ]
+            ]
+          }
+        ],
+        "coarseVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.172431012549845,
+            "magnitudeDeltaDb": -1.2045876992090503
+          },
+          "radiationPowerDb": -1.2418103369602247,
+          "fixedVelocityPowerDb": 1.5443737006392453,
+          "pressure": [
+            {
+              "relativeComplexError": 0.2210027353764827,
+              "magnitudeDeltaDb": -0.8863218086707778
+            },
+            {
+              "relativeComplexError": 0.06762469962879429,
+              "magnitudeDeltaDb": 0.4445731535690475
+            }
+          ]
+        },
+        "mediumVsFine": {
+          "mobility": {
+            "relativeComplexError": 0.024475899150269025,
+            "magnitudeDeltaDb": 0.2096788189878635
+          },
+          "radiationPowerDb": 0.09035514320158128,
+          "fixedVelocityPowerDb": -0.1766685369241823,
+          "pressure": [
+            {
+              "relativeComplexError": 0.024126674962241815,
+              "magnitudeDeltaDb": 0.20705634867830053
+            },
+            {
+              "relativeComplexError": 0.04497049217297701,
+              "magnitudeDeltaDb": 0.18836541136738721
+            }
+          ]
+        },
+        "forcedFrequencyVsMedium": {
+          "mobility": {
+            "relativeComplexError": 0.010758973358891465,
+            "magnitudeDeltaDb": -0.06722195163932876
+          },
+          "radiationPowerDb": -0.0639101767985539,
+          "fixedVelocityPowerDb": 0.10626061391146198,
+          "pressure": [
+            {
+              "relativeComplexError": 0.017235897614406834,
+              "magnitudeDeltaDb": -0.13222264005636322
+            },
+            {
+              "relativeComplexError": 0.009180418522200624,
+              "magnitudeDeltaDb": -0.0526961161593051
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
