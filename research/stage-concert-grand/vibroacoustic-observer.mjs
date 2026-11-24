@@ -1,15 +1,14 @@
 // F7.2: offline observation of mechanical trajectory; no fluid reaction. Finite tapered source energy diagnostic.
 export function captureAcceleration(hammer,board,steps){
- if(!Number.isInteger(steps)||steps<1||steps>1000000||hammer.h!==board.h)throw new RangeError('capture');
- const rate=1/board.h,trace=board.modes.map(()=>new Float64Array(steps)),v0=new Float64Array(board.v.length),initial=hammer.energy();
+ if(!Number.isInteger(steps)||steps<2||steps>1000000||hammer.h!==board.h)throw new RangeError('capture');
+ const rate=1/board.h,trace=board.modes.map(()=>new Float64Array(steps)),v0=new Float64Array(board.v.length),x0=new Float64Array(board.x.length),initial=hammer.energy();
  let residual=0,derivativeError=0,maxIncrease=0,prev=initial,peakForce=0;
  for(let t=0;t<steps;t++){
-  v0.set(board.v);const s=hammer.step(),e=hammer.energy();peakForce=Math.max(peakForce,s.sum);
+  v0.set(board.v);x0.set(board.x);const s=hammer.step(),e=hammer.energy();peakForce=Math.max(peakForce,s.sum);
   residual=Math.max(residual,Math.abs(e+hammer.lossJ+hammer.bridge.lossJ-initial));maxIncrease=Math.max(maxIncrease,e-prev);prev=e;
   for(let i=0;i<trace.length;i++){const a=(board.v[i]-v0[i])*rate;trace[i][t]=a;const m=board.modes[i],force=-hammer.bridge.lastJointForce*m.w,coeff=m.coeff;
    // Independent exact constant-force velocity integral: m=1 in mass-normalized coordinates.
-   const oldX=(board.x[i]-coeff.S*v0[i]-coeff.G*force)/coeff.A;
-   if(Math.abs(coeff.A)>.5)derivativeError=Math.max(derivativeError,Math.abs(a-(coeff.H*oldX+(coeff.D-1)*v0[i]+coeff.J*force)*rate));
+   derivativeError=Math.max(derivativeError,Math.abs(a-(coeff.H*x0[i]+(coeff.D-1)*v0[i]+coeff.J*force)*rate));
   }
  }
  return {rate,trace,initial,residual,derivativeError,maxIncrease,peakForce,boardEnergy:board.energy(),boardLoss:board.lossJ,mechanicalLoss:hammer.lossJ+hammer.bridge.lossJ};
@@ -29,6 +28,7 @@ export function sineIntegral(m,L,k){
 }
 
 export function bandEnergy(p,modes,trace,rate,{maxHz=2000,nt=12,np=24,rho=1.204,c=343}={}){
+ if(!Number.isFinite(rate)||rate<=0||!Number.isFinite(maxHz)||maxHz<=0||![nt,np].every(v=>Number.isInteger(v)&&v>=1&&v<=128)||![rho,c].every(v=>Number.isFinite(v)&&v>0)||!trace.length||trace.length!==modes.length||trace[0].length<2||trace.some(q=>q.length!==trace[0].length||!Array.from(q).every(Number.isFinite)))throw new RangeError('band energy');
  const len=trace[0].length;let N=1;while(N<2*len)N*=2;
  // DFT of finite acceleration record with a cosine taper over final quarter.
  // Energy estimate is for this constructed finite source, not the full note.
