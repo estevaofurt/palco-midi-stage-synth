@@ -1,0 +1,13 @@
+import {concatenate24} from './f9-midi-listening-sequence.mjs';
+import {wave24} from './f9-wave24.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};const rejects=f=>{try{f();return false}catch{return true;}};
+const a=wave24([new Float64Array(2000).fill(.1),new Float64Array(2000).fill(-.1)],48000,1).bytes,b=wave24([new Float64Array(3000).fill(.2),new Float64Array(3000).fill(-.2)],48000,1).bytes;
+const q=concatenate24([a,b],100);
+check('duration and offsets',q.frames===5100&&q.placements[1].startFrame===2100);
+check('first clip unchanged',a.subarray(44).every((x,i)=>q.bytes[44+i]===x));
+check('second clip unchanged',b.subarray(44).every((x,i)=>q.bytes[44+2100*6+i]===x));
+check('gap exact zero',q.bytes.subarray(44+2000*6,44+2100*6).every(x=>x===0));
+check('valid RIFF size',new DataView(q.bytes.buffer).getUint32(4,true)===q.bytes.length-8&&new DataView(q.bytes.buffer).getUint32(40,true)===q.bytes.length-44);
+check('reject truncated',rejects(()=>concatenate24([a.slice(0,-1)])));
+check('reject invalid gap',rejects(()=>concatenate24([a,b],-1)));
+console.log('F9.18a sequence tests passed:',n);

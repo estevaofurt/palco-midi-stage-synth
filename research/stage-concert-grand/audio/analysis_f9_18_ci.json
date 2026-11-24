@@ -1,0 +1,235 @@
+{
+  "runId": 45463467507,
+  "artifactId": 14954900984,
+  "testsPassed": 19,
+  "smoke": [
+    {
+      "midiVelocity": 1,
+      "velocity": 0.06,
+      "rmsPa": 0.008045596461588493,
+      "peakForce": 0.47704585536130256,
+      "attack": {
+        "firstForceS": 0.0033333333333333496,
+        "lastForceEndS": 0.008479166666666623,
+        "contactSpanS": 0.005145833333333273,
+        "activeContactS": 0.005145833333333333,
+        "activeSteps": 494,
+        "peakForceN": 0.47704585536130256,
+        "peakCompressionM": 0.00008292052063552253,
+        "impulseNs": 0.001147439321202564,
+        "reboundMps": -0.054743932120256286,
+        "hammerLossJ": 0.0000011903684660156903
+      },
+      "maxBalance": 1.7966077031032063e-15
+    },
+    {
+      "midiVelocity": 4,
+      "velocity": 0.07208893723463809,
+      "rmsPa": 0.010845279200832987,
+      "peakForce": 0.5962958453947812,
+      "attack": {
+        "firstForceS": 0.0027708333333333413,
+        "lastForceEndS": 0.00766666666666659,
+        "contactSpanS": 0.004895833333333249,
+        "activeContactS": 0.004895833333333333,
+        "activeSteps": 470,
+        "peakForceN": 0.5962958453947812,
+        "peakCompressionM": 0.00009104287633906058,
+        "impulseNs": 0.0013676110657407966,
+        "reboundMps": -0.06467216933944156,
+        "hammerLossJ": 0.00000172876004502008
+      },
+      "maxBalance": 1.9261190407383888e-15
+    },
+    {
+      "midiVelocity": 8,
+      "velocity": 0.09,
+      "rmsPa": 0.015201196420960378,
+      "peakForce": 0.7781900212627124,
+      "attack": {
+        "firstForceS": 0.00221875,
+        "lastForceEndS": 0.006843749999999945,
+        "contactSpanS": 0.004624999999999945,
+        "activeContactS": 0.004625,
+        "activeSteps": 444,
+        "peakForceN": 0.7781900212627124,
+        "peakCompressionM": 0.00010178403301466958,
+        "impulseNs": 0.0016900939955090822,
+        "reboundMps": -0.07900939955090812,
+        "hammerLossJ": 0.000002678228504751942
+      },
+      "maxBalance": 1.7915221172878915e-15
+    },
+    {
+      "midiVelocity": 12,
+      "velocity": 0.10530263751838928,
+      "rmsPa": 0.019029248373035552,
+      "peakForce": 0.9373096950994133,
+      "attack": {
+        "firstForceS": 0.0018958333333333297,
+        "lastForceEndS": 0.006343749999999959,
+        "contactSpanS": 0.0044479166666666296,
+        "activeContactS": 0.004447916666666667,
+        "activeSteps": 427,
+        "peakForceN": 0.9373096950994133,
+        "peakCompressionM": 0.00011003420720220232,
+        "impulseNs": 0.0019633529478543152,
+        "reboundMps": -0.09103265726704228,
+        "hammerLossJ": 0.0000036164134002721764
+      },
+      "maxBalance": 1.6859885883235837e-15
+    },
+    {
+      "midiVelocity": 16,
+      "velocity": 0.12,
+      "rmsPa": 0.02276783822799565,
+      "peakForce": 1.0926240277766237,
+      "attack": {
+        "firstForceS": 0.0016666666666666644,
+        "lastForceEndS": 0.005947916666666636,
+        "contactSpanS": 0.004281249999999972,
+        "activeContactS": 0.0042812499999999995,
+        "activeSteps": 411,
+        "peakForceN": 1.0926240277766237,
+        "peakCompressionM": 0.00011733157277507279,
+        "impulseNs": 0.002224625785044579,
+        "reboundMps": -0.10246257850445802,
+        "hammerLossJ": 0.000004614808770809697
+      },
+      "maxBalance": 2.2108373074966603e-15
+    },
+    {
+      "midiVelocity": 20,
+      "velocity": 0.13391959003781162,
+      "rmsPa": 0.026352366506915813,
+      "peakForce": 1.2415273773397213,
+      "attack": {
+        "firstForceS": 0.0014895833333333321,
+        "lastForceEndS": 0.0056354166666666445,
+        "contactSpanS": 0.004145833333333312,
+        "activeContactS": 0.004145833333333333,
+        "activeSteps": 398,
+        "peakForceN": 1.2415273773397213,
+        "peakCompressionM": 0.00012377896081170917,
+        "impulseNs": 0.00247133279285559,
+        "reboundMps": -0.11321368924774738,
+        "hammerLossJ": 0.000005640303455657412
+      },
+      "maxBalance": 1.9987131524498714e-15
+    },
+    {
+      "midiVelocity": 24,
+      "velocity": 0.15,
+      "rmsPa": 0.03053807700590818,
+      "peakForce": 1.4153583851534839,
+      "attack": {
+        "firstForceS": 0.001333333333333333,
+        "lastForceEndS": 0.005322916666666653,
+        "contactSpanS": 0.00398958333333332,
+        "activeContactS": 0.003989583333333333,
+        "activeSteps": 383,
+        "peakForceN": 1.4153583851534839,
+        "peakCompressionM": 0.00013075573645528668,
+        "impulseNs": 0.0027555523597763377,
+        "reboundMps": -0.12555523597763393,
+        "hammerLossJ": 0.00000691448006951201
+      },
+      "maxBalance": 1.9197696817657706e-15
+    },
+    {
+      "midiVelocity": 36,
+      "velocity": 0.25,
+      "rmsPa": 0.0575592850438804,
+      "peakForce": 2.525633518938718,
+      "attack": {
+        "firstForceS": 0.0007916666666666677,
+        "lastForceEndS": 0.004250000000000015,
+        "contactSpanS": 0.003458333333333347,
+        "activeContactS": 0.0034583333333333332,
+        "activeSteps": 332,
+        "peakForceN": 2.525633518938718,
+        "peakCompressionM": 0.0001664985472961852,
+        "impulseNs": 0.004502850349868515,
+        "reboundMps": -0.20028503498685152,
+        "hammerLossJ": 0.000016637068744529085
+      },
+      "maxBalance": 4.234405794750762e-15
+    },
+    {
+      "midiVelocity": 52,
+      "velocity": 0.5,
+      "rmsPa": 0.12856062330870663,
+      "peakForce": 5.474113021470236,
+      "attack": {
+        "firstForceS": 0.00039583333333333316,
+        "lastForceEndS": 0.0034062500000000173,
+        "contactSpanS": 0.0030104166666666842,
+        "activeContactS": 0.0030104166666666664,
+        "activeSteps": 289,
+        "peakForceN": 5.474113021470236,
+        "peakCompressionM": 0.00022925500254178646,
+        "impulseNs": 0.00876274116381254,
+        "reboundMps": -0.3762741163812532,
+        "hammerLossJ": 0.000050632131310932816
+      },
+      "maxBalance": 3.0702437120444515e-15
+    },
+    {
+      "midiVelocity": 76,
+      "velocity": 1,
+      "rmsPa": 0.27482694339507135,
+      "peakForce": 11.95780084325923,
+      "attack": {
+        "firstForceS": 0.00019791666666666663,
+        "lastForceEndS": 0.0028854166666666763,
+        "contactSpanS": 0.0026875000000000098,
+        "activeContactS": 0.0026875,
+        "activeSteps": 258,
+        "peakForceN": 11.95780084325923,
+        "peakCompressionM": 0.00031618039756126884,
+        "impulseNs": 0.01707169795098102,
+        "reboundMps": -0.7071697950981005,
+        "hammerLossJ": 0.0001477522373486792
+      },
+      "maxBalance": 8.511420734880204e-15
+    },
+    {
+      "midiVelocity": 100,
+      "velocity": 1.5898478405355054,
+      "rmsPa": 0.4531298896875564,
+      "peakForce": 20.175735645822357,
+      "attack": {
+        "firstForceS": 0.00012500000000000003,
+        "lastForceEndS": 0.0026458333333333394,
+        "contactSpanS": 0.0025208333333333393,
+        "activeContactS": 0.0025208333333333333,
+        "activeSteps": 242,
+        "peakForceN": 20.175735645822357,
+        "peakCompressionM": 0.00039153497906891386,
+        "impulseNs": 0.026720390475452452,
+        "reboundMps": -1.0821912070097406,
+        "hammerLossJ": 0.00030291512918405143
+      },
+      "maxBalance": 4.597017211338539e-15
+    },
+    {
+      "midiVelocity": 127,
+      "velocity": 2.5,
+      "rmsPa": 0.7388394666218522,
+      "peakForce": 33.590546206379486,
+      "attack": {
+        "firstForceS": 0.00007291666666666667,
+        "lastForceEndS": 0.0024583333333333367,
+        "contactSpanS": 0.00238541666666667,
+        "activeContactS": 0.0023854166666666668,
+        "activeSteps": 229,
+        "peakForceN": 33.590546206379486,
+        "peakCompressionM": 0.0004817329655791222,
+        "impulseNs": 0.04147137831080549,
+        "reboundMps": -1.6471378310805527,
+        "hammerLossJ": 0.0006158245900666308
+      },
+      "maxBalance": 1.0963452368173421e-14
+    }
+  ]
+}
