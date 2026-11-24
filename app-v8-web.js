@@ -28,7 +28,7 @@ byId('profile-note').textContent=mobileLite
   :'Completo: até 64 notas; efeitos são ativados somente quando necessários.';
 
 function paintEngineLabel(){
-  byId('profile-note').textContent=(mobileLite?'Leve · 32 notas':'Completo · 64 notas')+' · C3X V8 Web · Modelagem física dry, sem amostras. FX opcionais.';
+  byId('profile-note').textContent=(mobileLite?'Leve · 32 notas':'Completo · 64 notas')+' · Yamaha C3X V8 Web: físico e dry. Efeitos opcionais.';
 }
 paintEngineLabel();
 let ctx,stage,access,panel,performer,saveTimer,previewTimer,previewToken=0;
@@ -66,10 +66,103 @@ panel=new Panel(state,{
   level(id,level){state.patches[id].level=level;stage?.update(id,'level');panel.sync();save()},
   set(id,key){
     stage?.update(id,key);
+    if(id==='piano'&&key==='physicalQuality')
+      stage?.instruments.piano.setV8Quality(state.patches.piano.values.physicalQuality);
+    if(id==='piano')paintEngineLabel();
+    save();
+  },listen,
+  fxEnabled(id,enabled){state.fx.enabled[id]=enabled;stage?.updateEffects();panel.sync();save()},
+  fxChange(id,key,value){state.fx.slots[id][key]=value;stage?.updateEffects();save()},
+  loadSF,clearSF,setProgram
+});
+syncScene();
+performer=new Performance(()=>stage,state.performance,updatePerformanceUI);
+function setProgram(value){if(!stage)return;stage.instruments.sf.program=value;panel.soundfontInfo.selected=value;save()}
+function clearSF(){stage?.instruments.sf.unload();panel.updateSoundFont(null,[]);report('Banco SF2 retirado. Timbres internos disponíveis.');}
+async function loadSF(file){
+  try{
+    report('Importando '+file.name+'…');await startAudio();
+    const programs=await stage.instruments.sf.load(file);
+    state.mask|=engines.sf.bit;state.editor='sf';stage.applyRouting();
+    panel.updateSoundFont(file.name,programs);syncScene();save();
+    report(programs.length+' programas disponíveis no arquivo '+file.name+'. O arquivo permanece apenas nesta sessão.');
+  }catch(e){report('Falha ao carregar SF2: '+e.message)}
+}
+function updatePerformanceUI(){
+  if(!performer)return;
+  const p=state.performance;
+  byId('arp-toggle').setAttribute('aria-pressed',String(p.arp));
+  byId('arp-toggle').textContent=p.arp?'Arpejador ligado':'Arpejador desligado';
+  byId('bpm').value=p.bpm;byId('arp-rate').value=p.rate;
+  byId('chord-mode').value=p.chord;byId('loop-bars').value=p.loopBars;
+  byId('record-loop').textContent=performer.recording?'Parar gravação':'Gravar loop';
+  byId('play-loop').textContent=performer.loopPlaying?'Parar loop':'Tocar loop';
+  byId('play-loop').disabled=!performer.events.length;
+  byId('clear-loop').disabled=!performer.events.length;
+  const status=performer.recording?'Gravando':performer.loopPlaying?'Reproduzindo':performer.events.length?'Loop disponível':'Looper pronto';
+  byId('loop-status').textContent=status;
+}
+byId('arp-toggle').onclick=()=>{performer.setArp(!state.performance.arp);save()};
+byId('arp-rate').onchange=e=>{state.performance.rate=e.target.value;performer.restartArp();save()};
+byId('chord-mode').onchange=e=>{performer.allNotesOff();state.performance.chord=e.target.value;save()};
+byId('bpm').onchange=e=>{state.performance.bpm=+e.target.value;performer.restartArp();save()};
+byId('loop-bars').onchange=e=>{state.performance.loopBars=e.target.value;save()};
+byId('record-loop').onclick=()=>{if(performer.recording)performer.stopRecording();else performer.startRecording()};
+byId('play-loop').onclick=()=>{if(performer.loopPlaying)performer.stopLoop();else performer.startLoop()};
+byId('clear-loop').onclick=()=>performer.clearLoop();
+updatePerformanceUI();
+const meterBars=[];
+for(let i=0;i<24;i++){const mark=document.createElement('i');byId('meter').append(mark);meterBars.push(mark)}
+const meterData=new Float32Array(256);
+function updateMeter(time){
+  frame=0;if(document.hidden||ctx?.state!=='running')return;
+  if(time-lastMeter>(mobileLite?220:80)){
+    lastMeter=time;stage.meter.getFloatTimeDomainData(meterData);
+    let peak=0;for(const v of meterData)peak=Math.max(peak,Math.abs(v));
+    const db=20*Math.log10(Math.max(.00001,peak)),bars=Math.max(0,Math.round((db+48)/2));
+    for(let i=0;i<24;i++)meterBars[i].classList.toggle('lit',i<bars);
+    byId('peak').textContent=db< -59?'−∞ dB':Math.round(db)+' dB';
+  }
+  frame=mobileLite?setTimeout(()=>updateMeter(performance.now()),220):requestAnimationFrame(updateMeter);
+}
+function resetMeter(){
+  if(frame){if(mobileLite)clearTimeout(frame);else cancelAnimationFrame(frame)}frame=0;meterBars.forEach(b=>b.classList.remove('lit'));byId('peak').textContent='−∞ dB';
+}
+function displayAudio(){
+  const on=ctx?.state==='running';
+  byId('power').classList.toggle('on',on);
+  byId('power').querySelector('span:last-child').textContent=on?'Áudio ativo':'Ativar áudio';
+  if(on&&!frame&&!document.hidden)frame=mobileLite?setTimeout(()=>updateMeter(performance.now()),220):requestAnimationFrame(updateMeter);else if(!on)resetMeter();
+}
+async function startAudio(){
+  if(!ctx){
+    const Audio=window.AudioContext||window.webkitAudioContext;
+    if(!Audio)throw Error('Áudio indisponível neste navegador.');
+    ctx=new Audio({latencyHint:mobileLite?'balanced':'interactive'});
+    const resume=ctx.resume();
+    try{
+      stage=new Stage(ctx,state,{bank:text=>byId('bank').textContent=text,note:paintKeys,pedal:paintPedal},{profile});
+    }catch(e){
+      resume.catch(()=>{});ctx.close().catch(()=>{});ctx=null;stage=null;throw e;
+    }
+    ctx.addEventListener('statechange',displayAudio);
+    await resume;
+  }else if(ctx.state!=='running')await ctx.resume();
+  displayAudio();if(ctx.state!=='running')throw Error('Toque em Ativar áudio para liberar o som.');
+  const ok=await stage.instruments.piano.prepareV8(state.patches.piano.values.physicalQuality);
+  if(!ok)throw Error('Motor C3X V8 Web não suportado: use navegador com AudioWorklet.');
+}
+byId('power').onclick=()=>startAudio().then(()=>{
+  report('C3X V8 Web pronto. Piano físico dry, sem WAVs ou reverb interno.');
+}).catch(e=>report(e.message));
+function stopPreview(){previewToken++;clearTimeout(previewTimer);if(stage)stage.disconnect('preview')}
+async function listen(id){
+  stopPreview();const token=previewToken;
+  try{
+    await startAudio();
     if(id==='piano'){
-      const ok=await stage.instruments.piano.prepareV8(
-        state.patches.piano.values.physicalQuality);
-      if(!ok)throw Error('Motor C3X V8 Web indisponível neste navegador.');
+      const ok=await stage.instruments.piano.prepareV8(state.patches.piano.values.physicalQuality);
+      if(!ok)throw Error('Motor C3X V8 Web não suportado.');
     }
     if(token!==previewToken)return;
     const mask=engines[id].bit;
