@@ -1,0 +1,35 @@
+name: Concert Grand F9.12 shared board sympathetic prototype
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f912.yml'
+      - 'research/stage-concert-grand/f9-shared-board*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-shared-board.test.mjs
+  experiment:
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-shared-board-demo.mjs /tmp/f912
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F912-sympathetic-mechanics
+          path: /tmp/f912/
+          if-no-files-found: error
