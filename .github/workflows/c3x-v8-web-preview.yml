@@ -1,0 +1,33 @@
+name: Stage Synth - C3X V8 Web physical preview
+on:
+  pull_request:
+    paths:
+      - 'v8-preview.html'
+      - 'app-v8-web.js'
+      - 'patches-v8-web.js'
+      - 'acoustic-v8-web.js'
+      - 'piano-c3x-v8-web.js'
+      - 'tests/v8_web_preview.test.mjs'
+      - 'tests/cache_version.test.mjs'
+      - '.github/workflows/c3x-v8-web-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate V8 Web syntax and isolated piano UI
+        run: |
+          node --check piano-c3x-v8-web.js
+          node --check acoustic-v8-web.js
+          node --check patches-v8-web.js
+          node --check app-v8-web.js
+          node --test tests/v8_web_preview.test.mjs
+      - name: Preserve the complete legacy Stage regression suite
+        run: npm run check

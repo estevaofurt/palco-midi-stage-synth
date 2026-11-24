@@ -19,7 +19,7 @@ for(const [file,version] of [['index.html','1.12.10'],['v1.12.7.html','1.12.7'],
         ?'./acoustic-v127.mjs?build=1.12.7-archive':`${path}?build=${version}`);
     }
     if(file==='index.html'||file==='v1.12.7.html'){
-      for(const path of readdirSync(dir).filter(x=>x.endsWith('.js')&&x!=='app.js')){
+      for(const path of readdirSync(dir).filter(x=>x.endsWith('.js')&&x!=='app.js'&&!['app-v8-web.js','patches-v8-web.js','acoustic-v8-web.js','piano-c3x-v8-web.js'].includes(x))){
         const expected=file==='v1.12.7.html'&&path==='acoustic.js'
           ?'./acoustic-v127.mjs?build=1.12.7-archive':`./${path}?build=${version}`;
         assert.equal(map.imports[`./${path}`],expected);
