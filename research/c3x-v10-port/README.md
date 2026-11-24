@@ -18,7 +18,15 @@ node research/c3x-v10-port/demo-stage11b.mjs /tmp/V11B_modal_probe_DIAGNOSTICO.w
 
 Compatibilidade de 44,1 e 48 kHz está testada na sonda. Nenhum arquivo Python ou fonte da aplicação publicada foi modificado nesta etapa.
 
-## Próximo trabalho técnico (Etapa 11C)
+## Etapa 11C: paridade da escala V10
+
+O módulo `c3x-scale-v10.mjs` replica a fórmula da escala estimada de `stage_synth_c3x/parameters.py` da V10: comprimento vibrante, tensão, densidade, B de inarmonicidade, número de cordas, posição de impacto e parâmetros do martelo. Um *fixture* congelado (`v10-scale-python-reference.json`) gerado a partir do Python original permite validar numericamente **88/88 notas** sem mudar o áudio. O teste `c3x-scale-v10.test.mjs` cobre os dados de todas as notas e as descontinuidades estimadas da ponte. Todos esses valores continuam sendo hipóteses, não dados de fábrica.
+
+```bash
+node --test research/c3x-v10-port/*.test.mjs
+```
+
+## Próximo trabalho técnico (Etapa 11D)
 
 1. Substituir o `ModalContinuityProbe` por um **port real** da integração das cordas, martelos e tampo V10, com estados pré-alocados, sem zerar osciladores entre blocos.
 2. Manter separadas as etapas de integração mecânica e radiativa e comparar sinais offline V10 × blocos na mesma sequência. Não tratar a sonoridade da sonda como benchmark de qualidade.
