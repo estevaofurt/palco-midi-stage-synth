@@ -22,3 +22,7 @@ Decision: defer wider register expansion to diagnose G4 first. New module f10b-d
 ## Execução
 
 Run 45486784689 iniciado; smoke in_progress / sem conclusão. 0 artefatos na consulta. [CI](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45486784689). Branch main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536; apenas arquivos novos na branch de pesquisa. Não promover variantes enquanto resultados e escuta não estiverem confirmados.
+
+## Resultados finais F10b
+
+CI 45486784689: 22+13 verificações aprovadas, 5/6 renderizações concluídas. +8cm forte falhou pelo gate de clipping (sem WAV). Dados em audio/analysis_f10b_d_ci.json. D original mantido; D1/D2 descartados para adoção. Em MIDI76, potência absoluta fora de bandas .525–1.025s (FS²) D original 4.12988e-7, D1 1.25155e-6 (3.03×), D2 2.27094e-6 (5.50×). RMS2 D1/D2 1.062/1.034× referência. Picos espectrais iniciais 367.68/366.21/364.75 Hz. A causa não foi isolada: pesos do tampo e resposta acoplada variam conjuntamente; frequências próprias da placa não mudaram. Não usar estas variantes nem reduzir ganho para mascarar clipping.
