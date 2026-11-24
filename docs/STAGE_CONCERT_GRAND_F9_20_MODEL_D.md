@@ -13,3 +13,5 @@ Arquivos novos: f10-model-d-register.mjs, f10-model-d-register.test.mjs, f10-mod
 ## Verificação de execução
 
 Run [45486315236](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45486315236) iniciado; a regressão híbrida histórica concluiu com sucesso, a nova regressão F10a está em execução na última consulta; nove renders dependem desse gate. Verificação adicional isolada do wrapper com renderer simulado: 10/10 casos (roteamento 3 notas × 3 dinâmicas, multiplicador D fixo, alvo f1 e bloqueio de checkpoint de outra nota). Não equivale a teste do DSP. Branch main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536; comparação desde 0a313e2 mostra somente arquivos novos de pesquisa, CI e documentação.
+
+**Atualização CI:** smoke concluído com sucesso no job [138772540261](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45486315236/job/138772540261), 10/10 verificações híbridas e 22/22 verificações F10a (incluindo C4 exato nas três dinâmicas em 25 ms). Nove renderizações iniciadas, todas em execução na consulta, ainda sem artefatos. A aprovação dos testes não autoriza declarar a expansão sonora homologada.
