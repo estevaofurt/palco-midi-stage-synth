@@ -35,6 +35,7 @@ function study(hp){
  ['time and band diagnostics finite',()=>a(Number.isFinite(timeError)&&Number.isFinite(bandError),'diagnostics')],
  ['stronger hammer produces larger peak pressure',()=>a(dyn[0].peakPa<dyn[1].peakPa&&dyn[1].peakPa<dyn[2].peakPa,'dynamic')],
  ['hemisphere energy positive and angular refinement converges',()=>a(energies.every(q=>q.energyJ>0)&&Math.abs(energies[1].energyJ/energies[2].energyJ-1)<.03,'angular '+JSON.stringify(energies))],
+ ['quadratic energy scaling',()=>a(Math.abs(bandEnergy(p,[one],[Float64Array.from({length:64},(_,i)=>2*Math.sin(i*.1))],96000,{nt:2,np:4}).energyJ/bandEnergy(p,[one],[Float64Array.from({length:64},(_,i)=>Math.sin(i*.1))],96000,{nt:2,np:4}).energyJ-4)<1e-12,'scaling')],
  ['zero input radiates zero energy',()=>a(bandEnergy(p,[one],[new Float64Array(32)],96000,{nt:2,np:4}).energyJ===0,'zero')]
  ];
  for(const [n,f] of test){try{f()}catch(e){throw Error(n+': '+e.message)}}
