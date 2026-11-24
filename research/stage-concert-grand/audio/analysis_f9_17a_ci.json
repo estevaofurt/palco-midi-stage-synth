@@ -1,0 +1,452 @@
+{
+  "runId": 45460537781,
+  "testsPassed": 12,
+  "bundleArtifactId": 14951389524,
+  "smoke": [
+    {
+      "velocity": 0.15,
+      "pressureRms": 0.03053807700590818,
+      "attack": {
+        "firstForceS": 0.001333333333333333,
+        "lastForceEndS": 0.005322916666666653,
+        "contactSpanS": 0.00398958333333332,
+        "activeContactS": 0.003989583333333333,
+        "activeSteps": 383,
+        "peakForceN": 1.4153583851534839,
+        "peakCompressionM": 0.00013075573645528668,
+        "impulseNs": 0.0027555523597763377,
+        "reboundMps": -0.12555523597763393,
+        "hammerLossJ": 0.00000691448006951201
+      },
+      "peakPa": 0.08369952490617077,
+      "maxBalance": 1.9197696817657706e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 0.25,
+      "pressureRms": 0.0575592850438804,
+      "attack": {
+        "firstForceS": 0.0007916666666666677,
+        "lastForceEndS": 0.004250000000000015,
+        "contactSpanS": 0.003458333333333347,
+        "activeContactS": 0.0034583333333333332,
+        "activeSteps": 332,
+        "peakForceN": 2.525633518938718,
+        "peakCompressionM": 0.0001664985472961852,
+        "impulseNs": 0.004502850349868515,
+        "reboundMps": -0.20028503498685152,
+        "hammerLossJ": 0.000016637068744529085
+      },
+      "peakPa": 0.1723417168100453,
+      "maxBalance": 4.234405794750762e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 0.35,
+      "pressureRms": 0.08564542133380115,
+      "attack": {
+        "firstForceS": 0.0005625000000000001,
+        "lastForceEndS": 0.003781250000000023,
+        "contactSpanS": 0.003218750000000023,
+        "activeContactS": 0.00321875,
+        "activeSteps": 309,
+        "peakForceN": 3.675356071934292,
+        "peakCompressionM": 0.0001944995029583287,
+        "impulseNs": 0.006220993054782612,
+        "reboundMps": -0.2720993054782611,
+        "hammerLossJ": 0.000028809375771697126
+      },
+      "peakPa": 0.2661702004584446,
+      "maxBalance": 4.60590766915292e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 0.5,
+      "pressureRms": 0.12856062330870663,
+      "attack": {
+        "firstForceS": 0.00039583333333333316,
+        "lastForceEndS": 0.0034062500000000173,
+        "contactSpanS": 0.0030104166666666842,
+        "activeContactS": 0.0030104166666666664,
+        "activeSteps": 289,
+        "peakForceN": 5.474113021470236,
+        "peakCompressionM": 0.00022925500254178646,
+        "impulseNs": 0.00876274116381254,
+        "reboundMps": -0.3762741163812532,
+        "hammerLossJ": 0.000050632131310932816
+      },
+      "peakPa": 0.40346694888200463,
+      "maxBalance": 3.0702437120444515e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 1,
+      "pressureRms": 0.27482694339507135,
+      "attack": {
+        "firstForceS": 0.00019791666666666663,
+        "lastForceEndS": 0.0028854166666666763,
+        "contactSpanS": 0.0026875000000000098,
+        "activeContactS": 0.0026875,
+        "activeSteps": 258,
+        "peakForceN": 11.95780084325923,
+        "peakCompressionM": 0.00031618039756126884,
+        "impulseNs": 0.01707169795098102,
+        "reboundMps": -0.7071697950981005,
+        "hammerLossJ": 0.0001477522373486792
+      },
+      "peakPa": 0.8418008624779465,
+      "maxBalance": 8.511420734880204e-15,
+      "maxIncrease": 0
+    }
+  ],
+  "verified": [
+    {
+      "velocity": 0.15,
+      "duration": 12,
+      "gain": 0.36767023440034063,
+      "feltFactor": 1.5,
+      "pcm": {
+        "frames": 576239,
+        "rate": 48000,
+        "rms16": 0.00874360491853091,
+        "rms24": 0.008743699862433896,
+        "peak16": 0.03076265755180517,
+        "peak24": 0.03077388176606676,
+        "maxPairError": 0.000015317236801620565
+      },
+      "attack": {
+        "firstForceS": 0.001333333333333333,
+        "lastForceEndS": 0.005322916666666653,
+        "contactSpanS": 0.00398958333333332,
+        "activeContactS": 0.003989583333333333,
+        "activeSteps": 383,
+        "peakForceN": 1.4153583851534839,
+        "peakCompressionM": 0.00013075573645528668,
+        "impulseNs": 0.0027555523597763377,
+        "reboundMps": -0.12555523597763393,
+        "hammerLossJ": 0.00000691448006951201
+      },
+      "initialDbFS": -41.16609516921355,
+      "sha256": {
+        "pcm16": "9ddb74c834d000b8d5daea75fccb3a00a452404b2807063bdffb1e5a1ad1aece",
+        "pcm24": "2b5a3a4c29d259ae8ee80b8742374e7d51f73795b44a986b57f9ab1780255087"
+      },
+      "file": "C4_v0.15_felt150_12s_24bit.wav",
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        },
+        "60": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        }
+      }
+    },
+    {
+      "velocity": 0.25,
+      "duration": 12,
+      "gain": 0.36767023440034063,
+      "feltFactor": 1.5,
+      "pcm": {
+        "frames": 576239,
+        "rate": 48000,
+        "rms16": 0.016475820350832213,
+        "rms24": 0.016475838152235467,
+        "peak16": 0.06335642567217017,
+        "peak24": 0.06336487094937217,
+        "maxPairError": 0.000015312139837157443
+      },
+      "attack": {
+        "firstForceS": 0.0007916666666666677,
+        "lastForceEndS": 0.004250000000000015,
+        "contactSpanS": 0.003458333333333347,
+        "activeContactS": 0.0034583333333333332,
+        "activeSteps": 332,
+        "peakForceN": 2.525633518938718,
+        "peakCompressionM": 0.0001664985472961852,
+        "impulseNs": 0.004502850349868515,
+        "reboundMps": -0.20028503498685152,
+        "hammerLossJ": 0.000016637068744529085
+      },
+      "initialDbFS": -35.66304965834285,
+      "sha256": {
+        "pcm16": "c20a93e14debedea3e315a2d8393febbdab25808a94239b60601cbb8d831ffb6",
+        "pcm24": "5d6f9b67ba7f4f7e00191a276e742fbaea158a34c5e1d021334f2a801b9b66bf"
+      },
+      "file": "C4_v0.25_felt150_12s_24bit.wav",
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        },
+        "60": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        }
+      }
+    },
+    {
+      "velocity": 0.35,
+      "duration": 12,
+      "gain": 0.36767023440034063,
+      "feltFactor": 1.5,
+      "pcm": {
+        "frames": 576239,
+        "rate": 48000,
+        "rms16": 0.024568567472922413,
+        "rms24": 0.024568528560220904,
+        "peak16": 0.09787285988952299,
+        "peak24": 0.09786285136495249,
+        "maxPairError": 0.000015318175428911257
+      },
+      "attack": {
+        "firstForceS": 0.0005625000000000001,
+        "lastForceEndS": 0.003781250000000023,
+        "contactSpanS": 0.003218750000000023,
+        "activeContactS": 0.00321875,
+        "activeSteps": 309,
+        "peakForceN": 3.675356071934292,
+        "peakCompressionM": 0.0001944995029583287,
+        "impulseNs": 0.006220993054782612,
+        "reboundMps": -0.2720993054782611,
+        "hammerLossJ": 0.000028809375771697126
+      },
+      "initialDbFS": -32.19241706357097,
+      "sha256": {
+        "pcm16": "3a8a0d168b10995dbfeea23be4fbc35bd014b545ecec6c8b87957c898df1834c",
+        "pcm24": "efb18dfefa8237a27f6f34eb046cfea5575007bca11e53e715d066d9c00ea9f1"
+      },
+      "file": "C4_v0.35_felt150_12s_24bit.wav",
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        },
+        "60": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        }
+      }
+    },
+    {
+      "velocity": 0.5,
+      "duration": 40,
+      "gain": 0.36767023440034063,
+      "feltFactor": 1.5,
+      "pcm": {
+        "frames": 1920239,
+        "rate": 48000,
+        "rms16": 0.0370101662640755,
+        "rms24": 0.03701019522426229,
+        "peak16": 0.14835047456282235,
+        "peak24": 0.14834274629864053,
+        "maxPairError": 0.000015315381375584662
+      },
+      "attack": {
+        "firstForceS": 0.00039583333333333316,
+        "lastForceEndS": 0.0034062500000000173,
+        "contactSpanS": 0.0030104166666666842,
+        "activeContactS": 0.0030104166666666664,
+        "activeSteps": 289,
+        "peakForceN": 5.474113021470236,
+        "peakCompressionM": 0.00022925500254178646,
+        "impulseNs": 0.00876274116381254,
+        "reboundMps": -0.3762741163812532,
+        "hammerLossJ": 0.000050632131310932816
+      },
+      "initialDbFS": -28.633572480969292,
+      "sha256": {
+        "pcm16": "ddd6d6ba4e6999e2c1ba35e334596768ed62563cc02bf5b1696f35a64de24c15",
+        "pcm24": "4a2de32e4afe9724e97a6de9a1b4fa084adae61705923107f44b9fea74c39b2b"
+      },
+      "file": "C4_v0.5_felt150_40s_24bit.wav",
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "observed-window",
+          "startS": 13,
+          "endS": 13.5,
+          "confirmedThroughS": 14
+        },
+        "60": {
+          "status": "observed-window",
+          "startS": 28.5,
+          "endS": 29,
+          "confirmedThroughS": 29.5
+        }
+      }
+    },
+    {
+      "velocity": 1,
+      "duration": 20,
+      "gain": 0.36767023440034063,
+      "feltFactor": 1.5,
+      "pcm": {
+        "frames": 960239,
+        "rate": 48000,
+        "rms16": 0.07930980943570876,
+        "rms24": 0.07930976640393018,
+        "peak16": 0.3095187231055635,
+        "peak24": 0.3095051419145038,
+        "maxPairError": 0.000015318164514638516
+      },
+      "attack": {
+        "firstForceS": 0.00019791666666666663,
+        "lastForceEndS": 0.0028854166666666763,
+        "contactSpanS": 0.0026875000000000098,
+        "activeContactS": 0.0026875,
+        "activeSteps": 258,
+        "peakForceN": 11.95780084325923,
+        "peakCompressionM": 0.00031618039756126884,
+        "impulseNs": 0.01707169795098102,
+        "reboundMps": -0.7071697950981005,
+        "hammerLossJ": 0.0001477522373486792
+      },
+      "initialDbFS": -22.01346658550921,
+      "sha256": {
+        "pcm16": "3c1796166dd7db4abafc625140f32fc42cbe0cec30bbed85deb7ef8fd7026dba",
+        "pcm24": "26ba3e7a80c040f34cbd96177f3bc9dfef4c5158b47d1bdadaee058eda642764"
+      },
+      "file": "C4_v1_felt150_20s_24bit.wav",
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "observed-window",
+          "startS": 13,
+          "endS": 13.5,
+          "confirmedThroughS": 14
+        },
+        "60": {
+          "status": "not-observed",
+          "analyzedThroughS": 19.5
+        }
+      }
+    },
+    {
+      "velocity": 2.5,
+      "duration": 40,
+      "gain": 0.36767023440034063,
+      "feltFactor": 1.5,
+      "pcm": {
+        "frames": 1920239,
+        "rate": 48000,
+        "rms16": 0.2100894513779523,
+        "rms24": 0.21008942359134444,
+        "peak16": 0.826837977233192,
+        "peak24": 0.8268528970304605,
+        "maxPairError": 0.000015316774764156937
+      },
+      "attack": {
+        "firstForceS": 0.00007291666666666667,
+        "lastForceEndS": 0.0024583333333333367,
+        "contactSpanS": 0.00238541666666667,
+        "activeContactS": 0.0023854166666666668,
+        "activeSteps": 229,
+        "peakForceN": 33.590546206379486,
+        "peakCompressionM": 0.0004817329655791222,
+        "impulseNs": 0.04147137831080549,
+        "reboundMps": -1.6471378310805527,
+        "hammerLossJ": 0.0006158245900666308
+      },
+      "initialDbFS": -13.551916209523387,
+      "sha256": {
+        "pcm16": "4e0b231db48079d5aedf5407beeaca12e98538acf1fd86dde9695d0ba6341bbc",
+        "pcm24": "4af2ac09a442bced9db80bd90d1e610696d402ded3cbdd2b988b513b4a0310db"
+      },
+      "file": "C4_v2.5_felt150_40s_24bit.wav",
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "observed-window",
+          "startS": 13,
+          "endS": 13.5,
+          "confirmedThroughS": 14
+        },
+        "60": {
+          "status": "observed-window",
+          "startS": 28,
+          "endS": 28.5,
+          "confirmedThroughS": 29
+        }
+      }
+    }
+  ],
+  "bundle": [
+    {
+      "velocity": 0.15,
+      "initialDbFS": -41.16609516921355,
+      "relativeDb": -19.152628583704338,
+      "contactSpanS": 0.00398958333333332,
+      "peak": 0.03077388176606676
+    },
+    {
+      "velocity": 0.25,
+      "initialDbFS": -35.66304965834285,
+      "relativeDb": -13.64958307283364,
+      "contactSpanS": 0.003458333333333347,
+      "peak": 0.06336487094937217
+    },
+    {
+      "velocity": 0.35,
+      "initialDbFS": -32.19241706357097,
+      "relativeDb": -10.178950478061761,
+      "contactSpanS": 0.003218750000000023,
+      "peak": 0.09786285136495249
+    },
+    {
+      "velocity": 0.5,
+      "initialDbFS": -28.633572480969292,
+      "relativeDb": -6.620105895460085,
+      "contactSpanS": 0.0030104166666666842,
+      "peak": 0.14834274629864053
+    },
+    {
+      "velocity": 1,
+      "initialDbFS": -22.01346658550921,
+      "relativeDb": 0,
+      "contactSpanS": 0.0026875000000000098,
+      "peak": 0.3095051419145038
+    },
+    {
+      "velocity": 2.5,
+      "initialDbFS": -13.551916209523387,
+      "relativeDb": 8.461550375985823,
+      "contactSpanS": 0.00238541666666667,
+      "peak": 0.8268528970304605
+    }
+  ]
+}

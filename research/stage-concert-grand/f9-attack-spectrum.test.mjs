@@ -1,0 +1,12 @@
+import {attackSpectrum,decodeCanonical24} from './f9-attack-spectrum.mjs';
+import {fft} from './f8-render.mjs';
+import {wave24} from './f9-wave24.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};
+const tone=(f,g=1)=>[0,1].map(ch=>Float64Array.from({length:9600},(_,i)=>g*Math.sin(2*Math.PI*f*i/48000+ch)));
+const a=attackSpectrum(tone(500),48000,fft),b=attackSpectrum(tone(4000),48000,fft),c=attackSpectrum(tone(500,.25),48000,fft);
+check('low tone',Math.abs(a.centroidHz-500)<1&&a.bands[0].fraction>.999);
+check('high tone',Math.abs(b.centroidHz-4000)<1&&b.bands[2].fraction>.999);
+check('gain invariant shape',Math.abs(c.centroidHz-a.centroidHz)<1e-9&&Math.abs(c.upperFraction-a.upperFraction)<1e-12&&Math.abs(c.rms/a.rms-.25)<1e-12);
+const d=decodeCanonical24(wave24(tone(500,.5),48000,1).bytes);check('PCM24 decoded',d[0].length===9600&&Math.abs(d[0][100]-tone(500,.5)[0][100])<1e-7);
+let rejected=false;try{decodeCanonical24(new Uint8Array(44))}catch{rejected=true;}check('malformed PCM rejected',rejected);
+console.log('F9.17b attack spectrum tests passed:',n);

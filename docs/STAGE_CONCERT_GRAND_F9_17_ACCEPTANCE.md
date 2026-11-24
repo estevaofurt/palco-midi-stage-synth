@@ -13,3 +13,7 @@ CI [45452369072](https://github.com/estevaofurt/palco-midi-stage-synth/actions/r
 ## Feedback do toque suave
 
 24/11/2026: “o zip do toque suave nao corresponde a batida suave”. Reabrir avaliação da dinâmica suave; não equivale a rejeição do timbre médio. Logs do job 138652789350 indicam v=.5 m/s, RMS inicial -28,634 dBFS, força 5,474 N, contato 3,010 ms; médio v1 RMS -22,013 dBFS, força 11,958 N. Diferença inicial -6,62 dB, não calibrada como pp/mf. Sem acesso direto aos bytes baixados pelo usuário, não afirmar ausência de troca no ZIP. F9.17a audita os arquivos reais no CI e testa menores velocidades. Não reduzir perdas nem alterar C4 médio. Main preservada. Registro audio/feedback_f9_17_soft.json.
+
+## Auditoria e novas dinâmicas concluídas
+
+F9.17a CI 45460537781 concluída, 12 testes, [seis intensidades comparáveis WAV24](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45460537781/artifacts/14951389524). Artefatos históricos íntegros e correspondentes a seus metadados; cópia local não verificada. Novos candidatos .15/.25/.35 m/s ficam -19,153/-13,650/-10,179 dB abaixo do médio no RMS inicial; toque médio e forte não alterados. Não homologar suave antes de escuta. F9.17b diagnóstico espectral sem modificação de áudio. F10 piloto independente concluído tecnicamente, não equivale a desbloqueio do roteiro.

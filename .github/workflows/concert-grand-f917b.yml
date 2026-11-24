@@ -1,0 +1,34 @@
+name: Concert Grand F9.17b quiet attack spectral audit
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f917b.yml'
+      - 'research/stage-concert-grand/f9-attack-spectrum*'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 45460537781
+          name: F917A-comparacao-toques-24bit
+          path: /tmp/input
+      - run: |
+          node research/stage-concert-grand/f9-attack-spectrum.test.mjs
+          node research/stage-concert-grand/f9-attack-spectrum-demo.mjs /tmp/input /tmp/attack.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F917B-attack-numeric
+          path: /tmp/attack.json
+          if-no-files-found: error
