@@ -1,0 +1,15 @@
+import {comparePartialWindows} from './f9-harmonic-comparison.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};
+const w=(t,g=1,c=40)=>({startS:t,partials:Array.from({length:10},(_,i)=>({rms:g/(i+1),contrastDb:c}))});
+const a=[w(0),w(1,.5),w(2,.25)],b=[w(0,3),w(1,1.5)];
+let q=comparePartialWindows(a,b);
+check('common windows only',q.windows.length===2);
+check('gain invariant',q.byPartial.every(x=>x.balance.meanAbsoluteDb<1e-12&&x.decay.meanAbsoluteDb<1e-12));
+const c=[w(0),w(1,.5)];c[1].partials[1].rms*=2;q=comparePartialWindows(c,[w(0),w(1,.5)]);
+check('known balance difference',Math.abs(q.windows[1].partials[1].balanceErrorDb-20*Math.log10(2))<1e-12);
+check('known decay difference',Math.abs(q.windows[1].partials[1].decayErrorDb-20*Math.log10(2))<1e-12);
+q=comparePartialWindows([w(0,1,10),w(1,.5)],[w(0),w(1,.5)]);
+check('contrast censoring',q.windows[0].partials[0].balanceErrorDb===null&&q.byPartial[0].decay.count===0);
+check('valid later balance',q.windows[1].partials[0].balanceErrorDb===0);
+let rejected=false;try{comparePartialWindows([w(3)],b)}catch{rejected=true;}check('unaligned rejected',rejected);
+console.log('F9.16 harmonic comparison tests passed:',n);

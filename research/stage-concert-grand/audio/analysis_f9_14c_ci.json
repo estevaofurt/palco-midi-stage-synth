@@ -1,0 +1,269 @@
+{
+  "runId": 45428525326,
+  "artifactId": 14938711655,
+  "testsPassed": 15,
+  "comparison": {
+    "scope": "passive coefficient sensitivity, not a calibrated pedal geometry or listening approval",
+    "referenceRun": 45427666254,
+    "rows": [
+      {
+        "position": 0.13,
+        "pedalProxy": 0.8,
+        "effectiveDampingNsM": 0.19999999999999996,
+        "energyFraction": 0.06836023535953052,
+        "energyAboveClosedDb": 0.8561928401823129,
+        "energyBelowOpenDb": 5.363707519349928,
+        "initialDb": 7.714619732426294e-15,
+        "windows": [
+          {
+            "startS": 0.5,
+            "aboveClosedDb": 1.3754458622103918,
+            "belowOpenDb": 2.295688817905689
+          },
+          {
+            "startS": 0.75,
+            "aboveClosedDb": 1.0131893374527996,
+            "belowOpenDb": 6.878389744596541
+          },
+          {
+            "startS": 1,
+            "aboveClosedDb": -5.055149582778932,
+            "belowOpenDb": 14.31110515426794
+          },
+          {
+            "startS": 1.25,
+            "aboveClosedDb": -4.7280582639318744,
+            "belowOpenDb": 16.89830772760554
+          }
+        ],
+        "eligible": false
+      },
+      {
+        "position": 0.13,
+        "pedalProxy": 0.9,
+        "effectiveDampingNsM": 0.09999999999999998,
+        "energyFraction": 0.20008197516257137,
+        "energyAboveClosedDb": 2.1426861954810232,
+        "energyBelowOpenDb": 4.077214164051218,
+        "initialDb": 2.314385919727886e-14,
+        "windows": [
+          {
+            "startS": 0.5,
+            "aboveClosedDb": 2.121892462266815,
+            "belowOpenDb": 1.5492422178492666
+          },
+          {
+            "startS": 0.75,
+            "aboveClosedDb": 3.1801380962272012,
+            "belowOpenDb": 4.711440985822142
+          },
+          {
+            "startS": 1,
+            "aboveClosedDb": -0.17725592865465523,
+            "belowOpenDb": 9.433211500143662
+          },
+          {
+            "startS": 1.25,
+            "aboveClosedDb": -0.49588898827641326,
+            "belowOpenDb": 12.66613845195008
+          }
+        ],
+        "eligible": false
+      },
+      {
+        "position": 0.13,
+        "pedalProxy": 0.95,
+        "effectiveDampingNsM": 0.050000000000000044,
+        "energyFraction": 0.37090502711095497,
+        "energyAboveClosedDb": 3.3893151155967804,
+        "energyBelowOpenDb": 2.83058524393546,
+        "initialDb": 3.85730986621314e-14,
+        "windows": [
+          {
+            "startS": 0.5,
+            "aboveClosedDb": 2.641855685833321,
+            "belowOpenDb": 1.029278994282761
+          },
+          {
+            "startS": 0.75,
+            "aboveClosedDb": 4.90650472797976,
+            "belowOpenDb": 2.9850743540695808
+          },
+          {
+            "startS": 1,
+            "aboveClosedDb": 3.7058078386386013,
+            "belowOpenDb": 5.550147732850407
+          },
+          {
+            "startS": 1.25,
+            "aboveClosedDb": 4.534534286125668,
+            "belowOpenDb": 7.635715177547998
+          }
+        ],
+        "eligible": true
+      },
+      {
+        "position": 0.27,
+        "pedalProxy": 0.8,
+        "effectiveDampingNsM": 0.19999999999999996,
+        "energyFraction": -0.24149400685003589,
+        "energyAboveClosedDb": -2.2476683845570884,
+        "energyBelowOpenDb": 6.517647890071794,
+        "initialDb": -1.1571929598639454e-14,
+        "windows": [
+          {
+            "startS": 0.5,
+            "aboveClosedDb": -1.6919023806817177,
+            "belowOpenDb": 3.5150205819672857
+          },
+          {
+            "startS": 0.75,
+            "aboveClosedDb": -2.2282883679829677,
+            "belowOpenDb": 8.604407413437675
+          },
+          {
+            "startS": 1,
+            "aboveClosedDb": -4.882137556221698,
+            "belowOpenDb": 11.564497282835454
+          },
+          {
+            "startS": 1.25,
+            "aboveClosedDb": -8.09300511371356,
+            "belowOpenDb": 16.29762514766728
+          }
+        ],
+        "eligible": false
+      },
+      {
+        "position": 0.27,
+        "pedalProxy": 0.9,
+        "effectiveDampingNsM": 0.09999999999999998,
+        "energyFraction": -0.21038776093747266,
+        "energyAboveClosedDb": -1.8840986012078171,
+        "energyBelowOpenDb": 6.1540781067225225,
+        "initialDb": -1.2536257065192741e-14,
+        "windows": [
+          {
+            "startS": 0.5,
+            "aboveClosedDb": -1.0149991216310696,
+            "belowOpenDb": 2.8381173229166374
+          },
+          {
+            "startS": 0.75,
+            "aboveClosedDb": -2.0443420073856835,
+            "belowOpenDb": 8.420461052840391
+          },
+          {
+            "startS": 1,
+            "aboveClosedDb": -9.087827352543824,
+            "belowOpenDb": 15.77018707915758
+          },
+          {
+            "startS": 1.25,
+            "aboveClosedDb": -13.763805039167181,
+            "belowOpenDb": 21.968425073120905
+          }
+        ],
+        "eligible": false
+      },
+      {
+        "position": 0.27,
+        "pedalProxy": 0.95,
+        "effectiveDampingNsM": 0.050000000000000044,
+        "energyFraction": -0.087689905528886,
+        "energyAboveClosedDb": -0.6890063009515157,
+        "energyBelowOpenDb": 4.958985806466221,
+        "initialDb": -6.7502922658730125e-15,
+        "windows": [
+          {
+            "startS": 0.5,
+            "aboveClosedDb": -0.056895203065450733,
+            "belowOpenDb": 1.8800134043510195
+          },
+          {
+            "startS": 0.75,
+            "aboveClosedDb": -0.0794788697861015,
+            "belowOpenDb": 6.455597915240809
+          },
+          {
+            "startS": 1,
+            "aboveClosedDb": -7.4108542750189175,
+            "belowOpenDb": 14.093214001632674
+          },
+          {
+            "startS": 1.25,
+            "aboveClosedDb": -9.159229298644293,
+            "belowOpenDb": 17.363849332598015
+          }
+        ],
+        "eligible": false
+      }
+    ],
+    "ranked": [
+      {
+        "position": 0.13,
+        "pedalProxy": 0.95,
+        "effectiveDampingNsM": 0.050000000000000044,
+        "energyFraction": 0.37090502711095497,
+        "energyAboveClosedDb": 3.3893151155967804,
+        "energyBelowOpenDb": 2.83058524393546,
+        "initialDb": 3.85730986621314e-14,
+        "windows": [
+          {
+            "startS": 0.5,
+            "aboveClosedDb": 2.641855685833321,
+            "belowOpenDb": 1.029278994282761
+          },
+          {
+            "startS": 0.75,
+            "aboveClosedDb": 4.90650472797976,
+            "belowOpenDb": 2.9850743540695808
+          },
+          {
+            "startS": 1,
+            "aboveClosedDb": 3.7058078386386013,
+            "belowOpenDb": 5.550147732850407
+          },
+          {
+            "startS": 1.25,
+            "aboveClosedDb": 4.534534286125668,
+            "belowOpenDb": 7.635715177547998
+          }
+        ],
+        "eligible": true
+      }
+    ],
+    "selectedForFurtherListening": {
+      "position": 0.13,
+      "pedalProxy": 0.95,
+      "effectiveDampingNsM": 0.050000000000000044,
+      "energyFraction": 0.37090502711095497,
+      "energyAboveClosedDb": 3.3893151155967804,
+      "energyBelowOpenDb": 2.83058524393546,
+      "initialDb": 3.85730986621314e-14,
+      "windows": [
+        {
+          "startS": 0.5,
+          "aboveClosedDb": 2.641855685833321,
+          "belowOpenDb": 1.029278994282761
+        },
+        {
+          "startS": 0.75,
+          "aboveClosedDb": 4.90650472797976,
+          "belowOpenDb": 2.9850743540695808
+        },
+        {
+          "startS": 1,
+          "aboveClosedDb": 3.7058078386386013,
+          "belowOpenDb": 5.550147732850407
+        },
+        {
+          "startS": 1.25,
+          "aboveClosedDb": 4.534534286125668,
+          "belowOpenDb": 7.635715177547998
+        }
+      ],
+      "eligible": true
+    }
+  }
+}
