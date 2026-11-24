@@ -1,0 +1,64 @@
+name: Concert Grand F9.10 dynamics with common gain
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f910.yml'
+      - 'research/stage-concert-grand/f9-dynamics*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-dynamics-analysis.test.mjs
+          node research/stage-concert-grand/f9-dynamics-smoke.test.mjs
+          node research/stage-concert-grand/f9-wave24.test.mjs
+          node research/stage-concert-grand/f9-precision-audit.test.mjs
+          node research/stage-concert-grand/f9-string-loss.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        velocity: [0.5, 1, 2.5]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Render 40 seconds of candidate B
+        run: node research/stage-concert-grand/f9-dynamics-demo.mjs /tmp/f910 40 ${{ matrix.velocity }} .5 .5 .5 both-half
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F910-velocity-${{ matrix.velocity }}
+          path: /tmp/f910/
+          if-no-files-found: error
+  compare:
+    needs: render
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F910-velocity-*
+          path: /tmp/f910-input
+      - run: node research/stage-concert-grand/f9-dynamics-compare.mjs /tmp/f910-input /tmp/f910-comparison.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F910-dynamic-comparison
+          path: /tmp/f910-comparison.json
+          if-no-files-found: error
