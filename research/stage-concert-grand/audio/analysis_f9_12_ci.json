@@ -1,0 +1,550 @@
+{
+  "sourceCommit": "ec68a3b2093be007e1b3b507e33a8a49b948ee82",
+  "runId": 45417915009,
+  "artifactId": 14933271346,
+  "scope": "reduced mechanical initial-value prototype, not sound pressure or calibrated piano",
+  "cases": [
+    {
+      "cents": 0,
+      "connected": false,
+      "seconds": 2,
+      "modeCount": 101,
+      "secondaryP2Hz": 261.6255653005987,
+      "initialEnergyJ": 0.00010000000000000002,
+      "peakOtherJ": 0,
+      "maxResidual": 2.313009809726263e-16,
+      "maxIncrease": 0,
+      "windows": [
+        {
+          "timeS": 0.09999999999999999,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00009054309908501557,
+          "boardPortVelocityRmsMps": 0.0016699223431211347,
+          "energyJ": 0.00009224989910816648,
+          "lossJ": 0.000007750100891823796
+        },
+        {
+          "timeS": 0.19999999999999998,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00008354796723051026,
+          "boardPortVelocityRmsMps": 0.0013094642506928829,
+          "energyJ": 0.000086295407934741,
+          "lossJ": 0.000013704592065269703
+        },
+        {
+          "timeS": 0.3,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00007813503375041998,
+          "boardPortVelocityRmsMps": 0.0011012878515520496,
+          "energyJ": 0.00008129847445210902,
+          "lossJ": 0.00001870152554792629
+        },
+        {
+          "timeS": 0.39999999999999997,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00007225011217254024,
+          "boardPortVelocityRmsMps": 0.0010577148640870415,
+          "energyJ": 0.00007651741982253816,
+          "lossJ": 0.000023482580177496143
+        },
+        {
+          "timeS": 0.5,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00006733710532743582,
+          "boardPortVelocityRmsMps": 0.0009990516403631002,
+          "energyJ": 0.00007203129219138779,
+          "lossJ": 0.000027968707808640428
+        },
+        {
+          "timeS": 0.6,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00006448106069643737,
+          "boardPortVelocityRmsMps": 0.0008488636260961301,
+          "energyJ": 0.00006818639055039716,
+          "lossJ": 0.000031813609449644676
+        },
+        {
+          "timeS": 0.7,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00006208355813115912,
+          "boardPortVelocityRmsMps": 0.0007027190259869723,
+          "energyJ": 0.00006494092771880667,
+          "lossJ": 0.000035059072281257136
+        },
+        {
+          "timeS": 0.7999999999999999,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00005896357234978725,
+          "boardPortVelocityRmsMps": 0.0006630245385522529,
+          "energyJ": 0.000061895726825064,
+          "lossJ": 0.00003810427317500851
+        },
+        {
+          "timeS": 0.9,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00005614979676287163,
+          "boardPortVelocityRmsMps": 0.000695293428185418,
+          "energyJ": 0.00005880063370094682,
+          "lossJ": 0.00004119936629913687
+        },
+        {
+          "timeS": 1,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00005427701945627541,
+          "boardPortVelocityRmsMps": 0.0006680016722743908,
+          "energyJ": 0.000055862282938316956,
+          "lossJ": 0.000044137717061782985
+        },
+        {
+          "timeS": 1.0999999999999999,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.000052539114321600715,
+          "boardPortVelocityRmsMps": 0.0005349170115344648,
+          "energyJ": 0.000053337700587931263,
+          "lossJ": 0.00004666229941218712
+        },
+        {
+          "timeS": 1.2,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00005038196053543501,
+          "boardPortVelocityRmsMps": 0.0004308763168208346,
+          "energyJ": 0.00005107478398745316,
+          "lossJ": 0.00004892521601268129
+        },
+        {
+          "timeS": 1.3,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00004807882924257265,
+          "boardPortVelocityRmsMps": 0.0004754255093322735,
+          "energyJ": 0.000048797868281804326,
+          "lossJ": 0.000051202131718346356
+        },
+        {
+          "timeS": 1.4,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.0000459675358552485,
+          "boardPortVelocityRmsMps": 0.0005087458618273181,
+          "energyJ": 0.00004653191633865708,
+          "lossJ": 0.00005346808366150997
+        },
+        {
+          "timeS": 1.5,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.0000441260071349213,
+          "boardPortVelocityRmsMps": 0.0004328682604848807,
+          "energyJ": 0.0000444594312647954,
+          "lossJ": 0.00005554056873538484
+        },
+        {
+          "timeS": 1.5999999999999999,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00004240400375481964,
+          "boardPortVelocityRmsMps": 0.0003215179570188129,
+          "energyJ": 0.00004261398893462061,
+          "lossJ": 0.00005738601106557054
+        },
+        {
+          "timeS": 1.7,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.000040588944878919544,
+          "boardPortVelocityRmsMps": 0.0003022922760988664,
+          "energyJ": 0.00004087141676794652,
+          "lossJ": 0.00005912858323225936
+        },
+        {
+          "timeS": 1.8,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00003871815272618903,
+          "boardPortVelocityRmsMps": 0.00034020778091584753,
+          "energyJ": 0.00003913083198748416,
+          "lossJ": 0.000060869168012734824
+        },
+        {
+          "timeS": 1.9,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.000037021434584041825,
+          "boardPortVelocityRmsMps": 0.00033888774765357654,
+          "energyJ": 0.000037431168689468435,
+          "lossJ": 0.00006256883131075705
+        },
+        {
+          "timeS": 2,
+          "secondaryWireJ": 0,
+          "sourceWireJ": 0.00003559728185396074,
+          "boardPortVelocityRmsMps": 0.00028369556883732125,
+          "energyJ": 0.000035868337853964555,
+          "lossJ": 0.00006413166214626673
+        }
+      ]
+    },
+    {
+      "cents": 0,
+      "connected": true,
+      "seconds": 2,
+      "modeCount": 101,
+      "secondaryP2Hz": 261.6255653005987,
+      "initialEnergyJ": 0.00010000000000000002,
+      "peakOtherJ": 3.277523592717531e-7,
+      "maxResidual": 2.330492569757592e-16,
+      "maxIncrease": 0,
+      "windows": [
+        {
+          "timeS": 0.09999999999999999,
+          "secondaryWireJ": 6.111345360368425e-8,
+          "sourceWireJ": 0.00009046448026164319,
+          "boardPortVelocityRmsMps": 0.0016903866878372445,
+          "energyJ": 0.00009230966724702293,
+          "lossJ": 0.00000769033275296754
+        },
+        {
+          "timeS": 0.19999999999999998,
+          "secondaryWireJ": 1.7148567490863806e-7,
+          "sourceWireJ": 0.00008326046327159166,
+          "boardPortVelocityRmsMps": 0.001315386253097765,
+          "energyJ": 0.00008643306705255047,
+          "lossJ": 0.000013566932947456907
+        },
+        {
+          "timeS": 0.3,
+          "secondaryWireJ": 1.1182048983741422e-7,
+          "sourceWireJ": 0.00007751778266783778,
+          "boardPortVelocityRmsMps": 0.0011093001488594924,
+          "energyJ": 0.00008146179645431069,
+          "lossJ": 0.00001853820354572164
+        },
+        {
+          "timeS": 0.39999999999999997,
+          "secondaryWireJ": 6.705688059907025e-8,
+          "sourceWireJ": 0.00007154439919205808,
+          "boardPortVelocityRmsMps": 0.0010649912982086962,
+          "energyJ": 0.00007670430990512287,
+          "lossJ": 0.000023295690094908965
+        },
+        {
+          "timeS": 0.5,
+          "secondaryWireJ": 2.0859760256631287e-7,
+          "sourceWireJ": 0.00006725921348852573,
+          "boardPortVelocityRmsMps": 0.0009980271079251396,
+          "energyJ": 0.00007227703287156234,
+          "lossJ": 0.00002772296712846405
+        },
+        {
+          "timeS": 0.6,
+          "secondaryWireJ": 1.722400577801176e-7,
+          "sourceWireJ": 0.00006507452399793657,
+          "boardPortVelocityRmsMps": 0.000853802646316609,
+          "energyJ": 0.00006847329268867787,
+          "lossJ": 0.00003152670731136641
+        },
+        {
+          "timeS": 0.7,
+          "secondaryWireJ": 1.4491846633831057e-8,
+          "sourceWireJ": 0.0000627779233039868,
+          "boardPortVelocityRmsMps": 0.0007131246585245602,
+          "energyJ": 0.00006522328438720067,
+          "lossJ": 0.000034776715612865664
+        },
+        {
+          "timeS": 0.7999999999999999,
+          "secondaryWireJ": 5.643053048316163e-8,
+          "sourceWireJ": 0.00005989024241456008,
+          "boardPortVelocityRmsMps": 0.0006825815607884607,
+          "energyJ": 0.0000621316629909533,
+          "lossJ": 0.000037868337009123154
+        },
+        {
+          "timeS": 0.9,
+          "secondaryWireJ": 1.1167115211347011e-7,
+          "sourceWireJ": 0.00005737661061716643,
+          "boardPortVelocityRmsMps": 0.0007420691352076805,
+          "energyJ": 0.000058981044452915636,
+          "lossJ": 0.00004101895554716927
+        },
+        {
+          "timeS": 1,
+          "secondaryWireJ": 6.858573773558528e-8,
+          "sourceWireJ": 0.000055228664869050935,
+          "boardPortVelocityRmsMps": 0.0007042502836808313,
+          "energyJ": 0.00005604193013525264,
+          "lossJ": 0.00004395806986484986
+        },
+        {
+          "timeS": 1.0999999999999999,
+          "secondaryWireJ": 2.3228643182620126e-8,
+          "sourceWireJ": 0.00005308793967985091,
+          "boardPortVelocityRmsMps": 0.0005393352820706971,
+          "energyJ": 0.00005353751349008252,
+          "lossJ": 0.00004646248651003845
+        },
+        {
+          "timeS": 1.2,
+          "secondaryWireJ": 2.1991503136840667e-8,
+          "sourceWireJ": 0.00005070908622707786,
+          "boardPortVelocityRmsMps": 0.0004577337696991647,
+          "energyJ": 0.0000512385969574401,
+          "lossJ": 0.00004876140304269731
+        },
+        {
+          "timeS": 1.3,
+          "secondaryWireJ": 7.654961638837509e-8,
+          "sourceWireJ": 0.00004808865239754417,
+          "boardPortVelocityRmsMps": 0.000518895089934444,
+          "energyJ": 0.000048914436042275366,
+          "lossJ": 0.000051085563957877525
+        },
+        {
+          "timeS": 1.4,
+          "secondaryWireJ": 8.913953669704382e-8,
+          "sourceWireJ": 0.00004577168296609249,
+          "boardPortVelocityRmsMps": 0.0005174375006119905,
+          "energyJ": 0.00004665523451588401,
+          "lossJ": 0.000053344765484285825
+        },
+        {
+          "timeS": 1.5,
+          "secondaryWireJ": 2.4936975304930884e-8,
+          "sourceWireJ": 0.00004398574244479684,
+          "boardPortVelocityRmsMps": 0.0004182612213059567,
+          "energyJ": 0.000044612189539406176,
+          "lossJ": 0.00005538781046077679
+        },
+        {
+          "timeS": 1.5999999999999999,
+          "secondaryWireJ": 1.918852906242611e-8,
+          "sourceWireJ": 0.00004226358841361932,
+          "boardPortVelocityRmsMps": 0.00032689532290650585,
+          "energyJ": 0.000042769716007401505,
+          "lossJ": 0.00005723028399279262
+        },
+        {
+          "timeS": 1.7,
+          "secondaryWireJ": 6.851404992264273e-8,
+          "sourceWireJ": 0.00004038462803413289,
+          "boardPortVelocityRmsMps": 0.00032993839981037166,
+          "energyJ": 0.00004100472203469303,
+          "lossJ": 0.0000589952779655157
+        },
+        {
+          "timeS": 1.8,
+          "secondaryWireJ": 5.308048442563941e-8,
+          "sourceWireJ": 0.00003861294692588997,
+          "boardPortVelocityRmsMps": 0.000363450693185937,
+          "energyJ": 0.000039241855784760594,
+          "lossJ": 0.00006075814421545962
+        },
+        {
+          "timeS": 1.9,
+          "secondaryWireJ": 1.2051108932341316e-8,
+          "sourceWireJ": 0.00003710957171368998,
+          "boardPortVelocityRmsMps": 0.0003526584206911984,
+          "energyJ": 0.00003753649147293884,
+          "lossJ": 0.00006246350852728685
+        },
+        {
+          "timeS": 2,
+          "secondaryWireJ": 1.7330018574273978e-8,
+          "sourceWireJ": 0.00003576220386335905,
+          "boardPortVelocityRmsMps": 0.000289285343927346,
+          "energyJ": 0.00003598045135668976,
+          "lossJ": 0.00006401954864354329
+        }
+      ]
+    },
+    {
+      "cents": 50,
+      "connected": true,
+      "seconds": 2,
+      "modeCount": 101,
+      "secondaryP2Hz": 269.29177952702423,
+      "initialEnergyJ": 0.00010000000000000002,
+      "peakOtherJ": 0.0000021599648438763726,
+      "maxResidual": 2.4058446207453343e-16,
+      "maxIncrease": 0,
+      "windows": [
+        {
+          "timeS": 0.09999999999999999,
+          "secondaryWireJ": 7.693572738045872e-7,
+          "sourceWireJ": 0.00008969506866489782,
+          "boardPortVelocityRmsMps": 0.0016534609896675233,
+          "energyJ": 0.00009237478768250861,
+          "lossJ": 0.000007625212317481077
+        },
+        {
+          "timeS": 0.19999999999999998,
+          "secondaryWireJ": 0.0000016865663370100592,
+          "sourceWireJ": 0.00008170998322881843,
+          "boardPortVelocityRmsMps": 0.0011942012578940449,
+          "energyJ": 0.00008682864950374682,
+          "lossJ": 0.000013171350496263145
+        },
+        {
+          "timeS": 0.3,
+          "secondaryWireJ": 0.00000139235097258588,
+          "sourceWireJ": 0.0000758165547856348,
+          "boardPortVelocityRmsMps": 0.0009567475584038431,
+          "energyJ": 0.00008222995485562041,
+          "lossJ": 0.00001777004514441434
+        },
+        {
+          "timeS": 0.39999999999999997,
+          "secondaryWireJ": 4.701794871277333e-7,
+          "sourceWireJ": 0.00007102318285992531,
+          "boardPortVelocityRmsMps": 0.0010027081533421946,
+          "energyJ": 0.0000776155366167771,
+          "lossJ": 0.000022384463383254427
+        },
+        {
+          "timeS": 0.5,
+          "secondaryWireJ": 1.5381340157216342e-7,
+          "sourceWireJ": 0.00006866883752927719,
+          "boardPortVelocityRmsMps": 0.0010633051721812509,
+          "energyJ": 0.0000730080764981366,
+          "lossJ": 0.000026991923501888998
+        },
+        {
+          "timeS": 0.6,
+          "secondaryWireJ": 6.125944631879032e-7,
+          "sourceWireJ": 0.00006664620115258414,
+          "boardPortVelocityRmsMps": 0.0009638383863133144,
+          "energyJ": 0.00006896042197735446,
+          "lossJ": 0.000031039578022690054
+        },
+        {
+          "timeS": 0.7,
+          "secondaryWireJ": 0.0000010058419900419004,
+          "sourceWireJ": 0.00006370959754479005,
+          "boardPortVelocityRmsMps": 0.0007328504229205465,
+          "energyJ": 0.00006567534059032658,
+          "lossJ": 0.00003432465940973982
+        },
+        {
+          "timeS": 0.7999999999999999,
+          "secondaryWireJ": 8.257266379613344e-7,
+          "sourceWireJ": 0.00006027466063210805,
+          "boardPortVelocityRmsMps": 0.0006791335132657895,
+          "energyJ": 0.00006259141127616262,
+          "lossJ": 0.000037408588723913734
+        },
+        {
+          "timeS": 0.9,
+          "secondaryWireJ": 3.7249223536905943e-7,
+          "sourceWireJ": 0.000056498881195829095,
+          "boardPortVelocityRmsMps": 0.0007535406893519392,
+          "energyJ": 0.000059377186381934914,
+          "lossJ": 0.00004062281361815108
+        },
+        {
+          "timeS": 1,
+          "secondaryWireJ": 1.9053519750424997e-7,
+          "sourceWireJ": 0.00005386606266033835,
+          "boardPortVelocityRmsMps": 0.0006970768505247898,
+          "energyJ": 0.000056372384255143006,
+          "lossJ": 0.00004362761574495983
+        },
+        {
+          "timeS": 1.0999999999999999,
+          "secondaryWireJ": 3.4142300186093385e-7,
+          "sourceWireJ": 0.00005223895619652791,
+          "boardPortVelocityRmsMps": 0.0005429525831490895,
+          "energyJ": 0.0000538354713751657,
+          "lossJ": 0.000046164528624957515
+        },
+        {
+          "timeS": 1.2,
+          "secondaryWireJ": 4.682071358590518e-7,
+          "sourceWireJ": 0.00005027614040501514,
+          "boardPortVelocityRmsMps": 0.0004362166868359141,
+          "energyJ": 0.00005156792934964391,
+          "lossJ": 0.00004843207065049585
+        },
+        {
+          "timeS": 1.3,
+          "secondaryWireJ": 3.7083222331419396e-7,
+          "sourceWireJ": 0.000048238928039435916,
+          "boardPortVelocityRmsMps": 0.00048647884426166263,
+          "energyJ": 0.00004926819526120276,
+          "lossJ": 0.000050731804738952104
+        },
+        {
+          "timeS": 1.4,
+          "secondaryWireJ": 1.854006122987168e-7,
+          "sourceWireJ": 0.00004633819619869655,
+          "boardPortVelocityRmsMps": 0.0005393733344183306,
+          "energyJ": 0.00004694978748054842,
+          "lossJ": 0.00005305021251962288
+        },
+        {
+          "timeS": 1.5,
+          "secondaryWireJ": 1.2514662153073232e-7,
+          "sourceWireJ": 0.00004443598077093201,
+          "boardPortVelocityRmsMps": 0.0004662110120147335,
+          "energyJ": 0.000044833761058144425,
+          "lossJ": 0.00005516623894203998
+        },
+        {
+          "timeS": 1.5999999999999999,
+          "secondaryWireJ": 1.9476441298758191e-7,
+          "sourceWireJ": 0.00004255928577783982,
+          "boardPortVelocityRmsMps": 0.00034806714535213975,
+          "energyJ": 0.000042961649855522257,
+          "lossJ": 0.000057038350144675005
+        },
+        {
+          "timeS": 1.7,
+          "secondaryWireJ": 2.4307291659641216e-7,
+          "sourceWireJ": 0.00004057654870033086,
+          "boardPortVelocityRmsMps": 0.0003207443402828593,
+          "energyJ": 0.00004119582777937384,
+          "lossJ": 0.000058804172220838754
+        },
+        {
+          "timeS": 1.8,
+          "secondaryWireJ": 1.9637094067185078e-7,
+          "sourceWireJ": 0.00003867484668906618,
+          "boardPortVelocityRmsMps": 0.00035318023344511787,
+          "energyJ": 0.00003943239836427137,
+          "lossJ": 0.00006056760163595543
+        },
+        {
+          "timeS": 1.9,
+          "secondaryWireJ": 1.235029330197692e-7,
+          "sourceWireJ": 0.000037110150163071866,
+          "boardPortVelocityRmsMps": 0.00036382507171692696,
+          "energyJ": 0.00003770835280511917,
+          "lossJ": 0.00006229164719511378
+        },
+        {
+          "timeS": 2,
+          "secondaryWireJ": 1.0846204628153852e-7,
+          "sourceWireJ": 0.00003573593539756203,
+          "boardPortVelocityRmsMps": 0.0003237299262798417,
+          "energyJ": 0.00003612162612605365,
+          "lossJ": 0.00006387837387418694
+        }
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "cents": 0,
+      "connected": false,
+      "peakSecondaryPercent": 0,
+      "finalWindowBoardVelocityGainDb": 0,
+      "maxResidualJ": 2.313009809726263e-16
+    },
+    {
+      "cents": 0,
+      "connected": true,
+      "peakSecondaryPercent": 0.327752359271753,
+      "finalWindowBoardVelocityGainDb": 0.1694775822576722,
+      "maxResidualJ": 2.330492569757592e-16
+    },
+    {
+      "cents": 50,
+      "connected": true,
+      "peakSecondaryPercent": 2.1599648438763723,
+      "finalWindowBoardVelocityGainDb": 1.1466059188523485,
+      "maxResidualJ": 2.4058446207453343e-16
+    }
+  ]
+}

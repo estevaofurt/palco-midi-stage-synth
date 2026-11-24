@@ -9,3 +9,15 @@ CI Node e experimento configurados; resultados ainda pendentes neste commit. Nã
 ## Smoke confirmado
 
 CI [45417915009](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45417915009): 7/7 testes Node aprovados. Em 50 ms, modelo reduzido de 101 modos do tampo, energia inicial 0,1 mJ, corda secundária desligada permanece em repouso (0 J), ligada atinge pico 3.10588049e-7 J (0.3106% da energia inicial). Resíduos máximos off/on 1.1913e-17/1.0354e-17 J; aumento de energia zero em ambos. Paridade de uma porta aprovada. Isso demonstra transferência passiva neste protótipo, não benefício acústico; a corda pode retirar energia do som inicialmente. Experimentos de 2 s e comparação detunada ainda precisam de verificação. Não afirmar melhoria após 14 s. Nenhum áudio ou integração realizada.
+
+## Experimento de 2 s confirmado
+
+CI [45417915009](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45417915009): smoke e experimento concluídos. [Artefato](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45417915009/artifacts/14933271346).
+
+| Caso | Pico energia secundária (% inicial) | Ganho RMS velocidade do ponto do tampo, janela 1,9–2 s | Resíduo máximo J |
+|---|---:|---:|---:|
+| Desligado | 0.00000 | 0.000 dB | 2.3130e-16 |
+| Ligado, nominal | 0.32775 | 0.169 dB | 2.3305e-16 |
+| Ligado, +50 cents | 2.15996 | 1.147 dB | 2.4058e-16 |
+
+A corda secundária conectada absorve energia sem criação de energia; a resposta +50 cents superou a resposta nominal nesta configuração hipotética. Não presumir que a afinação livre coincide com os modos do conjunto carregado. Antes de alterar parâmetros, varrer frequências acopladas, pontos de ligação e truncamento; medir trabalho bidirecional e pressão acústica real com martelo e radiação. Ganhos na velocidade de um ponto não provam aumento do sustain audível; não existe áudio de F9.12. Nenhuma alteração na referência B ou na main. Relatório em audio/analysis_f9_12_ci.json. A F9 continua aberta.
