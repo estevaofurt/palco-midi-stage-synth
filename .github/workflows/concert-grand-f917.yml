@@ -1,0 +1,42 @@
+name: Concert Grand F9.17 felt candidate dynamic listening
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f917.yml'
+      - 'research/stage-concert-grand/f9-acceptance-*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-acceptance-analysis.test.mjs
+          node research/stage-concert-grand/f9-felt-sensitivity.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        velocity: [0.5, 2.5]
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-felt-sensitivity-demo.mjs /tmp/f917 40 ${{ matrix.velocity }} .5 .5 .5 both-half 1.5
+      - run: node research/stage-concert-grand/f9-acceptance-listening.mjs /tmp/f917/C4_v${{ matrix.velocity }}_board0.5_angle0.5_spread0.5_both-half_felt1.5_40s /tmp/f917/listening.json ${{ matrix.velocity }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F917-felt150-v${{ matrix.velocity }}-40s
+          path: /tmp/f917/
+          if-no-files-found: error

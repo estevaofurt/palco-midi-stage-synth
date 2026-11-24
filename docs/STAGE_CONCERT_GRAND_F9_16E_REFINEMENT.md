@@ -5,3 +5,7 @@ Base 55622f7d7c2e888a758f79730f6070b104f01925. F9.16d mostrou diferenças de pre
 ## Smoke confirmado
 
 CI [45448897708](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45448897708), 18 testes (9+9) aprovados. Paridade do controle zero, L2 relativa 0.00734427 / 0.00732261 para medium/fine, pico de pressão 0.718326668 / 0.718000105 / 0.717867831 Pa, passividade aprovada. Renders ainda em andamento na consulta; relatório audio/analysis_f9_16e_smoke.json. Não promover quadratura antes de resultados. F9.16f isola feltro contra B original, em paralelo; não combinar candidatos ainda.
+
+## Renders confirmados
+
+CI 45448897708, 18 testes, 40 blocos, sem clipping ou aumento de energia. Medium/fine: RMS inicial +0,00127/+0,00187 dB, 14 s +0,00356/+0,00435 dB, 19 s +0,00381/+0,00475 dB vs B. Global e P2 -40 dB 13 s, idênticos ao controle. A melhoria de precisão forçada não se traduz em benefício de sustain, e P9/P1 em 4 s cai 6,71/7,01 dB. Manter referência para escuta e estudo de convergência separado; nenhuma combinação aprovada. [Medium](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45448897708/artifacts/14948431486), [fine](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45448897708/artifacts/14947216658). Dados em audio/analysis_f9_16e_ci.json.

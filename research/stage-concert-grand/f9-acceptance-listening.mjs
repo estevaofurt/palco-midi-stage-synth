@@ -1,0 +1,11 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {contextualCrossing} from './f9-acceptance-analysis.mjs';
+const [stem,out,velocityArg]=process.argv.slice(2),velocity=Number(velocityArg);
+const m=JSON.parse(readFileSync(stem+'.json')),a=JSON.parse(readFileSync(stem+'_float_analysis.json')),p=JSON.parse(readFileSync(stem+'_precision.json'));
+const historic=JSON.parse(readFileSync(new URL('./audio/analysis_f9_10b_ci.json',import.meta.url)));
+const ref=historic.matched.find(x=>x.listening.velocity===velocity);
+if(!ref||m.velocity!==velocity||m.duration!==40||m.feltFactor!==1.5||m.gain!==ref.listening.gain||m.clipped!==0||m.chunks.length!==40||m.chunks.some(c=>c.maxBalance>1e-9||c.maxIncrease>1e-9)||a.windows.length!==79)throw Error('invalid listening render');
+const crossing=contextualCrossing(a.windows,ref.listening.comparisonLevel);
+const result={scope:'contextual threshold from earlier listening, not an audibility prediction',velocity,gain:m.gain,peak:m.peak,crossing,referenceCrossing:ref.listening.crossing,referenceArtifactId:ref.artifactId,relativeDrops:a.broadband.drops,attack:m.chunks[0].attack,precision:p.windows.filter(w=>[0,10,14,19,24,29,34,39].includes(w.startS)),matchedReferenceWindows:[0,10,14,19,24,29,34,39].map(t=>{const c=a.windows.find(w=>w.startS===t),r=ref.precision.find(w=>w.startS===t);return {startS:t,candidateRms:c.rms,referenceRms:r.floatRms,deltaDb:20*Math.log10(c.rms/r.floatRms)};})};
+writeFileSync(out,JSON.stringify(result,null,2),{flag:'wx'});
+console.log('F917_LISTENING '+JSON.stringify(result));

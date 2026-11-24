@@ -1,0 +1,14 @@
+import {compareCandidates,contextualCrossing} from './f9-acceptance-analysis.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};const w=(g=1)=>({startS:1,partials:Array.from({length:10},(_,i)=>({rms:i?g:1,contrastDb:30}))});
+const layer={layer:'v8',windows:[{startS:1,partials:Array.from({length:10},(_,i)=>({h:i+1,referenceBalanceDb:i?20*Math.log10(2):0}))}]};
+let q=compareCandidates([w()],[{name:'candidate',windows:[w(2)]}],[layer])[0];
+check('exact candidate balance',q.metrics[1].all.meanAbsoluteDb===0&&q.metrics[0].all.count===9);
+check('common support',q.metrics[1].upper.count===5);
+const bad=w(2);bad.partials[6].contrastDb=2;q=compareCandidates([w()],[{name:'candidate',windows:[bad]}],[layer])[0];
+check('same censored cells',q.metrics.every(x=>x.all.count===8&&x.upper.count===4));
+const windows=[2,1,.5,1,.4,.3].map((rms,i)=>({startS:i*.5,endS:(i+1)*.5,rms}));
+check('two windows confirmed',contextualCrossing(windows,1).startS===2);
+check('equality not below',contextualCrossing(windows,1,1).startS===1);
+check('censored crossing',contextualCrossing(windows,.2).status==='not-observed');
+let reject=false;try{contextualCrossing(windows.slice(0,1).concat(windows.slice(2)),1)}catch{reject=true;}check('sparse windows rejected',reject);
+console.log('F9.17 acceptance tests passed:',n);
