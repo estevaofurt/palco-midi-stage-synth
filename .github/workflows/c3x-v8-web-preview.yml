@@ -9,6 +9,8 @@ on:
       - 'piano-c3x-v8-web.js'
       - 'tests/v8_web_preview.test.mjs'
       - 'tests/cache_version.test.mjs'
+      - 'panel.js'
+      - 'sample-library.js'
       - '.github/workflows/c3x-v8-web-preview.yml'
   workflow_dispatch:
 permissions:

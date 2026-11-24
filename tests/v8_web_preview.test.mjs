@@ -57,26 +57,77 @@ test('profiles enforce max 32/48/64 without infinite PCM',()=>{
   e.stopAll();assert.equal(e.voices.length,0);
  }
 });
-test('preview includes ONLY one C3X piano engine, not A/B/C/D/E or samples',()=>{
+test('preview has independent V8 Web and E local WAV, no A/B/C/D motors',()=>{
  const controls=engines.piano.groups.flatMap(g=>g.controls);
  assert.deepEqual(engines.piano.presets.map(x=>x.id),['c3x','c3x-soft','c3x-bright']);
  assert.equal(engines.piano.presets[0].id,'c3x');
- assert.equal(controls.some(x=>x.id==='soundEngine'||x.type==='samplepack'),false);
+ const selector=controls.find(x=>x.id==='soundEngine');
+ assert.deepEqual(Object.keys(selector.options),['v8','sampled']);
+ assert.equal(controls.filter(x=>x.type==='samplepack').length,1);
+ assert.deepEqual(Object.keys(controls.find(x=>x.id==='sampleModel').options),['american','japanese','felt','upright']);
  assert.equal(loadState(null).patches.piano.preset,'c3x');
+ assert.equal(loadState(null).patches.piano.values.soundEngine,'v8');
  assert.deepEqual(Object.keys(engines),['piano','electric','organ','synth','sf']);
  const html=read('../v8-preview.html');
  const map=JSON.parse(html.match(/<script type="importmap">(.*?)<\/script>/s)[1]).imports;
- assert.equal(map['./acoustic.js'],'./acoustic-v8-web.js?build=1.13.0');
- assert.equal(map['./patches.js'],'./patches-v8-web.js?build=1.13.0');
- assert.match(html,/app-v8-web\.js\?build=1\.13\.0/);
- assert.doesNotMatch(html,/physical-piano-hybrid|physical-piano-legacy|piano-worklet|sample-notice/);
+ assert.equal(map['./acoustic.js'],'./acoustic-v8-web.js?build=1.13.1');
+ assert.equal(map['./patches.js'],'./patches-v8-web.js?build=1.13.1');
+ assert.match(html,/app-v8-web\.js\?build=1\.13\.1/);
+ assert.doesNotMatch(html,/physical-piano-hybrid|physical-piano-legacy|piano-worklet/);
+ assert.match(html,/id="sample-notice"/);
+ assert.match(html,/id="sample-upload-shortcut"/);
  const app=read('../app-v8-web.js'),a=read('../acoustic-v8-web.js');
  assert.match(app,/prepareV8/);
- assert.doesNotMatch(app,/prepareHybrid|preparePhysical|prepareModal|sampleBankCount|loadSamples/);
+ assert.doesNotMatch(app,/prepareHybrid|preparePhysical|prepareModal|sampleBankCount/);
+ assert.match(app,/loadSamples/);
+ assert.match(app,/syncSampleUI/);
+ assert.match(app,/warnSample\(key,velocity\)/);
  assert.match(a,/stage-c3x-v8-web/);
- assert.doesNotMatch(a,/SampleLibrary|PianoBank|playHybrid/);
+ assert.match(a,/SampleLibrary/);
+ assert.match(a,/p\.soundEngine==='sampled'/);
+ assert.doesNotMatch(a,/PianoBank|playHybrid/);
 });
 test('provenance of the original Python V8 is not misstated',()=>{
- assert.match(read('../v8-preview.html'),/não é a transposição validada do V8 Python original/i);
+ assert.match(read('../v8-preview.html'),/ainda não equivale ao V8 Python original/i);
  assert.match(read('../piano-c3x-v8-web.js'),/NOT THE PYTHON V8 REFERENCE/);
+});
+
+
+test('sample E plays its WAV bank without initializing the V8 AudioWorklet',async()=>{
+ const {Acoustic}=await import('../acoustic-v8-web.js');
+ let played=0,rate=0;
+ const makeGain=()=>({gain:{value:1,setTargetAtTime(){}},connect(dest){return dest},disconnect(){}});
+ const ctx={
+  currentTime:0,sampleRate:48000,
+  createGain:makeGain,
+  createBiquadFilter:()=>({type:'lowpass',frequency:{value:1,setTargetAtTime(){}},Q:{value:1},gain:{value:0},connect(dest){return dest}}),
+  decodeAudioData:async()=>({duration:2,sampleRate:48000}),
+  createBufferSource:()=>({buffer:null,playbackRate:{set value(v){rate=v}},connect(dest){return dest}})
+ };
+ const acoustic=new Acoustic(ctx,makeGain());
+ const fake=name=>({name,size:100,arrayBuffer:async()=>new ArrayBuffer(100)});
+ await acoustic.samples.load('japanese',[fake('MIDI60_v60.wav'),fake('MIDI72_v110.wav')]);
+ const part={
+  gate:makeGain(),
+  releaseSeconds:0,
+  own(){},
+  start(){played++}
+ };
+ acoustic.play(part,61,55,{soundEngine:'sampled',sampleModel:'japanese',release:.43,damping:30,touch:50});
+ assert.equal(played,1);assert.ok(rate>1);
+ assert.equal(acoustic.node,null,'sampler must never initialize the V8 worklet');
+ assert.equal(acoustic.samples.count('american'),0,'separate sample bank per piano');
+ acoustic.play(part,61,55,{soundEngine:'sampled',sampleModel:'american',release:.43,damping:30,touch:50});
+ assert.equal(played,1,'missing WAV must never fall back to synthetic V8 sound');
+});
+test('E WAV import and selector are reachable and the virtual keyboard stays responsive',()=>{
+ const panel=read('../panel.js'),app=read('../app-v8-web.js'),html=read('../v8-preview.html');
+ assert.match(panel,/name==='sampleModel'/);
+ assert.match(panel,/patch\.values\.sampleModel/);
+ assert.match(app,/sampleCount\(\)/);
+ assert.match(app,/async function loadSamples/);
+ assert.match(app,/panel\.updateSamples\(id,model,count\)/);
+ assert.match(app,/activePointers\.set\(pointer,slot\);paintKeys\(\)/);
+ assert.match(app,/for\(const slot of activePointers\.values\(\)\)held\.add\(slot\.key\)/);
+ assert.match(html,/Carregar notas WAV/);
 });

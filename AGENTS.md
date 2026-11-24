@@ -1,3 +1,9 @@
+## 24/11/2026 — C3X V8 WEB + E SAMPLEADO, RESTAURAÇÃO PARCIAL
+
+Novo pedido: o usuário confirmou que o V8 Web da prévia não reproduz integralmente o timbre original Python e exigiu manter também o motor E baseado em amostras. **A fonte Python do V8 `Stage_Synth_C3X_Etapa_08.zip` não está acessível no GitHub nem no contêiner desta conversa**. NÃO alegar port fiel nem publicar a prévia como substituta definitiva de index.html. `v8-preview.html` deve apresentar dois motores, V8 Web (prévia) e E sampleado, com bancos American/Japanese/Felt/Upright privados, teclado virtual responsivo e alerta sem WAV; não restaurar A/B/C/D como opções de piano. [Documento](docs/C3X_V8_WEB_PREVIEW.md).
+
+---
+
 ## HOTFIX v1.12.10 — TECLADO E SEM BANCO (23/11/2026)
 
 Usuário relatou motor E sem áudio e teclas virtuais aparentemente travadas. Causa reproduzível no código: E não carrega banco público e Stage descarta vozes sem sample; teclado era desenhado exclusivamente a partir de vozes ativas. Agora teclas mostram toque via activePointers, faixa de banco junto ao teclado e botão para importar WAVs locais. Não inserir áudio privado em páginas públicas nem alegar que E possui banco embutido. Manter V4 puramente físico e DSP A/B/C/D intocados. [doc](docs/SAMPLER_KEYBOARD_V1210.md).
