@@ -1,0 +1,5921 @@
+{
+  "sourceCommit": "f0f6e87b419e7d4769e7a75ca193478ba13ddf13",
+  "runId": 45415259799,
+  "lossCase": "control",
+  "artifactId": 14931568743,
+  "floatDrops": {
+    "broadband": {
+      "referenceRms": 0.0760719891770252,
+      "drops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3,
+          "endS": 3.5,
+          "confirmedThroughS": 4
+        },
+        "40": {
+          "status": "observed-window",
+          "startS": 7.5,
+          "endS": 8,
+          "confirmedThroughS": 8.5
+        },
+        "60": {
+          "status": "observed-window",
+          "startS": 15.5,
+          "endS": 16,
+          "confirmedThroughS": 16.5
+        }
+      }
+    },
+    "partials": [
+      {
+        "h": 1,
+        "referenceRms": 0.051156596579711514,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3,
+            "endS": 3.5,
+            "confirmedThroughS": 4
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 8.5,
+            "endS": 9,
+            "confirmedThroughS": 9.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 16.5,
+            "endS": 17,
+            "confirmedThroughS": 17.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 2,
+        "referenceRms": 0.010832767474472378,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 4,
+            "endS": 4.5,
+            "confirmedThroughS": 5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 9.5,
+            "endS": 10,
+            "confirmedThroughS": 10.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 15,
+            "endS": 15.5,
+            "confirmedThroughS": 16
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 3,
+        "referenceRms": 0.020211974476813596,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3.5,
+            "endS": 4,
+            "confirmedThroughS": 4.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 6.5,
+            "endS": 7,
+            "confirmedThroughS": 7.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 10,
+            "endS": 10.5,
+            "confirmedThroughS": 11
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 4,
+        "referenceRms": 0.007278179660572553,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1.5,
+            "endS": 2,
+            "confirmedThroughS": 2.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 4,
+            "endS": 4.5,
+            "confirmedThroughS": 5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 9.5,
+            "endS": 10,
+            "confirmedThroughS": 10.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 5,
+        "referenceRms": 0.005087995542709092,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3.5,
+            "endS": 4,
+            "confirmedThroughS": 4.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 6.5,
+            "endS": 7,
+            "confirmedThroughS": 7.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 8,
+            "endS": 8.5,
+            "confirmedThroughS": 9
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 6,
+        "referenceRms": 0.0015235545714477813,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1,
+            "endS": 1.5,
+            "confirmedThroughS": 2
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 2.5,
+            "endS": 3,
+            "confirmedThroughS": 3.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 6.5,
+            "endS": 7,
+            "confirmedThroughS": 7.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 7,
+        "referenceRms": 0.002635806775293107,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1.5,
+            "endS": 2,
+            "confirmedThroughS": 2.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 4,
+            "endS": 4.5,
+            "confirmedThroughS": 5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 5.5,
+            "endS": 6,
+            "confirmedThroughS": 6.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 8,
+        "referenceRms": 0.00020938651940459737,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1.5,
+            "endS": 2,
+            "confirmedThroughS": 2.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 3.5,
+            "endS": 4,
+            "confirmedThroughS": 4.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 6,
+            "endS": 6.5,
+            "confirmedThroughS": 7
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 9,
+        "referenceRms": 0.00009945551274228796,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 2,
+            "endS": 2.5,
+            "confirmedThroughS": 3
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 4.5,
+            "endS": 5,
+            "confirmedThroughS": 5.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 7.5,
+            "endS": 8,
+            "confirmedThroughS": 8.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 10,
+        "referenceRms": 0.00030847783579171116,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1.5,
+            "endS": 2,
+            "confirmedThroughS": 2.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 3,
+            "endS": 3.5,
+            "confirmedThroughS": 4
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 6,
+            "endS": 6.5,
+            "confirmedThroughS": 7
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      }
+    ],
+    "analyzedThroughS": 39.5
+  },
+  "pcm16Drops": {
+    "broadband": {
+      "referenceRms": 0.0760696206398787,
+      "drops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3,
+          "endS": 3.5,
+          "confirmedThroughS": 4
+        },
+        "40": {
+          "status": "observed-window",
+          "startS": 7.5,
+          "endS": 8,
+          "confirmedThroughS": 8.5
+        },
+        "60": {
+          "status": "observed-window",
+          "startS": 15.5,
+          "endS": 16,
+          "confirmedThroughS": 16.5
+        }
+      }
+    },
+    "partials": [
+      {
+        "h": 1,
+        "referenceRms": 0.05115502852101252,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3,
+            "endS": 3.5,
+            "confirmedThroughS": 4
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 8.5,
+            "endS": 9,
+            "confirmedThroughS": 9.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 16.5,
+            "endS": 17,
+            "confirmedThroughS": 17.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 2,
+        "referenceRms": 0.01083241016230953,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 4,
+            "endS": 4.5,
+            "confirmedThroughS": 5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 9.5,
+            "endS": 10,
+            "confirmedThroughS": 10.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 15,
+            "endS": 15.5,
+            "confirmedThroughS": 16
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 3,
+        "referenceRms": 0.020211292470927886,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3.5,
+            "endS": 4,
+            "confirmedThroughS": 4.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 6.5,
+            "endS": 7,
+            "confirmedThroughS": 7.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 10,
+            "endS": 10.5,
+            "confirmedThroughS": 11
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 4,
+        "referenceRms": 0.007277998771016824,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1.5,
+            "endS": 2,
+            "confirmedThroughS": 2.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 4,
+            "endS": 4.5,
+            "confirmedThroughS": 5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 9.5,
+            "endS": 10,
+            "confirmedThroughS": 10.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 5,
+        "referenceRms": 0.0050878365873471745,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3.5,
+            "endS": 4,
+            "confirmedThroughS": 4.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 6.5,
+            "endS": 7,
+            "confirmedThroughS": 7.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 8,
+            "endS": 8.5,
+            "confirmedThroughS": 9
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 6,
+        "referenceRms": 0.0015235154561032739,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1,
+            "endS": 1.5,
+            "confirmedThroughS": 2
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 2.5,
+            "endS": 3,
+            "confirmedThroughS": 3.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 6.5,
+            "endS": 7,
+            "confirmedThroughS": 7.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 7,
+        "referenceRms": 0.002635790384145061,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1.5,
+            "endS": 2,
+            "confirmedThroughS": 2.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 4,
+            "endS": 4.5,
+            "confirmedThroughS": 5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 5.5,
+            "endS": 6,
+            "confirmedThroughS": 6.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 8,
+        "referenceRms": 0.0002093873574552043,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1.5,
+            "endS": 2,
+            "confirmedThroughS": 2.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 3.5,
+            "endS": 4,
+            "confirmedThroughS": 4.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 23.5,
+            "endS": 24,
+            "confirmedThroughS": 24.5
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 9,
+        "referenceRms": 0.00009946740792931122,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 2,
+            "endS": 2.5,
+            "confirmedThroughS": 3
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 4.5,
+            "endS": 5,
+            "confirmedThroughS": 5.5
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 21,
+            "endS": 21.5,
+            "confirmedThroughS": 22
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      },
+      {
+        "h": 10,
+        "referenceRms": 0.00030849893861387416,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1.5,
+            "endS": 2,
+            "confirmedThroughS": 2.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 3,
+            "endS": 3.5,
+            "confirmedThroughS": 4
+          },
+          "60": {
+            "status": "observed-window",
+            "startS": 12,
+            "endS": 12.5,
+            "confirmedThroughS": 13
+          }
+        },
+        "warning": "check sideband contrast and recording noise before interpreting crossings"
+      }
+    ],
+    "analyzedThroughS": 39.5
+  },
+  "floatWindows": [
+    {
+      "startS": 0,
+      "globalRms": 0.0760719891770252,
+      "globalDb": 0,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.051156596579711514,
+          "db": 0,
+          "contrastDb": 10.21248186833259
+        },
+        {
+          "h": 2,
+          "rms": 0.010832767474472378,
+          "db": 0,
+          "contrastDb": 16.04184939808504
+        },
+        {
+          "h": 3,
+          "rms": 0.020211974476813596,
+          "db": 0,
+          "contrastDb": 32.2032750220944
+        },
+        {
+          "h": 4,
+          "rms": 0.007278179660572553,
+          "db": 0,
+          "contrastDb": 27.548113183278904
+        },
+        {
+          "h": 5,
+          "rms": 0.005087995542709092,
+          "db": 0,
+          "contrastDb": 34.574733737548485
+        },
+        {
+          "h": 6,
+          "rms": 0.0015235545714477813,
+          "db": 0,
+          "contrastDb": 20.334155292907212
+        },
+        {
+          "h": 7,
+          "rms": 0.002635806775293107,
+          "db": 0,
+          "contrastDb": 35.20515978583547
+        },
+        {
+          "h": 8,
+          "rms": 0.00020938651940459737,
+          "db": 0,
+          "contrastDb": 31.685221035797987
+        },
+        {
+          "h": 9,
+          "rms": 0.00009945551274228796,
+          "db": 0,
+          "contrastDb": 25.34823746109766
+        },
+        {
+          "h": 10,
+          "rms": 0.00030847783579171116,
+          "db": 0,
+          "contrastDb": 30.30406751198666
+        }
+      ]
+    },
+    {
+      "startS": 0.5,
+      "globalRms": 0.04171097895641954,
+      "globalDb": -5.219487794953612,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.034025654404114196,
+          "db": -3.541903135939015,
+          "contrastDb": 16.795513868523592
+        },
+        {
+          "h": 2,
+          "rms": 0.007259724786529637,
+          "db": -3.476385280777393,
+          "contrastDb": 25.742392105760345
+        },
+        {
+          "h": 3,
+          "rms": 0.01472661719003222,
+          "db": -2.750114868396467,
+          "contrastDb": 59.89550536694132
+        },
+        {
+          "h": 4,
+          "rms": 0.002235872555489578,
+          "db": -10.251514533731093,
+          "contrastDb": 50.717504426251345
+        },
+        {
+          "h": 5,
+          "rms": 0.0024584824889116743,
+          "db": -6.317592058054967,
+          "contrastDb": 62.028720780100116
+        },
+        {
+          "h": 6,
+          "rms": 0.0003182571615249645,
+          "db": -13.601596590937506,
+          "contrastDb": 33.03631314443615
+        },
+        {
+          "h": 7,
+          "rms": 0.0005162230817696541,
+          "db": -14.16152301680656,
+          "contrastDb": 59.962122596659256
+        },
+        {
+          "h": 8,
+          "rms": 0.00006532582127394513,
+          "db": -10.11727678782389,
+          "contrastDb": 51.41347131462438
+        },
+        {
+          "h": 9,
+          "rms": 0.000025506323994543846,
+          "db": -11.819619774322662,
+          "contrastDb": 48.84095144051501
+        },
+        {
+          "h": 10,
+          "rms": 0.0000639578409837534,
+          "db": -13.666603408476954,
+          "contrastDb": 58.5888862713194
+        }
+      ]
+    },
+    {
+      "startS": 1,
+      "globalRms": 0.026717967960229953,
+      "globalDb": -9.088426957718593,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.02376140748667097,
+          "db": -6.660589625211182,
+          "contrastDb": 23.75729528198807
+        },
+        {
+          "h": 2,
+          "rms": 0.005333964140580506,
+          "db": -6.1537865887953185,
+          "contrastDb": 36.22093957222157
+        },
+        {
+          "h": 3,
+          "rms": 0.00957645538113173,
+          "db": -6.488079032406702,
+          "contrastDb": 75.45936310915712
+        },
+        {
+          "h": 4,
+          "rms": 0.0010982898840339464,
+          "db": -16.426115767609634,
+          "contrastDb": 66.83807236889942
+        },
+        {
+          "h": 5,
+          "rms": 0.0020188942313959127,
+          "db": -8.028663101142921,
+          "contrastDb": 84.91378560179727
+        },
+        {
+          "h": 6,
+          "rms": 0.0000741905992739031,
+          "db": -26.25018271023297,
+          "contrastDb": 43.31896370629535
+        },
+        {
+          "h": 7,
+          "rms": 0.00029910179785402777,
+          "db": -18.901890929623903,
+          "contrastDb": 84.08993519991945
+        },
+        {
+          "h": 8,
+          "rms": 0.00003134615419318339,
+          "db": -16.49528904365534,
+          "contrastDb": 72.68752650831473
+        },
+        {
+          "h": 9,
+          "rms": 0.000026064973198902213,
+          "db": -11.63143156064004,
+          "contrastDb": 83.18724570838523
+        },
+        {
+          "h": 10,
+          "rms": 0.00010699152559222424,
+          "db": -9.197491703129518,
+          "contrastDb": 92.64492880861711
+        }
+      ]
+    },
+    {
+      "startS": 2,
+      "globalRms": 0.011943117997384217,
+      "globalDb": -16.08214098940223,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.0114633109193261,
+          "db": -12.991831429185849,
+          "contrastDb": 37.49509480441994
+        },
+        {
+          "h": 2,
+          "rms": 0.003589606314401805,
+          "db": -9.593852012488735,
+          "contrastDb": 58.51881367547545
+        },
+        {
+          "h": 3,
+          "rms": 0.004728672110884258,
+          "db": -12.617390806895672,
+          "contrastDb": 77.83247563545468
+        },
+        {
+          "h": 4,
+          "rms": 0.00021592501196790505,
+          "db": -30.554396390472498,
+          "contrastDb": 82.26887776362516
+        },
+        {
+          "h": 5,
+          "rms": 0.0012317243226380467,
+          "db": -12.320664094747633,
+          "contrastDb": 89.96219672366814
+        },
+        {
+          "h": 6,
+          "rms": 0.000050107745338803995,
+          "db": -29.659063061247906,
+          "contrastDb": 83.82105355779187
+        },
+        {
+          "h": 7,
+          "rms": 0.00010214832785372508,
+          "db": -28.23364616555058,
+          "contrastDb": 95.94702539070366
+        },
+        {
+          "h": 8,
+          "rms": 0.0000031232765406725343,
+          "db": -36.52676557183736,
+          "contrastDb": 86.4790172462352
+        },
+        {
+          "h": 9,
+          "rms": 0.000005865274846249444,
+          "db": -24.586809856138146,
+          "contrastDb": 98.0249794915186
+        },
+        {
+          "h": 10,
+          "rms": 0.000007667316506095055,
+          "db": -32.091611481277624,
+          "contrastDb": 98.84556350944732
+        }
+      ]
+    },
+    {
+      "startS": 4,
+      "globalRms": 0.003086790596795111,
+      "globalDb": -27.834352080025866,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.0016972436643693232,
+          "db": -29.583148944400648,
+          "contrastDb": 59.53160463858789
+        },
+        {
+          "h": 2,
+          "rms": 0.001071488898337686,
+          "db": -20.095034908372785,
+          "contrastDb": 66.95172301638868
+        },
+        {
+          "h": 3,
+          "rms": 0.001298161791904357,
+          "db": -23.845598370441415,
+          "contrastDb": 77.5553083578115
+        },
+        {
+          "h": 4,
+          "rms": 0.00003170863771737883,
+          "db": -47.21690375634486,
+          "contrastDb": 82.23285073613354
+        },
+        {
+          "h": 5,
+          "rms": 0.00027946320876636203,
+          "db": -25.204441618236835,
+          "contrastDb": 90.48817961312771
+        },
+        {
+          "h": 6,
+          "rms": 0.00001156557038410409,
+          "db": -42.39381917395916,
+          "contrastDb": 90.92620865148639
+        },
+        {
+          "h": 7,
+          "rms": 0.000003453591053330618,
+          "db": -57.6528531880887,
+          "contrastDb": 87.55491167010099
+        },
+        {
+          "h": 8,
+          "rms": 9.983576712328321e-7,
+          "db": -46.4332511684422,
+          "contrastDb": 96.4783430360135
+        },
+        {
+          "h": 9,
+          "rms": 0.0000012038387014434824,
+          "db": -38.34121119331317,
+          "contrastDb": 100.71799319683112
+        },
+        {
+          "h": 10,
+          "rms": 7.227793086816002e-7,
+          "db": -52.604365079912654,
+          "contrastDb": 98.29467839136159
+        }
+      ]
+    },
+    {
+      "startS": 6,
+      "globalRms": 0.0011429356201586795,
+      "globalDb": -36.46406009342959,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.0011362119857494253,
+          "db": -33.06884554227953,
+          "contrastDb": 73.68782148076714
+        },
+        {
+          "h": 2,
+          "rms": 0.0005285419160762826,
+          "db": -26.233199726528234,
+          "contrastDb": 73.16224684675228
+        },
+        {
+          "h": 3,
+          "rms": 0.00036825771080078816,
+          "db": -34.78913784043854,
+          "contrastDb": 79.48823949427603
+        },
+        {
+          "h": 4,
+          "rms": 0.00003639216547147759,
+          "db": -46.02029746690896,
+          "contrastDb": 85.70410701553554
+        },
+        {
+          "h": 5,
+          "rms": 0.00005143057323330877,
+          "db": -39.90650714573394,
+          "contrastDb": 90.67969842775031
+        },
+        {
+          "h": 6,
+          "rms": 0.000002886823598576283,
+          "db": -54.44875535600932,
+          "contrastDb": 92.93164680415727
+        },
+        {
+          "h": 7,
+          "rms": 0.0000020614159777243594,
+          "db": -62.134958642447174,
+          "contrastDb": 98.5056717991879
+        },
+        {
+          "h": 8,
+          "rms": 1.714049958897368e-7,
+          "db": -61.73850483475935,
+          "contrastDb": 92.93593616666875
+        },
+        {
+          "h": 9,
+          "rms": 2.632639661339747e-7,
+          "db": -51.544748819532124,
+          "contrastDb": 99.90155330600462
+        },
+        {
+          "h": 10,
+          "rms": 2.2947759691061055e-7,
+          "db": -62.569673440451716,
+          "contrastDb": 100.00048700521491
+        }
+      ]
+    },
+    {
+      "startS": 8,
+      "globalRms": 0.0005840695449302708,
+      "globalDb": -42.29520422276144,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.0005183476405718578,
+          "db": -39.88561034702102,
+          "contrastDb": 68.8491481348741
+        },
+        {
+          "h": 2,
+          "rms": 0.00018909133070051735,
+          "db": -35.16135605946667,
+          "contrastDb": 71.56612876046809
+        },
+        {
+          "h": 3,
+          "rms": 0.00009873742767790438,
+          "db": -46.22253864846806,
+          "contrastDb": 80.76440341265774
+        },
+        {
+          "h": 4,
+          "rms": 0.000011447471723994855,
+          "db": -56.06626384798936,
+          "contrastDb": 86.1469107332676
+        },
+        {
+          "h": 5,
+          "rms": 0.000004779829138857019,
+          "db": -60.54268699412808,
+          "contrastDb": 84.76242662684746
+        },
+        {
+          "h": 6,
+          "rms": 8.185106347244506e-7,
+          "db": -65.39667376283008,
+          "contrastDb": 93.97745258167335
+        },
+        {
+          "h": 7,
+          "rms": 5.684102143185444e-7,
+          "db": -73.3250339281793,
+          "contrastDb": 97.9579260110695
+        },
+        {
+          "h": 8,
+          "rms": 1.6283542692404762e-8,
+          "db": -82.18399641246164,
+          "contrastDb": 81.87834800285799
+        },
+        {
+          "h": 9,
+          "rms": 4.654272430383349e-8,
+          "db": -66.59554120617487,
+          "contrastDb": 92.62568216217127
+        },
+        {
+          "h": 10,
+          "rms": 4.998578184015952e-8,
+          "db": -75.80754951837184,
+          "contrastDb": 95.71014471427468
+        }
+      ]
+    },
+    {
+      "startS": 10,
+      "globalRms": 0.0003147024351983316,
+      "globalDb": -47.66649338124793,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.00031228639541529133,
+          "db": -44.28697157103357,
+          "contrastDb": 70.37789866782285
+        },
+        {
+          "h": 2,
+          "rms": 0.0000345625029889319,
+          "db": -49.922684698047476,
+          "contrastDb": 60.905763702873074
+        },
+        {
+          "h": 3,
+          "rms": 0.000019410202012922397,
+          "db": -60.351573715810865,
+          "contrastDb": 76.75365638808037
+        },
+        {
+          "h": 4,
+          "rms": 6.457754113452113e-7,
+          "db": -81.03882534279145,
+          "contrastDb": 77.23503131166933
+        },
+        {
+          "h": 5,
+          "rms": 0.0000024331043184647422,
+          "db": -66.40771985265181,
+          "contrastDb": 85.80016538515017
+        },
+        {
+          "h": 6,
+          "rms": 2.599191842808374e-7,
+          "db": -75.36039358497179,
+          "contrastDb": 91.86488794215208
+        },
+        {
+          "h": 7,
+          "rms": 2.751853428332108e-7,
+          "db": -79.62576543192763,
+          "contrastDb": 97.56632753826554
+        },
+        {
+          "h": 8,
+          "rms": 2.420362597981787e-8,
+          "db": -78.74136569256285,
+          "contrastDb": 92.77988773238279
+        },
+        {
+          "h": 9,
+          "rms": 9.106942128475625e-9,
+          "db": -80.76512567889621,
+          "contrastDb": 85.39942814749372
+        },
+        {
+          "h": 10,
+          "rms": 1.265346725482735e-8,
+          "db": -87.74028839577007,
+          "contrastDb": 89.55622396059157
+        }
+      ]
+    },
+    {
+      "startS": 12,
+      "globalRms": 0.00017759933887657588,
+      "globalDb": -52.63566855683473,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.00017370635884062332,
+          "db": -49.381718530163425,
+          "contrastDb": 69.88720233612824
+        },
+        {
+          "h": 2,
+          "rms": 0.00003483371502784892,
+          "db": -49.8547925304468,
+          "contrastDb": 72.6576011701473
+        },
+        {
+          "h": 3,
+          "rms": 0.000009466364374083732,
+          "db": -66.58851048144786,
+          "contrastDb": 81.46499649236914
+        },
+        {
+          "h": 4,
+          "rms": 0.0000019682328201259188,
+          "db": -71.358926050149,
+          "contrastDb": 85.51933207728166
+        },
+        {
+          "h": 5,
+          "rms": 0.0000012167159209213907,
+          "db": -72.42715062557119,
+          "contrastDb": 88.3892661335613
+        },
+        {
+          "h": 6,
+          "rms": 8.8961018619831e-8,
+          "db": -84.67316535198755,
+          "contrastDb": 90.90760137531502
+        },
+        {
+          "h": 7,
+          "rms": 8.490268032356833e-8,
+          "db": -89.8398433827146,
+          "contrastDb": 94.94177820894703
+        },
+        {
+          "h": 8,
+          "rms": 6.847305175542811e-9,
+          "db": -89.70858067034936,
+          "contrastDb": 88.63623402936648
+        },
+        {
+          "h": 9,
+          "rms": 5.94137940367153e-9,
+          "db": -84.47483148729094,
+          "contrastDb": 89.2148638948243
+        },
+        {
+          "h": 10,
+          "rms": 2.5430655794922084e-9,
+          "db": -101.67732811207455,
+          "contrastDb": 81.19646459955854
+        }
+      ]
+    },
+    {
+      "startS": 14,
+      "globalRms": 0.00010117241720645046,
+      "globalDb": -57.5232529268289,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.00010012930114362825,
+          "db": -54.16680916787172,
+          "contrastDb": 70.02510654862618
+        },
+        {
+          "h": 2,
+          "rms": 0.000015890931319864214,
+          "db": -56.67180140914246,
+          "contrastDb": 71.55375835438939
+        },
+        {
+          "h": 3,
+          "rms": 0.000001469029052854821,
+          "db": -82.77156712544384,
+          "contrastDb": 71.53061583864327
+        },
+        {
+          "h": 4,
+          "rms": 0.000001053646104433789,
+          "db": -76.78656012109145,
+          "contrastDb": 86.10281375344158
+        },
+        {
+          "h": 5,
+          "rms": 2.5587996454607416e-7,
+          "db": -85.97020880619716,
+          "contrastDb": 88.44073791533287
+        },
+        {
+          "h": 6,
+          "rms": 3.204947036740979e-8,
+          "db": -93.54074315246532,
+          "contrastDb": 90.81156723028599
+        },
+        {
+          "h": 7,
+          "rms": 1.820986420047258e-8,
+          "db": -103.21213725855536,
+          "contrastDb": 89.60246407732623
+        },
+        {
+          "h": 8,
+          "rms": 2.6406126780661787e-9,
+          "db": -97.98488027361655,
+          "contrastDb": 84.56279659382409
+        },
+        {
+          "h": 9,
+          "rms": 2.4000812965166823e-9,
+          "db": -92.34805816355563,
+          "contrastDb": 84.5707037494179
+        },
+        {
+          "h": 10,
+          "rms": 1.0009389466826574e-9,
+          "db": -109.77632754567415,
+          "contrastDb": 76.99153328971377
+        }
+      ]
+    },
+    {
+      "startS": 16,
+      "globalRms": 0.000057897830315262,
+      "globalDb": -62.371249669636896,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.000057472987657795454,
+          "db": -58.98875738890681,
+          "contrastDb": 70.0036207557107
+        },
+        {
+          "h": 2,
+          "rms": 0.000004836174252228413,
+          "db": -67.00474961140687,
+          "contrastDb": 63.95337175450341
+        },
+        {
+          "h": 3,
+          "rms": 9.350882928805982e-7,
+          "db": -86.6951224280016,
+          "contrastDb": 73.78637636260422
+        },
+        {
+          "h": 4,
+          "rms": 1.8879565174183635e-7,
+          "db": -91.72061568532776,
+          "contrastDb": 84.66057029237615
+        },
+        {
+          "h": 5,
+          "rms": 1.0965058607056628e-7,
+          "db": -93.3307152980791,
+          "contrastDb": 89.3460098404791
+        },
+        {
+          "h": 6,
+          "rms": 1.1799047565491008e-8,
+          "db": -102.2202212542528,
+          "contrastDb": 89.36036504812142
+        },
+        {
+          "h": 7,
+          "rms": 2.9689014078141913e-8,
+          "db": -98.96635588689742,
+          "contrastDb": 97.33612254953565
+        },
+        {
+          "h": 8,
+          "rms": 2.2164832967047643e-9,
+          "db": -99.50568509862799,
+          "contrastDb": 86.91942890951947
+        },
+        {
+          "h": 9,
+          "rms": 8.601366502371773e-10,
+          "db": -101.26122814961711,
+          "contrastDb": 79.61984680733273
+        },
+        {
+          "h": 10,
+          "rms": 2.3758648672687763e-10,
+          "db": -122.26804459604455,
+          "contrastDb": 68.77970768226
+        }
+      ]
+    },
+    {
+      "startS": 18,
+      "globalRms": 0.00003289762402161994,
+      "globalDb": -67.28120479490048,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.000032619199771261756,
+          "db": -63.90856681729916,
+          "contrastDb": 70.00189003638637
+        },
+        {
+          "h": 2,
+          "rms": 0.000004020710592478491,
+          "db": -68.6087321409774,
+          "contrastDb": 69.81618473884323
+        },
+        {
+          "h": 3,
+          "rms": 6.46599073060933e-7,
+          "db": -89.89947326923306,
+          "contrastDb": 79.73852980772256
+        },
+        {
+          "h": 4,
+          "rms": 1.58405375994353e-7,
+          "db": -93.24505710370656,
+          "contrastDb": 84.80042843241925
+        },
+        {
+          "h": 5,
+          "rms": 6.373951181799364e-8,
+          "db": -98.0427597859857,
+          "contrastDb": 89.66398914092105
+        },
+        {
+          "h": 6,
+          "rms": 4.240464653403784e-9,
+          "db": -111.10889134277484,
+          "contrastDb": 86.52984191378656
+        },
+        {
+          "h": 7,
+          "rms": 2.065998575770873e-8,
+          "db": -102.11567104401112,
+          "contrastDb": 97.98994431956308
+        },
+        {
+          "h": 8,
+          "rms": 4.3260156743508094e-10,
+          "db": -113.69721258170094,
+          "contrastDb": 76.93581359996972
+        },
+        {
+          "h": 9,
+          "rms": 3.881454344604594e-10,
+          "db": -108.17268757142404,
+          "contrastDb": 77.87188599057858
+        },
+        {
+          "h": 10,
+          "rms": 1.8876382459349052e-10,
+          "db": -124.2661039442047,
+          "contrastDb": 71.18677378895755
+        }
+      ]
+    },
+    {
+      "startS": 19,
+      "globalRms": 0.000025169565231505348,
+      "globalDb": -69.60698117618404,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.000025007128900741456,
+          "db": -66.21675621371543,
+          "contrastDb": 70.0339170164259
+        },
+        {
+          "h": 2,
+          "rms": 0.0000024170407244744607,
+          "db": -73.02910906510928,
+          "contrastDb": 66.81124286866394
+        },
+        {
+          "h": 3,
+          "rms": 6.298406678085749e-7,
+          "db": -90.12756084482751,
+          "contrastDb": 78.42784810135065
+        },
+        {
+          "h": 4,
+          "rms": 1.1122458778039885e-7,
+          "db": -96.31643934040153,
+          "contrastDb": 85.60416838901915
+        },
+        {
+          "h": 5,
+          "rms": 6.058020512699808e-8,
+          "db": -98.48431965286179,
+          "contrastDb": 90.16998504787622
+        },
+        {
+          "h": 6,
+          "rms": 1.3620922567341824e-8,
+          "db": -100.97302981137392,
+          "contrastDb": 94.7164792254113
+        },
+        {
+          "h": 7,
+          "rms": 3.341687771644694e-9,
+          "db": -117.93895401114129,
+          "contrastDb": 89.7471513922436
+        },
+        {
+          "h": 8,
+          "rms": 6.662914399826707e-10,
+          "db": -109.94568967897541,
+          "contrastDb": 84.80164662504734
+        },
+        {
+          "h": 9,
+          "rms": 1.0017929285545341e-10,
+          "db": -119.93701797929046,
+          "contrastDb": 69.14866857121186
+        },
+        {
+          "h": 10,
+          "rms": 6.923853856742784e-11,
+          "db": -132.97752145541955,
+          "contrastDb": 65.98793211533268
+        }
+      ]
+    },
+    {
+      "startS": 20,
+      "globalRms": 0.000018641416496784605,
+      "globalDb": -72.21491725588136,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.00001849613425455131,
+          "db": -68.8364134861476,
+          "contrastDb": 69.97605325774154
+        },
+        {
+          "h": 2,
+          "rms": 0.00000196168073105371,
+          "db": -74.84222189874727,
+          "contrastDb": 69.12878790978253
+        },
+        {
+          "h": 3,
+          "rms": 2.934225611194093e-7,
+          "db": -96.76230475330891,
+          "contrastDb": 77.72805699831869
+        },
+        {
+          "h": 4,
+          "rms": 1.6240518442803744e-7,
+          "db": -93.02845765685723,
+          "contrastDb": 85.98002254879277
+        },
+        {
+          "h": 5,
+          "rms": 1.5320108555619857e-8,
+          "db": -110.42569759076778,
+          "contrastDb": 87.69539093482031
+        },
+        {
+          "h": 6,
+          "rms": 1.5319209853068689e-9,
+          "db": -119.95243298287738,
+          "contrastDb": 83.18944594352651
+        },
+        {
+          "h": 7,
+          "rms": 9.331365872165162e-9,
+          "db": -109.01936704090785,
+          "contrastDb": 97.07673946546927
+        },
+        {
+          "h": 8,
+          "rms": 3.3122132427542233e-10,
+          "db": -116.01660857089956,
+          "contrastDb": 78.32072512322107
+        },
+        {
+          "h": 9,
+          "rms": 1.3436586281237886e-10,
+          "db": -117.38679830990083,
+          "contrastDb": 72.6492246176625
+        },
+        {
+          "h": 10,
+          "rms": 5.3386815710313375e-11,
+          "db": -135.23579894915875,
+          "contrastDb": 64.65566008630799
+        }
+      ]
+    },
+    {
+      "startS": 24,
+      "globalRms": 0.000006247329368268505,
+      "globalDb": -81.7106073883426,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.000006216543397072961,
+          "db": -78.30705347263331,
+          "contrastDb": 70.05575037112672
+        },
+        {
+          "h": 2,
+          "rms": 6.030013969852821e-7,
+          "db": -85.08842205657139,
+          "contrastDb": 69.03613590011082
+        },
+        {
+          "h": 3,
+          "rms": 8.143103238596862e-8,
+          "db": -107.89637600638216,
+          "contrastDb": 77.44326309933805
+        },
+        {
+          "h": 4,
+          "rms": 1.525162269149102e-8,
+          "db": -113.57413438203865,
+          "contrastDb": 82.45515097183448
+        },
+        {
+          "h": 5,
+          "rms": 2.2557762074525204e-9,
+          "db": -127.06501421017073,
+          "contrastDb": 84.12379318108735
+        },
+        {
+          "h": 6,
+          "rms": 6.341041912431142e-10,
+          "db": -127.61394781721422,
+          "contrastDb": 85.5459901131851
+        },
+        {
+          "h": 7,
+          "rms": 6.088181799847815e-10,
+          "db": -132.7285191505261,
+          "contrastDb": 88.28283928941352
+        },
+        {
+          "h": 8,
+          "rms": 2.4691050948891664e-11,
+          "db": -138.5681828428376,
+          "contrastDb": 66.61822335350485
+        },
+        {
+          "h": 9,
+          "rms": 2.1291525551430136e-11,
+          "db": -133.38844161409563,
+          "contrastDb": 66.57274730074023
+        },
+        {
+          "h": 10,
+          "rms": 8.463179351932921e-12,
+          "db": -151.2338084154334,
+          "contrastDb": 58.89058901300271
+        }
+      ]
+    },
+    {
+      "startS": 29,
+      "globalRms": 0.0000014998458590048946,
+      "globalDb": -94.10356288457032,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.0000014903153429252292,
+          "db": -90.71246941638826,
+          "contrastDb": 69.98424649112656
+        },
+        {
+          "h": 2,
+          "rms": 1.3811764620777976e-7,
+          "db": -97.88980505174437,
+          "contrastDb": 69.44229790272985
+        },
+        {
+          "h": 3,
+          "rms": 2.1499435648443514e-8,
+          "db": -119.46363362281424,
+          "contrastDb": 77.50387613513149
+        },
+        {
+          "h": 4,
+          "rms": 1.4183553085821303e-8,
+          "db": -114.20475466764148,
+          "contrastDb": 85.76275363796476
+        },
+        {
+          "h": 5,
+          "rms": 1.7213433458557033e-9,
+          "db": -129.41358434284058,
+          "contrastDb": 89.96863013932334
+        },
+        {
+          "h": 6,
+          "rms": 5.282607641674903e-10,
+          "db": -129.20019318699113,
+          "contrastDb": 92.81360814283495
+        },
+        {
+          "h": 7,
+          "rms": 1.1136602068231934e-10,
+          "db": -147.48321736436378,
+          "contrastDb": 87.72086930859223
+        },
+        {
+          "h": 8,
+          "rms": 1.220717528101628e-11,
+          "db": -144.68667074344572,
+          "contrastDb": 72.62316498792416
+        },
+        {
+          "h": 9,
+          "rms": 3.742974433432563e-12,
+          "db": -148.48824000160678,
+          "contrastDb": 64.26257570305081
+        },
+        {
+          "h": 10,
+          "rms": 6.631820685111737e-13,
+          "db": -173.35182380643758,
+          "contrastDb": 50.170313660606254
+        }
+      ]
+    },
+    {
+      "startS": 30,
+      "globalRms": 0.0000011648364178336025,
+      "globalDb": -96.29919664986892,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.000001161155164940408,
+          "db": -92.88022770179985,
+          "contrastDb": 70.06370824042504
+        },
+        {
+          "h": 2,
+          "rms": 8.39486792584439e-8,
+          "db": -102.21451106433446,
+          "contrastDb": 67.6371031987105
+        },
+        {
+          "h": 3,
+          "rms": 3.629215812754567e-8,
+          "db": -114.91591893376832,
+          "contrastDb": 77.6878125059631
+        },
+        {
+          "h": 4,
+          "rms": 1.1915755677080536e-9,
+          "db": -135.71802364174036,
+          "contrastDb": 75.87792565459529
+        },
+        {
+          "h": 5,
+          "rms": 2.292214304130704e-9,
+          "db": -126.92583007692076,
+          "contrastDb": 90.45762682004076
+        },
+        {
+          "h": 6,
+          "rms": 2.2442381260883615e-10,
+          "db": -136.6357815707789,
+          "contrastDb": 91.31560400487997
+        },
+        {
+          "h": 7,
+          "rms": 2.7992182098670585e-10,
+          "db": -139.47753630557963,
+          "contrastDb": 96.00681790150004
+        },
+        {
+          "h": 8,
+          "rms": 2.541369378795297e-12,
+          "db": -158.31761849997045,
+          "contrastDb": 62.951963546192246
+        },
+        {
+          "h": 9,
+          "rms": 2.228320309008368e-12,
+          "db": -152.99302484521158,
+          "contrastDb": 62.421084378199374
+        },
+        {
+          "h": 10,
+          "rms": 4.207654826631414e-13,
+          "db": -177.3036771980249,
+          "contrastDb": 47.544817396705106
+        }
+      ]
+    },
+    {
+      "startS": 34,
+      "globalRms": 3.574824812555828e-7,
+      "globalDb": -106.55940017855303,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 3.54830985032859e-7,
+          "db": -103.17760213052858,
+          "contrastDb": 69.90149037716371
+        },
+        {
+          "h": 2,
+          "rms": 2.9551319874554408e-8,
+          "db": -111.28325076423118,
+          "contrastDb": 68.94073594397658
+        },
+        {
+          "h": 3,
+          "rms": 1.4761558961799024e-8,
+          "db": -122.72953031180609,
+          "contrastDb": 77.6669905273578
+        },
+        {
+          "h": 4,
+          "rms": 4.299337349330431e-9,
+          "db": -124.5724249661957,
+          "contrastDb": 86.04829076860551
+        },
+        {
+          "h": 5,
+          "rms": 6.897677597916583e-10,
+          "db": -137.3568766178181,
+          "contrastDb": 90.71250067539181
+        },
+        {
+          "h": 6,
+          "rms": 8.621302065066994e-11,
+          "db": -144.94570305711414,
+          "contrastDb": 91.97526911501298
+        },
+        {
+          "h": 7,
+          "rms": 2.0411766691110913e-11,
+          "db": -162.22065948689522,
+          "contrastDb": 86.47747741513632
+        },
+        {
+          "h": 8,
+          "rms": 1.2108463202080152e-12,
+          "db": -164.7571938295948,
+          "contrastDb": 65.14343656317126
+        },
+        {
+          "h": 9,
+          "rms": 3.9327811983906374e-13,
+          "db": -168.05858151547423,
+          "contrastDb": 56.68936366519293
+        },
+        {
+          "h": 10,
+          "rms": 3.849606087763847e-14,
+          "db": -198.07615345743545,
+          "contrastDb": 37.46270628684313
+        }
+      ]
+    },
+    {
+      "startS": 35,
+      "globalRms": 2.9335337477401985e-7,
+      "globalDb": -108.27667367685324,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 2.9301225376197567e-7,
+          "db": -104.84031720961258,
+          "contrastDb": 70.12932145309334
+        },
+        {
+          "h": 2,
+          "rms": 1.6428340104539694e-8,
+          "db": -116.38291471872319,
+          "contrastDb": 66.39293541724501
+        },
+        {
+          "h": 3,
+          "rms": 9.313415386266397e-9,
+          "db": -126.7299953571812,
+          "contrastDb": 77.43692008519942
+        },
+        {
+          "h": 4,
+          "rms": 2.592411639803929e-9,
+          "db": -128.96637618235638,
+          "contrastDb": 85.48508625985252
+        },
+        {
+          "h": 5,
+          "rms": 4.0386007031631153e-10,
+          "db": -142.0063161125049,
+          "contrastDb": 89.3579705304689
+        },
+        {
+          "h": 6,
+          "rms": 6.150936632693537e-11,
+          "db": -147.8783352339352,
+          "contrastDb": 91.81002174227686
+        },
+        {
+          "h": 7,
+          "rms": 4.8454084948567174e-11,
+          "db": -154.71166347256943,
+          "contrastDb": 95.25430802629423
+        },
+        {
+          "h": 8,
+          "rms": 1.2249632448647716e-12,
+          "db": -164.65651319819835,
+          "contrastDb": 68.26892206031238
+        },
+        {
+          "h": 9,
+          "rms": 1.209078796565798e-13,
+          "db": -178.30348511315023,
+          "contrastDb": 49.28172506568559
+        },
+        {
+          "h": 10,
+          "rms": 3.431381762659433e-14,
+          "db": -199.07509853212642,
+          "contrastDb": 38.27762172803549
+        }
+      ]
+    },
+    {
+      "startS": 39,
+      "globalRms": 9.120366397230047e-8,
+      "globalDb": -118.4242497356924,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 9.083710101192309e-8,
+          "db": -115.01276755521651,
+          "contrastDb": 70.00518900537897
+        },
+        {
+          "h": 2,
+          "rms": 5.957241204815061e-9,
+          "db": -125.19388472706115,
+          "contrastDb": 68.04585627638505
+        },
+        {
+          "h": 3,
+          "rms": 3.2772078953868566e-9,
+          "db": -135.80209497334977,
+          "contrastDb": 77.32341502293076
+        },
+        {
+          "h": 4,
+          "rms": 5.268736388522056e-10,
+          "db": -142.80632603738593,
+          "contrastDb": 84.97208208739494
+        },
+        {
+          "h": 5,
+          "rms": 2.031964233050896e-10,
+          "db": -147.97261326040942,
+          "contrastDb": 90.59874490631651
+        },
+        {
+          "h": 6,
+          "rms": 1.2777214709842307e-11,
+          "db": -161.52843643650985,
+          "contrastDb": 88.37308890940352
+        },
+        {
+          "h": 7,
+          "rms": 3.7453096591310676e-12,
+          "db": -176.94851678729745,
+          "contrastDb": 86.30496219495333
+        },
+        {
+          "h": 8,
+          "rms": 1.4630578316481088e-13,
+          "db": -183.11374449066602,
+          "contrastDb": 61.53146752603824
+        },
+        {
+          "h": 9,
+          "rms": 2.3045670203102518e-14,
+          "db": -192.70079036295874,
+          "contrastDb": 45.56613470412573
+        },
+        {
+          "h": 10,
+          "rms": 1.6236541209799022e-15,
+          "db": -225.5746089235237,
+          "contrastDb": 22.856862663657147
+        }
+      ]
+    }
+  ],
+  "pcm16Windows": [
+    {
+      "startS": 0,
+      "globalRms": 0.0760696206398787,
+      "globalDb": 0,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.05115502852101252,
+          "db": 0,
+          "contrastDb": 10.212514371025884
+        },
+        {
+          "h": 2,
+          "rms": 0.01083241016230953,
+          "db": 0,
+          "contrastDb": 16.041681502507426
+        },
+        {
+          "h": 3,
+          "rms": 0.020211292470927886,
+          "db": 0,
+          "contrastDb": 32.20264847652808
+        },
+        {
+          "h": 4,
+          "rms": 0.007277998771016824,
+          "db": 0,
+          "contrastDb": 27.548814123512585
+        },
+        {
+          "h": 5,
+          "rms": 0.0050878365873471745,
+          "db": 0,
+          "contrastDb": 34.578695351074785
+        },
+        {
+          "h": 6,
+          "rms": 0.0015235154561032739,
+          "db": 0,
+          "contrastDb": 20.333238280139984
+        },
+        {
+          "h": 7,
+          "rms": 0.002635790384145061,
+          "db": 0,
+          "contrastDb": 35.20915955307821
+        },
+        {
+          "h": 8,
+          "rms": 0.0002093873574552043,
+          "db": 0,
+          "contrastDb": 31.64721314371761
+        },
+        {
+          "h": 9,
+          "rms": 0.00009946740792931122,
+          "db": 0,
+          "contrastDb": 25.337540369247122
+        },
+        {
+          "h": 10,
+          "rms": 0.00030849893861387416,
+          "db": 0,
+          "contrastDb": 30.280262447165565
+        }
+      ]
+    },
+    {
+      "startS": 0.5,
+      "globalRms": 0.04170966254869723,
+      "globalDb": -5.219491484410207,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.03402460290362948,
+          "db": -3.541905316478387,
+          "contrastDb": 16.79547886419497
+        },
+        {
+          "h": 2,
+          "rms": 0.0072595393902628634,
+          "db": -3.4763205973219,
+          "contrastDb": 25.74352059148151
+        },
+        {
+          "h": 3,
+          "rms": 0.014726153053598838,
+          "db": -2.750095534491907,
+          "contrastDb": 59.88257154484913
+        },
+        {
+          "h": 4,
+          "rms": 0.0022357882244035767,
+          "db": -10.25162626924065,
+          "contrastDb": 50.702079359926906
+        },
+        {
+          "h": 5,
+          "rms": 0.0024583886210433085,
+          "db": -6.317652339951618,
+          "contrastDb": 61.69218823628766
+        },
+        {
+          "h": 6,
+          "rms": 0.00031824506357456926,
+          "db": -13.60170377291454,
+          "contrastDb": 33.1250839499311
+        },
+        {
+          "h": 7,
+          "rms": 0.0005161799406468381,
+          "db": -14.162194918355054,
+          "contrastDb": 57.88941963376785
+        },
+        {
+          "h": 8,
+          "rms": 0.00006533006720824303,
+          "db": -10.116747020215763,
+          "contrastDb": 43.27561170621042
+        },
+        {
+          "h": 9,
+          "rms": 0.000025430494296439495,
+          "db": -11.846519977731267,
+          "contrastDb": 35.2633244874625
+        },
+        {
+          "h": 10,
+          "rms": 0.00006396798293148742,
+          "db": -13.665820352645675,
+          "contrastDb": 43.25200649533066
+        }
+      ]
+    },
+    {
+      "startS": 1,
+      "globalRms": 0.026717072084115938,
+      "globalDb": -9.088447764376413,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.023760632008319474,
+          "db": -6.660606857810127,
+          "contrastDb": 23.757160522015255
+        },
+        {
+          "h": 2,
+          "rms": 0.005333793686449628,
+          "db": -6.1537776592874245,
+          "contrastDb": 36.22770191093871
+        },
+        {
+          "h": 3,
+          "rms": 0.009576101278957637,
+          "db": -6.488107120656084,
+          "contrastDb": 75.3183640168732
+        },
+        {
+          "h": 4,
+          "rms": 0.001098281033423131,
+          "db": -16.42596988445058,
+          "contrastDb": 66.24965926772735
+        },
+        {
+          "h": 5,
+          "rms": 0.0020188625224995056,
+          "db": -8.028528161090092,
+          "contrastDb": 76.84223455754645
+        },
+        {
+          "h": 6,
+          "rms": 0.0000742886772680549,
+          "db": -26.238484776685343,
+          "contrastDb": 41.64896802201398
+        },
+        {
+          "h": 7,
+          "rms": 0.00029906117804384046,
+          "db": -18.903016590771678,
+          "contrastDb": 57.43491733687782
+        },
+        {
+          "h": 8,
+          "rms": 0.000031221309875003185,
+          "db": -16.529986725132492,
+          "contrastDb": 38.52485529846406
+        },
+        {
+          "h": 9,
+          "rms": 0.000026099340991830338,
+          "db": -11.621025180978197,
+          "contrastDb": 36.118101048892854
+        },
+        {
+          "h": 10,
+          "rms": 0.00010691156858354263,
+          "db": -9.204579454389886,
+          "contrastDb": 48.29021781470635
+        }
+      ]
+    },
+    {
+      "startS": 2,
+      "globalRms": 0.011942796892427719,
+      "globalDb": -16.08210407956546,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.011462973994203254,
+          "db": -12.991820480079925,
+          "contrastDb": 37.49301955144159
+        },
+        {
+          "h": 2,
+          "rms": 0.003589577279530008,
+          "db": -9.593635765971786,
+          "contrastDb": 58.47014856816645
+        },
+        {
+          "h": 3,
+          "rms": 0.004728567241101118,
+          "db": -12.617290349709904,
+          "contrastDb": 77.03623681104781
+        },
+        {
+          "h": 4,
+          "rms": 0.0002160656926949928,
+          "db": -30.54852327254331,
+          "contrastDb": 56.14922286054092
+        },
+        {
+          "h": 5,
+          "rms": 0.0012317151958116087,
+          "db": -12.320457093335094,
+          "contrastDb": 72.09333534297042
+        },
+        {
+          "h": 6,
+          "rms": 0.00005006249013212901,
+          "db": -29.666688333711974,
+          "contrastDb": 43.4552584929851
+        },
+        {
+          "h": 7,
+          "rms": 0.00010228166848028513,
+          "db": -28.22226130757782,
+          "contrastDb": 48.22822561013554
+        },
+        {
+          "h": 8,
+          "rms": 0.00000315901339044931,
+          "db": -36.4279797836229,
+          "contrastDb": 18.51907419172274
+        },
+        {
+          "h": 9,
+          "rms": 0.000005848374257617433,
+          "db": -24.612912875078393,
+          "contrastDb": 23.796067083222905
+        },
+        {
+          "h": 10,
+          "rms": 0.00000765120456785583,
+          "db": -32.110477209469536,
+          "contrastDb": 24.5529180576851
+        }
+      ]
+    },
+    {
+      "startS": 4,
+      "globalRms": 0.003086714770542331,
+      "globalDb": -27.83429500592437,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.0016972085335309483,
+          "db": -29.58306248829438,
+          "contrastDb": 59.501101240728914
+        },
+        {
+          "h": 2,
+          "rms": 0.001071497834003728,
+          "db": -20.09467596938,
+          "contrastDb": 66.49180075705551
+        },
+        {
+          "h": 3,
+          "rms": 0.0012980162374603987,
+          "db": -23.846279227382368,
+          "contrastDb": 72.2407362062385
+        },
+        {
+          "h": 4,
+          "rms": 0.000031701508406861065,
+          "db": -47.218641016013684,
+          "contrastDb": 39.73281986349271
+        },
+        {
+          "h": 5,
+          "rms": 0.0002794587209048524,
+          "db": -25.204309742547835,
+          "contrastDb": 57.7604098849615
+        },
+        {
+          "h": 6,
+          "rms": 0.000011480463922833096,
+          "db": -42.45774852711541,
+          "contrastDb": 31.40789695232528
+        },
+        {
+          "h": 7,
+          "rms": 0.000003462035950813975,
+          "db": -57.63158591716696,
+          "contrastDb": 18.41605064592673
+        },
+        {
+          "h": 8,
+          "rms": 0.0000010221195196656691,
+          "db": -46.22897547573029,
+          "contrastDb": 7.900683266336927
+        },
+        {
+          "h": 9,
+          "rms": 0.0000012742152393953002,
+          "db": -37.84876011457352,
+          "contrastDb": 9.64317033955898
+        },
+        {
+          "h": 10,
+          "rms": 8.259342189303759e-7,
+          "db": -51.44616429263432,
+          "contrastDb": 6.112597800581565
+        }
+      ]
+    },
+    {
+      "startS": 6,
+      "globalRms": 0.0011429098267950815,
+      "globalDb": -36.463985672234585,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.0011361517620298385,
+          "db": -33.06903969580554,
+          "contrastDb": 71.0907768145064
+        },
+        {
+          "h": 2,
+          "rms": 0.0005285398025561423,
+          "db": -26.23294795607018,
+          "contrastDb": 67.777849751417
+        },
+        {
+          "h": 3,
+          "rms": 0.00036826296435352,
+          "db": -34.78872083868848,
+          "contrastDb": 61.795440282423854
+        },
+        {
+          "h": 4,
+          "rms": 0.000036384329014289435,
+          "db": -46.02195215346872,
+          "contrastDb": 42.80638581139503
+        },
+        {
+          "h": 5,
+          "rms": 0.00005134392810850091,
+          "db": -39.9208812481935,
+          "contrastDb": 43.81862858697603
+        },
+        {
+          "h": 6,
+          "rms": 0.0000029377341376632542,
+          "db": -54.29668749085859,
+          "contrastDb": 20.129108805276505
+        },
+        {
+          "h": 7,
+          "rms": 0.000002134873764353232,
+          "db": -61.83077338182385,
+          "contrastDb": 14.810390390417378
+        },
+        {
+          "h": 8,
+          "rms": 5.099753616431636e-7,
+          "db": -52.26802522749737,
+          "contrastDb": 2.5511231743133593
+        },
+        {
+          "h": 9,
+          "rms": 5.743864595307969e-7,
+          "db": -44.76953214415446,
+          "contrastDb": 2.745185745780634
+        },
+        {
+          "h": 10,
+          "rms": 5.167076026836371e-7,
+          "db": -55.52017645028126,
+          "contrastDb": 0.13296969785132273
+        }
+      ]
+    },
+    {
+      "startS": 8,
+      "globalRms": 0.0005841245020643455,
+      "globalDb": -42.29411653218843,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.000518349582053402,
+          "db": -39.88531156879969,
+          "contrastDb": 64.81260934038184
+        },
+        {
+          "h": 2,
+          "rms": 0.0001890586394134296,
+          "db": -35.16257135655028,
+          "contrastDb": 55.3470790574238
+        },
+        {
+          "h": 3,
+          "rms": 0.00009868168838322283,
+          "db": -46.2271503051172,
+          "contrastDb": 51.247927980031164
+        },
+        {
+          "h": 4,
+          "rms": 0.00001141759399644747,
+          "db": -56.0887476449788,
+          "contrastDb": 31.206839840256244
+        },
+        {
+          "h": 5,
+          "rms": 0.000004804489246597349,
+          "db": -60.49771856763044,
+          "contrastDb": 22.76101166290338
+        },
+        {
+          "h": 6,
+          "rms": 8.802499163618243e-7,
+          "db": -64.76481744065086,
+          "contrastDb": 6.383810308331426
+        },
+        {
+          "h": 7,
+          "rms": 7.048781842592093e-7,
+          "db": -71.45593599511325,
+          "contrastDb": 3.7397861980513607
+        },
+        {
+          "h": 8,
+          "rms": 3.596400515116845e-7,
+          "db": -55.30164809566104,
+          "contrastDb": -2.9351116105058312
+        },
+        {
+          "h": 9,
+          "rms": 4.1011889212603556e-7,
+          "db": -47.69542050140632,
+          "contrastDb": -0.25276052719302716
+        },
+        {
+          "h": 10,
+          "rms": 4.674792890272982e-7,
+          "db": -56.38982598645071,
+          "contrastDb": -0.34076494968502724
+        }
+      ]
+    },
+    {
+      "startS": 10,
+      "globalRms": 0.000314854645668716,
+      "globalDb": -47.66202289488209,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.00031224484871338,
+          "db": -44.28786097689336,
+          "contrastDb": 65.39133364444159
+        },
+        {
+          "h": 2,
+          "rms": 0.000034553914055115004,
+          "db": -49.92455694457309,
+          "contrastDb": 46.70855407008005
+        },
+        {
+          "h": 3,
+          "rms": 0.000019316952280252567,
+          "db": -60.393109593968745,
+          "contrastDb": 39.948430796075705
+        },
+        {
+          "h": 4,
+          "rms": 9.257215532489101e-7,
+          "db": -77.91063205083144,
+          "contrastDb": 13.632616519805154
+        },
+        {
+          "h": 5,
+          "rms": 0.0000023910698359521622,
+          "db": -66.5588178665836,
+          "contrastDb": 21.72686530997986
+        },
+        {
+          "h": 6,
+          "rms": 5.050577238530816e-7,
+          "db": -69.59011694690071,
+          "contrastDb": 7.5932707410789355
+        },
+        {
+          "h": 7,
+          "rms": 6.205275257915002e-7,
+          "db": -72.56299636531813,
+          "contrastDb": 8.813903745248012
+        },
+        {
+          "h": 8,
+          "rms": 4.3100636151802796e-7,
+          "db": -53.72933551446341,
+          "contrastDb": 5.12343524724007
+        },
+        {
+          "h": 9,
+          "rms": 5.430589094013038e-7,
+          "db": -45.25667714972738,
+          "contrastDb": 7.151526967511115
+        },
+        {
+          "h": 10,
+          "rms": 4.076015492195517e-7,
+          "db": -57.58035696351779,
+          "contrastDb": 4.658170166574431
+        }
+      ]
+    },
+    {
+      "startS": 12,
+      "globalRms": 0.00017804539805685874,
+      "globalDb": -52.613609949836395,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.00017374339871765657,
+          "db": -49.37960036673783,
+          "contrastDb": 58.45671904580098
+        },
+        {
+          "h": 2,
+          "rms": 0.00003484572496536298,
+          "db": -49.85151182977964,
+          "contrastDb": 44.813720847333315
+        },
+        {
+          "h": 3,
+          "rms": 0.000009600594526780404,
+          "db": -66.46591917281475,
+          "contrastDb": 36.74614470689156
+        },
+        {
+          "h": 4,
+          "rms": 0.0000023367198490550414,
+          "db": -69.86810660528133,
+          "contrastDb": 24.383552967822638
+        },
+        {
+          "h": 5,
+          "rms": 0.0000016470020622035983,
+          "db": -69.79678022232964,
+          "contrastDb": 18.71046845950254
+        },
+        {
+          "h": 6,
+          "rms": 7.429293841420656e-7,
+          "db": -66.23798657446773,
+          "contrastDb": 12.047673203450755
+        },
+        {
+          "h": 7,
+          "rms": 7.679619384864189e-7,
+          "db": -70.71142346161294,
+          "contrastDb": 11.429744964120594
+        },
+        {
+          "h": 8,
+          "rms": 5.359716182842344e-7,
+          "db": -51.83617326415324,
+          "contrastDb": 10.289953762947182
+        },
+        {
+          "h": 9,
+          "rms": 5.247433885799774e-7,
+          "db": -45.55467650255557,
+          "contrastDb": 7.845787164167151
+        },
+        {
+          "h": 10,
+          "rms": 3.083209963802597e-7,
+          "db": -60.00501146788007,
+          "contrastDb": 2.924926648314592
+        }
+      ]
+    },
+    {
+      "startS": 14,
+      "globalRms": 0.00010117192774664487,
+      "globalDb": -57.52302450473688,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.00009911911286299664,
+          "db": -54.2546184956166,
+          "contrastDb": 59.21174530165747
+        },
+        {
+          "h": 2,
+          "rms": 0.0000163562328520108,
+          "db": -56.42083622538918,
+          "contrastDb": 44.80294590976662
+        },
+        {
+          "h": 3,
+          "rms": 0.0000027267162171353706,
+          "db": -77.3990829106855,
+          "contrastDb": 32.52801262893537
+        },
+        {
+          "h": 4,
+          "rms": 0.0000015993065844623608,
+          "db": -73.16160505287085,
+          "contrastDb": 21.820976896866696
+        },
+        {
+          "h": 5,
+          "rms": 0.000001220340023862477,
+          "db": -72.40104597742908,
+          "contrastDb": 18.80987163793679
+        },
+        {
+          "h": 6,
+          "rms": 0.0000013490505876349043,
+          "db": -61.056372581132415,
+          "contrastDb": 18.289176547903956
+        },
+        {
+          "h": 7,
+          "rms": 0.0000012108765724273682,
+          "db": -66.75621985101199,
+          "contrastDb": 19.34371837139572
+        },
+        {
+          "h": 8,
+          "rms": 8.296507706988042e-7,
+          "db": -48.04110270041453,
+          "contrastDb": 15.674727071077818
+        },
+        {
+          "h": 9,
+          "rms": 4.030077313469306e-7,
+          "db": -47.84734845633068,
+          "contrastDb": 9.984035870531036
+        },
+        {
+          "h": 10,
+          "rms": 2.1176519821287436e-7,
+          "db": -63.267981702228624,
+          "contrastDb": 3.1987984284435598
+        }
+      ]
+    },
+    {
+      "startS": 16,
+      "globalRms": 0.00005840150767647644,
+      "globalDb": -62.29574383100748,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.000056674118323597766,
+          "db": -59.110071171702245,
+          "contrastDb": 61.74731206113862
+        },
+        {
+          "h": 2,
+          "rms": 0.0000054646990203924064,
+          "db": -65.94317697318431,
+          "contrastDb": 40.88005512487179
+        },
+        {
+          "h": 3,
+          "rms": 0.000002083226070767779,
+          "db": -79.73715369400377,
+          "contrastDb": 34.480617476400035
+        },
+        {
+          "h": 4,
+          "rms": 0.000002215605196394818,
+          "db": -70.33039205721415,
+          "contrastDb": 28.136373455666337
+        },
+        {
+          "h": 5,
+          "rms": 0.0000020602694552849176,
+          "db": -67.85218260312863,
+          "contrastDb": 26.94790624650967
+        },
+        {
+          "h": 6,
+          "rms": 0.0000022860838827046774,
+          "db": -56.475094053982716,
+          "contrastDb": 27.710084912188073
+        },
+        {
+          "h": 7,
+          "rms": 0.0000014699805140353007,
+          "db": -65.07198582914488,
+          "contrastDb": 24.34331730090854
+        },
+        {
+          "h": 8,
+          "rms": 0.000002050907275668272,
+          "db": -40.18008860436015,
+          "contrastDb": 26.06869330951216
+        },
+        {
+          "h": 9,
+          "rms": 2.804753050273105e-7,
+          "db": -50.99572343174829,
+          "contrastDb": 8.41660427024511
+        },
+        {
+          "h": 10,
+          "rms": 1.293876028784635e-7,
+          "db": -67.54722014557507,
+          "contrastDb": 0.06107655505561963
+        }
+      ]
+    },
+    {
+      "startS": 18,
+      "globalRms": 0.00003588411730456423,
+      "globalDb": -66.52617965442735,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.00003503705487310467,
+          "db": -63.28721475625499,
+          "contrastDb": 61.71067513516758
+        },
+        {
+          "h": 2,
+          "rms": 0.000002097495014212326,
+          "db": -74.26048317521987,
+          "contrastDb": 37.73337046493077
+        },
+        {
+          "h": 3,
+          "rms": 0.0000015152589485983422,
+          "db": -82.50214458332202,
+          "contrastDb": 33.09560742873357
+        },
+        {
+          "h": 4,
+          "rms": 0.0000017232660048581568,
+          "db": -72.51319314425508,
+          "contrastDb": 27.887657049723728
+        },
+        {
+          "h": 5,
+          "rms": 0.0000025983762834381392,
+          "db": -65.83662220977433,
+          "contrastDb": 30.01217934414196
+        },
+        {
+          "h": 6,
+          "rms": 0.000002007487761613198,
+          "db": -57.603879163408735,
+          "contrastDb": 27.723998722268774
+        },
+        {
+          "h": 7,
+          "rms": 0.0000026121359519732112,
+          "db": -60.07830185317536,
+          "contrastDb": 30.647442119901296
+        },
+        {
+          "h": 8,
+          "rms": 0.0000015383223035742242,
+          "db": -42.67806238431052,
+          "contrastDb": 26.604311507045203
+        },
+        {
+          "h": 9,
+          "rms": 1.3855219212689617e-7,
+          "db": -57.121347983141355,
+          "contrastDb": 5.243057572028196
+        },
+        {
+          "h": 10,
+          "rms": 7.934703134920375e-8,
+          "db": -71.79445982546484,
+          "contrastDb": -1.3941920591914534
+        }
+      ]
+    },
+    {
+      "startS": 19,
+      "globalRms": 0.000026094685664314478,
+      "globalDb": -69.29318361403926,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.000024259738691459668,
+          "db": -66.48004424984806,
+          "contrastDb": 57.482931602815846
+        },
+        {
+          "h": 2,
+          "rms": 0.0000022285428162545446,
+          "db": -73.73408226955952,
+          "contrastDb": 36.76702477883463
+        },
+        {
+          "h": 3,
+          "rms": 0.0000045317050637867695,
+          "db": -72.98664899309266,
+          "contrastDb": 41.92125945681373
+        },
+        {
+          "h": 4,
+          "rms": 0.00000137749946788971,
+          "db": -74.45841076305102,
+          "contrastDb": 27.18102324893483
+        },
+        {
+          "h": 5,
+          "rms": 0.0000033089172389488644,
+          "db": -63.73694498268574,
+          "contrastDb": 35.99964556489656
+        },
+        {
+          "h": 6,
+          "rms": 0.0000015096672291560041,
+          "db": -60.07931273463733,
+          "contrastDb": 26.874629855763615
+        },
+        {
+          "h": 7,
+          "rms": 0.0000029652939468105932,
+          "db": -58.9768623645054,
+          "contrastDb": 33.94837422611766
+        },
+        {
+          "h": 8,
+          "rms": 0.000001250579632782043,
+          "db": -44.476782091902095,
+          "contrastDb": 24.77640540937701
+        },
+        {
+          "h": 9,
+          "rms": 2.5090309219777457e-7,
+          "db": -51.963495737650554,
+          "contrastDb": 10.669149835450284
+        },
+        {
+          "h": 10,
+          "rms": 9.541151746663381e-8,
+          "db": -70.1930574214825,
+          "contrastDb": 0.9104329188459539
+        }
+      ]
+    },
+    {
+      "startS": 20,
+      "globalRms": 0.000020816273210963803,
+      "globalDb": -71.25616542226561,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0.000018279649036501243,
+          "db": -68.93840955956273,
+          "contrastDb": 50.170558719835654
+        },
+        {
+          "h": 2,
+          "rms": 0.000004372264424474158,
+          "db": -67.88037353470298,
+          "contrastDb": 38.08511958722638
+        },
+        {
+          "h": 3,
+          "rms": 0.000003313034149161263,
+          "db": -75.70736348492207,
+          "contrastDb": 36.92744071069381
+        },
+        {
+          "h": 4,
+          "rms": 0.0000031138142403070864,
+          "db": -67.37438554916827,
+          "contrastDb": 35.660997814830154
+        },
+        {
+          "h": 5,
+          "rms": 0.0000028815667757553606,
+          "db": -64.93808931885044,
+          "contrastDb": 33.67108221828863
+        },
+        {
+          "h": 6,
+          "rms": 0.000001019524796754747,
+          "db": -63.488981428218366,
+          "contrastDb": 25.010884375665352
+        },
+        {
+          "h": 7,
+          "rms": 0.0000027722050118338243,
+          "db": -59.561710498416375,
+          "contrastDb": 33.972064040056026
+        },
+        {
+          "h": 8,
+          "rms": 0.0000015220689783129415,
+          "db": -42.770322428063146,
+          "contrastDb": 27.95481489228362
+        },
+        {
+          "h": 9,
+          "rms": 3.0818676282077944e-7,
+          "db": -50.17733639088247,
+          "contrastDb": 12.912204357566901
+        },
+        {
+          "h": 10,
+          "rms": 1.2170501658086322e-7,
+          "db": -68.07890388653925,
+          "contrastDb": 3.6750080320372414
+        }
+      ]
+    },
+    {
+      "startS": 24,
+      "globalRms": 0,
+      "globalDb": null,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 2,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 3,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 4,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 5,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 6,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 7,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 8,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 9,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 10,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        }
+      ]
+    },
+    {
+      "startS": 29,
+      "globalRms": 0,
+      "globalDb": null,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 2,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 3,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 4,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 5,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 6,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 7,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 8,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 9,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 10,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        }
+      ]
+    },
+    {
+      "startS": 30,
+      "globalRms": 0,
+      "globalDb": null,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 2,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 3,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 4,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 5,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 6,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 7,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 8,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 9,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 10,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        }
+      ]
+    },
+    {
+      "startS": 34,
+      "globalRms": 0,
+      "globalDb": null,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 2,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 3,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 4,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 5,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 6,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 7,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 8,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 9,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 10,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        }
+      ]
+    },
+    {
+      "startS": 35,
+      "globalRms": 0,
+      "globalDb": null,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 2,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 3,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 4,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 5,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 6,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 7,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 8,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 9,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 10,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        }
+      ]
+    },
+    {
+      "startS": 39,
+      "globalRms": 0,
+      "globalDb": null,
+      "partials": [
+        {
+          "h": 1,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 2,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 3,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 4,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 5,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 6,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 7,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 8,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 9,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        },
+        {
+          "h": 10,
+          "rms": 0,
+          "db": null,
+          "contrastDb": null
+        }
+      ]
+    }
+  ],
+  "precision": [
+    {
+      "startS": 0,
+      "endS": 0.5,
+      "floatRms": 0.0760719891770252,
+      "pcmRms": 0.07607194217131698,
+      "errorRms": 0.000008787317129595224,
+      "floatDbFS": -22.375504547961075,
+      "pcmDbFS": -22.375509915068264,
+      "quantizationSnrDb": 78.74736944922603,
+      "zeroFraction": 0.009479166666666667,
+      "peak": 0.30501981497425285,
+      "clipped": 0
+    },
+    {
+      "startS": 10,
+      "endS": 10.5,
+      "floatRms": 0.0003147024351983316,
+      "pcmRms": 0.00031486425456318616,
+      "errorRms": 0.00000883738925795937,
+      "floatDbFS": -70.041997929209,
+      "pcmDbFS": -70.03753280995083,
+      "quantizationSnrDb": 31.031522377596545,
+      "zeroFraction": 0.025833333333333333,
+      "peak": 0.0006920805506109452,
+      "clipped": 0
+    },
+    {
+      "startS": 14,
+      "endS": 14.5,
+      "floatRms": 0.00010117241720645046,
+      "pcmRms": 0.0001011750153630749,
+      "errorRms": 0.000008819349788518378,
+      "floatDbFS": -79.89875747478999,
+      "pcmDbFS": -79.89853441980563,
+      "quantizationSnrDb": 21.192511171026492,
+      "zeroFraction": 0.07533333333333334,
+      "peak": 0.00020769211609143146,
+      "clipped": 0
+    },
+    {
+      "startS": 19,
+      "endS": 19.5,
+      "floatRms": 0.000025169565231505348,
+      "pcmRms": 0.000026095482035224758,
+      "errorRms": 0.000009900276353191318,
+      "floatDbFS": -91.9824857241451,
+      "pcmDbFS": -91.66869352910801,
+      "quantizationSnrDb": 8.104567925336326,
+      "zeroFraction": 0.3445416666666667,
+      "peak": 0.000050964866285368365,
+      "clipped": 0
+    },
+    {
+      "startS": 24,
+      "endS": 24.5,
+      "floatRms": 0.000006247329368268505,
+      "pcmRms": 0,
+      "errorRms": 0.000006247329368268505,
+      "floatDbFS": -104.08611193630367,
+      "pcmDbFS": null,
+      "quantizationSnrDb": 0,
+      "zeroFraction": 1,
+      "peak": 0.000012079886239657235,
+      "clipped": 0
+    },
+    {
+      "startS": 29,
+      "endS": 29.5,
+      "floatRms": 0.0000014998458590048946,
+      "pcmRms": 0,
+      "errorRms": 0.0000014998458590048946,
+      "floatDbFS": -116.4790674325314,
+      "pcmDbFS": null,
+      "quantizationSnrDb": 0,
+      "zeroFraction": 1,
+      "peak": 0.000002853521222015634,
+      "clipped": 0
+    },
+    {
+      "startS": 34,
+      "endS": 34.5,
+      "floatRms": 3.574824812555828e-7,
+      "pcmRms": 0,
+      "errorRms": 3.574824812555828e-7,
+      "floatDbFS": -128.9349047265141,
+      "pcmDbFS": null,
+      "quantizationSnrDb": 0,
+      "zeroFraction": 1,
+      "peak": 7.126949943417516e-7,
+      "clipped": 0
+    },
+    {
+      "startS": 39,
+      "endS": 39.5,
+      "floatRms": 9.120366397230047e-8,
+      "pcmRms": 0,
+      "errorRms": 9.120366397230047e-8,
+      "floatDbFS": -140.79975428365347,
+      "pcmDbFS": null,
+      "quantizationSnrDb": 0,
+      "zeroFraction": 1,
+      "peak": 1.8458225906745788e-7,
+      "clipped": 0
+    }
+  ],
+  "export": {
+    "frames": 1920239,
+    "peak": 0.30501981497425285,
+    "clipped": 0,
+    "pcm16Bytes": 7681000,
+    "pcm24Bytes": 11521478
+  },
+  "chunks": [
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            0.00009993422886903559,
+            0.00006821330271147948,
+            0.00008379082691522402
+          ],
+          "diagonalByPartial": [
+            0.00016164791690252402,
+            0.00006249602294644226,
+            0.00002384500394995967,
+            0.0000011388350550370115,
+            0.000004409206027705641,
+            3.8191981268396643e-7,
+            3.097778762094556e-8,
+            7.715539226440927e-10,
+            1.1791751920652724e-9,
+            8.606997938637497e-9
+          ],
+          "bridgeDisplacementM": -0.0000028777802514976994,
+          "bridgeVelocityMps": -0.007110152637665221
+        },
+        "horizontal": {
+          "wireJ": [
+            0.00012830527172278107,
+            0.00008279085268441219,
+            0.00004852089296712872
+          ],
+          "diagonalByPartial": [
+            0.00024150436579455434,
+            0.000011129909944586756,
+            0.0000011823041946465397,
+            7.386931960043743e-8,
+            6.331011826204037e-8,
+            3.2250249118599566e-8,
+            3.2075312659245627e-9,
+            1.1523739825110023e-10,
+            1.4635631198349943e-9,
+            2.305182853270713e-10
+          ],
+          "bridgeDisplacementM": -0.0000013205736433897822,
+          "bridgeVelocityMps": -0.006144516045845892
+        },
+        "crossSpringJ": -0.0000031978596454309343,
+        "stringLossJ": 0.0006138539431279236,
+        "bridgeLossJ": 0.000016414795674064944
+      },
+      "maxBalance": 8.592952738251114e-15,
+      "maxIncrease": 0,
+      "peakForce": 11.546166573172037,
+      "finalEnergyJ": 0.003214593979431292,
+      "boardEnergyJ": 0.0000793137997004127,
+      "radLossJ": 0.00038905956728745673,
+      "structuralLossJ": 0.000598494945069182,
+      "peakPa": 0.8296016101320705
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            0.000013672176771161501,
+            0.000016140116176998,
+            0.000012705219852675166
+          ],
+          "diagonalByPartial": [
+            0.000014116529065379211,
+            0.00002194958800191463,
+            0.000005403901009582336,
+            2.549448142589596e-7,
+            0.0000011123279665987173,
+            8.410212223960141e-8,
+            3.260559552428141e-9,
+            6.34416354608518e-11,
+            1.1080601051136103e-10,
+            1.438349438512492e-10
+          ],
+          "bridgeDisplacementM": -7.040890126316656e-8,
+          "bridgeVelocityMps": -0.00175947054775339
+        },
+        "horizontal": {
+          "wireJ": [
+            0.00008655775413954125,
+            0.000054938829711770984,
+            0.000058743595476547544
+          ],
+          "diagonalByPartial": [
+            0.00019312716723618543,
+            0.00000470145589925229,
+            0.0000012165314648620224,
+            3.259058546010633e-8,
+            1.796692567878244e-8,
+            1.3710312486530952e-8,
+            4.5182390572824854e-10,
+            1.521241416897423e-11,
+            3.1408720097991914e-10,
+            6.236314345105148e-11
+          ],
+          "bridgeDisplacementM": -5.773813837758353e-7,
+          "bridgeVelocityMps": -0.0015425961928531877
+        },
+        "crossSpringJ": -3.420814226161356e-8,
+        "stringLossJ": 0.0008279825414301425,
+        "bridgeLossJ": 0.000023388910214807298
+      },
+      "maxBalance": 1.5768636396629176e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002870554064715718,
+      "boardEnergyJ": 0.000005066495156782192,
+      "radLossJ": 0.00043875602362730714,
+      "structuralLossJ": 0.0006716796552087407,
+      "peakPa": 0.2241978408403278
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            0.00001672945326688488,
+            0.000015641480289134342,
+            0.000015093997758983608
+          ],
+          "diagonalByPartial": [
+            0.000036346170839705407,
+            0.000009302649112000472,
+            0.0000011915565355343344,
+            7.945271062135785e-8,
+            3.0774361201654885e-7,
+            1.9779923140047615e-8,
+            5.992159361567992e-10,
+            7.817863033622487e-12,
+            1.3396685374209675e-11,
+            4.629822298811042e-12
+          ],
+          "bridgeDisplacementM": 2.9966691096408834e-7,
+          "bridgeVelocityMps": -0.0009728808593647041
+        },
+        "horizontal": {
+          "wireJ": [
+            0.000027975421239620526,
+            0.00003171781697935745,
+            0.000013059180995130777
+          ],
+          "diagonalByPartial": [
+            0.0000713968010172372,
+            7.469392271547565e-7,
+            6.364598738402083e-7,
+            1.7107231873202275e-8,
+            8.933119685614444e-9,
+            6.199792261443106e-9,
+            1.8956463883665174e-10,
+            5.2259316276017325e-12,
+            7.743879718171934e-11,
+            1.916713366915528e-11
+          ],
+          "bridgeDisplacementM": -4.122739918551001e-7,
+          "bridgeVelocityMps": -0.0007291252233478113
+        },
+        "crossSpringJ": 1.039594264646172e-7,
+        "stringLossJ": 0.0009247997617796611,
+        "bridgeLossJ": 0.000026870488992659144
+      },
+      "maxBalance": 1.4085954624931674e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0027452696249735536,
+      "boardEnergyJ": 0.0000023731239742143588,
+      "radLossJ": 0.0004494059596867588,
+      "structuralLossJ": 0.00068599927589361,
+      "peakPa": 0.09493646757074328
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            0.000012726843577270976,
+            0.000007706535915139254,
+            0.0000064545204446931294
+          ],
+          "diagonalByPartial": [
+            0.00002369032628340648,
+            0.000002536880768082008,
+            2.8967930911023246e-7,
+            2.448976142899754e-8,
+            8.239695093453219e-8,
+            4.66481258239261e-9,
+            5.925007391537093e-11,
+            9.884722568586361e-13,
+            1.2223264172295211e-12,
+            3.453663241562915e-13
+          ],
+          "bridgeDisplacementM": -8.76852139427292e-9,
+          "bridgeVelocityMps": -0.0008751049400913037
+        },
+        "horizontal": {
+          "wireJ": [
+            0.00002165036370844445,
+            0.000007627324631682663,
+            0.000007936371874130263
+          ],
+          "diagonalByPartial": [
+            0.000035602680423678815,
+            0.0000013088600113913281,
+            2.3974506608949433e-7,
+            9.106041998657948e-9,
+            3.243685497525705e-9,
+            2.9069578210223054e-9,
+            7.33915369278508e-11,
+            1.915063864697067e-12,
+            1.9402464523617254e-11,
+            5.379188513591834e-12
+          ],
+          "bridgeDisplacementM": 5.558511686512241e-9,
+          "bridgeVelocityMps": 0.0001292578334391522
+        },
+        "crossSpringJ": 4.1013235755111405e-11,
+        "stringLossJ": 0.0009743707284815115,
+        "bridgeLossJ": 0.000028558601076695083
+      },
+      "maxBalance": 1.3704315460216776e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026875557100628942,
+      "boardEnergyJ": 0.0000010390438406425352,
+      "radLossJ": 0.0004521626909638055,
+      "structuralLossJ": 0.0006896927161377867,
+      "peakPa": 0.05175373950878079
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            0.000004622109738447356,
+            0.000003467074549961425,
+            0.0000029543248363158854
+          ],
+          "diagonalByPartial": [
+            0.000009919075337366819,
+            9.942185226747975e-7,
+            8.772821097663113e-8,
+            9.232847395454083e-9,
+            2.534809245670481e-8,
+            1.1910520439216156e-9,
+            1.0203172400651634e-11,
+            1.1949652975399864e-13,
+            3.089685686863569e-13,
+            2.737268745131845e-14
+          ],
+          "bridgeDisplacementM": -1.0081202468088157e-7,
+          "bridgeVelocityMps": -0.00027366156434514887
+        },
+        "horizontal": {
+          "wireJ": [
+            0.000009996134976405394,
+            0.000008633378960305231,
+            0.000006124843411194268
+          ],
+          "diagonalByPartial": [
+            0.000024096723230935156,
+            5.645738201005394e-7,
+            8.261971183348406e-8,
+            5.467181279953081e-9,
+            1.442242886736014e-9,
+            1.424892569233197e-9,
+            3.5672655578838535e-11,
+            8.659124911620838e-13,
+            5.933782715734337e-12,
+            1.399362596172601e-12
+          ],
+          "bridgeDisplacementM": 2.644550651414721e-7,
+          "bridgeVelocityMps": 0.00006904821055828171
+        },
+        "crossSpringJ": 2.2433827288921723e-8,
+        "stringLossJ": 0.0010007799880553925,
+        "bridgeLossJ": 0.000029509392747620008
+      },
+      "maxBalance": 1.339206523454095e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.00265842710689521,
+      "boardEnergyJ": 1.4480218015020363e-7,
+      "radLossJ": 0.00045291493230658204,
+      "structuralLossJ": 0.0006907075781977763,
+      "peakPa": 0.028588503151896878
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            0.000002573394880469575,
+            0.000002059271768384611,
+            0.000001172517348740748
+          ],
+          "diagonalByPartial": [
+            0.000005243456075278317,
+            4.9652263209628e-7,
+            3.034060350357165e-8,
+            2.968491443251001e-9,
+            7.166012150982673e-9,
+            3.07735238299485e-10,
+            1.4972213960817486e-12,
+            1.9954832655352553e-14,
+            2.204501281281707e-14,
+            4.8552592032723955e-15
+          ],
+          "bridgeDisplacementM": 1.878790008495405e-8,
+          "bridgeVelocityMps": 0.00016158812090221006
+        },
+        "horizontal": {
+          "wireJ": [
+            0.000005662061422588634,
+            0.0000059429637230303165,
+            0.000002897135732057749
+          ],
+          "diagonalByPartial": [
+            0.00001418168193884611,
+            1.7690537528471622e-7,
+            3.4020431949424776e-8,
+            2.932131062984728e-9,
+            4.983562600867464e-10,
+            6.909003813759035e-10,
+            1.809851034345246e-11,
+            3.890458103478636e-13,
+            2.0979547634181574e-12,
+            5.980202812208654e-13
+          ],
+          "bridgeDisplacementM": 1.1330783053769666e-7,
+          "bridgeVelocityMps": -0.00042896302510839044
+        },
+        "crossSpringJ": -1.7913370634350376e-9,
+        "stringLossJ": 0.0010153098797936453,
+        "bridgeLossJ": 0.00003005849971845614
+      },
+      "maxBalance": 1.3808398868775384e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002642753088939004,
+      "boardEnergyJ": 3.137483297982029e-8,
+      "radLossJ": 0.0004531625389991961,
+      "structuralLossJ": 0.0006910544973682284,
+      "peakPa": 0.0140587053635244
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            0.000001717066584600951,
+            8.53529052517632e-7,
+            8.915103797969465e-7
+          ],
+          "diagonalByPartial": [
+            0.000003341526038456327,
+            1.0404015323879362e-7,
+            1.0903214617949109e-8,
+            1.0264125389481502e-9,
+            2.406969917261505e-9,
+            8.889231722711567e-11,
+            2.304023443531463e-13,
+            2.773837502322977e-14,
+            3.4431916125543376e-14,
+            1.0165904537987829e-14
+          ],
+          "bridgeDisplacementM": 1.1777758838514616e-7,
+          "bridgeVelocityMps": 0.000046668773931048894
+        },
+        "horizontal": {
+          "wireJ": [
+            0.00000469415129004101,
+            0.000001253387744030397,
+            0.000002076802856979772
+          ],
+          "diagonalByPartial": [
+            0.000007803475526128629,
+            1.889933432994772e-7,
+            1.715484623368968e-8,
+            1.6406991130750345e-9,
+            2.499471571877165e-10,
+            3.561788058668053e-10,
+            9.018144714506428e-12,
+            1.8705176552336938e-13,
+            7.519207990326386e-13,
+            2.1750451162049917e-13
+          ],
+          "bridgeDisplacementM": -1.3846090673503403e-7,
+          "bridgeVelocityMps": -0.0001510469951498996
+        },
+        "crossSpringJ": 1.3722365231549222e-8,
+        "stringLossJ": 0.0010235084103668926,
+        "bridgeLossJ": 0.000030361292359553267
+      },
+      "maxBalance": 1.457167719820518e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026339718891211926,
+      "boardEnergyJ": 5.0006911861424514e-8,
+      "radLossJ": 0.0004532734019758189,
+      "structuralLossJ": 0.0006912233260839587,
+      "peakPa": 0.008538109884384013
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            8.800046666715251e-7,
+            7.304441350326073e-7,
+            4.0138698754442354e-7
+          ],
+          "diagonalByPartial": [
+            0.000001948058975808438,
+            4.892256506285254e-8,
+            4.103093232922206e-9,
+            3.913743357615919e-10,
+            7.086762011196242e-10,
+            2.737336896895188e-11,
+            4.7662318951529686e-14,
+            6.137713358665287e-15,
+            4.377452492008115e-15,
+            1.2108571477885543e-15
+          ],
+          "bridgeDisplacementM": 5.393500305376893e-8,
+          "bridgeVelocityMps": -0.00012622354372189437
+        },
+        "horizontal": {
+          "wireJ": [
+            0.0000016322510948142766,
+            0.0000023077268676280903,
+            6.327798855235357e-7
+          ],
+          "diagonalByPartial": [
+            0.000004449391954014833,
+            9.12198728669504e-8,
+            9.603619161389901e-9,
+            9.892618349418827e-10,
+            1.0073093926328676e-10,
+            1.7836115058708753e-10,
+            4.514418317652264e-12,
+            8.392919715113284e-14,
+            3.1874822385900225e-13,
+            5.5908275024272076e-14
+          ],
+          "bridgeDisplacementM": -6.832377938103547e-8,
+          "bridgeVelocityMps": 0.00018268432591870884
+        },
+        "crossSpringJ": 3.1008569722679397e-9,
+        "stringLossJ": 0.0010281544659770105,
+        "bridgeLossJ": 0.00003052799554333491
+      },
+      "maxBalance": 1.4866580189121237e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026290226762849147,
+      "boardEnergyJ": 2.6654055626000758e-8,
+      "radLossJ": 0.0004533250947012469,
+      "structuralLossJ": 0.0006913080249273171,
+      "peakPa": 0.0057778607224991075
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            5.152258723751738e-7,
+            3.189766461858176e-7,
+            2.868778620550687e-7
+          ],
+          "diagonalByPartial": [
+            0.0000010886111695816978,
+            2.7399824215280594e-8,
+            1.6103553986080302e-9,
+            1.4781027055486828e-10,
+            2.4877973665396754e-10,
+            8.905269448581368e-12,
+            1.967743548696807e-14,
+            1.4273852792158263e-15,
+            1.7342505082268415e-15,
+            1.3746595615453383e-16
+          ],
+          "bridgeDisplacementM": -3.610059431132831e-8,
+          "bridgeVelocityMps": -0.00006185025327502886
+        },
+        "horizontal": {
+          "wireJ": [
+            0.000001085631076106135,
+            5.895484351382707e-7,
+            9.677772141078445e-7
+          ],
+          "diagonalByPartial": [
+            0.0000025868108666910753,
+            4.296020089005762e-8,
+            5.698005009414957e-9,
+            5.515860815868143e-10,
+            5.7862806628828517e-11,
+            9.454008403620501e-11,
+            2.296429678404137e-12,
+            4.7866965636114664e-14,
+            1.4047741338644615e-13,
+            2.330906526874381e-14
+          ],
+          "bridgeDisplacementM": 7.63038368766882e-8,
+          "bridgeVelocityMps": 0.00009301714088725066
+        },
+        "crossSpringJ": 2.3179276371047197e-9,
+        "stringLossJ": 0.0010308186857717191,
+        "bridgeLossJ": 0.000030628279057708696
+      },
+      "maxBalance": 1.6080886622305002e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002626184746442394,
+      "boardEnergyJ": 9.9865098637302e-9,
+      "radLossJ": 0.00045335257346047075,
+      "structuralLossJ": 0.0006913539410575185,
+      "peakPa": 0.003901305950452738
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            3.0014406101307814e-7,
+            1.800121187155768e-7,
+            1.0997033903516511e-7
+          ],
+          "diagonalByPartial": [
+            5.832284474063715e-7,
+            4.833857408830902e-9,
+            6.014786402419787e-10,
+            5.7621364583875325e-11,
+            7.017512924429692e-11,
+            3.4284486867043706e-12,
+            1.2542128246262471e-14,
+            3.7043212453022805e-16,
+            1.0971103379836427e-15,
+            1.2420481602123019e-16
+          ],
+          "bridgeDisplacementM": -2.818450330156129e-8,
+          "bridgeVelocityMps": 0.00004797039132403794
+        },
+        "horizontal": {
+          "wireJ": [
+            0.0000010313756763383459,
+            4.356809147288895e-7,
+            1.1443438798050977e-7
+          ],
+          "diagonalByPartial": [
+            0.0000015432874572631207,
+            3.097706087540705e-8,
+            3.534981850245686e-9,
+            3.2284843401427175e-10,
+            3.7613347921359015e-11,
+            4.843676312515071e-11,
+            1.1224531592444406e-12,
+            1.654223893082846e-14,
+            5.0272532734667406e-14,
+            5.744320654936987e-15
+          ],
+          "bridgeDisplacementM": 4.5960844333268025e-8,
+          "bridgeVelocityMps": -0.00007545691619986099
+        },
+        "crossSpringJ": 1.0900276873871536e-9,
+        "stringLossJ": 0.0010323279933163786,
+        "bridgeLossJ": 0.00003068208270323837
+      },
+      "maxBalance": 1.7191109646930158e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026245841640050584,
+      "boardEnergyJ": 6.075751608095576e-9,
+      "radLossJ": 0.0004533662490845086,
+      "structuralLossJ": 0.0006913777250904077,
+      "peakPa": 0.002493055954827835
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.5794054762695473e-7,
+            1.2184592530353768e-7,
+            9.503641842527563e-8
+          ],
+          "diagonalByPartial": [
+            3.689849369669006e-7,
+            3.877055420677139e-9,
+            2.74938198656232e-10,
+            2.2819051826238386e-11,
+            2.4504921905093388e-11,
+            1.2035691857209096e-12,
+            5.910337820934738e-15,
+            3.4539276403706207e-16,
+            5.681280298857546e-16,
+            1.315037546698872e-16
+          ],
+          "bridgeDisplacementM": 1.6092499958608326e-8,
+          "bridgeVelocityMps": 0.00004525673382928519
+        },
+        "horizontal": {
+          "wireJ": [
+            1.873907651887344e-7,
+            3.026679824692969e-7,
+            3.8707681695198916e-7
+          ],
+          "diagonalByPartial": [
+            8.563264894479609e-7,
+            1.5463247476561952e-8,
+            2.166229857562143e-9,
+            1.952999473690785e-10,
+            2.14864103027398e-11,
+            2.602281964425442e-11,
+            5.642742014380855e-13,
+            7.511810515312024e-15,
+            2.099858635701919e-14,
+            2.1933988822297405e-15
+          ],
+          "bridgeDisplacementM": -1.7219511031579593e-8,
+          "bridgeVelocityMps": -0.00005433802815758307
+        },
+        "crossSpringJ": 2.3317580088947876e-10,
+        "stringLossJ": 0.0010331997454018106,
+        "bridgeLossJ": 0.00003071328852914208
+      },
+      "maxBalance": 1.887379141862766e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026236596771817894,
+      "boardEnergyJ": 3.688876498349632e-9,
+      "radLossJ": 0.0004533740260081993,
+      "structuralLossJ": 0.0006913914714079952,
+      "peakPa": 0.0021951197865345243
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.0120455074618685e-7,
+            5.903179285587579e-8,
+            3.74492992598355e-8
+          ],
+          "diagonalByPartial": [
+            1.9546859809576934e-7,
+            1.972567375456706e-9,
+            1.6112016106943777e-10,
+            1.0686461165073827e-11,
+            6.873145869391438e-12,
+            5.73768383704861e-13,
+            4.389937307390637e-15,
+            4.52886251226184e-16,
+            3.936576362166961e-16,
+            1.491586935093936e-16
+          ],
+          "bridgeDisplacementM": 2.303935892354984e-8,
+          "bridgeVelocityMps": -0.000009363760075424415
+        },
+        "horizontal": {
+          "wireJ": [
+            3.147992782341311e-7,
+            1.4339590961417807e-7,
+            6.304945358673717e-8
+          ],
+          "diagonalByPartial": [
+            5.109351743656596e-7,
+            8.768083092064791e-9,
+            1.3029221797486883e-9,
+            1.1290590278601106e-10,
+            1.3839412210941671e-11,
+            1.3515288333675615e-11,
+            2.7937179608801436e-13,
+            3.173534626944743e-15,
+            8.840233123118232e-15,
+            1.0698365066019178e-15
+          ],
+          "bridgeDisplacementM": -2.870219798915007e-8,
+          "bridgeVelocityMps": 0.000010386734494987436
+        },
+        "crossSpringJ": 5.564481359369406e-10,
+        "stringLossJ": 0.0010337030138168647,
+        "bridgeLossJ": 0.00003073182005115184
+      },
+      "maxBalance": 2.1484550249972756e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026231257417466155,
+      "boardEnergyJ": 2.0455957152479334e-9,
+      "radLossJ": 0.00045337839306753826,
+      "structuralLossJ": 0.0006913992369056454,
+      "peakPa": 0.0013676505163528131
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            5.165693469464757e-8,
+            3.4490171602329455e-8,
+            2.8281690908833403e-8
+          ],
+          "diagonalByPartial": [
+            1.1334410103280305e-7,
+            4.08924090903764e-10,
+            8.084044842189935e-11,
+            4.4594655179616494e-12,
+            2.064069843908159e-12,
+            2.1070957226650737e-13,
+            1.4303087221755703e-15,
+            2.5452475903977088e-17,
+            6.129602795413872e-17,
+            2.500235683316627e-18
+          ],
+          "bridgeDisplacementM": -2.2093265393960504e-10,
+          "bridgeVelocityMps": -0.000026244039597387755
+        },
+        "horizontal": {
+          "wireJ": [
+            1.6267321615497366e-7,
+            5.310251601558029e-8,
+            8.901290107197542e-8
+          ],
+          "diagonalByPartial": [
+            2.9718809160117754e-7,
+            5.63691760802868e-9,
+            8.053423062882274e-10,
+            6.778099464812353e-11,
+            8.250584096513783e-12,
+            7.313885773339377e-12,
+            1.4011320571721408e-13,
+            1.7103763449133896e-15,
+            3.628852021487982e-15,
+            3.104234638647233e-16
+          ],
+          "bridgeDisplacementM": -4.406740286538493e-9,
+          "bridgeVelocityMps": 0.00003339218197384773
+        },
+        "crossSpringJ": -8.192501147083141e-13,
+        "stringLossJ": 0.0010339886640438614,
+        "bridgeLossJ": 0.00003074134176251522
+      },
+      "maxBalance": 2.467644144577008e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026228238150430017,
+      "boardEnergyJ": 1.114323237375615e-9,
+      "radLossJ": 0.00045338081195775583,
+      "structuralLossJ": 0.0006914035712938073,
+      "peakPa": 0.0010745029419849219
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            3.15057605584239e-8,
+            2.3036706601214694e-8,
+            1.4003013058111652e-8
+          ],
+          "diagonalByPartial": [
+            6.821957385683645e-8,
+            2.766019851031967e-10,
+            3.461014553729063e-11,
+            1.9240082133125327e-12,
+            7.256525301845327e-13,
+            1.2185449122433395e-13,
+            9.990200447179108e-16,
+            1.1558623167675108e-16,
+            8.27939425676439e-17,
+            4.1408934365936554e-17
+          ],
+          "bridgeDisplacementM": -1.3040742088852732e-8,
+          "bridgeVelocityMps": -0.000004035707574565193
+        },
+        "horizontal": {
+          "wireJ": [
+            3.640076535485407e-8,
+            8.690106765150195e-8,
+            4.934483708216607e-8
+          ],
+          "diagonalByPartial": [
+            1.6877302892348566e-7,
+            3.232876024033999e-9,
+            5.105021546812022e-10,
+            4.103113219695475e-11,
+            4.767708472296648e-12,
+            3.821633895915835e-12,
+            6.996531324641472e-14,
+            8.241796082328884e-16,
+            1.5761248361391832e-15,
+            1.1316532116000475e-16
+          ],
+          "bridgeDisplacementM": 1.9370583186341767e-8,
+          "bridgeVelocityMps": 0.000015281004891855602
+        },
+        "crossSpringJ": 2.1256127546768353e-10,
+        "stringLossJ": 0.0010341566856789212,
+        "bridgeLossJ": 0.00003074741715382343
+      },
+      "maxBalance": 2.7495367094232392e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026226458478739324,
+      "boardEnergyJ": 6.634847655823863e-10,
+      "radLossJ": 0.00045338218985602934,
+      "structuralLossJ": 0.0006914060627959828,
+      "peakPa": 0.0007736127727474972
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.7926433181561582e-8,
+            9.844712585423217e-9,
+            8.1414091971211e-9
+          ],
+          "diagonalByPartial": [
+            3.551963130143429e-8,
+            1.7815716425601537e-10,
+            2.021728736229393e-11,
+            1.0769310599932616e-12,
+            2.2131775667452814e-13,
+            4.616533933416978e-14,
+            4.96815798362774e-16,
+            1.719386807507554e-17,
+            2.1450023590006286e-17,
+            5.691569386849463e-18
+          ],
+          "bridgeDisplacementM": -3.4703895163989982e-9,
+          "bridgeVelocityMps": 0.000016764702586775282
+        },
+        "horizontal": {
+          "wireJ": [
+            6.962885743762387e-8,
+            2.101721300526786e-8,
+            1.4121933256043034e-8
+          ],
+          "diagonalByPartial": [
+            1.0213311080706086e-7,
+            1.8982780525265256e-9,
+            3.173675695786728e-10,
+            2.4241938889651282e-11,
+            2.784553088219227e-12,
+            2.0761306645525e-12,
+            3.402181526566784e-14,
+            5.942997618978432e-16,
+            7.438650724667456e-16,
+            1.308972606809727e-16
+          ],
+          "bridgeDisplacementM": 8.418141188726334e-9,
+          "bridgeVelocityMps": -0.000022563843129894454
+        },
+        "crossSpringJ": 2.4582925987223733e-11,
+        "stringLossJ": 0.0010342525416507826,
+        "bridgeLossJ": 0.00003075063637002533
+      },
+      "maxBalance": 3.340210052993342e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026225445889272773,
+      "boardEnergyJ": 3.7037293984552764e-10,
+      "radLossJ": 0.00045338296917912747,
+      "structuralLossJ": 0.0006914074667899587,
+      "peakPa": 0.00070122421564609
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            9.635283064659875e-9,
+            7.374507778387118e-9,
+            4.9348642012629755e-9
+          ],
+          "diagonalByPartial": [
+            2.1842225262841305e-8,
+            4.981640226154203e-11,
+            1.346818584679373e-11,
+            4.59430707204153e-13,
+            8.193311859044206e-14,
+            3.0188877702582105e-14,
+            2.748065670773103e-16,
+            4.037216802112631e-17,
+            2.8195019371623753e-17,
+            1.7373864364410864e-17
+          ],
+          "bridgeDisplacementM": 7.075179944761856e-9,
+          "bridgeVelocityMps": 0.000007272178184947006
+        },
+        "horizontal": {
+          "wireJ": [
+            2.1697154813570036e-8,
+            1.7792398858879017e-8,
+            2.0547570713896764e-8
+          ],
+          "diagonalByPartial": [
+            5.85057378653624e-8,
+            1.1851830143727871e-9,
+            1.9455286161865146e-10,
+            1.4714861636193674e-11,
+            1.606160002231884e-12,
+            1.0874197379838438e-12,
+            1.7385274322802414e-14,
+            2.926021104252776e-16,
+            3.1819947461778557e-16,
+            7.789392968352699e-17
+          ],
+          "bridgeDisplacementM": -1.0524984090109739e-8,
+          "bridgeVelocityMps": -0.00001546179489058634
+        },
+        "crossSpringJ": 6.266110992145504e-11,
+        "stringLossJ": 0.00103430821698241,
+        "bridgeLossJ": 0.000030752485692062205
+      },
+      "maxBalance": 4.5900783174346316e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002622485816987692,
+      "boardEnergyJ": 2.2565802823682189e-10,
+      "radLossJ": 0.00045338341237512755,
+      "structuralLossJ": 0.0006914082706553378,
+      "peakPa": 0.0004117464079509579
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            6.025054824577256e-9,
+            3.784030444516206e-9,
+            2.5564162532750295e-9
+          ],
+          "diagonalByPartial": [
+            1.2270435432376415e-8,
+            4.380923932480779e-11,
+            6.715080532431102e-12,
+            2.32046788220912e-13,
+            4.159480279473831e-14,
+            1.1777462549465259e-14,
+            1.5511734029102795e-16,
+            1.7183492784307223e-17,
+            9.940831128523669e-18,
+            6.322188884566666e-18
+          ],
+          "bridgeDisplacementM": 3.932885306009537e-9,
+          "bridgeVelocityMps": -0.000007910314848434473
+        },
+        "horizontal": {
+          "wireJ": [
+            9.169601558099455e-9,
+            2.3354501661547885e-8,
+            2.953374156589393e-9
+          ],
+          "diagonalByPartial": [
+            3.453284152433728e-8,
+            7.012094799412342e-10,
+            1.2248821215410073e-10,
+            8.8998306371089e-12,
+            9.090163133445023e-13,
+            5.904635779774168e-13,
+            8.554026342020728e-15,
+            1.1502291938580188e-16,
+            1.51395945395671e-16,
+            3.3387952125232e-17
+          ],
+          "bridgeDisplacementM": -6.8341666920517865e-9,
+          "bridgeVelocityMps": 0.000013131094929498629
+        },
+        "crossSpringJ": 2.2617051880562457e-11,
+        "stringLossJ": 0.0010343407553482526,
+        "bridgeLossJ": 0.00003075357468262816
+      },
+      "maxBalance": 5.484328269300676e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224514779684,
+      "boardEnergyJ": 1.2368465888381474e-10,
+      "radLossJ": 0.0004533836650887201,
+      "structuralLossJ": 0.0006914087294782253,
+      "peakPa": 0.0003069610692270056
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            3.280272853696098e-9,
+            1.9968033400308182e-9,
+            1.5940931641002237e-9
+          ],
+          "diagonalByPartial": [
+            6.822660859731911e-9,
+            2.0280283791692605e-11,
+            2.92159643383398e-12,
+            1.5054982596237368e-13,
+            1.4507960358910786e-14,
+            8.125527273388929e-15,
+            5.622480627327246e-17,
+            8.83439029380894e-18,
+            6.61831378000761e-18,
+            3.652625462405187e-18
+          ],
+          "bridgeDisplacementM": -2.974591302306484e-9,
+          "bridgeVelocityMps": -0.000005741965841499362
+        },
+        "horizontal": {
+          "wireJ": [
+            1.3587021237473933e-8,
+            2.866045484736021e-10,
+            7.3166821180307836e-9
+          ],
+          "diagonalByPartial": [
+            2.0610430860779043e-8,
+            4.3207108109301794e-10,
+            7.78057350743072e-11,
+            5.302500632828305e-12,
+            5.285847348837586e-13,
+            3.096946088689348e-13,
+            4.39736224772176e-15,
+            5.83142930863498e-17,
+            5.724401396561754e-17,
+            9.88175548314131e-18
+          ],
+          "bridgeDisplacementM": 4.441828305260828e-9,
+          "bridgeVelocityMps": 0.000009552112542683819
+        },
+        "crossSpringJ": 1.1118039597206544e-11,
+        "stringLossJ": 0.0010343596174172906,
+        "bridgeLossJ": 0.00003075418013595593
+      },
+      "maxBalance": 6.260617024800297e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224316069683204,
+      "boardEnergyJ": 6.937468703078928e-11,
+      "radLossJ": 0.00045338380838357576,
+      "structuralLossJ": 0.0006914089895894288,
+      "peakPa": 0.00023559264633971685
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.7570718609771824e-9,
+            1.3410323572825566e-9,
+            8.328346208891058e-10
+          ],
+          "diagonalByPartial": [
+            3.915320645099861e-9,
+            8.045727154106856e-12,
+            1.97282153706111e-12,
+            6.36814137022478e-14,
+            7.687825177279706e-15,
+            3.3001505711696706e-15,
+            3.456550021702835e-17,
+            6.34945280153631e-18,
+            3.643032204387212e-18,
+            2.3217310432616713e-18
+          ],
+          "bridgeDisplacementM": -2.9473274664984275e-9,
+          "bridgeVelocityMps": 0.000003181657038489611
+        },
+        "horizontal": {
+          "wireJ": [
+            3.9032459847490974e-9,
+            8.282396997760556e-9,
+            4.499162399267989e-10
+          ],
+          "diagonalByPartial": [
+            1.2302889392346588e-8,
+            2.672403057637175e-10,
+            4.8587184607450384e-11,
+            3.2346210092666786e-12,
+            3.0146234391340316e-13,
+            1.6789160267637132e-13,
+            2.15481596425712e-15,
+            2.2494998755765476e-17,
+            2.6278754686814204e-17,
+            4.9908934724140005e-18
+          ],
+          "bridgeDisplacementM": 4.581451652273252e-9,
+          "bridgeVelocityMps": -0.0000048792116187072185
+        },
+        "crossSpringJ": 1.1362414928777599e-11,
+        "stringLossJ": 0.0010343705755786379,
+        "bridgeLossJ": 0.000030754514023587526
+      },
+      "maxBalance": 7.737734064594548e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224200845262175,
+      "boardEnergyJ": 4.181851208579331e-11,
+      "radLossJ": 0.000453383890134856,
+      "structuralLossJ": 0.0006914091381913479,
+      "peakPa": 0.0001783967270644772
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.1884736297363273e-9,
+            7.01893737112482e-10,
+            5.596378086769025e-10
+          ],
+          "diagonalByPartial": [
+            2.431559481758239e-9,
+            5.356542370287465e-12,
+            1.353835270992309e-12,
+            3.840539445400426e-14,
+            3.1993324511393544e-15,
+            2.2573105946599582e-15,
+            1.2353256881162913e-17,
+            1.0319295102616819e-18,
+            7.62050589287987e-19,
+            3.578388699927584e-19
+          ],
+          "bridgeDisplacementM": 8.783182634759006e-10,
+          "bridgeVelocityMps": 0.0000037781924297846355
+        },
+        "horizontal": {
+          "wireJ": [
+            1.8353721070594384e-9,
+            1.8140003811608386e-9,
+            3.653955123730853e-9
+          ],
+          "diagonalByPartial": [
+            7.081406428382422e-9,
+            1.6481306677536739e-10,
+            3.014114233976388e-11,
+            1.951092703577717e-12,
+            1.7441155084413716e-13,
+            8.818171801206494e-14,
+            1.0813752205875968e-15,
+            8.026337813332194e-18,
+            8.301974588905521e-18,
+            1.2998906199189489e-18
+          ],
+          "bridgeDisplacementM": -1.2906608292326152e-9,
+          "bridgeVelocityMps": -0.00000535938872162124
+        },
+        "crossSpringJ": 9.539007462721803e-13,
+        "stringLossJ": 0.0010343770950523722,
+        "bridgeLossJ": 0.0000307547212515209
+      },
+      "maxBalance": 9.780370957557238e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224132244221537,
+      "boardEnergyJ": 2.194935162143027e-11,
+      "radLossJ": 0.00045338393742728897,
+      "structuralLossJ": 0.0006914092242788319,
+      "peakPa": 0.0001463374440678727
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            5.656034744788715e-10,
+            3.6211619431900505e-10,
+            2.327503473665869e-10
+          ],
+          "diagonalByPartial": [
+            1.15693646333407e-9,
+            2.784142365502587e-12,
+            6.487831635177367e-13,
+            2.7328278197675324e-14,
+            1.500232564484914e-15,
+            9.624506507883126e-16,
+            9.567684670953222e-18,
+            2.0426211083143378e-18,
+            1.3827544542767862e-18,
+            7.960969680876608e-19
+          ],
+          "bridgeDisplacementM": 1.8501980911728441e-9,
+          "bridgeVelocityMps": -3.794915095218245e-7
+        },
+        "horizontal": {
+          "wireJ": [
+            3.649777199445159e-9,
+            7.965058728078614e-10,
+            1.8422125204428346e-10
+          ],
+          "diagonalByPartial": [
+            4.5069912047673255e-9,
+            1.0302052055934675e-10,
+            1.9082008962899945e-11,
+            1.1678918053582616e-12,
+            1.0042058499037448e-13,
+            4.7701173619222866e-14,
+            5.291498537565481e-16,
+            4.003132582697871e-18,
+            3.3721555672991565e-18,
+            6.970191497313685e-19
+          ],
+          "bridgeDisplacementM": -2.3125503495760864e-9,
+          "bridgeVelocityMps": 3.89664389678563e-7
+        },
+        "crossSpringJ": 3.60038191147315e-12,
+        "stringLossJ": 0.001034380876749388,
+        "bridgeLossJ": 0.000030754831672803824
+      },
+      "maxBalance": 1.0635589631213804e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224092587812512,
+      "boardEnergyJ": 1.3071211335538524e-11,
+      "radLossJ": 0.0004533839635001286,
+      "structuralLossJ": 0.0006914092717161601,
+      "peakPa": 0.00010149379025266623
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            3.438554373398062e-10,
+            2.6776870375320753e-10,
+            2.08865433322885e-10
+          ],
+          "diagonalByPartial": [
+            8.14613748566699e-10,
+            1.2843008298466568e-12,
+            3.033634487912844e-13,
+            1.1379550706215913e-14,
+            6.645445437705826e-16,
+            6.291361154873241e-16,
+            3.813024854459066e-18,
+            3.0467231329868693e-20,
+            3.379285349517862e-20,
+            7.52482991040597e-21
+          ],
+          "bridgeDisplacementM": 8.512412400130184e-11,
+          "bridgeVelocityMps": -0.0000022873275048673252
+        },
+        "horizontal": {
+          "wireJ": [
+            3.1011112954424545e-10,
+            9.773889325793552e-10,
+            1.3626930356159724e-9
+          ],
+          "diagonalByPartial": [
+            2.56304492226692e-9,
+            6.536362289499884e-11,
+            1.2118992868587127e-11,
+            7.137679764211279e-13,
+            5.803575359181025e-14,
+            2.512062370768695e-14,
+            2.6052663335221504e-16,
+            1.7900848357033128e-18,
+            1.5732596561717152e-18,
+            3.6302228775947707e-19
+          ],
+          "bridgeDisplacementM": -6.264202612486947e-10,
+          "bridgeVelocityMps": 0.000003223701255824231
+        },
+        "crossSpringJ": 4.487015785928146e-14,
+        "stringLossJ": 0.0010343831059488454,
+        "bridgeLossJ": 0.00003075489283400873
+      },
+      "maxBalance": 1.4504022982642084e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002622406924716578,
+      "boardEnergyJ": 7.302678586791055e-12,
+      "radLossJ": 0.00045338397897228894,
+      "structuralLossJ": 0.0006914092999409022,
+      "peakPa": 0.00009685591047714084
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            2.30042684476998e-10,
+            1.2233008175781234e-10,
+            7.032507224351374e-11
+          ],
+          "diagonalByPartial": [
+            4.215512230442333e-10,
+            7.524886433940538e-13,
+            2.339855081889864e-13,
+            8.177946948208691e-15,
+            3.826657889035378e-16,
+            2.8626728179046794e-16,
+            2.2452203229373004e-18,
+            5.565877927109249e-19,
+            3.655616297811845e-19,
+            2.284055838025701e-19
+          ],
+          "bridgeDisplacementM": -1.0086268630730652e-9,
+          "bridgeVelocityMps": -4.83861244737923e-7
+        },
+        "horizontal": {
+          "wireJ": [
+            8.964943970555666e-10,
+            2.728393230935401e-10,
+            4.609962632092728e-10
+          ],
+          "diagonalByPartial": [
+            1.5805823536268783e-9,
+            4.1346103341729324e-11,
+            7.566320620366667e-12,
+            4.2943144143057697e-13,
+            3.349419730347051e-14,
+            1.3563756109811661e-14,
+            1.3304521202057086e-16,
+            1.2041715119611851e-18,
+            9.43300498420935e-19,
+            2.684200884256389e-19
+          ],
+          "bridgeDisplacementM": 1.4592729528397092e-9,
+          "bridgeVelocityMps": 7.275874131597269e-7
+        },
+        "crossSpringJ": 1.2385290831590554e-12,
+        "stringLossJ": 0.0010343844587875942,
+        "bridgeLossJ": 0.00003075493396515929
+      },
+      "maxBalance": 1.8469600848725065e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224055064736364,
+      "boardEnergyJ": 4.1242028581731355e-12,
+      "radLossJ": 0.00045338398756956255,
+      "structuralLossJ": 0.0006914093156127056,
+      "peakPa": 0.000058355004007008246
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            9.239725193037122e-11,
+            6.879724341646104e-11,
+            6.450088704070092e-11
+          ],
+          "diagonalByPartial": [
+            2.2400203964679038e-10,
+            5.31049310377247e-13,
+            1.6157315453464662e-13,
+            5.549232220804215e-15,
+            2.0770835938156503e-16,
+            1.7449994060318665e-16,
+            1.0940823581290048e-18,
+            1.9128535239766978e-19,
+            1.271538370663047e-19,
+            7.266940978202852e-20
+          ],
+          "bridgeDisplacementM": -3.991217831332783e-10,
+          "bridgeVelocityMps": 0.0000011993311413703316
+        },
+        "horizontal": {
+          "wireJ": [
+            7.020036239640115e-10,
+            6.663889093180509e-11,
+            2.5538888819487136e-10
+          ],
+          "diagonalByPartial": [
+            9.913630617414238e-10,
+            2.617206375003671e-11,
+            4.728512193166112e-12,
+            2.576036213919231e-13,
+            1.9280066494748018e-14,
+            7.167914047450502e-15,
+            6.769444579114308e-17,
+            1.2345432025192008e-18,
+            7.699594658910135e-19,
+            4.267087960169648e-19
+          ],
+          "bridgeDisplacementM": 8.417661672165049e-10,
+          "bridgeVelocityMps": -0.0000012460709582210948
+        },
+        "crossSpringJ": 2.827066621254189e-13,
+        "stringLossJ": 0.0010343852341028594,
+        "bridgeLossJ": 0.0000307549520316591
+      },
+      "maxBalance": 2.076984417787031e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224046992700156,
+      "boardEnergyJ": 2.4534477460861094e-12,
+      "radLossJ": 0.0004533839924665869,
+      "structuralLossJ": 0.0006914093245352643,
+      "peakPa": 0.00005363294325228343
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            7.44596421601578e-11,
+            5.7180957499615545e-11,
+            2.98341146232828e-11
+          ],
+          "diagonalByPartial": [
+            1.6073296824903816e-10,
+            3.207845803296638e-13,
+            7.371081676843929e-14,
+            2.3404488844490625e-15,
+            1.0398032089697694e-16,
+            8.574351904284257e-17,
+            5.513715991330391e-19,
+            2.004242885249939e-19,
+            1.1304430976652306e-19,
+            7.678206225483991e-20
+          ],
+          "bridgeDisplacementM": 5.08986109424197e-10,
+          "bridgeVelocityMps": 6.745482064132011e-7
+        },
+        "horizontal": {
+          "wireJ": [
+            1.3167806537026149e-11,
+            2.5950473047519294e-10,
+            3.155639758543589e-10
+          ],
+          "diagonalByPartial": [
+            5.672606262888172e-10,
+            1.6645374747706638e-11,
+            3.001440433883191e-12,
+            1.575098820921287e-13,
+            1.1179606673013645e-14,
+            3.855283461575907e-15,
+            3.429260391542995e-17,
+            3.8627779235356596e-19,
+            3.550637154208323e-19,
+            1.5009918191287784e-19
+          ],
+          "bridgeDisplacementM": -7.973620398662311e-10,
+          "bridgeVelocityMps": -0.0000014090113708718334
+        },
+        "crossSpringJ": 3.415078036763876e-13,
+        "stringLossJ": 0.0010343857138541968,
+        "bridgeLossJ": 0.00003075496516703759
+      },
+      "maxBalance": 2.2072621508328893e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002622404198222159,
+      "boardEnergyJ": 1.4004470517384104e-12,
+      "radLossJ": 0.000453383995353859,
+      "structuralLossJ": 0.0006914093298078123,
+      "peakPa": 0.000032838806704583125
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            3.7982083377932755e-11,
+            1.6149573062727677e-11,
+            1.6184115756809033e-11
+          ],
+          "diagonalByPartial": [
+            6.989782362260799e-11,
+            1.8031921920762862e-13,
+            3.873715706099183e-14,
+            1.865128392398378e-15,
+            7.926524919797387e-17,
+            4.8173370373997253e-17,
+            3.991077551626673e-19,
+            1.144277741297431e-19,
+            6.95725937321343e-20,
+            4.576487493977119e-20
+          ],
+          "bridgeDisplacementM": 3.63623753470547e-10,
+          "bridgeVelocityMps": -5.49511767110478e-7
+        },
+        "horizontal": {
+          "wireJ": [
+            2.5320128353501273e-10,
+            1.1630513819691015e-10,
+            1.591251903999905e-11
+          ],
+          "diagonalByPartial": [
+            3.7231227249410047e-10,
+            1.0681968218071839e-11,
+            1.902988111299546e-12,
+            9.455834965638612e-14,
+            6.399724193337334e-15,
+            2.0461716174814085e-15,
+            1.6800920977225147e-17,
+            6.144101616475066e-19,
+            3.790844026298658e-19,
+            2.0516227636822646e-19
+          ],
+          "bridgeDisplacementM": -5.674400453355599e-10,
+          "bridgeVelocityMps": 7.892807571348489e-7
+        },
+        "crossSpringJ": 1.7362464566808583e-13,
+        "stringLossJ": 0.001034385997672011,
+        "bridgeLossJ": 0.00003075497195096433
+      },
+      "maxBalance": 2.2711867109226347e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224039031820644,
+      "boardEnergyJ": 7.961706278837813e-13,
+      "radLossJ": 0.0004533839969247234,
+      "structuralLossJ": 0.0006914093326745998,
+      "peakPa": 0.00002440394309663994
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.829565142646453e-11,
+            1.832267202902839e-11,
+            1.1598987078869924e-11
+          ],
+          "diagonalByPartial": [
+            4.7893878758641595e-11,
+            7.35544484036008e-14,
+            3.3033007748171643e-14,
+            1.1847014623384005e-15,
+            3.1980495366739445e-17,
+            2.5430455880004103e-17,
+            1.5353379967605319e-19,
+            3.3521026781326234e-20,
+            1.969556690490672e-20,
+            1.2880839085553455e-20
+          ],
+          "bridgeDisplacementM": -1.9773456369999886e-10,
+          "bridgeVelocityMps": -5.24114865978002e-7
+        },
+        "horizontal": {
+          "wireJ": [
+            7.835206939865705e-11,
+            4.947308377693387e-11,
+            1.0416849364196363e-10
+          ],
+          "diagonalByPartial": [
+            2.2326584283872005e-10,
+            6.903613918163659e-12,
+            1.1869244332240184e-12,
+            5.684744589559286e-14,
+            3.7191314756383935e-15,
+            1.0939515475242031e-15,
+            8.25116395393786e-18,
+            9.575227935587535e-20,
+            6.506933537261228e-20,
+            2.962024029224507e-20
+          ],
+          "bridgeDisplacementM": 2.47625931093747e-10,
+          "bridgeVelocityMps": 9.023506417893943e-7
+        },
+        "crossSpringJ": 4.12019581766688e-14,
+        "stringLossJ": 0.001034386167653038,
+        "bridgeLossJ": 0.00003075497556477219
+      },
+      "maxBalance": 2.3111720870439e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224037269672778,
+      "boardEnergyJ": 4.579277925385082e-13,
+      "radLossJ": 0.00045338399785132134,
+      "structuralLossJ": 0.000691409334367552,
+      "peakPa": 0.000019230729474112402
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.4061345749245312e-11,
+            7.93417947442084e-12,
+            4.84880035713411e-12
+          ],
+          "diagonalByPartial": [
+            2.675825636053807e-11,
+            4.167598357078619e-14,
+            2.2088620969946463e-14,
+            5.154213031540447e-16,
+            2.5383738266006247e-17,
+            1.3336325174946383e-17,
+            1.433086830740524e-19,
+            5.348170526502868e-20,
+            3.280512292457262e-20,
+            2.196990745870821e-20
+          ],
+          "bridgeDisplacementM": -2.5688777353131615e-10,
+          "bridgeVelocityMps": 1.910187120411292e-7
+        },
+        "horizontal": {
+          "wireJ": [
+            1.1393222891416292e-11,
+            1.3120482648717195e-10,
+            1.9073038518722413e-12
+          ],
+          "diagonalByPartial": [
+            1.3922360111242115e-10,
+            4.450783647739345e-12,
+            7.445216931440869e-13,
+            3.475505931837367e-14,
+            2.1318869546555985e-15,
+            5.837522904149378e-16,
+            4.316822063972452e-18,
+            2.1592051685271475e-19,
+            1.3376817128571992e-19,
+            7.323311086094914e-20
+          ],
+          "bridgeDisplacementM": 4.0898208535663174e-10,
+          "bridgeVelocityMps": -2.7825829776303753e-7
+        },
+        "crossSpringJ": 8.84070430874658e-14,
+        "stringLossJ": 0.001034386272716257,
+        "bridgeLossJ": 0.00003075497794421209
+      },
+      "maxBalance": 2.3338969645791963e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224036180368484,
+      "boardEnergyJ": 2.658173150292477e-13,
+      "radLossJ": 0.0004533839983774237,
+      "structuralLossJ": 0.0006914093353289865,
+      "peakPa": 0.00001462980974193043
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            6.8577602619831044e-12,
+            3.894176348363168e-12,
+            3.707229243657982e-12
+          ],
+          "diagonalByPartial": [
+            1.4328058934665834e-11,
+            3.9667594020063106e-14,
+            9.684735768779057e-15,
+            4.2753668562690007e-16,
+            1.1167444301998061e-17,
+            7.470505830645505e-18,
+            3.376513016301402e-20,
+            3.666742282395336e-21,
+            2.4742286751507183e-21,
+            1.426186391928401e-21
+          ],
+          "bridgeDisplacementM": 4.2767469527466843e-11,
+          "bridgeVelocityMps": 3.2489447458757386e-7
+        },
+        "horizontal": {
+          "wireJ": [
+            4.8280258101483307e-11,
+            1.0997026398574884e-11,
+            3.250818054473147e-11
+          ],
+          "diagonalByPartial": [
+            8.824088837711127e-11,
+            2.8526864021212206e-12,
+            4.734284833977747e-13,
+            2.0793527416689313e-14,
+            1.23467087862228e-15,
+            3.107315900511272e-16,
+            2.0084651437444506e-18,
+            2.5368250226389995e-20,
+            1.1978140719432464e-20,
+            7.261327598834884e-21
+          ],
+          "bridgeDisplacementM": -5.502439692206e-11,
+          "bridgeVelocityMps": -5.229980179011795e-7
+        },
+        "crossSpringJ": 1.980195144855136e-15,
+        "stringLossJ": 0.0010343863360942145,
+        "bridgeLossJ": 0.00003075497918088769
+      },
+      "maxBalance": 2.358530037938067e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002622403552582439,
+      "boardEnergyJ": 1.4115619548167517e-13,
+      "radLossJ": 0.0004533839986744582,
+      "structuralLossJ": 0.0006914093358715547,
+      "peakPa": 0.00001105766108445296
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            3.316068594561209e-12,
+            3.1752850143696542e-12,
+            1.5774379213439027e-12
+          ],
+          "diagonalByPartial": [
+            8.029466019930864e-12,
+            3.334289199378208e-14,
+            5.798981491874402e-15,
+            2.503263206263612e-16,
+            7.046883975725882e-18,
+            3.672547717618202e-18,
+            2.807247517068908e-20,
+            1.3316495768519666e-20,
+            8.433035697184753e-21,
+            5.4072307341205756e-21
+          ],
+          "bridgeDisplacementM": 1.5280443697963952e-10,
+          "bridgeVelocityMps": -6.902203010347919e-9
+        },
+        "horizontal": {
+          "wireJ": [
+            1.5156092423801704e-11,
+            4.085327490475215e-11,
+            2.2247758630249198e-12
+          ],
+          "diagonalByPartial": [
+            5.6095488796521e-11,
+            1.826658097923016e-12,
+            2.9937875413555517e-13,
+            1.2545023748913799e-14,
+            7.11718747642416e-16,
+            1.6639146446443312e-16,
+            1.0756152767771673e-18,
+            2.4879802454596936e-20,
+            1.3817414497330364e-20,
+            8.96457781933314e-21
+          ],
+          "bridgeDisplacementM": -2.0749573433809442e-10,
+          "bridgeVelocityMps": 3.4072707487788314e-8
+        },
+        "crossSpringJ": 2.6679905283225795e-14,
+        "stringLossJ": 0.0010343863748727515,
+        "bridgeLossJ": 0.00003075497986191683
+      },
+      "maxBalance": 2.3909693669388332e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224035126434565,
+      "boardEnergyJ": 8.786909852709113e-14,
+      "radLossJ": 0.0004533839988440309,
+      "structuralLossJ": 0.0006914093361812521,
+      "peakPa": 0.000008318385455989808
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            2.869184064892893e-12,
+            1.4294805754371323e-12,
+            1.3916089116687327e-12
+          ],
+          "diagonalByPartial": [
+            5.639076281020473e-12,
+            1.8950568207450832e-14,
+            5.205333504972485e-15,
+            1.1320145181119745e-16,
+            4.043401598354015e-18,
+            2.1462510342885726e-18,
+            6.244414209546896e-21,
+            4.662225398333859e-22,
+            2.399596979700917e-22,
+            1.517939405518792e-22
+          ],
+          "bridgeDisplacementM": 2.0025292639877625e-11,
+          "bridgeVelocityMps": -1.7911809098227085e-7
+        },
+        "horizontal": {
+          "wireJ": [
+            3.2255755354313565e-12,
+            1.6740751394511617e-11,
+            1.5740474409835466e-11
+          ],
+          "diagonalByPartial": [
+            3.4273477350885103e-11,
+            1.1823643219156655e-12,
+            1.8667682858460127e-13,
+            7.657121887302237e-15,
+            4.0986476557108466e-16,
+            8.852100607794256e-17,
+            4.971008938678475e-19,
+            3.764488178475198e-21,
+            2.2355865546125446e-21,
+            1.0820634416693774e-21
+          ],
+          "bridgeDisplacementM": -5.224998519688958e-11,
+          "bridgeVelocityMps": 2.5150788622788316e-7
+        },
+        "crossSpringJ": 8.804489676115688e-16,
+        "stringLossJ": 0.0010343863991583299,
+        "bridgeLossJ": 0.00003075498030104416
+      },
+      "maxBalance": 2.420459666030439e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224034876343224,
+      "boardEnergyJ": 4.5797515270435646e-14,
+      "radLossJ": 0.00045338399894452174,
+      "structuralLossJ": 0.0006914093363650593,
+      "peakPa": 0.00000799517362871847
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.1632135835481544e-12,
+            7.284716767545344e-13,
+            3.6320446106659415e-13
+          ],
+          "diagonalByPartial": [
+            2.2415890558667007e-12,
+            7.794790728698389e-15,
+            3.2336410291668734e-15,
+            9.80843208014627e-17,
+            1.9979756490546738e-18,
+            1.0131783388001442e-18,
+            8.366521244514314e-21,
+            3.63331038711777e-21,
+            2.277536942833691e-21,
+            1.4481831840141437e-21
+          ],
+          "bridgeDisplacementM": -7.703065915978577e-11,
+          "bridgeVelocityMps": -5.8161925283798966e-8
+        },
+        "horizontal": {
+          "wireJ": [
+            1.6306851997388373e-11,
+            2.9533718982498913e-12,
+            4.49409773072088e-12
+          ],
+          "diagonalByPartial": [
+            2.2856810538991562e-11,
+            7.715345436585723e-13,
+            1.1733197147968051e-13,
+            4.574695029863396e-15,
+            2.376916993962761e-16,
+            4.745156309347998e-17,
+            2.6424774788202056e-19,
+            6.627401298364267e-21,
+            3.4515907932010374e-21,
+            2.31863822292407e-21
+          ],
+          "bridgeDisplacementM": 9.462915621963172e-11,
+          "bridgeVelocityMps": 6.808524598113974e-8
+        },
+        "crossSpringJ": 6.133773392275757e-15,
+        "stringLossJ": 0.0010343864141619745,
+        "bridgeLossJ": 0.00003075498054412883
+      },
+      "maxBalance": 2.4718074809193524e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224034722375296,
+      "boardEnergyJ": 2.6577432016682036e-14,
+      "radLossJ": 0.0004533839989975055,
+      "structuralLossJ": 0.0006914093364619051,
+      "peakPa": 0.000004600596361777914
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            6.458884598251713e-13,
+            5.998838569119099e-13,
+            5.563935968223604e-13
+          ],
+          "diagonalByPartial": [
+            1.7911814241341819e-12,
+            3.647539463729715e-15,
+            1.3973733081828807e-15,
+            5.2629175173485895e-17,
+            1.4812005658628013e-18,
+            6.263677187976832e-19,
+            3.67715983404589e-21,
+            1.2127289425022649e-21,
+            7.678175664000089e-22,
+            4.848324907910168e-22
+          ],
+          "bridgeDisplacementM": -3.8218825567689794e-11,
+          "bridgeVelocityMps": 9.109313022200956e-8
+        },
+        "horizontal": {
+          "wireJ": [
+            3.0200469937056912e-12,
+            5.3597102532513244e-12,
+            6.385962057097352e-12
+          ],
+          "diagonalByPartial": [
+            1.4175973445711366e-11,
+            5.030804964891396e-13,
+            7.469929515769051e-14,
+            2.7688148666882156e-15,
+            1.3625534436192455e-16,
+            2.522351558542759e-17,
+            1.3109356333968726e-19,
+            6.638377185388796e-21,
+            3.7234176609665345e-21,
+            2.5526122857403045e-21
+          ],
+          "bridgeDisplacementM": 8.9256517581044e-11,
+          "bridgeVelocityMps": -9.833044374448929e-8
+        },
+        "crossSpringJ": 2.8704925320066572e-15,
+        "stringLossJ": 0.0010343864234134826,
+        "bridgeLossJ": 0.00003075498065604984
+      },
+      "maxBalance": 2.5398086411776433e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224034627812254,
+      "boardEnergyJ": 1.6586457395467327e-14,
+      "radLossJ": 0.0004533839990302387,
+      "structuralLossJ": 0.0006914093365218515,
+      "peakPa": 0.000003991790690382832
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            6.246490509586321e-13,
+            2.9761061018134073e-13,
+            1.3407339331957736e-13
+          ],
+          "diagonalByPartial": [
+            1.049488689565207e-12,
+            3.545257165758151e-15,
+            9.459042010596791e-16,
+            2.5736528936388945e-17,
+            6.135141339525379e-19,
+            2.7844904475267957e-19,
+            1.9598872429992184e-21,
+            6.291395664166037e-22,
+            3.860892796076422e-22,
+            2.5297928077604135e-22
+          ],
+          "bridgeDisplacementM": 3.3865623050376115e-11,
+          "bridgeVelocityMps": 5.9310001194160595e-8
+        },
+        "horizontal": {
+          "wireJ": [
+            3.68390581195421e-12,
+            5.439422920860353e-13,
+            5.123390713577412e-12
+          ],
+          "diagonalByPartial": [
+            8.971723157213141e-12,
+            3.2538848431782763e-13,
+            4.709061229980971e-14,
+            1.6867475715981873e-15,
+            7.921464825454589e-17,
+            1.3531046810442675e-17,
+            6.238915762925842e-20,
+            1.3119010916781397e-21,
+            7.47680691043223e-22,
+            4.384855324580739e-22
+          ],
+          "bridgeDisplacementM": -6.093175288323197e-11,
+          "bridgeVelocityMps": -8.580247600718632e-8
+        },
+        "crossSpringJ": 1.7363684560036089e-15,
+        "stringLossJ": 0.0010343864294331034,
+        "bridgeLossJ": 0.00003075498075802822
+      },
+      "maxBalance": 2.6178711975965996e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002622403456608007,
+      "boardEnergyJ": 8.244976997410701e-15,
+      "radLossJ": 0.0004533839990483999,
+      "structuralLossJ": 0.0006914093365550513,
+      "peakPa": 0.000002696861029552274
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.4342151588992625e-13,
+            1.0693620125911972e-13,
+            1.4671683994205767e-13
+          ],
+          "diagonalByPartial": [
+            3.9203403757357465e-13,
+            3.618224735836006e-15,
+            8.475158490847948e-16,
+            2.187749035784576e-17,
+            5.126415000016665e-19,
+            1.8737136674654728e-19,
+            2.1030685988185e-21,
+            1.1801587198539397e-21,
+            7.268186373535418e-22,
+            4.686605074187051e-22
+          ],
+          "bridgeDisplacementM": 3.4597894803259235e-11,
+          "bridgeVelocityMps": -3.6393258756233315e-8
+        },
+        "horizontal": {
+          "wireJ": [
+            4.482009049015724e-12,
+            6.464771979376739e-14,
+            1.749386770257099e-12
+          ],
+          "diagonalByPartial": [
+            6.055521210298636e-12,
+            2.0987955150609085e-13,
+            2.936985429838413e-14,
+            1.0061860302692735e-15,
+            4.540371436361403e-17,
+            7.190178976506523e-18,
+            4.4412606468488296e-20,
+            5.628736113661223e-21,
+            3.489225797931831e-21,
+            2.2511912896552252e-21
+          ],
+          "bridgeDisplacementM": -5.2814039386464917e-11,
+          "bridgeVelocityMps": 1.0538719630506414e-8
+        },
+        "crossSpringJ": 1.5375817099412223e-15,
+        "stringLossJ": 0.001034386433089281,
+        "bridgeLossJ": 0.00003075498079198359
+      },
+      "maxBalance": 2.7563021309795488e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224034528898573,
+      "boardEnergyJ": 5.576201794615467e-15,
+      "radLossJ": 0.0004533839990581496,
+      "structuralLossJ": 0.0006914093365729003,
+      "peakPa": 0.000001938408229704418
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.7640131251001408e-13,
+            1.772962998280198e-13,
+            8.718930574476974e-14
+          ],
+          "diagonalByPartial": [
+            4.361039833317236e-13,
+            2.5091525504947977e-15,
+            4.827720250036615e-16,
+            1.1030930513258715e-17,
+            2.1901952231593565e-19,
+            7.710258190860277e-20,
+            4.5740336305034955e-22,
+            1.8755172344473078e-22,
+            1.123398196133029e-22,
+            7.327042663699185e-23
+          ],
+          "bridgeDisplacementM": -1.3539793256688944e-11,
+          "bridgeVelocityMps": -4.410385306733471e-8
+        },
+        "horizontal": {
+          "wireJ": [
+            3.8561372824944367e-13,
+            8.800137328570364e-13,
+            2.5661492081128803e-12
+          ],
+          "diagonalByPartial": [
+            3.6702234436387315e-12,
+            1.3588607153849925e-13,
+            1.8501244616760278e-14,
+            6.112288640390172e-16,
+            2.633402758773108e-17,
+            3.858278240576939e-18,
+            1.7600038707683985e-20,
+            1.0048806071027296e-21,
+            6.134443245933242e-22,
+            3.705553293930125e-22
+          ],
+          "bridgeDisplacementM": 2.2093747314167797e-11,
+          "bridgeVelocityMps": 1.0288668682568687e-7
+        },
+        "crossSpringJ": 2.5172164496881586e-16,
+        "stringLossJ": 0.0010343864354685369,
+        "bridgeLossJ": 0.00003075498082102969
+      },
+      "maxBalance": 2.856829356412405e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224034504635893,
+      "boardEnergyJ": 2.9178361702149445e-15,
+      "radLossJ": 0.00045338399906437855,
+      "structuralLossJ": 0.0006914093365842898,
+      "peakPa": 0.0000015833323169272394
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            9.735477267679131e-14,
+            2.2152390871199942e-14,
+            2.3196754170137496e-14
+          ],
+          "diagonalByPartial": [
+            1.412245110465481e-13,
+            1.2028303991628722e-15,
+            2.1083629228066735e-16,
+            5.868064771664279e-18,
+            1.5343169903454596e-19,
+            5.545285751237472e-20,
+            5.799319400015127e-22,
+            3.2683954737527925e-22,
+            1.9898547036360563e-22,
+            1.3056982909082718e-22
+          ],
+          "bridgeDisplacementM": -2.1082725770050507e-11,
+          "bridgeVelocityMps": 8.60579457986219e-9
+        },
+        "horizontal": {
+          "wireJ": [
+            1.3102988678666211e-12,
+            8.87399127014203e-13,
+            3.9510181311027546e-13
+          ],
+          "diagonalByPartial": [
+            2.491674023992365e-12,
+            8.86921437544804e-14,
+            1.1779974649891602e-14,
+            3.7144517051863195e-16,
+            1.515023088229359e-17,
+            2.0327159240295878e-18,
+            9.600310492823295e-21,
+            7.616728360831469e-22,
+            4.915713503617434e-22,
+            3.0096116179182493e-22
+          ],
+          "bridgeDisplacementM": 2.505200857165945e-11,
+          "bridgeVelocityMps": -2.4460457985706318e-8
+        },
+        "crossSpringJ": 4.444352085743625e-16,
+        "stringLossJ": 0.0010343864369811678,
+        "bridgeLossJ": 0.00003075498083757418
+      },
+      "maxBalance": 3.04044983634455e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224034489253627,
+      "boardEnergyJ": 1.6374883261541088e-15,
+      "radLossJ": 0.00045338399906735957,
+      "structuralLossJ": 0.000691409336589794,
+      "peakPa": 0.0000011556149152325622
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            2.7709119467118473e-14,
+            4.759452849923682e-14,
+            3.554576408432934e-14
+          ],
+          "diagonalByPartial": [
+            1.0958622383732463e-13,
+            4.906836846320078e-16,
+            1.5994365754059683e-16,
+            4.9344571737276374e-18,
+            8.382889375229734e-20,
+            2.144996037734376e-20,
+            5.528678025694375e-23,
+            5.294532926041569e-24,
+            2.701144459219093e-24,
+            1.4757999387527043e-24
+          ],
+          "bridgeDisplacementM": 1.0598358893008866e-12,
+          "bridgeVelocityMps": 2.825262038016908e-8
+        },
+        "horizontal": {
+          "wireJ": [
+            5.819587278788423e-13,
+            3.8630479171845463e-13,
+            6.974635152286283e-13
+          ],
+          "diagonalByPartial": [
+            1.5985883676770533e-12,
+            5.807703468856645e-14,
+            7.404548310946988e-15,
+            2.2154836507165206e-16,
+            8.736795076333627e-18,
+            1.0997854737577075e-18,
+            3.7436950902449164e-21,
+            2.4240053446622804e-23,
+            1.1726433456555478e-23,
+            6.2083776279759035e-24
+          ],
+          "bridgeDisplacementM": 6.097535240375416e-12,
+          "bridgeVelocityMps": -4.3663388088789014e-8
+        },
+        "crossSpringJ": -5.437910887217446e-18,
+        "stringLossJ": 0.0010343864379298452,
+        "bridgeLossJ": 0.000030754980843812655
+      },
+      "maxBalance": 3.571622164688648e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002622403447964794,
+      "boardEnergyJ": 9.796786598754677e-16,
+      "radLossJ": 0.00045338399906934713,
+      "structuralLossJ": 0.0006914093365932817,
+      "peakPa": 9.311899429389845e-7
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            3.5951152656281245e-14,
+            2.4161037727580317e-14,
+            6.8238790614317685e-15
+          ],
+          "diagonalByPartial": [
+            6.645827124082489e-14,
+            3.367813822287534e-16,
+            1.3663147956556497e-16,
+            2.306825535994931e-18,
+            4.3348338075862654e-20,
+            1.6291558515153877e-20,
+            2.0615871181153027e-22,
+            1.0452359662444493e-22,
+            6.439639663674014e-23,
+            4.1869769069940636e-23
+          ],
+          "bridgeDisplacementM": 1.2137317856420654e-11,
+          "bridgeVelocityMps": 1.1474265001543806e-9
+        },
+        "horizontal": {
+          "wireJ": [
+            6.348523114371171e-14,
+            8.881656198199603e-13,
+            1.2638322923515048e-13
+          ],
+          "diagonalByPartial": [
+            1.0354410245221704e-12,
+            3.784115122472414e-14,
+            4.617810679695272e-15,
+            1.349459256529828e-16,
+            5.061238579986318e-18,
+            5.781998251269852e-19,
+            2.8294168591779583e-21,
+            5.513430694662707e-22,
+            3.324474946301818e-22,
+            2.1221327249156883e-22
+          ],
+          "bridgeDisplacementM": -2.064988870363143e-11,
+          "bridgeVelocityMps": 3.882121527506498e-9
+        },
+        "crossSpringJ": 2.1090146002543321e-16,
+        "stringLossJ": 0.0010343864385526842,
+        "bridgeLossJ": 0.000030754980849604524
+      },
+      "maxBalance": 4.064457104213659e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.002622403447333273,
+      "boardEnergyJ": 5.476798805480553e-16,
+      "radLossJ": 0.00045338399906953784,
+      "structuralLossJ": 0.0006914093365933806,
+      "peakPa": 6.639810332225389e-7
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "angleRad": 0.5,
+      "spreadCents": 0.5,
+      "lossCase": "control",
+      "polarization": {
+        "vertical": {
+          "wireJ": [
+            1.570748904114382e-14,
+            5.012588539741128e-15,
+            1.0141538261005849e-14
+          ],
+          "diagonalByPartial": [
+            3.0310112869616663e-14,
+            3.429996436232843e-16,
+            7.186141035376349e-17,
+            1.345035268996584e-18,
+            3.1141226465043993e-20,
+            6.130460509439621e-21,
+            1.8603847275085816e-23,
+            5.244315718245885e-24,
+            3.2476367299268703e-24,
+            2.123754698882559e-24
+          ],
+          "bridgeDisplacementM": 2.9672633699282042e-12,
+          "bridgeVelocityMps": -1.326283419479113e-8
+        },
+        "horizontal": {
+          "wireJ": [
+            2.414257602367863e-13,
+            2.997975744766244e-13,
+            1.7328401060093403e-13
+          ],
+          "diagonalByPartial": [
+            6.867925061429167e-13,
+            2.4492246004122907e-14,
+            2.9177433482290626e-15,
+            8.172320957499284e-17,
+            2.901176510657259e-18,
+            3.136019993786879e-19,
+            9.217603876618472e-22,
+            7.430919418031399e-24,
+            3.661759648911703e-24,
+            2.3517572751695996e-24
+          ],
+          "bridgeDisplacementM": -3.870674572729612e-12,
+          "bridgeVelocityMps": 1.499338783458487e-8
+        },
+        "crossSpringJ": 9.664555854134795e-18,
+        "stringLossJ": 0.001034386438948745,
+        "bridgeLossJ": 0.00003075498085211816
+      },
+      "maxBalance": 4.343747583845925e-14,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026224034469328685,
+      "boardEnergyJ": 2.903436676245856e-16,
+      "radLossJ": 0.00045338399906953784,
+      "structuralLossJ": 0.0006914093365933806,
+      "peakPa": 5.935656873169515e-7
+    }
+  ]
+}

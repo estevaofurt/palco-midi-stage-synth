@@ -13,3 +13,15 @@ Feedback positivo de sustentação F98-both-half-20s registrado em docs/STAGE_CO
 ## Candidato B de 40 s confirmado
 
 CI 45415259799, artefato 14932760494: 40 blocos, 1920239 frames, zero clipping, pico 0,306769 FS, PCM16/24. Float e PCM16 concordam nas quedas globais -40 13 s e -60 28,5 s, fundamental -60 31 s. Aos 39–39,5 s float -96,389 dBFS (-74,180 dB relativo), PCM16 69,065% zeros e SNR de quantização 4,413 dB. Não inferir audibilidade. Relatório completo do candidato em audio/analysis_f9_9_both_half_ci.json; os outros dois jobs não confirmados nesta leitura. [Áudio B](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45415259799/artifacts/14932760494).
+
+## Matriz completa confirmada
+
+CI [45415259799](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45415259799), quatro jobs concluídos com sucesso. 67 testes Node, 120 blocos contínuos, todos os WAVs de 16/24 bits sem clipping. Maior resíduo de energia 4.34375e-14 J. Análise float e PCM16 concordam nos cruzamentos globais -60 dB dos três casos.
+
+| Caso | Global -60 dB | Fundamental -60 dB | Float aos 39 s (dBFS) | PCM16 zeros aos 39 s |
+|---|---:|---:|---:|---:|
+| control | 15.5 s | 16.5 s | -140.80 | 100.00% |
+| horizontal-half | 20 s | 22 s | -117.18 | 100.00% |
+| both-half | 28.5 s | 31 s | -96.39 | 69.06% |
+
+Artefatos: [controle](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45415259799/artifacts/14931568743), [A](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45415259799/artifacts/14933170303), [B](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45415259799/artifacts/14932760494). B permanece candidato prioritário pela melhora percebida no F9.8 de 20 s. Não afirmar audibilidade aos 40 s nem validação perceptiva do novo áudio. P2, dinâmica, pedal, outras notas e integração pendentes. Não alterar física neste registro. Relatórios separados em audio/analysis_f9_9_control_ci.json, audio/analysis_f9_9_horizontal_half_ci.json, audio/analysis_f9_9_both_half_ci.json.
