@@ -1,0 +1,560 @@
+{
+  "sourceCommit": "87f11959e4d43fb236ac0f445a626dfb1d109a60",
+  "runId": 45408747339,
+  "conclusion": "success",
+  "nodeTests": {
+    "f95": 13,
+    "f93": 12
+  },
+  "candidateArtifactId": 14927495229,
+  "referenceArtifactId": 14925794162,
+  "analysisSummaries": [
+    {
+      "file": "/tmp/f95-candidate/C4_v1_board0.5_5s.wav",
+      "analyzedThroughS": 4.5,
+      "broadband": {
+        "referenceRms": 0.0802854677802496,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3,
+            "endS": 3.5,
+            "confirmedThroughS": 4
+          },
+          "40": {
+            "status": "not-observed",
+            "analyzedThroughS": 4.5
+          },
+          "60": {
+            "status": "not-observed",
+            "analyzedThroughS": 4.5
+          }
+        }
+      },
+      "firstThreePartials": [
+        {
+          "h": 1,
+          "referenceRms": 0.05945413380327426,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 3,
+              "endS": 3.5,
+              "confirmedThroughS": 4
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 4.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 4.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 2,
+          "referenceRms": 0.010008044029171112,
+          "drops": {
+            "20": {
+              "status": "not-observed",
+              "analyzedThroughS": 4.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 4.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 4.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 3,
+          "referenceRms": 0.019708849017766258,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 3.5,
+              "endS": 4,
+              "confirmedThroughS": 4.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 4.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 4.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        }
+      ]
+    },
+    {
+      "file": "research/stage-concert-grand/audio/C4_medio_R_10s.wav",
+      "analyzedThroughS": 9.5,
+      "broadband": {
+        "referenceRms": 0.07263962335605753,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 2.5,
+            "endS": 3,
+            "confirmedThroughS": 3.5
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 5.5,
+            "endS": 6,
+            "confirmedThroughS": 6.5
+          },
+          "60": {
+            "status": "not-observed",
+            "analyzedThroughS": 9.5
+          }
+        }
+      },
+      "firstThreePartials": [
+        {
+          "h": 1,
+          "referenceRms": 0.05475262522724197,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2.5,
+              "endS": 3,
+              "confirmedThroughS": 3.5
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 5.5,
+              "endS": 6,
+              "confirmedThroughS": 6.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 9.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 2,
+          "referenceRms": 0.009798190171714983,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 4,
+              "endS": 4.5,
+              "confirmedThroughS": 5
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 8.5,
+              "endS": 9,
+              "confirmedThroughS": 9.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 9.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 3,
+          "referenceRms": 0.019357288732109828,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 3.5,
+              "endS": 4,
+              "confirmedThroughS": 4.5
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 6.5,
+              "endS": 7,
+              "confirmedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 9.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        }
+      ]
+    },
+    {
+      "file": "/tmp/f95-c5/v1.f32",
+      "analyzedThroughS": 12,
+      "broadband": {
+        "referenceRms": 0.02673435058651146,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 3.5,
+            "endS": 4,
+            "confirmedThroughS": 4.5
+          },
+          "40": {
+            "status": "not-observed",
+            "analyzedThroughS": 12
+          },
+          "60": {
+            "status": "not-observed",
+            "analyzedThroughS": 12
+          }
+        }
+      },
+      "firstThreePartials": [
+        {
+          "h": 1,
+          "referenceRms": 0.020293695861400566,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 1,
+              "endS": 1.5,
+              "confirmedThroughS": 2
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 10.5,
+              "endS": 11,
+              "confirmedThroughS": 11.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 12
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 2,
+          "referenceRms": 0.015819972310528653,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 1,
+              "endS": 1.5,
+              "confirmedThroughS": 2
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 8,
+              "endS": 8.5,
+              "confirmedThroughS": 9
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 12
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 3,
+          "referenceRms": 0.0014258634578683481,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 4,
+              "endS": 4.5,
+              "confirmedThroughS": 5
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 9,
+              "endS": 9.5,
+              "confirmedThroughS": 10
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 12
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        }
+      ]
+    },
+    {
+      "file": "/tmp/f95-c5/v8.f32",
+      "analyzedThroughS": 16,
+      "broadband": {
+        "referenceRms": 0.09562941424068264,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1,
+            "endS": 1.5,
+            "confirmedThroughS": 2
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 14,
+            "endS": 14.5,
+            "confirmedThroughS": 15
+          },
+          "60": {
+            "status": "not-observed",
+            "analyzedThroughS": 16
+          }
+        }
+      },
+      "firstThreePartials": [
+        {
+          "h": 1,
+          "referenceRms": 0.061094411868074516,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 1,
+              "endS": 1.5,
+              "confirmedThroughS": 2
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 11.5,
+              "endS": 12,
+              "confirmedThroughS": 12.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 16
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 2,
+          "referenceRms": 0.06713721587067256,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 1,
+              "endS": 1.5,
+              "confirmedThroughS": 2
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 5,
+              "endS": 5.5,
+              "confirmedThroughS": 6
+            },
+            "60": {
+              "status": "observed-window",
+              "startS": 13.5,
+              "endS": 14,
+              "confirmedThroughS": 14.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 3,
+          "referenceRms": 0.007185848078775842,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2.5,
+              "endS": 3,
+              "confirmedThroughS": 3.5
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 9,
+              "endS": 9.5,
+              "confirmedThroughS": 10
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 16
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        }
+      ]
+    },
+    {
+      "file": "/tmp/f95-c5/v16.f32",
+      "analyzedThroughS": 15.5,
+      "broadband": {
+        "referenceRms": 0.1982027366241399,
+        "drops": {
+          "20": {
+            "status": "observed-window",
+            "startS": 1,
+            "endS": 1.5,
+            "confirmedThroughS": 2
+          },
+          "40": {
+            "status": "observed-window",
+            "startS": 9,
+            "endS": 9.5,
+            "confirmedThroughS": 10
+          },
+          "60": {
+            "status": "not-observed",
+            "analyzedThroughS": 15.5
+          }
+        }
+      },
+      "firstThreePartials": [
+        {
+          "h": 1,
+          "referenceRms": 0.12164433801636096,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 1,
+              "endS": 1.5,
+              "confirmedThroughS": 2
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 10.5,
+              "endS": 11,
+              "confirmedThroughS": 11.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 15.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 2,
+          "referenceRms": 0.1423092284695091,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 1,
+              "endS": 1.5,
+              "confirmedThroughS": 2
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 5,
+              "endS": 5.5,
+              "confirmedThroughS": 6
+            },
+            "60": {
+              "status": "observed-window",
+              "startS": 13.5,
+              "endS": 14,
+              "confirmedThroughS": 14.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 3,
+          "referenceRms": 0.01614074693423314,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2,
+              "endS": 2.5,
+              "confirmedThroughS": 3
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 8,
+              "endS": 8.5,
+              "confirmedThroughS": 9
+            },
+            "60": {
+              "status": "observed-window",
+              "startS": 13.5,
+              "endS": 14,
+              "confirmedThroughS": 14.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        }
+      ]
+    }
+  ],
+  "candidateChunks": [
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "maxBalance": 8.581677035657265e-15,
+      "maxIncrease": 0,
+      "peakForce": 11.546166573173796,
+      "finalEnergyJ": 0.0030936238152169636,
+      "boardEnergyJ": 0.00005934564590927653,
+      "radLossJ": 0.00043675839055575845,
+      "structuralLossJ": 0.0006952118379315164,
+      "peakPa": 0.8509005391198079
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "maxBalance": 1.961972251329769e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0027707341648336237,
+      "boardEnergyJ": 0.000013209522265646735,
+      "radLossJ": 0.0004981689459999481,
+      "structuralLossJ": 0.0007886425838533478,
+      "peakPa": 0.23444407839212356
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "maxBalance": 1.850949948867253e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026840665684643547,
+      "boardEnergyJ": 0.0000032063401594617166,
+      "radLossJ": 0.0005109087818948432,
+      "structuralLossJ": 0.0008067568100940071,
+      "peakPa": 0.1147621547187708
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "maxBalance": 1.6202317265623378e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.00265405576497398,
+      "boardEnergyJ": 6.649358012427125e-7,
+      "radLossJ": 0.0005136861532616636,
+      "structuralLossJ": 0.0008104947611757544,
+      "peakPa": 0.05248669438983165
+    },
+    {
+      "seconds": 1,
+      "velocity": 1,
+      "scale": 1,
+      "boardFactor": 0.5,
+      "maxBalance": 1.614160194396419e-15,
+      "maxIncrease": 0,
+      "peakForce": 0,
+      "finalEnergyJ": 0.0026402393122721963,
+      "boardEnergyJ": 9.690255943660532e-8,
+      "radLossJ": 0.0005144221134497456,
+      "structuralLossJ": 0.0008114524200713588,
+      "peakPa": 0.025336009670283842
+    }
+  ],
+  "limitations": "relative first 0.5 s, not T60; no SPL calibration; recording duration and noise censor conclusions; no pedal parity; no V10 or hardware"
+}

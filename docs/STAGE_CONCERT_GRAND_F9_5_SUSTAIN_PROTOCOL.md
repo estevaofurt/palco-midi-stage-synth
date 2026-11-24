@@ -11,3 +11,17 @@ Testes: 13 verificações sintéticas executadas em V8 com FFT recuperada do Git
 ## Ensaio acústico executado após gravação
 
 Três renderizações V8 de 25 ms com os módulos recuperados do commit 87f11959e4d43fb236ac0f445a626dfb1d109a60. Fator 1: cada amostra de pressão numericamente idêntica à F9.2, energia final exatamente igual. Fator 0,5: pico de força 11,5461665731738 N (baseline 11,54616657317385); pico de pressão 0,762761 Pa (baseline 0,750927 Pa); erro L2 relativo da pressão 1,3046%; perda estrutural 0,024803 mJ (baseline 0,048426 mJ); resíduo de energia 8,584e-15 J, aumento observado zero. O checkpoint registrou fator 0,5. Trata-se de teste curto de regressão e passividade, não avaliação perceptiva ou sustentação de 5 s. Relatório em research/stage-concert-grand/audio/analysis_f9_5_smoke.json. GitHub Actions: [{"id":45408747339,"status":"completed","conclusion":"success","url":"https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45408747339"}]. Não há novo WAV longo disponível. F9 permanece aberta.
+
+## Resultados CI confirmados
+
+[Run 45408747339](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45408747339), ambos jobs concluídos com sucesso. Node: 13/13 F9.5 + 12/12 F9.3. Original Stage analisado, três SHA-256 C5 reconfirmados. Candidato de 5 s efetivamente renderizado, sem clipping (script recusa clipping), ganho original, cinco blocos passivos e sem recontato. [WAV e métricas do candidato (ZIP)](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45408747339/artifacts/14927495229); [métricas de referência (ZIP)](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45408747339/artifacts/14925794162). Artefatos CI têm retenção finita e podem exigir login. Substitui a observação anterior de WAV ainda indisponível na sessão.
+
+| gravação | queda global 20 dB | queda global 40 dB | janela observada |
+|---|---|---|---|
+| C4_v1_board0.5_5s.wav | 3–3.5 s | não observada | 4.5 s |
+| C4_medio_R_10s.wav | 2.5–3 s | 5.5–6 s | 9.5 s |
+| v1.f32 | 3.5–4 s | não observada | 12 s |
+| v8.f32 | 1–1.5 s | 14–14.5 s | 16 s |
+| v16.f32 | 1–1.5 s | 9–9.5 s | 15.5 s |
+
+A queda global de 20 dB do candidato atrasou 0,5 s frente à F9.2; seu primeiro RMS também aumentou cerca de 10,5%. No C5 médio v8 e forte v16 a queda inicial é mais rápida (1–1,5 s), porém a queda de 40 dB chega muito depois (14–14,5 e 9–9,5 s). A fundamental C5 v8 chega a -40 dB em 11,5–12 s versus Stage F9.2 5,5–6 s; segundo parcial C5 v8 chega a -40 dB em 5–5,5 s versus Stage F9.2 8,5–9 s. Portanto não reduzir amortecimento indiscriminadamente: distribuição espectral/duplo decaimento requer ajuste físico seletivo. Candidato curto não permite confirmar cauda tardia nem extrapolar T60. Nenhum T60 global observado. Níveis absolutos entre instrumentos não calibrados; ruído e edição do C5 devem ser avaliados. Próximo ensaio: candidato 15–20 s e análise de contraste e evolução por parcial, com mobilidade da ponte/uníssonos investigados sem integração. V10, 32–64 vozes e avaliação auditiva pendentes. F9 aberta.
