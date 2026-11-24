@@ -1,0 +1,40 @@
+name: Concert Grand F10 preparatory register pilot
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f10-pilot.yml'
+      - 'research/stage-concert-grand/f10-pilot-*'
+      - 'research/stage-concert-grand/f10-register-pilot*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10-register-pilot.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [55, 60, 67]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10-register-pilot-demo.mjs /tmp/f10-pilot ${{ matrix.midi }} 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10-pilot-midi${{ matrix.midi }}-3s
+          path: /tmp/f10-pilot/
+          if-no-files-found: error
