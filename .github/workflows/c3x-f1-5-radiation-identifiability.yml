@@ -1,0 +1,57 @@
+name: Stage Synth F1.5 - radiation identifiability and V10 output-path research
+on:
+  push:
+    branches: ['research/import-c3x-v10-20261123']
+    paths:
+      - 'research/c3x-physical/radiation_identifiability.py'
+      - 'research/c3x-physical/test_radiation_identifiability.py'
+      - 'research/c3x-physical/diagnostic_v10_output_paths.py'
+      - 'research/c3x-physical/test_v10_output_paths.py'
+      - '.github/workflows/c3x-f1-5-radiation-identifiability.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-and-v10-ablation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      F15_DIAG_DIR: /tmp/c3x-f1-5-diag
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependencies, never audio samples
+        run: python -m pip install numpy scipy soundfile numba
+      - name: Regenerate original V10 output-path diagnostic (temporary only)
+        run: |
+          python research/c3x-physical/diagnostic_v10_output_paths.py \
+            --v10-root research/c3x-python/v10 --output "$F15_DIAG_DIR"
+      - name: Ten non-identifiability and Rayleigh quadrature tests
+        run: python -m unittest discover -s research/c3x-physical -p 'test_radiation_identifiability.py' -v
+      - name: Five original V10 ablation tests (same physical states)
+        run: python -m unittest discover -s research/c3x-physical -p 'test_v10_output_paths.py' -v
+      - name: Assert V10 reconstruction and no clipping in diagnostic WAV
+        run: |
+          python - <<'PY'
+          import json,os,sys
+          import numpy as np
+          import soundfile as sf
+          p=os.environ['F15_DIAG_DIR']
+          x=json.load(open(p+'/F1_5_AUDICAO_DIAGNOSTICO.json'))
+          assert x['v10_source_modified'] is False
+          assert len(x['measurements'])==2
+          assert max(c['max_unmodified_V10_difference'] for c in x['measurements'])<2e-6
+          assert all(c['measures']['direct_and_board_only_diagnostic']['h5_db_rel_fundamental'] >
+               c['measures']['v10_original']['h5_db_rel_fundamental']+15 for c in x['measurements'])
+          for f in x['wavs']:
+            y,fs=sf.read(p+'/'+f)
+            assert fs==48000 and y.ndim==2 and y.shape[1]==2
+            assert np.isfinite(y).all() and np.max(np.abs(y))<.81
+          print('F1.5 VERIFIED 15 tests; V10 unmodified, 6 WAVs with headroom; no C3X measurement claimed')
+          PY
+      - name: Delete all synthetic runtime audio and temporary data
+        if: always()
+        run: rm -rf "$F15_DIAG_DIR"

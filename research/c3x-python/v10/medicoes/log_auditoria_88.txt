@@ -1,0 +1,9 @@
+Auditoria 11/88 | G1: 0.64 cents | tempo=8.6s
+Auditoria 22/88 | F#2: 0.70 cents | tempo=12.3s
+Auditoria 33/88 | F3: 0.57 cents | tempo=15.2s
+Auditoria 44/88 | E4: 0.46 cents | tempo=18.4s
+Auditoria 55/88 | D#5: 0.26 cents | tempo=21.3s
+Auditoria 66/88 | D6: -0.12 cents | tempo=23.5s
+Auditoria 77/88 | C#7: 0.17 cents | tempo=25.3s
+Auditoria 88/88 | C8: -0.08 cents | tempo=27.2s
+RESUMO {'notas_total': 88, 'avaliadas_confiaveis': 88, 'inconclusivas': 0, 'mediana_desvio_abs_cents': 0.6165, 'p95_desvio_abs_cents': 1.2724499999999994, 'maior_desvio_abs_cents': 1.651, 'notas_inconclusivas': [], 'notas_desvio_acima_5c': [], 'tempo_total_s': 27.25, 'limites': 'Pico da fundamental estimado em janela FFT, não um analisador de afinação perceptual e não medição do C3X físico.'}

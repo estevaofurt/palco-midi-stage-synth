@@ -1,0 +1,48 @@
+name: STAGE SYNTH F1 - C5 C4 licensed reference spectral audit
+on:
+  push:
+    branches:
+      - research/import-c3x-v10-20261123
+    paths:
+      - '.github/workflows/c3x-f1-c5-c4-compare.yml'
+      - 'research/c3x-physical/c5_c4_analysis.py'
+      - 'research/c3x-physical/test_c5_c4_analysis.py'
+      - 'research/c3x-physical/download_analyze_c5.py'
+      - 'research/c3x-physical/v10_c4_profiles.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  c5-licensed-source-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      AUDIO_TMP: /tmp/stage-synth-c5-c4-originals
+      RESULT_TMP: /tmp/stage-synth-c5-c4-results
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deterministic analysis dependencies
+        run: python -m pip install 'numpy>=1.26,<3' 'scipy>=1.12,<2' 'soundfile>=0.12,<1'
+      - name: Unit tests with synthetic controls only
+        run: python -m unittest discover -s research/c3x-physical -p 'test_c5_c4_analysis.py' -v
+      - name: Download exactly three originals into ephemeral temp directory; verify pinned SHA-256; analyze C4
+        run: |
+          mkdir -p "$AUDIO_TMP" "$RESULT_TMP"
+          python research/c3x-physical/download_analyze_c5.py \
+            --tmp-dir "$AUDIO_TMP" \
+            --v10-profiles research/c3x-physical/v10_c4_profiles.json \
+            --output "$RESULT_TMP/c5-c4-v10-numeric-results.json"
+      - name: Save ONLY numeric results, source hashes, provenance and limitations
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: F1-Yamaha-C5-C4-numeric-metrics-only
+          path: /tmp/stage-synth-c5-c4-results/c5-c4-v10-numeric-results.json
+          if-no-files-found: error
+          retention-days: 21
+      - name: Permanently remove downloaded source audio from job workspace
+        if: always()
+        run: rm -rf "$AUDIO_TMP"

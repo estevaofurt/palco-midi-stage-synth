@@ -1,0 +1,14 @@
+Renderizando mesma partitura na V9 / V10...
+Audio: C3X_V10_DRY_acao_continua_7s.wav duração 7.65
+Audio: C3X_AB_V9_vs_V10_DRY_15s.wav duração 15.53
+Testes de meia liberação...
+Audio: C3X_V10_meia_liberacao_dupla_repeticao.wav duração 1.05
+Audio: C3X_V10_meia_liberacao_repeticao_simples.wav duração 1.05
+Audio: C3X_AB_V10_dupla_vs_simples.wav duração 2.33
+Pedal...
+Audio: C3X_V10_DRY_pedal_dinamico_7s.wav duração 7.65
+Dinâmica e espectro...
+Audio: C3X_V10_A4_quatro_intensidades.wav duração 4.0
+Audio: C3X_AB_V9_vs_V10_A4_isolada.wav duração 1.95
+Audio: C3X_V10_A4_isolada.wav duração 0.86
+Concluido em 24.93 s

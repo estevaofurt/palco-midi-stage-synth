@@ -1,0 +1,22 @@
+test_dry_no_samples (testes.test_continuous_v10.AudioV10Tests.test_dry_no_samples) ... ok
+test_dynamics (testes.test_continuous_v10.AudioV10Tests.test_dynamics) ... ok
+test_finite_nonzero_and_stereo (testes.test_continuous_v10.AudioV10Tests.test_finite_nonzero_and_stereo) ... ok
+test_keyframe_repeated_strikes_sound (testes.test_continuous_v10.AudioV10Tests.test_keyframe_repeated_strikes_sound) ... ok
+test_keyframe_shallow_is_silent (testes.test_continuous_v10.AudioV10Tests.test_keyframe_shallow_is_silent) ... ok
+test_pedal_still_sustains (testes.test_continuous_v10.AudioV10Tests.test_pedal_still_sustains) ... ok
+test_v9_bypass_exact (testes.test_continuous_v10.AudioV10Tests.test_v9_bypass_exact) ... ok
+test_config_invalid (testes.test_continuous_v10.ScheduleV10Tests.test_config_invalid) ... ok
+test_deterministic (testes.test_continuous_v10.ScheduleV10Tests.test_deterministic) ... ok
+test_higher_velocity_faster_and_harder (testes.test_continuous_v10.ScheduleV10Tests.test_higher_velocity_faster_and_harder) ... ok
+test_invalid_commands (testes.test_continuous_v10.ScheduleV10Tests.test_invalid_commands) ... ok
+test_no_restrike_if_key_does_not_release (testes.test_continuous_v10.ScheduleV10Tests.test_no_restrike_if_key_does_not_release) ... ok
+test_normal_note_strikes_once (testes.test_continuous_v10.ScheduleV10Tests.test_normal_note_strikes_once) ... ok
+test_partial_key_release_enables_double_repetition (testes.test_continuous_v10.ScheduleV10Tests.test_partial_key_release_enables_double_repetition) ... ok
+test_rearm_threshold_mode_difference (testes.test_continuous_v10.ScheduleV10Tests.test_rearm_threshold_mode_difference) ... ok
+test_shallow_press_does_not_trigger_hammer (testes.test_continuous_v10.ScheduleV10Tests.test_shallow_press_does_not_trigger_hammer) ... ok
+test_trace_retained (testes.test_continuous_v10.ScheduleV10Tests.test_trace_retained) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 4.062s
+
+OK

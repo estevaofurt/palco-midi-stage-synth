@@ -1,0 +1,118 @@
+{
+  "phase": "F1.5",
+  "physical_C3X_F1_status": "PENDENTE",
+  "audio_output_model_modified": false,
+  "physical_C3X_measurements_acquired": 0,
+  "reference_piano_real": "Yamaha C5 recordings previously verified, but only archival metrics referenced",
+  "spatial_radiation_basis": "two fictitious patches, illustrative Rayleigh quadrature, NOT C3X or C5",
+  "synthetic_microphone_results": {
+    "center": {
+      "partial4_pressure_magnitude_Pa": 0.09807634306271304,
+      "partial5_pressure_magnitude_Pa": 0.0,
+      "h5_relative_to_h4_db": -339.83128528188547
+    },
+    "offset": {
+      "partial4_pressure_magnitude_Pa": 0.040157715190505185,
+      "partial5_pressure_magnitude_Pa": 0.06380576382999884,
+      "h5_relative_to_h4_db": 4.02181833577956
+    },
+    "far_offset": {
+      "partial4_pressure_magnitude_Pa": 0.07144849333562776,
+      "partial5_pressure_magnitude_Pa": 0.07193320132749009,
+      "h5_relative_to_h4_db": 0.05872627146522792
+    }
+  },
+  "offline_v10_path_ablation": {
+    "status": "OFFLINE ABLATION ONLY / not a physically calibrated alternative",
+    "audio_sample_rate_hz": 48000,
+    "pcm": "stereo 24-bit",
+    "fixed_gain_all_versions": 0.36547000104525273,
+    "equalized_tonal_comparison": {
+      "file": "C4_AB_V10_vs_sem_IR_modal_RMS_IGUALADO_DIAGNOSTICO.wav",
+      "rms_match_window_s": [
+        0.12,
+        0.62
+      ],
+      "diagnostic_only_not_physical_evidence": true,
+      "diagnostic_gain_factors": {
+        "75": 9.54158487847739,
+        "115": 9.980447219339034
+      },
+      "global_tonal_gain": 0.2030822123687922
+    },
+    "source": "Original V10 synthesis, no external samples, no room reverb",
+    "v10_source_modified": false,
+    "sequence": "MIDI75 original → MIDI75 diagnostic → MIDI115 original → MIDI115 diagnostic, separated by .22s silence",
+    "differences_due_to_muting": "body=fftconvolve(source, modal_body_ir) branch muted. Direct+board original preserved.",
+    "measurements": [
+      {
+        "velocity": 75,
+        "measures": {
+          "v10_original": {
+            "h4_db_rel_fundamental": 0.85,
+            "h5_db_rel_fundamental": -38.22,
+            "h5_minus_h4_db": -39.07
+          },
+          "direct_and_board_only_diagnostic": {
+            "h4_db_rel_fundamental": -12.71,
+            "h5_db_rel_fundamental": -17.82,
+            "h5_minus_h4_db": -5.11
+          }
+        },
+        "max_unmodified_V10_difference": 5.958283333384884e-08
+      },
+      {
+        "velocity": 115,
+        "measures": {
+          "v10_original": {
+            "h4_db_rel_fundamental": 2.35,
+            "h5_db_rel_fundamental": -41.6,
+            "h5_minus_h4_db": -43.95
+          },
+          "direct_and_board_only_diagnostic": {
+            "h4_db_rel_fundamental": -11.33,
+            "h5_db_rel_fundamental": -21.15,
+            "h5_minus_h4_db": -9.82
+          }
+        },
+        "max_unmodified_V10_difference": 1.1896776008768484e-07
+      }
+    ],
+    "wavs": [
+      "C4_MIDI75_v10_original.wav",
+      "C4_MIDI75_direct_and_board_only_diagnostic.wav",
+      "C4_MIDI115_v10_original.wav",
+      "C4_MIDI115_direct_and_board_only_diagnostic.wav",
+      "C4_AB_V10_original_vs_sem_IR_modal_DIAGNOSTICO.wav",
+      "C4_AB_V10_vs_sem_IR_modal_RMS_IGUALADO_DIAGNOSTICO.wav"
+    ]
+  },
+  "original_v10_source_hashes_sha256": {
+    "continuous_engine.py": "1ca2a580cc69162af64b6dc1a1cfbb9f1c99572400bea74d18d4d5dd22d89d99",
+    "harmonic_dry.py": "b7661798252c4fb8189ae874c844bd8d42ac0db6737d9f0d0fa6d0212fb5ef98",
+    "action_engine.py": "da4ce8419df10aca01a9dd7a7a82eaf05564aa094489a376f5e1b0dff915058d"
+  },
+  "diagnostic_wav_sha256": {
+    "C4_MIDI75_v10_original.wav": "18e9fcd309a207311a8bdbfa65a05981f839ad76e0ca7300413d29eb246271e1",
+    "C4_MIDI75_direct_and_board_only_diagnostic.wav": "6a92df970982f9a94ee40063437f8eb2a2f6e6616cb4e9fea1d1e942b21884e5",
+    "C4_MIDI115_v10_original.wav": "de9dbea6fee690b430979c969775325851fd02385b75976c85d5b075cc745dd5",
+    "C4_MIDI115_direct_and_board_only_diagnostic.wav": "37e12938cf8d002b7281c840e1bca9d8c32e792fdca8251880a7018f9e144ba7",
+    "C4_AB_V10_original_vs_sem_IR_modal_DIAGNOSTICO.wav": "c19ef3669458bbba249fbae24f417c0e7c7a5f4bddc592a153621235d90a0a7e",
+    "C4_AB_V10_vs_sem_IR_modal_RMS_IGUALADO_DIAGNOSTICO.wav": "64ecfdb88476bbe401d1a1bf5ed8a08182b92a8e75bce623eeb4fe8b1e155261"
+  },
+  "measurement_gate": "requires synchronized calibrated bridge/board motion and pressure; pressure-alone cannot identify mechanical vs radiation transfer",
+  "local_test_count": 15,
+  "local_tests_passed": true,
+  "reference_web_docs": [
+    "https://pubmed.ncbi.nlm.nih.gov/23556610/",
+    "https://arxiv.org/abs/1305.3057",
+    "https://pub.dega-akustik.de/DAGA_2016/data/articles/000537.pdf"
+  ],
+  "limits": [
+    "C5 is not C3X",
+    "modes fictitious",
+    "no measured spatial velocities or mechanical mobility",
+    "no new synth engine",
+    "auditory ablation not an acoustic substitute"
+  ]
+}

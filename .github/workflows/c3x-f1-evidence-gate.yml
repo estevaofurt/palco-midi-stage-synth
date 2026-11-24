@@ -1,0 +1,36 @@
+name: STAGE SYNTH C3X F1 - evidence acceptance gate (expect blocked)
+on:
+  push:
+    branches:
+      - research/import-c3x-v10-20261123
+    paths:
+      - 'research/c3x-physical/f1_evidence_gate.py'
+      - 'research/c3x-physical/test_f1_evidence_gate.py'
+      - 'research/c3x-physical/F1_ESTADO_E_GATES_V2.json'
+      - '.github/workflows/c3x-f1-evidence-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence-must-stay-blocked-without-c3x-measurements:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run physical evidence controls (synthetic fixtures only)
+        run: python -m unittest discover -s research/c3x-physical -p 'test_f1_evidence_gate.py' -v
+      - name: Audit current C3X F1 state and EXPECT the physical gate to remain BLOCKED
+        run: |
+          python research/c3x-physical/f1_evidence_gate.py \
+            --project-state research/c3x-physical/F1_ESTADO_E_GATES_V2.json \
+            --expect-blocked \
+            --output /tmp/stage-f1-blocked-metadata.json
+      - name: Exclude audio and personal measurements from CI archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-c3x-f1-gate-metadata-only
+          path: /tmp/stage-f1-blocked-metadata.json
+          retention-days: 14

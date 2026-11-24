@@ -1,0 +1,2073 @@
+{
+  "schema": "stage-c3x-f1-v10-output-stem-ablation-v1",
+  "protocol": "Original V10 reproduced without modifying any source file; no samples as synthesis input",
+  "reference_instrument": "Yamaha C5 recorded by Alexander Holm (not C3X)",
+  "c5_reference_hashes": {
+    "v1": "ca44d2e906110ebc2f67ae4c233e84cbbf0e657fe53e1c6724e4f31409478f11",
+    "v8": "36fb0535a1f21fe1dfc367c361dedda73710144e8c4940b40e97e6e5f8a3c694",
+    "v16": "e2944a0d1b31ea0ff8eb82b20ae2108027f111d96fb680c6e36d01f40582c252"
+  },
+  "sample_rate_hz": 48000,
+  "length_seconds": 1.8,
+  "C3X_F1_status": "PENDENTE",
+  "V10_default_unchanged": true,
+  "cases": {
+    "v1": {
+      "velocity": 25,
+      "impact_s": 0.066601,
+      "detected_onset_s": 0.06,
+      "baseline_max_abs_difference": 2.9391083677943186e-08,
+      "windows": {
+        "attack_35_255ms": [
+          {
+            "partial": 1,
+            "peak_hz": 261.364,
+            "sum_of_magnitudes_vs_mix_db": 0.695,
+            "phase_cancellation_db": -0.695,
+            "component_vs_mix_db": {
+              "direct": -9.153,
+              "body": -2.707,
+              "board": -52.108
+            },
+            "component_relative_phase_deg": {
+              "direct": 33.36,
+              "body": -15.02,
+              "board": -49.23
+            },
+            "direct_vs_body_phase_deg": 48.39,
+            "mix_complex_amplitude": 225.96292676810688,
+            "direct_complex_amplitude": 78.77052955015486,
+            "mix_relative_to_fundamental_db": 0.0,
+            "component_relative_to_its_fundamental_db": {
+              "direct": 0.0,
+              "body": 0.0,
+              "board": 0.0
+            }
+          },
+          {
+            "partial": 2,
+            "peak_hz": 523.864,
+            "sum_of_magnitudes_vs_mix_db": 0.499,
+            "phase_cancellation_db": -0.499,
+            "component_vs_mix_db": {
+              "direct": -23.362,
+              "body": -0.082,
+              "board": -64.313
+            },
+            "component_relative_phase_deg": {
+              "direct": 80.67,
+              "body": -3.88,
+              "board": 2.77
+            },
+            "direct_vs_body_phase_deg": 84.55,
+            "mix_complex_amplitude": 639.2577308685663,
+            "direct_complex_amplitude": 43.40662161882721,
+            "mix_relative_to_fundamental_db": 9.03,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -5.18,
+              "body": 11.65,
+              "board": -3.18
+            }
+          },
+          {
+            "partial": 3,
+            "peak_hz": 787.5,
+            "sum_of_magnitudes_vs_mix_db": 5.609,
+            "phase_cancellation_db": -5.609,
+            "component_vs_mix_db": {
+              "direct": -6.678,
+              "body": 3.175,
+              "board": -52.078
+            },
+            "component_relative_phase_deg": {
+              "direct": 158.42,
+              "body": -6.89,
+              "board": 85.58
+            },
+            "direct_vs_body_phase_deg": 165.31,
+            "mix_complex_amplitude": 39.94129200252795,
+            "direct_complex_amplitude": 18.515775313879644,
+            "mix_relative_to_fundamental_db": -15.05,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -12.58,
+              "body": -9.17,
+              "board": -15.02
+            }
+          },
+          {
+            "partial": 4,
+            "peak_hz": 1051.705,
+            "sum_of_magnitudes_vs_mix_db": 0.019,
+            "phase_cancellation_db": -0.019,
+            "component_vs_mix_db": {
+              "direct": -22.987,
+              "body": -0.625,
+              "board": -62.818
+            },
+            "component_relative_phase_deg": {
+              "direct": 12.89,
+              "body": -0.94,
+              "board": -54.0
+            },
+            "direct_vs_body_phase_deg": 13.83,
+            "mix_complex_amplitude": 158.34156938930943,
+            "direct_complex_amplitude": 11.22651119273108,
+            "mix_relative_to_fundamental_db": -3.09,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -16.92,
+              "body": -1.01,
+              "board": -13.8
+            }
+          },
+          {
+            "partial": 5,
+            "peak_hz": 1317.045,
+            "sum_of_magnitudes_vs_mix_db": 16.377,
+            "phase_cancellation_db": -16.377,
+            "component_vs_mix_db": {
+              "direct": 11.309,
+              "body": 9.25,
+              "board": -38.384
+            },
+            "component_relative_phase_deg": {
+              "direct": 33.64,
+              "body": -135.56,
+              "board": -30.07
+            },
+            "direct_vs_body_phase_deg": 169.21,
+            "mix_complex_amplitude": 3.155417794240532,
+            "direct_complex_amplitude": 11.601157432207886,
+            "mix_relative_to_fundamental_db": -37.1,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -16.64,
+              "body": -25.14,
+              "board": -23.38
+            }
+          },
+          {
+            "partial": 6,
+            "peak_hz": 1584.659,
+            "sum_of_magnitudes_vs_mix_db": 0.025,
+            "phase_cancellation_db": -0.025,
+            "component_vs_mix_db": {
+              "direct": -7.49,
+              "body": -4.751,
+              "board": -53.814
+            },
+            "component_relative_phase_deg": {
+              "direct": 4.34,
+              "body": -3.0,
+              "board": -55.27
+            },
+            "direct_vs_body_phase_deg": 7.34,
+            "mix_complex_amplitude": 22.437213651350508,
+            "direct_complex_amplitude": 9.472231742036463,
+            "mix_relative_to_fundamental_db": -20.06,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -18.4,
+              "body": -22.1,
+              "board": -21.77
+            }
+          },
+          {
+            "partial": 7,
+            "peak_hz": 1855.114,
+            "sum_of_magnitudes_vs_mix_db": 0.295,
+            "phase_cancellation_db": -0.295,
+            "component_vs_mix_db": {
+              "direct": -19.355,
+              "body": -0.663,
+              "board": -69.862
+            },
+            "component_relative_phase_deg": {
+              "direct": 44.93,
+              "body": -4.71,
+              "board": -11.63
+            },
+            "direct_vs_body_phase_deg": 49.63,
+            "mix_complex_amplitude": 27.87134536827828,
+            "direct_complex_amplitude": 3.0021367622866397,
+            "mix_relative_to_fundamental_db": -18.18,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -28.38,
+              "body": -16.14,
+              "board": -35.93
+            }
+          },
+          {
+            "partial": 8,
+            "peak_hz": 2127.841,
+            "sum_of_magnitudes_vs_mix_db": 5.331,
+            "phase_cancellation_db": -5.331,
+            "component_vs_mix_db": {
+              "direct": 3.044,
+              "body": -7.431,
+              "board": -51.907
+            },
+            "component_relative_phase_deg": {
+              "direct": 2.83,
+              "body": -170.79,
+              "board": -50.34
+            },
+            "direct_vs_body_phase_deg": 173.61,
+            "mix_complex_amplitude": 0.1247393850636505,
+            "direct_complex_amplitude": 0.17708819518144187,
+            "mix_relative_to_fundamental_db": -65.16,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -52.96,
+              "body": -69.88,
+              "board": -64.96
+            }
+          }
+        ],
+        "body_260_700ms": [
+          {
+            "partial": 1,
+            "peak_hz": 261.648,
+            "sum_of_magnitudes_vs_mix_db": 0.772,
+            "phase_cancellation_db": -0.772,
+            "component_vs_mix_db": {
+              "direct": -12.461,
+              "body": -1.38,
+              "board": -55.42
+            },
+            "component_relative_phase_deg": {
+              "direct": 46.76,
+              "body": -11.67,
+              "board": -35.61
+            },
+            "direct_vs_body_phase_deg": 58.43,
+            "mix_complex_amplitude": 455.8009491301163,
+            "direct_complex_amplitude": 108.5749345333256,
+            "mix_relative_to_fundamental_db": 0.0,
+            "component_relative_to_its_fundamental_db": {
+              "direct": 0.0,
+              "body": 0.0,
+              "board": 0.0
+            }
+          },
+          {
+            "partial": 2,
+            "peak_hz": 523.864,
+            "sum_of_magnitudes_vs_mix_db": 0.391,
+            "phase_cancellation_db": -0.391,
+            "component_vs_mix_db": {
+              "direct": -25.299,
+              "body": -0.077,
+              "board": -66.268
+            },
+            "component_relative_phase_deg": {
+              "direct": 79.67,
+              "body": -3.09,
+              "board": 2.14
+            },
+            "direct_vs_body_phase_deg": 82.77,
+            "mix_complex_amplitude": 989.4937495911795,
+            "direct_complex_amplitude": 53.76041644650494,
+            "mix_relative_to_fundamental_db": 6.73,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -6.11,
+              "body": 8.03,
+              "board": -4.12
+            }
+          },
+          {
+            "partial": 3,
+            "peak_hz": 786.648,
+            "sum_of_magnitudes_vs_mix_db": 4.725,
+            "phase_cancellation_db": -4.725,
+            "component_vs_mix_db": {
+              "direct": -8.16,
+              "body": 2.476,
+              "board": -53.598
+            },
+            "component_relative_phase_deg": {
+              "direct": 142.11,
+              "body": -10.49,
+              "board": 69.72
+            },
+            "direct_vs_body_phase_deg": 152.59,
+            "mix_complex_amplitude": 52.25504412366624,
+            "direct_complex_amplitude": 20.422670002906624,
+            "mix_relative_to_fundamental_db": -18.81,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -14.51,
+              "body": -14.95,
+              "board": -16.99
+            }
+          },
+          {
+            "partial": 4,
+            "peak_hz": 1050.852,
+            "sum_of_magnitudes_vs_mix_db": 0.009,
+            "phase_cancellation_db": -0.009,
+            "component_vs_mix_db": {
+              "direct": -19.938,
+              "body": -0.922,
+              "board": -59.819
+            },
+            "component_relative_phase_deg": {
+              "direct": 5.66,
+              "body": -0.58,
+              "board": -60.93
+            },
+            "direct_vs_body_phase_deg": 6.23,
+            "mix_complex_amplitude": 104.0820000637396,
+            "direct_complex_amplitude": 10.483227048635815,
+            "mix_relative_to_fundamental_db": -12.83,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -20.31,
+              "body": -12.37,
+              "board": -17.23
+            }
+          },
+          {
+            "partial": 5,
+            "peak_hz": 1316.477,
+            "sum_of_magnitudes_vs_mix_db": 9.753,
+            "phase_cancellation_db": -9.753,
+            "component_vs_mix_db": {
+              "direct": 5.753,
+              "body": 1.046,
+              "board": -44.02
+            },
+            "component_relative_phase_deg": {
+              "direct": 25.89,
+              "body": -131.65,
+              "board": -37.35
+            },
+            "direct_vs_body_phase_deg": 157.54,
+            "mix_complex_amplitude": 4.466525085360187,
+            "direct_complex_amplitude": 8.661764813456363,
+            "mix_relative_to_fundamental_db": -40.18,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -21.97,
+              "body": -37.75,
+              "board": -28.78
+            }
+          },
+          {
+            "partial": 6,
+            "peak_hz": 1584.375,
+            "sum_of_magnitudes_vs_mix_db": 0.257,
+            "phase_cancellation_db": -0.257,
+            "component_vs_mix_db": {
+              "direct": -7.73,
+              "body": -4.189,
+              "board": -54.152
+            },
+            "component_relative_phase_deg": {
+              "direct": 17.0,
+              "body": -11.09,
+              "board": -42.25
+            },
+            "direct_vs_body_phase_deg": 28.09,
+            "mix_complex_amplitude": 13.343704092790615,
+            "direct_complex_amplitude": 5.479652441291166,
+            "mix_relative_to_fundamental_db": -30.67,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -25.94,
+              "body": -33.48,
+              "board": -29.4
+            }
+          },
+          {
+            "partial": 7,
+            "peak_hz": 1854.83,
+            "sum_of_magnitudes_vs_mix_db": 0.068,
+            "phase_cancellation_db": -0.068,
+            "component_vs_mix_db": {
+              "direct": -21.808,
+              "body": -0.663,
+              "board": -72.437
+            },
+            "component_relative_phase_deg": {
+              "direct": 24.43,
+              "body": -2.07,
+              "board": -31.72
+            },
+            "direct_vs_body_phase_deg": 26.5,
+            "mix_complex_amplitude": 15.645034988661077,
+            "direct_complex_amplitude": 1.2704795835846074,
+            "mix_relative_to_fundamental_db": -29.29,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -38.64,
+              "body": -28.57,
+              "board": -46.31
+            }
+          },
+          {
+            "partial": 8,
+            "peak_hz": 2127.273,
+            "sum_of_magnitudes_vs_mix_db": 7.005,
+            "phase_cancellation_db": -7.005,
+            "component_vs_mix_db": {
+              "direct": 3.597,
+              "body": -2.801,
+              "board": -51.47
+            },
+            "component_relative_phase_deg": {
+              "direct": 23.99,
+              "body": -122.07,
+              "board": -29.34
+            },
+            "direct_vs_body_phase_deg": 146.06,
+            "mix_complex_amplitude": 0.03202538587084062,
+            "direct_complex_amplitude": 0.04845382729929784,
+            "mix_relative_to_fundamental_db": -83.07,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -67.01,
+              "body": -84.49,
+              "board": -79.12
+            }
+          }
+        ],
+        "tail_900_1400ms": [
+          {
+            "partial": 1,
+            "peak_hz": 261.75,
+            "sum_of_magnitudes_vs_mix_db": 0.768,
+            "phase_cancellation_db": -0.768,
+            "component_vs_mix_db": {
+              "direct": -12.326,
+              "body": -1.424,
+              "board": -55.347
+            },
+            "component_relative_phase_deg": {
+              "direct": 46.1,
+              "body": -11.78,
+              "board": -35.52
+            },
+            "direct_vs_body_phase_deg": 57.89,
+            "mix_complex_amplitude": 193.61558142888913,
+            "direct_complex_amplitude": 46.8428397699808,
+            "mix_relative_to_fundamental_db": 0.0,
+            "component_relative_to_its_fundamental_db": {
+              "direct": 0.0,
+              "body": 0.0,
+              "board": 0.0
+            }
+          },
+          {
+            "partial": 2,
+            "peak_hz": 523.75,
+            "sum_of_magnitudes_vs_mix_db": 0.333,
+            "phase_cancellation_db": -0.333,
+            "component_vs_mix_db": {
+              "direct": -25.9,
+              "body": -0.106,
+              "board": -67.121
+            },
+            "component_relative_phase_deg": {
+              "direct": 75.3,
+              "body": -2.84,
+              "board": -1.51
+            },
+            "direct_vs_body_phase_deg": 78.15,
+            "mix_complex_amplitude": 285.3183923131956,
+            "direct_complex_amplitude": 14.465438437941282,
+            "mix_relative_to_fundamental_db": 3.37,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -10.2,
+              "body": 4.69,
+              "board": -8.4
+            }
+          },
+          {
+            "partial": 3,
+            "peak_hz": 786.5,
+            "sum_of_magnitudes_vs_mix_db": 4.581,
+            "phase_cancellation_db": -4.581,
+            "component_vs_mix_db": {
+              "direct": -8.396,
+              "body": 2.36,
+              "board": -54.171
+            },
+            "component_relative_phase_deg": {
+              "direct": 139.49,
+              "body": -10.93,
+              "board": 66.34
+            },
+            "direct_vs_body_phase_deg": 150.43,
+            "mix_complex_amplitude": 8.489908698293709,
+            "direct_complex_amplitude": 3.22908117458744,
+            "mix_relative_to_fundamental_db": -27.16,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -23.23,
+              "body": -23.38,
+              "board": -25.98
+            }
+          },
+          {
+            "partial": 4,
+            "peak_hz": 1051.75,
+            "sum_of_magnitudes_vs_mix_db": 0.005,
+            "phase_cancellation_db": -0.005,
+            "component_vs_mix_db": {
+              "direct": -21.337,
+              "body": -0.781,
+              "board": -61.647
+            },
+            "component_relative_phase_deg": {
+              "direct": -1.45,
+              "body": 0.18,
+              "board": -70.19
+            },
+            "direct_vs_body_phase_deg": -1.64,
+            "mix_complex_amplitude": 5.807677748812301,
+            "direct_complex_amplitude": 0.49791136489758997,
+            "mix_relative_to_fundamental_db": -30.46,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -39.47,
+              "body": -29.82,
+              "board": -36.76
+            }
+          },
+          {
+            "partial": 5,
+            "peak_hz": 1317.25,
+            "sum_of_magnitudes_vs_mix_db": 13.618,
+            "phase_cancellation_db": -13.618,
+            "component_vs_mix_db": {
+              "direct": 8.381,
+              "body": 6.702,
+              "board": -41.417
+            },
+            "component_relative_phase_deg": {
+              "direct": 52.3,
+              "body": -106.46,
+              "board": -13.07
+            },
+            "direct_vs_body_phase_deg": 158.77,
+            "mix_complex_amplitude": 0.47607778813203244,
+            "direct_complex_amplitude": 1.2494101303552878,
+            "mix_relative_to_fundamental_db": -52.19,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -31.48,
+              "body": -44.06,
+              "board": -38.26
+            }
+          },
+          {
+            "partial": 6,
+            "peak_hz": 1584.5,
+            "sum_of_magnitudes_vs_mix_db": 0.082,
+            "phase_cancellation_db": -0.082,
+            "component_vs_mix_db": {
+              "direct": -7.48,
+              "body": -4.66,
+              "board": -53.834
+            },
+            "component_relative_phase_deg": {
+              "direct": 8.96,
+              "body": -6.31,
+              "board": -52.06
+            },
+            "direct_vs_body_phase_deg": 15.27,
+            "mix_complex_amplitude": 4.213761785918691,
+            "direct_complex_amplitude": 1.7810058653617504,
+            "mix_relative_to_fundamental_db": -33.25,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -28.4,
+              "body": -36.49,
+              "board": -31.74
+            }
+          },
+          {
+            "partial": 7,
+            "peak_hz": 1854.75,
+            "sum_of_magnitudes_vs_mix_db": 0.186,
+            "phase_cancellation_db": -0.186,
+            "component_vs_mix_db": {
+              "direct": -19.501,
+              "body": -0.768,
+              "board": -69.988
+            },
+            "component_relative_phase_deg": {
+              "direct": 35.35,
+              "body": -3.83,
+              "board": -22.61
+            },
+            "direct_vs_body_phase_deg": 39.18,
+            "mix_complex_amplitude": 4.599080504105522,
+            "direct_complex_amplitude": 0.4870954901088767,
+            "mix_relative_to_fundamental_db": -32.49,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -39.66,
+              "body": -31.83,
+              "board": -47.13
+            }
+          },
+          {
+            "partial": 8,
+            "peak_hz": 2126.5,
+            "sum_of_magnitudes_vs_mix_db": 5.064,
+            "phase_cancellation_db": -5.064,
+            "component_vs_mix_db": {
+              "direct": 2.657,
+              "body": -7.309,
+              "board": -52.143
+            },
+            "component_relative_phase_deg": {
+              "direct": 11.81,
+              "body": -140.16,
+              "board": -42.43
+            },
+            "direct_vs_body_phase_deg": 151.96,
+            "mix_complex_amplitude": 0.011375730298651696,
+            "direct_complex_amplitude": 0.01544700899901563,
+            "mix_relative_to_fundamental_db": -84.62,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -69.64,
+              "body": -90.5,
+              "board": -81.42
+            }
+          }
+        ]
+      },
+      "stems_rms": {
+        "direct": 0.013825939535792302,
+        "body": 0.11077426740986497,
+        "board": 0.0001231669942812858,
+        "mix": 0.1145614223780119
+      },
+      "not_c3x_measurement": true,
+      "c5_audio_used_as_input": false
+    },
+    "v8": {
+      "velocity": 75,
+      "impact_s": 0.043671,
+      "detected_onset_s": 0.04,
+      "baseline_max_abs_difference": 5.958283333384884e-08,
+      "windows": {
+        "attack_35_255ms": [
+          {
+            "partial": 1,
+            "peak_hz": 261.364,
+            "sum_of_magnitudes_vs_mix_db": 0.678,
+            "phase_cancellation_db": -0.678,
+            "component_vs_mix_db": {
+              "direct": -9.173,
+              "body": -2.723,
+              "board": -52.127
+            },
+            "component_relative_phase_deg": {
+              "direct": 32.95,
+              "body": -14.85,
+              "board": -49.64
+            },
+            "direct_vs_body_phase_deg": 47.79,
+            "mix_complex_amplitude": 504.6947744565319,
+            "direct_complex_amplitude": 175.5497682353082,
+            "mix_relative_to_fundamental_db": 0.0,
+            "component_relative_to_its_fundamental_db": {
+              "direct": 0.0,
+              "body": 0.0,
+              "board": 0.0
+            }
+          },
+          {
+            "partial": 2,
+            "peak_hz": 523.864,
+            "sum_of_magnitudes_vs_mix_db": 0.495,
+            "phase_cancellation_db": -0.495,
+            "component_vs_mix_db": {
+              "direct": -23.457,
+              "body": -0.08,
+              "board": -64.408
+            },
+            "component_relative_phase_deg": {
+              "direct": 80.75,
+              "body": -3.84,
+              "board": 2.85
+            },
+            "direct_vs_body_phase_deg": 84.59,
+            "mix_complex_amplitude": 1738.3755143443295,
+            "direct_complex_amplitude": 116.75385311809796,
+            "mix_relative_to_fundamental_db": 10.74,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -3.54,
+              "body": 13.38,
+              "board": -1.54
+            }
+          },
+          {
+            "partial": 3,
+            "peak_hz": 787.5,
+            "sum_of_magnitudes_vs_mix_db": 5.669,
+            "phase_cancellation_db": -5.669,
+            "component_vs_mix_db": {
+              "direct": -6.542,
+              "body": 3.211,
+              "board": -51.943
+            },
+            "component_relative_phase_deg": {
+              "direct": 157.9,
+              "body": -7.13,
+              "board": 85.07
+            },
+            "direct_vs_body_phase_deg": 165.03,
+            "mix_complex_amplitude": 83.23573897592331,
+            "direct_complex_amplitude": 39.19431256968229,
+            "mix_relative_to_fundamental_db": -15.65,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -13.02,
+              "body": -9.72,
+              "board": -15.47
+            }
+          },
+          {
+            "partial": 4,
+            "peak_hz": 1051.705,
+            "sum_of_magnitudes_vs_mix_db": 0.018,
+            "phase_cancellation_db": -0.018,
+            "component_vs_mix_db": {
+              "direct": -22.925,
+              "body": -0.631,
+              "board": -62.758
+            },
+            "component_relative_phase_deg": {
+              "direct": 12.33,
+              "body": -0.9,
+              "board": -54.57
+            },
+            "direct_vs_body_phase_deg": 13.23,
+            "mix_complex_amplitude": 556.8958627131709,
+            "direct_complex_amplitude": 39.76566566820328,
+            "mix_relative_to_fundamental_db": 0.85,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -12.9,
+              "body": 2.94,
+              "board": -9.78
+            }
+          },
+          {
+            "partial": 5,
+            "peak_hz": 1317.045,
+            "sum_of_magnitudes_vs_mix_db": 16.261,
+            "phase_cancellation_db": -16.261,
+            "component_vs_mix_db": {
+              "direct": 11.208,
+              "body": 9.114,
+              "board": -38.485
+            },
+            "component_relative_phase_deg": {
+              "direct": 33.36,
+              "body": -135.75,
+              "board": -30.34
+            },
+            "direct_vs_body_phase_deg": 169.11,
+            "mix_complex_amplitude": 6.193573687220078,
+            "direct_complex_amplitude": 22.50883453479084,
+            "mix_relative_to_fundamental_db": -38.22,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -17.84,
+              "body": -26.38,
+              "board": -24.58
+            }
+          },
+          {
+            "partial": 6,
+            "peak_hz": 1584.659,
+            "sum_of_magnitudes_vs_mix_db": 0.025,
+            "phase_cancellation_db": -0.025,
+            "component_vs_mix_db": {
+              "direct": -7.488,
+              "body": -4.752,
+              "board": -53.813
+            },
+            "component_relative_phase_deg": {
+              "direct": 4.4,
+              "body": -3.04,
+              "board": -55.21
+            },
+            "direct_vs_body_phase_deg": 7.44,
+            "mix_complex_amplitude": 100.2143907540224,
+            "direct_complex_amplitude": 42.31666315060807,
+            "mix_relative_to_fundamental_db": -14.04,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -12.35,
+              "body": -16.07,
+              "board": -15.73
+            }
+          },
+          {
+            "partial": 7,
+            "peak_hz": 1855.114,
+            "sum_of_magnitudes_vs_mix_db": 0.286,
+            "phase_cancellation_db": -0.286,
+            "component_vs_mix_db": {
+              "direct": -19.434,
+              "body": -0.663,
+              "board": -69.942
+            },
+            "component_relative_phase_deg": {
+              "direct": 44.43,
+              "body": -4.62,
+              "board": -12.13
+            },
+            "direct_vs_body_phase_deg": 49.05,
+            "mix_complex_amplitude": 201.75861630109495,
+            "direct_complex_amplitude": 21.534749617143344,
+            "mix_relative_to_fundamental_db": -7.96,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -18.22,
+              "body": -5.9,
+              "board": -25.77
+            }
+          },
+          {
+            "partial": 8,
+            "peak_hz": 2127.841,
+            "sum_of_magnitudes_vs_mix_db": 5.342,
+            "phase_cancellation_db": -5.342,
+            "component_vs_mix_db": {
+              "direct": 3.051,
+              "body": -7.405,
+              "board": -51.9
+            },
+            "component_relative_phase_deg": {
+              "direct": 2.89,
+              "body": -170.6,
+              "board": -50.27
+            },
+            "direct_vs_body_phase_deg": 173.49,
+            "mix_complex_amplitude": 1.4523284940808754,
+            "direct_complex_amplitude": 2.063463205106707,
+            "mix_relative_to_fundamental_db": -50.82,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -38.6,
+              "body": -55.5,
+              "board": -50.59
+            }
+          }
+        ],
+        "body_260_700ms": [
+          {
+            "partial": 1,
+            "peak_hz": 261.648,
+            "sum_of_magnitudes_vs_mix_db": 0.772,
+            "phase_cancellation_db": -0.772,
+            "component_vs_mix_db": {
+              "direct": -12.461,
+              "body": -1.381,
+              "board": -55.42
+            },
+            "component_relative_phase_deg": {
+              "direct": 46.75,
+              "body": -11.67,
+              "board": -35.61
+            },
+            "direct_vs_body_phase_deg": 58.42,
+            "mix_complex_amplitude": 1015.2959596885238,
+            "direct_complex_amplitude": 241.86005103210513,
+            "mix_relative_to_fundamental_db": 0.0,
+            "component_relative_to_its_fundamental_db": {
+              "direct": 0.0,
+              "body": 0.0,
+              "board": 0.0
+            }
+          },
+          {
+            "partial": 2,
+            "peak_hz": 523.864,
+            "sum_of_magnitudes_vs_mix_db": 0.391,
+            "phase_cancellation_db": -0.391,
+            "component_vs_mix_db": {
+              "direct": -25.302,
+              "body": -0.077,
+              "board": -66.271
+            },
+            "component_relative_phase_deg": {
+              "direct": 79.67,
+              "body": -3.09,
+              "board": 2.14
+            },
+            "direct_vs_body_phase_deg": 82.76,
+            "mix_complex_amplitude": 2659.031952952959,
+            "direct_complex_amplitude": 144.42339389581582,
+            "mix_relative_to_fundamental_db": 8.36,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -4.48,
+              "body": 9.66,
+              "board": -2.49
+            }
+          },
+          {
+            "partial": 3,
+            "peak_hz": 786.648,
+            "sum_of_magnitudes_vs_mix_db": 4.724,
+            "phase_cancellation_db": -4.724,
+            "component_vs_mix_db": {
+              "direct": -8.162,
+              "body": 2.476,
+              "board": -53.601
+            },
+            "component_relative_phase_deg": {
+              "direct": 142.11,
+              "body": -10.48,
+              "board": 69.73
+            },
+            "direct_vs_body_phase_deg": 152.59,
+            "mix_complex_amplitude": 110.34982440988615,
+            "direct_complex_amplitude": 43.11718414836755,
+            "mix_relative_to_fundamental_db": -19.28,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -14.98,
+              "body": -15.42,
+              "board": -17.46
+            }
+          },
+          {
+            "partial": 4,
+            "peak_hz": 1050.852,
+            "sum_of_magnitudes_vs_mix_db": 0.009,
+            "phase_cancellation_db": -0.009,
+            "component_vs_mix_db": {
+              "direct": -19.933,
+              "body": -0.922,
+              "board": -59.815
+            },
+            "component_relative_phase_deg": {
+              "direct": 5.62,
+              "body": -0.57,
+              "board": -60.97
+            },
+            "direct_vs_body_phase_deg": 6.19,
+            "mix_complex_amplitude": 367.2800885938583,
+            "direct_complex_amplitude": 37.01132386486897,
+            "mix_relative_to_fundamental_db": -8.83,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -16.3,
+              "body": -8.37,
+              "board": -13.22
+            }
+          },
+          {
+            "partial": 5,
+            "peak_hz": 1316.477,
+            "sum_of_magnitudes_vs_mix_db": 9.734,
+            "phase_cancellation_db": -9.734,
+            "component_vs_mix_db": {
+              "direct": 5.739,
+              "body": 1.018,
+              "board": -44.036
+            },
+            "component_relative_phase_deg": {
+              "direct": 25.82,
+              "body": -131.7,
+              "board": -37.41
+            },
+            "direct_vs_body_phase_deg": 157.52,
+            "mix_complex_amplitude": 8.626274990186415,
+            "direct_complex_amplitude": 16.702043583916176,
+            "mix_relative_to_fundamental_db": -41.42,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -23.22,
+              "body": -39.02,
+              "board": -30.04
+            }
+          },
+          {
+            "partial": 6,
+            "peak_hz": 1584.375,
+            "sum_of_magnitudes_vs_mix_db": 0.258,
+            "phase_cancellation_db": -0.258,
+            "component_vs_mix_db": {
+              "direct": -7.735,
+              "body": -4.184,
+              "board": -54.158
+            },
+            "component_relative_phase_deg": {
+              "direct": 17.06,
+              "body": -11.12,
+              "board": -42.19
+            },
+            "direct_vs_body_phase_deg": 28.18,
+            "mix_complex_amplitude": 59.143571844473485,
+            "direct_complex_amplitude": 24.275261891319726,
+            "mix_relative_to_fundamental_db": -24.69,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -19.96,
+              "body": -27.49,
+              "board": -23.43
+            }
+          },
+          {
+            "partial": 7,
+            "peak_hz": 1854.83,
+            "sum_of_magnitudes_vs_mix_db": 0.068,
+            "phase_cancellation_db": -0.068,
+            "component_vs_mix_db": {
+              "direct": -21.841,
+              "body": -0.661,
+              "board": -72.471
+            },
+            "component_relative_phase_deg": {
+              "direct": 24.33,
+              "body": -2.05,
+              "board": -31.82
+            },
+            "direct_vs_body_phase_deg": 26.38,
+            "mix_complex_amplitude": 111.25154125266616,
+            "direct_complex_amplitude": 9.000792200925916,
+            "mix_relative_to_fundamental_db": -19.21,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -28.59,
+              "body": -18.49,
+              "board": -36.26
+            }
+          },
+          {
+            "partial": 8,
+            "peak_hz": 2127.273,
+            "sum_of_magnitudes_vs_mix_db": 7.019,
+            "phase_cancellation_db": -7.019,
+            "component_vs_mix_db": {
+              "direct": 3.594,
+              "body": -2.751,
+              "board": -51.474
+            },
+            "component_relative_phase_deg": {
+              "direct": 24.29,
+              "body": -121.53,
+              "board": -29.05
+            },
+            "direct_vs_body_phase_deg": 145.82,
+            "mix_complex_amplitude": 0.36653612075223274,
+            "direct_complex_amplitude": 0.5543988845417019,
+            "mix_relative_to_fundamental_db": -68.85,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -52.8,
+              "body": -70.22,
+              "board": -64.9
+            }
+          }
+        ],
+        "tail_900_1400ms": [
+          {
+            "partial": 1,
+            "peak_hz": 261.75,
+            "sum_of_magnitudes_vs_mix_db": 0.768,
+            "phase_cancellation_db": -0.768,
+            "component_vs_mix_db": {
+              "direct": -12.325,
+              "body": -1.425,
+              "board": -55.347
+            },
+            "component_relative_phase_deg": {
+              "direct": 46.1,
+              "body": -11.79,
+              "board": -35.52
+            },
+            "direct_vs_body_phase_deg": 57.89,
+            "mix_complex_amplitude": 430.5601617969288,
+            "direct_complex_amplitude": 104.18160275622627,
+            "mix_relative_to_fundamental_db": 0.0,
+            "component_relative_to_its_fundamental_db": {
+              "direct": 0.0,
+              "body": 0.0,
+              "board": 0.0
+            }
+          },
+          {
+            "partial": 2,
+            "peak_hz": 523.75,
+            "sum_of_magnitudes_vs_mix_db": 0.332,
+            "phase_cancellation_db": -0.332,
+            "component_vs_mix_db": {
+              "direct": -25.901,
+              "body": -0.106,
+              "board": -67.125
+            },
+            "component_relative_phase_deg": {
+              "direct": 75.26,
+              "body": -2.84,
+              "board": -1.56
+            },
+            "direct_vs_body_phase_deg": 78.1,
+            "mix_complex_amplitude": 764.4128732690601,
+            "direct_complex_amplitude": 38.75055419045387,
+            "mix_relative_to_fundamental_db": 4.99,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -8.59,
+              "body": 6.31,
+              "board": -6.79
+            }
+          },
+          {
+            "partial": 3,
+            "peak_hz": 786.5,
+            "sum_of_magnitudes_vs_mix_db": 4.582,
+            "phase_cancellation_db": -4.582,
+            "component_vs_mix_db": {
+              "direct": -8.393,
+              "body": 2.361,
+              "board": -54.168
+            },
+            "component_relative_phase_deg": {
+              "direct": 139.48,
+              "body": -10.94,
+              "board": 66.3
+            },
+            "direct_vs_body_phase_deg": 150.42,
+            "mix_complex_amplitude": 17.856587579047897,
+            "direct_complex_amplitude": 6.794515556918536,
+            "mix_relative_to_fundamental_db": -27.64,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -23.71,
+              "body": -23.85,
+              "board": -26.46
+            }
+          },
+          {
+            "partial": 4,
+            "peak_hz": 1051.75,
+            "sum_of_magnitudes_vs_mix_db": 0.005,
+            "phase_cancellation_db": -0.005,
+            "component_vs_mix_db": {
+              "direct": -21.429,
+              "body": -0.772,
+              "board": -61.743
+            },
+            "component_relative_phase_deg": {
+              "direct": -1.2,
+              "body": 0.16,
+              "board": -69.92
+            },
+            "direct_vs_body_phase_deg": -1.36,
+            "mix_complex_amplitude": 20.593748666406874,
+            "direct_complex_amplitude": 1.74695655988188,
+            "mix_relative_to_fundamental_db": -26.41,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -35.51,
+              "body": -25.76,
+              "board": -32.81
+            }
+          },
+          {
+            "partial": 5,
+            "peak_hz": 1317.25,
+            "sum_of_magnitudes_vs_mix_db": 13.625,
+            "phase_cancellation_db": -13.625,
+            "component_vs_mix_db": {
+              "direct": 8.399,
+              "body": 6.695,
+              "board": -41.395
+            },
+            "component_relative_phase_deg": {
+              "direct": 51.87,
+              "body": -107.0,
+              "board": -13.51
+            },
+            "direct_vs_body_phase_deg": 158.88,
+            "mix_complex_amplitude": 0.9399623926522196,
+            "direct_complex_amplitude": 2.4721689032508682,
+            "mix_relative_to_fundamental_db": -53.22,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -32.5,
+              "body": -45.1,
+              "board": -39.27
+            }
+          },
+          {
+            "partial": 6,
+            "peak_hz": 1584.5,
+            "sum_of_magnitudes_vs_mix_db": 0.083,
+            "phase_cancellation_db": -0.083,
+            "component_vs_mix_db": {
+              "direct": -7.481,
+              "body": -4.658,
+              "board": -53.834
+            },
+            "component_relative_phase_deg": {
+              "direct": 9.0,
+              "body": -6.33,
+              "board": -52.03
+            },
+            "direct_vs_body_phase_deg": 15.32,
+            "mix_complex_amplitude": 18.999204235600498,
+            "direct_complex_amplitude": 8.029033659545496,
+            "mix_relative_to_fundamental_db": -27.11,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -22.27,
+              "body": -30.34,
+              "board": -25.6
+            }
+          },
+          {
+            "partial": 7,
+            "peak_hz": 1854.75,
+            "sum_of_magnitudes_vs_mix_db": 0.183,
+            "phase_cancellation_db": -0.183,
+            "component_vs_mix_db": {
+              "direct": -19.538,
+              "body": -0.766,
+              "board": -70.023
+            },
+            "component_relative_phase_deg": {
+              "direct": 35.2,
+              "body": -3.8,
+              "board": -22.75
+            },
+            "direct_vs_body_phase_deg": 39.0,
+            "mix_complex_amplitude": 33.1060931889313,
+            "direct_complex_amplitude": 3.4914328874119165,
+            "mix_relative_to_fundamental_db": -22.28,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -29.49,
+              "body": -21.62,
+              "board": -36.96
+            }
+          },
+          {
+            "partial": 8,
+            "peak_hz": 2126.5,
+            "sum_of_magnitudes_vs_mix_db": 5.04,
+            "phase_cancellation_db": -5.04,
+            "component_vs_mix_db": {
+              "direct": 2.64,
+              "body": -7.357,
+              "board": -52.157
+            },
+            "component_relative_phase_deg": {
+              "direct": 11.8,
+              "body": -140.01,
+              "board": -42.43
+            },
+            "direct_vs_body_phase_deg": 151.81,
+            "mix_complex_amplitude": 0.13303214210164777,
+            "direct_complex_amplitude": 0.18029245995763934,
+            "mix_relative_to_fundamental_db": -70.2,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -55.23,
+              "body": -76.13,
+              "board": -67.01
+            }
+          }
+        ]
+      },
+      "stems_rms": {
+        "direct": 0.032842035292720624,
+        "body": 0.29005972402862185,
+        "board": 0.0002929945290308231,
+        "mix": 0.29874511803457265
+      },
+      "not_c3x_measurement": true,
+      "c5_audio_used_as_input": false
+    },
+    "v16": {
+      "velocity": 115,
+      "impact_s": 0.036735,
+      "detected_onset_s": 0.03,
+      "baseline_max_abs_difference": 1.1896776008768484e-07,
+      "windows": {
+        "attack_35_255ms": [
+          {
+            "partial": 1,
+            "peak_hz": 261.364,
+            "sum_of_magnitudes_vs_mix_db": 0.693,
+            "phase_cancellation_db": -0.693,
+            "component_vs_mix_db": {
+              "direct": -9.155,
+              "body": -2.71,
+              "board": -52.109
+            },
+            "component_relative_phase_deg": {
+              "direct": 33.3,
+              "body": -15.0,
+              "board": -49.29
+            },
+            "direct_vs_body_phase_deg": 48.3,
+            "mix_complex_amplitude": 801.4569947502592,
+            "direct_complex_amplitude": 279.35292296796774,
+            "mix_relative_to_fundamental_db": 0.0,
+            "component_relative_to_its_fundamental_db": {
+              "direct": 0.0,
+              "body": 0.0,
+              "board": 0.0
+            }
+          },
+          {
+            "partial": 2,
+            "peak_hz": 523.864,
+            "sum_of_magnitudes_vs_mix_db": 0.5,
+            "phase_cancellation_db": -0.5,
+            "component_vs_mix_db": {
+              "direct": -23.361,
+              "body": -0.081,
+              "board": -64.312
+            },
+            "component_relative_phase_deg": {
+              "direct": 80.76,
+              "body": -3.88,
+              "board": 2.85
+            },
+            "direct_vs_body_phase_deg": 84.64,
+            "mix_complex_amplitude": 2920.6440327224373,
+            "direct_complex_amplitude": 198.3500608157284,
+            "mix_relative_to_fundamental_db": 11.23,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -2.98,
+              "body": 13.86,
+              "board": -0.97
+            }
+          },
+          {
+            "partial": 3,
+            "peak_hz": 787.5,
+            "sum_of_magnitudes_vs_mix_db": 5.631,
+            "phase_cancellation_db": -5.631,
+            "component_vs_mix_db": {
+              "direct": -6.631,
+              "body": 3.189,
+              "board": -52.032
+            },
+            "component_relative_phase_deg": {
+              "direct": 158.36,
+              "body": -6.94,
+              "board": 85.52
+            },
+            "direct_vs_body_phase_deg": 165.3,
+            "mix_complex_amplitude": 123.01684097556544,
+            "direct_complex_amplitude": 57.33572313415757,
+            "mix_relative_to_fundamental_db": -16.28,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -13.76,
+              "body": -10.38,
+              "board": -16.2
+            }
+          },
+          {
+            "partial": 4,
+            "peak_hz": 1051.705,
+            "sum_of_magnitudes_vs_mix_db": 0.02,
+            "phase_cancellation_db": -0.02,
+            "component_vs_mix_db": {
+              "direct": -23.02,
+              "body": -0.622,
+              "board": -62.852
+            },
+            "component_relative_phase_deg": {
+              "direct": 13.06,
+              "body": -0.95,
+              "board": -53.83
+            },
+            "direct_vs_body_phase_deg": 14.01,
+            "mix_complex_amplitude": 1050.9206373639481,
+            "direct_complex_amplitude": 74.22582289453514,
+            "mix_relative_to_fundamental_db": 2.35,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -11.51,
+              "body": 4.44,
+              "board": -8.39
+            }
+          },
+          {
+            "partial": 5,
+            "peak_hz": 1317.045,
+            "sum_of_magnitudes_vs_mix_db": 16.327,
+            "phase_cancellation_db": -16.327,
+            "component_vs_mix_db": {
+              "direct": 11.267,
+              "body": 9.189,
+              "board": -38.426
+            },
+            "component_relative_phase_deg": {
+              "direct": 33.41,
+              "body": -135.79,
+              "board": -30.3
+            },
+            "direct_vs_body_phase_deg": 169.2,
+            "mix_complex_amplitude": 6.669028333226817,
+            "direct_complex_amplitude": 24.40113388920121,
+            "mix_relative_to_fundamental_db": -41.6,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -21.18,
+              "body": -29.7,
+              "board": -27.92
+            }
+          },
+          {
+            "partial": 6,
+            "peak_hz": 1584.659,
+            "sum_of_magnitudes_vs_mix_db": 0.025,
+            "phase_cancellation_db": -0.025,
+            "component_vs_mix_db": {
+              "direct": -7.488,
+              "body": -4.753,
+              "board": -53.812
+            },
+            "component_relative_phase_deg": {
+              "direct": 4.34,
+              "body": -3.0,
+              "board": -55.28
+            },
+            "direct_vs_body_phase_deg": 7.34,
+            "mix_complex_amplitude": 175.40184946729957,
+            "direct_complex_amplitude": 74.06807577199783,
+            "mix_relative_to_fundamental_db": -13.2,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -11.53,
+              "body": -15.24,
+              "board": -14.9
+            }
+          },
+          {
+            "partial": 7,
+            "peak_hz": 1855.114,
+            "sum_of_magnitudes_vs_mix_db": 0.296,
+            "phase_cancellation_db": -0.296,
+            "component_vs_mix_db": {
+              "direct": -19.368,
+              "body": -0.66,
+              "board": -69.875
+            },
+            "component_relative_phase_deg": {
+              "direct": 45.07,
+              "body": -4.71,
+              "board": -11.49
+            },
+            "direct_vs_body_phase_deg": 49.77,
+            "mix_complex_amplitude": 462.20375317223846,
+            "direct_complex_amplitude": 49.709344853585335,
+            "mix_relative_to_fundamental_db": -4.78,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -14.99,
+              "body": -2.73,
+              "board": -22.55
+            }
+          },
+          {
+            "partial": 8,
+            "peak_hz": 2127.841,
+            "sum_of_magnitudes_vs_mix_db": 5.326,
+            "phase_cancellation_db": -5.326,
+            "component_vs_mix_db": {
+              "direct": 3.041,
+              "body": -7.442,
+              "board": -51.909
+            },
+            "component_relative_phase_deg": {
+              "direct": 2.8,
+              "body": -170.88,
+              "board": -50.37
+            },
+            "direct_vs_body_phase_deg": 173.68,
+            "mix_complex_amplitude": 4.30307159378036,
+            "direct_complex_amplitude": 6.107103694138742,
+            "mix_relative_to_fundamental_db": -45.4,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -33.2,
+              "body": -50.13,
+              "board": -45.2
+            }
+          }
+        ],
+        "body_260_700ms": [
+          {
+            "partial": 1,
+            "peak_hz": 261.648,
+            "sum_of_magnitudes_vs_mix_db": 0.772,
+            "phase_cancellation_db": -0.772,
+            "component_vs_mix_db": {
+              "direct": -12.461,
+              "body": -1.38,
+              "board": -55.42
+            },
+            "component_relative_phase_deg": {
+              "direct": 46.76,
+              "body": -11.67,
+              "board": -35.61
+            },
+            "direct_vs_body_phase_deg": 58.43,
+            "mix_complex_amplitude": 1616.4247314622542,
+            "direct_complex_amplitude": 385.04335727600875,
+            "mix_relative_to_fundamental_db": 0.0,
+            "component_relative_to_its_fundamental_db": {
+              "direct": 0.0,
+              "body": 0.0,
+              "board": 0.0
+            }
+          },
+          {
+            "partial": 2,
+            "peak_hz": 523.864,
+            "sum_of_magnitudes_vs_mix_db": 0.391,
+            "phase_cancellation_db": -0.391,
+            "component_vs_mix_db": {
+              "direct": -25.299,
+              "body": -0.077,
+              "board": -66.268
+            },
+            "component_relative_phase_deg": {
+              "direct": 79.67,
+              "body": -3.09,
+              "board": 2.14
+            },
+            "direct_vs_body_phase_deg": 82.77,
+            "mix_complex_amplitude": 4521.505969081588,
+            "direct_complex_amplitude": 245.6576845997522,
+            "mix_relative_to_fundamental_db": 8.93,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -3.91,
+              "body": 10.23,
+              "board": -1.92
+            }
+          },
+          {
+            "partial": 3,
+            "peak_hz": 786.648,
+            "sum_of_magnitudes_vs_mix_db": 4.725,
+            "phase_cancellation_db": -4.725,
+            "component_vs_mix_db": {
+              "direct": -8.161,
+              "body": 2.476,
+              "board": -53.599
+            },
+            "component_relative_phase_deg": {
+              "direct": 142.11,
+              "body": -10.48,
+              "board": 69.72
+            },
+            "direct_vs_body_phase_deg": 152.59,
+            "mix_complex_amplitude": 161.74105067560865,
+            "direct_complex_amplitude": 63.20987981907497,
+            "mix_relative_to_fundamental_db": -19.99,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -15.69,
+              "body": -16.13,
+              "board": -18.17
+            }
+          },
+          {
+            "partial": 4,
+            "peak_hz": 1050.852,
+            "sum_of_magnitudes_vs_mix_db": 0.009,
+            "phase_cancellation_db": -0.009,
+            "component_vs_mix_db": {
+              "direct": -19.939,
+              "body": -0.922,
+              "board": -59.82
+            },
+            "component_relative_phase_deg": {
+              "direct": 5.66,
+              "body": -0.58,
+              "board": -60.93
+            },
+            "direct_vs_body_phase_deg": 6.24,
+            "mix_complex_amplitude": 688.4618215221639,
+            "direct_complex_amplitude": 69.33136082860334,
+            "mix_relative_to_fundamental_db": -7.41,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -14.89,
+              "body": -6.95,
+              "board": -11.81
+            }
+          },
+          {
+            "partial": 5,
+            "peak_hz": 1316.477,
+            "sum_of_magnitudes_vs_mix_db": 9.753,
+            "phase_cancellation_db": -9.753,
+            "component_vs_mix_db": {
+              "direct": 5.753,
+              "body": 1.045,
+              "board": -44.021
+            },
+            "component_relative_phase_deg": {
+              "direct": 25.87,
+              "body": -131.68,
+              "board": -37.36
+            },
+            "direct_vs_body_phase_deg": 157.55,
+            "mix_complex_amplitude": 9.39034481382671,
+            "direct_complex_amplitude": 18.211239210055986,
+            "mix_relative_to_fundamental_db": -44.72,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -26.51,
+              "body": -42.29,
+              "board": -33.32
+            }
+          },
+          {
+            "partial": 6,
+            "peak_hz": 1584.375,
+            "sum_of_magnitudes_vs_mix_db": 0.257,
+            "phase_cancellation_db": -0.257,
+            "component_vs_mix_db": {
+              "direct": -7.73,
+              "body": -4.189,
+              "board": -54.151
+            },
+            "component_relative_phase_deg": {
+              "direct": 17.01,
+              "body": -11.09,
+              "board": -42.24
+            },
+            "direct_vs_body_phase_deg": 28.1,
+            "mix_complex_amplitude": 104.26286017234519,
+            "direct_complex_amplitude": 42.82019180196372,
+            "mix_relative_to_fundamental_db": -23.81,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -19.08,
+              "body": -26.62,
+              "board": -22.54
+            }
+          },
+          {
+            "partial": 7,
+            "peak_hz": 1854.83,
+            "sum_of_magnitudes_vs_mix_db": 0.069,
+            "phase_cancellation_db": -0.069,
+            "component_vs_mix_db": {
+              "direct": -21.812,
+              "body": -0.663,
+              "board": -72.44
+            },
+            "component_relative_phase_deg": {
+              "direct": 24.46,
+              "body": -2.07,
+              "board": -31.68
+            },
+            "direct_vs_body_phase_deg": 26.53,
+            "mix_complex_amplitude": 259.0722507920576,
+            "direct_complex_amplitude": 21.030199528389126,
+            "mix_relative_to_fundamental_db": -15.9,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -25.25,
+              "body": -15.18,
+              "board": -32.92
+            }
+          },
+          {
+            "partial": 8,
+            "peak_hz": 2127.273,
+            "sum_of_magnitudes_vs_mix_db": 7.011,
+            "phase_cancellation_db": -7.011,
+            "component_vs_mix_db": {
+              "direct": 3.603,
+              "body": -2.797,
+              "board": -51.463
+            },
+            "component_relative_phase_deg": {
+              "direct": 23.95,
+              "body": -122.2,
+              "board": -29.38
+            },
+            "direct_vs_body_phase_deg": 146.14,
+            "mix_complex_amplitude": 1.106420296297318,
+            "direct_complex_amplitude": 1.675290904686994,
+            "mix_relative_to_fundamental_db": -63.29,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -47.23,
+              "body": -64.71,
+              "board": -59.33
+            }
+          }
+        ],
+        "tail_900_1400ms": [
+          {
+            "partial": 1,
+            "peak_hz": 261.75,
+            "sum_of_magnitudes_vs_mix_db": 0.768,
+            "phase_cancellation_db": -0.768,
+            "component_vs_mix_db": {
+              "direct": -12.326,
+              "body": -1.424,
+              "board": -55.347
+            },
+            "component_relative_phase_deg": {
+              "direct": 46.1,
+              "body": -11.78,
+              "board": -35.52
+            },
+            "direct_vs_body_phase_deg": 57.89,
+            "mix_complex_amplitude": 686.5784666298619,
+            "direct_complex_amplitude": 166.10933830391681,
+            "mix_relative_to_fundamental_db": 0.0,
+            "component_relative_to_its_fundamental_db": {
+              "direct": 0.0,
+              "body": 0.0,
+              "board": 0.0
+            }
+          },
+          {
+            "partial": 2,
+            "peak_hz": 523.75,
+            "sum_of_magnitudes_vs_mix_db": 0.333,
+            "phase_cancellation_db": -0.333,
+            "component_vs_mix_db": {
+              "direct": -25.901,
+              "body": -0.106,
+              "board": -67.122
+            },
+            "component_relative_phase_deg": {
+              "direct": 75.3,
+              "body": -2.84,
+              "board": -1.51
+            },
+            "direct_vs_body_phase_deg": 78.15,
+            "mix_complex_amplitude": 1303.4601205555773,
+            "direct_complex_amplitude": 66.07976300256854,
+            "mix_relative_to_fundamental_db": 5.57,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -8.0,
+              "body": 6.89,
+              "board": -6.2
+            }
+          },
+          {
+            "partial": 3,
+            "peak_hz": 786.5,
+            "sum_of_magnitudes_vs_mix_db": 4.581,
+            "phase_cancellation_db": -4.581,
+            "component_vs_mix_db": {
+              "direct": -8.395,
+              "body": 2.36,
+              "board": -54.17
+            },
+            "component_relative_phase_deg": {
+              "direct": 139.49,
+              "body": -10.93,
+              "board": 66.33
+            },
+            "direct_vs_body_phase_deg": 150.42,
+            "mix_complex_amplitude": 26.27227186182277,
+            "direct_complex_amplitude": 9.993720809374125,
+            "mix_relative_to_fundamental_db": -28.34,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -24.41,
+              "body": -24.56,
+              "board": -27.16
+            }
+          },
+          {
+            "partial": 4,
+            "peak_hz": 1051.75,
+            "sum_of_magnitudes_vs_mix_db": 0.005,
+            "phase_cancellation_db": -0.005,
+            "component_vs_mix_db": {
+              "direct": -21.326,
+              "body": -0.782,
+              "board": -61.636
+            },
+            "component_relative_phase_deg": {
+              "direct": -1.44,
+              "body": 0.18,
+              "board": -70.18
+            },
+            "direct_vs_body_phase_deg": -1.63,
+            "mix_complex_amplitude": 38.379533326748586,
+            "direct_complex_amplitude": 3.294403599477861,
+            "mix_relative_to_fundamental_db": -25.05,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -34.05,
+              "body": -24.41,
+              "board": -31.34
+            }
+          },
+          {
+            "partial": 5,
+            "peak_hz": 1317.25,
+            "sum_of_magnitudes_vs_mix_db": 13.614,
+            "phase_cancellation_db": -13.614,
+            "component_vs_mix_db": {
+              "direct": 8.377,
+              "body": 6.698,
+              "board": -41.418
+            },
+            "component_relative_phase_deg": {
+              "direct": 52.29,
+              "body": -106.47,
+              "board": -13.08
+            },
+            "direct_vs_body_phase_deg": 158.76,
+            "mix_complex_amplitude": 1.0053282322047234,
+            "direct_complex_amplitude": 2.6374280671368644,
+            "mix_relative_to_fundamental_db": -56.69,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -35.99,
+              "body": -48.57,
+              "board": -42.76
+            }
+          },
+          {
+            "partial": 6,
+            "peak_hz": 1584.5,
+            "sum_of_magnitudes_vs_mix_db": 0.082,
+            "phase_cancellation_db": -0.082,
+            "component_vs_mix_db": {
+              "direct": -7.48,
+              "body": -4.66,
+              "board": -53.834
+            },
+            "component_relative_phase_deg": {
+              "direct": 8.96,
+              "body": -6.31,
+              "board": -52.06
+            },
+            "direct_vs_body_phase_deg": 15.27,
+            "mix_complex_amplitude": 32.944245817104374,
+            "direct_complex_amplitude": 13.924707517217893,
+            "mix_relative_to_fundamental_db": -26.38,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -21.53,
+              "body": -29.62,
+              "board": -24.87
+            }
+          },
+          {
+            "partial": 7,
+            "peak_hz": 1854.75,
+            "sum_of_magnitudes_vs_mix_db": 0.186,
+            "phase_cancellation_db": -0.186,
+            "component_vs_mix_db": {
+              "direct": -19.504,
+              "body": -0.768,
+              "board": -69.991
+            },
+            "component_relative_phase_deg": {
+              "direct": 35.37,
+              "body": -3.83,
+              "board": -22.58
+            },
+            "direct_vs_body_phase_deg": 39.21,
+            "mix_complex_amplitude": 76.13528223432068,
+            "direct_complex_amplitude": 8.060548418998339,
+            "mix_relative_to_fundamental_db": -19.1,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -26.28,
+              "body": -18.44,
+              "board": -33.74
+            }
+          },
+          {
+            "partial": 8,
+            "peak_hz": 2126.5,
+            "sum_of_magnitudes_vs_mix_db": 5.068,
+            "phase_cancellation_db": -5.068,
+            "component_vs_mix_db": {
+              "direct": 2.659,
+              "body": -7.301,
+              "board": -52.142
+            },
+            "component_relative_phase_deg": {
+              "direct": 11.82,
+              "body": -140.15,
+              "board": -42.43
+            },
+            "direct_vs_body_phase_deg": 151.96,
+            "mix_complex_amplitude": 0.3910583276560047,
+            "direct_complex_amplitude": 0.5311385469339334,
+            "mix_relative_to_fundamental_db": -64.89,
+            "component_relative_to_its_fundamental_db": {
+              "direct": -49.91,
+              "body": -70.77,
+              "board": -61.69
+            }
+          }
+        ]
+      },
+      "stems_rms": {
+        "direct": 0.05340417386100517,
+        "body": 0.48820870833627067,
+        "board": 0.0004768373375099005,
+        "mix": 0.502384227575543
+      },
+      "not_c3x_measurement": true,
+      "c5_audio_used_as_input": false
+    }
+  },
+  "synthetic_body_IR_transfer": {
+    "1": {
+      "predicted_partial_hz": 261.6256,
+      "channels": [
+        {
+          "route": "left",
+          "combined_body_plus_direct_vs_direct_only_db": 12.614,
+          "body_vs_direct_phase_deg": -53.9,
+          "body_vs_direct_magnitude": 3.6064
+        },
+        {
+          "route": "right",
+          "combined_body_plus_direct_vs_direct_only_db": 12.447,
+          "body_vs_direct_phase_deg": -69.39,
+          "body_vs_direct_magnitude": 3.7333
+        }
+      ]
+    },
+    "2": {
+      "predicted_partial_hz": 523.6655,
+      "channels": [
+        {
+          "route": "left",
+          "combined_body_plus_direct_vs_direct_only_db": 24.587,
+          "body_vs_direct_phase_deg": -80.17,
+          "body_vs_direct_magnitude": 16.7578
+        },
+        {
+          "route": "right",
+          "combined_body_plus_direct_vs_direct_only_db": 24.056,
+          "body_vs_direct_phase_deg": -79.62,
+          "body_vs_direct_magnitude": 15.7406
+        }
+      ]
+    },
+    "3": {
+      "predicted_partial_hz": 786.5331,
+      "channels": [
+        {
+          "route": "left",
+          "combined_body_plus_direct_vs_direct_only_db": 7.922,
+          "body_vs_direct_phase_deg": -150.12,
+          "body_vs_direct_magnitude": 3.3062
+        },
+        {
+          "route": "right",
+          "combined_body_plus_direct_vs_direct_only_db": 8.036,
+          "body_vs_direct_phase_deg": -151.7,
+          "body_vs_direct_magnitude": 3.3578
+        }
+      ]
+    },
+    "4": {
+      "predicted_partial_hz": 1050.6396,
+      "channels": [
+        {
+          "route": "left",
+          "combined_body_plus_direct_vs_direct_only_db": 21.291,
+          "body_vs_direct_phase_deg": -17.61,
+          "body_vs_direct_magnitude": 10.6451
+        },
+        {
+          "route": "right",
+          "combined_body_plus_direct_vs_direct_only_db": 17.93,
+          "body_vs_direct_phase_deg": -18.22,
+          "body_vs_direct_magnitude": 6.9236
+        }
+      ]
+    },
+    "5": {
+      "predicted_partial_hz": 1316.3927,
+      "channels": [
+        {
+          "route": "left",
+          "combined_body_plus_direct_vs_direct_only_db": -5.611,
+          "body_vs_direct_phase_deg": -160.66,
+          "body_vs_direct_magnitude": 0.5373
+        },
+        {
+          "route": "right",
+          "combined_body_plus_direct_vs_direct_only_db": -10.939,
+          "body_vs_direct_phase_deg": -164.75,
+          "body_vs_direct_magnitude": 0.8582
+        }
+      ]
+    },
+    "6": {
+      "predicted_partial_hz": 1584.1961,
+      "channels": [
+        {
+          "route": "left",
+          "combined_body_plus_direct_vs_direct_only_db": 7.28,
+          "body_vs_direct_phase_deg": -18.5,
+          "body_vs_direct_magnitude": 1.3419
+        },
+        {
+          "route": "right",
+          "combined_body_plus_direct_vs_direct_only_db": 8.073,
+          "body_vs_direct_phase_deg": -17.6,
+          "body_vs_direct_magnitude": 1.5617
+        }
+      ]
+    },
+    "7": {
+      "predicted_partial_hz": 1854.4484,
+      "channels": [
+        {
+          "route": "left",
+          "combined_body_plus_direct_vs_direct_only_db": 18.821,
+          "body_vs_direct_phase_deg": -37.41,
+          "body_vs_direct_magnitude": 7.9148
+        },
+        {
+          "route": "right",
+          "combined_body_plus_direct_vs_direct_only_db": 17.188,
+          "body_vs_direct_phase_deg": -38.9,
+          "body_vs_direct_magnitude": 6.4287
+        }
+      ]
+    },
+    "8": {
+      "predicted_partial_hz": 2127.5416,
+      "channels": [
+        {
+          "route": "left",
+          "combined_body_plus_direct_vs_direct_only_db": -0.497,
+          "body_vs_direct_phase_deg": -119.4,
+          "body_vs_direct_magnitude": 0.1265
+        },
+        {
+          "route": "right",
+          "combined_body_plus_direct_vs_direct_only_db": -7.074,
+          "body_vs_direct_phase_deg": -169.26,
+          "body_vs_direct_magnitude": 0.5807
+        }
+      ]
+    }
+  },
+  "c5_C4_numeric_source_license": "CC BY 3.0; Alexander Holm; Salamander Grand Piano v3; Yamaha C5",
+  "c5_C4_original_sha_verified": true,
+  "c5_C4_numeric_only": {
+    "v1": {
+      "f1_fit": 261.56041,
+      "B_fit": 0.000281251,
+      "reference_attack_h4_rel_db": -27.55,
+      "reference_attack_h5_rel_db": -29.2
+    },
+    "v8": {
+      "f1_fit": 261.54104,
+      "B_fit": 0.000288287,
+      "reference_attack_h4_rel_db": -16.36,
+      "reference_attack_h5_rel_db": -14.52
+    },
+    "v16": {
+      "f1_fit": 261.48562,
+      "B_fit": 0.000295142,
+      "reference_attack_h4_rel_db": -14.97,
+      "reference_attack_h5_rel_db": -12.1
+    }
+  },
+  "corrected_h5_attack_reference_minus_v10_db": {
+    "v1": 7.9,
+    "v8": 23.7,
+    "v16": 29.5
+  },
+  "previous_broad_peak_algorithm_issue": {
+    "v1": {
+      "old_frequency_hz": 1291.17673,
+      "old_reported_h5_relative_db": -28.35,
+      "new_physically_anchored_h5_frequency_hz": 1317.045,
+      "new_h5_relative_db": -37.1,
+      "old_minus_new_db": 8.75,
+      "diagnosis": "Previous attack detector chose a ~1291Hz sideband outside the predicted V10 5th harmonic (~1317Hz)."
+    },
+    "v8": {
+      "old_frequency_hz": 1291.19244,
+      "old_reported_h5_relative_db": -30.37,
+      "new_physically_anchored_h5_frequency_hz": 1317.045,
+      "new_h5_relative_db": -38.22,
+      "old_minus_new_db": 7.85,
+      "diagnosis": "Previous attack detector chose a ~1291Hz sideband outside the predicted V10 5th harmonic (~1317Hz)."
+    },
+    "v16": {
+      "old_frequency_hz": 1291.16375,
+      "old_reported_h5_relative_db": -31.5,
+      "new_physically_anchored_h5_frequency_hz": 1317.045,
+      "new_h5_relative_db": -41.6,
+      "old_minus_new_db": 10.1,
+      "diagnosis": "Previous attack detector chose a ~1291Hz sideband outside the predicted V10 5th harmonic (~1317Hz)."
+    }
+  }
+}

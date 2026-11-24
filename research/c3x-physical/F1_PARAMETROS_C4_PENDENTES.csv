@@ -1,0 +1,17 @@
+parametro;unidade;protocolo_de_obtencao;status;valor;incerteza;fonte_exemplar;hash_dado_base;licenca_comercial
+C4_fundamental_individual;Hz;"sensor_acustico; isolar_corda_com_tecnico";desconhecido;;;;;
+C4_stretch;cents;medir_f1_vs_temperamento_na_mesma_afinacao;desconhecido;;;;;
+C4_numero_cordas;un;contagem_fotografica_do_exemplar;desconhecido;;;;;
+C4_comprimento_vibrante;m;medida_agrafe_ate_ponte_por_corda;desconhecido;;;;;
+C4_diametro;m;medida_de_fio_por_tecnico_sem_danificar;desconhecido;;;;;
+C4_massa_linear;kg/m;medida_ou_metodo_independente_da_frequencia_alvo;desconhecido;;;;;
+C4_tensao;N;medir_ou_derivar_de_massa_linear_com_incerteza;desconhecido;;;;;
+C4_inarmonicidade;1;ajuste_de_parciais_reais_por_corda;desconhecido;;;;;
+C4_decaimento_parciais;1/s;curva_temporal_por_parcial_sem_normalizacao;desconhecido;;;;;
+C4_batimentos_unissono;Hz;medir_frequencias_de_cordas_isoladas;desconhecido;;;;;
+C4_posicao_martelo;fracao_L;medida_instrumental_por_tecnico;desconhecido;;;;;
+C4_velocidade_martelo;m/s;sensor_optico_calibrado_ou_camera_alta_velocidade_adequada;desconhecido;;;;;
+C4_forca_contato;N;sensor_dedicado_nao_deduzir_de_PCM;desconhecido;;;;;
+C4_mobilidade_ponte;(m/s)/N;medicao_complexa_sincronizada_por_especialista;desconhecido;;;;;
+C4_ressonancias_tampo;Hz;vibrometria_espectral_e_modos_espaciais;desconhecido;;;;;
+C4_transferencia_radiativa;Pa/(m/s2);sincronizar_microfone_e_acelerometro_sem_confundir_sala;desconhecido;;;;;

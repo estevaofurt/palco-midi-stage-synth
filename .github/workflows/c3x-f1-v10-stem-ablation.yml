@@ -1,0 +1,52 @@
+name: STAGE SYNTH F1 - V10 C4 output-path physical audit
+on:
+  push:
+    branches:
+      - research/import-c3x-v10-20261123
+    paths:
+      - '.github/workflows/c3x-f1-v10-stem-ablation.yml'
+      - 'research/c3x-physical/c4_v10_stem_ablation.py'
+      - 'research/c3x-physical/test_c4_v10_stem_ablation.py'
+      - 'research/c3x-physical/C5_C4_verified_numeric_report.json'
+      - 'research/c3x-physical/v10_c4_profiles.json'
+      - 'research/c3x-python/v10/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic-no-dsp-changes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    env:
+      C3X_V10_ROOT: research/c3x-python/v10
+      OPENBLAS_NUM_THREADS: '1'
+      NUMBA_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test-only scientific dependencies
+        run: python -m pip install --disable-pip-version-check -r research/c3x-python/v10/requirements.txt
+      - name: Generate numeric-only V10 stems, verify original PCM, correct sideband detection
+        run: |
+          python research/c3x-physical/c4_v10_stem_ablation.py \
+            --v10-root research/c3x-python/v10 \
+            --c5-metrics research/c3x-physical/C5_C4_verified_numeric_report.json \
+            --prior-v10-profiles research/c3x-physical/v10_c4_profiles.json \
+            --output "$RUNNER_TEMP/F1_4_V10_STEM_RESULTS.json"
+          cp "$RUNNER_TEMP/F1_4_V10_STEM_RESULTS.json" research/c3x-physical/F1_4_V10_STEM_RESULTS.json
+      - name: Automated regression and analytic IR response tests
+        run: python -m unittest discover -s research/c3x-physical -p test_c4_v10_stem_ablation.py -v
+      - name: Preserve only numerical summary and source code reference
+        uses: actions/upload-artifact@v4
+        with:
+          name: F1-C4-V10-output-stems-numeric-only
+          path: ${{ runner.temp }}/F1_4_V10_STEM_RESULTS.json
+          retention-days: 14
+          if-no-files-found: error
+      - name: Remove generated runtime data
+        if: always()
+        run: |
+          rm -f research/c3x-physical/F1_4_V10_STEM_RESULTS.json
+          rm -f "$RUNNER_TEMP/F1_4_V10_STEM_RESULTS.json"
