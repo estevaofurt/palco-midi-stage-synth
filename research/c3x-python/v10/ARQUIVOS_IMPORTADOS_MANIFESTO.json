@@ -1,0 +1,409 @@
+{
+  "source_archive": "Stage_Synth_C3X_Etapa_10_2.zip",
+  "archive_sha256": "5735b7f862821ca4d19705da858c07a607ddb4baea46b297721dd56be4502915",
+  "note": "Snapshot de pesquisa V10. Áudios WAV não enviados ao GitHub nesta importação; hashes preservados.",
+  "files": [
+    {
+      "path": "PLANO_ETAPA_11.md",
+      "bytes": 1664,
+      "sha256": "f5909d5b15da6fb0c971acd0bcef63502fbd08e11949e4bdef93ad5d8cd8f384",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4534,
+      "sha256": "babc5a363b90beb9297853d74c438b7896156aa2202befb121f214a31f053448",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "RELATORIO_ETAPA_10.md",
+      "bytes": 5146,
+      "sha256": "08e1b4751c355d41f02721b56a4c6dae6bcc688a1ef8e9f53c5d7bf6da2c2a16",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_AB_V10_dupla_vs_simples.wav",
+      "bytes": 447404,
+      "sha256": "532189c871dd9543c33d54e57ff0448593cdeccca86e4c4ea4ff060f305a2e12",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_AB_V9_vs_V10_A4_isolada.wav",
+      "bytes": 374444,
+      "sha256": "41e5d5f2dd8bf6bb893a3036e25c7d738774bdbfe6baa0fcacac48b83c9e234f",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_AB_V9_vs_V10_DRY_15s.wav",
+      "bytes": 2981804,
+      "sha256": "c16201f1cf7fdc1a4c8835aff610a8da3a24054fdb23fd98327c7783e39e522d",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_A4_isolada.wav",
+      "bytes": 165164,
+      "sha256": "f228fe4f6b836fd255d101342e7fcfd62549b2854db0ad7ba517bc424f18a3d4",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_A4_quatro_intensidades.wav",
+      "bytes": 768044,
+      "sha256": "0423153c76e60cfe8df378164bce0b392eb732d56e3954d348d533b6ddc571aa",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_DRY_acao_continua_7s.wav",
+      "bytes": 1468844,
+      "sha256": "5ebeef4b019cee7be76e04aebf596a6ca68590e7befcab4cef9112955f820b96",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_DRY_pedal_dinamico_7s.wav",
+      "bytes": 1468844,
+      "sha256": "dea7c630fec7416d63637f44302caf549c23818c25660f3da7bb33ae82bf2f0c",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_meia_liberacao_dupla_repeticao.wav",
+      "bytes": 201644,
+      "sha256": "ae80fdcb4897b802b2f023fae058e3f1537b810b1fa45426e04da765605c49cb",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_meia_liberacao_repeticao_simples.wav",
+      "bytes": 201644,
+      "sha256": "aaa79a84059dc51137940f80b3a4e610db43ec676d93eb9d6af52484c572dac5",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_nota_A0.wav",
+      "bytes": 307244,
+      "sha256": "b03e160873fb1e2c0fe8533bf0c3dddf7d5ec68e631bf6f03b5f5fa7d7703633",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_nota_A3.wav",
+      "bytes": 163244,
+      "sha256": "f8ac8f362c4a10137f2bc4e2798554e69dfa3bb4689595661b0377d8693f4d37",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_nota_A4.wav",
+      "bytes": 163244,
+      "sha256": "579669f1477f585ff6487d63a658f0bd759b2657e44186020780e8d801b37998",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_nota_A5.wav",
+      "bytes": 124844,
+      "sha256": "3db88d1d35fbee47422dbc327076396a355461bade20462d3991b1ca53d4ee35",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_nota_C3.wav",
+      "bytes": 163244,
+      "sha256": "9a3fc2435db258a5a251d8c8d1fd4ae620a6337ed34efd668528b6443dc35aad",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "audios/C3X_V10_nota_C8.wav",
+      "bytes": 124844,
+      "sha256": "6321eaae65e56a9a339be51f01cd21509914a7d06cf524d85996291dc579312d",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "auditoria_88_v10.py",
+      "bytes": 4466,
+      "sha256": "2e7c600cb0fdff710270ad1a813aa726368a492498924e66a1fed14c4b0aa610",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "gerar_etapa_10.py",
+      "bytes": 6237,
+      "sha256": "36cef256f683a32c4c6e1a11aa1e7a32763e03a19321c310e4d508869d22acb7",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/MANIFESTO_SHA256_V10.json",
+      "bytes": 10400,
+      "sha256": "a2d8aad53a7b2720221d5b1e91d546b3e79ddf2e28712ade3fbbfdd4a4bf7dec",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/SHA256_referencias_v1_v9.json",
+      "bytes": 271,
+      "sha256": "a968305755be6efc8e37890d146880b141e467bcc1daf845add8da7291ea928e",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/auditoria_afinacao_V10_88_notas.csv",
+      "bytes": 7355,
+      "sha256": "e4a2e39b0f21010446d1731c4d3b9daa51d05f59ac7f2a8c479a8530fa9fd9ac",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/comparacao_parciais_v9_v10.csv",
+      "bytes": 891,
+      "sha256": "2a22a4e6ce0d86a9415a4e28bba2f450f4cbe5a4309b3486195bebded5f99396",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/exitcode_regressao.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/log_auditoria_88.txt",
+      "bytes": 783,
+      "sha256": "8b7aa72fc65ca180bce79ca8fd7d425655dbd9d6d95ba5eb49326c5d492af65e",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/log_geracao.txt",
+      "bytes": 632,
+      "sha256": "62cdc902d083c15e9ca55afbf8329eb37beeb65c9a8db9f884f13b4aa80e58da",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/resultados_regressao_completa.txt",
+      "bytes": 12978,
+      "sha256": "b2f986bcd59d697d4502c161bfdc9b6a6da0dfdf8b84787e69aa20455e0ba46e",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/resultados_testes_v10.txt",
+      "bytes": 1985,
+      "sha256": "6d2fe62a14eb4232e288ca62ea18c42cf88b6858948d2d88ea2ba4942d341699",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/resumo_auditoria_88_v10.json",
+      "bytes": 417,
+      "sha256": "3f5336e8d20aa4804cc279a1332af57870dbbd3331a2e2fe18bd276831b66507",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/resumo_v10.json",
+      "bytes": 5606,
+      "sha256": "b466ed77e2840ab917158806ae26c8d54536c6ee83b450521cf8a206aa650f5c",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "medicoes/trajetoria_tecla_A4.csv",
+      "bytes": 3686,
+      "sha256": "b006d70f1edae98244a7eaa65d87f4704c031a5c1bc010191425917ba22658d4",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "referencias/V1_original_10s.wav",
+      "bytes": 1920044,
+      "sha256": "6f919989b11ca6146537c0a58e35405364bf55b38c5819b100d34fcd4ff41c2d",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "referencias/V9_DRY_ACAO_7s.wav",
+      "bytes": 1468844,
+      "sha256": "72a27f867016c82aea06831bd40cfacbc6fedce7d87522c2f46c83f20c5e3b78",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 52,
+      "sha256": "969adbf6d468a5eea9b5eded01e5483a226a500be350466a173c23bfc193f2d7",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/__init__.py",
+      "bytes": 1140,
+      "sha256": "ab4cd03c80651f20b6f9af168bb994860d71d6eaa27ba68da696f5b088eecee1",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/action.py",
+      "bytes": 4358,
+      "sha256": "027bed989a95648ddf9910a039e77c1fa9590e6a9449b0d112f3a822be5a4f6d",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/action_engine.py",
+      "bytes": 14626,
+      "sha256": "da4ce8419df10aca01a9dd7a7a82eaf05564aa094489a376f5e1b0dff915058d",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/continuous_action.py",
+      "bytes": 9110,
+      "sha256": "85eb39805c69dd1927a09fe80581196b24673b215b40aac97b69444346229b1e",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/continuous_engine.py",
+      "bytes": 4638,
+      "sha256": "1ca2a580cc69162af64b6dc1a1cfbb9f1c99572400bea74d18d4d5dd22d89d99",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/coupled.py",
+      "bytes": 7518,
+      "sha256": "3f4a1922d1363e12a16ff9b018900f89345322a50bb275b41cacd44f422abe1d",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/dry.py",
+      "bytes": 12037,
+      "sha256": "c6d5b572853d89ef7d2fcd268af0069e3a53f375084eac83777b1f9b6dadf1ef",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/engine.py",
+      "bytes": 7267,
+      "sha256": "f9e9fb0f1430af8197cb44fc3aa249157fbffa9a96c709ada6d3290007b05882",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/feedback.py",
+      "bytes": 11026,
+      "sha256": "48720e78ab9ff2c2219611b4b25031b4e901b59f7d857bed062c47e2c67533e2",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/harmonic_dry.py",
+      "bytes": 5781,
+      "sha256": "b7661798252c4fb8189ae874c844bd8d42ac0db6737d9f0d0fa6d0212fb5ef98",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/natural.py",
+      "bytes": 4355,
+      "sha256": "582576bc79673d09930df1d8fd7d1da246f85a891718b4c1438dfad130f51ee8",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/optimized.py",
+      "bytes": 16825,
+      "sha256": "52901f9fee3a9a811f4656ad992b45b450f168c620465ade79637a8a6c73405e",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/optimized_coeff.py",
+      "bytes": 18024,
+      "sha256": "08ad6c12ebe8791fcce52c0368145722c5c735d593e15618ed59c8ee2c343d3a",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/parameters.py",
+      "bytes": 3687,
+      "sha256": "27ee89004ea7231a47cee3ac5e3fca85c6d87d42f85bdd543cf11d11cf8cacf9",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/pedals.py",
+      "bytes": 16593,
+      "sha256": "7cf5253890b99676b712e01702636c42b9ce1320f0232c5c5c7aa76e471b9905",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/polarization.py",
+      "bytes": 11706,
+      "sha256": "edec8d35822e03d70a2b49916ede27c302d866089496be620d7b92850ac92ddd",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/shared_mechanics.py",
+      "bytes": 13731,
+      "sha256": "a88c3aca9cb30efd82865c33bb064266dcbffb17cf617b52cfde36edb996c451",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "stage_synth_c3x/tuning.py",
+      "bytes": 3616,
+      "sha256": "3f0c349f0b0508badd60e1a1197da92a5f1ae757347e9cf10e0f751078f6b784",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_action_v9.py",
+      "bytes": 5173,
+      "sha256": "e99213eb570a58ffd0574e9569e779358d0d1c44a084acb7eff23f3a6ede15b3",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_continuous_v10.py",
+      "bytes": 5541,
+      "sha256": "1704856f4c37f25cbfaa83937658bf9cf5107d94854cab8ad0125918445a4358",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_coupling.py",
+      "bytes": 2469,
+      "sha256": "8b760b070078a3b69987d9e4aeee476c17707db0134679fc44abe5c04e772dd4",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_dry.py",
+      "bytes": 3277,
+      "sha256": "dea09fc05d27f78c28c00da4565307a3f29a0695d4bc4def8ea2266bc9da2d95",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_engine.py",
+      "bytes": 1246,
+      "sha256": "478f7b9a0f9dab0f4af8376ebeb03d740ec3ad13d1347abfd49f01a598ed3e96",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_feedback.py",
+      "bytes": 2999,
+      "sha256": "e5b588e80f05324622205251a3241c2763c83984f55852654bcd8038da23bd02",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_harmonic_dry.py",
+      "bytes": 3332,
+      "sha256": "2f8b9b3e8d60c172333fbf4b1852920a6002ec33bf2ae919cf6fedd3d06738f2",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_natural.py",
+      "bytes": 2113,
+      "sha256": "748c2d22bc28fcc5ce294b90e0e12b72a8ee22cc965fd74edb4111715699cc1d",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_optimized_v8.py",
+      "bytes": 4508,
+      "sha256": "c51cecd3b378ac14110d8c1c5e53b6f828229760db9c1701ed3efc9338bb2bec",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_pedals_v7.py",
+      "bytes": 4068,
+      "sha256": "6dbd6648ad6819d6ff9dda87c07fb3882625b9eceb1fd219df391508a87287cb",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_polarization.py",
+      "bytes": 3772,
+      "sha256": "0786b7f8af976344e94b8d1b2b1932f0b0cc12629f4092290b87af2e7856b023",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_shared_mechanics.py",
+      "bytes": 4276,
+      "sha256": "d0957660e8d1dd88dc1fb6f35279f38fb2efe961209f3d09192c1f11b404d048",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_tuning.py",
+      "bytes": 1687,
+      "sha256": "2dc47d8c85875e6aebb1e34f8048a07447833d0410282f947cbd95f822ebee80",
+      "source": "V10 ZIP"
+    },
+    {
+      "path": "testes/test_validation.py",
+      "bytes": 1107,
+      "sha256": "65546600f0362694b37d1ba477b4e2baf4ea599efe985c1e9c303add30146813",
+      "source": "V10 ZIP"
+    }
+  ]
+}
