@@ -9,3 +9,14 @@ Arquivos novos f10c-d-local.mjs, f10c-d-local.test.mjs, f10c-d-local-demo.mjs e 
 ## Execução
 
 CI 45487489322: smoke in_progress / sem conclusão, 0 artefatos na consulta. [Run](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45487489322). Main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536; alterações restritas a pesquisa, dados, CI e documentação.
+
+## Resultados finais F10c
+
+CI [45487489322](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45487489322), 22+15 testes aprovados, 6/6 renders concluídos, sem clipping, passividade preservada. Dados em audio/analysis_f10c_d_ci.json com IDs e resultados de logs, sem reanálise auditiva local. Comparação G4 de ganho fixo com F10a, janela .025–.525s:
+| Touch | D3 potência pico 367.68 Hz relativa | D4 potência pico relativa | D3 potência fora de bandas relativa | D4 potência fora de bandas relativa | D3 RMS2 relativo | D4 RMS2 relativo |
+|---|---:|---:|---:|---:|---:|---:|
+|24|.27893|.10155|.42991|.29169|.94385|.90964|
+|76|.27634|.09983|.39862|.25526|.95852|.93344|
+|127|.27592|.09956|.40141|.25907|.95821|.93295|
+
+Potência estimada fora de bandas = rmsBand² × wideOffFraction. RMS2 = janela 2–2.5s. D4 reduz ~90% do pico nas três dinâmicas, mas perde 6–9% de RMS2. Na janela .525–1.025s as diferenças D3/D4 são menores (ff .30659/.29743 em potência relativa). Não confundir pico com ruído mecânico ou qualidade auditiva. D4 priorizado para teste inter-notas, D3 fallback. D original não substituído. F10d verifica se a mesma configuração estrutural pode ser aplicada sem depender da nota; não é ainda tampo com estado compartilhado polifônico.
