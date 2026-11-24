@@ -1,0 +1,41 @@
+name: Concert Grand F10d D4 fixed board cross-note pilot
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f10d-d4.yml'
+      - 'research/stage-concert-grand/f10d-d4-board*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10-model-d-register.test.mjs
+      - run: node research/stage-concert-grand/f10d-d4-board.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [55, 60]
+        touch: [24, 76, 127]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10d-d4-board-demo.mjs /tmp/f10d ${{ matrix.midi }} ${{ matrix.touch }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10D-D4-midi${{ matrix.midi }}-touch${{ matrix.touch }}
+          path: /tmp/f10d/
+          if-no-files-found: error
