@@ -27,3 +27,7 @@ C5 médio v8: global -40 14 s, P1 11,5 s, P2 5 s, P3 9 s. A se aproxima de P1, p
 Artefatos: [control](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45413792006/artifacts/14931251101), [horizontal-half](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45413792006/artifacts/14932025780), [both-half](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45413792006/artifacts/14932365714). Retenção finita.
 
 Decisão: manter A e B como alternativas de pesquisa, não substituir controle F9.6. F9.9 comparar 40 s de controle, A, B em toque médio com análise float e PCM no mesmo ganho. Não inferir duração audível ou calibrar pp/ff. F9 aberta, V10, pedal, ressonância simpática, 32–64 vozes e integração pendentes.
+
+## Retorno auditivo do titular — 24/11/2026
+
+Sobre o artefato F98-both-half-20s (CI 45413792006, artefato 14932365714): "F98-both-half-20s nesse exemplo o sustain melhorou". Melhora de sustain percebida pelo titular, não uma aprovação de timbre, preferência comparativa frente a A ou homologação final. Priorizar B como candidato de pesquisa sem substituir os controles. Manter coeficientes constantes vertical 0,2 e horizontal 0,1 s^-1, com demais parâmetros F9.8 intactos; não reduzir perdas novamente sem evidência. Avaliação F9.9 de 40 s e dinâmica pendentes. Discrepância P2 permanece em aberto. Nenhuma alteração em main.

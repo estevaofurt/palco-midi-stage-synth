@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-24",
+  "artifact": "F98-both-half-20s",
+  "artifactId": 14932365714,
+  "sourceRunId": 45413792006,
+  "comment": "F98-both-half-20s nesse exemplo o sustain melhorou",
+  "scope": "perceived sustain improvement only; no comparative preference versus A asserted, no timbre or final acceptance",
+  "decision": "prioritize both-half for subsequent research, keep A and control frozen; verify 40-second and dynamics before final calibration",
+  "f99RunId": 45415259799,
+  "testsPassed": 67,
+  "jobStatus": [
+    {
+      "name": "render (both-half)",
+      "id": 138519617593,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "name": "render (horizontal-half)",
+      "id": 138519617875,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "name": "render (control)",
+      "id": 138519617883,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "name": "smoke",
+      "id": 138519617953,
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}
