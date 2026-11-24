@@ -1,0 +1,46 @@
+name: Concert Grand F9.6 long aftersound
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f96.yml'
+      - 'research/stage-concert-grand/f9-aftersound*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-aftersound.test.mjs
+          node research/stage-concert-grand/f9-long-analysis.test.mjs
+          node research/stage-concert-grand/f9-decay-analysis.test.mjs
+  render:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: [0.25, 0.5]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Render 15 continuous seconds
+        run: node research/stage-concert-grand/f9-aftersound-demo.mjs /tmp/f96 15 1 .5 ${{ matrix.angle }}
+      - name: Analyze without end fade
+        run: |
+          node research/stage-concert-grand/f9-long-analysis-cli.mjs /tmp/f96/C4_v1_board0.5_angle${{ matrix.angle }}_15s.wav /tmp/f96/analysis.json 0 48000 2 .04
+          node research/stage-concert-grand/f9-aftersound-summary.mjs /tmp/f96/analysis.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F96-angle-${{ matrix.angle }}-15s
+          path: /tmp/f96/
+          if-no-files-found: error
