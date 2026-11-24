@@ -11,3 +11,7 @@ Comparar dois conceitos: queda relativa de cada nota a partir da sua primeira ja
 ## Smoke confirmado no CI
 
 CI 45416470232: 38 testes Node (8+5+8+8+9) aprovados. Forças pico suave/médio/forte 5,302597/11,545991/32,469252 N, pressão pico 0,324049/0,718327/2,055826 Pa em 25 ms, ganho de 0,1 deixa headroom nesse ensaio. Resíduo máximo 1,043e-14 J, aumento zero, configurações preservadas. Não comprova clipping no render completo, duração ou dinâmica perceptiva. Renders longos ainda não confirmados nesta leitura.
+
+## Toque suave confirmado (parcial da matriz)
+
+CI 45416470232, [artefato F910-velocity-0.5](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45416470232/artifacts/14931834125): 40 blocos, PCM16/24, zero clipping, pico 0.03871080 FS. Na janela 14–14,5 s RMS float 8.32813732e-5 FS, -41.310 dB em relação à primeira janela. B médio F9.9 na mesma janela -41,507 dB relativo. A forma de decaimento nesse ponto é muito semelhante, não conclusão global. Referência contextual da escuta F9.9 aos 14 s convertida ao ganho F9.10: 1.77299054e-4 FS (0,1/0,3676702344); suave já abaixo desse nível na janela de 10 s. Não inferir audibilidade nem instante de cruzamento exato apenas pelos pontos publicados; comparar matriz completa quando concluída. Ganho F9.10 inferior ao F9.9 para garantir headroom comum. Não confundir com mudança física. Relatório em audio/analysis_f9_10_soft_ci.json. F9 aberta; experimento F9.12 separado iniciado, nenhum áudio novo da ressonância simpática validado.
