@@ -1,0 +1,35 @@
+{
+  "schema": "stage_synth_c3x_f1_2",
+  "date": "2026-11-23",
+  "fase": "F1",
+  "status": "PENDENTE",
+  "reference_target": "Yamaha C3X convencional; nao C3X espressivo",
+  "physical_c4_measured_count": 0,
+  "physical_c4_audio_acquired_count": 0,
+  "commercial_licenses_confirmed_for_f1_C4_audio": 0,
+  "source_count": 8,
+  "planned_capture_count": 24,
+  "pending_parameter_count": 16,
+  "gate_conditions": [
+    "Identificar exemplar C3X especifico e estado do instrumento",
+    "Obter gravacoes C4 reais nao processadas com metadados e direito comercial",
+    "Obter medidas geometricas e f1/B/perdas com incerteza, distinguir inferencias",
+    "Registrar viabilidade de sensores martelo/ponte/tampo para as fases posteriores",
+    "Revisar fidelidade de hashes, licencas, dados e aceite do titular"
+  ],
+  "known_source_urls": [
+    "https://br.yamaha.com/pt/musical-instruments/pianos/products/grand-pianos/cx-series/",
+    "https://europe.yamaha.com/en/musical-instruments/pianos/products/grand-pianos/cx-series/",
+    "https://usa.yamaha.com/musical-instruments/pianos/products/grand-pianos/cx-series/specs.html",
+    "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0292515",
+    "https://osf.io/tbzdc/",
+    "https://reference-global.com/article/10.5334/tismir.160?tab=article",
+    "https://www.audiolabs-erlangen.de/resources/MIR/PCD/"
+  ],
+  "limitations": [
+    "OSF Kemp file list unavailable; cannot assert original G2 WAV",
+    "PCD P without algorithmic reverb still processed; not raw C4",
+    "Yamaha official depths inconsistent: BR and EU 186cm, US 185cm",
+    "Official claims about hammer felt and back beams are not numeric material measurements"
+  ]
+}
