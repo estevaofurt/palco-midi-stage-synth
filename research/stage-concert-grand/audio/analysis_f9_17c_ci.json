@@ -1,0 +1,267 @@
+{
+  "runId": 45462131637,
+  "sourceCommit": "607e81d3de111d90513035fd72ebd646d3358928",
+  "testsPassed": 6,
+  "bundleArtifactId": 14953521018,
+  "smoke": [
+    {
+      "velocity": 0.06,
+      "pressureRms": 0.008045596461588493,
+      "attack": {
+        "firstForceS": 0.0033333333333333496,
+        "lastForceEndS": 0.008479166666666623,
+        "contactSpanS": 0.005145833333333273,
+        "activeContactS": 0.005145833333333333,
+        "activeSteps": 494,
+        "peakForceN": 0.47704585536130256,
+        "peakCompressionM": 0.00008292052063552253,
+        "impulseNs": 0.001147439321202564,
+        "reboundMps": -0.054743932120256286,
+        "hammerLossJ": 0.0000011903684660156903
+      },
+      "peakPa": 0.023301424193341587,
+      "maxBalance": 1.7966077031032063e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 0.09,
+      "pressureRms": 0.015201196420960378,
+      "attack": {
+        "firstForceS": 0.00221875,
+        "lastForceEndS": 0.006843749999999945,
+        "contactSpanS": 0.004624999999999945,
+        "activeContactS": 0.004625,
+        "activeSteps": 444,
+        "peakForceN": 0.7781900212627124,
+        "peakCompressionM": 0.00010178403301466958,
+        "impulseNs": 0.0016900939955090822,
+        "reboundMps": -0.07900939955090812,
+        "hammerLossJ": 0.000002678228504751942
+      },
+      "peakPa": 0.043276811328635006,
+      "maxBalance": 1.7915221172878915e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 0.12,
+      "pressureRms": 0.02276783822799565,
+      "attack": {
+        "firstForceS": 0.0016666666666666644,
+        "lastForceEndS": 0.005947916666666636,
+        "contactSpanS": 0.004281249999999972,
+        "activeContactS": 0.0042812499999999995,
+        "activeSteps": 411,
+        "peakForceN": 1.0926240277766237,
+        "peakCompressionM": 0.00011733157277507279,
+        "impulseNs": 0.002224625785044579,
+        "reboundMps": -0.10246257850445802,
+        "hammerLossJ": 0.000004614808770809697
+      },
+      "peakPa": 0.06364571801555959,
+      "maxBalance": 2.2108373074966603e-15,
+      "maxIncrease": 0
+    },
+    {
+      "velocity": 0.15,
+      "pressureRms": 0.03053807700590818,
+      "attack": {
+        "firstForceS": 0.001333333333333333,
+        "lastForceEndS": 0.005322916666666653,
+        "contactSpanS": 0.00398958333333332,
+        "activeContactS": 0.003989583333333333,
+        "activeSteps": 383,
+        "peakForceN": 1.4153583851534839,
+        "peakCompressionM": 0.00013075573645528668,
+        "impulseNs": 0.0027555523597763377,
+        "reboundMps": -0.12555523597763393,
+        "hammerLossJ": 0.00000691448006951201
+      },
+      "peakPa": 0.08369952490617077,
+      "maxBalance": 1.9197696817657706e-15,
+      "maxIncrease": 0
+    }
+  ],
+  "verified": [
+    {
+      "velocity": 0.06,
+      "duration": 12,
+      "gain": 0.36767023440034063,
+      "feltFactor": 1.5,
+      "pcm": {
+        "frames": 576239,
+        "rate": 48000,
+        "rms16": 0.002297881011815711,
+        "rms24": 0.0022978767607860023,
+        "peak16": 0.008575701162755212,
+        "peak24": 0.008567215033437613,
+        "maxPairError": 0.000015307031958423098
+      },
+      "attack": {
+        "firstForceS": 0.0033333333333333496,
+        "lastForceEndS": 0.008479166666666623,
+        "contactSpanS": 0.005145833333333273,
+        "activeContactS": 0.005145833333333333,
+        "activeSteps": 494,
+        "peakForceN": 0.47704585536130256,
+        "peakCompressionM": 0.00008292052063552253,
+        "impulseNs": 0.001147439321202564,
+        "reboundMps": -0.054743932120256286,
+        "hammerLossJ": 0.0000011903684660156903
+      },
+      "initialDbFS": -52.77346534015929,
+      "sha256": {
+        "pcm16": "a8d5ff7ebe87c078e94ee436a4f25f4b19a17a33ba794d9c89c3b9c3b1d4eded",
+        "pcm24": "2ffe6a8e2cb0ea6965c74f86de748fa4286ec11ca4ae582e23cbce40373ce6a0"
+      },
+      "file": "C4_v0.06_felt150_12s_24bit.wav",
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        },
+        "60": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        }
+      },
+      "artifactId": 14954800072
+    },
+    {
+      "velocity": 0.09,
+      "duration": 12,
+      "gain": 0.36767023440034063,
+      "feltFactor": 1.5,
+      "pcm": {
+        "frames": 576239,
+        "rate": 48000,
+        "rms16": 0.0043452315076826,
+        "rms24": 0.004345256281731873,
+        "peak16": 0.015900143436994536,
+        "peak24": 0.015911581028888348,
+        "maxPairError": 0.00001531445366256671
+      },
+      "attack": {
+        "firstForceS": 0.00221875,
+        "lastForceEndS": 0.006843749999999945,
+        "contactSpanS": 0.004624999999999945,
+        "activeContactS": 0.004625,
+        "activeSteps": 444,
+        "peakForceN": 0.7781900212627124,
+        "peakCompressionM": 0.00010178403301466958,
+        "impulseNs": 0.0016900939955090822,
+        "reboundMps": -0.07900939955090812,
+        "hammerLossJ": 0.000002678228504751942
+      },
+      "initialDbFS": -47.23969207839315,
+      "sha256": {
+        "pcm16": "713c67e031c58cca34860d0d3627e8af60421f82823e63286339d32a7a87a42b",
+        "pcm24": "45f8e17f3df8028ba2be7adaec98d64e158fe797d0121bb25d6d32f2489907ea"
+      },
+      "file": "C4_v0.09_felt150_12s_24bit.wav",
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        },
+        "60": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        }
+      },
+      "artifactId": 14952803794
+    },
+    {
+      "velocity": 0.12,
+      "duration": 12,
+      "gain": 0.36767023440034063,
+      "feltFactor": 1.5,
+      "pcm": {
+        "frames": 576239,
+        "rate": 48000,
+        "rms16": 0.006518384727759994,
+        "rms24": 0.0065183562053022686,
+        "peak16": 0.023407696768089847,
+        "peak24": 0.02340066711910571,
+        "maxPairError": 0.000015316309088602613
+      },
+      "attack": {
+        "firstForceS": 0.0016666666666666644,
+        "lastForceEndS": 0.005947916666666636,
+        "contactSpanS": 0.004281249999999972,
+        "activeContactS": 0.0042812499999999995,
+        "activeSteps": 411,
+        "peakForceN": 1.0926240277766237,
+        "peakCompressionM": 0.00011733157277507279,
+        "impulseNs": 0.002224625785044579,
+        "reboundMps": -0.10246257850445802,
+        "hammerLossJ": 0.000004614808770809697
+      },
+      "initialDbFS": -43.717238211046606,
+      "sha256": {
+        "pcm16": "a9e4108374517ab43c89a23f78ab3dff47adb0fd73ed9166eb5a4eb3ef5d5763",
+        "pcm24": "b5d0f0952d49555d00dda4008540e6781c96154f2d4a7e9a14b55b4aa34904bb"
+      },
+      "file": "C4_v0.12_felt150_12s_24bit.wav",
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        },
+        "60": {
+          "status": "not-observed",
+          "analyzedThroughS": 11.5
+        }
+      },
+      "artifactId": 14954135609
+    }
+  ],
+  "bundle": [
+    {
+      "velocity": 0.06,
+      "initialDbFS": -52.77346534015929,
+      "relativeDb": -11.60737017094574,
+      "contactSpanS": 0.005145833333333273,
+      "peak": 0.008567215033437613
+    },
+    {
+      "velocity": 0.09,
+      "initialDbFS": -47.23969207839315,
+      "relativeDb": -6.073596909179599,
+      "contactSpanS": 0.004624999999999945,
+      "peak": 0.015911581028888348
+    },
+    {
+      "velocity": 0.12,
+      "initialDbFS": -43.717238211046606,
+      "relativeDb": -2.5511430418330585,
+      "contactSpanS": 0.004281249999999972,
+      "peak": 0.02340066711910571
+    },
+    {
+      "velocity": 0.15,
+      "initialDbFS": -41.16609516921355,
+      "relativeDb": 0,
+      "contactSpanS": 0.00398958333333332,
+      "peak": 0.03077388176606676
+    }
+  ],
+  "decision": "recommend .09 for listening only; no promotion"
+}

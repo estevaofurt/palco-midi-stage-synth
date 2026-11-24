@@ -1,5 +1,10 @@
 name: Concert Grand F9.17c verified quiet attack audit
 on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f917c-attack.yml'
+      - 'research/stage-concert-grand/f9-ultraquiet-attack-*'
   workflow_dispatch:
     inputs:
       render_run_id:
@@ -21,7 +26,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.render_run_id }}
+          run-id: ${{ inputs.render_run_id || '45462131637' }}
           name: F917C-very-quiet-comparison-24bit
           path: /tmp/input
       - run: |

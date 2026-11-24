@@ -21,3 +21,7 @@ F9.17a CI 45460537781 concluída, 12 testes, [seis intensidades comparáveis WAV
 ## Continuidade da dinâmica muito suave
 
 Usuário selecionou .15 m/s como o mais suave, solicitando toque ainda mais suave. Arquivo anexado coincide byte a byte por SHA256 com F917A-quiet-0.15. Registrar em audio/feedback_f9_17a_015.json. F9.17b cinco testes e análise espectral concluídos. F9.17c ensaia .06/.09/.12 m/s sem reduzir ganho ou perdas, mantendo .15 como comparação. Não inferir calibração pp/ppp, nem homologação final; C4 médio e main preservados.
+
+## Renders muito suaves disponíveis
+
+F9.17c concluída tecnicamente, seis testes e três renders, ZIP [quatro intensidades](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45462131637/artifacts/14953521018). .06/.09/.12 abaixo de .15 em 11,607/6,074/2,551 dB RMS inicial; mesmos parâmetros e ganho. Aguardar escuta antes de escolher limite inferior de velocidade e mapear MIDI; não modificar candidato médio. Auditoria espectral complementar iniciada por push. Nenhuma promoção.
