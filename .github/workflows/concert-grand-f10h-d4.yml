@@ -1,0 +1,81 @@
+name: Concert Grand F10h S50 dynamics and listening comparison
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f10h-d4.yml'
+      - 'research/stage-concert-grand/f10h-d4-comparison.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  dynamics:
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [53,55,57,60,64,67,72]
+        touch: [24,76]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10g-d4-s50-demo.mjs /tmp/f10h-s50 ${{ matrix.midi }} ${{ matrix.touch }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10H-S50-midi${{ matrix.midi }}-touch${{ matrix.touch }}
+          path: /tmp/f10h-s50/
+          if-no-files-found: error
+  comparison:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: F10E-D4-midi60-touch24-long
+          path: /tmp/f10h-input/D4-24
+          run-id: 45507422898
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: F10E-D4-midi60-touch127-long
+          path: /tmp/f10h-input/D4-127
+          run-id: 45507422898
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: F10F-D4-loss50-midi60-touch24
+          path: /tmp/f10h-input/S50-24
+          run-id: 45508716694
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: F10F-D4-loss50-midi60-touch127
+          path: /tmp/f10h-input/S50-127
+          run-id: 45508716694
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: F10G-S25-midi60-touch24-long
+          path: /tmp/f10h-input/S25-24
+          run-id: 45509969698
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: F10G-S25-midi60-touch127-long
+          path: /tmp/f10h-input/S25-127
+          run-id: 45509969698
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: node research/stage-concert-grand/f10h-d4-comparison.mjs /tmp/f10h-input /tmp/f10h-comparison
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10H-C4-D4-S50-S25-comparison
+          path: /tmp/f10h-comparison/
+          if-no-files-found: error
