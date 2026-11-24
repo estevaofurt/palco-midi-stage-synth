@@ -1,0 +1,68 @@
+name: Concert Grand F10e D4 sustain and extended pilot
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f10e-d4.yml'
+      - 'research/stage-concert-grand/f10e-d4-*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10d-d4-board.test.mjs
+      - run: node research/stage-concert-grand/f10e-d4-extension.test.mjs
+  extended:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [53, 57, 64, 72]
+        touch: [24, 76, 127]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10e-d4-extension-demo.mjs /tmp/f10e ${{ matrix.midi }} ${{ matrix.touch }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10E-D4-midi${{ matrix.midi }}-touch${{ matrix.touch }}-3s
+          path: /tmp/f10e/
+          if-no-files-found: error
+  sustain:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {midi: 60, touch: 24, model: D}
+          - {midi: 60, touch: 24, model: D4}
+          - {midi: 60, touch: 76, model: D4}
+          - {midi: 60, touch: 127, model: D4}
+          - {midi: 67, touch: 76, model: D}
+          - {midi: 67, touch: 127, model: D}
+          - {midi: 67, touch: 76, model: D4}
+          - {midi: 67, touch: 127, model: D4}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10e-d4-long-demo.mjs /tmp/f10e-long ${{ matrix.midi }} ${{ matrix.touch }} ${{ matrix.model }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10E-${{ matrix.model }}-midi${{ matrix.midi }}-touch${{ matrix.touch }}-long
+          path: /tmp/f10e-long/
+          if-no-files-found: error
