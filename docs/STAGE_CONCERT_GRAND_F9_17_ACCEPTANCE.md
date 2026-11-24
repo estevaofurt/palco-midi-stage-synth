@@ -25,3 +25,7 @@ Usuário selecionou .15 m/s como o mais suave, solicitando toque ainda mais suav
 ## Renders muito suaves disponíveis
 
 F9.17c concluída tecnicamente, seis testes e três renders, ZIP [quatro intensidades](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45462131637/artifacts/14953521018). .06/.09/.12 abaixo de .15 em 11,607/6,074/2,551 dB RMS inicial; mesmos parâmetros e ganho. Aguardar escuta antes de escolher limite inferior de velocidade e mapear MIDI; não modificar candidato médio. Auditoria espectral complementar iniciada por push. Nenhuma promoção.
+
+## Aprovação da progressão muito suave
+
+Usuário gostou da progressão .06→.15 m/s. F9.17c espectral concluída com 11 testes; aceitação relativa da progressão muito suave, C4 médio previamente aceito. F9.18 implementa mapeamento provisório em módulo isolado, sem trocar motor, ganho ou física. Não inferir aceitação de todos os toques intermediários ou forte, calibração pp/ff, nem homologação F9 completa. Main preservada.

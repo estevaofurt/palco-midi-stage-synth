@@ -1,0 +1,563 @@
+{
+  "runId": 45463005082,
+  "artifactId": 14954195873,
+  "testsPassed": 11,
+  "spectrum": {
+    "comparison": {
+      "referenceVelocity": 0.15,
+      "rows": [
+        {
+          "velocity": 0.06,
+          "windows": [
+            {
+              "startS": 0,
+              "endS": 0.05,
+              "relativeRmsDb": -11.771721210985826,
+              "centroidDeltaHz": -11.307406033018225,
+              "upperFraction": 0.00011545842744542936,
+              "upperFractionDelta": -0.0018833125902602984,
+              "upperFractionRatio": 0.05776470962539637
+            },
+            {
+              "startS": 0.05,
+              "endS": 0.15,
+              "relativeRmsDb": -11.50545722740665,
+              "centroidDeltaHz": -10.71171580457792,
+              "upperFraction": 0.00015378310760938985,
+              "upperFractionDelta": -0.0022145981034945982,
+              "upperFractionRatio": 0.0649317377153596
+            },
+            {
+              "startS": 0.15,
+              "endS": 0.5,
+              "relativeRmsDb": -11.618088440011384,
+              "centroidDeltaHz": -6.963256716856279,
+              "upperFraction": 0.00005575039378927419,
+              "upperFractionDelta": -0.0008218934734248373,
+              "upperFractionRatio": 0.0635227976539523
+            }
+          ]
+        },
+        {
+          "velocity": 0.09,
+          "windows": [
+            {
+              "startS": 0,
+              "endS": 0.05,
+              "relativeRmsDb": -6.132732581517323,
+              "centroidDeltaHz": -5.3638338941218535,
+              "upperFraction": 0.0004500156371971671,
+              "upperFractionDelta": -0.0015487553805085606,
+              "upperFractionRatio": 0.22514616892620032
+            },
+            {
+              "startS": 0.05,
+              "endS": 0.15,
+              "relativeRmsDb": -6.029695865088524,
+              "centroidDeltaHz": -5.351009399929694,
+              "upperFraction": 0.0005188020428691919,
+              "upperFractionDelta": -0.0018495791682347964,
+              "upperFractionRatio": 0.21905343634581506
+            },
+            {
+              "startS": 0.15,
+              "endS": 0.5,
+              "relativeRmsDb": -6.080537357711902,
+              "centroidDeltaHz": -2.8762559417123157,
+              "upperFraction": 0.0001792538971679827,
+              "upperFractionDelta": -0.0006983899700461288,
+              "upperFractionRatio": 0.20424445935796826
+            }
+          ]
+        },
+        {
+          "velocity": 0.12,
+          "windows": [
+            {
+              "startS": 0,
+              "endS": 0.05,
+              "relativeRmsDb": -2.6103593806148497,
+              "centroidDeltaHz": -2.320252904408619,
+              "upperFraction": 0.0011771427807402298,
+              "upperFractionDelta": -0.000821628236965498,
+              "upperFractionRatio": 0.5889332846597921
+            },
+            {
+              "startS": 0.05,
+              "endS": 0.15,
+              "relativeRmsDb": -2.532208299040319,
+              "centroidDeltaHz": -2.2699032371861563,
+              "upperFraction": 0.0014261307761154148,
+              "upperFractionDelta": -0.0009422504349885733,
+              "upperFractionRatio": 0.6021542348964353
+            },
+            {
+              "startS": 0.15,
+              "endS": 0.5,
+              "relativeRmsDb": -2.5464405675695545,
+              "centroidDeltaHz": -1.088570242184801,
+              "upperFraction": 0.000509975583028141,
+              "upperFractionDelta": -0.00036766828418597047,
+              "upperFractionRatio": 0.5810734878680882
+            }
+          ]
+        },
+        {
+          "velocity": 0.15,
+          "windows": [
+            {
+              "startS": 0,
+              "endS": 0.05,
+              "relativeRmsDb": 0,
+              "centroidDeltaHz": 0,
+              "upperFraction": 0.001998771017705728,
+              "upperFractionDelta": 0,
+              "upperFractionRatio": 1
+            },
+            {
+              "startS": 0.05,
+              "endS": 0.15,
+              "relativeRmsDb": 0,
+              "centroidDeltaHz": 0,
+              "upperFraction": 0.002368381211103988,
+              "upperFractionDelta": 0,
+              "upperFractionRatio": 1
+            },
+            {
+              "startS": 0.15,
+              "endS": 0.5,
+              "relativeRmsDb": 0,
+              "centroidDeltaHz": 0,
+              "upperFraction": 0.0008776438672141115,
+              "upperFractionDelta": 0,
+              "upperFractionRatio": 1
+            }
+          ]
+        }
+      ]
+    },
+    "scope": "Hann-window normalized spectral energy and centroid up to 12 kHz; stereo power average; fixed file-relative windows, no onset alignment, not perceptual loudness or C5 calibration",
+    "rows": [
+      {
+        "velocity": 0.06,
+        "contactSpanS": 0.005145833333333273,
+        "windows": [
+          {
+            "startS": 0,
+            "endS": 0.05,
+            "rms": 0.0026243531296652406,
+            "centroidHz": 252.26635331707982,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.000010256234212524503,
+                "fraction": 0.9998845415725557
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 1.184137059313694e-9,
+                "fraction": 0.00011544201469824988
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 1.6804440566030222e-13,
+                "fraction": 1.6382719040512787e-8
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 3.080111887738308e-16,
+                "fraction": 3.002813897426915e-11
+              }
+            ],
+            "upperFraction": 0.00011545842744542936
+          },
+          {
+            "startS": 0.05,
+            "endS": 0.15,
+            "rms": 0.0027176331028388127,
+            "centroidHz": 254.32102301399993,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.000006908310518292835,
+                "fraction": 0.9998462168923896
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 1.0624318162519936e-9,
+                "fraction": 0.00015376674649653291
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 1.127445305674107e-13,
+                "fraction": 1.631762093852591e-8
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 3.0050188971973074e-16,
+                "fraction": 4.349191843790118e-11
+              }
+            ],
+            "upperFraction": 0.00015378310760938985
+          },
+          {
+            "startS": 0.15,
+            "endS": 0.5,
+            "rms": 0.002109302097347735,
+            "centroidHz": 258.6366099199467,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.0000040240564637569665,
+                "fraction": 0.9999442496062134
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 2.2434125219149158e-10,
+                "fraction": 0.000055746917842425115
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 1.368572778003915e-14,
+                "fraction": 3.4007884627318347e-9
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 3.024584525850858e-16,
+                "fraction": 7.515838635248239e-11
+              }
+            ],
+            "upperFraction": 0.00005575039378927419
+          }
+        ]
+      },
+      {
+        "velocity": 0.09,
+        "contactSpanS": 0.004624999999999945,
+        "windows": [
+          {
+            "startS": 0,
+            "endS": 0.05,
+            "rms": 0.005023098612515373,
+            "centroidHz": 258.2099254559762,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.0000365583305269865,
+                "fraction": 0.999549984362804
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 1.6457812828228115e-8,
+                "fraction": 0.0004499769633341999
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 1.4140145788577147e-12,
+                "fraction": 3.866090791926844e-8
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 4.738281555085665e-16,
+                "fraction": 1.2955047963134761e-11
+              }
+            ],
+            "upperFraction": 0.0004500156371971671
+          },
+          {
+            "startS": 0.05,
+            "endS": 0.15,
+            "rms": 0.005104801885767395,
+            "centroidHz": 259.68172941864816,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.00002339966378801286,
+                "fraction": 0.99948119795713
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 1.2145128369376459e-8,
+                "fraction": 0.0005187607634852413
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 9.661074030850342e-13,
+                "fraction": 4.126581447231481e-8
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 3.176860450245348e-16,
+                "fraction": 1.3569478251138122e-11
+              }
+            ],
+            "upperFraction": 0.0005188020428691919
+          },
+          {
+            "startS": 0.15,
+            "endS": 0.5,
+            "rms": 0.003990399143701532,
+            "centroidHz": 262.72361069509066,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.000014439560514875339,
+                "fraction": 0.9998207461028307
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 2.588710106502973e-9,
+                "fraction": 0.0001792468730236895
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 1.0114706343052982e-13,
+                "fraction": 7.003601828534997e-9
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 2.966773416386858e-16,
+                "fraction": 2.0542464624419773e-11
+              }
+            ],
+            "upperFraction": 0.0001792538971679827
+          }
+        ]
+      },
+      {
+        "velocity": 0.12,
+        "contactSpanS": 0.004281249999999972,
+        "windows": [
+          {
+            "startS": 0,
+            "endS": 0.05,
+            "rms": 0.0075351233181387344,
+            "centroidHz": 261.2535064456894,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.00008198623913586916,
+                "fraction": 0.9988228572192596
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 9.661739023017806e-8,
+                "fraction": 0.0011770714059324873
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 5.857700041214191e-12,
+                "fraction": 7.136325258441076e-8
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 9.484804616067198e-16,
+                "fraction": 1.1555158215132621e-11
+              }
+            ],
+            "upperFraction": 0.0011771427807402298
+          },
+          {
+            "startS": 0.05,
+            "endS": 0.15,
+            "rms": 0.007635777595154173,
+            "centroidHz": 262.7628355813917,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.00005116072523688096,
+                "fraction": 0.9985738692238839
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 7.306208427053145e-8,
+                "fraction": 0.0014260526574981364
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 4.001783910370341e-12,
+                "fraction": 7.810829155908227e-8
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 5.290257600804636e-16,
+                "fraction": 1.0325719538116168e-11
+              }
+            ],
+            "upperFraction": 0.0014261307761154148
+          },
+          {
+            "startS": 0.15,
+            "endS": 0.5,
+            "rms": 0.0059940612729498894,
+            "centroidHz": 264.51129639461817,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.000032485239154128485,
+                "fraction": 0.9994900244169673
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 1.657465503288182e-8,
+                "fraction": 0.0005099609174775767
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 4.763392982447143e-13,
+                "fraction": 1.4655775645501581e-8
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 3.177025962058502e-16,
+                "fraction": 9.77491882182322e-12
+              }
+            ],
+            "upperFraction": 0.000509975583028141
+          }
+        ]
+      },
+      {
+        "velocity": 0.15,
+        "contactSpanS": 0.00398958333333332,
+        "windows": [
+          {
+            "startS": 0,
+            "endS": 0.05,
+            "rms": 0.010176731896943321,
+            "centroidHz": 263.57375935009804,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.00014708953287613264,
+                "fraction": 0.9980012289822959
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 2.9456966299333895e-7,
+                "fraction": 0.0019986526569216916
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 1.7442417558598363e-11,
+                "fraction": 1.1834665471786378e-7
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 2.0824371151466628e-15,
+                "fraction": 1.4129318106849095e-11
+              }
+            ],
+            "upperFraction": 0.001998771017705728
+          },
+          {
+            "startS": 0.05,
+            "endS": 0.15,
+            "rms": 0.010220300972384215,
+            "centroidHz": 265.03273881857785,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.00009037743359624579,
+                "fraction": 0.9976316187888962
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 2.1454450285355443e-7,
+                "fraction": 0.00236825024972762
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 1.186313466774729e-11,
+                "fraction": 1.309512537761088e-7
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 9.170258024918294e-16,
+                "fraction": 1.0122592547805127e-11
+              }
+            ],
+            "upperFraction": 0.002368381211103988
+          },
+          {
+            "startS": 0.15,
+            "endS": 0.5,
+            "rms": 0.008036060662580868,
+            "centroidHz": 265.599866636803,
+            "bands": [
+              {
+                "loHz": 0,
+                "hiHz": 1000,
+                "energy": 0.00005836531848639899,
+                "fraction": 0.9991223561327852
+              },
+              {
+                "loHz": 1000,
+                "hiHz": 3000,
+                "energy": 5.126754146253099e-8,
+                "fraction": 0.0008776195889535963
+              },
+              {
+                "loHz": 3000,
+                "hiHz": 6000,
+                "energy": 1.4179146783662053e-12,
+                "fraction": 2.4272466783071412e-8
+              },
+              {
+                "loHz": 6000,
+                "hiHz": 12000,
+                "energy": 3.384500618917017e-16,
+                "fraction": 5.793732169033303e-12
+              }
+            ],
+            "upperFraction": 0.0008776438672141115
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+import {hammerSpeed,velocityTable,VELOCITY_ANCHORS} from './f9-midi-velocity.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};const rejects=f=>{try{f();return false}catch{return true;}};
+const table=velocityTable();
+check('all 127 sounding velocities',table.length===127&&table.every((r,i)=>r.midiVelocity===i+1&&Number.isFinite(r.velocityMps)));
+check('note off',hammerSpeed(0)===null);
+check('invalid input',[-1,128,1.5,NaN,Infinity,'1',null,undefined].every(v=>rejects(()=>hammerSpeed(v))));
+check('exact anchors',VELOCITY_ANCHORS.every(([m,v])=>hammerSpeed(m)===v));
+check('strict monotonicity',table.every((r,i)=>i===0||r.velocityMps>table[i-1].velocityMps));
+check('bounds',table.every(r=>r.velocityMps>=.06&&r.velocityMps<=2.5));
+check('quiet resolution',table.filter(r=>r.velocityMps<=.15).length===24);
+check('mechanical energy',table.every(r=>r.hammerEnergyJ===.005*r.velocityMps**2));
+const steps=table.slice(1).map((r,i)=>Math.log(r.velocityMps/table[i].velocityMps));
+check('bounded log steps',steps.every(d=>d>0&&d<.08));
+check('no abrupt log slope steps',steps.slice(1).every((s,i)=>Math.abs(s-steps[i])<.015));
+console.log('F9.18 MIDI mapping tests passed:',n);

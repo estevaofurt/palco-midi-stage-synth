@@ -1,0 +1,29 @@
+name: Concert Grand F9.18 provisional MIDI velocity curve
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f918.yml'
+      - 'research/stage-concert-grand/f9-midi-*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-midi-velocity.test.mjs
+          node research/stage-concert-grand/f9-midi-strike.test.mjs
+          mkdir -p /tmp/f918
+          node --input-type=module -e "import {velocityTable} from './research/stage-concert-grand/f9-midi-velocity.mjs'; console.log(JSON.stringify(velocityTable(),null,2));" > /tmp/f918/velocity-table.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F918-MIDI-velocity-table
+          path: /tmp/f918/
+          if-no-files-found: error
