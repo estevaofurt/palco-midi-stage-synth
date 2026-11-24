@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-24",
+  "comments": [
+    "gostei do timbre, porem o sustain nao se manteve ate os 20s",
+    "se manteve sim",
+    "falha minha"
+  ],
+  "interpretation": "O usuário corrigiu a avaliação negativa inicial: gostou do timbre e confirmou que o sustain se manteve até os 20 s.",
+  "context": "Áudio médio F9.16f feltro 150% indicado imediatamente antes da avaliação inicial; associação contextual, não confirmação explícita do arquivo, bit depth, ganho de reprodução ou ambiente.",
+  "runId": 45449233643,
+  "artifactId": 14948026384,
+  "velocity": 1,
+  "feltFactor": 1.5,
+  "gain": 0.36767023440034063,
+  "perceivedSustainThroughS": 20,
+  "scope": "Aceitação auditiva positiva preliminar de timbre e sustentação na demonstração; não é medida calibrada, fim exato da audibilidade ou homologação de toda a dinâmica.",
+  "decision": "Não reduzir amortecimento nem alterar ganho com base na avaliação negativa corrigida. Manter candidato feltro 1.5, concluir F9.17 e comparação dinâmica, referência B e main preservadas."
+}

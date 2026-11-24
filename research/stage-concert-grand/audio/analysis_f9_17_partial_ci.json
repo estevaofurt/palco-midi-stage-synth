@@ -1,0 +1,219 @@
+{
+  "runId": 45452369072,
+  "testsPassed": 18,
+  "soft": {
+    "artifactId": 14947664365,
+    "listening": {
+      "scope": "contextual threshold from earlier listening, not an audibility prediction",
+      "velocity": 0.5,
+      "gain": 0.36767023440034063,
+      "peak": 0.1483427798209172,
+      "crossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381057,
+        "startS": 9.5,
+        "confirmedThroughS": 10.5
+      },
+      "referenceCrossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381058,
+        "startS": 9.5,
+        "endS": 10,
+        "confirmedThroughS": 10.5
+      },
+      "referenceArtifactId": 14935680667,
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 3.5,
+          "endS": 4,
+          "confirmedThroughS": 4.5
+        },
+        "40": {
+          "status": "observed-window",
+          "startS": 13,
+          "endS": 13.5,
+          "confirmedThroughS": 14
+        },
+        "60": {
+          "status": "observed-window",
+          "startS": 28.5,
+          "endS": 29,
+          "confirmedThroughS": 29.5
+        }
+      },
+      "attack": {
+        "firstForceS": 0.00039583333333333316,
+        "lastForceEndS": 0.0034062500000000173,
+        "contactSpanS": 0.0030104166666666842,
+        "activeContactS": 0.0030104166666666664,
+        "activeSteps": 289,
+        "peakForceN": 5.474113021470236,
+        "peakCompressionM": 0.00022925500254178646,
+        "impulseNs": 0.00876274116381254,
+        "reboundMps": -0.3762741163812532,
+        "hammerLossJ": 0.000050632131310932816
+      },
+      "precision": [
+        {
+          "startS": 0,
+          "endS": 0.5,
+          "floatRms": 0.037010195166010854,
+          "pcmRms": 0.037010166264075585,
+          "errorRms": 0.000008759969078935625,
+          "floatDbFS": -28.633572494640273,
+          "pcmDbFS": -28.633579277612288,
+          "quantizationSnrDb": 72.51637604152171,
+          "zeroFraction": 0.010270833333333333,
+          "peak": 0.1483427798209172,
+          "clipped": 0
+        },
+        {
+          "startS": 10,
+          "endS": 10.5,
+          "floatRms": 0.0005837150612498002,
+          "pcmRms": 0.000583815676265229,
+          "errorRms": 0.000008786912987970861,
+          "floatDbFS": -64.67598201410206,
+          "pcmDbFS": -64.6744849555767,
+          "quantizationSnrDb": 36.447291469096605,
+          "zeroFraction": 0.016145833333333335,
+          "peak": 0.0012537742079358884,
+          "clipped": 0
+        },
+        {
+          "startS": 14,
+          "endS": 14.5,
+          "floatRms": 0.0003152111195514701,
+          "pcmRms": 0.0003153738259084115,
+          "errorRms": 0.00000886083213729375,
+          "floatDbFS": -70.02796941028254,
+          "pcmDbFS": -70.02348706575037,
+          "quantizationSnrDb": 31.02254040555478,
+          "zeroFraction": 0.025291666666666667,
+          "peak": 0.0006337792097422512,
+          "clipped": 0
+        },
+        {
+          "startS": 19,
+          "endS": 19.5,
+          "floatRms": 0.00014883916990166476,
+          "pcmRms": 0.00014913875741371914,
+          "errorRms": 0.000009007846089735426,
+          "floatDbFS": -76.54565521538197,
+          "pcmDbFS": -76.52818959323417,
+          "quantizationSnrDb": 24.36192564244252,
+          "zeroFraction": 0.053875,
+          "peak": 0.0002905466966879445,
+          "clipped": 0
+        },
+        {
+          "startS": 24,
+          "endS": 24.5,
+          "floatRms": 0.00007062560119162319,
+          "pcmRms": 0.00007127395179871975,
+          "errorRms": 0.000008165468208163137,
+          "floatDbFS": -83.02075684558298,
+          "pcmDbFS": -82.94138321979604,
+          "quantizationSnrDb": 18.739621309541953,
+          "zeroFraction": 0.1156875,
+          "peak": 0.00012968277737608115,
+          "clipped": 0
+        },
+        {
+          "startS": 29,
+          "endS": 29.5,
+          "floatRms": 0.000032954247144357534,
+          "pcmRms": 0.0000359708139521644,
+          "errorRms": 0.000008198639111201697,
+          "floatDbFS": -89.64177211154032,
+          "pcmDbFS": -88.88099469598784,
+          "quantizationSnrDb": 12.083392488456074,
+          "zeroFraction": 0.25814583333333335,
+          "peak": 0.0000615201736659972,
+          "clipped": 0
+        },
+        {
+          "startS": 34,
+          "endS": 34.5,
+          "floatRms": 0.000015343449541794752,
+          "pcmRms": 0.000017045573377352457,
+          "errorRms": 0.000009140284595479892,
+          "floatDbFS": -96.28153981093598,
+          "pcmDbFS": -95.3677677086701,
+          "quantizationSnrDb": 4.4992658229163425,
+          "zeroFraction": 0.6880416666666667,
+          "peak": 0.000028841717630431276,
+          "clipped": 0
+        },
+        {
+          "startS": 39,
+          "endS": 39.5,
+          "floatRms": 0.000007366950841939285,
+          "pcmRms": 0,
+          "errorRms": 0.000007366950841939285,
+          "floatDbFS": -102.65424456176137,
+          "pcmDbFS": null,
+          "quantizationSnrDb": 0,
+          "zeroFraction": 1,
+          "peak": 0.000013866138792544419,
+          "clipped": 0
+        }
+      ],
+      "matchedReferenceWindows": [
+        {
+          "startS": 0,
+          "candidateRms": 0.037010195166010854,
+          "referenceRms": 0.03560283801341979,
+          "deltaDb": 0.33673513891237583
+        },
+        {
+          "startS": 10,
+          "candidateRms": 0.0005837150612498002,
+          "referenceRms": 0.0005628816333206787,
+          "deltaDb": 0.3156764263593826
+        },
+        {
+          "startS": 14,
+          "candidateRms": 0.0003152111195514701,
+          "referenceRms": 0.00030620082022131715,
+          "deltaDb": 0.25190359551541547
+        },
+        {
+          "startS": 19,
+          "candidateRms": 0.00014883916990166476,
+          "referenceRms": 0.0001449230750756894,
+          "deltaDb": 0.23159397233980233
+        },
+        {
+          "startS": 24,
+          "candidateRms": 0.00007062560119162319,
+          "referenceRms": 0.00006877886184611859,
+          "deltaDb": 0.23014345777069445
+        },
+        {
+          "startS": 29,
+          "candidateRms": 0.000032954247144357534,
+          "referenceRms": 0.00003209493479563418,
+          "deltaDb": 0.22949793436939364
+        },
+        {
+          "startS": 34,
+          "candidateRms": 0.000015343449541794752,
+          "referenceRms": 0.000014947251417960704,
+          "deltaDb": 0.2272333977379653
+        },
+        {
+          "startS": 39,
+          "candidateRms": 0.000007366950841939285,
+          "referenceRms": 0.000007177871237790493,
+          "deltaDb": 0.22584217110733845
+        }
+      ]
+    }
+  },
+  "strong": {
+    "status": "in_progress at verification"
+  },
+  "scope": "partial CI report; no new listening claim"
+}
