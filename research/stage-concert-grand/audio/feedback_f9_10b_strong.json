@@ -1,0 +1,13 @@
+{
+  "comment": "Foi possível ouvir o sustain do toque forte até os 20,5s",
+  "context": "F910B-velocity-2.5-matched-gain in preceding response; file bit depth, playback gain and environment unspecified",
+  "runId": 45420388507,
+  "artifactId": 14935660302,
+  "velocity": 2.5,
+  "gain": 0.36767023440034063,
+  "perceivedEndS": 20.5,
+  "priorMediumPerceivedEndS": 14,
+  "measuredContextualCrossingS": 20.5,
+  "scope": "positive listening result for sustain duration only; no timbre or definitive acceptance",
+  "decision": "retain B and common gain as comparison baseline; do not infer a universal threshold or exact pp/ff calibration; continue acoustic refinement without gain boost"
+}
