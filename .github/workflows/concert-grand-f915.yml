@@ -1,0 +1,58 @@
+name: Concert Grand F9.15 bridge-board stiffness sensitivity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f915.yml'
+      - 'research/stage-concert-grand/f9-joint-*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-string-loss.test.mjs
+          node research/stage-concert-grand/f9-loaded-mobility.test.mjs
+          node research/stage-concert-grand/f9-joint-render.test.mjs
+  mobility:
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-joint-mobility.mjs /tmp/f915-mobility
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F915-mobility
+          path: /tmp/f915-mobility/
+          if-no-files-found: error
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        factor: [0.5, 2]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-joint-demo.mjs /tmp/f915 30 1 .5 .5 .5 both-half ${{ matrix.factor }}
+      - run: node research/stage-concert-grand/f9-f99-summary.mjs /tmp/f915/C4_v1_board0.5_angle0.5_spread0.5_both-half_joint${{ matrix.factor }}_30s_float_analysis.json FLOAT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F915-joint-${{ matrix.factor }}-30s
+          path: /tmp/f915/
+          if-no-files-found: error
