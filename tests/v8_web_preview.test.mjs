@@ -59,7 +59,7 @@ test('profiles enforce max 32/48/64 without infinite PCM',()=>{
 });
 test('preview includes ONLY one C3X piano engine, not A/B/C/D/E or samples',()=>{
  const controls=engines.piano.groups.flatMap(g=>g.controls);
- assert.equal(engines.piano.presets.length,1);
+ assert.deepEqual(engines.piano.presets.map(x=>x.id),['c3x','c3x-soft','c3x-bright']);
  assert.equal(engines.piano.presets[0].id,'c3x');
  assert.equal(controls.some(x=>x.id==='soundEngine'||x.type==='samplepack'),false);
  assert.equal(loadState(null).patches.piano.preset,'c3x');
