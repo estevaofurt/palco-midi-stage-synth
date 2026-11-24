@@ -1,0 +1,1086 @@
+{
+  "scope": "Selected metrics from F919C_LONG and F919E_LONG CI job logs, not re-analysis of WAV bytes. C4 fixed gain. All 8 jobs completed successfully.",
+  "base": "d90ee1715d1253b2432b21506b8fabc035800b21",
+  "cases": [
+    {
+      "runId": 45470420899,
+      "jobId": 138716927479,
+      "artifactId": 14957612721,
+      "case": "global4",
+      "midiVelocity": 127,
+      "duration": 40,
+      "gain": 0.36767023440034063,
+      "threshold": 0.0006518758466381057,
+      "contextualCrossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381057,
+        "startS": 19,
+        "confirmedThroughS": 20
+      },
+      "peak": 0.7325614669250514,
+      "clipped": 0,
+      "pair": {
+        "frames": 1920239,
+        "rate": 48000,
+        "rms16": 0.16260564683122336,
+        "rms24": 0.1626055574299713,
+        "peak16": 0.7325663014618367,
+        "peak24": 0.7325614371969029,
+        "maxPairError": 0.000015317698839084626
+      },
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.13146776083091755,
+          "wideOffFraction": 0.06414172844598488,
+          "narrowOffFraction": 0.11413548665389095
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.06610127062660134,
+          "wideOffFraction": 0.00035514884910344897,
+          "narrowOffFraction": 0.004010937808150613
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.039606287163402344,
+          "wideOffFraction": 0.000012363165767781963,
+          "narrowOffFraction": 0.0017848760089193873
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.020899260819530238,
+          "wideOffFraction": 0.000002691729290131324,
+          "narrowOffFraction": 0.000630402794364795
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.16260555732333404
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.06780876001888493
+        },
+        {
+          "startS": 1,
+          "rms": 0.040865884269312876
+        },
+        {
+          "startS": 2,
+          "rms": 0.02176135862591111
+        },
+        {
+          "startS": 4,
+          "rms": 0.00894005206917426
+        },
+        {
+          "startS": 9,
+          "rms": 0.003168587343336963
+        },
+        {
+          "startS": 10,
+          "rms": 0.0026718568315681384
+        },
+        {
+          "startS": 14,
+          "rms": 0.0013995092958989286
+        },
+        {
+          "startS": 19,
+          "rms": 0.0006272811580255627
+        },
+        {
+          "startS": 24,
+          "rms": 0.0002801396223037448
+        },
+        {
+          "startS": 29,
+          "rms": 0.00012198751138916391
+        },
+        {
+          "startS": 34,
+          "rms": 0.000052869067037346606
+        },
+        {
+          "startS": 39,
+          "rms": 0.000024032016581519604
+        }
+      ],
+      "attack": {
+        "firstForceS": 0.00007291666666666667,
+        "lastForceEndS": 0.0024583333333333367,
+        "contactSpanS": 0.00238541666666667,
+        "activeContactS": 0.0023854166666666668,
+        "activeSteps": 229,
+        "peakForceN": 33.59054620637281,
+        "peakCompressionM": 0.0004817329655790845,
+        "impulseNs": 0.04147137831023082,
+        "reboundMps": -1.6471378310230858,
+        "hammerLossJ": 0.0006158245900637036
+      }
+    },
+    {
+      "runId": 45470420899,
+      "jobId": 138716927568,
+      "artifactId": 14957391937,
+      "case": "global4",
+      "midiVelocity": 76,
+      "duration": 20,
+      "gain": 0.36767023440034063,
+      "threshold": 0.0006518758466381057,
+      "contextualCrossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381057,
+        "startS": 13,
+        "confirmedThroughS": 14
+      },
+      "peak": 0.26998988859305917,
+      "clipped": 0,
+      "pair": {
+        "frames": 960239,
+        "rate": 48000,
+        "rms16": 0.060830281330704436,
+        "rms24": 0.060830253883493286,
+        "peak16": 0.26999725333414715,
+        "peak24": 0.26998988032220367,
+        "maxPairError": 0.000015317698839084626
+      },
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.049420988270022365,
+          "wideOffFraction": 0.06900625587219791,
+          "narrowOffFraction": 0.12159935345348948
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.024363718824960853,
+          "wideOffFraction": 0.00038281688129757036,
+          "narrowOffFraction": 0.0021125923103096854
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.014333887171827604,
+          "wideOffFraction": 0.000004437170833568211,
+          "narrowOffFraction": 0.00024691716513661313
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.007437807732329008,
+          "wideOffFraction": 0.0000018502848352025428,
+          "narrowOffFraction": 0.00011806537313580196
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.06083025367767121
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.025114052755804788
+        },
+        {
+          "startS": 1,
+          "rms": 0.014648391437848352
+        },
+        {
+          "startS": 2,
+          "rms": 0.007688609657450218
+        },
+        {
+          "startS": 4,
+          "rms": 0.003312502174157979
+        },
+        {
+          "startS": 9,
+          "rms": 0.001237216928461707
+        },
+        {
+          "startS": 10,
+          "rms": 0.001043000482454293
+        },
+        {
+          "startS": 14,
+          "rms": 0.0005472773933619586
+        },
+        {
+          "startS": 19,
+          "rms": 0.0002453416735390323
+        }
+      ],
+      "attack": {
+        "firstForceS": 0.00019791666666666663,
+        "lastForceEndS": 0.0028854166666666763,
+        "contactSpanS": 0.0026875000000000098,
+        "activeContactS": 0.0026875,
+        "activeSteps": 258,
+        "peakForceN": 11.957800843259491,
+        "peakCompressionM": 0.00031618039756127177,
+        "impulseNs": 0.017071697950764242,
+        "reboundMps": -0.707169795076424,
+        "hammerLossJ": 0.00014775223734933012
+      }
+    },
+    {
+      "runId": 45470420899,
+      "jobId": 138716927644,
+      "artifactId": 14955959994,
+      "case": "selective4",
+      "midiVelocity": 127,
+      "duration": 40,
+      "gain": 0.36767023440034063,
+      "threshold": 0.0006518758466381057,
+      "contextualCrossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381057,
+        "startS": 20,
+        "confirmedThroughS": 21
+      },
+      "peak": 0.7936271402440868,
+      "clipped": 0,
+      "pair": {
+        "frames": 1920239,
+        "rate": 48000,
+        "rms16": 0.191626786572486,
+        "rms24": 0.1916268062315487,
+        "peak16": 0.793633838923307,
+        "peak24": 0.7936271183046244,
+        "maxPairError": 0.00001531770611526602
+      },
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.16698813219011394,
+          "wideOffFraction": 0.0541004297696871,
+          "narrowOffFraction": 0.21878002019990458
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.10112733947800065,
+          "wideOffFraction": 0.002036006339726343,
+          "narrowOffFraction": 0.0963170149666149
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.06680608986729011,
+          "wideOffFraction": 0.00032025362086464095,
+          "narrowOffFraction": 0.04529041482867235
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.03579843542058914,
+          "wideOffFraction": 0.000020199761832325256,
+          "narrowOffFraction": 0.00689541446788834
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.19162680605761812
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.1019440547815938
+        },
+        {
+          "startS": 1,
+          "rms": 0.06764808763573413
+        },
+        {
+          "startS": 2,
+          "rms": 0.0357046590952843
+        },
+        {
+          "startS": 4,
+          "rms": 0.014910933864283842
+        },
+        {
+          "startS": 9,
+          "rms": 0.0038979752850353457
+        },
+        {
+          "startS": 10,
+          "rms": 0.003206992791836692
+        },
+        {
+          "startS": 14,
+          "rms": 0.0016479931102850078
+        },
+        {
+          "startS": 19,
+          "rms": 0.0007570886800842469
+        },
+        {
+          "startS": 24,
+          "rms": 0.0003537196021244288
+        },
+        {
+          "startS": 29,
+          "rms": 0.00016228369949335578
+        },
+        {
+          "startS": 34,
+          "rms": 0.00007422293557593847
+        },
+        {
+          "startS": 39,
+          "rms": 0.000035165420561574254
+        }
+      ],
+      "attack": {
+        "firstForceS": 0.00007291666666666667,
+        "lastForceEndS": 0.0024583333333333367,
+        "contactSpanS": 0.00238541666666667,
+        "activeContactS": 0.0023854166666666668,
+        "activeSteps": 229,
+        "peakForceN": 33.59054620637936,
+        "peakCompressionM": 0.0004817329655791218,
+        "impulseNs": 0.04147137831064171,
+        "reboundMps": -1.6471378310641716,
+        "hammerLossJ": 0.0006158245900671162
+      }
+    },
+    {
+      "runId": 45470420899,
+      "jobId": 138716927785,
+      "artifactId": 14956642415,
+      "case": "selective4",
+      "midiVelocity": 76,
+      "duration": 20,
+      "gain": 0.36767023440034063,
+      "threshold": 0.0006518758466381057,
+      "contextualCrossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381057,
+        "startS": 14,
+        "confirmedThroughS": 15
+      },
+      "peak": 0.2860680253553853,
+      "clipped": 0,
+      "pair": {
+        "frames": 960239,
+        "rate": 48000,
+        "rms16": 0.07181425241849236,
+        "rms24": 0.07181428180541423,
+        "peak16": 0.28608050782799765,
+        "peak24": 0.286067996748447,
+        "maxPairError": 0.000015318164514638516
+      },
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.06324948702608436,
+          "wideOffFraction": 0.05438061133265777,
+          "narrowOffFraction": 0.2282503334509545
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.03819078450747364,
+          "wideOffFraction": 0.0018973824771168833,
+          "narrowOffFraction": 0.10179201777519022
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.024953837426186107,
+          "wideOffFraction": 0.0003338374544401409,
+          "narrowOffFraction": 0.048884937550425736
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.012913833475023043,
+          "wideOffFraction": 0.000024682209483551828,
+          "narrowOffFraction": 0.007850332657033101
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.07181428166482236
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.03855625733194918
+        },
+        {
+          "startS": 1,
+          "rms": 0.025130969984928028
+        },
+        {
+          "startS": 2,
+          "rms": 0.012742847419377448
+        },
+        {
+          "startS": 4,
+          "rms": 0.005243201497313537
+        },
+        {
+          "startS": 9,
+          "rms": 0.0014699569205273552
+        },
+        {
+          "startS": 10,
+          "rms": 0.001219820137998852
+        },
+        {
+          "startS": 14,
+          "rms": 0.0006389490876479125
+        },
+        {
+          "startS": 19,
+          "rms": 0.0002957932697969749
+        }
+      ],
+      "attack": {
+        "firstForceS": 0.00019791666666666663,
+        "lastForceEndS": 0.0028854166666666763,
+        "contactSpanS": 0.0026875000000000098,
+        "activeContactS": 0.0026875,
+        "activeSteps": 258,
+        "peakForceN": 11.95780084325925,
+        "peakCompressionM": 0.0003161803975612689,
+        "impulseNs": 0.017071697950907593,
+        "reboundMps": -0.7071697950907592,
+        "hammerLossJ": 0.00014775223734893523
+      }
+    },
+    {
+      "runId": 45472486673,
+      "jobId": 138724101020,
+      "artifactId": 14958985443,
+      "case": "hybridGlobal3",
+      "midiVelocity": 76,
+      "duration": 20,
+      "gain": 0.36767023440034063,
+      "threshold": 0.0006518758466381057,
+      "contextualCrossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381057,
+        "startS": 13.5,
+        "confirmedThroughS": 14.5
+      },
+      "peak": 0.27511077574148096,
+      "clipped": 0,
+      "pair": {
+        "frames": 960239,
+        "rate": 48000,
+        "rms16": 0.06358861447121941,
+        "rms24": 0.06358860177952598,
+        "peak16": 0.2751243629261147,
+        "peak24": 0.2751107543838923,
+        "maxPairError": 0.000015316309088602613
+      },
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.052900493741197076,
+          "wideOffFraction": 0.06264902551586676,
+          "narrowOffFraction": 0.1412616899969606
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.027526103458151662,
+          "wideOffFraction": 0.00035672957465066626,
+          "narrowOffFraction": 0.00659999901551486
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.01672147886724459,
+          "wideOffFraction": 0.000005769023301627524,
+          "narrowOffFraction": 0.0005095839108296999
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.008625291450852217,
+          "wideOffFraction": 0.0000018064455046022416,
+          "narrowOffFraction": 0.00010621825729679908
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.06358860170159304
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.028230251115816316
+        },
+        {
+          "startS": 1,
+          "rms": 0.016898711845718957
+        },
+        {
+          "startS": 2,
+          "rms": 0.008790291557629526
+        },
+        {
+          "startS": 4,
+          "rms": 0.003689772469755399
+        },
+        {
+          "startS": 9,
+          "rms": 0.0012832832066851662
+        },
+        {
+          "startS": 10,
+          "rms": 0.0010827942674513384
+        },
+        {
+          "startS": 14,
+          "rms": 0.0005738128790999144
+        },
+        {
+          "startS": 19,
+          "rms": 0.0002609863034741799
+        }
+      ],
+      "attack": {
+        "firstForceS": 0.00019791666666666663,
+        "lastForceEndS": 0.0028854166666666763,
+        "contactSpanS": 0.0026875000000000098,
+        "activeContactS": 0.0026875,
+        "activeSteps": 258,
+        "peakForceN": 11.957800843259404,
+        "peakCompressionM": 0.0003161803975612708,
+        "impulseNs": 0.01707169795081194,
+        "reboundMps": -0.7071697950811953,
+        "hammerLossJ": 0.00014775223734919845
+      }
+    },
+    {
+      "runId": 45472486673,
+      "jobId": 138724101042,
+      "artifactId": 14956353900,
+      "case": "hybridGlobal2",
+      "midiVelocity": 76,
+      "duration": 20,
+      "gain": 0.36767023440034063,
+      "threshold": 0.0006518758466381057,
+      "contextualCrossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381057,
+        "startS": 14,
+        "confirmedThroughS": 15
+      },
+      "peak": 0.28045407943196266,
+      "clipped": 0,
+      "pair": {
+        "frames": 960239,
+        "rate": 48000,
+        "rms16": 0.06708002981530146,
+        "rms24": 0.06708003243012052,
+        "peak16": 0.2804651020844142,
+        "peak24": 0.28045407300640024,
+        "maxPairError": 0.000015316309088602613
+      },
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.05731945201620648,
+          "wideOffFraction": 0.05744907813059926,
+          "narrowOffFraction": 0.17500476781205204
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.0316778929636963,
+          "wideOffFraction": 0.0005439910983887954,
+          "narrowOffFraction": 0.025922432115064554
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.01995049074140047,
+          "wideOffFraction": 0.00002730692973019845,
+          "narrowOffFraction": 0.004229601392492653
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.010309697247061041,
+          "wideOffFraction": 0.000002012905517559988,
+          "narrowOffFraction": 0.00015405640794313515
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.06708003235014061
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.032289314304179736
+        },
+        {
+          "startS": 1,
+          "rms": 0.020032401287586498
+        },
+        {
+          "startS": 2,
+          "rms": 0.010336691678342762
+        },
+        {
+          "startS": 4,
+          "rms": 0.004286547218849127
+        },
+        {
+          "startS": 9,
+          "rms": 0.0013478103477492602
+        },
+        {
+          "startS": 10,
+          "rms": 0.001133256174862687
+        },
+        {
+          "startS": 14,
+          "rms": 0.0006028480986898743
+        },
+        {
+          "startS": 19,
+          "rms": 0.00027771597060437676
+        }
+      ],
+      "attack": {
+        "firstForceS": 0.00019791666666666663,
+        "lastForceEndS": 0.0028854166666666763,
+        "contactSpanS": 0.0026875000000000098,
+        "activeContactS": 0.0026875,
+        "activeSteps": 258,
+        "peakForceN": 11.957800843259315,
+        "peakCompressionM": 0.00031618039756126976,
+        "impulseNs": 0.017071697950859742,
+        "reboundMps": -0.707169795085974,
+        "hammerLossJ": 0.0001477522373490669
+      }
+    },
+    {
+      "runId": 45472486673,
+      "jobId": 138724101074,
+      "artifactId": 14958407122,
+      "case": "hybridGlobal3",
+      "midiVelocity": 127,
+      "duration": 40,
+      "gain": 0.36767023440034063,
+      "threshold": 0.0006518758466381057,
+      "contextualCrossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381057,
+        "startS": 19.5,
+        "confirmedThroughS": 20.5
+      },
+      "peak": 0.7414926392290155,
+      "clipped": 0,
+      "pair": {
+        "frames": 1920239,
+        "rate": 48000,
+        "rms16": 0.169942155012016,
+        "rms24": 0.16994214627549833,
+        "peak16": 0.7414777062288278,
+        "peak24": 0.7414925982347248,
+        "maxPairError": 0.000015318626552102577
+      },
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.14038819253890453,
+          "wideOffFraction": 0.05897368382276005,
+          "narrowOffFraction": 0.1332829819650274
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.0741569277533961,
+          "wideOffFraction": 0.0003343085389023716,
+          "narrowOffFraction": 0.007665291772028337
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.04580732467128399,
+          "wideOffFraction": 0.000011379417135166372,
+          "narrowOffFraction": 0.0016446802185806622
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.02425571407879491,
+          "wideOffFraction": 0.0000024490878560999833,
+          "narrowOffFraction": 0.0004970902187128903
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.16994214638821367
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.0757578177202077
+        },
+        {
+          "startS": 1,
+          "rms": 0.046726037217792664
+        },
+        {
+          "startS": 2,
+          "rms": 0.024933737298881167
+        },
+        {
+          "startS": 4,
+          "rms": 0.01014550046629107
+        },
+        {
+          "startS": 9,
+          "rms": 0.00329638063927362
+        },
+        {
+          "startS": 10,
+          "rms": 0.002779404884669542
+        },
+        {
+          "startS": 14,
+          "rms": 0.0014682784348204352
+        },
+        {
+          "startS": 19,
+          "rms": 0.000667407386923287
+        },
+        {
+          "startS": 24,
+          "rms": 0.0003026290478253772
+        },
+        {
+          "startS": 29,
+          "rms": 0.0001340941669861592
+        },
+        {
+          "startS": 34,
+          "rms": 0.00005919292016986524
+        },
+        {
+          "startS": 39,
+          "rms": 0.000027275164061598293
+        }
+      ],
+      "attack": {
+        "firstForceS": 0.00007291666666666667,
+        "lastForceEndS": 0.0024583333333333367,
+        "contactSpanS": 0.00238541666666667,
+        "activeContactS": 0.0023854166666666668,
+        "activeSteps": 229,
+        "peakForceN": 33.590546206375066,
+        "peakCompressionM": 0.00048173296557909727,
+        "impulseNs": 0.04147137831036765,
+        "reboundMps": -1.6471378310367637,
+        "hammerLossJ": 0.000615824590064838
+      }
+    },
+    {
+      "runId": 45472486673,
+      "jobId": 138724101119,
+      "artifactId": 14958871858,
+      "case": "hybridGlobal2",
+      "midiVelocity": 127,
+      "duration": 40,
+      "gain": 0.36767023440034063,
+      "threshold": 0.0006518758466381057,
+      "contextualCrossing": {
+        "status": "observed-window",
+        "threshold": 0.0006518758466381057,
+        "startS": 20,
+        "confirmedThroughS": 21
+      },
+      "peak": 0.7578788387357671,
+      "clipped": 0,
+      "pair": {
+        "frames": 1920239,
+        "rate": 48000,
+        "rms16": 0.17917819086963088,
+        "rms24": 0.17917817250518783,
+        "peak16": 0.7578661458174383,
+        "peak24": 0.757878870711192,
+        "maxPairError": 0.000015316771126066674
+      },
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.15172516906400416,
+          "wideOffFraction": 0.05520690074152713,
+          "narrowOffFraction": 0.16624476574380642
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.08468695317765146,
+          "wideOffFraction": 0.0005286950425569702,
+          "narrowOffFraction": 0.025097678405550224
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.054103297796067366,
+          "wideOffFraction": 0.000028098195788768093,
+          "narrowOffFraction": 0.004644023407939606
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "binHz": 1.46484375,
+          "rmsBand": 0.028882798898700875,
+          "wideOffFraction": 0.0000024256473222747157,
+          "narrowOffFraction": 0.00042800595918472006
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.17917817254376445
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.08607424851532616
+        },
+        {
+          "startS": 1,
+          "rms": 0.054765471304511364
+        },
+        {
+          "startS": 2,
+          "rms": 0.02925150492552496
+        },
+        {
+          "startS": 4,
+          "rms": 0.012011929060708993
+        },
+        {
+          "startS": 9,
+          "rms": 0.003492181132554415
+        },
+        {
+          "startS": 10,
+          "rms": 0.002926222157001423
+        },
+        {
+          "startS": 14,
+          "rms": 0.0015451105105767616
+        },
+        {
+          "startS": 19,
+          "rms": 0.0007103506805226795
+        },
+        {
+          "startS": 24,
+          "rms": 0.000327079508362454
+        },
+        {
+          "startS": 29,
+          "rms": 0.00014746466303834727
+        },
+        {
+          "startS": 34,
+          "rms": 0.00006627946459117526
+        },
+        {
+          "startS": 39,
+          "rms": 0.00003096574950413193
+        }
+      ],
+      "attack": {
+        "firstForceS": 0.00007291666666666667,
+        "lastForceEndS": 0.0024583333333333367,
+        "contactSpanS": 0.00238541666666667,
+        "activeContactS": 0.0023854166666666668,
+        "activeSteps": 229,
+        "peakForceN": 33.59054620637721,
+        "peakCompressionM": 0.00048173296557910963,
+        "impulseNs": 0.04147137831050455,
+        "reboundMps": -1.6471378310504596,
+        "hammerLossJ": 0.0006158245900659766
+      }
+    }
+  ]
+}
