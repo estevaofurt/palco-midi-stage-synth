@@ -1,0 +1,84 @@
+{
+  "sourceCommit": "dc44eae13caa3514d130a7f09e37f0ccf41c6452",
+  "sourceManifest": "research/stage-concert-grand/audio/manifest_f9_2.json",
+  "sourceBlob": "9eb190d2b9124ef12d3a3462358601a71bed1df3",
+  "quantity": "pre-fade pressure RMS from F9.2 manifest, not remeasured PCM",
+  "points": [
+    {
+      "startS": 0,
+      "endS": 1,
+      "rms": 0.15655454297326404,
+      "relativeDb": 0
+    },
+    {
+      "startS": 1,
+      "endS": 2,
+      "rms": 0.0477508453834007,
+      "relativeDb": -10.313692198751788
+    },
+    {
+      "startS": 2,
+      "endS": 3,
+      "rms": 0.01806531218922221,
+      "relativeDb": -18.75640407247264
+    },
+    {
+      "startS": 3,
+      "endS": 4,
+      "rms": 0.007572504961543489,
+      "relativeDb": -26.30852216280275
+    },
+    {
+      "startS": 4,
+      "endS": 5,
+      "rms": 0.003926300377048926,
+      "relativeDb": -32.0136430593458
+    },
+    {
+      "startS": 5,
+      "endS": 6,
+      "rms": 0.002115446286894959,
+      "relativeDb": -37.3852734404321
+    },
+    {
+      "startS": 6,
+      "endS": 7,
+      "rms": 0.0013244128043936837,
+      "relativeDb": -41.45284607694588
+    },
+    {
+      "startS": 7,
+      "endS": 8,
+      "rms": 0.0008953846714002597,
+      "relativeDb": -44.853120390407625
+    },
+    {
+      "startS": 8,
+      "endS": 9,
+      "rms": 0.0006710390942485855,
+      "relativeDb": -47.358357042220106
+    },
+    {
+      "startS": 9,
+      "endS": 10,
+      "rms": 0.0005068552895064586,
+      "relativeDb": -49.795633831518096
+    }
+  ],
+  "early": {
+    "startS": 0,
+    "endS": 3,
+    "dbPerSecond": -9.37820203623632,
+    "rSquared": 0.9966941743450745
+  },
+  "late": {
+    "startS": 3,
+    "endS": 10,
+    "dbPerSecond": -3.87923606863822,
+    "rSquared": 0.9714520083193153
+  },
+  "monotonic": true,
+  "testsV8": 12,
+  "nodeCI": "not executed",
+  "sourceWavReopened": false
+}

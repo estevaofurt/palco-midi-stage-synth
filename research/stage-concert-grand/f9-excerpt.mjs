@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {decaySummary,parsePcm16,excerptPcm16,pcmWindows} from './f9-decay-analysis.mjs';
+const [input,output]=process.argv.slice(2);
+if(!input||!output||input===output)throw Error('Usage: node f9-excerpt.mjs INPUT.wav OUTPUT.wav');
+const bytes=readFileSync(input),q=parsePcm16(bytes);
+if(q.rate!==48000||q.channels!==2)throw Error('Expected F9.2 48 kHz stereo PCM16');
+const cut=excerptPcm16(bytes,5);
+writeFileSync(output,cut,{flag:'wx'});
+const w=pcmWindows(bytes);
+console.log(JSON.stringify({durationS:5,frames:parsePcm16(cut).frames,discardedFrames:w.discardedFrames,originalPcmDecay:decaySummary(w.rms)},null,2));
