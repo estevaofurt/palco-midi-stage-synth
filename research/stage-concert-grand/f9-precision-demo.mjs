@@ -11,6 +11,7 @@ import {radiationGrid,surfaceShape,radiationKernel} from './surface-radiation.mj
 import {ResistiveBoard} from './radiation-loading.mjs';
 import {relaxMemory} from './felt-memory.mjs';
 import {fft,waveBytes} from './f8-render.mjs';
+import {wave24} from './f9-wave24.mjs';
 import {compareQuantization,decodePcmChannels} from './f9-precision-audit.mjs';
 import {parsePcm16} from './f9-decay-analysis.mjs';
 import {analyzeSustain} from './f9-long-analysis.mjs';
@@ -40,3 +41,7 @@ const prePcm=analyzeSustain(y.map(c=>Float64Array.from(c,v=>v*.36767023440034063
 writeFileSync(dir+'/'+stem+'_precision.json',JSON.stringify(audit,null,2),{flag:'wx'});
 writeFileSync(dir+'/'+stem+'_float_analysis.json',JSON.stringify(prePcm,null,2),{flag:'wx'});
 console.log('F9_PRECISION '+JSON.stringify(audit.windows.filter(x=>[0,10,14,19,24,29,34,39].includes(x.startS))));
+
+const hi=wave24(y,48000,.36767023440034063);if(hi.clipped||hi.peak!==w.peak)throw Error('24-bit export mismatch');
+writeFileSync(dir+'/'+stem+'_24bit.wav',hi.bytes,{flag:'wx'});
+console.log('F99_EXPORT '+JSON.stringify({frames:y[0].length,peak:hi.peak,clipped:hi.clipped,pcm16Bytes:w.bytes.length,pcm24Bytes:hi.bytes.length}));

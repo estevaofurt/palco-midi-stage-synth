@@ -1,0 +1,54 @@
+name: Concert Grand F9.9 40-second precision and listening
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f99.yml'
+      - 'research/stage-concert-grand/f9-precision*'
+      - 'research/stage-concert-grand/f9-wave24*'
+      - 'research/stage-concert-grand/f9-f99-summary.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-wave24.test.mjs
+          node research/stage-concert-grand/f9-precision-audit.test.mjs
+          node research/stage-concert-grand/f9-string-loss.test.mjs
+          node research/stage-concert-grand/f9-unison.test.mjs
+          node research/stage-concert-grand/f9-aftersound.test.mjs
+          node research/stage-concert-grand/f9-long-analysis.test.mjs
+          node research/stage-concert-grand/f9-decay-analysis.test.mjs
+  render:
+    strategy:
+      fail-fast: false
+      matrix:
+        lossCase: [control, horizontal-half, both-half]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Render 40 continuous seconds
+        run: node research/stage-concert-grand/f9-precision-demo.mjs /tmp/f99 40 1 .5 .5 .5 ${{ matrix.lossCase }}
+      - name: Compare float signal and PCM16 with fixed gain
+        run: |
+          STEM=/tmp/f99/C4_v1_board0.5_angle0.5_spread0.5_${{ matrix.lossCase }}_40s
+          node research/stage-concert-grand/f9-long-analysis-cli.mjs "$STEM.wav" /tmp/f99/pcm16_analysis.json 0 48000 2 .04
+          node research/stage-concert-grand/f9-f99-summary.mjs "${STEM}_float_analysis.json" FLOAT
+          node research/stage-concert-grand/f9-f99-summary.mjs /tmp/f99/pcm16_analysis.json PCM16
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F99-${{ matrix.lossCase }}-40s
+          path: /tmp/f99/
+          if-no-files-found: error
