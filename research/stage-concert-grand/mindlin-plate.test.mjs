@@ -1,6 +1,10 @@
 import {plateDesign,plateModes,patchWeight} from './orthotropic-plate.mjs';
 import {ribDesign,ribbedModes,ribbedPatchWeight,generalizedEigen} from './ribbed-plate.mjs';
-import {BoardPort} from './board-coupling.mjs';
+import {BoardPort,BoardCoupledBridge} from './board-coupling.mjs';
+import {PolarizedBridge,PolarizedHammer} from './polarized-bridge.mjs';
+import {stringMode,spatialWeight} from './stiff-string.mjs';
+import {makeDesign} from './c4-design.mjs';
+import {solidWire} from '../c3x-physical/c4-wire-consistency.mjs';
 import {mindlinModes} from './mindlin-plate.mjs';
 function study(hp){
  const a=(x,msg)=>{if(!x)throw Error(msg)},p=hp.plateDesign(),ribs=[.14,.31,.48,.65,.82,.99,1.16,1.29].map(xM=>hp.ribDesign(p,{xM})),patch={xM:.83,yM:.46,dxM:.04,dyM:.025};
@@ -35,3 +39,21 @@ function study(hp){
  return {passed:cases.map(c=>c[0]),comparison,bands,convergence,compliance,shear,limitErr,portResidual,maxIncrease,portModes:port.modes.length};
 }
 const result=study({plateDesign,plateModes,patchWeight,ribDesign,ribbedModes,ribbedPatchWeight,generalizedEigen,BoardPort});for(const n of result.passed)console.log('PASS '+n);console.log(JSON.stringify(result,null,2));
+
+function integration(hp){
+ const p=hp.plateDesign(),ribs=[.14,.31,.48,.65,.82,.99,1.16,1.29].map(xM=>hp.ribDesign(p,{xM})),patch={xM:.83,yM:.46,dxM:.04,dyM:.025},wires=[-.5,0,.5].map(c=>hp.makeDesign(hp.solidWire,{f1Hz:440*2**(-9/12+c/1200)}));
+ const mind=hp.mindlinModes(p,ribs,{basisHz:4000},hp),old=hp.ribbedModes(p,ribs,{basisHz:4000},hp);
+ function impact(modes,cut,rate){
+   const bridge=new hp.PolarizedBridge(wires,{sampleRate:rate,stiffness:[0,2e6],damping:[0,5]},hp);
+   const board=new hp.BoardPort(p,modes.filter(q=>q.frequencyHz<cut),patch,bridge.h,{},hp),b=new hp.BoardCoupledBridge(bridge,board),hammer=new hp.PolarizedHammer(b);
+   const initial=hammer.energy();let peak=0,maxBoard=0,residual=0,maxIncrease=0,prev=initial,last=0,forceRes=0;
+   for(let i=0;i<Math.round(.012*rate);i++){const s=hammer.step(),e=hammer.energy();peak=Math.max(peak,s.sum);last=s.sum;maxBoard=Math.max(maxBoard,Math.abs(board.position()));residual=Math.max(residual,Math.abs(e+b.lossJ+hammer.lossJ-initial));maxIncrease=Math.max(maxIncrease,e-prev);prev=e;forceRes=Math.max(forceRes,hammer.lastResidual);}
+   return {cut,rate,count:board.modes.length,peak,maxBoard,energy:board.energy(),loss:board.lossJ,residual,maxIncrease,forceRes,last,rebounce:hammer.v};
+ }
+ const prior=impact(old.modes,1000,96000),results=[impact(mind.modes,1000,96000),impact(mind.modes,1500,96000),impact(mind.modes,2000,96000),impact(mind.modes,1500,192000)];
+ const a=(v,m)=>{if(!v)throw Error(m)};
+ a(Math.abs(prior.energy-0.0003504097047942483)<1e-12,'F6.3 parity');
+ a(results.every(q=>q.residual<1e-10&&q.maxIncrease<1e-10&&q.forceRes<1e-8&&q.energy>0&&q.last===0&&q.rebounce<0),'coupled dynamics');
+ return {passed:2,prior,results};
+}
+const coupled=integration({PolarizedBridge,PolarizedHammer,plateDesign,plateModes,patchWeight,ribDesign,ribbedModes,ribbedPatchWeight,generalizedEigen,BoardPort,BoardCoupledBridge,mindlinModes,stringMode,spatialWeight,makeDesign,solidWire});console.log('PASS F6.3 parity');console.log('PASS full coupled Mindlin impact');console.log(JSON.stringify(coupled,null,2));
