@@ -1,0 +1,61 @@
+name: Concert Grand F9.14c pedal coefficient sensitivity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f914c.yml'
+      - 'research/stage-concert-grand/f9-pedal-sensitivity*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-pedal-sensitivity.test.mjs
+          node research/stage-concert-grand/f9-damper-spatial-render.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        position: [0.13, 0.27]
+        proxy: [0.8, 0.9, 0.95]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-pedal-sensitivity-demo.mjs /tmp/f914c 3 1 .5 .5 .5 both-half off ${{ matrix.proxy }} ${{ matrix.position }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F914C-pos-${{ matrix.position }}-proxy-${{ matrix.proxy }}
+          path: /tmp/f914c/
+          if-no-files-found: error
+  compare:
+    needs: render
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F914C-pos-*
+          path: /tmp/f914c-input
+      - run: node research/stage-concert-grand/f9-pedal-sensitivity-compare.mjs /tmp/f914c-input /tmp/f914c-comparison.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F914C-comparison
+          path: /tmp/f914c-comparison.json
+          if-no-files-found: error

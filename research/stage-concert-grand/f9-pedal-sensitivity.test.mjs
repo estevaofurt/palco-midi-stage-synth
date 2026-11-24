@@ -1,0 +1,14 @@
+import {windowEnergy,assessCandidate,rankCandidates} from './f9-pedal-sensitivity.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};
+const q=(rms,init=1)=>({position:.13,pedal:.9,windows:Array.from({length:11},(_,i)=>({startS:i*.25,endS:(i+1)*.25,rms:i<2?init:rms}))});
+const closed=q(1),open=q(3),mid=q(Math.sqrt(5)),low=q(.8),high=q(4),bad=q(Math.sqrt(5),.8);
+check('integrated energy',windowEnergy(mid.windows)===5.000000000000001||Math.abs(windowEnergy(mid.windows)-5)<1e-12);
+const a=assessCandidate(mid,closed,open);
+check('midpoint energy accepted',a.eligible&&Math.abs(a.energyFraction-.5)<1e-12);
+check('inverted response rejected',!assessCandidate(low,closed,open).eligible);
+check('over open rejected',!assessCandidate(high,closed,open).eligible);
+check('attack shift rejected',!assessCandidate(bad,closed,open).eligible);
+const dip=q(Math.sqrt(5));dip.windows[3].rms=.5;check('local inversion rejected',!assessCandidate(dip,closed,open).eligible);
+check('rank valid only',rankCandidates([assessCandidate(low,closed,open),a,assessCandidate(q(2),closed,open)])[0]===a);
+let rejected=false;try{windowEnergy(mid.windows.slice(3))}catch{rejected=true;}check('missing windows rejected',rejected);
+console.log('F9.14c analysis tests passed:',n);
