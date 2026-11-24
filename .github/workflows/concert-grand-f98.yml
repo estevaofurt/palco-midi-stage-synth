@@ -1,0 +1,48 @@
+name: Concert Grand F9.8 string loss 20 seconds
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f98.yml'
+      - 'research/stage-concert-grand/f9-string-loss*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-string-loss.test.mjs
+          node research/stage-concert-grand/f9-unison.test.mjs
+          node research/stage-concert-grand/f9-aftersound.test.mjs
+          node research/stage-concert-grand/f9-long-analysis.test.mjs
+          node research/stage-concert-grand/f9-decay-analysis.test.mjs
+  render:
+    strategy:
+      fail-fast: false
+      matrix:
+        lossCase: [control, horizontal-half, both-half]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Render 20 continuous seconds
+        run: node research/stage-concert-grand/f9-string-loss-demo.mjs /tmp/f98 20 1 .5 .5 .5 ${{ matrix.lossCase }}
+      - name: Analyze all ten partials
+        run: |
+          node research/stage-concert-grand/f9-long-analysis-cli.mjs /tmp/f98/C4_v1_board0.5_angle0.5_spread0.5_${{ matrix.lossCase }}_20s.wav /tmp/f98/analysis.json 0 48000 2 .04
+          node research/stage-concert-grand/f9-string-loss-summary.mjs /tmp/f98/analysis.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F98-${{ matrix.lossCase }}-20s
+          path: /tmp/f98/
+          if-no-files-found: error
