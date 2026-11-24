@@ -1,21 +1,25 @@
-# Stage Synth — Yamaha C3X V8 Web · Prévia
+# Stage Synth — C3X V8 Web + E sampleado (prévia 1.13.1)
 
-**23/11/2026.** O usuário pediu integrar o piano V8 e remover A/B/C/D.
+## O que foi recuperado
 
-## Proveniência e limite fundamental
+O **código real do sampler E** foi reencontrado no repositório (`SampleLibrary`) e reconectado à prévia `v8-preview.html`. Os bancos `American`, `Japanese`, `Felt` e `Upright` são separados, carregados pelo usuário como WAV local; não são publicados no GitHub. Sem áudio importado o E fica silencioso, mas a tecla virtual é destacada e aparece aviso específico. O motor E não depende do AudioWorklet do piano V8.
 
-O **V8 Python original** está em um ZIP separado, `Stage_Synth_C3X_Etapa_08.zip` (referenciado pelo projeto, mas **não está no repositório web ou disponível como arquivo nesta execução**). Sua afinação 88/88, otimização de integrador, timbre dry e 92 testes são resultados da implementação Python, **não são transferidos automaticamente ao navegador**.
+## O que NÃO foi recuperado
 
-A nova página `v8-preview.html` usa um **motor Web Audio físico independente, escrito para esta prévia**. Ele respeita o desenho de martelo/feltro, modos de cordas inarmônicos, tampo harmônico com saída dry e abafamento dinâmico CC64, e pré-calcula coeficientes por nota. **Não é uma transcrição nem reprodução numericamente idêntica do código V8 Python, e o timbre NÃO está homologado por escuta.** Não usar o nome “V8 finalizado” ou prometer a afinação/benchmark da Etapa 8 neste protótipo.
+O **V8 Python aprovado na Etapa 8** era distribuído como `Stage_Synth_C3X_Etapa_08.zip`, contendo código e relatórios. O nome e a documentação foram encontrados no histórico da conversa, **mas o ZIP não estava acessível pelo sistema de arquivos atual, arquivos da conversa, Biblioteca, nem repositório GitHub**. Portanto esta entrega **NÃO restaura o timbre original do V8**; o seletor `C3X V8 Web (prévia)` conserva uma modelagem física web experimental, declarada explicitamente como não equivalente.
 
-## Escopo e entrega
+O usuário relatou que o timbre da prévia não reproduz todas as qualidades do original. Esse parecer é válido e requer a transposição do **código Python original**, não especulação ou retimbragem arbitrária.
 
-- Página separada `v8-preview.html` no mesmo Stage, com **somente Yamaha C3X V8 Web (prévia)** no módulo Piano acústico; sem seletor A/B/C/D/E/Clássico.
-- Não importa nenhum DSP antigo nem samples de piano; não tem reverb de sala interno. Rack FX permanece independente, desligado por padrão.
-- Preservados os demais módulos Electric/Organ/Synth/SF2, teclado virtual, MIDI, sustain, presets de outros instrumentos, arpejador, chord mode e looper.
-- Site principal `index.html` permanece intacto até teste perceptivo e paridade com o Python V8 original. Arquivos históricos preservados como backup.
-- Testes `node --test tests/v8_web_preview.test.mjs`, mais suíte antiga, checam notas, energia, pedal, polifonia declarada e isolamento. 32/48/64 vozes ainda carecem de validação em hardware real.
+## Como usar
 
-## Próximos critérios para o V8 original
+1. Abrir `v8-preview.html`, ativar áudio.
+2. Escolher **Motor do piano**: `C3X V8 Web · físico experimental` ou `E · Piano sampleado · WAV local`.
+3. No E, selecionar **Piano sampleado**: American, Japanese, Felt ou Upright.
+4. Descompactar `Stage_Synth_E_48_Amostras_Privadas_para_Importar.zip` que já foi gerado e importar as notas WAV da pasta correspondente, em `Carregar notas WAV`. Arquivos nomeados `MIDI60_v60.wav` etc.
+5. Notas/velocidades, sustain/teclado/MIDI, FX e demais instrumentos continuam integrados. O arquivo WAV fica apenas na sessão, não no GitHub e não persiste após atualizar a página.
 
-Com o código Python da Etapa 8, traduzir integrador, forças de martelo, massas, acoplamentos, tampo e pedal sem alteração de parâmetros. A/B PCM nas mesmas notas/velocidades sem FX, auditoria de afinação 88/88, dinâmica, decaimento, CPU real, escuta humana, e só então substituir `index.html`.
+## Próximo passo técnico fiel ao pedido
+
+O titular deve anexar **`Stage_Synth_C3X_Etapa_08.zip`** à conversa atual ou colocá-lo no projeto/repositório. Só com fonte/coeficientes reais é possível portar integralmente o V8 a AudioWorklet/WASM, comparar PCM/afinação 88 notas/ataque/caudas/harmônicos com as referências originais e então torná-lo motor principal sem o qualificativo de prévia.
+
+A antiga rota principal `index.html` permanece intacta por segurança até o V8 original ser acessado e reproduzido. A/B/C/D não aparecem na prévia V8+E. O sampler está independente e funcional com banco local.
