@@ -11,3 +11,20 @@ Workflow separado de pesquisa: testes de paridade acústica a 0,25 rad, passivid
 ## Resultados verificados do ensaio curto
 
 [CI 45410474558](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45410474558), job smoke concluído com sucesso. F9.6 tests passed: 9; F9.5 tests passed: 13; F9.3 tests passed: 12. Paridade numérica integral da pressão e energia final com F9.5 no ângulo 0,25 rad durante 25 ms. Mudança para 0,5 rad: energia horizontal das três cordas 7.95608 → 34.63815 µJ, pico de força 11.546166573 → 11.546166573 N; pico pressão 0.762761 → 0.717616 Pa; balanços passivos, checkpoint contínuo até 50 ms e rejeição de checkpoint com configuração diferente. Ensaio V8 independente da mesma revisão também confirmou paridade, erro L2 relativo da pressão 8,742% para 0,5 rad vs 0,25 rad. Isso indica alteração do ataque acústico apesar de força quase igual, não ganho perceptivo comprovado. Os jobs de render longo estão registrados com estado observado no JSON; não declarar conclusão nem WAV disponível antes de confirmar artefatos. F9 aberta, nenhum DSP público alterado.
+
+## Resultados de 15 segundos confirmados
+
+[CI 45410474558](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45410474558), três jobs concluídos com sucesso; 34/34 testes Node (9+13+12). Ambos os WAVs completos foram exportados com ganho comum e zero clipping, 15 blocos contínuos passivos e ausência de recontato; maior resíduo 8.5930e-15 J. Dados de pressão PCM excluem fade editorial, análise até 14,5 s. [Referência 0,25 rad](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45410474558/artifacts/14927796433) e [candidato 0,5 rad](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45410474558/artifacts/14926649102) (ZIPs originais do CI, retenção finita).
+
+| Métrica: início da janela de 0,5 s | 0,25 rad | 0,5 rad | C5 v8 (F9.5) |
+|---|---:|---:|---:|
+| Global -20 dB | 3 | 3 | 1 |
+| Global -40 dB | 6 | 7,5 | 14 |
+| Fundamental -40 dB | 6 | 8,5 | 11,5 |
+| Segundo parcial -40 dB | 9 | 9,5 | 5 |
+| Terceiro parcial -40 dB | 7 | 6,5 | 9 |
+| Global -60 dB | 13 | não observado até 14,5 | não observado até 16 |
+
+Cauda 10–10,5 s: ganho relativo 6.368 dB e ganho em escala PCM comum 5.899 dB (primeira janela -0.469 dB). Fundamental -40 dB inicia 2,5 s mais tarde, mas segundo/terceiro parciais afastam-se mais do C5; referência inicial de cada banda e ruído limitam comparabilidade. Contraste lateral da fundamental do candidato aos 10 s 65,39 dB, não é SNR instrumental medido. Energia horizontal às 10 s 1,58149 µJ (referência 1,41904 µJ), energia vertical 0,59013 µJ (referência 0,14621 µJ). Energia total inclui martelo afastado, não interpretar como sustain. Não declarar equivalência de áudio, duração audível, T60 padronizado ou calibração Yamaha.
+
+**Decisão:** manter 0,5 rad como candidato de pesquisa F9.6 (ganho tardio real em PCM), NÃO substituir F9.5 nem F9.2; avaliação auditiva pendente. Não aumentar ângulo indiscriminadamente: ataque difere 8,742% L2 no ensaio curto e distribuição de parciais continua desequilibrada. Próxima F9.7: variar somente a dispersão de afinação do tricórdio, simulações até 20 s em paralelo, medir batimentos e níveis relativos/absolutos com critérios antes da seleção. Ressonância simpática, pedal, V10, hardware 32–64 e F10 ainda pendentes. Main preservada.
