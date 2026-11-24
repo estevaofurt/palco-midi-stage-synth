@@ -1,0 +1,1196 @@
+{
+  "runId": 45465603213,
+  "artifactId": 14953693183,
+  "testsPassed": 7,
+  "scope": "logged top-three peaks and off-band fractions; full metrics in artifact",
+  "rows": [
+    {
+      "midiVelocity": 1,
+      "velocity": 0.06,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.22191390156372304,
+          "narrowOffFraction": 0.3641372613432891,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 2.325035716353583e-7,
+              "relativeToMaxBinDb": -7.295583494624194
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 1.7910091927785397e-7,
+              "relativeToMaxBinDb": -8.428901632396508
+            },
+            {
+              "frequencyHz": 227.05078125,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -34.57478405059862,
+              "power": 1.8859168346499746e-8,
+              "relativeToMaxBinDb": -18.204654409517303
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.038810152754044175,
+          "narrowOffFraction": 0.12120768151753704,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 2.231194151649582e-8,
+              "relativeToMaxBinDb": -14.691352292254063
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 3.0252073615620205e-9,
+              "relativeToMaxBinDb": -23.369174435822675
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 1.9029760677942597e-9,
+              "relativeToMaxBinDb": -25.38239265575505
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.006981930820880306,
+          "narrowOffFraction": 0.04142228632820776,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 2.1778542235696397e-9,
+              "relativeToMaxBinDb": -22.189754243735575
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 2.4450001145561183e-10,
+              "relativeToMaxBinDb": -31.687253471067475
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -185.45369030059862,
+              "power": 9.335556713928167e-11,
+              "relativeToMaxBinDb": -35.86864009263791
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 4,
+      "velocity": 0.07208893723463809,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.21835065850915414,
+          "narrowOffFraction": 0.3631088251298568,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 4.433344505703615e-7,
+              "relativeToMaxBinDb": -7.079200108491555
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 2.9945800922408764e-7,
+              "relativeToMaxBinDb": -8.783155584535619
+            },
+            {
+              "frequencyHz": 227.05078125,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -34.57478405059862,
+              "power": 3.184136021545045e-8,
+              "relativeToMaxBinDb": -18.516598796786862
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.039149673512940866,
+          "narrowOffFraction": 0.12261324540131233,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 4.255985109212761e-8,
+              "relativeToMaxBinDb": -14.4767541829946
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 5.05962969499456e-9,
+              "relativeToMaxBinDb": -23.725567852976937
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 3.310354650818333e-9,
+              "relativeToMaxBinDb": -25.56800994205814
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.007068321795420514,
+          "narrowOffFraction": 0.04200966112326824,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 4.149043686514906e-9,
+              "relativeToMaxBinDb": -21.981927624954167
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 4.251961046528552e-10,
+              "relativeToMaxBinDb": -31.875514929948068
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -185.45369030059862,
+              "power": 1.3459369962399217e-10,
+              "relativeToMaxBinDb": -36.87116039270135
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 8,
+      "velocity": 0.09,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.2155408862360473,
+          "narrowOffFraction": 0.3624552070064655,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 9.104842166277965e-7,
+              "relativeToMaxBinDb": -6.872670731405446
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 5.412098537244575e-7,
+              "relativeToMaxBinDb": -9.131737996503745
+            },
+            {
+              "frequencyHz": 227.05078125,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -34.57478405059862,
+              "power": 5.810542768596807e-8,
+              "relativeToMaxBinDb": -18.823227926146778
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.039567357197663855,
+          "narrowOffFraction": 0.12389788239900407,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 8.743745397483242e-8,
+              "relativeToMaxBinDb": -14.271981023153344
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 9.146847331791036e-9,
+              "relativeToMaxBinDb": -24.076241751254145
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 6.221885819717435e-9,
+              "relativeToMaxBinDb": -25.74973568611808
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.007172524278976716,
+          "narrowOffFraction": 0.04254752143385345,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 8.513411320181885e-9,
+              "relativeToMaxBinDb": -21.783822212729476
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 7.988970363714117e-10,
+              "relativeToMaxBinDb": -32.059950277594936
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -185.45369030059862,
+              "power": 2.088575041354625e-10,
+              "relativeToMaxBinDb": -37.88635753996675
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 12,
+      "velocity": 0.10530263751838928,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.21445196018176887,
+          "narrowOffFraction": 0.3626027295331334,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.000001464534783856685,
+              "relativeToMaxBinDb": -6.754124650153742
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 8.082789505597267e-7,
+              "relativeToMaxBinDb": -9.33550887072054
+            },
+            {
+              "frequencyHz": 227.05078125,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -34.57478405059862,
+              "power": 8.727128417046559e-8,
+              "relativeToMaxBinDb": -19.002407894668437
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.03991954434875931,
+          "narrowOffFraction": 0.12481525577429756,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 1.4067460884636404e-7,
+              "relativeToMaxBinDb": -14.154466681152124
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 1.3662740100759381e-8,
+              "relativeToMaxBinDb": -24.28124577308492
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 9.508047869677903e-9,
+              "relativeToMaxBinDb": -25.855710247811075
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.007254151779021922,
+          "narrowOffFraction": 0.042914861256724224,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 1.36867374186133e-8,
+              "relativeToMaxBinDb": -21.670232856487193
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 1.2205223543759343e-9,
+              "relativeToMaxBinDb": -32.167774828920315
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -185.45369030059862,
+              "power": 2.846366110453223e-10,
+              "relativeToMaxBinDb": -38.49032461050725
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 16,
+      "velocity": 0.12,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.21403560452341985,
+          "narrowOffFraction": 0.3631188974535612,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.0000021349657468891203,
+              "relativeToMaxBinDb": -6.669131365857451
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.0000011169927688451158,
+              "relativeToMaxBinDb": -9.482536866369976
+            },
+            {
+              "frequencyHz": 227.05078125,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -34.57478405059862,
+              "power": 1.210968297246997e-7,
+              "relativeToMaxBinDb": -19.13171274634158
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.040253374992846674,
+          "narrowOffFraction": 0.1256369694363391,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 2.0510284297070944e-7,
+              "relativeToMaxBinDb": -14.070234235965762
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 1.8883318354967976e-8,
+              "relativeToMaxBinDb": -24.429167888527946
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 1.335897694361601e-8,
+              "relativeToMaxBinDb": -25.93221903549005
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.0073277377175965325,
+          "narrowOffFraction": 0.043232024065823514,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 1.994441602103344e-8,
+              "relativeToMaxBinDb": -21.588839073286074
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 1.71452990984172e-9,
+              "relativeToMaxBinDb": -32.24560166126707
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -185.45369030059862,
+              "power": 3.6808870508248194e-10,
+              "relativeToMaxBinDb": -38.9275274068886
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 20,
+      "velocity": 0.13391959003781162,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.2139063450294038,
+          "narrowOffFraction": 0.36367491561785575,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.000002896508105065105,
+              "relativeToMaxBinDb": -6.605733813373659
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.000001456156861478342,
+              "relativeToMaxBinDb": -9.59239968455863
+            },
+            {
+              "frequencyHz": 227.05078125,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -34.57478405059862,
+              "power": 1.583471061652932e-7,
+              "relativeToMaxBinDb": -19.22837998489966
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.04053689821943893,
+          "narrowOffFraction": 0.12630150860338957,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 2.782944342565111e-7,
+              "relativeToMaxBinDb": -14.00740412501332
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 2.4619338551555343e-8,
+              "relativeToMaxBinDb": -24.53968552708904
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 1.7631826156217763e-8,
+              "relativeToMaxBinDb": -25.989476380615983
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.007388846247993002,
+          "narrowOffFraction": 0.04348461320666251,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 2.7050500223795354e-8,
+              "relativeToMaxBinDb": -21.528161905623268
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 2.2625361282278903e-9,
+              "relativeToMaxBinDb": -32.30395968391497
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -185.45369030059862,
+              "power": 4.566954964855093e-10,
+              "relativeToMaxBinDb": -39.25364762136179
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 24,
+      "velocity": 0.15,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.21381531170829507,
+          "narrowOffFraction": 0.36411943052078527,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.000003931182197937682,
+              "relativeToMaxBinDb": -6.546835959730114
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.00000190438576913517,
+              "relativeToMaxBinDb": -9.694518409725875
+            },
+            {
+              "frequencyHz": 227.05078125,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -34.57478405059862,
+              "power": 2.0767329233098322e-7,
+              "relativeToMaxBinDb": -19.31826120435677
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.040790678076332486,
+          "narrowOffFraction": 0.126841248018739,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 3.7774465368393864e-7,
+              "relativeToMaxBinDb": -13.949038526452227
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 3.2200165490151034e-8,
+              "relativeToMaxBinDb": -24.642440752966387
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 2.3325364915663185e-8,
+              "relativeToMaxBinDb": -26.042737321908422
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.007443774231487114,
+          "narrowOffFraction": 0.04369162664341331,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 3.670300286843244e-8,
+              "relativeToMaxBinDb": -21.47180388966496
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 2.992655159917051e-9,
+              "relativeToMaxBinDb": -32.35825310131939
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -185.45369030059862,
+              "power": 5.705826518385498e-10,
+              "relativeToMaxBinDb": -39.55563423514585
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 36,
+      "velocity": 0.25,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.21058279965053917,
+          "narrowOffFraction": 0.35959640283859345,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.000014196287788547756,
+              "relativeToMaxBinDb": -6.344620869918925
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.000006052853166449145,
+              "relativeToMaxBinDb": -10.046767431392425
+            },
+            {
+              "frequencyHz": 227.05078125,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -34.57478405059862,
+              "power": 6.664877884106901e-7,
+              "relativeToMaxBinDb": -19.628446852683844
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.040579068448256636,
+          "narrowOffFraction": 0.12496438492812671,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.0000013645983030656716,
+              "relativeToMaxBinDb": -13.74865863824126
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 1.0237236140952351e-7,
+              "relativeToMaxBinDb": -24.996879694903736
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 7.712641148161746e-8,
+              "relativeToMaxBinDb": -26.22667565617663
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.007431119219493597,
+          "narrowOffFraction": 0.04311119427340594,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 1.3241266711528523e-7,
+              "relativeToMaxBinDb": -21.278323952953645
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 9.889027300043267e-9,
+              "relativeToMaxBinDb": -32.54608352876818
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 1.7268282575164064e-9,
+              "relativeToMaxBinDb": -40.12512781939071
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 52,
+      "velocity": 0.5,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.2009142120126145,
+          "narrowOffFraction": 0.3423102920790476,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.0000694973337202759,
+              "relativeToMaxBinDb": -6.176437872725268
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.000026625146563683136,
+              "relativeToMaxBinDb": -10.343199232656353
+            },
+            {
+              "frequencyHz": 227.05078125,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -34.57478405059862,
+              "power": 0.000002955775316937483,
+              "relativeToMaxBinDb": -19.889405122722003
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.03787443661512063,
+          "narrowOffFraction": 0.11520119347676909,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.000006682228123721856,
+              "relativeToMaxBinDb": -13.582005558433375
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 4.504093198960299e-7,
+              "relativeToMaxBinDb": -25.295144853385697
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 3.507564804764731e-7,
+              "relativeToMaxBinDb": -26.381161500464614
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.0069329393380554915,
+          "narrowOffFraction": 0.03970394863492985,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 6.477019007632888e-7,
+              "relativeToMaxBinDb": -21.11726959434771
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 4.49461648556825e-8,
+              "relativeToMaxBinDb": -32.7040949059917
+            },
+            {
+              "frequencyHz": 370.60546875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 108.97990344940138,
+              "power": 1.0295827570865765e-8,
+              "relativeToMaxBinDb": -39.10440870362276
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 76,
+      "velocity": 1,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.19346259609984115,
+          "narrowOffFraction": 0.3283151227707206,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.00030761466266477624,
+              "relativeToMaxBinDb": -6.077608174996351
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.00011063662237143168,
+              "relativeToMaxBinDb": -10.51868941352887
+            },
+            {
+              "frequencyHz": 370.60546875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 108.97990344940138,
+              "power": 0.000013531245795882857,
+              "relativeToMaxBinDb": -19.644300669685236
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.0357632226905188,
+          "narrowOffFraction": 0.10772868681568526,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.00002958208286205218,
+              "relativeToMaxBinDb": -13.484071492211003
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.0000018718260871508717,
+              "relativeToMaxBinDb": -25.471704028198616
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 0.0000014866092018906246,
+              "relativeToMaxBinDb": -26.472390817572034
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.00650792737620578,
+          "narrowOffFraction": 0.03693669393028366,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.000002865604385298001,
+              "relativeToMaxBinDb": -21.02250604302091
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 1.9042267293281222e-7,
+              "relativeToMaxBinDb": -32.79748180431674
+            },
+            {
+              "frequencyHz": 370.60546875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 108.97990344940138,
+              "power": 5.265553400232052e-8,
+              "relativeToMaxBinDb": -38.38022815925589
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 100,
+      "velocity": 1.5898478405355054,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.19014327964194266,
+          "narrowOffFraction": 0.32204269968952426,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.0008059145456138999,
+              "relativeToMaxBinDb": -6.034989298786767
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.0002820431897956474,
+              "relativeToMaxBinDb": -10.594723063910369
+            },
+            {
+              "frequencyHz": 370.60546875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 108.97990344940138,
+              "power": 0.000037689566153984924,
+              "relativeToMaxBinDb": -19.335667858224266
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.03506891373601786,
+          "narrowOffFraction": 0.10522724261840886,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.00007750672137199184,
+              "relativeToMaxBinDb": -13.441838684568651
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.000004772032011019828,
+              "relativeToMaxBinDb": -25.54819886276455
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 0.000003822419956449579,
+              "relativeToMaxBinDb": -26.511848347355702
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.00635289838688487,
+          "narrowOffFraction": 0.03596715222361894,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.000007506104842913593,
+              "relativeToMaxBinDb": -20.981608241899245
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 4.895385926179715e-7,
+              "relativeToMaxBinDb": -32.837885154432
+            },
+            {
+              "frequencyHz": 370.60546875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 108.97990344940138,
+              "power": 1.4665218944622527e-7,
+              "relativeToMaxBinDb": -38.07286899226759
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midiVelocity": 127,
+      "velocity": 2.5,
+      "windows": [
+        {
+          "startS": 0.025,
+          "wideOffFraction": 0.18695871720951554,
+          "narrowOffFraction": 0.316543090447187,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.0020344981622172284,
+              "relativeToMaxBinDb": -6.005577247063545
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.0006986607320636031,
+              "relativeToMaxBinDb": -10.64748691994019
+            },
+            {
+              "frequencyHz": 370.60546875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 108.97990344940138,
+              "power": 0.0000991922261540705,
+              "relativeToMaxBinDb": -19.125373894257866
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "wideOffFraction": 0.034601813652882354,
+          "narrowOffFraction": 0.10397079512601137,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.00019567137264577585,
+              "relativeToMaxBinDb": -13.412693299754014
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -40.43415905059862,
+              "power": 0.000011821392835922436,
+              "relativeToMaxBinDb": -25.60127972010573
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 0.000009525274742592977,
+              "relativeToMaxBinDb": -26.5391911047828
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "wideOffFraction": 0.006242602932577495,
+          "narrowOffFraction": 0.035495911856907376,
+          "offPeaks": [
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 18.159590949401377,
+              "power": 0.000018946343090416396,
+              "relativeToMaxBinDb": -20.953377564312923
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": -21.391190300598623,
+              "power": 0.0000012197583698959917,
+              "relativeToMaxBinDb": -32.865893470135276
+            },
+            {
+              "frequencyHz": 370.60546875,
+              "nearestPartial": 1,
+              "partialHz": 261.6255653005986,
+              "offsetHz": 108.97990344940138,
+              "power": 3.8593839357248693e-7,
+              "relativeToMaxBinDb": -37.86345169096742
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

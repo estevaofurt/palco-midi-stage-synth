@@ -1,0 +1,40 @@
+name: Concert Grand F9.19a structural board loss sensitivity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f919a.yml'
+      - 'research/stage-concert-grand/f9-rattle-board*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-rattle-board.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [24, 76, 127]
+        multiplier: [1, 2, 4]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-rattle-board-demo.mjs /tmp/f919a ${{ matrix.midi }} ${{ matrix.multiplier }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F919A-midi${{ matrix.midi }}-boardLoss${{ matrix.multiplier }}
+          path: /tmp/f919a/
+          if-no-files-found: error
