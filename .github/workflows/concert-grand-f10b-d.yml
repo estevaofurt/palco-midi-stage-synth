@@ -1,0 +1,41 @@
+name: Concert Grand F10b D spatial sensitivity G4
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f10b-d.yml'
+      - 'research/stage-concert-grand/f10b-d-spatial*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10-model-d-register.test.mjs
+      - run: node research/stage-concert-grand/f10b-d-spatial.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [minus8cm, plus8cm]
+        touch: [24, 76, 127]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10b-d-spatial-demo.mjs /tmp/f10b ${{ matrix.variant }} ${{ matrix.touch }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F10B-D-G4-${{ matrix.variant }}-touch${{ matrix.touch }}
+          path: /tmp/f10b/
+          if-no-files-found: error
