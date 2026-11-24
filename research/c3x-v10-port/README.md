@@ -1,19 +1,29 @@
-# STAGE SYNTH C3X V10 — Etapa 11A (pesquisa)
+# STAGE SYNTH — Etapa 11B: primeiro processamento contínuo em blocos
 
-Este diretório é uma prova de conceito **somente de agendamento MIDI**, independente do motor físico offline V10 em `research/c3x-python/v10/`. Não gera áudio, não altera a prévia V8 Web, não implementa AudioWorklet e **não deve ser anunciado como motor em tempo real funcional**.
+**Pesquisa isolada. Não é a V10 portada, não é motor Yamaha C3X calibrado e não substitui a prévia web V8.**
 
-## Uso
+A Etapa 11A já inclui `midi-block-scheduler.mjs`, um escalonador de referência que retorna eventos por bloco e aloca arrays. A Etapa 11B acrescenta:
 
-`node --test research/c3x-v10-port/midi-block-scheduler.test.mjs`
+- `rt-midi-ring.mjs`: fila de capacidade fixa com `Float64Array`/`Uint8Array`, eventos em ordem cronológica, tratamento explícito de overflow e escrita direta em buffers `Float32Array` fornecidos pelo chamador. **Não há alocações explícitas na função de processamento por amostra**, mas isso NÃO comprova comportamento real-time seguro, ausência de GC, nem uso multithread; a fila **não é thread-safe**.
+- `modal-continuity-probe.mjs`: demonstrador de *cordas modais amortecidas* com `q/v` preservados entre chamadas, golpes que acrescentam energia sem apagar a corda, pedal de sustentação contínuo e decaimento. A fonte sonora é inteiramente sintetizada. Esta é uma **sonda de integração**, sem o martelo não linear V10, ponte/tampo bidirecional, 88 escalas físicas calibradas, duas polarizações ou modelagem completa de abafadores. Os parâmetros são artificiais, não medidos do C3X.
+- `rt-modal-continuity.test.mjs`: teste de equivalência **exata**, amostra a amostra, para 64/128/256 frames; MIDI nas fronteiras, pedal, meio-pedal, repetição sobre cordas vibrantes, erros e capacidade fixa.
+- `demo-stage11b.mjs`: gera um WAV offline de diagnóstico; **não utilizar como WAV de referência sonora do STAGE SYNTH**.
 
-O escalonador atribui eventos note-on, note-off, CC64 e all-notes-off a frames absolutos e os distribui em blocos de 64/128/256 amostras. Os eventos mantêm a ordem de chegada quando simultâneos e não perdem o estado de notas pressionadas ou posição do pedal entre blocos. Eventos atrasados são rejeitados explicitamente nesta versão.
+## Executar
 
-## Próximos marcos
+```bash
+node --test research/c3x-v10-port/midi-block-scheduler.test.mjs research/c3x-v10-port/rt-modal-continuity.test.mjs
+node research/c3x-v10-port/demo-stage11b.mjs /tmp/V11B_modal_probe_DIAGNOSTICO.wav
+```
 
-1. Portar o integrador DSP V10 para AudioWorklet/C++/WASM, com conservação real dos estados de corda, martelo, ponte e tampo de bloco para bloco.
-2. Implementar fila pré-alocada e sem ordenações/alocações no callback de áudio. **A estrutura JS desta pesquisa não é RT-safe.**
-3. Acoplar teclado virtual e MIDI físico ao motor portado, sem mexer no app publicado antes dos testes.
-4. Comparar WAVs offline V10 × Web portado por nota, parciais, afinação, ataque e decaimento. Monitorar CPU, latência, dropouts e memória em hardware real.
-5. Manter o som dry e o reverb exclusivamente nos efeitos opcionais.
+Compatibilidade de 44,1 e 48 kHz está testada na sonda. Nenhum arquivo Python ou fonte da aplicação publicada foi modificado nesta etapa.
 
-**Licenças e marca:** não importar WAVs de terceiros, nem atribuir endosso à Yamaha. A V10 é referência experimental não calibrada com medições internas do fabricante.
+## Próximo trabalho técnico (Etapa 11C)
+
+1. Substituir o `ModalContinuityProbe` por um **port real** da integração das cordas, martelos e tampo V10, com estados pré-alocados, sem zerar osciladores entre blocos.
+2. Manter separadas as etapas de integração mecânica e radiativa e comparar sinais offline V10 × blocos na mesma sequência. Não tratar a sonoridade da sonda como benchmark de qualidade.
+3. Revisar integridade numérica, limites de energia, compensação de afinação, critérios de desativação de vozes e pedal nas fronteiras.
+4. Mover o processamento para um AudioWorklet isolado, medir latência, GC, CPU, underruns e compatibilidade em Windows/Android com hardware real.
+5. Preservar a referência sonora aprovada V1 e os arquivos de calibração, e deixar reverberação somente nos efeitos opcionais desligados por padrão.
+
+**Estado:** prova de arquitetura e continuidade numérica em JS/Node. Não é instrumento pronto para performance.
