@@ -1,0 +1,35 @@
+import {polarizationLedger,validateAngle} from './f9-aftersound-ledger.mjs';
+import {renderStringLoss} from './f9-string-loss.mjs';
+import {stringLossCase} from './f9-string-loss-parameters.mjs';
+import {renderSympathetic} from './f9-sympathetic-render.mjs';
+import {renderDamper} from './f9-damper-render.mjs';
+import {solidWire} from '../c3x-physical/c4-wire-consistency.mjs';
+import {makeDesign} from './c4-design.mjs';
+import {stringMode,spatialWeight} from './stiff-string.mjs';
+import {plateDesign,plateModes,patchWeight} from './orthotropic-plate.mjs';
+import {ribDesign,generalizedEigen} from './ribbed-plate.mjs';
+import {mindlinModes} from './mindlin-plate.mjs';
+import {PolarizedBridge,PolarizedHammer} from './polarized-bridge.mjs';
+import {BoardCoupledBridge} from './board-coupling.mjs';
+import {radiationGrid,surfaceShape,radiationKernel} from './surface-radiation.mjs';
+import {ResistiveBoard} from './radiation-loading.mjs';
+import {relaxMemory} from './felt-memory.mjs';
+import {fft} from './f8-render.mjs';
+const hp={fft,solidWire,makeDesign,stringMode,spatialWeight,plateDesign,plateModes,patchWeight,ribDesign,generalizedEigen,mindlinModes,PolarizedBridge,PolarizedHammer,BoardCoupledBridge,radiationGrid,surfaceShape,radiationKernel,ResistiveBoard,relaxMemory};
+
+import {renderSpatialDamper} from './f9-damper-spatial-render.mjs';
+
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;};
+const opts={seconds:.025,boardFactor:.5,angleRad:.5,spreadCents:.5,lossCase:'both-half',sympathetic:'off',keyReleaseS:.025,pedalReleaseS:.075,pedal:0};
+const old=renderDamper(hp,opts),atOld=renderSpatialDamper(hp,{...opts,damperFraction:.13}),atNew=renderSpatialDamper(hp,{...opts,damperFraction:.27});
+const rel=(a,b)=>{let d=0,s=0;for(let j=0;j<a.length;j++)for(let i=0;i<a[j].length;i++){d+=(a[j][i]-b[j][i])**2;s+=a[j][i]**2;}return Math.sqrt(d/s);};
+check('attack unchanged at both positions',rel(old.channels,atOld.channels)<1e-12&&rel(old.channels,atNew.channels)<1e-12);
+const nextOld=renderDamper(hp,{...opts,prior:old.checkpoint}),same=renderSpatialDamper(hp,{...opts,damperFraction:.13,prior:atOld.checkpoint}),next=renderSpatialDamper(hp,{...opts,damperFraction:.27,prior:atNew.checkpoint});
+check('original port parity after release',rel(nextOld.channels,same.channels)<1e-10&&Math.abs(nextOld.meta.damperLossJ-same.meta.damperLossJ)<1e-12);
+check('new port dissipates',next.meta.damperLossJ>0);
+check('new position changes response',rel(same.channels,next.channels)>1e-4);
+check('energy balance',[same,next].every(x=>x.meta.maxBalance<1e-9&&x.meta.maxIncrease<1e-9));
+const more=renderSpatialDamper(hp,{...opts,damperFraction:.27,prior:next.checkpoint});
+check('continued dissipative checkpoint',more.meta.damperLossJ>=next.meta.damperLossJ&&more.meta.maxBalance<1e-9);
+let rejected=false;try{renderSpatialDamper(hp,{...opts,damperFraction:.13,prior:atNew.checkpoint})}catch{rejected=true;}check('position checkpoint guard',rejected);
+console.log('F9.14b spatial tests passed:',n);console.log('F914B_SMOKE '+JSON.stringify({attackParity:rel(old.channels,atNew.channels),releaseParity:rel(nextOld.channels,same.channels),newResponseDifference:rel(same.channels,next.channels),same:same.meta,next:next.meta,more:more.meta}));

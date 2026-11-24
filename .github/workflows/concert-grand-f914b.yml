@@ -1,0 +1,47 @@
+name: Concert Grand F9.14b spatial damper sensitivity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f914b.yml'
+      - 'research/stage-concert-grand/f9-damper-spatial*'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node research/stage-concert-grand/f9-damper.test.mjs
+          node research/stage-concert-grand/f9-damper-render.test.mjs
+          node research/stage-concert-grand/f9-damper-spatial-render.test.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {position: 0.13, pedal: 0}
+          - {position: 0.13, pedal: 0.5}
+          - {position: 0.27, pedal: 0}
+          - {position: 0.27, pedal: 0.5}
+          - {position: 0.27, pedal: 1}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f9-damper-spatial-demo.mjs /tmp/f914b 3 1 .5 .5 .5 both-half off ${{ matrix.pedal }} ${{ matrix.position }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F914B-pos-${{ matrix.position }}-pedal-${{ matrix.pedal }}
+          path: /tmp/f914b/
+          if-no-files-found: error
