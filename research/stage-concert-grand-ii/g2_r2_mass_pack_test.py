@@ -13,15 +13,15 @@ def main():
             for label,speed,scale in [('dry',1.,1.),('mass70-energy',(1/.7)**.5,.8)]:
                 wav=d/f'{k}-{label}.wav';sf.write(wav,x*scale,p.FS,subtype='PCM_24')
                 raw=d/f'{k}-{label}-pressure.npz';np.savez(raw,pressurePa=x.T)
-                rows.append(dict(label=label,wavSha256=p.sha(wav),rawSha256=p.sha(raw),radiation={'gate':True},convergence={'trajectory':.001},events=[[0.,k,speed]],mechanical={'injectedJ':.005},baselineParity=0.))
-            (d/'manifest.json').write_text(json.dumps(dict(commit=p.COMMIT,key=k,gain=p.GAIN,durationS=1.5,gate=True,screen={'screen':k!=67},rows=rows,relativeEnvelopeDeltaDb={},partialDeltaDb=[])))
+                rows.append(dict(label=label,wavSha256=p.sha(wav),rawSha256=p.sha(raw),radiation={'gate':True},convergence={'trajectory':.001},events=[[0.,k,speed]],mechanical={'injectedJ':.005},baselineParity=0.,baselineWavMaxAbsDelta=0.,baselineOriginalSha256=p.sha(wav)))
+            (d/'manifest.json').write_text(json.dumps(dict(commit=p.SOURCES[k]['commit'],key=k,gain=p.GAIN,durationS=1.5,gate=True,screen={'screen':k!=67},rows=rows,relativeEnvelopeDeltaDb={},partialDeltaDb=[])))
         p.pack(root,t/'valid')
         manifest=root/'G2-R2C-note-67'/'manifest.json';b=manifest.read_bytes()
-        for name,mutate in [('hash',lambda m:m['rows'][0].update(wavSha256='invalid')),('radiation',lambda m:m['rows'][0]['radiation'].update(gate=False)),('energy',lambda m:m['rows'][1]['mechanical'].update(injectedJ=.004)),('negative-control',lambda m:m['screen'].update(screen=True))]:
+        for name,mutate in [('hash',lambda m:m['rows'][0].update(wavSha256='invalid')),('radiation',lambda m:m['rows'][0]['radiation'].update(gate=False)),('energy',lambda m:m['rows'][1]['mechanical'].update(injectedJ=.004)),('negative-control',lambda m:m['screen'].update(screen=True)),('wrong-source',lambda m:m.update(commit=p.SOURCES[60]['commit']))]:
             m=json.loads(b);mutate(m);manifest.write_text(json.dumps(m))
             try:p.pack(root,t/name)
             except AssertionError:assert not (t/name).exists()
             else:raise AssertionError('accepted '+name)
             manifest.write_bytes(b)
-        print('G2_R2C_PACK_SOFTWARE_GATE {"checks":5,"passed":5,"gate":true,"scope":"synthetic fixtures"}')
+        print('G2_R2C_PACK_SOFTWARE_GATE {"checks":6,"passed":6,"gate":true,"scope":"synthetic fixtures"}')
 if __name__=='__main__':main()

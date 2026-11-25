@@ -5,7 +5,8 @@ import numpy as np
 import soundfile as sf
 FS=48000
 KEYS={60:'C4',64:'E4',67:'G4',72:'C5'}
-COMMIT='335775e31f22c54cf425975bfa102dcd4247f67e'
+SOURCES={k:dict(commit='335775e31f22c54cf425975bfa102dcd4247f67e',run=45625084768) for k in KEYS}
+SOURCES[60]=dict(commit='b767cc0e15a9e406444f221891d5e615da740206',run=45626307034)
 GAIN=.18491857409775692
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def read(p):
@@ -19,7 +20,7 @@ def pack(root,out):
     inputs={}
     for k,note in KEYS.items():
         d=root/f'G2-R2C-note-{k}';m=json.loads((d/'manifest.json').read_text())
-        assert m['commit']==COMMIT and m['key']==k and m['gain']==GAIN and m['durationS']==1.5 and m['gate']
+        assert m['commit']==SOURCES[k]['commit'] and m['key']==k and m['gain']==GAIN and m['durationS']==1.5 and m['gate']
         assert m['screen']['screen']==(k!=67)
         rows={x['label']:x for x in m['rows']};assert len(m['rows'])==2 and set(rows)=={'dry','mass70-energy'}
         signals={};paths={}
@@ -30,7 +31,10 @@ def pack(root,out):
             assert row['events']==[[0.,k,1. if label=='dry' else (1/.7)**.5]]
             signals[label]=read(p);paths[label]=p
         assert abs(rows['dry']['mechanical']['injectedJ']-rows['mass70-energy']['mechanical']['injectedJ'])<=1e-12
-        if k==60:assert rows['dry']['baselineParity']<=1e-9
+        if k==60:
+            dry=rows['dry'];assert dry['baselineParity']<=1e-9
+            assert 0<=dry['baselineWavMaxAbsDelta']<=2**-23+1e-12
+            assert dry['baselineOriginalSha256']==dry['wavSha256']
         inputs[k]=(m,signals,paths)
     out.mkdir(parents=True,exist_ok=True)
     blind=out/'escuta-cega';orig=out/'ganho-original';blind.mkdir();orig.mkdir()
@@ -48,10 +52,10 @@ def pack(root,out):
             dst=o/(label+'.wav');shutil.copyfile(paths[label],dst);assert sha(dst)==sha(paths[label])
             pair.append(dict(label=('A','B')[i],source=label,attenuationDb=db(g),sha256=sha(p)))
         key.append(dict(note=note,pair=pair))
-        metrics.append(dict(note=note,screen=m['screen'],attackRmsDbfs={v:db(x) for v,x in at.items()},relativeEnvelopeDeltaDb=m['relativeEnvelopeDeltaDb'],partialDeltaDb=m['partialDeltaDb']))
+        metrics.append(dict(note=note,source=SOURCES[k],screen=m['screen'],attackRmsDbfs={v:db(x) for v,x in at.items()},relativeEnvelopeDeltaDb=m['relativeEnvelopeDeltaDb'],partialDeltaDb=m['partialDeltaDb']))
     assert len(list(blind.rglob('*.wav')))==len(list(orig.rglob('*.wav')))==8
     (out/'gabarito.json').write_text(json.dumps(key,indent=2,allow_nan=False))
-    (out/'relatorio.json').write_text(json.dumps(dict(gate=True,sourceCommit=COMMIT,sourceRun=45625084768,rows=metrics),indent=2,allow_nan=False))
+    (out/'relatorio.json').write_text(json.dumps(dict(gate=True,sources=SOURCES,rows=metrics),indent=2,allow_nan=False))
     (out/'LEIA-ME.txt').write_text('R2c: quatro notas mantidas de 1,5s, pares A/B. Escute primeiro sem gabarito. Versões Dry e massa efetiva 70% com velocidade compensada para energia inicial equivalente. Não é calibração MIDI. Cópias cegas atenuadas exclusivamente para igualar RMS 20–80ms, margem de pico -6dBFS. Originais preservados com ganho único. Avalie ataque, definição, corpo, caráter amadeirado e ressonância; G4 é controle da falha na triagem harmônica. Não avalia sustain longo ou soltura; nenhum candidato adotado.',encoding='utf-8')
     print('G2_R2C_PACK_GATE '+json.dumps(dict(notes=4,blindWavs=8,originalWavs=8,gate=True)),flush=True)
 if __name__=='__main__':
