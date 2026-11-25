@@ -1,0 +1,27 @@
+name: Concert Grand R4 stage presence microphone trial
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths: ['research/stage-concert-grand/f11u-r4-*.mjs','.github/workflows/concert-grand-presence-r4.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  phrase:
+    strategy:
+      fail-fast: false
+      matrix:
+        distance: ['1','0.6','0.3']
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --max-old-space-size=6144 research/stage-concert-grand/f11u-r4-presence-demo.mjs /tmp/r4 K750 phrase ${{ matrix.distance }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R4-presence-z${{ matrix.distance }}
+          path: /tmp/r4/
+          if-no-files-found: error
