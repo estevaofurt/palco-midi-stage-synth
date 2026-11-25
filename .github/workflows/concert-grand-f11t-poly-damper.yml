@@ -21,3 +21,23 @@ jobs:
       - run: node research/stage-concert-grand/f11t-poly-damper.test.mjs
       - run: node research/stage-concert-grand/f11s-held-chord-render.test.mjs
       - run: node research/stage-concert-grand/f11t-physical-smoke.mjs
+  render:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        caseId: [G7-dry-mf,G7-pedal-mf]
+        variant: [K750,K1000]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11t-pedal-chord-demo.mjs /tmp/f11t ${{ matrix.caseId }} ${{ matrix.variant }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11T-${{ matrix.caseId }}-${{ matrix.variant }}
+          path: /tmp/f11t/
+          if-no-files-found: error
