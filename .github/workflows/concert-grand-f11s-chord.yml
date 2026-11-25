@@ -1,0 +1,40 @@
+name: Concert Grand F11s full board held chords
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11s-chord.yml'
+      - 'research/stage-concert-grand/f11s-held-chord*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11s-held-chord-render.test.mjs
+  chord:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        chord: [C-major-open-mf,G7-open-mf]
+        variant: [A,K750,K1000]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11s-held-chord-demo.mjs /tmp/f11s ${{ matrix.chord }} ${{ matrix.variant }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11S-${{ matrix.chord }}-${{ matrix.variant }}
+          path: /tmp/f11s/
+          if-no-files-found: error
