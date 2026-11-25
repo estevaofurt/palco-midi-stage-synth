@@ -1,0 +1,23 @@
+name: Concert Grand F11t polyphonic dampers smoke
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11t-poly-damper.yml'
+      - 'research/stage-concert-grand/f11t-*.mjs'
+      - 'research/stage-concert-grand/f11s-held-chord-render.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11t-poly-damper.test.mjs
+      - run: node research/stage-concert-grand/f11s-held-chord-render.test.mjs
+      - run: node research/stage-concert-grand/f11t-physical-smoke.mjs
