@@ -1,0 +1,454 @@
+{
+  "runId": 45530668020,
+  "artifactId": 14984138398,
+  "summary": [
+    {
+      "midi": 36,
+      "variant": "A",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 65.3013236068132,
+            "cents": -2.7832611214162526,
+            "pressure": 35.08855223173718
+          },
+          "offToNear": 0.38986237869098306,
+          "nearRatio": 1,
+          "pass": true
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 132.32905740871152,
+            "cents": 19.595002112119502,
+            "pressure": 7.465400994555786
+          },
+          "offToNear": 3.1945204380786767,
+          "nearRatio": 1,
+          "pass": false
+        }
+      ]
+    },
+    {
+      "midi": 36,
+      "variant": "K100",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 65.3013236068132,
+            "cents": -2.7832611214162526,
+            "pressure": 35.767323058953025
+          },
+          "offToNear": 0.29617773749309445,
+          "nearRatio": 1.0193445093639943,
+          "pass": true
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 129.37991976017716,
+            "cents": -19.42439797105165,
+            "pressure": 9.067926733903345
+          },
+          "offToNear": 3.8021566947008782,
+          "nearRatio": 1.020541153012123,
+          "pass": false
+        }
+      ]
+    },
+    {
+      "midi": 36,
+      "variant": "K500",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 65.35129869467136,
+            "cents": -1.458854823240518,
+            "pressure": 26.64549947204526
+          },
+          "offToNear": 0.2099802861555552,
+          "nearRatio": 0.759378708362459,
+          "pass": true
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 130.5795689731403,
+            "cents": -3.4458444069494325,
+            "pressure": 16.484125326622255
+          },
+          "offToNear": 0.14821910339897482,
+          "nearRatio": 7.053723610847846,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 36,
+      "variant": "K1000",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 65.35129869467136,
+            "cents": -1.458854823240518,
+            "pressure": 23.71694529607754
+          },
+          "offToNear": 0.15476865279361046,
+          "nearRatio": 0.6759168956143435,
+          "pass": false
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 130.7295251247607,
+            "cents": -1.4588548232403258,
+            "pressure": 6.0862003204144095
+          },
+          "offToNear": 0.11629979189316146,
+          "nearRatio": 2.6043465485622868,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 36,
+      "variant": "K2000",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 65.35129869467136,
+            "cents": -1.458854823240518,
+            "pressure": 12.261451606506414
+          },
+          "offToNear": 0.19251982353744784,
+          "nearRatio": 0.34944307549446496,
+          "pass": false
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 130.77951050863416,
+            "cents": -0.7970314230530349,
+            "pressure": 3.6998929176252604
+          },
+          "offToNear": 0.08956786938744325,
+          "nearRatio": 1.5832215245605477,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 43,
+      "variant": "A",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 97.45634828936042,
+            "cents": -9.610543830820198,
+            "pressure": 4.846851559814638
+          },
+          "offToNear": 2.937352088464114,
+          "nearRatio": 1,
+          "pass": false
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 195.93102089162738,
+            "cents": -1.0176111126851841,
+            "pressure": 28.42219963984766
+          },
+          "offToNear": 0.37170270127483973,
+          "nearRatio": 1,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 43,
+      "variant": "K100",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 97.60569292723605,
+            "cents": -6.959586514443779,
+            "pressure": 5.773868490491544
+          },
+          "offToNear": 2.2666250629747258,
+          "nearRatio": 1.5437731699635846,
+          "pass": false
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 195.68136569806376,
+            "cents": -3.2249551343583613,
+            "pressure": 29.386052715894802
+          },
+          "offToNear": 0.2718218052433512,
+          "nearRatio": 1.0339119803625554,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 43,
+      "variant": "K500",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 97.85460065702877,
+            "cents": -2.5503250534569815,
+            "pressure": 4.724941941887979
+          },
+          "offToNear": 0.292324096538968,
+          "nearRatio": 2.8634708345404984,
+          "pass": true
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 195.93102089162738,
+            "cents": -1.0176111126851841,
+            "pressure": 31.546426238861603
+          },
+          "offToNear": 0.1419193258014478,
+          "nearRatio": 1.1099220552456401,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 43,
+      "variant": "K1000",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 97.9043822029873,
+            "cents": -1.6698187494574503,
+            "pressure": 4.313894591342766
+          },
+          "offToNear": 0.13594490674683118,
+          "nearRatio": 2.6143625673114945,
+          "pass": true
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 195.93102089162738,
+            "cents": -1.0176111126851841,
+            "pressure": 35.464382602983186
+          },
+          "offToNear": 0.09706296980544642,
+          "nearRatio": 1.2477705122182892,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 43,
+      "variant": "K2000",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 97.95416374894585,
+            "cents": -0.7897600436642125,
+            "pressure": 2.2090330057050322
+          },
+          "offToNear": 0.13892332232085314,
+          "nearRatio": 1.338746943808196,
+          "pass": true
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 195.93102089162738,
+            "cents": -1.0176111126851841,
+            "pressure": 36.467081033513054
+          },
+          "offToNear": 0.06751057461251588,
+          "nearRatio": 1.2830492184139946,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 48,
+      "variant": "A",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 133.00145143081795,
+            "cents": 28.726159249588697,
+            "pressure": 5.508502614390409
+          },
+          "offToNear": 2.3710298954240394,
+          "nearRatio": 1,
+          "pass": false
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 260.1776223849277,
+            "cents": -10.085661967253095,
+            "pressure": 24.17826720182285
+          },
+          "offToNear": 1.6656458343381573,
+          "nearRatio": 1,
+          "pass": false
+        }
+      ]
+    },
+    {
+      "midi": 48,
+      "variant": "K100",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 128.70359387501642,
+            "cents": -28.141421168764662,
+            "pressure": 7.183443663656301
+          },
+          "offToNear": 3.080723760158792,
+          "nearRatio": 1.0036525723504137,
+          "pass": false
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 260.5775334184584,
+            "cents": -7.426678273168926,
+            "pressure": 31.172320214176157
+          },
+          "offToNear": 2.136039026247178,
+          "nearRatio": 1.005350355630726,
+          "pass": false
+        }
+      ]
+    },
+    {
+      "midi": 48,
+      "variant": "K500",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 130.40274686219377,
+            "cents": -5.435117139280468,
+            "pressure": 15.483155491742105
+          },
+          "offToNear": 2.314398674712714,
+          "nearRatio": 2.8795509903068677,
+          "pass": false
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 261.1773999687545,
+            "cents": -3.4458444069496252,
+            "pressure": 38.40978552871517
+          },
+          "offToNear": 0.19842344378373877,
+          "nearRatio": 2.6460580789223425,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 48,
+      "variant": "K1000",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 130.6026472136264,
+            "cents": -2.7832611214162526,
+            "pressure": 10.664027047656603
+          },
+          "offToNear": 0.09742999108502369,
+          "nearRatio": 4.590127064576598,
+          "pass": true
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 261.3773554855199,
+            "cents": -2.12093132480754,
+            "pressure": 33.400658439784294
+          },
+          "offToNear": 0.07909452435691194,
+          "nearRatio": 2.3009782764822777,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "midi": 48,
+      "variant": "K2000",
+      "bands": [
+        {
+          "h": 1,
+          "dominant": {
+            "hz": 130.7025973893427,
+            "cents": -1.458854823240518,
+            "pressure": 6.492873342870181
+          },
+          "offToNear": 0.06259102630443791,
+          "nearRatio": 2.794733502155315,
+          "pass": true
+        },
+        {
+          "h": 2,
+          "dominant": {
+            "hz": 261.52732212309394,
+            "cents": -1.1279114975692535,
+            "pressure": 21.891684499513847
+          },
+          "offToNear": 0.060379060116259826,
+          "nearRatio": 1.508122678473475,
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "variant": "A",
+      "passCount": 2,
+      "expected": 6
+    },
+    {
+      "variant": "K100",
+      "passCount": 2,
+      "expected": 6
+    },
+    {
+      "variant": "K500",
+      "passCount": 5,
+      "expected": 6
+    },
+    {
+      "variant": "K1000",
+      "passCount": 5,
+      "expected": 6
+    },
+    {
+      "variant": "K2000",
+      "passCount": 5,
+      "expected": 6
+    }
+  ],
+  "scope": "Linear forced response screening; not transient audio or tuning approval"
+}
