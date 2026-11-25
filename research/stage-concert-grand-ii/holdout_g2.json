@@ -1,0 +1,54 @@
+{
+  "purpose": "reserved evaluation; do not retrieve or measure audio until after calibration frozen",
+  "c5": {
+    "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+    "files": [
+      {
+        "path": "Samples/F#3v12.flac",
+        "bytes": 1806073,
+        "git_blob_sha1": "c54c2f93814e07043bcbd860d6f23456dbf6690b"
+      },
+      {
+        "path": "Samples/F#3v5.flac",
+        "bytes": 1775604,
+        "git_blob_sha1": "c78aa038ba0f883efad7e8259c478222728e3964"
+      },
+      {
+        "path": "Samples/F#4v12.flac",
+        "bytes": 1549067,
+        "git_blob_sha1": "4787268dc66d6cc75093b92d39efaca3f32ecdea"
+      },
+      {
+        "path": "Samples/F#4v5.flac",
+        "bytes": 1441445,
+        "git_blob_sha1": "451a1afc50c2f8f443733de815fc3b8289bee297"
+      },
+      {
+        "path": "Samples/F#6v12.flac",
+        "bytes": 698769,
+        "git_blob_sha1": "3d365e417225a2a93687073a55cb9b96a691e918"
+      },
+      {
+        "path": "Samples/F#6v5.flac",
+        "bytes": 618762,
+        "git_blob_sha1": "df19892992290caa586a94083901008dc1563f02"
+      }
+    ],
+    "replacement": "G3/G4/G6 unavailable on recorded sample grid; nearest F# selected rather than transposition"
+  },
+  "iowa": {
+    "commit": "3127691df600da0c20a44f8e59db514e11df7197",
+    "files": [
+      "university_iowa/Piano.pp.G3.aiff",
+      "university_iowa/Piano.mf.G3.aiff",
+      "university_iowa/Piano.ff.G3.aiff",
+      "university_iowa/Piano.pp.G4.aiff",
+      "university_iowa/Piano.mf.G4.aiff",
+      "university_iowa/Piano.ff.G4.aiff",
+      "university_iowa/Piano.pp.G6.aiff",
+      "university_iowa/Piano.mf.G6.aiff",
+      "university_iowa/Piano.ff.G6.aiff"
+    ],
+    "status": "pending checksum metadata verification"
+  }
+}

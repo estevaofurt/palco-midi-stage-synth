@@ -1,0 +1,22 @@
+name: Concert Grand II G2 holdout metadata
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/holdout_g2.json','research/stage-concert-grand-ii/verify_holdout_metadata.py','.github/workflows/concert-grand-ii-holdout.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python research/stage-concert-grand-ii/verify_holdout_metadata.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-holdout-metadata
+          path: /tmp/g2-holdout.json
