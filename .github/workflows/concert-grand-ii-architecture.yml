@@ -1,0 +1,24 @@
+name: Concert Grand II G2.04a architecture core proof
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_arch_*.mjs','.github/workflows/concert-grand-ii-architecture.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand-ii/g2_arch_core.test.mjs
+      - run: node research/stage-concert-grand-ii/g2_arch_bench.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-architecture-core-proof
+          path: /tmp/g2arch/benchmark.json
+          if-no-files-found: error
