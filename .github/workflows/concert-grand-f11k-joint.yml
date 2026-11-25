@@ -3,7 +3,7 @@ on:
   push:
     branches: [research/stage-concert-grand]
     paths:
-      - '.github/workflows/concert-grand-f11k-patch.yml'
+      - '.github/workflows/concert-grand-f11k-joint.yml'
       - 'research/stage-concert-grand/f11k-bass-joint-trial*.mjs'
   workflow_dispatch:
 permissions:
