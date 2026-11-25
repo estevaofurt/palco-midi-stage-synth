@@ -1,0 +1,30 @@
+name: Concert Grand F11s bass dynamic confirmation
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11s-dynamics.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  notes:
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [36,43,48]
+        variant: [K750,K1000]
+        touch: [24,76]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11q-bass-support-trial-demo.mjs /tmp/f11s-dynamics ${{ matrix.midi }} ${{ matrix.touch }} ${{ matrix.variant }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11S-bass-midi${{ matrix.midi }}-variant${{ matrix.variant }}-touch${{ matrix.touch }}
+          path: /tmp/f11s-dynamics/
+          if-no-files-found: error
