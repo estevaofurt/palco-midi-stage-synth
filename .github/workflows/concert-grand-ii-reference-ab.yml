@@ -1,0 +1,48 @@
+name: Concert Grand II G2.10d reference AB
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_reference_ab.py','.github/workflows/concert-grand-ii-reference-ab.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-first-audio-5s-WAV
+          run-id: 45602018373
+          github-token: ${{ github.token }}
+          path: /tmp/g2-baseline
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-C6-candidate-*
+          run-id: 45607975115
+          github-token: ${{ github.token }}
+          path: /tmp/g2-candidate
+      - run: python research/stage-concert-grand-ii/g2_reference_ab.py --baseline /tmp/g2-baseline --candidate /tmp/g2-candidate --out /tmp/g2-ab
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-10d-AB-escuta-cega
+          path: |
+            /tmp/g2-ab/escuta_cega/
+            /tmp/g2-ab/LEIA-ME.txt
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-10d-AB-originais-e-gabarito
+          path: |
+            /tmp/g2-ab/originals/
+            /tmp/g2-ab/gabarito.json
+            /tmp/g2-ab/resultado_numerico.json
+            /tmp/g2-ab/LEIA-ME.txt
+          if-no-files-found: error
