@@ -1,0 +1,72 @@
+name: Concert Grand III third generation BEM proof
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/bem_third_proof.py','research/stage-concert-grand-iii/test_bem_third_proof.py','.github/workflows/concert-grand-iii-third-bem-proof.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof30:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          for r in 45716637733 45720932678 45721919295; do
+            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
+          done
+          gh run download 45716637733 -n G3-candidate-proof-30 -D /tmp/g3-candidate
+          gh run download 45720932678 -n G3-third-strip-30 -D /tmp/g3-third
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_bem_third_proof.py
+      - run: python research/stage-concert-grand-iii/test_bem_prepared_operator.py
+      - run: python research/stage-concert-grand-iii/bem_third_proof.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-candidate --candidate /tmp/g3-third --angle 30 --budget 850 --out /tmp/g3-third-proof
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-third-proof-30-850
+          path: /tmp/g3-third-proof/
+          if-no-files-found: warn
+  localize55:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          test "$(gh run view 45716637733 --json conclusion --jq .conclusion)" = success
+          gh run download 45716637733 -n G3-candidate-proof-55 -D /tmp/g3-candidate
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_bem_third_strip_replay.py
+      - run: python research/stage-concert-grand-iii/bem_third_strip_replay.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-candidate --angle 55 --out /tmp/g3-third
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-third-strip-55
+          path: /tmp/g3-third/
+          if-no-files-found: warn
