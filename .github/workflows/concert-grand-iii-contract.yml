@@ -71,3 +71,15 @@ jobs:
           name: G3-felt-law-01
           path: /tmp/g3-felt/
           if-no-files-found: error
+      - run: python research/stage-concert-grand-iii/test_hammer_impact.py
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+      - run: python research/stage-concert-grand-iii/hammer_impact.py --scale /tmp/g3-geometry/scale_geometry.json --felt /tmp/g3-felt/felt.json --out /tmp/g3-impact
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-hammer-impact-fixture-01
+          path: /tmp/g3-impact/
+          if-no-files-found: warn
