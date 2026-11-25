@@ -1,0 +1,35 @@
+name: Concert Grand F11o bass support screening
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11o-support.yml'
+      - 'research/stage-concert-grand/f11o-bass-support*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11o-bass-support-trial.test.mjs
+  screen:
+    needs: smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11o-bass-support-screen.mjs /tmp/f11o
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11O-bass-support-screen
+          path: /tmp/f11o/
+          if-no-files-found: error
