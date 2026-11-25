@@ -1,0 +1,45 @@
+name: Concert Grand III remaining reactive block quadrature audit
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/high_modal_remaining_reactive.py','research/stage-concert-grand-iii/test_high_modal_remaining_reactive.py','.github/workflows/concert-grand-iii-remaining-reactive.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+        kind: ['self','disjoint']
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require completed reference
+        run: |
+          test "$(gh run view 45717196561 --json conclusion --jq .conclusion)" = success
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high-modal
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_high_modal_remaining_reactive.py
+      - run: python research/stage-concert-grand-iii/high_modal_remaining_reactive.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high-modal --angle ${{ matrix.angle }} --kind ${{ matrix.kind }} --out /tmp/g3-remaining
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-remaining-reactive-${{ matrix.angle }}-${{ matrix.kind }}
+          path: /tmp/g3-remaining/
+          if-no-files-found: warn
