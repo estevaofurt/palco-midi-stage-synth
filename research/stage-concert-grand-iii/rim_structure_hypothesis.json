@@ -1,0 +1,28 @@
+{
+  "version": "G3-rim-structure-01",
+  "status": "engineering_hypothesis",
+  "rim": {
+    "densityKgM3": 660,
+    "youngAlongPa": 10000000000,
+    "widthM": 0.04,
+    "heightM": 0.08,
+    "foundationNperM2": 2000000,
+    "alphaPerS": 30,
+    "betaS": 0.00001,
+    "status": "diagnostic rectangular maple-like closed arclength beam; artificial distributed ground restraint"
+  },
+  "joint": {
+    "stiffnessNperM2": 2000000,
+    "status": "diagnostic relative vertical bond, not measured"
+  },
+  "plate": {
+    "alphaPerS": 10,
+    "betaS": 0.000002
+  },
+  "limitations": [
+    "closed scalar arclength beam, corners not actual three-dimensional frame",
+    "no lateral, torsion, in-plane or normal-slope bond",
+    "no actual case, legs or rim geometry",
+    "not a selected model; no radiation"
+  ]
+}
