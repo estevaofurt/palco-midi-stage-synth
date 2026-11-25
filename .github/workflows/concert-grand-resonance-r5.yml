@@ -1,0 +1,27 @@
+name: Concert Grand R5 selective resonance trial
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths: ['research/stage-concert-grand/f11u-r5-*.mjs','.github/workflows/concert-grand-resonance-r5.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  phrase:
+    strategy:
+      fail-fast: false
+      matrix:
+        factor: ['1','1.5','2']
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --max-old-space-size=6144 research/stage-concert-grand/f11u-r5-demo.mjs /tmp/r5 K750 phrase ${{ matrix.factor }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R5-board-loss-${{ matrix.factor }}
+          path: /tmp/r5/
+          if-no-files-found: error
