@@ -1,0 +1,49 @@
+name: Concert Grand III archived strip exact band replay at 80 Hz
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/bem_strip_band_replay.py','research/stage-concert-grand-iii/test_bem_strip_band_replay.py','.github/workflows/concert-grand-iii-strip-band-replay.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - angle: '30'
+            job: '139542864994'
+          - angle: '55'
+            job: '139542864929'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require approved individual 80 Hz diagnostic
+        run: |
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/jobs/${{ matrix.job }} --jq .conclusion)" = success
+          gh run download 45710358582 -n G3-strip-audit-${{ matrix.angle }}-80 -D /tmp/g3-strip-source
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_bem_strip_band_replay.py
+      - run: python research/stage-concert-grand-iii/test_bem_edge_bands.py
+      - run: python research/stage-concert-grand-iii/bem_strip_band_replay.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-strip-source --angle ${{ matrix.angle }} --out /tmp/g3-strip-band
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-strip-band-replay-${{ matrix.angle }}
+          path: /tmp/g3-strip-band/
+          if-no-files-found: warn

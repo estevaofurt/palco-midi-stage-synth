@@ -56,7 +56,8 @@ def summarize(classes,E,T,A):
     return dict(heldoutResidual=float(np.sqrt(total/den)),heldoutWorstColumn=float(np.sqrt(max(error/target))),
         totalResidualEnergy=total,area=float(A.sum()),energyClosure=float(closure),
         categories=rows,elementIndicator=normalized.sum(axis=(1,2,3)).tolist(),
-        sectorIndicator=normalized.sum(axis=(2,3)).tolist())
+        sectorIndicator=normalized.sum(axis=(2,3)).tolist(),
+        sectorBandIndicator=normalized.sum(axis=3).tolist())
 
 def localize(t,labels,kinds,q,velocity,k,outer,inner,batch=24,*,exact_bands=False):
     classes,angles=inventory(t,labels,kinds)
