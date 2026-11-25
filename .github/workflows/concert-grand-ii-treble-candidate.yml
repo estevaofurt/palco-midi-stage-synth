@@ -1,0 +1,44 @@
+name: Concert Grand II G2.10c candidate treble audio
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_treble_candidate_audio.py','.github/workflows/concert-grand-ii-treble-candidate.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        speed: ['0.5','1','2']
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: python -m py_compile research/stage-concert-grand-ii/g2_treble_candidate_audio.py
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-first-audio-5s-WAV
+          run-id: 45602018373
+          github-token: ${{ github.token }}
+          path: /tmp/g2-baseline
+      - run: python research/stage-concert-grand-ii/g2_treble_candidate_audio.py --speed ${{ matrix.speed }} --baseline /tmp/g2-baseline --out /tmp/g2-candidate
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G2-C6-candidate-${{ matrix.speed }}ms
+          path: /tmp/g2-candidate/
+          if-no-files-found: error
