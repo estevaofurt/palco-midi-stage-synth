@@ -1,0 +1,2452 @@
+{
+  "runId": 45527213980,
+  "cases": [
+    {
+      "pitch": [
+        {
+          "startS": 0.25,
+          "endS": 1.25,
+          "dominant": 2,
+          "partials": [
+            {
+              "h": 1,
+              "expectedHz": 130.8127826502993,
+              "stiffnessCents": 0,
+              "peak": {
+                "hz": 131.97609911616348,
+                "db": -30.490445228364216,
+                "centsFromHarmonic": 15.327788739519235,
+                "centsFromStiff": 15.327788739519235
+              },
+              "otherPeaks": [
+                {
+                  "hz": 127.45100908243421,
+                  "db": -53.560840835234714,
+                  "centsFromHarmonic": -45.07287351640945,
+                  "centsFromStiff": -45.07287351640945
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 2,
+              "expectedHz": 261.6977645801819,
+              "stiffnessCents": 0.4776926415805644,
+              "peak": {
+                "hz": 261.91366847241613,
+                "db": -22.534943601125434,
+                "centsFromHarmonic": 1.905393288093674,
+                "centsFromStiff": 1.427700646513164
+              },
+              "otherPeaks": [],
+              "usable": true
+            },
+            {
+              "h": 3,
+              "expectedHz": 392.7270787033524,
+              "stiffnessCents": 1.2732616980434819,
+              "peak": {
+                "hz": 392.10885108814045,
+                "db": -49.919923599239794,
+                "centsFromHarmonic": -1.4541794862161328,
+                "centsFromStiff": -2.7274411842595625
+              },
+              "otherPeaks": [
+                {
+                  "hz": 395.73725469000624,
+                  "db": -59.14066940771038,
+                  "centsFromHarmonic": 14.492234986395694,
+                  "centsFromStiff": 13.218973288352366
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 4,
+              "expectedHz": 523.9727254576919,
+              "stiffnessCents": 2.3858314068774176,
+              "peak": {
+                "hz": 523.9218528913478,
+                "db": -37.535283908420716,
+                "centsFromHarmonic": 2.217737552958996,
+                "centsFromStiff": -0.1680938539183942
+              },
+              "otherPeaks": [],
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "endS": 3,
+          "dominant": 2,
+          "partials": [
+            {
+              "h": 1,
+              "expectedHz": 130.8127826502993,
+              "stiffnessCents": 0,
+              "peak": {
+                "hz": 131.96178683318675,
+                "db": -42.1907322462193,
+                "centsFromHarmonic": 15.14003311251367,
+                "centsFromStiff": 15.14003311251367
+              },
+              "otherPeaks": [
+                {
+                  "hz": 130.52416745695837,
+                  "db": -59.744692007369025,
+                  "centsFromHarmonic": -3.823880646977673,
+                  "centsFromStiff": -3.823880646977673
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 2,
+              "expectedHz": 261.6977645801819,
+              "stiffnessCents": 0.4776926415805644,
+              "peak": {
+                "hz": 261.9975566237159,
+                "db": -27.40307465493826,
+                "centsFromHarmonic": 2.4598002873249265,
+                "centsFromStiff": 1.98210764574455
+              },
+              "otherPeaks": [
+                {
+                  "hz": 260.9073665287671,
+                  "db": -48.66580895943993,
+                  "centsFromHarmonic": -4.7590146956036445,
+                  "centsFromStiff": -5.236707337184067
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 3,
+              "expectedHz": 392.7270787033524,
+              "stiffnessCents": 1.2732616980434819,
+              "peak": {
+                "hz": 392.3731147027181,
+                "db": -52.34399718940054,
+                "centsFromHarmonic": -0.28779911103332945,
+                "centsFromStiff": -1.5610608090766203
+              },
+              "otherPeaks": [],
+              "usable": true
+            },
+            {
+              "h": 4,
+              "expectedHz": 523.9727254576919,
+              "stiffnessCents": 2.3858314068774176,
+              "peak": {
+                "hz": 523.9397132210028,
+                "db": -46.71822667994293,
+                "centsFromHarmonic": 2.27675376622424,
+                "centsFromStiff": -0.10907764065309968
+              },
+              "otherPeaks": [],
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 3,
+          "endS": 7,
+          "dominant": 2,
+          "partials": [
+            {
+              "h": 1,
+              "expectedHz": 130.8127826502993,
+              "stiffnessCents": 0,
+              "peak": {
+                "hz": 130.69902130411486,
+                "db": -61.031581119037284,
+                "centsFromHarmonic": -1.5062228582216537,
+                "centsFromStiff": -1.5062228582216537
+              },
+              "otherPeaks": [
+                {
+                  "hz": 131.96025573124243,
+                  "db": -69.55640532440347,
+                  "centsFromHarmonic": 15.119946152039525,
+                  "centsFromStiff": 15.119946152039525
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 2,
+              "expectedHz": 261.6977645801819,
+              "stiffnessCents": 0.4776926415805644,
+              "peak": {
+                "hz": 261.95333236474534,
+                "db": -34.504731685365954,
+                "centsFromHarmonic": 2.167549449639455,
+                "centsFromStiff": 1.6898568080592722
+              },
+              "otherPeaks": [
+                {
+                  "hz": 261.26319491742873,
+                  "db": -53.012788909610904,
+                  "centsFromHarmonic": -2.3995468783377896,
+                  "centsFromStiff": -2.8772395199182084
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 3,
+              "expectedHz": 392.7270787033524,
+              "stiffnessCents": 1.2732616980434819,
+              "peak": {
+                "hz": 392.3770392807248,
+                "db": -55.58182399464645,
+                "centsFromHarmonic": -0.2704831206154312,
+                "centsFromStiff": -1.543744818658764
+              },
+              "otherPeaks": [],
+              "usable": true
+            },
+            {
+              "h": 4,
+              "expectedHz": 523.9727254576919,
+              "stiffnessCents": 2.3858314068774176,
+              "peak": {
+                "hz": 524.1683846342419,
+                "db": -49.9774223784283,
+                "centsFromHarmonic": 3.0321791727056615,
+                "centsFromStiff": 0.6463477658278967
+              },
+              "otherPeaks": [
+                {
+                  "hz": 523.1779374331608,
+                  "db": -74.0876756931149,
+                  "centsFromHarmonic": -0.2421846042722844,
+                  "centsFromStiff": -2.6280160111497635
+                }
+              ],
+              "usable": true
+            }
+          ]
+        }
+      ],
+      "parameters": {
+        "patchX": 0.67
+      },
+      "pair": {
+        "frames": 384239,
+        "rate": 48000,
+        "rms16": 0.10146557502700371,
+        "rms24": 0.10146557816014902,
+        "peak16": 0.5034943693350017,
+        "peak24": 0.503507793367838,
+        "maxPairError": 0.00001531724771589374
+      },
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 5.5,
+          "endS": 6,
+          "confirmedThroughS": 6.5
+        },
+        "40": {
+          "status": "not-observed",
+          "analyzedThroughS": 7.5
+        },
+        "60": {
+          "status": "not-observed",
+          "analyzedThroughS": 7.5
+        }
+      },
+      "partialDrops": [
+        {
+          "h": 1,
+          "referenceRms": 0.039233154090579044,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2,
+              "endS": 2.5,
+              "confirmedThroughS": 3
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 2,
+          "referenceRms": 0.0592382574198382,
+          "drops": {
+            "20": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 3,
+          "referenceRms": 0.009623448598701628,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 6,
+              "endS": 6.5,
+              "confirmedThroughS": 7
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 4,
+          "referenceRms": 0.013519309088769414,
+          "drops": {
+            "20": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 5,
+          "referenceRms": 0.004518641409389918,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 3.5,
+              "endS": 4,
+              "confirmedThroughS": 4.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 6,
+          "referenceRms": 0.03737222638110404,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 4.5,
+              "endS": 5,
+              "confirmedThroughS": 5.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 7,
+          "referenceRms": 0.027631019967354654,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 3.5,
+              "endS": 4,
+              "confirmedThroughS": 4.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 8,
+          "referenceRms": 0.005052438161823263,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2,
+              "endS": 2.5,
+              "confirmedThroughS": 3
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 6.5,
+              "endS": 7,
+              "confirmedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 9,
+          "referenceRms": 0.007310344146261905,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 1.5,
+              "endS": 2,
+              "confirmedThroughS": 2.5
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 5.5,
+              "endS": 6,
+              "confirmedThroughS": 6.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 10,
+          "referenceRms": 0.010759822280285354,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2,
+              "endS": 2.5,
+              "confirmedThroughS": 3
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 3.5,
+              "endS": 4,
+              "confirmedThroughS": 4.5
+            },
+            "60": {
+              "status": "observed-window",
+              "startS": 6,
+              "endS": 6.5,
+              "confirmedThroughS": 7
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        }
+      ],
+      "model": "S50-bass",
+      "variant": "LL",
+      "local": {
+        "variant": "local8",
+        "factor": 8,
+        "modeCount": 337,
+        "modifiedCount": 4,
+        "compliance": 1.5825411253737741e-9,
+        "modes": [
+          {
+            "index": 17,
+            "frequencyHz": 372.5984818599289,
+            "before": 12.68221061339945,
+            "after": 25.3644212267989
+          },
+          {
+            "index": 18,
+            "frequencyHz": 376.10992819640126,
+            "before": 9.544752562091997,
+            "after": 25.45267349891199
+          },
+          {
+            "index": 19,
+            "frequencyHz": 380.62893452755657,
+            "before": 9.587343193366447,
+            "after": 25.566248515643856
+          },
+          {
+            "index": 20,
+            "frequencyHz": 384.3371342573889,
+            "before": 9.622292152454301,
+            "after": 25.659445739878137
+          }
+        ]
+      },
+      "midi": 48,
+      "midiVelocity": 127,
+      "duration": 8,
+      "wire": {
+        "kind": "single-wound-core-only-EI-hypothesis",
+        "lengthM": 0.9,
+        "coreDiameterM": 0.001,
+        "wrapDiameterM": 0.00020791439511588577,
+        "pitchM": 0.00020791439511588577,
+        "outerDiameterM": 0.0014158287902317716,
+        "coreYoungPa": 200000000000,
+        "coreDensityKgM3": 7850,
+        "wrapDensityKgM3": 8960,
+        "coreMu": 0.0061653755826699685,
+        "wrapMu": 0.00556057059609548,
+        "helixRatio": 18.278996498112665,
+        "linearDensityKgM": 0.011725946178765448,
+        "EI": 0.009817477042468105,
+        "tensionN": 649.9999999999998,
+        "B": 0.00018403535541488503,
+        "stressPa": 827605704.0778556,
+        "f1Hz": 130.8127826502993,
+        "areaM2": 7.853981633974482e-7,
+        "massKg": 0.010553351560888904,
+        "midi": 48,
+        "scope": "single layer homogenized winding, axial load and EI core only, diagnostic target not measured",
+        "impedanceNsM": 2.7607725397427325
+      },
+      "gain": 0.2757526758002555,
+      "peak": 0.5035078380068109,
+      "clipped": 0,
+      "originalPeak": 0.6713437840090811,
+      "originalClipped": 0,
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "binHz": 1.46484375,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "rmsBand": 0.09079931092048374,
+          "narrowOffFraction": 0.029159520740428723,
+          "wideOffFraction": 0.02731121549627548,
+          "offPeaks": [
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -40.50635833018191,
+              "power": 0.000040111829609015216,
+              "relativeToMaxBinDb": -16.163063401320006
+            },
+            {
+              "frequencyHz": 196.2890625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -65.40870208018191,
+              "power": 0.000017283585441282126,
+              "relativeToMaxBinDb": -19.81944970999717
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -21.46338958018191,
+              "power": 0.000015764208603312406,
+              "relativeToMaxBinDb": -20.219066387835426
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -54.64090765029931,
+              "power": 0.000009772928649032424,
+              "relativeToMaxBinDb": -22.295540838606453
+            },
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 18.08739166981809,
+              "power": 0.000009481081840857977,
+              "relativeToMaxBinDb": -22.427209164814652
+            },
+            {
+              "frequencyHz": 309.08203125,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 47.38426666981809,
+              "power": 0.0000017937553830055306,
+              "relativeToMaxBinDb": -29.658155945265406
+            },
+            {
+              "frequencyHz": 687.01171875,
+              "nearestPartial": 5,
+              "partialHz": 655.5065072050677,
+              "offsetHz": 31.50521154493231,
+              "power": 8.875561747068107e-7,
+              "relativeToMaxBinDb": -32.71382962191745
+            },
+            {
+              "frequencyHz": 101.07421875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -29.73856390029931,
+              "power": 5.379486513039429e-7,
+              "relativeToMaxBinDb": -34.888379888834805
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "binHz": 1.46484375,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "rmsBand": 0.06139593982356873,
+          "narrowOffFraction": 0.0003533825861384926,
+          "wideOffFraction": 0.00022439931837251384,
+          "offPeaks": [
+            {
+              "frequencyHz": 196.2890625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -65.40870208018191,
+              "power": 1.5143146045457916e-7,
+              "relativeToMaxBinDb": -39.42600225927268
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -54.64090765029931,
+              "power": 1.3715923470801702e-7,
+              "relativeToMaxBinDb": -39.85591283509062
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -21.46338958018191,
+              "power": 3.737389931354939e-8,
+              "relativeToMaxBinDb": -45.50247925518087
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -40.50635833018191,
+              "power": 1.3318636190885322e-8,
+              "relativeToMaxBinDb": -49.983565807914026
+            },
+            {
+              "frequencyHz": 309.08203125,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 47.38426666981809,
+              "power": 1.3069171295117013e-8,
+              "relativeToMaxBinDb": -50.065682865595996
+            },
+            {
+              "frequencyHz": 279.78515625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 18.08739166981809,
+              "power": 1.123047692832511e-8,
+              "relativeToMaxBinDb": -50.72418136796125
+            },
+            {
+              "frequencyHz": 225.5859375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -36.11182708018191,
+              "power": 6.8586651219914986e-9,
+              "relativeToMaxBinDb": -52.86576738059779
+            },
+            {
+              "frequencyHz": 101.07421875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -29.73856390029931,
+              "power": 2.2286178500920034e-9,
+              "relativeToMaxBinDb": -57.747807321009134
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "binHz": 1.46484375,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "rmsBand": 0.04941726488174665,
+          "narrowOffFraction": 0.00007735441906712516,
+          "wideOffFraction": 0.000005162939117194596,
+          "offPeaks": [
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -54.64090765029931,
+              "power": 1.9285839380317e-9,
+              "relativeToMaxBinDb": -56.51205412008772
+            },
+            {
+              "frequencyHz": 196.2890625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -65.40870208018191,
+              "power": 1.326417188118982e-9,
+              "relativeToMaxBinDb": -58.137638165192016
+            },
+            {
+              "frequencyHz": 275.390625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 13.69286041981809,
+              "power": 5.468821402274718e-10,
+              "relativeToMaxBinDb": -61.98550216823612
+            },
+            {
+              "frequencyHz": 244.62890625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -17.06885833018191,
+              "power": 1.6390227797612584e-10,
+              "relativeToMaxBinDb": -67.2185896788024
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -21.46338958018191,
+              "power": 1.5692806662185823e-10,
+              "relativeToMaxBinDb": -67.4074333327776
+            },
+            {
+              "frequencyHz": 802.734375,
+              "nearestPartial": 6,
+              "partialHz": 787.3999633905281,
+              "offsetHz": 15.334411609471886,
+              "power": 9.324501168072019e-11,
+              "relativeToMaxBinDb": -69.66818349789689
+            },
+            {
+              "frequencyHz": 145.01953125,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": 14.206748599700688,
+              "power": 9.125952391016228e-11,
+              "relativeToMaxBinDb": -69.76165758701326
+            },
+            {
+              "frequencyHz": 309.08203125,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 47.38426666981809,
+              "power": 8.797050081490939e-11,
+              "relativeToMaxBinDb": -69.92106893071764
+            }
+          ]
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "binHz": 1.46484375,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "rmsBand": 0.031965657956504426,
+          "narrowOffFraction": 0.000058991188835569446,
+          "wideOffFraction": 0.0000019023543164201572,
+          "offPeaks": [
+            {
+              "frequencyHz": 275.390625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 13.69286041981809,
+              "power": 3.018194054883436e-10,
+              "relativeToMaxBinDb": -60.900408451555215
+            },
+            {
+              "frequencyHz": 244.62890625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -17.06885833018191,
+              "power": 6.79370229057925e-11,
+              "relativeToMaxBinDb": -67.37681492903654
+            },
+            {
+              "frequencyHz": 281.25,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 19.55223541981809,
+              "power": 4.3345366495328984e-11,
+              "relativeToMaxBinDb": -69.32845325104819
+            },
+            {
+              "frequencyHz": 802.734375,
+              "nearestPartial": 6,
+              "partialHz": 787.3999633905281,
+              "offsetHz": 15.334411609471886,
+              "power": 3.274230094584833e-11,
+              "relativeToMaxBinDb": -70.5467880853401
+            },
+            {
+              "frequencyHz": 771.97265625,
+              "nearestPartial": 6,
+              "partialHz": 787.3999633905281,
+              "offsetHz": -15.427307140528114,
+              "power": 2.0816193878432903e-11,
+              "relativeToMaxBinDb": -72.51386680290301
+            },
+            {
+              "frequencyHz": 238.76953125,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -22.92823333018191,
+              "power": 1.4593034446756376e-11,
+              "relativeToMaxBinDb": -74.05642396849917
+            },
+            {
+              "frequencyHz": 143.5546875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": 12.741904849700688,
+              "power": 1.1523437084747183e-11,
+              "relativeToMaxBinDb": -75.08205969454116
+            },
+            {
+              "frequencyHz": 287.109375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 25.41161041981809,
+              "power": 1.0002495864637341e-11,
+              "relativeToMaxBinDb": -75.69679623971044
+            }
+          ]
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.1014655780608772,
+          "partials": [
+            {
+              "rms": 0.039233154090579044,
+              "contrastDb": 35.83153457585883
+            },
+            {
+              "rms": 0.0592382574198382,
+              "contrastDb": 19.873793141246306
+            },
+            {
+              "rms": 0.009623448598701628,
+              "contrastDb": 17.553551204465954
+            },
+            {
+              "rms": 0.013519309088769414,
+              "contrastDb": 27.667801339507243
+            },
+            {
+              "rms": 0.004518641409389918,
+              "contrastDb": 11.388369352763288
+            },
+            {
+              "rms": 0.03737222638110404,
+              "contrastDb": 37.265626122295444
+            },
+            {
+              "rms": 0.027631019967354654,
+              "contrastDb": 33.83602157826026
+            },
+            {
+              "rms": 0.005052438161823263,
+              "contrastDb": 32.929770022232475
+            },
+            {
+              "rms": 0.007310344146261905,
+              "contrastDb": 43.04803500924747
+            },
+            {
+              "rms": 0.010759822280285354,
+              "contrastDb": 41.22273868861808
+            }
+          ]
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.06307659352229461,
+          "partials": [
+            {
+              "rms": 0.020372716911514866,
+              "contrastDb": 53.89445299012448
+            },
+            {
+              "rms": 0.05326465668591134,
+              "contrastDb": 46.196039532995805
+            },
+            {
+              "rms": 0.0024665391173493874,
+              "contrastDb": 48.451956001476255
+            },
+            {
+              "rms": 0.00951830792384692,
+              "contrastDb": 54.26582073914628
+            },
+            {
+              "rms": 0.002186394191170002,
+              "contrastDb": 38.52710903854397
+            },
+            {
+              "rms": 0.013947081015730606,
+              "contrastDb": 70.2300930278639
+            },
+            {
+              "rms": 0.009778915497355179,
+              "contrastDb": 65.37615178458564
+            },
+            {
+              "rms": 0.0023005962045780717,
+              "contrastDb": 74.30720799384807
+            },
+            {
+              "rms": 0.0024531914160015305,
+              "contrastDb": 85.8107936440944
+            },
+            {
+              "rms": 0.003220343038254286,
+              "contrastDb": 88.98362455921072
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "rms": 0.05011212993356212,
+          "partials": [
+            {
+              "rms": 0.012699392281892877,
+              "contrastDb": 67.64374459383124
+            },
+            {
+              "rms": 0.0433309685005587,
+              "contrastDb": 67.47136723210312
+            },
+            {
+              "rms": 0.0016613937241669978,
+              "contrastDb": 67.08319145246497
+            },
+            {
+              "rms": 0.004131708695981336,
+              "contrastDb": 67.40699792915565
+            },
+            {
+              "rms": 0.0012028474152124802,
+              "contrastDb": 65.99629269583522
+            },
+            {
+              "rms": 0.014591493446083936,
+              "contrastDb": 75.52946153803202
+            },
+            {
+              "rms": 0.013152084057967089,
+              "contrastDb": 85.93748669807395
+            },
+            {
+              "rms": 0.0006307364017840094,
+              "contrastDb": 77.42584681114991
+            },
+            {
+              "rms": 0.0020509588425426982,
+              "contrastDb": 89.13879693776677
+            },
+            {
+              "rms": 0.003975294069642631,
+              "contrastDb": 91.71540234086578
+            }
+          ]
+        },
+        {
+          "startS": 2,
+          "rms": 0.03205869181482759,
+          "partials": [
+            {
+              "rms": 0.0037728487952413095,
+              "contrastDb": 67.00299023488601
+            },
+            {
+              "rms": 0.02758602878176971,
+              "contrastDb": 68.89969244940596
+            },
+            {
+              "rms": 0.0017517287178995245,
+              "contrastDb": 67.98035945719978
+            },
+            {
+              "rms": 0.005460787942376084,
+              "contrastDb": 69.95966115247239
+            },
+            {
+              "rms": 0.0012264959483719036,
+              "contrastDb": 73.75686653461463
+            },
+            {
+              "rms": 0.013856398829881017,
+              "contrastDb": 77.87637195505197
+            },
+            {
+              "rms": 0.0037212352267938127,
+              "contrastDb": 79.9404032852654
+            },
+            {
+              "rms": 0.00013546315558110112,
+              "contrastDb": 71.43145416697115
+            },
+            {
+              "rms": 0.0007025295655812962,
+              "contrastDb": 88.43817030301678
+            },
+            {
+              "rms": 0.0005010872056613507,
+              "contrastDb": 87.92502996147812
+            }
+          ]
+        },
+        {
+          "startS": 4,
+          "rms": 0.017599419793566103,
+          "partials": [
+            {
+              "rms": 0.0008649548116932631,
+              "contrastDb": 72.80438261816347
+            },
+            {
+              "rms": 0.016028580835789494,
+              "contrastDb": 68.78755526747648
+            },
+            {
+              "rms": 0.0011766273117023703,
+              "contrastDb": 67.68940254191924
+            },
+            {
+              "rms": 0.003951660699674832,
+              "contrastDb": 69.37602443457969
+            },
+            {
+              "rms": 0.0000848348433521406,
+              "contrastDb": 66.5267700558732
+            },
+            {
+              "rms": 0.005150758860763417,
+              "contrastDb": 77.04390022432845
+            },
+            {
+              "rms": 0.0005710074592808208,
+              "contrastDb": 75.54436730736475
+            },
+            {
+              "rms": 0.0001270498067898141,
+              "contrastDb": 81.359210303099
+            },
+            {
+              "rms": 0.00015852696752625384,
+              "contrastDb": 87.4766682077686
+            },
+            {
+              "rms": 0.00005944117901995578,
+              "contrastDb": 84.19555254653861
+            }
+          ]
+        },
+        {
+          "startS": 6,
+          "rms": 0.009467637316783154,
+          "partials": [
+            {
+              "rms": 0.0006019203771815654,
+              "contrastDb": 68.86593343710065
+            },
+            {
+              "rms": 0.008062279181975265,
+              "contrastDb": 68.53572776627927
+            },
+            {
+              "rms": 0.0009101314639397761,
+              "contrastDb": 67.76622194209432
+            },
+            {
+              "rms": 0.004149499037925387,
+              "contrastDb": 70.31567555750912
+            },
+            {
+              "rms": 0.00007364211662122143,
+              "contrastDb": 70.11093896812267
+            },
+            {
+              "rms": 0.0017793060178068016,
+              "contrastDb": 75.52003823579446
+            },
+            {
+              "rms": 0.0005178535644949997,
+              "contrastDb": 83.34337372490927
+            },
+            {
+              "rms": 0.00006116050369253141,
+              "contrastDb": 81.21171067799241
+            },
+            {
+              "rms": 0.000044290050542766015,
+              "contrastDb": 86.73157907590878
+            },
+            {
+              "rms": 0.0000047927018514135815,
+              "contrastDb": 70.9209177993225
+            }
+          ]
+        },
+        {
+          "startS": 7,
+          "rms": 0.012310316986590754,
+          "partials": [
+            {
+              "rms": 0.0005931908466900704,
+              "contrastDb": 69.4428571681562
+            },
+            {
+              "rms": 0.011860145024772546,
+              "contrastDb": 70.20106461609683
+            },
+            {
+              "rms": 0.0008793078828029971,
+              "contrastDb": 68.1779898258282
+            },
+            {
+              "rms": 0.0031169812051049343,
+              "contrastDb": 70.1347640718911
+            },
+            {
+              "rms": 0.000040056056414124285,
+              "contrastDb": 71.17327695232125
+            },
+            {
+              "rms": 0.0015516216080679174,
+              "contrastDb": 76.27242889541988
+            },
+            {
+              "rms": 0.0004661289165404908,
+              "contrastDb": 81.69175071206404
+            },
+            {
+              "rms": 0.00004068408590153951,
+              "contrastDb": 80.59637433106491
+            },
+            {
+              "rms": 0.00003016200234123894,
+              "contrastDb": 87.11781532541251
+            },
+            {
+              "rms": 0.0000026497834626070215,
+              "contrastDb": 69.39702478773322
+            }
+          ]
+        }
+      ],
+      "count": 2,
+      "attack": {
+        "peakForce": 25.392673212370653,
+        "reboundMps": -1.401830556254221
+      },
+      "maxBalance": 2.309159807811767e-13,
+      "maxIncrease": 0,
+      "jobId": 138913633359,
+      "artifactId": 14983461152
+    },
+    {
+      "pitch": [
+        {
+          "startS": 0.25,
+          "endS": 1.25,
+          "dominant": 6,
+          "partials": [
+            {
+              "h": 1,
+              "expectedHz": 130.8127826502993,
+              "stiffnessCents": 0,
+              "peak": {
+                "hz": 131.6547997988048,
+                "db": -34.41002265580004,
+                "centsFromHarmonic": 11.107914697079497,
+                "centsFromStiff": 11.107914697079497
+              },
+              "otherPeaks": [
+                {
+                  "hz": 127.60885959978971,
+                  "db": -45.728083369177774,
+                  "centsFromHarmonic": -42.930033667792486,
+                  "centsFromStiff": -42.930033667792486
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 2,
+              "expectedHz": 261.6977645801819,
+              "stiffnessCents": 0.4776926415805644,
+              "peak": {
+                "hz": 261.6998119600002,
+                "db": -34.703132641423494,
+                "centsFromHarmonic": 0.491236814544706,
+                "centsFromStiff": 0.013544172964075856
+              },
+              "otherPeaks": [
+                {
+                  "hz": 267.74889615524177,
+                  "db": -57.349312731470874,
+                  "centsFromHarmonic": 40.05252415019435,
+                  "centsFromStiff": 39.574831508613826
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 3,
+              "expectedHz": 392.7270787033524,
+              "stiffnessCents": 1.2732616980434819,
+              "peak": {
+                "hz": 392.23484306735185,
+                "db": -50.36483735151113,
+                "centsFromHarmonic": -0.8979906424185413,
+                "centsFromStiff": -2.171252340461925
+              },
+              "otherPeaks": [
+                {
+                  "hz": 395.7074228863716,
+                  "db": -61.23319389493152,
+                  "centsFromHarmonic": 14.36172470390828,
+                  "centsFromStiff": 13.08846300586503
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 4,
+              "expectedHz": 523.9727254576919,
+              "stiffnessCents": 2.3858314068774176,
+              "peak": {
+                "hz": 522.0115549210453,
+                "db": -37.88790833194615,
+                "centsFromHarmonic": -4.106138408287001,
+                "centsFromStiff": -6.491969815164408
+              },
+              "otherPeaks": [],
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "endS": 3,
+          "dominant": 6,
+          "partials": [
+            {
+              "h": 1,
+              "expectedHz": 130.8127826502993,
+              "stiffnessCents": 0,
+              "peak": {
+                "hz": 131.66844281559648,
+                "db": -45.19818701251533,
+                "centsFromHarmonic": 11.287308319825366,
+                "centsFromStiff": 11.287308319825366
+              },
+              "otherPeaks": [
+                {
+                  "hz": 130.65222268405964,
+                  "db": -58.678420251697574,
+                  "centsFromHarmonic": -2.12622652928545,
+                  "centsFromStiff": -2.12622652928545
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 2,
+              "expectedHz": 261.6977645801819,
+              "stiffnessCents": 0.4776926415805644,
+              "peak": {
+                "hz": 261.6699824044585,
+                "db": -41.91358285737579,
+                "centsFromHarmonic": 0.2938928224595191,
+                "centsFromStiff": -0.18379981912085183
+              },
+              "otherPeaks": [],
+              "usable": true
+            },
+            {
+              "h": 3,
+              "expectedHz": 392.7270787033524,
+              "stiffnessCents": 1.2732616980434819,
+              "peak": {
+                "hz": 392.3731004556051,
+                "db": -52.402734817629465,
+                "centsFromHarmonic": -0.287861972342399,
+                "centsFromStiff": -1.5611236703857203
+              },
+              "otherPeaks": [],
+              "usable": true
+            },
+            {
+              "h": 4,
+              "expectedHz": 523.9727254576919,
+              "stiffnessCents": 2.3858314068774176,
+              "peak": {
+                "hz": 521.957262863836,
+                "db": -44.008605461426626,
+                "centsFromHarmonic": -4.286205583700884,
+                "centsFromStiff": -6.672036990578272
+              },
+              "otherPeaks": [
+                {
+                  "hz": 523.5678155424403,
+                  "db": -52.120029630884154,
+                  "centsFromHarmonic": 1.0474700937569164,
+                  "centsFromStiff": -1.338361313120417
+                }
+              ],
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 3,
+          "endS": 7,
+          "dominant": 2,
+          "partials": [
+            {
+              "h": 1,
+              "expectedHz": 130.8127826502993,
+              "stiffnessCents": 0,
+              "peak": {
+                "hz": 130.69861945452746,
+                "db": -62.33106652723108,
+                "centsFromHarmonic": -1.5115457500909786,
+                "centsFromStiff": -1.5115457500909786
+              },
+              "otherPeaks": [
+                {
+                  "hz": 131.65925042036864,
+                  "db": -70.47342091999192,
+                  "centsFromHarmonic": 11.16643848329723,
+                  "centsFromStiff": 11.16643848329723
+                }
+              ],
+              "usable": true
+            },
+            {
+              "h": 2,
+              "expectedHz": 261.6977645801819,
+              "stiffnessCents": 0.4776926415805644,
+              "peak": {
+                "hz": 261.68188317966036,
+                "db": -43.146751477960294,
+                "centsFromHarmonic": 0.3726277180364149,
+                "centsFromStiff": -0.10506492354404517
+              },
+              "otherPeaks": [],
+              "usable": true
+            },
+            {
+              "h": 3,
+              "expectedHz": 392.7270787033524,
+              "stiffnessCents": 1.2732616980434819,
+              "peak": {
+                "hz": 392.37674568545975,
+                "db": -55.52091893281506,
+                "centsFromHarmonic": -0.27177851320643137,
+                "centsFromStiff": -1.5450402112499213
+              },
+              "otherPeaks": [],
+              "usable": true
+            },
+            {
+              "h": 4,
+              "expectedHz": 523.9727254576919,
+              "stiffnessCents": 2.3858314068774176,
+              "peak": {
+                "hz": 523.4981562158264,
+                "db": -56.262591562424774,
+                "centsFromHarmonic": 0.8171186135263071,
+                "centsFromStiff": -1.568712793351191
+              },
+              "otherPeaks": [
+                {
+                  "hz": 521.9608837619726,
+                  "db": -58.09605695098486,
+                  "centsFromHarmonic": -4.274195787410877,
+                  "centsFromStiff": -6.660027194288367
+                },
+                {
+                  "hz": 524.0282694181677,
+                  "db": -73.17421798102852,
+                  "centsFromHarmonic": 2.5693419114587757,
+                  "centsFromStiff": 0.18351050458136434
+                }
+              ],
+              "usable": true
+            }
+          ]
+        }
+      ],
+      "parameters": {
+        "patchX": 0.71
+      },
+      "pair": {
+        "frames": 384239,
+        "rate": 48000,
+        "rms16": 0.08604659835405189,
+        "rms24": 0.0860466000415273,
+        "peak16": 0.5191198461867123,
+        "peak24": 0.519126477137384,
+        "maxPairError": 0.000015317702477174455
+      },
+      "relativeDrops": {
+        "20": {
+          "status": "observed-window",
+          "startS": 2.5,
+          "endS": 3,
+          "confirmedThroughS": 3.5
+        },
+        "40": {
+          "status": "not-observed",
+          "analyzedThroughS": 7.5
+        },
+        "60": {
+          "status": "not-observed",
+          "analyzedThroughS": 7.5
+        }
+      },
+      "partialDrops": [
+        {
+          "h": 1,
+          "referenceRms": 0.026799469998138634,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2.5,
+              "endS": 3,
+              "confirmedThroughS": 3.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 2,
+          "referenceRms": 0.017093193700010584,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2.5,
+              "endS": 3,
+              "confirmedThroughS": 3.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 3,
+          "referenceRms": 0.010007528078376867,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 6,
+              "endS": 6.5,
+              "confirmedThroughS": 7
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 4,
+          "referenceRms": 0.010384776127797406,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 6,
+              "endS": 6.5,
+              "confirmedThroughS": 7
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 5,
+          "referenceRms": 0.006098650352453269,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2,
+              "endS": 2.5,
+              "confirmedThroughS": 3
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 6,
+          "referenceRms": 0.019728473062475795,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 4.5,
+              "endS": 5,
+              "confirmedThroughS": 5.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 7,
+          "referenceRms": 0.025612493061448863,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2.5,
+              "endS": 3,
+              "confirmedThroughS": 3.5
+            },
+            "40": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 8,
+          "referenceRms": 0.00530575878180675,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 2,
+              "endS": 2.5,
+              "confirmedThroughS": 3
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 6.5,
+              "endS": 7,
+              "confirmedThroughS": 7.5
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 9,
+          "referenceRms": 0.01333794464925687,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 1.5,
+              "endS": 2,
+              "confirmedThroughS": 2.5
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 6,
+              "endS": 6.5,
+              "confirmedThroughS": 7
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        },
+        {
+          "h": 10,
+          "referenceRms": 0.009129523761503498,
+          "drops": {
+            "20": {
+              "status": "observed-window",
+              "startS": 1.5,
+              "endS": 2,
+              "confirmedThroughS": 2.5
+            },
+            "40": {
+              "status": "observed-window",
+              "startS": 5,
+              "endS": 5.5,
+              "confirmedThroughS": 6
+            },
+            "60": {
+              "status": "not-observed",
+              "analyzedThroughS": 7.5
+            }
+          },
+          "warning": "check sideband contrast and recording noise before interpreting crossings"
+        }
+      ],
+      "model": "S50-bass",
+      "variant": "LM",
+      "local": {
+        "variant": "local8",
+        "factor": 8,
+        "modeCount": 337,
+        "modifiedCount": 4,
+        "compliance": 3.768696895326363e-9,
+        "modes": [
+          {
+            "index": 17,
+            "frequencyHz": 372.5984818599289,
+            "before": 12.68221061339945,
+            "after": 25.3644212267989
+          },
+          {
+            "index": 18,
+            "frequencyHz": 376.10992819640126,
+            "before": 9.544752562091997,
+            "after": 25.45267349891199
+          },
+          {
+            "index": 19,
+            "frequencyHz": 380.62893452755657,
+            "before": 9.587343193366447,
+            "after": 25.566248515643856
+          },
+          {
+            "index": 20,
+            "frequencyHz": 384.3371342573889,
+            "before": 9.622292152454301,
+            "after": 25.659445739878137
+          }
+        ]
+      },
+      "midi": 48,
+      "midiVelocity": 127,
+      "duration": 8,
+      "wire": {
+        "kind": "single-wound-core-only-EI-hypothesis",
+        "lengthM": 0.9,
+        "coreDiameterM": 0.001,
+        "wrapDiameterM": 0.00020791439511588577,
+        "pitchM": 0.00020791439511588577,
+        "outerDiameterM": 0.0014158287902317716,
+        "coreYoungPa": 200000000000,
+        "coreDensityKgM3": 7850,
+        "wrapDensityKgM3": 8960,
+        "coreMu": 0.0061653755826699685,
+        "wrapMu": 0.00556057059609548,
+        "helixRatio": 18.278996498112665,
+        "linearDensityKgM": 0.011725946178765448,
+        "EI": 0.009817477042468105,
+        "tensionN": 649.9999999999998,
+        "B": 0.00018403535541488503,
+        "stressPa": 827605704.0778556,
+        "f1Hz": 130.8127826502993,
+        "areaM2": 7.853981633974482e-7,
+        "massKg": 0.010553351560888904,
+        "midi": 48,
+        "scope": "single layer homogenized winding, axial load and EI core only, diagnostic target not measured",
+        "impedanceNsM": 2.7607725397427325
+      },
+      "gain": 0.2757526758002555,
+      "peak": 0.5191264839689901,
+      "clipped": 0,
+      "originalPeak": 0.6921686452919869,
+      "originalClipped": 0,
+      "windows": [
+        {
+          "startS": 0.025,
+          "endS": 0.525,
+          "binHz": 1.46484375,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "rmsBand": 0.06149626753398305,
+          "narrowOffFraction": 0.09257758031838054,
+          "wideOffFraction": 0.06502395647218329,
+          "offPeaks": [
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -40.50635833018191,
+              "power": 0.000046971333662016387,
+              "relativeToMaxBinDb": -9.58359440399746
+            },
+            {
+              "frequencyHz": 194.82421875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": 64.01143609970069,
+              "power": 0.00001964065412361111,
+              "relativeToMaxBinDb": -13.370363840426144
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -21.46338958018191,
+              "power": 0.000016190637610274755,
+              "relativeToMaxBinDb": -14.209283795040735
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -54.64090765029931,
+              "power": 0.000010327587150492325,
+              "relativeToMaxBinDb": -16.16193463220598
+            },
+            {
+              "frequencyHz": 369.140625,
+              "nearestPartial": 3,
+              "partialHz": 392.7270787033524,
+              "offsetHz": -23.58645370335239,
+              "power": 0.000002752438300424608,
+              "relativeToMaxBinDb": -21.904747392640743
+            },
+            {
+              "frequencyHz": 225.5859375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -36.11182708018191,
+              "power": 0.0000026743210248707253,
+              "relativeToMaxBinDb": -22.029787930636484
+            },
+            {
+              "frequencyHz": 309.08203125,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 47.38426666981809,
+              "power": 0.0000025780907993123295,
+              "relativeToMaxBinDb": -22.188941227646968
+            },
+            {
+              "frequencyHz": 553.7109375,
+              "nearestPartial": 4,
+              "partialHz": 523.9727254576919,
+              "offsetHz": 29.738212042308078,
+              "power": 0.000002077405076863003,
+              "relativeToMaxBinDb": -23.12671143090986
+            }
+          ]
+        },
+        {
+          "startS": 0.525,
+          "endS": 1.025,
+          "binHz": 1.46484375,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "rmsBand": 0.0429138746665479,
+          "narrowOffFraction": 0.0036776618391041495,
+          "wideOffFraction": 0.0005129671592809413,
+          "offPeaks": [
+            {
+              "frequencyHz": 194.82421875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": 64.01143609970069,
+              "power": 1.7572226346667277e-7,
+              "relativeToMaxBinDb": -33.26766971783432
+            },
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -54.64090765029931,
+              "power": 1.4557354904202243e-7,
+              "relativeToMaxBinDb": -34.08511290421063
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -21.46338958018191,
+              "power": 3.692797961812175e-8,
+              "relativeToMaxBinDb": -40.04238213093832
+            },
+            {
+              "frequencyHz": 309.08203125,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 47.38426666981809,
+              "power": 1.8888804854916873e-8,
+              "relativeToMaxBinDb": -42.95389280710338
+            },
+            {
+              "frequencyHz": 221.19140625,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -40.50635833018191,
+              "power": 1.6063483782589282e-8,
+              "relativeToMaxBinDb": -43.65754021364126
+            },
+            {
+              "frequencyHz": 225.5859375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -36.11182708018191,
+              "power": 8.581225467441564e-9,
+              "relativeToMaxBinDb": -46.38044447537144
+            },
+            {
+              "frequencyHz": 553.7109375,
+              "nearestPartial": 4,
+              "partialHz": 523.9727254576919,
+              "offsetHz": 29.738212042308078,
+              "power": 2.399987219807177e-9,
+              "relativeToMaxBinDb": -51.91384831478355
+            },
+            {
+              "frequencyHz": 101.07421875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -29.73856390029931,
+              "power": 2.124231967303967e-9,
+              "relativeToMaxBinDb": -52.443918203344765
+            }
+          ]
+        },
+        {
+          "startS": 1.025,
+          "endS": 1.525,
+          "binHz": 1.46484375,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "rmsBand": 0.022071906197253174,
+          "narrowOffFraction": 0.001297706235113579,
+          "wideOffFraction": 0.000021412850209281397,
+          "offPeaks": [
+            {
+              "frequencyHz": 76.171875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -54.64090765029931,
+              "power": 2.0473467396458123e-9,
+              "relativeToMaxBinDb": -46.52089873907301
+            },
+            {
+              "frequencyHz": 194.82421875,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": 64.01143609970069,
+              "power": 1.5758007621565622e-9,
+              "relativeToMaxBinDb": -47.6577996892945
+            },
+            {
+              "frequencyHz": 309.08203125,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 47.38426666981809,
+              "power": 1.3631241603953178e-10,
+              "relativeToMaxBinDb": -58.287458597020596
+            },
+            {
+              "frequencyHz": 799.8046875,
+              "nearestPartial": 6,
+              "partialHz": 787.3999633905281,
+              "offsetHz": 12.404724109471886,
+              "power": 9.829282416757969e-11,
+              "relativeToMaxBinDb": -59.70759461648626
+            },
+            {
+              "frequencyHz": 773.4375,
+              "nearestPartial": 6,
+              "partialHz": 787.3999633905281,
+              "offsetHz": -13.962463390528114,
+              "power": 9.212757341519275e-11,
+              "relativeToMaxBinDb": -59.98891642866698
+            },
+            {
+              "frequencyHz": 240.234375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -21.46338958018191,
+              "power": 7.582266694187947e-11,
+              "relativeToMaxBinDb": -60.83482219147267
+            },
+            {
+              "frequencyHz": 225.5859375,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": -36.11182708018191,
+              "power": 6.685506335376782e-11,
+              "relativeToMaxBinDb": -61.381469704330314
+            },
+            {
+              "frequencyHz": 5021.484375,
+              "nearestPartial": 35,
+              "partialHz": 5067.863186365659,
+              "offsetHz": -46.3788113656592,
+              "power": 4.8610877172652094e-11,
+              "relativeToMaxBinDb": -62.76547817230704
+            }
+          ]
+        },
+        {
+          "startS": 2.025,
+          "endS": 2.525,
+          "binHz": 1.46484375,
+          "analysisBandHz": [
+            30,
+            6000
+          ],
+          "rmsBand": 0.009347139104528368,
+          "narrowOffFraction": 0.00024018777458966416,
+          "wideOffFraction": 0.0000027937050936703027,
+          "offPeaks": [
+            {
+              "frequencyHz": 773.4375,
+              "nearestPartial": 6,
+              "partialHz": 787.3999633905281,
+              "offsetHz": -13.962463390528114,
+              "power": 2.535297141183109e-11,
+              "relativeToMaxBinDb": -58.696699337328354
+            },
+            {
+              "frequencyHz": 799.8046875,
+              "nearestPartial": 6,
+              "partialHz": 787.3999633905281,
+              "offsetHz": 12.404724109471886,
+              "power": 1.9682007533507137e-11,
+              "relativeToMaxBinDb": -59.796294067430765
+            },
+            {
+              "frequencyHz": 506.8359375,
+              "nearestPartial": 4,
+              "partialHz": 523.9727254576919,
+              "offsetHz": -17.136787957691922,
+              "power": 6.4338998491294164e-12,
+              "relativeToMaxBinDb": -64.65224504107402
+            },
+            {
+              "frequencyHz": 118.65234375,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": -12.160438900299312,
+              "power": 5.718894143300668e-12,
+              "relativeToMaxBinDb": -65.16386742612455
+            },
+            {
+              "frequencyHz": 276.85546875,
+              "nearestPartial": 2,
+              "partialHz": 261.6977645801819,
+              "offsetHz": 15.15770416981809,
+              "power": 4.1577911002291795e-12,
+              "relativeToMaxBinDb": -66.54836135145794
+            },
+            {
+              "frequencyHz": 539.0625,
+              "nearestPartial": 4,
+              "partialHz": 523.9727254576919,
+              "offsetHz": 15.089774542308078,
+              "power": 3.730568428594797e-12,
+              "relativeToMaxBinDb": -67.01923789924926
+            },
+            {
+              "frequencyHz": 145.01953125,
+              "nearestPartial": 1,
+              "partialHz": 130.8127826502993,
+              "offsetHz": 14.206748599700688,
+              "power": 3.3809929310052115e-12,
+              "relativeToMaxBinDb": -67.44654537703121
+            },
+            {
+              "frequencyHz": 767.578125,
+              "nearestPartial": 6,
+              "partialHz": 787.3999633905281,
+              "offsetHz": -19.821838390528114,
+              "power": 2.7381016104361605e-12,
+              "relativeToMaxBinDb": -68.36249239761418
+            }
+          ]
+        }
+      ],
+      "rms": [
+        {
+          "startS": 0,
+          "rms": 0.08604659982105206,
+          "partials": [
+            {
+              "rms": 0.026799469998138634,
+              "contrastDb": 32.48003326074427
+            },
+            {
+              "rms": 0.017093193700010584,
+              "contrastDb": 10.669001245530543
+            },
+            {
+              "rms": 0.010007528078376867,
+              "contrastDb": 11.300291226067937
+            },
+            {
+              "rms": 0.010384776127797406,
+              "contrastDb": 16.924770023803507
+            },
+            {
+              "rms": 0.006098650352453269,
+              "contrastDb": 13.553850959340583
+            },
+            {
+              "rms": 0.019728473062475795,
+              "contrastDb": 28.16606640905167
+            },
+            {
+              "rms": 0.025612493061448863,
+              "contrastDb": 29.05773339312747
+            },
+            {
+              "rms": 0.00530575878180675,
+              "contrastDb": 32.06824819982082
+            },
+            {
+              "rms": 0.01333794464925687,
+              "contrastDb": 47.35631680647111
+            },
+            {
+              "rms": 0.009129523761503498,
+              "contrastDb": 36.199562554107416
+            }
+          ]
+        },
+        {
+          "startS": 0.5,
+          "rms": 0.042089261272736635,
+          "partials": [
+            {
+              "rms": 0.013582647384057777,
+              "contrastDb": 49.98059614906676
+            },
+            {
+              "rms": 0.01302901496090007,
+              "contrastDb": 34.839034625487464
+            },
+            {
+              "rms": 0.002014446063331366,
+              "contrastDb": 35.41244397317606
+            },
+            {
+              "rms": 0.009580621904732078,
+              "contrastDb": 45.40649091428464
+            },
+            {
+              "rms": 0.002084310731614158,
+              "contrastDb": 31.243762258726875
+            },
+            {
+              "rms": 0.015383681179303218,
+              "contrastDb": 70.95967812863834
+            },
+            {
+              "rms": 0.013263072658154308,
+              "contrastDb": 69.31635263107684
+            },
+            {
+              "rms": 0.0027159965334245997,
+              "contrastDb": 78.91380388361557
+            },
+            {
+              "rms": 0.0035611536055662964,
+              "contrastDb": 84.48026705651861
+            },
+            {
+              "rms": 0.002776024574318043,
+              "contrastDb": 88.12867492699954
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "rms": 0.023038186414737587,
+          "partials": [
+            {
+              "rms": 0.008011212036726887,
+              "contrastDb": 64.55209129862372
+            },
+            {
+              "rms": 0.009935528911033796,
+              "contrastDb": 58.63435958690428
+            },
+            {
+              "rms": 0.001661633063160756,
+              "contrastDb": 61.00734330396024
+            },
+            {
+              "rms": 0.007779739487602104,
+              "contrastDb": 68.79877496766906
+            },
+            {
+              "rms": 0.0009714592953531512,
+              "contrastDb": 51.49509113947309
+            },
+            {
+              "rms": 0.013993257815866631,
+              "contrastDb": 79.48316850398798
+            },
+            {
+              "rms": 0.007384261388489618,
+              "contrastDb": 84.54670094902036
+            },
+            {
+              "rms": 0.0011242196435970802,
+              "contrastDb": 80.85883212430879
+            },
+            {
+              "rms": 0.0013994444399461653,
+              "contrastDb": 85.47689731336288
+            },
+            {
+              "rms": 0.001040274222100444,
+              "contrastDb": 87.91373205656384
+            }
+          ]
+        },
+        {
+          "startS": 2,
+          "rms": 0.009989442563761945,
+          "partials": [
+            {
+              "rms": 0.0026963431467355243,
+              "contrastDb": 68.23968121571212
+            },
+            {
+              "rms": 0.004288266785542437,
+              "contrastDb": 69.62983650990145
+            },
+            {
+              "rms": 0.0017398107634533798,
+              "contrastDb": 68.20163899380046
+            },
+            {
+              "rms": 0.0027188620726828145,
+              "contrastDb": 63.73478719097768
+            },
+            {
+              "rms": 0.0005515786172155841,
+              "contrastDb": 71.42912806298261
+            },
+            {
+              "rms": 0.0061448562301177675,
+              "contrastDb": 78.50564618285736
+            },
+            {
+              "rms": 0.0027463292572899815,
+              "contrastDb": 81.96355833266209
+            },
+            {
+              "rms": 0.00027763169993954076,
+              "contrastDb": 77.98624106637834
+            },
+            {
+              "rms": 0.0006411553434089956,
+              "contrastDb": 90.03937782855508
+            },
+            {
+              "rms": 0.0005298933924485452,
+              "contrastDb": 87.05401213985249
+            }
+          ]
+        },
+        {
+          "startS": 4,
+          "rms": 0.005805931083385443,
+          "partials": [
+            {
+              "rms": 0.00040698500815398325,
+              "contrastDb": 65.3731500868144
+            },
+            {
+              "rms": 0.004710090986346714,
+              "contrastDb": 70.32806797077674
+            },
+            {
+              "rms": 0.0011850059870366857,
+              "contrastDb": 67.97815176808095
+            },
+            {
+              "rms": 0.0009094367766921492,
+              "contrastDb": 61.54579462579912
+            },
+            {
+              "rms": 0.0004463106296613052,
+              "contrastDb": 74.25495477698361
+            },
+            {
+              "rms": 0.002461464059431858,
+              "contrastDb": 78.31252728509155
+            },
+            {
+              "rms": 0.0007783923889181515,
+              "contrastDb": 81.7489573636687
+            },
+            {
+              "rms": 0.00009750820142987678,
+              "contrastDb": 78.97974954940904
+            },
+            {
+              "rms": 0.00029296080015280305,
+              "contrastDb": 87.85072189887343
+            },
+            {
+              "rms": 0.00013795811073162017,
+              "contrastDb": 90.97631768910277
+            }
+          ]
+        },
+        {
+          "startS": 6,
+          "rms": 0.004997648486946874,
+          "partials": [
+            {
+              "rms": 0.0004908621781112405,
+              "contrastDb": 68.82246798943385
+            },
+            {
+              "rms": 0.00471115490701262,
+              "contrastDb": 70.10387564285483
+            },
+            {
+              "rms": 0.0009237021499277503,
+              "contrastDb": 67.850343101086
+            },
+            {
+              "rms": 0.0008361948226414503,
+              "contrastDb": 66.64508333396344
+            },
+            {
+              "rms": 0.00030872077705683203,
+              "contrastDb": 74.18769050571784
+            },
+            {
+              "rms": 0.000615852647757721,
+              "contrastDb": 77.1619669558069
+            },
+            {
+              "rms": 0.00036801636866117595,
+              "contrastDb": 83.35868164856053
+            },
+            {
+              "rms": 0.000059097359065005444,
+              "contrastDb": 83.3391012674083
+            },
+            {
+              "rms": 0.00010099551145177692,
+              "contrastDb": 87.27215393897923
+            },
+            {
+              "rms": 0.000034007118858621426,
+              "contrastDb": 83.9237374216967
+            }
+          ]
+        },
+        {
+          "startS": 7,
+          "rms": 0.004152839953345838,
+          "partials": [
+            {
+              "rms": 0.0004943057980438386,
+              "contrastDb": 69.33142479147183
+            },
+            {
+              "rms": 0.0039061932282573684,
+              "contrastDb": 70.20199212639072
+            },
+            {
+              "rms": 0.0008967742455527224,
+              "contrastDb": 68.14720825841191
+            },
+            {
+              "rms": 0.0008540849436423658,
+              "contrastDb": 71.15582283429671
+            },
+            {
+              "rms": 0.00027137603896119005,
+              "contrastDb": 74.58330653813823
+            },
+            {
+              "rms": 0.0003057780136450685,
+              "contrastDb": 72.95415638096225
+            },
+            {
+              "rms": 0.00014987739212266512,
+              "contrastDb": 79.74889154003672
+            },
+            {
+              "rms": 0.00003641099328779771,
+              "contrastDb": 83.85375389101807
+            },
+            {
+              "rms": 0.000042558834546873185,
+              "contrastDb": 87.59480198559703
+            },
+            {
+              "rms": 0.0000173381221233877,
+              "contrastDb": 87.40950834234707
+            }
+          ]
+        }
+      ],
+      "count": 2,
+      "attack": {
+        "peakForce": 25.392673212745358,
+        "reboundMps": -1.4018305558541742
+      },
+      "maxBalance": 2.603472992745992e-13,
+      "maxIncrease": 0,
+      "jobId": 138913633558,
+      "artifactId": 14982737356
+    }
+  ],
+  "summary": [
+    {
+      "midi": 48,
+      "variant": "LL",
+      "pitch": [
+        15.327788739519235,
+        15.14003311251367,
+        -1.5062228582216537
+      ],
+      "rms0": 0.1014655780608772,
+      "rms2": 0.03205869181482759,
+      "peak": 0.5035078380068109,
+      "dominant": [
+        2,
+        2,
+        2
+      ],
+      "partials": [
+        15.327788739519235,
+        1.427700646513164,
+        -2.7274411842595625,
+        -0.1680938539183942
+      ]
+    },
+    {
+      "midi": 48,
+      "variant": "LM",
+      "pitch": [
+        11.107914697079497,
+        11.287308319825366,
+        -1.5115457500909786
+      ],
+      "rms0": 0.08604659982105206,
+      "rms2": 0.009989442563761945,
+      "peak": 0.5191264839689901,
+      "dominant": [
+        6,
+        6,
+        2
+      ],
+      "partials": [
+        11.107914697079497,
+        0.013544172964075856,
+        -2.171252340461925,
+        -6.491969815164408
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "jobId": 138913633397,
+      "name": "trials (43, LL)",
+      "status": "in_progress"
+    },
+    {
+      "jobId": 138913633418,
+      "name": "trials (43, LM)",
+      "status": "in_progress"
+    }
+  ],
+  "scope": "Completed CI cases only; no acoustic approval"
+}
