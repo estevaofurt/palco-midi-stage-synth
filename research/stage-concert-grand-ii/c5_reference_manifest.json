@@ -1,0 +1,87 @@
+{
+  "instrument": "Yamaha C5",
+  "author": "Alexander Holm",
+  "library": "Salamander Grand Piano v3",
+  "license": "CC BY 3.0",
+  "license_url": "https://creativecommons.org/licenses/by/3.0/",
+  "source": "https://github.com/sfzinstruments/SalamanderGrandPiano",
+  "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+  "capture": "AKG C414 AB ~12cm above strings, 48kHz 24bit; library layers not measured MIDI velocities",
+  "files": [
+    {
+      "path": "Samples/C3v1.flac",
+      "git_blob_sha1": "208ad6b0a8788653ad57356a11b2b2da71e9a171",
+      "bytes": 1624899
+    },
+    {
+      "path": "Samples/C3v16.flac",
+      "git_blob_sha1": "05391ccf3a7fd724920ffefda57eac91a935fc56",
+      "bytes": 1875350
+    },
+    {
+      "path": "Samples/C3v8.flac",
+      "git_blob_sha1": "c2d2a2019e13bf292923667a3db1df8a47ea5cfc",
+      "bytes": 1741485
+    },
+    {
+      "path": "Samples/C4v1.flac",
+      "git_blob_sha1": "acf46f2ea8b395cf5609f1411199410f7e93a975",
+      "bytes": 1265676
+    },
+    {
+      "path": "Samples/C4v16.flac",
+      "git_blob_sha1": "0ab0b0700532f483468a0b299fd2902eaaa59599",
+      "bytes": 1772214
+    },
+    {
+      "path": "Samples/C4v8.flac",
+      "git_blob_sha1": "5d1c81dd7ee1d21cbec2fa1f2f605c098cf19679",
+      "bytes": 1774472
+    },
+    {
+      "path": "Samples/C5v1.flac",
+      "git_blob_sha1": "3194ad58ac43d0868ecada1893a2710298875c46",
+      "bytes": 1238975
+    },
+    {
+      "path": "Samples/C5v16.flac",
+      "git_blob_sha1": "42c23f6132943738fd1ccadaae374e874adaf9c3",
+      "bytes": 1531778
+    },
+    {
+      "path": "Samples/C5v8.flac",
+      "git_blob_sha1": "8f2a4baab012730693c1b173ce463056c22e42d0",
+      "bytes": 1516971
+    },
+    {
+      "path": "Samples/C6v1.flac",
+      "git_blob_sha1": "8ea5cab9449ab6e59601aae94da384099c96d734",
+      "bytes": 567727
+    },
+    {
+      "path": "Samples/C6v16.flac",
+      "git_blob_sha1": "d9a3c6e69c421f7ee92869a3a4a0577a02c7cb82",
+      "bytes": 730412
+    },
+    {
+      "path": "Samples/C6v8.flac",
+      "git_blob_sha1": "4728c69c56c82a98e54cf93a289afd282705317d",
+      "bytes": 695617
+    },
+    {
+      "path": "Samples/C7v1.flac",
+      "git_blob_sha1": "809fe48dc39c3fffb39d7a612d5f38e2b17f0b5f",
+      "bytes": 405957
+    },
+    {
+      "path": "Samples/C7v16.flac",
+      "git_blob_sha1": "bcff7eba0f3530f510e348b95920015a0ea92cb6",
+      "bytes": 462505
+    },
+    {
+      "path": "Samples/C7v8.flac",
+      "git_blob_sha1": "65a6c3d80ffc3a40a3dffbf183972a10e316018e",
+      "bytes": 412115
+    }
+  ]
+}

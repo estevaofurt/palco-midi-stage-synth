@@ -1,0 +1,25 @@
+name: Concert Grand II G2.02a C5 reference measurements
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_c5_analysis.py','research/stage-concert-grand-ii/test_g2_c5_analysis.py','research/stage-concert-grand-ii/c5_reference_manifest.json','.github/workflows/concert-grand-ii-reference-g2.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: python -m unittest discover -s research/stage-concert-grand-ii -p test_g2_c5_analysis.py
+      - run: python research/stage-concert-grand-ii/g2_c5_analysis.py --output /tmp/g2/c5_report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-C5-reference-numeric
+          path: /tmp/g2/c5_report.json
+          if-no-files-found: error
