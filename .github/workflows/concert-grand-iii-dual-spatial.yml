@@ -1,0 +1,47 @@
+name: Concert Grand III fixed-mode directional spatial convergence
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/dual_cavity_spatial_diagnostic.py','research/stage-concert-grand-iii/test_dual_cavity_spatial.py','.github/workflows/concert-grand-iii-dual-spatial.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_dual_cavity_spatial.py
+      - run: python research/stage-concert-grand-iii/test_boundary_refinement.py
+      - name: Require integrated reference and sparse solver evidence
+        run: |
+          test "$(gh run view 45702919527 --json conclusion --jq .conclusion)" = success
+          test "$(gh run view 45706743978 --json conclusion --jq .conclusion)" = success
+          test "$(gh run view 45709372650 --json conclusion --jq .conclusion)" = success
+          gh run download 45702919527 -n G3-dual-reference-${{ matrix.angle }} -D /tmp/g3-prior
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/dual_cavity_spatial_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --previous /tmp/g3-prior/dual_cavity_reference.json --angle ${{ matrix.angle }} --out /tmp/g3-dual-spatial
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-dual-spatial-${{ matrix.angle }}
+          path: /tmp/g3-dual-spatial/
+          if-no-files-found: warn
