@@ -2,7 +2,7 @@ name: Concert Grand III regularized exterior Neumann stability
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/neumann_regularized.py','research/stage-concert-grand-iii/neumann_stability_diagnostic.py','research/stage-concert-grand-iii/test_neumann_regularized.py','.github/workflows/concert-grand-iii-neumann-stability.yml']
+    paths: ['research/stage-concert-grand-iii/envelope_membership.py','research/stage-concert-grand-iii/test_envelope_membership.py','research/stage-concert-grand-iii/neumann_regularized.py','research/stage-concert-grand-iii/neumann_stability_diagnostic.py','research/stage-concert-grand-iii/test_neumann_regularized.py','.github/workflows/concert-grand-iii-neumann-stability.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,6 +29,7 @@ jobs:
           run-id: 45643063220
           github-token: ${{ github.token }}
           path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_envelope_membership.py
       - run: python research/stage-concert-grand-iii/test_exterior_neumann.py
       - run: python research/stage-concert-grand-iii/test_neumann_regularized.py
       - run: python research/stage-concert-grand-iii/neumann_stability_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --angle ${{ matrix.angle }} --out /tmp/g3-neumann-stable
