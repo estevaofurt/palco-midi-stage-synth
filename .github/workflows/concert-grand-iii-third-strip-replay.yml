@@ -1,0 +1,51 @@
+name: Concert Grand III third strip residual replay
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/bem_third_strip_replay.py','research/stage-concert-grand-iii/test_bem_third_strip_replay.py','.github/workflows/concert-grand-iii-third-strip-replay.yml']
+  workflow_dispatch:
+    inputs:
+      angle:
+        type: choice
+        options: ['30','55']
+        default: '30'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+      ANGLE: ${{ inputs.angle || '30' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require completed candidate job
+        run: |
+          case "$ANGLE" in
+            30) JOB=139564362420 ;;
+            55) JOB=139564362343 ;;
+            *) exit 1 ;;
+          esac
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/jobs/$JOB --jq .conclusion)" = success
+          gh run download 45716637733 -n G3-candidate-proof-$ANGLE -D /tmp/g3-candidate
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_bem_third_strip_replay.py
+      - run: python research/stage-concert-grand-iii/bem_third_strip_replay.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-candidate --angle "$ANGLE" --out /tmp/g3-third-strip
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-third-strip-${{ env.ANGLE }}
+          path: /tmp/g3-third-strip/
+          if-no-files-found: warn
