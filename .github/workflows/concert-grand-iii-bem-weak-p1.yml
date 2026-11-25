@@ -2,7 +2,7 @@ name: Concert Grand III weakly tested linear BEM
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/bem_weak_p1*.py','research/stage-concert-grand-iii/test_bem_weak_p1.py','.github/workflows/concert-grand-iii-bem-weak-p1.yml']
+    paths: ['research/stage-concert-grand-iii/bem_weak_p1.py','research/stage-concert-grand-iii/bem_weak_p1_diagnostic.py','research/stage-concert-grand-iii/test_bem_weak_p1.py','.github/workflows/concert-grand-iii-bem-weak-p1.yml']
   workflow_dispatch:
 permissions:
   contents: read
