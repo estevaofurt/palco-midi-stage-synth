@@ -1,0 +1,45 @@
+name: Concert Grand F11c complete S50 scale review
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11c-scale-review.yml'
+      - 'research/stage-concert-grand/f11c-s50-scale-review.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11b-s50-scale-audit.test.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F10G-S50-midi*-touch127
+          path: /tmp/s50-input/g
+          run-id: 45509969698
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F10H-S50-midi*-touch*
+          path: /tmp/s50-input/h
+          run-id: 45511128271
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F11A-S50-midi*-touch*
+          path: /tmp/s50-input/a
+          run-id: 45518512147
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: node research/stage-concert-grand/f11c-s50-scale-review.mjs /tmp/s50-input /tmp/s50-review
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11C-S50-complete-scale-review
+          path: /tmp/s50-review/
+          if-no-files-found: error
