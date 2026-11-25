@@ -1,0 +1,50 @@
+import {polarizationLedger,validateAngle} from './f9-aftersound-ledger.mjs';
+import {renderStringLoss} from './f9-string-loss.mjs';
+import {stringLossCase} from './f9-string-loss-parameters.mjs';
+import {renderUnison} from './f9-unison.mjs';
+import {solidWire} from '../c3x-physical/c4-wire-consistency.mjs';
+import {makeDesign} from './c4-design.mjs';
+import {stringMode,spatialWeight} from './stiff-string.mjs';
+import {plateDesign,plateModes,patchWeight} from './orthotropic-plate.mjs';
+import {ribDesign,generalizedEigen} from './ribbed-plate.mjs';
+import {mindlinModes} from './mindlin-plate.mjs';
+import {PolarizedBridge,PolarizedHammer} from './polarized-bridge.mjs';
+import {BoardCoupledBridge} from './board-coupling.mjs';
+import {radiationGrid,surfaceShape,radiationKernel} from './surface-radiation.mjs';
+import {ResistiveBoard} from './radiation-loading.mjs';
+import {relaxMemory} from './felt-memory.mjs';
+import {fft} from './f8-render.mjs';
+const hp={fft,solidWire,makeDesign,stringMode,spatialWeight,plateDesign,plateModes,patchWeight,ribDesign,generalizedEigen,mindlinModes,PolarizedBridge,PolarizedHammer,BoardCoupledBridge,radiationGrid,surfaceShape,radiationKernel,ResistiveBoard,relaxMemory};
+import {EXTENDED_NOTES} from './f10e-d4-extension.mjs';
+import {renderD4LossPilot} from './f10g-d4-loss-pilot.mjs';
+import {renderS50Scale,scaleWire,scaleGeometry,SCALE_NOTES,NEW_NOTES,S50_REFERENCE} from './f11a-s50-scale.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++;},rejects=f=>{try{f();return false}catch{return true}};
+const opts={midiVelocity:76,seconds:.025};
+const exact=(a,b)=>a.channels.every((c,j)=>c.length===b.channels[j].length&&c.every((v,i)=>Object.is(v,b.channels[j][i])));
+check('contiguous range',SCALE_NOTES.length===20&&SCALE_NOTES.every((m,i)=>m===53+i)&&NEW_NOTES.length===13);
+check('frozen output gain',S50_REFERENCE.gain===.2757526758002555&&S50_REFERENCE.factor===.5);
+const wires=SCALE_NOTES.map(m=>scaleWire(hp,m));
+check('length monotonic',wires.every((w,i)=>i===0||w.lengthM<wires[i-1].lengthM));
+check('positive tension',wires.every(w=>w.tensionN>0&&w.diameterM===.00096));
+check('fundamental targets',wires.every((w,i)=>Math.abs(stringMode(w,1).frequencyHz-scaleGeometry(SCALE_NOTES[i]).f1Hz)<1e-9));
+check('unison targets',SCALE_NOTES.every(m=>[-.5,0,.5].every(c=>Math.abs(scaleWire(hp,m,c).f1Hz/(scaleGeometry(m).f1Hz*2**(c/1200))-1)<1e-12)));
+const cases=SCALE_NOTES.map(midi=>renderS50Scale(hp,{...opts,midi}));
+check('all passive',cases.every(q=>q.meta.maxBalance<1e-9&&q.meta.maxIncrease<1e-9&&q.meta.attack.reboundMps<0));
+check('common board',cases.every(q=>q.meta.boardSignature.length===337&&JSON.stringify(q.meta.boardSignature)===JSON.stringify(cases[0].meta.boardSignature)));
+check('common losses',cases.every(q=>JSON.stringify(q.meta.actualStringLoss)===JSON.stringify({verticalLoss:[.1,.0002],horizontalLoss:[.05,.00012]})));
+check('unchanged felt',cases.every(q=>q.meta.feltFactor===1.5&&q.meta.multiplier===3&&q.meta.local.factor===8));
+for(const midi of EXTENDED_NOTES){
+ const a=renderD4LossPilot(hp,{...opts,midi,factor:.5}),d=cases[midi-53];
+ check('exact reference pressure '+midi,exact(a,d));
+ check('exact reference state '+midi,JSON.stringify(a.checkpoint.state)===JSON.stringify(d.checkpoint.state));
+ check('exact reference wire '+midi,JSON.stringify(a.meta.centralWire)===JSON.stringify(d.meta.centralWire));
+}
+check('invalid note',rejects(()=>scaleGeometry(52))&&rejects(()=>scaleGeometry(73))&&rejects(()=>scaleGeometry(60.5)));
+check('note guard',rejects(()=>renderS50Scale(hp,{...opts,midi:56,prior:cases[1].checkpoint})));
+check('factor guard',rejects(()=>renderS50Scale(hp,{...opts,midi:54,prior:{...cases[1].checkpoint,sustainFactor:.25}})));
+check('velocity guard',rejects(()=>renderS50Scale(hp,{...opts,midi:54,midiVelocity:127,prior:cases[1].checkpoint})));
+for(const midi of [54,60]){
+ const next=renderS50Scale(hp,{...opts,midi,prior:cases[midi-53].checkpoint});
+ check('continuity '+midi,next.checkpoint.elapsed===.05&&next.meta.attack===null&&next.meta.maxBalance<1e-9);
+}
+console.log('F11A_SCALE_TESTS '+n);
