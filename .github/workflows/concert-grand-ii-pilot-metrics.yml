@@ -1,0 +1,20 @@
+name: Concert Grand II G2.03 operational pilot metrics
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_pilot_metrics*.py','.github/workflows/concert-grand-ii-pilot-metrics.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6
+      - run: python -m py_compile research/stage-concert-grand-ii/g2_pilot_metrics.py research/stage-concert-grand-ii/g2_pilot_metrics_test.py
+      - run: python research/stage-concert-grand-ii/g2_pilot_metrics_test.py
