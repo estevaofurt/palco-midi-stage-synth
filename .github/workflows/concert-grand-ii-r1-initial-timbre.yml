@@ -1,0 +1,43 @@
+name: Concert Grand II R1 initial acoustic timbre
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_r1_initial_timbre.py','.github/workflows/concert-grand-ii-r1-initial-timbre.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-R1-C4-*
+          run-id: 45617749735
+          github-token: ${{ github.token }}
+          path: /tmp/r1
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-R1-triad-*
+          run-id: 45617749735
+          github-token: ${{ github.token }}
+          path: /tmp/r1
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-R2-baseline-attack-reference
+          run-id: 45618100535
+          github-token: ${{ github.token }}
+          path: /tmp/ref
+      - run: python research/stage-concert-grand-ii/g2_r1_initial_timbre.py --root /tmp/r1 --reference /tmp/ref --out /tmp/result
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R1-initial-timbre-diagnostic
+          path: /tmp/result/
+          if-no-files-found: error
