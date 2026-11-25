@@ -1,0 +1,36 @@
+name: Concert Grand II R2 frozen physical mobility diagnostic
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_r2_mobility.py','.github/workflows/concert-grand-ii-r2-mobility.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mobility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [60,64,67,72,84]
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: node research/stage-concert-grand-ii/g2_octave_export.mjs
+      - run: python research/stage-concert-grand-ii/g2_r2_mobility.py --key ${{ matrix.key }} --out /tmp/mobility
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R2-mobility-${{ matrix.key }}
+          path: /tmp/mobility/
+          if-no-files-found: error
