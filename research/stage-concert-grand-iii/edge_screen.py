@@ -6,6 +6,7 @@ import numpy as np
 from numpy.polynomial.legendre import leggauss,legvander
 from scipy.linalg import cholesky,solve_triangular
 from board_contour import properties
+from ribbed_plate import quadrature
 from rigid_screen import coupling,far_gram
 from split_radiation import relative
 
@@ -32,7 +33,9 @@ class EdgeBasis:
         self.normals=n/np.sum(n*(c-self.poly),axis=1)[:,None]
         self.center=c;self.scale=2/np.ptp(self.poly,axis=0)
         self.indices=np.array([(i,d-i) for d in range(degree+1) for i in range(d+1)])
-        q,w=self.samples(max(12,degree+6))
+        # Products of two square-root edge factors are polynomial. Use
+        # ordinary Gauss-Duffy with enough points for exact mass integration.
+        q,w=quadrature(self.poly,max(16,len(self.poly)+degree+2))
         V,_,_=self.raw(q);G=V.T@(w[:,None]*V)
         L=cholesky((G+G.T)/2,lower=True)
         self.T=solve_triangular(L.T,np.eye(len(L)),lower=False)
