@@ -1,0 +1,43 @@
+name: Concert Grand F11d variable hammer and wound bass pilot
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11d-bass.yml'
+      - 'research/stage-concert-grand/f11d-*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11c-bass-candidates.test.mjs
+      - run: node research/stage-concert-grand/f11d-bass-render.test.mjs
+  bass:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      max-parallel: 9
+      matrix:
+        midi: [36,43,48]
+        count: [1,2]
+        touch: [24,76,127]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11d-bass-demo.mjs /tmp/f11d ${{ matrix.midi }} ${{ matrix.touch }} ${{ matrix.count }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11D-bass-midi${{ matrix.midi }}-strings${{ matrix.count }}-touch${{ matrix.touch }}
+          path: /tmp/f11d/
+          if-no-files-found: error
