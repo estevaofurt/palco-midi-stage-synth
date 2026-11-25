@@ -1,0 +1,45 @@
+name: Concert Grand II R2a actual hammer and energy transfer
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_r2_impulse.py','.github/workflows/concert-grand-ii-r2-impulse.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  impulse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [60,64,67,72]
+        speed: ['0.5','1.0','2.0']
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: node research/stage-concert-grand-ii/g2_octave_export.mjs
+      - uses: actions/download-artifact@v4
+        if: matrix.key == 60 && matrix.speed == '1.0'
+        with:
+          name: G2-R1-C4-held-dry
+          run-id: 45617749735
+          github-token: ${{ github.token }}
+          path: /tmp/r1-held
+      - run: python research/stage-concert-grand-ii/g2_r2_impulse.py --key ${{ matrix.key }} --speed ${{ matrix.speed }} --out /tmp/impulse --baseline /tmp/r1-held
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R2-impulse-${{ matrix.key }}-${{ matrix.speed }}
+          path: /tmp/impulse/
+          if-no-files-found: error

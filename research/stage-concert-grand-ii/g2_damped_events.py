@@ -14,7 +14,7 @@ def modal(group):
     nc=len(group['ports'])//2
     raw=np.zeros((group['n'],1));raw[0,0]=1
     return w2,D,U.T@np.column_stack((raw,np.asarray(group['ports'][:nc]).T))
-def run_damped(model,events,sr,duration,sink=None,retain_trace=False,*,releases=(),mode="dry",damperC=1.):
+def run_damped(model,events,sr,duration,sink=None,retain_trace=False,*,releases=(),mode="dry",damperC=1.,diagnostic=None):
     boardLossScale=feltScale=1.
     if mode not in ("bypass","release-only","dry") or not math.isfinite(damperC) or damperC<=0:raise ValueError("damper mode/coefficient")
     if mode=="bypass" and releases:raise ValueError("bypass has no releases")
@@ -138,6 +138,7 @@ def run_damped(model,events,sr,duration,sink=None,retain_trace=False,*,releases=
         assert all(f[k]==0 for k in range(n) if d0[k]<=0 and d1[k]<=0)
         assert np.isfinite(f).all() and np.all(f>=0)
         maxres=max(maxres,max((abs(f[k]-law(k,d1[k])) for k in range(n)),default=0.))
+        if diagnostic is not None:diagnostic(i,g,b,jf,f,owners,pos,pos1)
         E=energy(pos1);maxinc=max(maxinc,E-old);minloss=min(minloss,*ds,db,dj,dl)
         for j in active:
             sl=slices[j];rec=live[j]
