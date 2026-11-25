@@ -8,6 +8,7 @@ from scipy.spatial.distance import cdist
 from board_contour import hull
 from ribbed_plate import quadrature
 from aperture_modes import FluxBasis
+from extended_flux_basis import ExtendedFluxBasis
 from split_radiation import relative
 
 class Panel:
@@ -16,7 +17,7 @@ class Panel:
         u=xyz[np.argmax(np.linalg.norm(xyz-self.origin,axis=1))]-self.origin
         u/=np.linalg.norm(u);v=np.cross(normal,u);v/=np.linalg.norm(v)
         self.axes=np.stack([u,v],axis=1)
-        self.poly=hull(self.local(xyz));self.basis=FluxBasis(self.poly,count)
+        self.poly=hull(self.local(xyz));self.basis=(ExtendedFluxBasis(self.poly,count) if count in (28,36) else FluxBasis(self.poly,count))
     def local(self,x):return (x-self.origin)@self.axes
     def world(self,x):return self.origin+x@self.axes.T
     def samples(self,order):

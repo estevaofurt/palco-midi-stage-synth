@@ -8,7 +8,8 @@ from scipy.sparse.linalg import splu
 from closed_cavity import mesh
 from board_contour import properties
 
-def build(poly,n,height,field,c=343.,rho=1.204):
+def build(poly,n,height,field,c=343.,rho=1.204,*,field_order=4):
+    if not isinstance(field_order,int) or field_order<2:raise ValueError('invalid trace quadrature order')
     xy,tri,_,_=mesh(poly,n,1,height);N=len(xy)
     t=xy[tri];J=np.transpose(t[:,1:]-t[:,:1],(0,2,1))
     A=abs(np.linalg.det(J))/2;inv=np.linalg.inv(J)
@@ -18,7 +19,7 @@ def build(poly,n,height,field,c=343.,rho=1.204):
     i=np.repeat(tri,3,axis=1).ravel();j=np.tile(tri,(1,3)).ravel()
     K=coo_matrix((K.ravel(),(i,j)),shape=(N,N)).tocsc()
     M=coo_matrix((M.ravel(),(i,j)),shape=(N,N)).tocsc()
-    z,w=np.polynomial.legendre.leggauss(4);z=(z+1)/2;w=w/2
+    z,w=np.polynomial.legendre.leggauss(field_order);z=(z+1)/2;w=w/2
     u,v=np.meshgrid(z,z,indexing='ij');u=u.ravel();v=v.ravel()
     lam=np.c_[1-u,u*(1-v),u*v];weight=(w[:,None]*w[None,:]).ravel()*u
     B=np.zeros((N,field(xy[:1]).shape[1]))

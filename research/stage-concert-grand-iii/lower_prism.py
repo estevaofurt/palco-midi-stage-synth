@@ -17,7 +17,7 @@ def build(poly,n,h,field,count,c=343.,rho=1.204):
     mouth=mouth_panel(poly,h,count)
     def combined(x):
         return np.column_stack([field(x),mouth.basis(mouth.local(np.c_[x,np.full(len(x),-h)]))])
-    m=prism_build(poly,n,h,combined,c,rho);nb=field(np.asarray(poly)[:1]).shape[1]
+    m=prism_build(poly,n,h,combined,c,rho,field_order=5 if count in (28,36) else 4);nb=field(np.asarray(poly)[:1]).shape[1]
     lam,U=eigh(m['K'].toarray(),m['M'].toarray(),check_finite=True)
     if lam.min()<-1e-8:raise ValueError('negative planar eigenvalue')
     lam[np.abs(lam)<1e-8]=0.
