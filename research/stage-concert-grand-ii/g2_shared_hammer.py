@@ -24,7 +24,7 @@ for a in data['groups']:
     raw=np.zeros((a['n'],1));raw[0,0]=1
     raw=np.column_stack((raw,np.asarray(a['ports'][:nc]).T))
     groups.append((w2,D,U.T@raw))
-def run(active,speed,sr,cut,trebleMass=6,capture=None,duration_s=.04,sink=None):
+def run(active,speed,sr,cut,trebleMass=6,capture=None,duration_s=.04,sink=None,diagnostic=None):
     if not math.isfinite(duration_s) or duration_s<.04:raise ValueError('duration')
     steps=round(sr*duration_s)
     h=1/sr
@@ -103,6 +103,8 @@ def run(active,speed,sr,cut,trebleMass=6,capture=None,duration_s=.04,sink=None):
         E=total(d1);maxinc=max(maxinc,E-old);minloss=min(minloss,*ds,db,dj,dl)
         maxbal=max(maxbal,abs(initial-E-felt-jl-b.loss-sum(a.loss for a in g)))
         peakBoard=max(peakBoard,b.energy());peakOther=max(peakOther,sum(a.energy() for j,a in enumerate(g) if j not in active))
+        if diagnostic is not None:
+            diagnostic(i,g,b,v,masses,f,jf,owners,local,pos,r0,felt,jl)
         if (i+1)%(sr//1000)==0:
             trace.append(np.r_[[a.P[:,0]@a.q for a in g],b.P.T@b.q,*[z[1:] for z in positions()]].tolist())
     assert all(first[j]>=0 and v[j]<0 for j in active) and np.all(d1<0) and np.all(f==0)
