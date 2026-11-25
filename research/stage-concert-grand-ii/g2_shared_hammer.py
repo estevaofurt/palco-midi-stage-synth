@@ -24,8 +24,9 @@ for a in data['groups']:
     raw=np.zeros((a['n'],1));raw[0,0]=1
     raw=np.column_stack((raw,np.asarray(a['ports'][:nc]).T))
     groups.append((w2,D,U.T@raw))
-def run(active,speed,sr,cut,trebleMass=6,capture=None,duration_s=.04,sink=None,diagnostic=None):
+def run(active,speed,sr,cut,trebleMass=6,capture=None,duration_s=.04,sink=None,diagnostic=None,trebleStiffnessScale=1.):
     if not math.isfinite(duration_s) or duration_s<.04:raise ValueError('duration')
+    if not math.isfinite(trebleStiffnessScale) or trebleStiffnessScale<=0:raise ValueError('treble stiffness scale')
     steps=round(sr*duration_s)
     h=1/sr
     g=[Block(*a,sr) for a in groups]
@@ -41,7 +42,7 @@ def run(active,speed,sr,cut,trebleMass=6,capture=None,duration_s=.04,sink=None,d
     n=len(owners);T=np.zeros((3,n));C=np.zeros((n,n));ks=np.zeros(n)
     for j in active:
         sl=slices[j];T[j,sl]=g[j].H[0,1:]
-        C[sl,sl]=g[j].H[1:,1:]+h*h/(2*masses[j]);ks[sl]=2e9/(sl.stop-sl.start)
+        C[sl,sl]=g[j].H[1:,1:]+h*h/(2*masses[j]);ks[sl]=2e9*(trebleStiffnessScale if j==2 else 1.)/(sl.stop-sl.start)
     C-=T.T@R@T;assert np.min(eigh(C,eigvals_only=True))>0
     x=np.full(3,-.0002);v=np.zeros(3);v[active]=speed
     initial=.5*np.sum(masses*v*v);felt=0.;jl=0.;peak=np.zeros(3);impulse=np.zeros(3)
