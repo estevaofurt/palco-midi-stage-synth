@@ -34,7 +34,7 @@ def partition(prescribed,computed,far):
         computedPassivityMinRelative=float(np.linalg.eigvalsh(Rv).min()/den),
         prescribedPassivityMinRelative=float(np.linalg.eigvalsh(Rp).min()/den))
 
-def integrate(t,q,velocity,k,outer,inner,rho=1.204,c=343.,batch=24):
+def integrate(t,q,velocity,k,outer,inner,rho=1.204,c=343.,batch=24,operator=operators):
     """Stream whole-surface work quadrature, separate from fit/audit points.
 
     The velocity callback takes points and element owners and returns the
@@ -50,7 +50,7 @@ def integrate(t,q,velocity,k,outer,inner,rho=1.204,c=343.,batch=24):
     for i in range(0,len(x),batch):
         sl=slice(i,min(i+batch,len(x)))
         V=np.asarray(velocity(x[sl],owner[sl]))
-        G,D=operators(t,x[sl],n[sl],owner[sl],k,inner)
+        G,D=operator(t,x[sl],n[sl],owner[sl],k,inner)
         pressure=1j*rho*c*k*(G@q);actual=-D@q
         wt=w[sl,None]
         P+=V.conj().T@(wt*pressure);C+=actual.conj().T@(wt*pressure)
