@@ -37,7 +37,7 @@ def self_integral(x,t,S0,k,order):
         d=(1-v[None,:,None])*a[:,None,:]+v[None,:,None]*b[:,None,:]
         L=np.linalg.norm(d,axis=-1);jac=np.linalg.norm(np.cross(a,b),axis=1)
         E=np.eye(3);edge=(1-v[:,None])*shape(E[j])+v[:,None]*shape(E[(j+1)%3])
-        S=(1-u[None,:,None])*S0[:,None,:]+u[None,:,None]*edge[None,:,:]
+        S=u[None,:,None]*(edge[None,:,:]-S0[:,None,:])
         kernel=np.exp(-1j*k*u[None,:]*L)*w[None,:]*jac[:,None]/(4*np.pi*L)
         out+=np.einsum('bq,bqd->bd',kernel,S)
     return out
@@ -59,7 +59,13 @@ def operators(t,x,n,owner,k,order):
         V=L0[:,:,None]*S0+np.einsum('btq,btqd->btd',g*w[None,:,:],delta)+np.einsum('btq,qd->btd',reg*w[None,:,:],Sy)
         PV=np.einsum('btd,bd->bt',grad,nn)
         K=PV[:,:,None]*S0+np.einsum('btq,btqd->btd',dg*w[None,:,:],delta)+np.einsum('btq,qd->btd',regD*w[None,:,:],Sy)
-        V[idx,ii]=self_integral(xx,t[ii],S0[idx,ii],k,order)
+        # Preserve the exact P0 constant part. Integrate only the
+        # vanishing linear density difference by independent radial Duffy.
+        sr=np.linalg.norm(xx[:,None,:]-y[ii],axis=-1)
+        rem=np.full(sr.shape,-1j*k,complex)
+        np.divide(np.expm1(-1j*k*sr),sr,out=rem,where=sr>0)
+        const=L0[idx,ii]+np.sum(w[ii]*rem,axis=1)/(4*np.pi)
+        V[idx,ii]=const[:,None]*S0[idx,ii]+self_integral(xx,t[ii],S0[idx,ii],k,order)
         K[idx,ii]=-.5*S0[idx,ii]
         G[start:stop]=V.reshape(len(xx),-1);D[start:stop]=K.reshape(len(xx),-1)
     return G,D
