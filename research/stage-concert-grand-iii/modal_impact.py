@@ -6,21 +6,22 @@ from pathlib import Path
 import numpy as np
 from scipy.optimize import brentq
 from modal_target import basis,Target
+from flexible_hammer import Hammer
 from felt_law import params,energy,relax,frozen_force
 ROOT=Path(__file__).parent
-def run(r,s,c,w2,P,sr,speed,stagger=False,trace=False):
+def run(r,s,c,w2,P,sr,speed,stagger=False,trace=False,shaft=None):
     hm,f=params(r['key'],r['count'],s,c);m=hm['massKg'];N=r['count'];h=1/sr
     targets=[Target(w2,P,sr) for _ in range(N)]
     gaps=np.arange(N)*30e-6 if stagger else np.zeros(N)
-    z=np.zeros(N);x=0.;v=speed;E0=.5*m*v*v;gh=h*h/(2*m)
+    z=np.zeros(N);hammer=Hammer(m,sr,speed,shaft);E0=hammer.energy();gh=hammer.H
     loss=impulse=peak=maxbal=maxinc=maxrelax=maxport=maxforce=0.;prev=E0
     forceHistory=[];ncontact=0;started=False;separated=False;maxCompression=0.;perImpulse=np.zeros(N)
     # Distinct contacts share the hammer displacement, not the state of felt or target.
     for i in range(round(.04*sr)):
-        d0=x-np.array([t.position() for t in targets])-gaps
+        d0=hammer.position()-np.array([t.position() for t in targets])-gaps
         for j in range(N):
             z[j],l,e=relax(float(d0[j]),float(z[j]),h/2,f);loss+=l;maxrelax=max(maxrelax,abs(e))
-        xf=x+h*v;free=xf-np.array([t.free() for t in targets])-gaps
+        xf=hammer.free();free=xf-np.array([t.free() for t in targets])-gaps
         def per(total):
             result=[]
             for j,t in enumerate(targets):
@@ -37,23 +38,23 @@ def run(r,s,c,w2,P,sr,speed,stagger=False,trace=False):
             F=per(total)
         else:F=np.zeros(N)
         if trace:forceHistory.append(F.copy())
-        total=float(sum(F));x=xf-gh*total;v-=h*total/m
+        total=float(sum(F));e=hammer.energy();work=hammer.step(-total);maxport=max(maxport,abs(hammer.energy()-e-work))
         for t,Fj in zip(targets,F):
             e=t.energy();work=t.step(float(Fj));maxport=max(maxport,abs(t.energy()-e-work))
-        d1=x-np.array([t.position() for t in targets])-gaps
+        d1=hammer.position()-np.array([t.position() for t in targets])-gaps
         for j in range(N):
             maxforce=max(maxforce,abs(F[j]-frozen_force(float(d0[j]),float(d1[j]),float(z[j]),f)))
             z[j],l,e=relax(float(d1[j]),float(z[j]),h/2,f);loss+=l;maxrelax=max(maxrelax,abs(e))
         assert np.all(F>=0) and np.all(z>=0)
-        Eh=.5*m*v*v;Ef=sum(energy(float(d),float(q),f) for d,q in zip(d1,z));Es=sum(t.energy() for t in targets)
+        Eh=hammer.energy();Ef=sum(energy(float(d),float(q),f) for d,q in zip(d1,z));Es=sum(t.energy() for t in targets)
         E=Eh+Ef+Es;maxbal=max(maxbal,abs(E+loss-E0));maxinc=max(maxinc,E-prev);prev=E
         perImpulse+=h*F;impulse+=h*total;peak=max(peak,total);maxCompression=max(maxCompression,float(max(d1)))
         if total>0:ncontact+=1;started=True
         # Same first-separation criterion as the prior fixture, not a catcher model.
-        if started and max(d1)<=0 and v<0 and all(v-float(t.P@t.v)<=0 for t in targets):
+        if started and max(d1)<=0 and hammer.v<0 and hammer.velocity()<0 and all(hammer.velocity()-float(t.P@t.v)<=0 for t in targets):
             separated=True;break
-    assert started and separated,(r['key'],sr,speed,v,float(max(d1)))
-    ie=abs(m*(speed-v)-impulse)
+    assert started and separated,(r['key'],sr,speed,hammer.velocity(),float(max(d1)))
+    ie=abs(m*(speed-hammer.v)-impulse)
     assert maxbal<=max(1e-10,E0*1e-7) and maxinc<=1e-11 and maxrelax<=1e-11 and maxport<=1e-11 and maxforce<=1e-7*max(1.,peak)
     assert ie<=1e-10 and abs(float(sum(perImpulse))-impulse)<=1e-10 and loss>=0
     if not stagger:assert max(perImpulse)-min(perImpulse)<=1e-10
@@ -72,7 +73,7 @@ def run(r,s,c,w2,P,sr,speed,stagger=False,trace=False):
     return dict(**audit,key=r['key'],sampleRateHz=sr,speedMps=speed,stagger=stagger,modesPerString=len(P),contactDurationMs=1000*ncontact/sr,
         injectedJ=E0,hammerReboundJ=Eh,targetJ=Es,storedFeltJ=Ef,lossJ=loss,maxBalanceJ=maxbal,maxIncreaseJ=maxinc,
         maxRelaxResidualJ=maxrelax,maxPortResidualJ=maxport,maxForceResidualN=maxforce,impulseErrorNs=ie,
-        peakForceN=peak,impulseNs=impulse,maxCompressionM=maxCompression,reboundMps=-v,perImpulseNs=perImpulse.tolist(),
+        peakForceN=peak,impulseNs=impulse,maxCompressionM=maxCompression,reboundMps=-hammer.velocity(),centerOfMassReboundMps=-hammer.v,shaftEnergyJ=hammer.flex_energy(),shaft=shaft,perImpulseNs=perImpulse.tolist(),
         modalFrequenciesHz=(np.sqrt(w2)/(2*np.pi)).tolist(),modalEnergyJ=modal.tolist(),fundamentalFractionInput=float(modal[0]/E0),
         totalTransferFractionInput=Es/E0)
 def compare(a,b):
