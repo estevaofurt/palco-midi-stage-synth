@@ -1,0 +1,36 @@
+name: Concert Grand R8b mechanical acoustic ledger
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths: ['research/stage-concert-grand/f11u-r8b-*.mjs','.github/workflows/concert-grand-ledger-r8b.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11u-r8b-ledger.test.mjs
+  compare:
+    needs: unit
+    strategy:
+      fail-fast: false
+      matrix:
+        note: [C3,C4,G4]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --max-old-space-size=6144 research/stage-concert-grand/f11u-r8b-demo.mjs /tmp/r8b ${{ matrix.note }} 0.5 0.5
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R8b-ledger-${{ matrix.note }}
+          path: /tmp/r8b/
+          if-no-files-found: error

@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {partialLedger} from './f11u-r8b-ledger.mjs';
+const axis=(v,x)=>({modes:[{n:1,m:2,k:4},{n:2,m:2,k:4}],v,x});
+const b={vAxis:axis([1,2],[0,0]),hAxis:axis([0,0],[1,2])};
+const l=partialLedger(b,100,[[0,.1]]);
+for(let i=0;i<9;i++)l.observe(i);
+const r=l.result()[0];
+assert.equal(r.samples,9);
+assert.deepEqual(r.total.slice(0,2),[3,12]);
+assert(Math.abs(r.relativeDb[1]-10*Math.log10(4))<1e-12);
+assert.throws(()=>partialLedger(b,100,[[1,2]]).result());
+console.log('R8B_LEDGER_UNIT_PASS');
