@@ -18,9 +18,11 @@ export function wireFor(midi){
  return {midi,lengthM,diameterM,youngPa,densityKgM3,areaM2,linearDensityKgM,EI,tensionN,f1Hz,B:Math.PI**2*EI/(tensionN*lengthM**2),stressPa:tensionN/areaM2,provenance:midi===60?'G1 C4 control geometry':'G2 C6 original diagnostic geometry, not measured'};
 }
 export class StringPilot {
- constructor(midi,sr=48000,{cutoffHz=pilotCutoffHz(midi),strikeFraction=DESIGN.strikeFraction,widthM=DESIGN.widthM}={}){
+ constructor(midi,sr=48000,{cutoffHz=pilotCutoffHz(midi),strikeFraction=DESIGN.strikeFraction,widthM=DESIGN.widthM,sigma0PerS=DESIGN.sigma0PerS,sigma2M2PerS=DESIGN.sigma2M2PerS}={}){
   if(![44100,48000,96000].includes(sr))throw RangeError('rate');
   if(!Number.isFinite(cutoffHz)||cutoffHz<=0||cutoffHz>.4*sr)throw RangeError('cutoff');
+  if(![sigma0PerS,sigma2M2PerS].every(v=>Number.isFinite(v)&&v>=0))throw RangeError('distributed loss');
+  this.lossParameters={sigma0PerS,sigma2M2PerS};
   this.sr=sr;this.cutoffHz=cutoffHz;this.wire=wireFor(midi);this.modes=[];this.weights=[];this.info=[];
   const L=this.wire.lengthM;
   if(!Number.isFinite(strikeFraction)||!Number.isFinite(widthM)||widthM<0||strikeFraction*L-widthM/2<0||strikeFraction*L+widthM/2>L)throw RangeError('contact footprint');
@@ -28,7 +30,7 @@ export class StringPilot {
   for(let n=1;n<=DESIGN.maxModes;n++){
    const m=stringMode(this.wire,n);
    if(m.frequencyHz>=cutoffHz)break;
-   const sigma=DESIGN.sigma0PerS+DESIGN.sigma2M2PerS*m.waveNumber**2;
+   const sigma=sigma0PerS+sigma2M2PerS*m.waveNumber**2;
    this.modes.push(new PortMode({massKg:m.massKg,frequencyHz:m.frequencyHz,dampingNsM:2*m.massKg*sigma,dt:1/sr}));
    this.weights.push(spatialWeight(m,L,strikeFraction*L,widthM));this.info.push({...m,sigma});
   }
