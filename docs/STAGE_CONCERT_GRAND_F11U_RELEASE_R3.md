@@ -1,0 +1,5 @@
+# R3 — integração musical do amortecimento R2
+
+R2 run 45535128559: unit + 5 renders passed. Dry RMS +100/+300/+500/+1000 ms: original -38.49/-42.08/-44.06/-44.95; vertical25 -39.89/-42.97/-45.00/-47.11; both10 -45.81/-59.35/-68.47/-90.46; both25 -48.68/-57.63/-66.42/-88.13; both50 -48.32/-57.35/-66.17/-87.66. Common pre-release -35.16. Pedal25 +1000 -42.12 identical to original; after pedal release 2.8–2.9 s -54.23 vs -39.71 original. Both10/25 retained as candidates, not certified by listening. Horizontal damping strongly implicated in this model, not exclusive causal proof for real piano. R2 distributed modal damping is diagnostic, not actual localized felt geometry.
+
+F11u run 45535128530 passed smoke and two 10s musical phrases (16 attacks each), no clipping, balance <1.1e-13 J. R3 integrates R2 as split substep after hammer contact on non-active keys; no damping with held/pedal target zero except transition ramp. Same phrase/gain, K750, two rates. Original F11u and stable S50 untouched; F12.5 mandatory. No listening certification.

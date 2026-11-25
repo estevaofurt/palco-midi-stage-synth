@@ -1,0 +1,36 @@
+name: Concert Grand R3 musical release integration
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths: ['research/stage-concert-grand/f11u-r3-*.mjs','.github/workflows/concert-grand-release-r3.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11u-r3-phrase-demo.mjs /tmp/smoke K750 smoke 25
+  phrase:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        rate: [10,25]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --max-old-space-size=6144 research/stage-concert-grand/f11u-r3-phrase-demo.mjs /tmp/r3 K750 phrase ${{ matrix.rate }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R3-phrase-K750-R${{ matrix.rate }}
+          path: /tmp/r3/
+          if-no-files-found: error
