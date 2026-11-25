@@ -10,7 +10,7 @@ permissions:
 jobs:
   evidence:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,7 +25,11 @@ jobs:
           python - <<'PY'
           import json, pathlib, subprocess
           manifest=json.loads(pathlib.Path('research/stage-concert-grand-iii/bem_evidence_manifest.json').read_text())
+          seen=set()
           for m in manifest['methods']:
+              key=(m['run'],m['artifact'])
+              if key in seen:continue
+              seen.add(key)
               rid=str(m['run']);root=pathlib.Path('/tmp/g3-evidence-input')/rid
               root.mkdir(exist_ok=True)
               j=subprocess.run(['gh','api',f'repos/{__import__("os").environ["GITHUB_REPOSITORY"]}/actions/runs/{rid}/jobs?per_page=100'],capture_output=True,text=True)

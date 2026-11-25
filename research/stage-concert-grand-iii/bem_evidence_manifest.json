@@ -86,12 +86,161 @@
     },
     {
       "key": "weak-p1-refined",
-      "run": 45700231172,
+      "run": 45701479539,
       "artifact": "G3-weak-refined",
       "file": "bem_weak_p1_refined.json",
       "audit": "audit",
       "family": "degree-four",
       "role": "solver"
+    },
+    {
+      "key": "static-moments",
+      "run": 45701479519,
+      "artifact": "G3-static-moments",
+      "file": "bem_p1_static_moments.json",
+      "role": "solver",
+      "family": "degree-four",
+      "audit": "audit",
+      "control": "legacyAudit"
+    },
+    {
+      "key": "priority-balanced",
+      "run": 45700020158,
+      "artifact": "G3-p1-priority",
+      "file": "bem_p1_priority.json",
+      "role": "diagnostic",
+      "family": "degree-four",
+      "audit": "audit",
+      "select": {
+        "policy": "balanced",
+        "step": 2
+      }
+    },
+    {
+      "key": "priority-worst",
+      "run": 45700020158,
+      "artifact": "G3-p1-priority",
+      "file": "bem_p1_priority.json",
+      "role": "diagnostic",
+      "family": "degree-four",
+      "audit": "audit",
+      "select": {
+        "policy": "worst",
+        "step": 2
+      }
+    },
+    {
+      "key": "energy-residual",
+      "run": 45700994720,
+      "artifact": "G3-energy-mark",
+      "file": "bem_energy_marking.json",
+      "role": "diagnostic",
+      "family": "degree-four",
+      "audit": "audit",
+      "select": {
+        "policy": "residual",
+        "step": 2
+      }
+    },
+    {
+      "key": "energy-combined",
+      "run": 45700994720,
+      "artifact": "G3-energy-mark",
+      "file": "bem_energy_marking.json",
+      "role": "diagnostic",
+      "family": "degree-four",
+      "audit": "audit",
+      "select": {
+        "policy": "combined",
+        "step": 2
+      }
+    },
+    {
+      "key": "edge-audit",
+      "run": 45703140895,
+      "artifact": "G3-edge-audit",
+      "file": "bem_edge_audit.json",
+      "role": "diagnostic",
+      "family": "edge-graded-8/8",
+      "select": {
+        "rule": "edge",
+        "outerOrder": 8,
+        "innerOrder": 8
+      }
+    },
+    {
+      "key": "edge-localization",
+      "run": 45704390331,
+      "artifact": "G3-edge-local",
+      "file": "bem_edge_localization.json",
+      "role": "diagnostic",
+      "family": "edge-graded-8/8",
+      "select": {
+        "outerOrder": 8,
+        "innerOrder": 8
+      }
+    },
+    {
+      "key": "edge-fit-tensor",
+      "run": 45704107170,
+      "artifact": "G3-edge-galerkin",
+      "file": "bem_edge_galerkin.json",
+      "role": "diagnostic",
+      "family": "edge-graded-8/8",
+      "audit": "audit",
+      "select": {
+        "method": "tensor",
+        "fitOuter": 5
+      }
+    },
+    {
+      "key": "edge-fit-edge",
+      "run": 45704107170,
+      "artifact": "G3-edge-galerkin",
+      "file": "bem_edge_galerkin.json",
+      "role": "diagnostic",
+      "family": "edge-graded-8/8",
+      "audit": "audit",
+      "select": {
+        "method": "edge",
+        "fitOuter": 6
+      }
+    },
+    {
+      "key": "matched-baseline",
+      "run": 45705092115,
+      "artifact": "G3-edge-matched",
+      "file": "bem_edge_matched.json",
+      "role": "diagnostic",
+      "family": "edge-graded-8/8",
+      "audit": "audit",
+      "select": {
+        "method": "baseline"
+      }
+    },
+    {
+      "key": "matched-red",
+      "run": 45705092115,
+      "artifact": "G3-edge-matched",
+      "file": "bem_edge_matched.json",
+      "role": "diagnostic",
+      "family": "edge-graded-8/8",
+      "audit": "audit",
+      "select": {
+        "method": "red"
+      }
+    },
+    {
+      "key": "matched-strip",
+      "run": 45705092115,
+      "artifact": "G3-edge-matched",
+      "file": "bem_edge_matched.json",
+      "role": "diagnostic",
+      "family": "edge-graded-8/8",
+      "audit": "audit",
+      "select": {
+        "method": "strip"
+      }
     }
   ],
   "angles": [
