@@ -1,0 +1,37 @@
+name: Concert Grand II R2.06 tuning preparation
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_r2_pitch_screen.py','.github/workflows/concert-grand-ii-r2-pitch.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  pitch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-R2C-note-*
+          run-id: 45625084768
+          github-token: ${{ github.token }}
+          path: /tmp/r2c
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-R2C-note-60
+          run-id: 45626307034
+          github-token: ${{ github.token }}
+          path: /tmp/r2c/G2-R2C-note-60
+      - run: python research/stage-concert-grand-ii/g2_r2_pitch_screen.py --root /tmp/r2c --out /tmp/pitch
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R2-pitch-preparation
+          path: /tmp/pitch/
+          if-no-files-found: error
