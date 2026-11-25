@@ -1,0 +1,24 @@
+name: Concert Grand II G2.09d orthotropic soundboard
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_board_pilot*.mjs','.github/workflows/concert-grand-ii-board-pilot.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  board:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand-ii/g2_board_pilot.test.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G2-board-pilot-numeric
+          path: /tmp/g2-board/report.json
+          if-no-files-found: error
