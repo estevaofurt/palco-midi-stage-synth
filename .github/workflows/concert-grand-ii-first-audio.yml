@@ -1,0 +1,60 @@
+name: Concert Grand II G2.10a first 5s audio
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_first_audio.py','.github/workflows/concert-grand-ii-first-audio.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  raw:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [C3, C4, C6, C6-light, chord]
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: python -m py_compile research/stage-concert-grand-ii/g2_first_audio.py
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: python research/stage-concert-grand-ii/g2_first_audio.py render --group ${{ matrix.group }} --out /tmp/g2-first-audio-raw
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-first-audio-raw-${{ matrix.group }}
+          path: /tmp/g2-first-audio-raw/
+          if-no-files-found: error
+          compression-level: 0
+  assemble:
+    needs: raw
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-first-audio-raw-*
+          path: /tmp/g2-raw
+      - run: python research/stage-concert-grand-ii/g2_first_audio.py assemble --raw /tmp/g2-raw --out /tmp/g2-first-audio-wav
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-first-audio-5s-WAV
+          path: /tmp/g2-first-audio-wav/
+          if-no-files-found: error
