@@ -1,0 +1,22 @@
+name: Concert Grand III streamed exterior pair quadrature equivalence
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/exterior_pair_stream.py','research/stage-concert-grand-iii/test_exterior_pair_stream.py','.github/workflows/concert-grand-iii-exterior-pair-stream.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_exterior_pair_stream.py
+      - run: python research/stage-concert-grand-iii/test_lid_exterior.py

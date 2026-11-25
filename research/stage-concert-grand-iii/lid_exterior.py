@@ -69,7 +69,9 @@ def angular(x,A,k,order):
         G+=F.conj().T@(w[i:i+128,None]*F)
     return G.real/(4*np.pi)
 
-def load(panels,freq,outer,inner,angular_order,rho=1.204,c=343.):
+def load(panels,freq,outer,inner,angular_order,rho=1.204,c=343.,*,pair_block=None):
+    if pair_block is not None and (not isinstance(pair_block,int) or isinstance(pair_block,bool) or pair_block<1):
+        raise ValueError('invalid pair block')
     f=np.asarray(freq,dtype=float);omega=2*np.pi*f;k=omega/c
     if min(f)<=0 or min(rho,c)<=0:raise ValueError('positive medium and frequencies')
     samples=[p.samples(outer) for p in panels];N=sum(p.basis.count for p in panels)
@@ -83,13 +85,19 @@ def load(panels,freq,outer,inner,angular_order,rho=1.204,c=343.):
         X[:,I,I]=self_react(p,si,k,inner)
         for j in range(i,len(panels)):
             _,y,v,T=samples[j];B=v[:,None]*T;J=slice(offsets[j],offsets[j+1])
-            D=cdist(x,y)
-            if i!=j:assert min(D.ravel())>0
-            for l,kl in enumerate(k):
-                R[l,I,J]=A.T@(np.sinc(kl*D/np.pi)@B)
-                if i!=j:X[l,I,J]=A.T@((np.cos(kl*D)/D)@B)
-                if i!=j:
-                    R[l,J,I]=R[l,I,J].T;X[l,J,I]=X[l,I,J].T
+            if pair_block is None:
+                D=cdist(x,y)
+                if i!=j:assert min(D.ravel())>0
+                for l,kl in enumerate(k):
+                    R[l,I,J]=A.T@(np.sinc(kl*D/np.pi)@B)
+                    if i!=j:X[l,I,J]=A.T@((np.cos(kl*D)/D)@B)
+            else:
+                from exterior_pair_stream import pair_integrals
+                rr,xx,_=pair_integrals(x,A,y,B,k,mutual=i!=j,block=pair_block)
+                R[:,I,J]=rr
+                if i!=j:X[:,I,J]=xx
+            if i!=j:
+                R[:,J,I]=R[:,I,J].transpose(0,2,1);X[:,J,I]=X[:,I,J].transpose(0,2,1)
     xyz=np.vstack([s[1] for s in samples]);A=np.zeros((len(xyz),N));start=0
     for i,(_,x,w,S) in enumerate(samples):
         A[start:start+len(x),offsets[i]:offsets[i+1]]=w[:,None]*S;start+=len(x)
