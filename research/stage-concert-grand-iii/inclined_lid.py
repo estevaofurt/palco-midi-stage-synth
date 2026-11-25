@@ -54,7 +54,7 @@ def build(poly,n,nz,height,angle,field,c=343.,rho=1.204):
     # Use the original polygon edge as a port label. Side faces are planar,
     # parallel to the displacement vector of the hinged lid.
     disp=np.array([np.cos(a)-1,0.,np.sin(a)])
-    areas=[];columns=[];faces_used=[];normals=[]
+    areas=[];columns=[];faces_used=[];normals=[];port_faces=[]
     for u,v in zip(poly,np.roll(poly,-1,axis=0)):
         edge=np.r_[v-u,0.]; normal=np.cross(edge,disp)
         scale=np.linalg.norm(normal); area=scale*((u[0]+v[0])/2-h)
@@ -67,13 +67,13 @@ def build(poly,n,nz,height,angle,field,c=343.,rho=1.204):
         col=np.zeros(size)
         np.add.at(col,ids.ravel(),np.repeat(weights/3/area,3))
         assert abs(col.sum()-1)<1e-10 and min(col)>=0
-        areas.append(float(area));columns.append(col);faces_used.extend(map(tuple,ids));normals.append(normal.tolist())
+        port_faces.append(ids);areas.append(float(area));columns.append(col);faces_used.extend(map(tuple,ids));normals.append(normal.tolist())
     assert sorted(faces_used)==sorted(map(tuple,apertures)), 'missing or duplicated side face'
     # Each rim triangle must now be internal, except at zero angle.
     rimfaces=np.sort(rim[m['tri']],axis=1)
     assert not set(map(tuple,rimfaces)) & set(map(tuple,boundary))
     B=np.pad(m['B'],((0,size-old),(0,0)))
-    model=dict(m,M=M,K=K,B=B,xyz=xyz,tet=tet,volume=m['volume']+vol,constantResidual=constant)
+    model=dict(m,M=M,K=K,B=B,xyz=xyz,tet=tet,volume=m['volume']+vol,constantResidual=constant,apertureFaces=port_faces)
     report=dict(areaM2=sum(areas),portAreasM2=areas,portNormalsXYZ=normals,wedgeVolumeM3=vol,
         expectedWedgeVolumeM3=float(expected),volumeM3=model['volume'],faces=len(apertures),ports=len(areas),
         nodes=size,tetrahedra=len(tet),constantResidual=constant,gate=True)
