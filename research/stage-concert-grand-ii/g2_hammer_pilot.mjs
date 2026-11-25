@@ -5,10 +5,10 @@ import {feltPotential,feltSecant,solveContact} from '../stage-concert-grand/hamm
 export const HAMMER=Object.freeze({massKg:.010,kNPerMPower:2e9,power:2.5,rateFactorSPerM:.12,gapM:.0002});
 export const SPEEDS=Object.freeze([.5,1,2]);
 export class HammerPilot {
- constructor(key,sr=48000,{speedMps=1,cutoffHz=pilotCutoffHz(key),params=HAMMER}={}){
+ constructor(key,sr=48000,{speedMps=1,cutoffHz=pilotCutoffHz(key),params=HAMMER,footprint={}}={}){
   const {massKg,kNPerMPower,power,rateFactorSPerM,gapM}=params;
   if(![massKg,kNPerMPower,speedMps].every(v=>Number.isFinite(v)&&v>0)||!Number.isFinite(power)||power<1||power>5||!Number.isFinite(rateFactorSPerM)||rateFactorSPerM<0||!Number.isFinite(gapM)||gapM<0)throw RangeError('hammer parameters');
-  this.string=new StringPilot(key,sr,{cutoffHz});this.h=1/sr;this.params={...params};this.x=-gapM;this.v=speedMps;this.contactLossJ=0;this.impulseNs=0;this.time=0;this.forceN=0;this.residualN=0;this.stepLossJ=0;
+  this.string=new StringPilot(key,sr,{...footprint,cutoffHz});this.h=1/sr;this.params={...params};this.x=-gapM;this.v=speedMps;this.contactLossJ=0;this.impulseNs=0;this.time=0;this.forceN=0;this.residualN=0;this.stepLossJ=0;
   this.g=this.h*this.h/(2*massKg)+this.string.modes.reduce((a,m,i)=>a+this.string.weights[i]**2*m.p.G,0);
  }
  compression(){return this.x-this.string.displacement();}
