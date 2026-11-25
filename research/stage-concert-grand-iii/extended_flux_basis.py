@@ -1,4 +1,4 @@
-"""Experimental degree-six/seven aperture basis. Preserve old coordinates
+"""Experimental degree-six through nine aperture basis. Preserve old coordinates
 through degree five. Whiten planar geometry and use weighted QR instead of
 forming a monomial Gram matrix, which squares the condition number.
 """
@@ -10,8 +10,8 @@ from ribbed_plate import quadrature
 
 class ExtendedFluxBasis:
     def __init__(self,poly,count):
-        if count not in (28,36):raise ValueError('degree six or seven required')
-        self.count=count;self.degree={28:6,36:7}[count]
+        if count not in (28,36,45,55):raise ValueError('degree six through nine required')
+        self.count=count;self.degree={28:6,36:7,45:8,55:9}[count]
         poly=np.asarray(poly,float)
         self.area,self.center,_=properties(poly)
         xy,w=quadrature(poly,12)

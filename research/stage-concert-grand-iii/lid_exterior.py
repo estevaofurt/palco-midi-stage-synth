@@ -17,7 +17,7 @@ class Panel:
         u=xyz[np.argmax(np.linalg.norm(xyz-self.origin,axis=1))]-self.origin
         u/=np.linalg.norm(u);v=np.cross(normal,u);v/=np.linalg.norm(v)
         self.axes=np.stack([u,v],axis=1)
-        self.poly=hull(self.local(xyz));self.basis=(ExtendedFluxBasis(self.poly,count) if count in (28,36) else FluxBasis(self.poly,count))
+        self.poly=hull(self.local(xyz));self.basis=(ExtendedFluxBasis(self.poly,count) if count in (28,36,45,55) else FluxBasis(self.poly,count))
     def local(self,x):return (x-self.origin)@self.axes
     def world(self,x):return self.origin+x@self.axes.T
     def samples(self,order):
@@ -26,7 +26,7 @@ class Panel:
 
 def ports(model,C0,report,count,canonical=False):
     panels=[];cols=[]
-    z,w=leggauss(5);z=(z+1)/2;w=w/2
+    z,w=leggauss(6 if count in (45,55) else 5);z=(z+1)/2;w=w/2
     u,v=np.meshgrid(z,z,indexing='ij');u=u.ravel();v=v.ravel()
     lam=np.c_[1-u,u*(1-v),u*v];weight=(w[:,None]*w[None,:]).ravel()*u
     for i,(ids,normal,area) in enumerate(zip(model['apertureFaces'],report['portNormalsXYZ'],report['portAreasM2'])):

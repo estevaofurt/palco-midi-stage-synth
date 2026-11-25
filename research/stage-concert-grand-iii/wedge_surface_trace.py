@@ -48,7 +48,8 @@ def surface_panels(poly,n,angle,height,layers,count):
         result.append((panel,xyz,faces,m))
     return result
 
-def trace_matrix(panel,xyz,faces,order=5):
+def trace_matrix(panel,xyz,faces,order=None):
+    if order is None:order=6 if panel.basis.count in (45,55) else 5
     z,w=leggauss(order);z=(z+1)/2;w=w/2
     u,v=np.meshgrid(z,z,indexing='ij');u=u.ravel();v=v.ravel()
     L=np.c_[1-u,u*(1-v),u*v];W=(w[:,None]*w[None,:]).ravel()*u
