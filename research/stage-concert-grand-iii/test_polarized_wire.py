@@ -26,6 +26,12 @@ class PolarTest(unittest.TestCase):
             self.assertLess(abs(t.energy()+t.loss-w),1e-12)
             self.assertLessEqual(t.load_energy(),t.energy()+1e-12)
         self.assertGreater(peak,1e-12)
+    def test_json(self):
+        from polarization_diagnostic import compare
+        a=dict(trace=np.ones((2,2,2)).tolist(),workJ=np.float64(1),lossJ=np.float64(1),storedJ=np.float64(1))
+        q=compare(a,a)
+        self.assertIs(type(q['gate']),bool)
+        self.assertTrue(json.loads(json.dumps(q,allow_nan=False))['gate'])
     def test_reciprocity(self):
         a=PolarizedWire(self.r,128,24000,192000,ANISO,.43)
         b=PolarizedWire(self.r,128,24000,192000,ANISO,.43)

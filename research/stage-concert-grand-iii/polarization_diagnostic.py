@@ -20,8 +20,8 @@ def simulate(r,N,cut,sr,load,angle,drive):
 def compare(a,b):
     x=np.asarray(a['trace']);y=np.asarray(b['trace'])
     errors={f'port{p}axis{d}':float(np.linalg.norm(x[:,p,d]-y[:,p,d])/max(np.linalg.norm(y[:,p,d]),1e-20)) for p in range(2) for d in range(2)}
-    for k in ('workJ','lossJ','storedJ'):errors[k]=abs(a[k]-b[k])/max(abs(b[k]),1e-20)
-    return dict(errors=errors,gate=max(errors.values())<=.05)
+    for k in ('workJ','lossJ','storedJ'):errors[k]=float(abs(a[k]-b[k])/max(abs(b[k]),1e-20))
+    return dict(errors=errors,gate=bool(max(errors.values())<=.05))
 def main():
     p=argparse.ArgumentParser();p.add_argument('--scale',type=Path,required=True);p.add_argument('--key',type=int,required=True);p.add_argument('--out',type=Path,required=True);a=p.parse_args()
     raw=a.scale.read_bytes();sc=json.loads(raw);assert sc['version']=='G3-scale-hypothesis-02' and sc['summary']['gate']
