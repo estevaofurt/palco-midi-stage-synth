@@ -61,5 +61,5 @@ def main():
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(result,indent=2,allow_nan=False))
     for row in rows:
         w=row["windows"]
-        print("G2_IOWA_CASE "+json.dumps({"note":row["note"],"dynamic":row["dynamic"],"source_rate":row["source_rate"],"channels":row["source_channels"],"duration":row["source_duration_s"],"h2":w.get("0.25-0.75",{}).get("partial_band_relative_db",[None,None])[1],"early_low":w.get("0-0.02",{}).get("below_0_7_f0_pct"),"rms":{k:w[k]["rms_dbfs"] for k in w}}),flush=True)
+        print("G2_IOWA_CASE "+json.dumps({"note":row["note"],"dynamic":row["dynamic"],"source_rate":row["source_rate"],"channels":row["source_channels"],"duration":row["source_duration_s"],"h2":w.get("0.25-0.75",{}).get("partial_band_relative_db",[None,None])[1],"onset":row["onset_diagnostics"],"early_low":w.get("0-0.02",{}).get("below_0_7_f0_pct"),"rms":{k:w[k]["rms_dbfs"] for k in w}}),flush=True)
 if __name__=="__main__":main()

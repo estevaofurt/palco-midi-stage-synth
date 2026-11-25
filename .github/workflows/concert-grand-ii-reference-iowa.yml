@@ -2,7 +2,7 @@ name: Concert Grand II G2.02b Iowa reference measurements
 on:
   push:
     branches: [research/stage-concert-grand-ii]
-    paths: ['research/stage-concert-grand-ii/g2_iowa_analysis.py','research/stage-concert-grand-ii/test_g2_iowa_analysis.py','.github/workflows/concert-grand-ii-reference-iowa.yml']
+    paths: ['research/stage-concert-grand-ii/g2_c5_analysis.py','research/stage-concert-grand-ii/test_g2_c5_analysis.py','research/stage-concert-grand-ii/g2_iowa_analysis.py','research/stage-concert-grand-ii/test_g2_iowa_analysis.py','.github/workflows/concert-grand-ii-reference-iowa.yml']
   workflow_dispatch:
 permissions:
   contents: read

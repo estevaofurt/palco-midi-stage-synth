@@ -1,0 +1,27 @@
+name: Concert Grand II G2.02c onset-aligned reference comparison
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_compare_reports.py','.github/workflows/concert-grand-ii-reference-compare.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: python -m unittest discover -s research/stage-concert-grand-ii -p 'test_g2_*analysis.py'
+      - run: python research/stage-concert-grand-ii/g2_c5_analysis.py --output /tmp/g2/c5_report.json
+      - run: python research/stage-concert-grand-ii/g2_iowa_analysis.py --output /tmp/g2/iowa_report.json
+      - run: python research/stage-concert-grand-ii/g2_compare_reports.py /tmp/g2/c5_report.json /tmp/g2/iowa_report.json /tmp/g2/compare.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-aligned-reference-numeric
+          path: /tmp/g2/*.json
+          if-no-files-found: error
