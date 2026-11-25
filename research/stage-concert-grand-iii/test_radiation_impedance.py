@@ -13,7 +13,7 @@ class ImpedanceTest(unittest.TestCase):
         def overlap(r):return 2*a*a*np.arccos(r/(2*a))-.5*r*np.sqrt(max(0.,4*a*a-r*r))
         for f in (80,500,2000):
             w=2*np.pi*f;k=w/c
-            z=rho*1j*w*complex(quad(lambda r:overlap(r)*np.cos(k*r),0,2*a)[0],-quad(lambda r:overlap(r)*np.sin(k*r),0,2*a)[0])
+            z=rho*1j*w*complex(quad(lambda r:overlap(r)*np.cos(k*r),0,2*a,epsabs=1e-12,epsrel=1e-12)[0],-quad(lambda r:overlap(r)*np.sin(k*r),0,2*a,epsabs=1e-12,epsrel=1e-12)[0])
             ref=rho*c*A*(1-j1(2*k*a)/(k*a)+1j*struve(1,2*k*a)/(k*a))
             self.assertLess(abs(z/ref-1),1e-8)
     def test_polygon_resistance(self):

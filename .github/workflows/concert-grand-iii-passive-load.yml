@@ -1,0 +1,27 @@
+name: Concert Grand III passive causal acoustic load
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/passive_radiation*.py','research/stage-concert-grand-iii/test_passive_radiation.py','.github/workflows/concert-grand-iii-passive-load.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_passive_radiation.py
+      - run: python research/stage-concert-grand-iii/passive_radiation_diagnostic.py --out /tmp/g3-passive
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-passive-acoustic-load
+          path: /tmp/g3-passive/
+          if-no-files-found: warn
