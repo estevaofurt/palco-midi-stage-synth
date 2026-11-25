@@ -1,0 +1,44 @@
+name: Concert Grand II R2 C5 energy partition diagnostic
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_r2_c5_energy_trace.py','.github/workflows/concert-grand-ii-r2-c5-energy.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  trace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [60,72]
+        variant: ['dry','mass70-energy']
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: node research/stage-concert-grand-ii/g2_octave_export.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-R2C-note-${{ matrix.key }}
+          run-id: ${{ matrix.key == 60 && 45626307034 || 45625084768 }}
+          github-token: ${{ github.token }}
+          path: /tmp/source
+      - run: python research/stage-concert-grand-ii/g2_r2_c5_energy_trace.py --key ${{ matrix.key }} --variant ${{ matrix.variant }} --source /tmp/source --out /tmp/energy
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R2-C5-energy-${{ matrix.key }}-${{ matrix.variant }}
+          path: /tmp/energy/
+          if-no-files-found: error
