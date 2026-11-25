@@ -1,0 +1,64 @@
+name: Concert Grand III second strip refinement candidate proof
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/bem_candidate*.py','research/stage-concert-grand-iii/test_bem_candidate_guard.py','.github/workflows/concert-grand-iii-candidate-proof.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_bem_candidate_guard.py
+      - run: python research/stage-concert-grand-iii/test_bem_weak_blocked.py
+  proof:
+    needs: unit
+    if: github.event_name == 'workflow_dispatch'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - angle: '30'
+            job: '139551753066'
+          - angle: '55'
+            job: '139551753571'
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require validated candidate and source
+        run: |
+          test "$(gh api repos/$GITHUB_REPOSITORY/actions/jobs/${{ matrix.job }} --jq .conclusion)" = success
+          test "$(gh run view 45713255450 --json conclusion --jq .conclusion)" = success
+          gh run download 45712962485 -n G3-strip-band-replay-${{ matrix.angle }} -D /tmp/g3-candidate
+          gh run download 45710358582 -n G3-strip-audit-${{ matrix.angle }}-80 -D /tmp/g3-strip-source
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/bem_candidate_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-strip-source --candidate /tmp/g3-candidate --angle ${{ matrix.angle }} --out /tmp/g3-candidate-proof
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-candidate-proof-${{ matrix.angle }}
+          path: /tmp/g3-candidate-proof/
+          if-no-files-found: warn
