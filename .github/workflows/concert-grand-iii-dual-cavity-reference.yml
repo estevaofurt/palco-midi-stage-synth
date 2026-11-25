@@ -1,0 +1,19 @@
+name: Concert Grand III dual cavity reference algebra
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/dual_cavity_reference.py','research/stage-concert-grand-iii/test_dual_cavity_reference.py','.github/workflows/concert-grand-iii-dual-cavity-reference.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  algebra:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_dual_cavity_reference.py
