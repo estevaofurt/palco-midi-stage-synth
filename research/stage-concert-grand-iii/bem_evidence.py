@@ -27,16 +27,18 @@ def select_cases(m,cases):
         cases=[c for c in cases if all(c.get(k)==v for k,v in m['select'].items())]
     return cases
 
-def summarize(m,angle,job,doc,freq):
+def summarize(m,angle,job,doc,freq,frequency=None):
     row=dict(method=m['key'],angleDeg=angle,runId=m['run'],role=m['role'],
         auditFamily=m.get('family'),jobStatus=job.get('status','unknown'),
         jobConclusion=job.get('conclusion'),artifactAvailable=doc is not None)
-    row['state']='missing-artifact' if doc is None else 'partial'
+    if frequency is not None:row['frequencyHz']=frequency
+    row['state']=('pending-artifact' if row['jobStatus'] in ('queued','in_progress','waiting','requested','pending') else 'missing-artifact') if doc is None else 'partial'
     row['solverApproved']=False
     if doc is None:return row
     if not isinstance(doc,dict):raise ValueError('invalid artifact')
     summary=doc.get('summary',{})
     complete=(isinstance(summary,dict) and summary.get('angleDeg')==angle and isinstance(summary.get('gate'),bool))
+    if frequency is not None:complete=bool(complete and summary.get('frequencyHz')==frequency)
     row['artifactComplete']=complete
     row['reportedGate']=summary.get('gate') if complete else None
     row['scaleSha256']=doc.get('scaleSha256')
@@ -55,15 +57,23 @@ def summarize(m,angle,job,doc,freq):
             reports=last.get('reports',[])
             if m.get('audit'):
                 row['metrics']=maxima(reports,m['audit']) if reports else maxima([last],m['audit'])
-            row['physicalGate']=last.get('physicalGate',last.get('gate'))
-            row['frequencyHz']=last.get('frequencyHz')
+            # A diagnostic's own numerical gate is not a physical gate.
+            row['physicalGate']=last.get('physicalGate',last.get('audit',{}).get('physicalGate',summary.get('physicalGate')))
+            if row['physicalGate'] is not None and not isinstance(row['physicalGate'],bool):row['physicalGate']=None
+            row['frequencyHz']=last.get('frequencyHz',summary.get('frequencyHz',frequency))
+            if frequency is not None and row['frequencyHz']!=frequency:complete=False;row['artifactComplete']=False;row['reportedGate']=None
+            for k in ('targetConvergence','sourceConvergence','farConvergence','fixedMesh','fixedDensity'):
+                if k in summary:row[k]=summary[k]
+            if isinstance(last.get('audit'),dict):
+                row['minimumPassivityRelative']=last['audit'].get('passivityMinRelative')
             for k in ('categories','totalPowerRelative','boundaryWorkRelative','computedWorkRelative',
                       'heldoutResidual','heldoutWorstColumn','meshSha256','densitySha256'):
                 if k in last:row[k]=last[k]
             if m.get('select'):row['selection']=m['select']
         row['diagnosticApproved']=bool(complete and summary['gate'] and cases
             and row['jobStatus']=='completed' and row['jobConclusion']=='success'
-            and scale_valid(row['scaleSha256']))
+            and scale_valid(row['scaleSha256'])
+            and (frequency is None or summary.get('diagnosticOnly') is True))
         if complete:
             row['state']='diagnostic-pass' if row['diagnosticApproved'] else (
                 'diagnostic-fail' if not summary['gate'] else 'diagnostic-unverified')
@@ -97,9 +107,12 @@ def collect(manifest,root):
         meta=root/str(m['run'])/'jobs.json'
         jobs=read(meta).get('jobs',[]) if meta.is_file() else []
         for angle in manifest['angles']:
-            job=next((j for j in jobs if j.get('name')==f'proof ({angle})'),{})
-            path=root/str(m['run'])/f"{m['artifact']}-{angle}"/m['file']
-            rows.append(summarize(m,angle,job,read(path) if path.is_file() else None,manifest['frequenciesHz']))
+            for f in m.get('frequencyCases',[None]):
+                suffix=f'{angle}' if f is None else f'{angle}-{f}'
+                jobname=f'proof ({angle})' if f is None else f'proof ({angle}, {f})'
+                job=next((j for j in jobs if j.get('name')==jobname),{})
+                path=root/str(m['run'])/f"{m['artifact']}-{suffix}"/m['file']
+                rows.append(summarize(m,angle,job,read(path) if path.is_file() else None,manifest['frequenciesHz'],f))
     # A pass on a subset cannot certify the combined cabinet. No comparison
     # of raw residuals across different quadrature families is made.
     return dict(rows=rows,physicalLimits=LIMITS,fullCabinetReady=False,radiationReady=False,
@@ -107,12 +120,13 @@ def collect(manifest,root):
         diagnosticCasesApproved=sum(r.get('diagnosticApproved',False) for r in rows))
 def markdown(report):
     out=['# BEM — evidências verificadas','',
-         '| Método | Ângulo | Regra de auditoria | Estado | Triângulos | Resíduo | Pior coluna | Reciprocidade | Potência |',
-         '|---|---:|---|---|---:|---:|---:|---:|---:|']
+         '| Método | Ângulo | Hz | Regra de auditoria | Estado | Triângulos | Resíduo | Pior coluna | Reciprocidade | Potência | Gate físico |',
+         '|---|---:|---:|---|---|---:|---:|---:|---:|---:|---|']
     pct=lambda x:f'{100*x:.3f}%' if finite(x) else '—'
     for r in report['rows']:
         m=r.get('metrics') or {}
-        out.append(f"| {r['method']} | {r['angleDeg']}° | {r.get('auditFamily') or '—'} | {r['state']} | {r.get('elements') or '—'} | "+' | '.join(pct(m.get(k)) for k in METRICS)+' |')
+        physical={True:'sim',False:'não',None:'—'}.get(r.get('physicalGate'),'—')
+        out.append(f"| {r['method']} | {r['angleDeg']}° | {r.get('frequencyHz') or '—'} | {r.get('auditFamily') or '—'} | {r['state']} | {r.get('elements') or '—'} | "+' | '.join(pct(m.get(k)) for k in METRICS)+f' | {physical} |')
     out+=['','## Notas','',
           'Métodos com famílias de auditoria diferentes não são comparações controladas.',
           'Diagnósticos energéticos e comparações de frequência única não aprovam o solucionador.',

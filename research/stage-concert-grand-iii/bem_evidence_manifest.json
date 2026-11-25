@@ -241,6 +241,24 @@
       "select": {
         "method": "strip"
       }
+    },
+    {
+      "key": "strip-audit",
+      "run": 45710358582,
+      "artifact": "G3-strip-audit",
+      "file": "bem_strip_audit.json",
+      "role": "diagnostic",
+      "family": "edge-graded-8/10",
+      "audit": "audit",
+      "select": {
+        "outerOrder": 8,
+        "innerOrder": 10
+      },
+      "frequencyCases": [
+        30,
+        80,
+        150
+      ]
     }
   ],
   "angles": [

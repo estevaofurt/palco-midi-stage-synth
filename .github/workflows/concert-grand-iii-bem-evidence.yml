@@ -27,7 +27,7 @@ jobs:
           manifest=json.loads(pathlib.Path('research/stage-concert-grand-iii/bem_evidence_manifest.json').read_text())
           seen=set()
           for m in manifest['methods']:
-              key=(m['run'],m['artifact'])
+              key=(m['run'],m['artifact'],tuple(m.get('frequencyCases',[None])))
               if key in seen:continue
               seen.add(key)
               rid=str(m['run']);root=pathlib.Path('/tmp/g3-evidence-input')/rid
@@ -36,10 +36,12 @@ jobs:
               if j.returncode==0:(root/'jobs.json').write_text(j.stdout)
               else:print('Jobs unavailable',rid,j.stderr)
               for angle in manifest['angles']:
-                  name=f"{m['artifact']}-{angle}"
-                  d=root/name
-                  p=subprocess.run(['gh','run','download',rid,'--name',name,'--dir',str(d)],capture_output=True,text=True)
-                  if p.returncode:print('Artifact not yet available',rid,name,p.stderr)
+                  for f in m.get('frequencyCases',[None]):
+                      suffix=f'{angle}' if f is None else f'{angle}-{f}'
+                      name=f"{m['artifact']}-{suffix}"
+                      d=root/name
+                      p=subprocess.run(['gh','run','download',rid,'--name',name,'--dir',str(d)],capture_output=True,text=True)
+                      if p.returncode:print('Artifact not yet available',rid,name,p.stderr)
           PY
       - run: python research/stage-concert-grand-iii/bem_evidence.py --root /tmp/g3-evidence-input --out /tmp/g3-evidence
       - run: cat /tmp/g3-evidence/bem_evidence.md >> "$GITHUB_STEP_SUMMARY"

@@ -44,4 +44,20 @@ class EvidenceTest(unittest.TestCase):
         self.doc['summary']['gate']=False
         row=summarize(self.m,30,self.job,self.doc,self.freq)
         self.assertEqual(row['state'],'diagnostic-fail')
+    def test_frequency_specific_diagnostic(self):
+        self.m.update(role='diagnostic',select=dict(outerOrder=8,innerOrder=10))
+        self.doc['summary'].update(frequencyHz=80,diagnosticOnly=True,physicalGate=False)
+        self.doc['cases']=[dict(elements=446,frequencyHz=80,outerOrder=8,innerOrder=10,
+            audit=dict(**{k:.001 for k in METRICS},physicalGate=False,passivityMinRelative=-.001))]
+        r=summarize(self.m,30,self.job,self.doc,self.freq,80)
+        self.assertTrue(r['diagnosticApproved']);self.assertFalse(r['physicalGate'])
+        self.assertFalse(r['solverApproved']);self.assertEqual(r['frequencyHz'],80)
+        self.assertFalse(summarize(self.m,30,self.job,self.doc,self.freq,150)['diagnosticApproved'])
+        self.assertEqual(summarize(self.m,30,dict(status='in_progress'),None,self.freq,80)['state'],'pending-artifact')
+        self.doc['cases'][0]['frequencyHz']=30
+        self.assertFalse(summarize(self.m,30,self.job,self.doc,self.freq,80)['diagnosticApproved'])
+    def test_no_physical_gate_inference(self):
+        self.m['role']='diagnostic'
+        self.doc['cases'][0]['gate']=True
+        self.assertIsNone(summarize(self.m,30,self.job,self.doc,self.freq)['physicalGate'])
 if __name__=='__main__':unittest.main()
