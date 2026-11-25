@@ -34,14 +34,14 @@ def partition(prescribed,computed,far):
         computedPassivityMinRelative=float(np.linalg.eigvalsh(Rv).min()/den),
         prescribedPassivityMinRelative=float(np.linalg.eigvalsh(Rp).min()/den))
 
-def integrate(t,q,velocity,k,outer,inner,rho=1.204,c=343.,batch=24,operator=operators):
+def integrate(t,q,velocity,k,outer,inner,rho=1.204,c=343.,batch=24,operator=operators,sample_rule=samples):
     """Stream whole-surface work quadrature, separate from fit/audit points.
 
     The velocity callback takes points and element owners and returns the
     prescribed real basis fields. Actual velocity is the exterior trace
     of the same computed single-layer density, including the jump.
     """
-    y,w=samples(t,outer);_,n,_=elements(t);N,Q=y.shape[:2]
+    y,w=sample_rule(t,outer);_,n,_=elements(t);N,Q=y.shape[:2]
     owner=np.repeat(np.arange(N),Q);x=y.reshape(-1,3)
     n=np.repeat(n,Q,axis=0);w=w.ravel()
     ncol=q.shape[1]
