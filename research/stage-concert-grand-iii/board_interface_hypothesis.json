@@ -1,0 +1,24 @@
+{
+  "version": "G3-board-interface-01",
+  "status": "engineering_hypothesis",
+  "plate": {
+    "thicknessM": 0.008,
+    "densityKgM3": 430,
+    "ExPa": 11000000000,
+    "EyPa": 800000000,
+    "GxyPa": 650000000,
+    "nuXY": 0.3,
+    "alphaPerS": 10,
+    "betaS": 0.000002,
+    "status": "working spruce prior from G2 inventory, unmeasured; rectangular simply supported, no ribs"
+  },
+  "joint": {
+    "stiffnessNperM2": 2000000,
+    "status": "diagnostic distributed relative displacement spring, not measured glue stiffness"
+  },
+  "limitations": [
+    "only normal displacement and arclength slope; no torsion or actual moment joint",
+    "both bridges coupled to same rectangular plate; no strings in this proof",
+    "no ground foundation, no acoustical loading, no soundboard geometry approval"
+  ]
+}
