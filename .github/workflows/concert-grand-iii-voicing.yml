@@ -1,0 +1,46 @@
+name: Concert Grand III force-normalized voicing hypothesis
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/voicing_*.py','research/stage-concert-grand-iii/test_voicing_candidate.py','.github/workflows/concert-grand-iii-voicing.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnose:
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [60,72,78,84,90,96,108]
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_voicing_candidate.py
+      - if: matrix.key == 60
+        run: python research/stage-concert-grand-iii/voicing_candidate.py --scale /tmp/g3-scale/scale_geometry.json --out /tmp/g3-voicing-inventory
+      - if: matrix.key == 60
+        uses: actions/upload-artifact@v4
+        with:
+          name: G3-voicing-inventory
+          path: /tmp/g3-voicing-inventory/
+          if-no-files-found: error
+      - run: python research/stage-concert-grand-iii/voicing_impact.py --scale /tmp/g3-scale/scale_geometry.json --key ${{ matrix.key }} --out /tmp/g3-voicing
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-voicing-impact-${{ matrix.key }}
+          path: /tmp/g3-voicing/
+          if-no-files-found: warn
