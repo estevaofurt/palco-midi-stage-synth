@@ -1,0 +1,50 @@
+name: Concert Grand III consolidated sampled exterior reference
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/consolidated_exterior_replay.py','research/stage-concert-grand-iii/test_consolidated_exterior_replay.py','.github/workflows/concert-grand-iii-consolidated-exterior.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require approved diagnostic archives
+        run: |
+          for r in 45717196561 45720245179 45721156423 45720677131; do
+            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
+          done
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45720245179 -n G3-vertex-modal-replay-${{ matrix.angle }} -D /tmp/g3-vertex
+          gh run download 45721156423 -n G3-remaining-reactive-${{ matrix.angle }}-self -D /tmp/g3-self
+          gh run download 45721156423 -n G3-remaining-reactive-${{ matrix.angle }}-disjoint -D /tmp/g3-disjoint
+          gh run download 45720677131 -n G3-high-modal-surface-${{ matrix.angle }} -D /tmp/g3-smooth
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_consolidated_exterior_replay.py
+      - run: python research/stage-concert-grand-iii/consolidated_exterior_replay.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high --vertex /tmp/g3-vertex --self /tmp/g3-self --disjoint /tmp/g3-disjoint --smooth /tmp/g3-smooth --angle ${{ matrix.angle }} --out /tmp/g3-consolidated
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-consolidated-exterior-${{ matrix.angle }}
+          path: /tmp/g3-consolidated/
+          if-no-files-found: warn
