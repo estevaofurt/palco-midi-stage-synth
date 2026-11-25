@@ -8,9 +8,9 @@ from scipy.sparse.linalg import splu
 from closed_cavity import mesh
 from board_contour import properties
 
-def build(poly,n,height,field,c=343.,rho=1.204,*,field_order=4):
+def build(poly,n,height,field,c=343.,rho=1.204,*,field_order=4,boundary_n=None):
     if not isinstance(field_order,int) or field_order<2:raise ValueError('invalid trace quadrature order')
-    xy,tri,_,_=mesh(poly,n,1,height);N=len(xy)
+    xy,tri,_,_=mesh(poly,n,1,height,boundary_n=boundary_n);N=len(xy)
     t=xy[tri];J=np.transpose(t[:,1:]-t[:,:1],(0,2,1))
     A=abs(np.linalg.det(J))/2;inv=np.linalg.inv(J)
     grad=np.einsum('ij,tjk->tik',np.vstack([-np.ones(2),np.eye(2)]),inv)

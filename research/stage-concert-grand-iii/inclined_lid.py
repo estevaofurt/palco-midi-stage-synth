@@ -7,12 +7,12 @@ from board_contour import properties
 from closed_cavity import assemble as closed_assemble
 from aperture_modes import response
 
-def build(poly,n,nz,height,angle,field,c=343.,rho=1.204,*,wedge_layers=1):
+def build(poly,n,nz,height,angle,field,c=343.,rho=1.204,*,wedge_layers=1,boundary_n=None):
     if not isinstance(wedge_layers,int) or isinstance(wedge_layers,bool) or wedge_layers<1:
         raise ValueError('positive integer wedge_layers required')
     poly=np.asarray(poly,dtype=float)
     if not np.isfinite(angle) or not 0<=angle<90: raise ValueError('lid angle')
-    m=closed_assemble(poly,n,nz,height,field,c,rho)
+    m=closed_assemble(poly,n,nz,height,field,c,rho,boundary_n=boundary_n)
     if angle==0:
         return m,np.zeros((len(m['xyz']),0)),dict(areaM2=0.,wedgeVolumeM3=0.,faces=0,ports=0,gate=True)
     xy=m['xy']; N=len(xy); old=len(m['xyz']); rim=old-N+np.arange(N)
@@ -93,7 +93,7 @@ def build(poly,n,nz,height,angle,field,c=343.,rho=1.204,*,wedge_layers=1):
     model=dict(m,M=M,K=K,B=B,xyz=xyz,tet=tet,volume=m['volume']+vol,constantResidual=constant,apertureFaces=port_faces,aperturePolygons=port_polygons)
     report=dict(areaM2=sum(areas),portAreasM2=areas,portNormalsXYZ=normals,wedgeVolumeM3=vol,
         expectedWedgeVolumeM3=float(expected),volumeM3=model['volume'],faces=len(apertures),ports=len(areas),
-        nodes=size,tetrahedra=len(tet),wedgeLayers=wedge_layers,constantResidual=constant,gate=True)
+        nodes=size,tetrahedra=len(tet),wedgeLayers=wedge_layers,boundaryN=n if boundary_n is None else boundary_n,constantResidual=constant,gate=True)
     return model,np.column_stack(columns),report
 
 def matched_fixture(model,C,report,s,points):

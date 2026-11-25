@@ -7,7 +7,10 @@ from scipy.sparse import coo_matrix
 from scipy.sparse.linalg import splu
 from board_contour import properties,margins
 
-def mesh(poly,n,nz,height):
+def mesh(poly,n,nz,height,*,boundary_n=None):
+    if boundary_n is None:boundary_n=n
+    if not isinstance(boundary_n,int) or isinstance(boundary_n,bool) or boundary_n<n:
+        raise ValueError('boundary_n must be an integer at least n')
     poly=np.asarray(poly);lo=poly.min(0);hi=poly.max(0)
     assert n>=2 and nz>=1 and height>0
     x,y=np.meshgrid(*[np.linspace(a,b,n+1) for a,b in zip(lo,hi)])
@@ -15,9 +18,9 @@ def mesh(poly,n,nz,height):
     h=max(hi-lo)/n
     # Avoid tiny cut triangles between interior grid points and perimeter nodes.
     grid=grid[margins(poly,grid)>.15*h]
-    boundary=[]
+    boundary=[];hb=max(hi-lo)/boundary_n
     for a,b in zip(poly,np.roll(poly,-1,axis=0)):
-        steps=max(1,int(np.ceil(np.linalg.norm(b-a)/h)))
+        steps=max(1,int(np.ceil(np.linalg.norm(b-a)/hb)))
         boundary.extend(a+(b-a)*j/steps for j in range(steps))
     xy=np.vstack([boundary,grid]);tri=Delaunay(xy).simplices
     t=xy[tri];det=np.abs(np.linalg.det(t[:,1:]-t[:,:1]))
@@ -43,8 +46,8 @@ def mesh(poly,n,nz,height):
             tet.extend([[a,b,c,c+N],[a,b,b+N,c+N],[a,a+N,b+N,c+N]])
     return xy,tri,xyz,np.array(tet)
 
-def assemble(poly,n,nz,height,field,c=343.,rho=1.204):
-    xy,tri,xyz,tet=mesh(poly,n,nz,height);N=len(xyz);ii=[];jj=[];mm=[];kk=[];volume=0.
+def assemble(poly,n,nz,height,field,c=343.,rho=1.204,*,boundary_n=None):
+    xy,tri,xyz,tet=mesh(poly,n,nz,height,boundary_n=boundary_n);N=len(xyz);ii=[];jj=[];mm=[];kk=[];volume=0.
     for ids in tet:
         t=xyz[ids];J=(t[1:]-t[0]).T;V=abs(np.linalg.det(J))/6
         assert V>0
