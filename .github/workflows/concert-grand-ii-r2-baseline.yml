@@ -1,0 +1,31 @@
+name: Concert Grand II R2 baseline attack reference
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_r2_baseline_attack.py','.github/workflows/concert-grand-ii-r2-baseline.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-11-audit-*
+          run-id: 45612682505
+          github-token: ${{ github.token }}
+          path: /tmp/g2-original
+      - run: python research/stage-concert-grand-ii/g2_r2_baseline_attack.py --baseline /tmp/g2-original --out /tmp/g2-r2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R2-baseline-attack-reference
+          path: /tmp/g2-r2/
+          if-no-files-found: error
