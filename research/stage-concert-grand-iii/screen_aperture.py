@@ -43,13 +43,14 @@ def gram(x,S,y,T,normal,Q,k,order):
         R+=F.conj().T@(w[i:i+64,None]*F)
     return R/(4*np.pi)
 
-def correction(basis,W,origin,axes,normal,panels,Z0,f,degree,screen_order,panel_order,angular_order=24,rho=1.204,c=343.,interaction_block=None):
+def correction(basis,W,origin,axes,normal,panels,Z0,f,degree,screen_order,panel_order,angular_order=24,rho=1.204,c=343.,interaction_block=None,subspace=None):
     k=2*np.pi*f/c
     x,S=screen_samples(basis,origin,axes,screen_order);y,T=sample_panels(panels,panel_order)
     B=interaction(x,S,y,T,normal,k) if interaction_block is None else np.asarray(interaction_block)
     if B.shape!=(S.shape[1],T.shape[1]) or not np.isfinite(B).all():raise ValueError('invalid interaction block')
     N=(degree+1)*(degree+2)//2;Ntest=(degree+2)*(degree+3)//2
-    if len(W)<Ntest:raise ValueError('independent degree required')
+    if subspace is not None:N,Ntest=subspace
+    if not 0<N<Ntest<=len(W) or W.shape!=(S.shape[1],S.shape[1]):raise ValueError('independent test space required')
     q=np.linalg.solve(W[:N,:N],B[:N]);Q=np.pad(q,((0,len(W)-N),(0,0)))
     delta=1j*rho*c*k*(B[:N].T@q);Z=Z0+delta;R=(Z+Z.conj().T)/2
     expected=rho*c*k*k/(4*np.pi)*gram(x,S,y,T,normal,Q,k,angular_order)
