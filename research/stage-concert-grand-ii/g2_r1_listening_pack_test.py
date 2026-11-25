@@ -11,7 +11,7 @@ def fixture(root,proof):
     for case in pack.CASES:
         dur=1.5 if case in pack.CASES[:3] else 5.
         n=round(dur*pack.FS);t=np.arange(n)/pack.FS
-        x=np.column_stack((np.sin(2*np.pi*261.6*t),np.sin(2*np.pi*261.6*t+.1)))*.05*np.exp(-t)
+        x=np.column_stack((np.sin(2*np.pi*261.6*t),np.sin(2*np.pi*261.6*t+.1)))*.05*np.exp(-t)[:,None]
         for mode in (['dry'] if case=='C4-held' else ['release-only','dry']):
             d=root/f'G2-R1-{case}-{mode}';d.mkdir()
             p=d/f'{case}-{mode}.wav';o=d/f'{case}-original.wav'
