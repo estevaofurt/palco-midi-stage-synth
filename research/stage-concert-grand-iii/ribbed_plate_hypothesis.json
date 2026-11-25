@@ -1,0 +1,18 @@
+{
+  "version": "G3-ribbed-plate-01",
+  "status": "engineering_hypothesis",
+  "rib": {
+    "widthM": 0.018,
+    "heightM": 0.02,
+    "densityKgM3": 430,
+    "youngAlongPa": 11000000000,
+    "status": "illustrative spruce beam section, not target measurement; constant section"
+  },
+  "boundary": "transverse displacement zero on convex polygon, slope free (Ritz essential condition; natural moment boundary)",
+  "limitations": [
+    "Kirchhoff-Love scalar plate, small linear flexure",
+    "rib centroidal bending only, perfect transverse compatibility; no eccentric composite extension, twist or bond slip",
+    "no crown, rim mobility, actual bridge mass or acoustic loading",
+    "no calibrated decay or target soundboard"
+  ]
+}
