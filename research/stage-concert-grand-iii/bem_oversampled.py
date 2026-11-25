@@ -23,10 +23,10 @@ def audit_targets(t):
     a=elements(t)[2]
     return x,n,(a[:,None]*WEIGHTS[None,:]).ravel(),owner
 
-def fit(t,V,k,order):
+def fit(t,V,k,order,derivative_only=True):
     x,n,w,owner=targets(t,TRAIN)
     if V.shape[0]!=len(x):raise ValueError('training field dimensions')
-    _,D=operators(t,x,n,owner,k,order)
+    _,D=operators(t,x,n,owner,k,order,derivative_only=derivative_only)
     sw=np.sqrt(w)[:,None];A=sw*D;B=-sw*V
     scales=np.linalg.norm(A,axis=0)
     if np.any(scales<=0):raise ValueError('zero column in trace')

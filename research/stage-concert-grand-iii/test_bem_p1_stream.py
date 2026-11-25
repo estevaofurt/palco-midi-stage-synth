@@ -18,7 +18,7 @@ class StreamTest(unittest.TestCase):
     def test_fit_and_audit(self):
         t=sphere(.5,1);k=2*np.pi*80/343.
         x,n,w,o=targets(t,COL);V=np.c_[np.ones(len(x)),x[:,0]]
-        q,_=fit(t,V,k,5);q0,_=dense_fit(t,V,k,5)
+        q,_=fit(t,V,k,5);q0,_=dense_fit(t,V,k,5,derivative_only=False)
         np.testing.assert_allclose(q,q0,rtol=1e-11,atol=1e-12)
         x,n,w,o=audit_targets(t);V=np.c_[np.ones(len(x)),x[:,0]]
         Z,P,r=audit(t,q,V,k,[[1.,0.,0.]],6,batch=17)

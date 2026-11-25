@@ -5,31 +5,12 @@ Experimental until compared numerically with the existing solver.
 """
 import numpy as np
 from scipy.linalg import solve
-from exterior_bem import samples
-from bem_linear import COL,targets,shape,rule,projected_shapes,operators,observe,far_gram
-from bem_static_split import laplace
+from bem_linear import COL,targets,operators,observe,far_gram
 from bem_oversampled import audit_targets
 from split_radiation import relative
 
 def derivative(t,x,n,owner,k,order):
-    t=np.asarray(t);x=np.asarray(x);owner=np.asarray(owner,int)
-    y,w=samples(t,order);u,v,_=rule(order);Sy=shape(np.c_[1-u,u*(1-v),u*v])
-    N=len(t);D=np.empty((len(x),3*N),complex)
-    for start in range(0,len(x),8):
-        stop=min(start+8,len(x));xx=x[start:stop];nn=n[start:stop];ii=owner[start:stop]
-        idx=np.arange(len(xx));S0=projected_shapes(t,xx)
-        _,grad=laplace(t,xx,ii)
-        d=xx[:,None,None,:]-y[None,:,:,:];rad=np.linalg.norm(d,axis=-1);rad[idx,ii,:]=1.
-        if np.any(rad<=0):raise ValueError('coincident nonself nodes')
-        E=np.expm1(-1j*k*rad);g=1/(4*np.pi*rad)
-        dot=np.einsum('btqd,bd->btq',d,nn);dg=-g*dot/rad**2
-        delta=Sy[None,None,:,:]-S0[:,:,None,:]
-        regD=g*(-E-1j*k*rad*(1+E))*dot/rad**2
-        PV=np.einsum('btd,bd->bt',grad,nn)
-        K=PV[:,:,None]*S0+np.einsum('btq,btqd->btd',dg*w[None,:,:],delta)+np.einsum('btq,qd->btd',regD*w[None,:,:],Sy)
-        K[idx,ii]=-.5*S0[idx,ii]
-        D[start:stop]=K.reshape(len(xx),-1)
-    return D
+    return operators(t,x,n,owner,k,order,derivative_only=True)[1]
 
 def fit(t,V,k,order):
     x,n,w,owner=targets(t,COL);D=derivative(t,x,n,owner,k,order)

@@ -73,6 +73,25 @@
       "artifact": "G3-bem-power",
       "file": "bem_power_partition.json",
       "role": "diagnostic"
+    },
+    {
+      "key": "weak-p1",
+      "run": 45699626092,
+      "artifact": "G3-bem-weak-p1",
+      "file": "bem_weak_p1.json",
+      "audit": "weakP1",
+      "family": "degree-four",
+      "role": "solver",
+      "control": "collocation"
+    },
+    {
+      "key": "weak-p1-refined",
+      "run": 45700231172,
+      "artifact": "G3-weak-refined",
+      "file": "bem_weak_p1_refined.json",
+      "audit": "audit",
+      "family": "degree-four",
+      "role": "solver"
     }
   ],
   "angles": [

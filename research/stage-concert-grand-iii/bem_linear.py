@@ -42,10 +42,11 @@ def self_integral(x,t,S0,k,order):
         out+=np.einsum('bq,bqd->bd',kernel,S)
     return out
 
-def operators(t,x,n,owner,k,order):
+def operators(t,x,n,owner,k,order,derivative_only=False):
+    """Full trace matrices, or the identical derivative without pressure work."""
     t=np.asarray(t);x=np.asarray(x);owner=np.asarray(owner,int)
     y,w=samples(t,order);u,v,_=rule(order);Sy=shape(np.c_[1-u,u*(1-v),u*v])
-    N=len(t);G=np.empty((len(x),3*N),complex);D=np.empty_like(G)
+    N=len(t);D=np.empty((len(x),3*N),complex);G=None if derivative_only else np.empty_like(D)
     for start in range(0,len(x),8):
         stop=min(start+8,len(x));xx=x[start:stop];nn=n[start:stop];ii=owner[start:stop]
         idx=np.arange(len(xx));S0=projected_shapes(t,xx)
@@ -55,23 +56,26 @@ def operators(t,x,n,owner,k,order):
         E=np.expm1(-1j*k*rad);g=1/(4*np.pi*rad)
         dot=np.einsum('btqd,bd->btq',d,nn);dg=-g*dot/rad**2
         delta=Sy[None,None,:,:]-S0[:,:,None,:]
-        reg=g*E;regD=g*(-E-1j*k*rad*(1+E))*dot/rad**2
-        V=L0[:,:,None]*S0+np.einsum('btq,btqd->btd',g*w[None,:,:],delta)+np.einsum('btq,qd->btd',reg*w[None,:,:],Sy)
+        regD=g*(-E-1j*k*rad*(1+E))*dot/rad**2
         PV=np.einsum('btd,bd->bt',grad,nn)
         K=PV[:,:,None]*S0+np.einsum('btq,btqd->btd',dg*w[None,:,:],delta)+np.einsum('btq,qd->btd',regD*w[None,:,:],Sy)
-        # Preserve the exact P0 constant part. Integrate only the
-        # vanishing linear density difference by independent radial Duffy.
-        sr=np.linalg.norm(xx[:,None,:]-y[ii],axis=-1)
-        rem=np.full(sr.shape,-1j*k,complex)
-        np.divide(np.expm1(-1j*k*sr),sr,out=rem,where=sr>0)
-        const=L0[idx,ii]+np.sum(w[ii]*rem,axis=1)/(4*np.pi)
-        V[idx,ii]=const[:,None]*S0[idx,ii]+self_integral(xx,t[ii],S0[idx,ii],k,order)
         K[idx,ii]=-.5*S0[idx,ii]
-        G[start:stop]=V.reshape(len(xx),-1);D[start:stop]=K.reshape(len(xx),-1)
+        D[start:stop]=K.reshape(len(xx),-1)
+        if not derivative_only:
+            reg=g*E
+            V=L0[:,:,None]*S0+np.einsum('btq,btqd->btd',g*w[None,:,:],delta)+np.einsum('btq,qd->btd',reg*w[None,:,:],Sy)
+            # Preserve the exact P0 constant part. Integrate only the
+            # vanishing linear density difference by independent radial Duffy.
+            sr=np.linalg.norm(xx[:,None,:]-y[ii],axis=-1)
+            rem=np.full(sr.shape,-1j*k,complex)
+            np.divide(np.expm1(-1j*k*sr),sr,out=rem,where=sr>0)
+            const=L0[idx,ii]+np.sum(w[ii]*rem,axis=1)/(4*np.pi)
+            V[idx,ii]=const[:,None]*S0[idx,ii]+self_integral(xx,t[ii],S0[idx,ii],k,order)
+            G[start:stop]=V.reshape(len(xx),-1)
     return G,D
 
-def fit(t,V,k,order):
-    x,n,w,owner=targets(t,COL);_,D=operators(t,x,n,owner,k,order)
+def fit(t,V,k,order,derivative_only=True):
+    x,n,w,owner=targets(t,COL);_,D=operators(t,x,n,owner,k,order,derivative_only=derivative_only)
     q=solve(D,-V,assume_a='gen')
     return q,dict(collocationResidual=relative(D@q,-V),coefficientNorm=float(np.linalg.norm(q)))
 

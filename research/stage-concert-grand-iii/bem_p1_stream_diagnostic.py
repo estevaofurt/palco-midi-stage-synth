@@ -32,7 +32,7 @@ def main():
         x,n,w,owner=audit_targets(t);Va=velocities(surf,ports,x,labels[owner])
         for f in frequencies:
             k=2*np.pi*f/343.
-            start=time.perf_counter();q0,r0=dense_fit(t,V,k,4);t0=time.perf_counter()-start
+            start=time.perf_counter();q0,r0=dense_fit(t,V,k,4,derivative_only=False);t0=time.perf_counter()-start
             start=time.perf_counter();q,r=fit(t,V,k,4);t1=time.perf_counter()-start
             start=time.perf_counter();z,p,rr0=dense_audit(t,q0,Va,k,far,6);a0=time.perf_counter()-start
             start=time.perf_counter();Z,P,rr=audit(t,q,Va,k,far,6);a1=time.perf_counter()-start
