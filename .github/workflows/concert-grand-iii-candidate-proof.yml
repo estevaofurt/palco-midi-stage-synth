@@ -23,7 +23,6 @@ jobs:
       - run: python research/stage-concert-grand-iii/test_bem_weak_blocked.py
   proof:
     needs: unit
-    if: github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:

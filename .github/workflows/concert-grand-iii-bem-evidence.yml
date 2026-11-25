@@ -1,4 +1,5 @@
 name: Concert Grand III BEM evidence consolidation
+# G3.09h refresh after all six strip audits completed.
 on:
   push:
     branches: [research/stage-concert-grand-iii]
