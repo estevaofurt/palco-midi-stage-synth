@@ -1,0 +1,42 @@
+name: Concert Grand F11g bass tuning trials
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11g-pitch.yml'
+      - 'research/stage-concert-grand/f11g-bass-pitch-trial*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11f-bass-pitch.test.mjs
+      - run: node research/stage-concert-grand/f11g-bass-pitch-trial.test.mjs
+  trials:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        midi: [36,43,48]
+        variant: [A,B,C,D]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11g-bass-pitch-trial-demo.mjs /tmp/f11g ${{ matrix.midi }} 127 ${{ matrix.variant }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11G-bass-midi${{ matrix.midi }}-variant${{ matrix.variant }}-touch127
+          path: /tmp/f11g/
+          if-no-files-found: error
