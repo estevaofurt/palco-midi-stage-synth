@@ -1,0 +1,1727 @@
+{
+  "runId": 45524032203,
+  "artifactId": 14980229696,
+  "scope": "PCM spectral peaks, not perceptual pitch. Partial 1-4 CI log summary; full eight partials in artifact.",
+  "cases": [
+    {
+      "midi": 36,
+      "count": 1,
+      "f1": 65.40639132514966,
+      "wires": [
+        {
+          "f1Hz": 65.40639132514966,
+          "cents": 0,
+          "B": 0.00013738165667578992
+        }
+      ],
+      "windows": [
+        {
+          "startS": 0.25,
+          "endS": 1.25,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.35685298059454,
+              "db": -22.412767141992802,
+              "centsFromHarmonic": -1.311721399792763,
+              "centsFromStiff": -1.311721399792763
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 131.69550100969622,
+                "db": -29.576763893670872,
+                "centsFromHarmonic": 11.643044692968484,
+                "centsFromStiff": 11.28640747382046
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 196.15647354328834,
+                "db": -28.418269625202885,
+                "centsFromHarmonic": -0.5532918500831704,
+                "centsFromStiff": -1.503998104731363
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 261.3240786619481,
+                "db": -33.248708242107284,
+                "centsFromHarmonic": -1.9961539242709962,
+                "centsFromStiff": -3.7778724759178304
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "endS": 3,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.35589064950611,
+              "db": -24.468366865511033,
+              "centsFromHarmonic": -1.3372127222228702,
+              "centsFromStiff": -1.3372127222228702
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 131.7017518369333,
+                "db": -39.99067595317386,
+                "centsFromHarmonic": 11.725214456189503,
+                "centsFromStiff": 11.368577237041313
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 196.15759831040978,
+                "db": -35.1001612848496,
+                "centsFromHarmonic": -0.5433649304153195,
+                "centsFromStiff": -1.4940711850635509
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 261.3823151105197,
+                "db": -38.112160565144336,
+                "centsFromHarmonic": -1.6103888971649787,
+                "centsFromStiff": -3.392107448811754
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 3,
+          "endS": 7,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.34973827610685,
+              "db": -29.935190825947725,
+              "centsFromHarmonic": -1.500192670474416,
+              "centsFromStiff": -1.500192670474416
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 130.82128246580723,
+                "db": -63.93383627822505,
+                "centsFromHarmonic": 0.11248665204770235,
+                "centsFromStiff": -0.24415056710031552
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 196.17284649525243,
+                "db": -42.95405554640099,
+                "centsFromHarmonic": -0.4087937945331144,
+                "centsFromStiff": -1.359500049181365
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 261.33103048555705,
+                "db": -52.53403454670178,
+                "centsFromHarmonic": -1.9500997155775843,
+                "centsFromStiff": -3.731818267224384
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 8,
+          "endS": 12,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.33290023018881,
+              "db": -38.43656318504105,
+              "centsFromHarmonic": -1.9463207699306373,
+              "centsFromStiff": -1.9463207699306373
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 130.81005857438322,
+                "db": -66.84977158533195,
+                "centsFromHarmonic": -0.03605199726651079,
+                "centsFromStiff": -0.3926892164146713
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 196.30347897667676,
+                "db": -50.56621132211268,
+                "centsFromHarmonic": 0.7436599634629569,
+                "centsFromStiff": -0.20704629118526863
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 261.832198834935,
+                "db": -62.56875808773999,
+                "centsFromHarmonic": 1.3667999728464537,
+                "centsFromStiff": -0.41491857880046856
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 14,
+          "endS": 18,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.36073898357172,
+              "db": -41.09878576193995,
+              "centsFromHarmonic": -1.208788342814533,
+              "centsFromStiff": -1.208788342814533
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 130.81017193637928,
+                "db": -70.19755938365964,
+                "centsFromHarmonic": -0.03455168402967448,
+                "centsFromStiff": -0.3911889031777543
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 196.2816490350837,
+                "db": -54.252955631709476,
+                "centsFromHarmonic": 0.5511272590001953,
+                "centsFromStiff": -0.3995789956482258
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 261.8325421046635,
+                "db": -66.57643805456382,
+                "centsFromHarmonic": 1.3690696702140586,
+                "centsFromStiff": -0.41264888143282313
+              },
+              "usable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midi": 36,
+      "count": 2,
+      "f1": 65.40639132514966,
+      "wires": [
+        {
+          "f1Hz": 65.38750394616807,
+          "cents": -0.5000000000002232,
+          "B": 0.00013746104526674916
+        },
+        {
+          "f1Hz": 65.42528415980799,
+          "cents": 0.49999999999992073,
+          "B": 0.0001373023139408301
+        }
+      ],
+      "windows": [
+        {
+          "startS": 0.25,
+          "endS": 1.25,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.30897311857122,
+              "db": -23.002620141302543,
+              "centsFromHarmonic": -2.580473200993611,
+              "centsFromStiff": -2.580473200993611
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 132.33586080469072,
+                "db": -31.59531403969548,
+                "centsFromHarmonic": 20.040644484278364,
+                "centsFromStiff": 19.684007265130276
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 195.9567252020397,
+                "db": -26.82407295003243,
+                "centsFromHarmonic": -2.3171251545159524,
+                "centsFromStiff": -3.26783140916405
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 260.86113209810094,
+                "db": -32.54999304130858,
+                "centsFromHarmonic": -5.065827471877523,
+                "centsFromStiff": -6.847546023524396
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "endS": 3,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.30154534803488,
+              "db": -26.440744388058338,
+              "centsFromHarmonic": -2.777382445761809,
+              "centsFromStiff": -2.777382445761809
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 132.3289978987598,
+                "db": -45.08416571674442,
+                "centsFromHarmonic": 19.950860774540647,
+                "centsFromStiff": 19.594223555392198
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 195.91347124202343,
+                "db": -35.338195370967554,
+                "centsFromHarmonic": -2.6993064447531507,
+                "centsFromStiff": -3.6500126994012483
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 260.8792429090109,
+                "db": -41.23633594694192,
+                "centsFromHarmonic": -4.945637223937957,
+                "centsFromStiff": -6.72735577558479
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 3,
+          "endS": 7,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.26330707154878,
+              "db": -34.80150122605731,
+              "centsFromHarmonic": -3.7914288280194373,
+              "centsFromStiff": -3.7914288280194373
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 130.7459736353248,
+                "db": -64.8671601252253,
+                "centsFromHarmonic": -0.8844058265637099,
+                "centsFromStiff": -1.2410430457118324
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 196.15323881866894,
+                "db": -41.49983303349295,
+                "centsFromHarmonic": -0.5818410561014021,
+                "centsFromStiff": -1.532547310749718
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 261.772201559414,
+                "db": -56.503400427105305,
+                "centsFromHarmonic": 0.9700526322601514,
+                "centsFromStiff": -0.8116659193865863
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 8,
+          "endS": 12,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.31244786205255,
+              "db": -38.87761561632456,
+              "centsFromHarmonic": -2.488365885318828,
+              "centsFromStiff": -2.488365885318828
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 130.77748109314356,
+                "db": -65.09095849911402,
+                "centsFromHarmonic": -0.467259424945913,
+                "centsFromStiff": -0.8238966440940927
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 196.2090584939449,
+                "db": -47.68723027242778,
+                "centsFromHarmonic": -0.08925079572508841,
+                "centsFromStiff": -1.0399570503732862
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 261.756543381267,
+                "db": -60.55687623714061,
+                "centsFromHarmonic": 0.8664939588373657,
+                "centsFromStiff": -0.915224592809692
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 14,
+          "endS": 18,
+          "dominant": 1,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 65.40639132514966,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 65.35948259848774,
+              "db": -50.11320204317509,
+              "centsFromHarmonic": -1.2420669987082045,
+              "centsFromStiff": -1.2420669987082045
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 130.7473523727913,
+                "db": -71.10292013035901,
+                "centsFromHarmonic": -0.8661497793962141,
+                "centsFromStiff": -1.2227869985441782
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 196.2232518731785,
+                "db": -51.7388511675317,
+                "centsFromHarmonic": 0.0359787573066775,
+                "centsFromStiff": -0.9147274973415591
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 261.7660282527271,
+                "db": -64.28316947283037,
+                "centsFromHarmonic": 0.9292249023122249,
+                "centsFromStiff": -0.8524936493347678
+              },
+              "usable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midi": 43,
+      "count": 1,
+      "f1": 97.99885899543733,
+      "wires": [
+        {
+          "f1Hz": 97.99885899543733,
+          "cents": 0,
+          "B": 0.00016502940849071906
+        }
+      ],
+      "windows": [
+        {
+          "startS": 0.25,
+          "endS": 1.25,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 97.7229587617745,
+              "db": -33.000027445476604,
+              "centsFromHarmonic": -4.880888605252958,
+              "centsFromStiff": -4.880888605252958
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 195.82844718822645,
+                "db": -25.32063367992683,
+                "centsFromHarmonic": -1.4958030949964474,
+                "centsFromStiff": -1.9241831620850736
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 294.3899957843054,
+                "db": -33.781072555447324,
+                "centsFromHarmonic": 2.3151450140131513,
+                "centsFromStiff": 1.1732689396500118
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 392.7898335998024,
+                "db": -34.705135903776785,
+                "centsFromHarmonic": 3.5048789214222262,
+                "centsFromStiff": 1.365095428431882
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "endS": 3,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 97.70192820642814,
+              "db": -38.282833657995134,
+              "centsFromHarmonic": -5.253500448010749,
+              "centsFromStiff": -5.253500448010749
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 195.81626590381214,
+                "db": -32.20280977117646,
+                "centsFromHarmonic": -1.6034958769554957,
+                "centsFromStiff": -2.0318759440442187
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 294.36215197644776,
+                "db": -36.65224897118905,
+                "centsFromHarmonic": 2.151394789277177,
+                "centsFromStiff": 1.0095187149140714
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 392.902470465229,
+                "db": -45.98559343192578,
+                "centsFromHarmonic": 4.001258425036038,
+                "centsFromStiff": 1.8614749320457857
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 3,
+          "endS": 7,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 97.71197488797816,
+              "db": -49.654663067687295,
+              "centsFromHarmonic": -5.0754869400726115,
+              "centsFromStiff": -5.0754869400726115
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 195.8918313594245,
+                "db": -36.29847433729224,
+                "centsFromHarmonic": -0.9355418968045086,
+                "centsFromStiff": -1.3639219638930793
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 294.3526972078294,
+                "db": -44.934854207384845,
+                "centsFromHarmonic": 2.0957875037390643,
+                "centsFromStiff": 0.953911429376015
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 392.326788350738,
+                "db": -57.948647156076525,
+                "centsFromHarmonic": 1.4627879199745528,
+                "centsFromStiff": -0.6769955730160246
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 8,
+          "endS": 12,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 98.05043160629013,
+              "db": -67.17820061968703,
+              "centsFromHarmonic": 0.9108348384540653,
+              "centsFromStiff": 0.9108348384540653
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 196.01953630838733,
+                "db": -47.318708879381035,
+                "centsFromHarmonic": 0.19270893715010576,
+                "centsFromStiff": -0.23567112993847836
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 294.4702228053999,
+                "db": -61.971065254672304,
+                "centsFromHarmonic": 2.7868758154788873,
+                "centsFromStiff": 1.644999741115961
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 392.3322048520197,
+                "db": -61.689408019605494,
+                "centsFromHarmonic": 1.486689338366454,
+                "centsFromStiff": -0.6530941546239585
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 14,
+          "endS": 18,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 97.96378158104413,
+              "db": -67.92453188516254,
+              "centsFromHarmonic": -0.6197835936552528,
+              "centsFromStiff": -0.6197835936552528
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 195.9985826321198,
+                "db": -50.5138464472035,
+                "centsFromHarmonic": 0.007637298420645944,
+                "centsFromStiff": -0.4207427686682094
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 294.09160644062774,
+                "db": -65.42402990558364,
+                "centsFromHarmonic": 0.559501901394705,
+                "centsFromStiff": -0.5823741729683473
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 392.3319452527192,
+                "db": -66.60195630474664,
+                "centsFromHarmonic": 1.4855438109506252,
+                "centsFromStiff": -0.6542396820398969
+              },
+              "usable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midi": 43,
+      "count": 2,
+      "f1": 97.99885899543733,
+      "wires": [
+        {
+          "f1Hz": 97.97055990184558,
+          "cents": -0.500000000000031,
+          "B": 0.00016512477649623865
+        },
+        {
+          "f1Hz": 98.02716626330816,
+          "cents": 0.49999999999992073,
+          "B": 0.0001649340955741843
+        }
+      ],
+      "windows": [
+        {
+          "startS": 0.25,
+          "endS": 1.25,
+          "dominant": 3,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 97.45371778544772,
+              "db": -34.847963373322806,
+              "centsFromHarmonic": -9.657273258723656,
+              "centsFromStiff": -9.657273258723656
+            },
+            "otherPeaks": [
+              {
+                "hz": 102.25494134215599,
+                "db": -58.49858349281098,
+                "centsFromHarmonic": 73.60044504221402,
+                "centsFromStiff": 73.60044504221402
+              }
+            ],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 195.6330680775519,
+                "db": -25.333352493843194,
+                "centsFromHarmonic": -3.2239269782986026,
+                "centsFromStiff": -3.6523070453872464
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 294.56135327847943,
+                "db": -23.556521861494844,
+                "centsFromHarmonic": 3.3225624766612807,
+                "centsFromStiff": 2.1806864022978902
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 393.13447344968836,
+                "db": -38.85175065236997,
+                "centsFromHarmonic": 5.023224328685092,
+                "centsFromStiff": 2.88344083569435
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "endS": 3,
+          "dominant": 3,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 97.50924417181685,
+              "db": -41.34828136189587,
+              "centsFromHarmonic": -8.671145715954093,
+              "centsFromStiff": -8.671145715954093
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 195.616483661718,
+                "db": -31.53331619479446,
+                "centsFromHarmonic": -3.3706952251378324,
+                "centsFromStiff": -3.7990752922265982
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 294.5711950316219,
+                "db": -29.08668055626866,
+                "centsFromHarmonic": 3.3804047336990566,
+                "centsFromStiff": 2.2385286593358313
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 392.19139543270217,
+                "db": -52.43984366906321,
+                "centsFromHarmonic": 0.8652317718099302,
+                "centsFromStiff": -1.2745517211804767
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 3,
+          "endS": 7,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 97.45597255862387,
+              "db": -59.68602793205868,
+              "centsFromHarmonic": -9.61721839958587,
+              "centsFromStiff": -9.61721839958587
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 195.96610180843533,
+                "db": -40.12977712977788,
+                "centsFromHarmonic": -0.2792860406718256,
+                "centsFromStiff": -0.7076661077604876
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 294.57867273474096,
+                "db": -42.51164050965464,
+                "centsFromHarmonic": 3.424351630600743,
+                "centsFromStiff": 2.2824755562375594
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 392.1838085550207,
+                "db": -57.155323356252694,
+                "centsFromHarmonic": 0.831741011515817,
+                "centsFromStiff": -1.3080424814745242
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 8,
+          "endS": 12,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 97.93951595492435,
+              "db": -65.68490480435214,
+              "centsFromHarmonic": -1.0486633409971111,
+              "centsFromStiff": -1.0486633409971111
+            },
+            "otherPeaks": [
+              {
+                "hz": 97.36975510888192,
+                "db": -89.33309442424694,
+                "centsFromHarmonic": -11.149486197558563,
+                "centsFromStiff": -11.149486197558563
+              }
+            ],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 195.88311859620734,
+                "db": -45.654597048898644,
+                "centsFromHarmonic": -1.0125444328122495,
+                "centsFromStiff": -1.4409244999008954
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 293.8770346740165,
+                "db": -54.637435928644045,
+                "centsFromHarmonic": -0.7040823745027508,
+                "centsFromStiff": -1.8459584488658487
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 392.15614162669215,
+                "db": -62.272601663522245,
+                "centsFromHarmonic": 0.709605377944896,
+                "centsFromStiff": -1.430178115045731
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 14,
+          "endS": 18,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 97.99885899543733,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 97.93222139759189,
+              "db": -69.30652288950365,
+              "centsFromHarmonic": -1.1776108471902769,
+              "centsFromStiff": -1.1776108471902769
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 195.89787868663026,
+                "db": -50.172803844312135,
+                "centsFromHarmonic": -0.8820982330385154,
+                "centsFromStiff": -1.3104783001271978
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 293.9877149618408,
+                "db": -55.514085220453254,
+                "centsFromHarmonic": -0.05218587883860828,
+                "centsFromStiff": -1.1940619532016898
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 392.1618033310638,
+                "db": -67.72022379462433,
+                "centsFromHarmonic": 0.7345996687096858,
+                "centsFromStiff": -1.4051838242808614
+              },
+              "usable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midi": 48,
+      "count": 1,
+      "f1": 130.8127826502993,
+      "wires": [
+        {
+          "f1Hz": 130.8127826502993,
+          "cents": 0,
+          "B": 0.00018403535541488503
+        }
+      ],
+      "windows": [
+        {
+          "startS": 0.25,
+          "endS": 1.25,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 132.1322103740542,
+              "db": -28.816384669025133,
+              "centsFromHarmonic": 17.374412392521876,
+              "centsFromStiff": 17.374412392521876
+            },
+            "otherPeaks": [
+              {
+                "hz": 126.8588473523394,
+                "db": -39.48232648243636,
+                "centsFromHarmonic": -53.13526179246898,
+                "centsFromStiff": -53.13526179246898
+              },
+              {
+                "hz": 129.91846242476623,
+                "db": -53.7947622124699,
+                "centsFromHarmonic": -11.876472240600595,
+                "centsFromStiff": -11.876472240600595
+              }
+            ],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 260.81476130319817,
+                "db": -28.38643925423973,
+                "centsFromHarmonic": -5.373599788922791,
+                "centsFromStiff": -5.85129243050326
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 393.0795227175418,
+                "db": -34.728211896799756,
+                "centsFromHarmonic": 2.826221720433887,
+                "centsFromStiff": 1.5529600223904325
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.0379135789218,
+                "db": -46.116736383076926,
+                "centsFromHarmonic": 2.601203066304916,
+                "centsFromStiff": 0.21537165942718783
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "endS": 3,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 132.117143011813,
+              "db": -41.49172740003518,
+              "centsFromHarmonic": 17.17698424190857,
+              "centsFromStiff": 17.17698424190857
+            },
+            "otherPeaks": [
+              {
+                "hz": 130.59798477172336,
+                "db": -59.81443740405358,
+                "centsFromHarmonic": -2.8450663177805557,
+                "centsFromStiff": -2.8450663177805557
+              }
+            ],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 260.8221470486232,
+                "db": -35.827817563668134,
+                "centsFromHarmonic": -5.32457544362184,
+                "centsFromStiff": -5.802268085202122
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 393.1848626538063,
+                "db": -47.91376159154965,
+                "centsFromHarmonic": 3.2901066142987716,
+                "centsFromStiff": 2.016844916255281
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.0462276735699,
+                "db": -48.603188118202326,
+                "centsFromHarmonic": 2.6286696468504878,
+                "centsFromStiff": 0.24283823997296766
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 3,
+          "endS": 7,
+          "dominant": 6,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 130.76285287608343,
+              "db": -60.0434686482149,
+              "centsFromHarmonic": -0.6609187897842451,
+              "centsFromStiff": -0.6609187897842451
+            },
+            "otherPeaks": [
+              {
+                "hz": 132.1153218896778,
+                "db": -71.23390512716566,
+                "centsFromHarmonic": 17.15312049262127,
+                "centsFromStiff": 17.15312049262127
+              }
+            ],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 261.5888225023502,
+                "db": -51.895581644871065,
+                "centsFromHarmonic": -0.2431522717001999,
+                "centsFromStiff": -0.7208449132807061
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 392.5481455563147,
+                "db": -56.26546546897734,
+                "centsFromHarmonic": 0.4843022289307482,
+                "centsFromStiff": -0.7889594691125299
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.0563195343501,
+                "db": -54.107391529004325,
+                "centsFromHarmonic": 2.6620086995001646,
+                "centsFromStiff": 0.2761772926225153
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 8,
+          "endS": 12,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 130.76410358835713,
+              "db": -62.81968806937449,
+              "centsFromHarmonic": -0.6443600709194831,
+              "centsFromStiff": -0.6443600709194831
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 261.5977989558093,
+                "db": -55.42533998407667,
+                "centsFromHarmonic": -0.18374577607338263,
+                "centsFromStiff": -0.661438417653814
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 392.5434890484678,
+                "db": -60.6367444063211,
+                "centsFromHarmonic": 0.46376576011872855,
+                "centsFromStiff": -0.8094959379246448
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.0580564234976,
+                "db": -63.266880678415006,
+                "centsFromHarmonic": 2.6677465496827093,
+                "centsFromStiff": 0.2819151428052357
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 14,
+          "endS": 18,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 130.7641030177692,
+              "db": -66.15557778814876,
+              "centsFromHarmonic": -0.6443676251428821,
+              "centsFromStiff": -0.6443676251428821
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 261.5979973041889,
+                "db": -59.497197407858394,
+                "centsFromHarmonic": -0.18243312229929134,
+                "centsFromStiff": -0.6601257638796288
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 392.5434623701856,
+                "db": -65.8181699761011,
+                "centsFromHarmonic": 0.46364810092073794,
+                "centsFromStiff": -0.8096135971226175
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.0590474281736,
+                "db": -74.31723542790897,
+                "centsFromHarmonic": 2.671020346153357,
+                "centsFromStiff": 0.2851889392756524
+              },
+              "usable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "midi": 48,
+      "count": 2,
+      "f1": 130.8127826502993,
+      "wires": [
+        {
+          "f1Hz": 130.77500789233613,
+          "cents": -0.5000000000002232,
+          "B": 0.00018414170869254754
+        },
+        {
+          "f1Hz": 130.85056831961597,
+          "cents": 0.49999999999992073,
+          "B": 0.00018392906357414404
+        }
+      ],
+      "windows": [
+        {
+          "startS": 0.25,
+          "endS": 1.25,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 132.98620789322118,
+              "db": -32.32173085676824,
+              "centsFromHarmonic": 28.52772800347949,
+              "centsFromStiff": 28.52772800347949
+            },
+            "otherPeaks": [
+              {
+                "hz": 126.05801207212123,
+                "db": -38.93849797121381,
+                "centsFromHarmonic": -64.0988483361578,
+                "centsFromStiff": -64.0988483361578
+              }
+            ],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 260.25628317874185,
+                "db": -24.22963557423214,
+                "centsFromHarmonic": -9.084635837370339,
+                "centsFromStiff": -9.562328478950926
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 393.60288874110887,
+                "db": -39.2997789393594,
+                "centsFromHarmonic": 5.129741414282772,
+                "centsFromStiff": 3.8564797162390474
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.1966971485349,
+                "db": -37.94812920996338,
+                "centsFromHarmonic": 3.125687797939797,
+                "centsFromStiff": 0.7398563910626471
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 1,
+          "endS": 3,
+          "dominant": 6,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 132.98680656346792,
+              "db": -48.1492806157496,
+              "centsFromHarmonic": 28.53552156341977,
+              "centsFromStiff": 28.53552156341977
+            },
+            "otherPeaks": [
+              {
+                "hz": 130.69630863057614,
+                "db": -58.56029247089157,
+                "centsFromHarmonic": -1.5421551971473308,
+                "centsFromStiff": -1.5421551971473308
+              },
+              {
+                "hz": 126.05567223579355,
+                "db": -70.84818909518901,
+                "centsFromHarmonic": -64.13098307990212,
+                "centsFromStiff": -64.13098307990212
+              }
+            ],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 260.1924844659583,
+                "db": -35.64895859993396,
+                "centsFromHarmonic": -9.509079168884723,
+                "centsFromStiff": -9.98677181046504
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 392.36704047862844,
+                "db": -49.66786342659119,
+                "centsFromHarmonic": -0.3146000934896591,
+                "centsFromStiff": -1.58786179153297
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.2138946776965,
+                "db": -40.145859322875296,
+                "centsFromHarmonic": 3.1824841490628195,
+                "centsFromStiff": 0.7966527421851767
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 3,
+          "endS": 7,
+          "dominant": 6,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 130.69692415041814,
+              "db": -60.496084302537966,
+              "centsFromHarmonic": -1.5340018957247727,
+              "centsFromStiff": -1.5340018957247727
+            },
+            "otherPeaks": [
+              {
+                "hz": 132.99063630613009,
+                "db": -84.5991389948085,
+                "centsFromHarmonic": 28.585376775386894,
+                "centsFromStiff": 28.585376775386894
+              }
+            ],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 261.48835603053647,
+                "db": -45.74361079309146,
+                "centsFromHarmonic": -0.9081821604830075,
+                "centsFromStiff": -1.3858748020634883
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 392.3768617395385,
+                "db": -53.424026817888716,
+                "centsFromHarmonic": -0.2712664626193596,
+                "centsFromStiff": -1.5445281606627113
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.2006836822279,
+                "db": -46.71916423553949,
+                "centsFromHarmonic": 3.1388538416431464,
+                "centsFromStiff": 0.7530224347658008
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 8,
+          "endS": 12,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 130.70246274242243,
+              "db": -62.959179726837746,
+              "centsFromHarmonic": -1.460638303123281,
+              "centsFromStiff": -1.460638303123281
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 261.46726234199946,
+                "db": -49.9937713200601,
+                "centsFromHarmonic": -1.047842623254797,
+                "centsFromStiff": -1.5255352648351772
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 392.3799529777975,
+                "db": -58.635639271770586,
+                "centsFromHarmonic": -0.2576274426647795,
+                "centsFromStiff": -1.5308891407082257
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.194400177386,
+                "db": -57.900578472937035,
+                "centsFromHarmonic": 3.118101707838864,
+                "centsFromStiff": 0.7322703009616786
+              },
+              "usable": true
+            }
+          ]
+        },
+        {
+          "startS": 14,
+          "endS": 18,
+          "dominant": 2,
+          "fundamental": {
+            "h": 1,
+            "expectedHz": 130.8127826502993,
+            "stiffnessCents": 0,
+            "peak": {
+              "hz": 130.71239536920785,
+              "db": -65.68118890232904,
+              "centsFromHarmonic": -1.3290795859172877,
+              "centsFromStiff": -1.3290795859172877
+            },
+            "otherPeaks": [],
+            "usable": true
+          },
+          "partials": [
+            {
+              "h": 2,
+              "peak": {
+                "hz": 261.4901410041014,
+                "db": -53.66977677046157,
+                "centsFromHarmonic": -0.896364439372712,
+                "centsFromStiff": -1.3740570809531758
+              },
+              "usable": true
+            },
+            {
+              "h": 3,
+              "peak": {
+                "hz": 392.35915270077965,
+                "db": -65.07792548423824,
+                "centsFromHarmonic": -0.349403543922257,
+                "centsFromStiff": -1.6226652419657872
+              },
+              "usable": true
+            },
+            {
+              "h": 4,
+              "peak": {
+                "hz": 524.0442175607384,
+                "db": -70.09727233172005,
+                "centsFromHarmonic": 2.6220290448067773,
+                "centsFromStiff": 0.23619763792926057
+              },
+              "usable": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "midi": 36,
+      "nominalHz": 65.40639132514966,
+      "first": {
+        "hz": 65.30897311857122,
+        "db": -23.002620141302543,
+        "centsFromHarmonic": -2.580473200993611,
+        "centsFromStiff": -2.580473200993611
+      },
+      "tail": {
+        "hz": 65.35948259848774,
+        "db": -50.11320204317509,
+        "centsFromHarmonic": -1.2420669987082045,
+        "centsFromStiff": -1.2420669987082045
+      },
+      "shiftCents": 1.3384062022854066
+    },
+    {
+      "midi": 43,
+      "nominalHz": 97.99885899543733,
+      "first": {
+        "hz": 97.45371778544772,
+        "db": -34.847963373322806,
+        "centsFromHarmonic": -9.657273258723656,
+        "centsFromStiff": -9.657273258723656
+      },
+      "tail": {
+        "hz": 97.93222139759189,
+        "db": -69.30652288950365,
+        "centsFromHarmonic": -1.1776108471902769,
+        "centsFromStiff": -1.1776108471902769
+      },
+      "shiftCents": 8.47966241153338
+    },
+    {
+      "midi": 48,
+      "nominalHz": 130.8127826502993,
+      "first": {
+        "hz": 132.98620789322118,
+        "db": -32.32173085676824,
+        "centsFromHarmonic": 28.52772800347949,
+        "centsFromStiff": 28.52772800347949
+      },
+      "tail": {
+        "hz": 130.71239536920785,
+        "db": -65.68118890232904,
+        "centsFromHarmonic": -1.3290795859172877,
+        "centsFromStiff": -1.3290795859172877
+      },
+      "shiftCents": -29.856807589396777
+    }
+  ]
+}
