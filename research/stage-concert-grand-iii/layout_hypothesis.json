@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "status": "engineering_layout_hypothesis",
+  "frame": {
+    "origin": "front left of external footprint, z=0 at undeformed soundboard reference plane",
+    "x": "bass to treble",
+    "y": "front to tail",
+    "z": "upward",
+    "unit": "m"
+  },
+  "externalEnvelopeM": [
+    1.49,
+    2
+  ],
+  "envelopeSource": "Yamaha C5 2007 indexed manufacturer width; C5 published dimensions corroborated by https://pianomalaysia.com/new/model/yamaha-c5/ ; not measured recording instrument",
+  "layout": {
+    "hammerLineY": 0.33,
+    "firstGroupX": 0.18,
+    "groupPitch": 0.014,
+    "withinGroupPitchX": 0.0045,
+    "bassAngleFromYM": 0.62,
+    "trebleAngleFromYM": 0,
+    "bassHeightM": 0.09,
+    "trebleHeightM": 0.05,
+    "minimumStringSurfaceClearanceM": 0.0005
+  },
+  "boardEnvelope": {
+    "x": [
+      0.035,
+      1.455
+    ],
+    "y": [
+      0.3,
+      1.9
+    ],
+    "z": 0,
+    "status": "bounding box only, not actual soundboard contour or boundary conditions"
+  },
+  "capture": {
+    "heightAboveAnchorStringM": 0.12,
+    "anchorKeys": [
+      60,
+      84
+    ],
+    "anchorFraction": 0.5,
+    "status": "illustrative A/B point-pressure geometry, not measured C414 coordinates or polar pattern",
+    "controlXYZ": [
+      [
+        0.7,
+        0.55,
+        1
+      ],
+      [
+        0.45,
+        0.55,
+        1
+      ],
+      [
+        0.95,
+        0.55,
+        1
+      ]
+    ]
+  },
+  "sources": [
+    "https://jp.yamaha.com/products/musical_instruments/pianos/grand_pianos/c5m/specs.html",
+    "https://pianomalaysia.com/new/model/yamaha-c5/",
+    "https://www.ingenia.org.uk/articles/the-engineering-of-the-concert-grand-piano/",
+    "https://en.wikipedia.org/wiki/Piano",
+    "https://github.com/sfzinstruments/SalamanderGrandPiano/tree/3382bf9496bba2486f5ab0de55a264d1dfc38404"
+  ],
+  "limitations": [
+    "equal chromatic group pitch is a packing hypothesis, not real keyboard/action geometry",
+    "parallel wires within each register, separate flat height planes; no pin/bridge solid volumes or collision with frame/hammer",
+    "board bounding envelope not soundboard shape",
+    "no rear/front non-speaking lengths, break angles, damper locations, compliance, lid or rim dimensions",
+    "12cm from chosen anchor string, not all strings or verified reference microphone placement"
+  ]
+}

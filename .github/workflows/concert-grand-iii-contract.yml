@@ -53,3 +53,14 @@ jobs:
           name: G3-scale-geometry-02
           path: /tmp/g3-geometry/
           if-no-files-found: error
+      - run: python research/stage-concert-grand-iii/test_spatial_layout.py
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+      - run: python research/stage-concert-grand-iii/spatial_layout.py --scale /tmp/g3-geometry/scale_geometry.json --out /tmp/g3-layout
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-spatial-layout-01
+          path: /tmp/g3-layout/
+          if-no-files-found: error
