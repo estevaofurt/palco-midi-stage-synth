@@ -12,6 +12,7 @@ from nested_acoustic_ports import reduced_panels,embedding
 from dual_cavity_spatial_diagnostic import FREQ,CONFIGS,compare_spatial
 from acoustic_matrix_archive import read_npz,validate_manifest,replay_full,modal_replay
 from split_radiation import relative
+from coupling_sensitivity import prepare,compare_sensitivity
 ROOT=Path(__file__).parent
 def read(n):return json.loads((ROOT/n).read_text())
 def main():
@@ -35,12 +36,15 @@ def main():
         low=reduced_panels(ext,[n]*6+[m])
         Tu,_=embedding(ext[:-1],low[:-1]);Tl,_=embedding(ext[-1:],low[-1:]);maps[n,m]=(Tu,Tl)
     a.out.mkdir(parents=True,exist_ok=True);path=a.out/'dual_cavity_modal_replay.json';results=[]
+    spatialSystems=[]
     for row in rows:
         u=read_npz(a.archive,row['archive'],dict(Zu=(nf,nu,nu),Pu=(nf,nm,nu),Y=(nf,nb,nb),flow=(nf,ne,nb)),FREQ)
         mats=[tuple(x[i] for x in (u['Zu'],u['Pu'],shared['Zl'],shared['Pl'],shared['Ze'],shared['Pe'])) for i in range(nf)]
         full=[];checks=[]
         for i,x in enumerate(mats):
             y,d=replay_full(*x,u['Y'][i],u['flow'][i],nb);full.append(y);checks.append(d)
+        systems=[prepare(x[0],x[2],x[4],nb,counts,areas) for x in mats]
+        spatialSystems.append((systems,[v[-1] for v in full]))
         cases=[];outputs={}
         for (n,m),(Tu,Tl) in maps.items():
             vals=[];reports=[]
@@ -52,14 +56,22 @@ def main():
         convergence=[compare_spatial(FREQ,outputs[x],outputs[y],counts,areas) for x,y in zip(seq,seq[1:])]
         result=dict(planarN=row['planarN'],boundaryN=row['boundaryN'],wedgeLayers=row['wedgeLayers'],
             minimumCapture36=row['minimumCapture36'],replayMax=max(max(x.values()) for x in checks),
+            couplingCondition=[dict(frequencyHz=f,**x['report']) for f,x in zip(FREQ,systems)],
             modalConvergence=convergence,cases=cases,modalGate=convergence[-1]['gate'])
         results.append(result)
         path.write_text(json.dumps(dict(cases=results,complete=False),indent=2,allow_nan=False))
         print('G3_MODAL_REPLAY_CASE '+json.dumps({**{k:v for k,v in result.items() if k not in ('cases','modalConvergence')},
             'modalConvergence':[x['maximum'] for x in convergence]}),flush=True)
+    sensitivity=[]
+    for name,i,j in [('oldToRefined',0,1),('boundaryAndLayers',1,2),('interior',1,3)]:
+        left,lf=spatialSystems[i];right,rf=spatialSystems[j]
+        checks=[dict(frequencyHz=f,**compare_sensitivity(x,y,u,v)) for f,x,y,u,v in zip(FREQ,left,right,lf,rf)]
+        sensitivity.append(dict(comparison=name,frequencies=checks,
+            maximumPhysicalFlowChange=max(x['physicalFlowChange'] for x in checks),
+            maximumClosure=max(x['decompositionClosure'] for x in checks)))
     summary=dict(gate=True,angleDeg=a.angle,diagnosticOnly=True,sourceSpatialGate=doc['summary']['gate'],
         reusedMatrices=True,maximumReplayDifference=max(x['replayMax'] for x in results),
         quadratureConvergenceCertified=False,fullCabinetReady=False,radiationReady=False)
-    path.write_text(json.dumps(dict(summary=summary,cases=results,scaleSha256=sha,frequenciesHz=FREQ),indent=2,allow_nan=False))
+    path.write_text(json.dumps(dict(summary=summary,cases=results,spatialSensitivity=sensitivity,scaleSha256=sha,frequenciesHz=FREQ),indent=2,allow_nan=False))
     print('G3_MODAL_REPLAY_GATE '+json.dumps(summary),flush=True)
 if __name__=='__main__':main()

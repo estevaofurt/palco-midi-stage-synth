@@ -2,7 +2,7 @@ name: Concert Grand III archived matrix modal replay
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/acoustic_matrix_archive.py','research/stage-concert-grand-iii/test_acoustic_matrix_archive.py','research/stage-concert-grand-iii/dual_cavity_modal_replay.py','.github/workflows/concert-grand-iii-modal-replay.yml']
+    paths: ['research/stage-concert-grand-iii/coupling_sensitivity.py','research/stage-concert-grand-iii/test_coupling_sensitivity.py','research/stage-concert-grand-iii/acoustic_matrix_archive.py','research/stage-concert-grand-iii/test_acoustic_matrix_archive.py','research/stage-concert-grand-iii/dual_cavity_modal_replay.py','.github/workflows/concert-grand-iii-modal-replay.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,6 +21,7 @@ jobs:
       - run: pip install numpy==2.2.6 scipy==1.15.3
       - run: python research/stage-concert-grand-iii/test_acoustic_matrix_archive.py
       - run: python research/stage-concert-grand-iii/test_flow_modal_audit.py
+      - run: python research/stage-concert-grand-iii/test_coupling_sensitivity.py
   proof:
     needs: unit
     if: github.event_name == 'workflow_dispatch'
