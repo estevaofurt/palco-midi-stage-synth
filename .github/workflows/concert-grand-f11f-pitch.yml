@@ -1,0 +1,33 @@
+name: Concert Grand F11f bass acoustic pitch audit
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11f-pitch.yml'
+      - 'research/stage-concert-grand/f11f-bass-pitch*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  pitch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11f-bass-pitch.test.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F11E-bass-midi*-strings*-touch127-long
+          path: /tmp/pitch-input
+          run-id: 45522437076
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: node research/stage-concert-grand/f11f-bass-pitch-review.mjs /tmp/pitch-input /tmp/pitch-result
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11F-bass-acoustic-pitch
+          path: /tmp/pitch-result/
+          if-no-files-found: error
