@@ -24,7 +24,9 @@ for a in data['groups']:
     raw=np.zeros((a['n'],1));raw[0,0]=1
     raw=np.column_stack((raw,np.asarray(a['ports'][:nc]).T))
     groups.append((w2,D,U.T@raw))
-def run(active,speed,sr,cut,trebleMass=6,capture=None):
+def run(active,speed,sr,cut,trebleMass=6,capture=None,duration_s=.04,sink=None):
+    if not math.isfinite(duration_s) or duration_s<.04:raise ValueError('duration')
+    steps=round(sr*duration_s)
     h=1/sr
     g=[Block(*a,sr) for a in groups]
     board=next(x for x in data['boards'] if x['basis']==6000)
@@ -50,9 +52,9 @@ def run(active,speed,sr,cut,trebleMass=6,capture=None):
     def mech():r=rel();return sum(a.energy() for a in g)+b.energy()+.5*KJ*(r@r)
     def total(d):return mech()+.5*np.sum(masses*v*v)+sum(potential(di,k) for di,k in zip(d,ks))
     if capture is not None:
-        capture['acc']=np.empty((len(modes),round(sr*.04)))
+        capture['acc']=np.empty((len(modes),steps))
         capture['maxDerivativeError']=0.;capture['peakAcceleration']=0.
-    for i in range(round(sr*.04)):
+    for i in range(steps):
         r0=rel();pos=positions();d0=compression(pos);old=total(d0)
         free=[a.free() for a in g];df=np.array([z[0] for z in free])-b.free()
         j0=inv@(-KJ*r0-alpha*df)
@@ -79,16 +81,18 @@ def run(active,speed,sr,cut,trebleMass=6,capture=None):
                 if ft>1e-8:
                     if first[j]<0:first[j]=i
                     last[j]=i
-        if capture is not None: q0=b.q.copy();v0=b.v.copy()
+        if capture is not None or sink is not None: q0=b.q.copy();v0=b.v.copy()
         db=b.step(-jf)
+        if capture is not None or sink is not None:
+            acc=(b.v-v0)/h
         if capture is not None:
             delta=b.q-q0;fe=b.P@(-jf)-b.D*delta/h
-            acc=(b.v-v0)/h
             integral=q0*b.J+v0*b.G+(h-b.J)*fe/b.w2
             oracle=fe-b.w2*integral/h
             capture['acc'][:,i]=acc
             capture['maxDerivativeError']=max(capture['maxDerivativeError'],float(np.max(abs(acc-oracle))))
             capture['peakAcceleration']=max(capture['peakAcceleration'],float(np.max(abs(acc))))
+        if sink is not None:sink(acc)
         dr=rel()-r0;dj=CJ*(dr@dr)/h;jl+=dj
         maxjoint=max(maxjoint,float(np.max(abs(jf+KJ*(r0+dr/2)+CJ*dr/h))))
         d1=compression(positions())

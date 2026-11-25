@@ -22,7 +22,6 @@ def make_kernels(nx,ny):
         d,w=geometry(x,y,area,loc)
         result.append(U@kernels(S,d,w,SR,'linear'))
     return result
-medium=make_kernels(128,96);fine=make_kernels(256,192)
 def render(acc,ks):
     channels=[pressure(acc,k[:acc.shape[0]]) for k in ks]
     n=max(map(len,channels))
@@ -57,42 +56,44 @@ def angular_energy(acc,nt,np_,limit=8000):
         z=A[:,i]@(X*Y)
         total+=float(np.sum(abs(z)**2))*(.5 if i==0 else 1.)
     return total*(2/(N*SR))*RHO/(4*np.pi**2*C)*(2*np.pi/(nt*np_))
-rows=[];checks=[]
-for active,mass in [([0],6),([1],6),([2],6),([2],3),([0,1,2],6)]:
-    label='-'.join(str([48,60,84][i]) for i in active)+'-m'+str(mass)
-    captures={}
-    for cut in [5000,6000,8000]:
-        if cut==8000 and active not in ([2],[0,1,2]):continue
-        cap={};r=run(active,1.,SR,cut,mass,capture=cap);acc=cap['acc']
-        assert acc.shape[0]==int(np.sum(freqs<cut)) and np.all(np.isfinite(acc))
-        assert cap['maxDerivativeError']<=1e-9*max(1.,cap['peakAcceleration'])
-        p=render(acc,medium);assert np.all(np.isfinite(p)) and np.max(abs(p))>0
-        # First physical propagation sample is fixed by receiver geometry.
-        assert np.all(p[:,:int(np.floor(SR/C+.5))]==0)
-        row=dict(label=label,cut=cut,modes=acc.shape[0],initialJ=r['initialJ'],boardWorkJ=r['boardJ']+r['boardLoss'],boardJ=r['boardJ'],peakPa=np.max(abs(p),axis=1).tolist(),rmsPa=np.sqrt(np.mean(p*p,axis=1)).tolist(),bands=bands(p),maxDerivativeError=cap['maxDerivativeError'],peakAcceleration=cap['peakAcceleration'],maxBalance=r['maxBalance'])
-        if cut==6000:
-            q=render(acc,fine);row['spatialError']=rel(p,q)
-            # Angular convergence: 8x16 vs 16x32; report and gate separately.
-            e1=angular_energy(acc,8,16);e2=angular_energy(acc,16,32)
-            row.update(radiatedJ=e2,angularError=abs(e1-e2)/max(e2,1e-30),radiatedInitialFraction=e2/r['initialJ'],radiatedBoardWorkFraction=e2/max(row['boardWorkJ'],1e-30))
-            checks.append(dict(label=label,kind='spatial',error=row['spatialError'],pass_=row['spatialError']<=.05))
-            checks.append(dict(label=label,kind='angular',error=row['angularError'],pass_=row['angularError']<=.10))
-            checks.append(dict(label=label,kind='initial-budget',error=row['radiatedInitialFraction'],pass_=e2<=r['initialJ']))
-            if label=='60-m6':
-                control=run(active,1.,SR,cut,mass)
-                assert r==control,'observer changed mechanics'
-                row['mechanicalParity']=True
-        captures[cut]=p
-        rows.append(row);print('G2_ACOUSTIC '+json.dumps(row),flush=True)
-    for cut in [5000,8000]:
-        if cut not in captures:continue
-        error=rel(captures[cut],captures[6000])
-        ck=dict(label=label,kind='band'+str(cut),error=error,pass_=error<=.10)
-        checks.append(ck);print('G2_ACOUSTIC_CHECK '+json.dumps(ck),flush=True)
-# 5k and 8k are diagnostic; do not select a reduced band on these results.
-required=[r for r in checks if r['kind'] in ('spatial','angular','initial-budget')]
-gate=all(r['pass_'] for r in required)
-report=dict(scope='40ms finite prescribed source, one-way pressure and angular energy diagnostic; no feedback, no WAV or calibrated SPL',rows=rows,checks=checks,required=len(required),passed=sum(r['pass_'] for r in required),gate=gate)
-(OUT/'acoustic_report.json').write_text(json.dumps(report,indent=2))
-print('G2_ACOUSTIC_GATE '+json.dumps({k:report[k] for k in ('required','passed','gate')}),flush=True)
-if not gate:raise SystemExit(1)
+if __name__ == '__main__':
+    medium=make_kernels(128,96);fine=make_kernels(256,192)
+    rows=[];checks=[]
+    for active,mass in [([0],6),([1],6),([2],6),([2],3),([0,1,2],6)]:
+        label='-'.join(str([48,60,84][i]) for i in active)+'-m'+str(mass)
+        captures={}
+        for cut in [5000,6000,8000]:
+            if cut==8000 and active not in ([2],[0,1,2]):continue
+            cap={};r=run(active,1.,SR,cut,mass,capture=cap);acc=cap['acc']
+            assert acc.shape[0]==int(np.sum(freqs<cut)) and np.all(np.isfinite(acc))
+            assert cap['maxDerivativeError']<=1e-9*max(1.,cap['peakAcceleration'])
+            p=render(acc,medium);assert np.all(np.isfinite(p)) and np.max(abs(p))>0
+            # First physical propagation sample is fixed by receiver geometry.
+            assert np.all(p[:,:int(np.floor(SR/C+.5))]==0)
+            row=dict(label=label,cut=cut,modes=acc.shape[0],initialJ=r['initialJ'],boardWorkJ=r['boardJ']+r['boardLoss'],boardJ=r['boardJ'],peakPa=np.max(abs(p),axis=1).tolist(),rmsPa=np.sqrt(np.mean(p*p,axis=1)).tolist(),bands=bands(p),maxDerivativeError=cap['maxDerivativeError'],peakAcceleration=cap['peakAcceleration'],maxBalance=r['maxBalance'])
+            if cut==6000:
+                q=render(acc,fine);row['spatialError']=rel(p,q)
+                # Angular convergence: 8x16 vs 16x32; report and gate separately.
+                e1=angular_energy(acc,8,16);e2=angular_energy(acc,16,32)
+                row.update(radiatedJ=e2,angularError=abs(e1-e2)/max(e2,1e-30),radiatedInitialFraction=e2/r['initialJ'],radiatedBoardWorkFraction=e2/max(row['boardWorkJ'],1e-30))
+                checks.append(dict(label=label,kind='spatial',error=row['spatialError'],pass_=row['spatialError']<=.05))
+                checks.append(dict(label=label,kind='angular',error=row['angularError'],pass_=row['angularError']<=.10))
+                checks.append(dict(label=label,kind='initial-budget',error=row['radiatedInitialFraction'],pass_=e2<=r['initialJ']))
+                if label=='60-m6':
+                    control=run(active,1.,SR,cut,mass)
+                    assert r==control,'observer changed mechanics'
+                    row['mechanicalParity']=True
+            captures[cut]=p
+            rows.append(row);print('G2_ACOUSTIC '+json.dumps(row),flush=True)
+        for cut in [5000,8000]:
+            if cut not in captures:continue
+            error=rel(captures[cut],captures[6000])
+            ck=dict(label=label,kind='band'+str(cut),error=error,pass_=error<=.10)
+            checks.append(ck);print('G2_ACOUSTIC_CHECK '+json.dumps(ck),flush=True)
+    # 5k and 8k are diagnostic; do not select a reduced band on these results.
+    required=[r for r in checks if r['kind'] in ('spatial','angular','initial-budget')]
+    gate=all(r['pass_'] for r in required)
+    report=dict(scope='40ms finite prescribed source, one-way pressure and angular energy diagnostic; no feedback, no WAV or calibrated SPL',rows=rows,checks=checks,required=len(required),passed=sum(r['pass_'] for r in required),gate=gate)
+    (OUT/'acoustic_report.json').write_text(json.dumps(report,indent=2))
+    print('G2_ACOUSTIC_GATE '+json.dumps({k:report[k] for k in ('required','passed','gate')}),flush=True)
+    if not gate:raise SystemExit(1)
