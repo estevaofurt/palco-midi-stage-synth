@@ -43,9 +43,16 @@ def static(t,x,owner=None):
         dG+=dJ[:,:,None,:]*C[None,:,:,None]
     return G,dG
 
-def operators(t,x,n,owner,k,order,derivative_only=False):
-    t=np.asarray(t);x=np.asarray(x);n=np.asarray(n);owner=np.asarray(owner,int)
+def source_quadrature(t,order):
     y,w=samples(t,order);u,v,_=rule(order);Sy=shape(np.c_[1-u,u*(1-v),u*v])
+    return y,w,Sy
+
+def operators(t,x,n,owner,k,order,derivative_only=False):
+    return _operators(t,x,n,owner,k,source_quadrature(t,order),derivative_only)
+
+def _operators(t,x,n,owner,k,source,derivative_only=False):
+    t=np.asarray(t);x=np.asarray(x);n=np.asarray(n);owner=np.asarray(owner,int)
+    y,w,Sy=source
     N=len(t);D=np.empty((len(x),3*N),complex);G=None if derivative_only else np.empty_like(D)
     for start in range(0,len(x),8):
         stop=min(start+8,len(x));xx=x[start:stop];nn=n[start:stop];ii=owner[start:stop]
