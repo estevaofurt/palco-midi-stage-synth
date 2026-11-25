@@ -1,0 +1,48 @@
+name: Concert Grand III shared vertex correction archived modal replay
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/shared_vertex_modal_replay.py','research/stage-concert-grand-iii/test_shared_vertex_modal_replay.py','.github/workflows/concert-grand-iii-vertex-modal-replay.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require completed references
+        run: |
+          for r in 45717196561 45719500624 45719746412; do
+            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
+          done
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high-modal
+          gh run download 45719500624 -n G3-edge-modal-replay-${{ matrix.angle }} -D /tmp/g3-edge
+          gh run download 45719746412 -n G3-shared-vertex-${{ matrix.angle }} -D /tmp/g3-vertex
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_shared_vertex_modal_replay.py
+      - run: python research/stage-concert-grand-iii/shared_vertex_modal_replay.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high-modal --edge /tmp/g3-edge --vertex /tmp/g3-vertex --angle ${{ matrix.angle }} --out /tmp/g3-vertex-replay
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-vertex-modal-replay-${{ matrix.angle }}
+          path: /tmp/g3-vertex-replay/
+          if-no-files-found: warn
