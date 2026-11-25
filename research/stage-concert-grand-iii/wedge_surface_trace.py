@@ -8,11 +8,23 @@ from numpy.polynomial.legendre import leggauss
 from lid_exterior import Panel
 from acoustic_trace_resolution import panel_capture
 
-def surface_panels(poly,n,angle,height,layers,count):
+def graded_fractions(n,strength):
+    if not isinstance(n,int) or isinstance(n,bool) or n<1 or not np.isfinite(strength) or not 0<=strength<=1:
+        raise ValueError('invalid grading')
+    t=np.arange(n+1)/n
+    if strength==0:return t
+    q=(1-strength)*t+strength*(1-np.cos(np.pi*t))/2
+    q[0]=0.;q[-1]=1.
+    if np.any(np.diff(q)<=0):raise ValueError('nonmonotone grading')
+    return q
+
+def surface_panels(poly,n,angle,height,layers,count,*,edge_grading=0.,layer_grading=0.):
     poly=np.asarray(poly,float)
     if poly.ndim!=2 or poly.shape[1]!=2 or len(poly)<3 or not 0<angle<90 or n<2 or layers<1 or height<=0:
         raise ValueError('invalid wedge trace geometry')
     if not isinstance(n,int) or not isinstance(layers,int):raise ValueError('integer subdivisions required')
+    layer_fractions=graded_fractions(layers,layer_grading)
+    graded_fractions(1,edge_grading)
     h=poly[:,0].min();a=np.deg2rad(angle);step=max(np.ptp(poly,axis=0))/n
     disp=np.array([np.cos(a)-1,0.,np.sin(a)])
     divisions=[max(1,int(np.ceil(np.linalg.norm(v-u)/step))) for u,v in zip(poly,np.roll(poly,-1,axis=0))]
@@ -22,7 +34,8 @@ def surface_panels(poly,n,angle,height,layers,count):
         A=scale*((u[0]+v[0])/2-h)
         if A<=1e-12:continue
         normal/=scale
-        rim=np.c_[u+(v-u)*np.arange(m+1)[:,None]/m,np.full(m+1,height)]
+        rimXY=u+(v-u)*np.arange(m+1)[:,None]/m if edge_grading==0 else u+(v-u)*graded_fractions(m,edge_grading)[:,None]
+        rim=np.c_[rimXY,np.full(m+1,height)]
         top=rim+(rim[:,0]-h)[:,None]*disp
         corners=[]
         for x in (rim[0],rim[-1],top[-1],top[0]):
@@ -30,7 +43,7 @@ def surface_panels(poly,n,angle,height,layers,count):
         panel=Panel(np.asarray(corners),normal,count)
         xyz=[];ids=np.empty((layers+1,m+1),int)
         for k in range(layers+1):
-            f=k/layers
+            f=k/layers if layer_grading==0 else layer_fractions[k]
             for j in range(m+1):
                 if k and rim[j,0]-h<=1e-12:ids[k,j]=ids[0,j]
                 else:
