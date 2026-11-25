@@ -52,7 +52,7 @@ for active,mass,label in [([0],6,'48-m6'),([1],6,'60-m6'),([2],6,'84-m6'),([2],3
     rows.append(r);checks.append(r);print('G2_STREAM_INTEGRATED '+json.dumps(r),flush=True)
     if label not in published:continue
     e40=energy(capture['acc'],16,32)
-    er=abs(e40-published[label])/published[label]
+    er=float(abs(e40-published[label])/published[label])
     checks.append(dict(label=label,kind='angular-parity',error=er,pass_=er<=1e-8))
     del capture
     # 160 ms bounded audit; capture dense only for angular energy calculation, not production.
@@ -62,13 +62,19 @@ for active,mass,label in [([0],6,'48-m6'),([1],6,'60-m6'),([2],6,'84-m6'),([2],3
     assert p.shape[1]==round(.16*SR)+max(k.shape[1] for k in ks)-1
     assert cap['maxDerivativeError']<=1e-9*max(1.,cap['peakAcceleration'])
     e1=energy(acc,8,16);e2=energy(acc,16,32)
-    angular=abs(e1-e2)/max(e2,1e-30);work=a['boardJ']+a['boardLoss']
-    r=dict(label=label,kind='longer-energy',durationS=.16,radiatedJ=e2,radiated40msJ=e40,angularError=angular,initialJ=a['initialJ'],boardWorkJ=work,boardLossJ=a['boardLoss'],boardEnergyJ=a['boardJ'],radiatedInitialFraction=e2/a['initialJ'],radiatedBoardWorkFraction=e2/work,radiatedBoardLossFraction=e2/a['boardLoss'],peakPa=np.max(abs(p),axis=1).tolist(),rmsLast40msPa=np.sqrt(np.mean(p[:,round(.12*SR):round(.16*SR)]**2,axis=1)).tolist(),maxBalance=a['maxBalance'],maxDerivativeError=cap['maxDerivativeError'])
+    coarseError=float(abs(e1-e2)/max(e2,1e-30))
+    angular=coarseError;angularGrid=[16,32];energies=[float(e1),float(e2)]
+    if coarseError>.10:
+        e3=energy(acc,32,64)
+        energies.append(float(e3));angular=float(abs(e2-e3)/max(e3,1e-30));e2=e3;angularGrid=[32,64]
+    e2=float(e2);e40=float(e40);work=float(a['boardJ']+a['boardLoss'])
+    r=dict(label=label,kind='longer-energy',durationS=.16,radiatedJ=e2,radiated40msJ=e40,angularError=angular,coarseAngularError=coarseError,angularGrid=angularGrid,angularEnergiesJ=energies,initialJ=a['initialJ'],boardWorkJ=work,boardLossJ=a['boardLoss'],boardEnergyJ=a['boardJ'],radiatedInitialFraction=e2/a['initialJ'],radiatedBoardWorkFraction=e2/work,radiatedBoardLossFraction=e2/a['boardLoss'],peakPa=np.max(abs(p),axis=1).tolist(),rmsLast40msPa=np.sqrt(np.mean(p[:,round(.12*SR):round(.16*SR)]**2,axis=1)).tolist(),maxBalance=a['maxBalance'],maxDerivativeError=cap['maxDerivativeError'])
     rows.append(r);print('G2_EXTENDED_ACOUSTIC '+json.dumps(r),flush=True)
     checks.extend([dict(label=label,kind='angular',error=angular,pass_=angular<=.10),dict(label=label,kind='initial-budget',error=e2/a['initialJ'],pass_=e2<=a['initialJ']),dict(label=label,kind='board-work-budget',error=e2/work,pass_=e2<=work)])
     del cap,acc
+for ck in checks:ck['pass_']=bool(ck['pass_'])
 gate=all(r['pass_'] for r in checks)
 report=dict(scope='one-way finite 160ms radiation diagnostic and streamed pressure equivalence; not full decay or acoustic loading',rows=rows,checks=checks,required=len(checks),passed=sum(r['pass_'] for r in checks),gate=gate)
-(OUT/'extended_acoustic_report.json').write_text(json.dumps(report,indent=2))
+(OUT/'extended_acoustic_report.json').write_text(json.dumps(report,indent=2,allow_nan=False))
 print('G2_EXTENDED_ACOUSTIC_GATE '+json.dumps({k:report[k] for k in ('required','passed','gate')}),flush=True)
 if not gate:raise SystemExit(1)
