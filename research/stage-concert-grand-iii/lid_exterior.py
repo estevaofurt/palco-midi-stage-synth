@@ -23,13 +23,13 @@ class Panel:
         x,w=quadrature(self.poly,order)
         return x,self.world(x),w,self.basis(x)
 
-def ports(model,C0,report,count):
+def ports(model,C0,report,count,canonical=False):
     panels=[];cols=[]
     z,w=leggauss(5);z=(z+1)/2;w=w/2
     u,v=np.meshgrid(z,z,indexing='ij');u=u.ravel();v=v.ravel()
     lam=np.c_[1-u,u*(1-v),u*v];weight=(w[:,None]*w[None,:]).ravel()*u
     for i,(ids,normal,area) in enumerate(zip(model['apertureFaces'],report['portNormalsXYZ'],report['portAreasM2'])):
-        panel=Panel(model['xyz'][np.unique(ids)],np.asarray(normal),count)
+        panel=Panel(model['aperturePolygons'][i] if canonical else model['xyz'][np.unique(ids)],np.asarray(normal),count)
         assert abs(panel.basis.area-area)<1e-10
         C=np.zeros((len(model['xyz']),count))
         for face in ids:
