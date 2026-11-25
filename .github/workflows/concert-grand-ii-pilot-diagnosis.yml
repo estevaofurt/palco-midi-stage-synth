@@ -1,0 +1,40 @@
+name: Concert Grand II G2.10b pilot acoustic diagnosis
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_pilot_diagnosis.py','.github/workflows/concert-grand-ii-pilot-diagnosis.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnosis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-first-audio-raw-*
+          run-id: 45602018373
+          github-token: ${{ github.token }}
+          path: /tmp/g2-raw
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-first-audio-5s-WAV
+          run-id: 45602018373
+          github-token: ${{ github.token }}
+          path: /tmp/g2-wav
+      - run: python research/stage-concert-grand-ii/g2_pilot_diagnosis.py --raw /tmp/g2-raw --wav /tmp/g2-wav --out /tmp/g2-diagnosis/report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-10b-pilot-diagnosis
+          path: /tmp/g2-diagnosis/
+          if-no-files-found: error
