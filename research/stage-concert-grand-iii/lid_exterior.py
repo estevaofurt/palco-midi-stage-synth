@@ -69,7 +69,8 @@ def angular(x,A,k,order):
         G+=F.conj().T@(w[i:i+128,None]*F)
     return G.real/(4*np.pi)
 
-def load(panels,freq,outer,inner,angular_order,rho=1.204,c=343.,*,pair_block=None,self_block=None):
+def load(panels,freq,outer,inner,angular_order,rho=1.204,c=343.,*,pair_block=None,self_block=None,angular_local=False):
+    if not isinstance(angular_local,bool):raise ValueError('invalid angular mode')
     if pair_block is not None and (not isinstance(pair_block,int) or isinstance(pair_block,bool) or pair_block<1):
         raise ValueError('invalid pair block')
     if self_block is not None and (not isinstance(self_block,int) or isinstance(self_block,bool) or self_block<1):
@@ -103,13 +104,17 @@ def load(panels,freq,outer,inner,angular_order,rho=1.204,c=343.,*,pair_block=Non
                 if i!=j:X[:,I,J]=xx
             if i!=j:
                 R[:,J,I]=R[:,I,J].transpose(0,2,1);X[:,J,I]=X[:,I,J].transpose(0,2,1)
-    xyz=np.vstack([s[1] for s in samples]);A=np.zeros((len(xyz),N));start=0
-    for i,(_,x,w,S) in enumerate(samples):
-        A[start:start+len(x),offsets[i]:offsets[i+1]]=w[:,None]*S;start+=len(x)
+    if angular_local:
+        from exterior_angular_panels import angular_panels
+        parts=[(x,w[:,None]*S) for _,x,w,S in samples]
+    else:
+        xyz=np.vstack([s[1] for s in samples]);A=np.zeros((len(xyz),N));start=0
+        for i,(_,x,w,S) in enumerate(samples):
+            A[start:start+len(x),offsets[i]:offsets[i+1]]=w[:,None]*S;start+=len(x)
     out=[]
     for l,kl in enumerate(k):
         # Independent spherical far-field Gram, not eigenvalue clipping.
-        G=angular(xyz,A,kl,angular_order)
+        G=angular_panels(parts,kl,angular_order)[0] if angular_local else angular(xyz,A,kl,angular_order)
         r=rho*omega[l]*kl/(4*np.pi)*G
         x=rho*omega[l]/(4*np.pi)*(X[l]+X[l].T)/2
         Z=r+1j*x
