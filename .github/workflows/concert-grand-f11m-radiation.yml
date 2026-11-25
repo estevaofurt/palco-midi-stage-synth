@@ -1,0 +1,26 @@
+name: Concert Grand F11M radiated mechanical response
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11m-radiation.yml'
+      - 'research/stage-concert-grand/f11m-radiated-mobility*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mobility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11m-radiated-mobility.test.mjs
+      - run: node research/stage-concert-grand/f11m-radiated-mobility-review.mjs /tmp/f11m
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11M-radiated-response
+          path: /tmp/f11m/
+          if-no-files-found: error
