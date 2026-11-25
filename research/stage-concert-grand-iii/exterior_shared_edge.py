@@ -74,4 +74,11 @@ def corrected_pair(p,q,k,outer,edge_order,*,block=64):
     x,A=tensor_triangle(p,i,outer);y,B=tensor_triangle(q,j,outer)
     r,z,_=pair_integrals(x,A,y,B,k,mutual=True,block=block)
     s,t,rep=edge_duffy(p,q,k,edge_order)
-    return R-r+s,X-z+t,rep
+    # The smooth sinc integral has independent tensor convergence evidence.
+    # Preserve that integral; compare the transformed smooth contribution
+    # independently as a control of the singular transformation.
+    from split_radiation import relative
+    rep['smoothControlRelative']=[relative(v,w) for v,w in zip(R-r+s,R)]
+    rep['smoothControlMaximum']=max(rep['smoothControlRelative'])
+    rep['singularTriangleSmoothRelative']=[relative(v,w) for v,w in zip(s,r)]
+    return R,X-z+t,rep

@@ -22,23 +22,26 @@ def main():
     i=min(range(6),key=lambda j:ports[j].basis.area);j=adjacent(ports,i);p,q=ports[i],ports[j]
     k=2*np.pi*np.asarray(FREQ)/343.;rows=[];mat=[]
     a.out.mkdir(parents=True,exist_ok=True);path=a.out/'shared_edge_quadrature.json'
-    for outer,edge in [(30,12),(36,16),(42,20)]:
+    for outer,edge in [(30,20),(36,24),(42,28)]:
         start=time.perf_counter();R,X,r=corrected_pair(p,q,k,outer,edge)
         _,x,w,A=p.samples(outer);_,y,v,B=q.samples(outer)
         S,Y,_=pair_integrals(x,w[:,None]*A,y,v[:,None]*B,k,mutual=True,block=64)
-        smooth=max(x['relative'] for x in changes(R,S));assert smooth<=1e-8
+        smooth=max(x['relative'] for x in changes(R,S));assert smooth<=1e-12
+        independentSmooth=r['smoothControlMaximum']
         row=dict(outerOrder=outer,edgeOrder=edge,seconds=time.perf_counter()-start,geometry=r,
-            smoothKernelChange=smooth,reactiveCorrection=changes(Y,X))
+            smoothKernelChange=smooth,independentSmoothControl=independentSmooth,
+            smoothControlGate=bool(independentSmooth<=1e-8),reactiveCorrection=changes(Y,X))
         rows.append(row);mat.append((R,X,Y))
         path.write_text(json.dumps(dict(cases=rows,complete=False),indent=2,allow_nan=False))
         print('G3_SHARED_EDGE_CASE '+json.dumps(row),flush=True)
     corrected=[changes(mat[i][1],mat[i+1][1]) for i in (0,1)]
     original=[changes(mat[i][2],mat[i+1][2]) for i in (0,1)]
     fine=max(x['relative'] for x in corrected[-1]);coarse=max(x['relative'] for x in corrected[0])
-    summary=dict(gate=True,angleDeg=a.angle,diagnosticOnly=True,panel=i,otherPanel=j,modesPerPanel=55,
+    smoothGate=all(r['smoothControlGate'] for r in rows)
+    summary=dict(gate=smoothGate,angleDeg=a.angle,diagnosticOnly=True,panel=i,otherPanel=j,modesPerPanel=55,
         correctedChanges=corrected,originalChanges=original,maximumFineRelative=fine,maximumCoarseRelative=coarse,
-        representativeQuadratureGate=bool(fine<=.01),fullExteriorQuadratureCertified=False,radiationReady=False)
+        smoothControlGate=smoothGate,representativeQuadratureGate=bool(smoothGate and fine<=.01),fullExteriorQuadratureCertified=False,radiationReady=False)
     np.savez_compressed(a.out/'shared_edge_blocks.npz',frequencies=FREQ,corrected=np.stack([v[1] for v in mat]),original=np.stack([v[2] for v in mat]))
     path.write_text(json.dumps(dict(summary=summary,cases=rows,scaleSha256=hashlib.sha256(raw).hexdigest()),indent=2,allow_nan=False))
-    print('G3_SHARED_EDGE_GATE '+json.dumps(summary),flush=True)
+    print('G3_SHARED_EDGE_GATE '+json.dumps(summary),flush=True);assert smoothGate
 if __name__=='__main__':main()

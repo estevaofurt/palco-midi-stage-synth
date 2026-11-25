@@ -21,9 +21,15 @@ class EdgeTest(unittest.TestCase):
         self.assertLess(relative(r,r2),1e-9)
     def test_smooth_kernel_preserved(self):
         p,q=self.fixture(6);k=np.array([.55,2.7])
-        r,x,_=corrected_pair(p,q,k,14,14,block=32)
+        r,x,rep=corrected_pair(p,q,k,14,14,block=32)
+        self.assertLess(rep['smoothControlMaximum'],1e-10)
         _,a,w,A=p.samples(14);_,b,v,B=q.samples(14)
         ref,old,_=pair_integrals(a,w[:,None]*A,b,v[:,None]*B,k,mutual=True,block=32)
         self.assertLess(relative(r,ref),1e-10)
         self.assertTrue(np.isfinite(x).all())
+    def test_degree_nine_smooth_control(self):
+        p,q=self.fixture(55);k=np.array([.55,5.5])
+        # Polynomial degree after mapping can exceed the original degree.
+        _,_,r=corrected_pair(p,q,k,24,24,block=64)
+        self.assertLess(r['smoothControlMaximum'],1e-8)
 if __name__=='__main__':unittest.main()
