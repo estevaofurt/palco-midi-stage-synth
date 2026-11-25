@@ -1,0 +1,41 @@
+name: Concert Grand R7 impact and body
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths: ['research/stage-concert-grand/f11u-r7-*.mjs','.github/workflows/concert-grand-impact-r7.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {mode: pedal, speed: '1', felt: '1.5', velocity: 76}
+          - {mode: pedal, speed: '1.25', felt: '1.5', velocity: 76}
+          - {mode: pedal, speed: '1.5', felt: '1.5', velocity: 76}
+          - {mode: pedal, speed: '1.25', felt: '1', velocity: 76}
+          - {mode: dry, speed: '1', felt: '1.5', velocity: 76}
+          - {mode: dry, speed: '1.25', felt: '1.5', velocity: 76}
+          - {mode: C3, speed: '1', felt: '1.5', velocity: 24}
+          - {mode: C3, speed: '1', felt: '1.5', velocity: 76}
+          - {mode: C3, speed: '1', felt: '1.5', velocity: 127}
+          - {mode: C3, speed: '1.25', felt: '1.5', velocity: 76}
+          - {mode: C4, speed: '1', felt: '1.5', velocity: 24}
+          - {mode: C4, speed: '1', felt: '1.5', velocity: 76}
+          - {mode: C4, speed: '1', felt: '1.5', velocity: 127}
+          - {mode: C4, speed: '1.25', felt: '1.5', velocity: 76}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --max-old-space-size=6144 research/stage-concert-grand/f11u-r7-impact-demo.mjs /tmp/r7 ${{ matrix.mode }} ${{ matrix.speed }} ${{ matrix.felt }} ${{ matrix.velocity }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R7-${{ matrix.mode }}-S${{ matrix.speed }}-F${{ matrix.felt }}-v${{ matrix.velocity }}
+          path: /tmp/r7/
+          if-no-files-found: error
