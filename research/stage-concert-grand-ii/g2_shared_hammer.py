@@ -82,7 +82,7 @@ def run(active,speed,sr,cut,trebleMass=6):
         dl=sum(float(f[j])*(d1[j]-d0[j])-potential(d1[j],ks[j])+potential(d0[j],ks[j]) for j in range(n));felt+=dl
         assert all(f[j]==0 for j in range(n) if d0[j]<=0 and d1[j]<=0)
         assert np.all(np.isfinite(f)) and np.all(f>=0)
-        maxres=max(maxres,max(abs(f[j]-law(j,d1[j])) for j in range(n))
+        maxres=max(maxres,max(abs(f[j]-law(j,d1[j])) for j in range(n)))
         E=total(d1);maxinc=max(maxinc,E-old);minloss=min(minloss,*ds,db,dj,dl)
         maxbal=max(maxbal,abs(initial-E-felt-jl-b.loss-sum(a.loss for a in g)))
         peakBoard=max(peakBoard,b.energy());peakOther=max(peakOther,sum(a.energy() for j,a in enumerate(g) if j not in active))
