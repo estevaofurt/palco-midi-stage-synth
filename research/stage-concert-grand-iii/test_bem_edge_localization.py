@@ -28,6 +28,7 @@ class EdgeLocalizationTest(unittest.TestCase):
         self.assertAlmostEqual(r['categories'][0]['residualEnergyFraction'],.7)
         self.assertAlmostEqual(r['categories'][0]['bandEnergyFractions'][0],.7)
         self.assertLess(r['energyClosure'],1e-14)
+        np.testing.assert_allclose(np.asarray(r['sectorIndicator']).sum(1),r['elementIndicator'],atol=1e-14)
     def test_matches_independent_integral(self):
         t=sphere(.5,0);labels=np.zeros(len(t),int);k=2*np.pi*80/343.
         v=lambda x,o:np.c_[np.ones(len(x)),x[:,0]]

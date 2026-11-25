@@ -55,7 +55,8 @@ def summarize(classes,E,T,A):
     closure=abs(sum(r['residualEnergyFraction'] for r in rows)-(1. if total>0 else 0.))
     return dict(heldoutResidual=float(np.sqrt(total/den)),heldoutWorstColumn=float(np.sqrt(max(error/target))),
         totalResidualEnergy=total,area=float(A.sum()),energyClosure=float(closure),
-        categories=rows,elementIndicator=normalized.sum(axis=(1,2,3)).tolist())
+        categories=rows,elementIndicator=normalized.sum(axis=(1,2,3)).tolist(),
+        sectorIndicator=normalized.sum(axis=(2,3)).tolist())
 
 def localize(t,labels,kinds,q,velocity,k,outer,inner,batch=24):
     classes,angles=inventory(t,labels,kinds)
