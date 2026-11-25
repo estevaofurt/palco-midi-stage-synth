@@ -69,9 +69,11 @@ def angular(x,A,k,order):
         G+=F.conj().T@(w[i:i+128,None]*F)
     return G.real/(4*np.pi)
 
-def load(panels,freq,outer,inner,angular_order,rho=1.204,c=343.,*,pair_block=None):
+def load(panels,freq,outer,inner,angular_order,rho=1.204,c=343.,*,pair_block=None,self_block=None):
     if pair_block is not None and (not isinstance(pair_block,int) or isinstance(pair_block,bool) or pair_block<1):
         raise ValueError('invalid pair block')
+    if self_block is not None and (not isinstance(self_block,int) or isinstance(self_block,bool) or self_block<1):
+        raise ValueError('invalid self block')
     f=np.asarray(freq,dtype=float);omega=2*np.pi*f;k=omega/c
     if min(f)<=0 or min(rho,c)<=0:raise ValueError('positive medium and frequencies')
     samples=[p.samples(outer) for p in panels];N=sum(p.basis.count for p in panels)
@@ -82,7 +84,10 @@ def load(panels,freq,outer,inner,angular_order,rho=1.204,c=343.,*,pair_block=Non
     # Gauss quadrature. Retain unsymmetrized self terms for independent audit.
     for i,(p,si) in enumerate(zip(panels,samples)):
         _,x,w,S=si;A=w[:,None]*S;I=slice(offsets[i],offsets[i+1])
-        X[:,I,I]=self_react(p,si,k,inner)
+        if self_block is None:X[:,I,I]=self_react(p,si,k,inner)
+        else:
+            from exterior_self_stream import self_react_blocked
+            X[:,I,I]=self_react_blocked(p,si,k,inner,block=self_block)
         for j in range(i,len(panels)):
             _,y,v,T=samples[j];B=v[:,None]*T;J=slice(offsets[j],offsets[j+1])
             if pair_block is None:
