@@ -1,0 +1,24 @@
+name: Concert Grand II G2.07b passive two-regime proof
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_two_regime*.mjs','.github/workflows/concert-grand-ii-two-regime.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand-ii/g2_decay.test.mjs
+      - run: node research/stage-concert-grand-ii/g2_two_regime.test.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-two-regime-numeric
+          path: /tmp/g2-two-regime/report.json
+          if-no-files-found: error
