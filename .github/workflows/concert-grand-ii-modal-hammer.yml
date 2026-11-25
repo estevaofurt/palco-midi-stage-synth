@@ -1,0 +1,33 @@
+name: Concert Grand II G2.09c modal moving hammer
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_modal_hammer*','.github/workflows/concert-grand-ii-modal-hammer.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hammer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: node research/stage-concert-grand-ii/g2_modal_bridge_export.mjs
+      - run: node research/stage-concert-grand-ii/g2_modal_hammer_reference.mjs
+      - run: python research/stage-concert-grand-ii/g2_modal_hammer.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G2-modal-hammer-numeric
+          path: /tmp/g2-modal-bridge/hammer_report.json
+          if-no-files-found: error
