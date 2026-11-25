@@ -2,7 +2,7 @@ name: Concert Grand II G2.11-R1 passive dampers
 on:
   push:
     branches: [research/stage-concert-grand-ii]
-    paths: ['research/stage-concert-grand-ii/g2_damped_events.py','research/stage-concert-grand-ii/g2_damper_test.py','.github/workflows/concert-grand-ii-dampers.yml']
+    paths: ['research/stage-concert-grand-ii/g2_damped_events.py','research/stage-concert-grand-ii/g2_damper_test.py','research/stage-concert-grand-ii/g2_damper_audio.py','.github/workflows/concert-grand-ii-dampers.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -31,3 +31,55 @@ jobs:
           name: G2-R1-passive-damper-proof
           path: /tmp/g2-shared-board/r1_report.json
           if-no-files-found: error
+  audio:
+    needs: mechanics
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: ['release-only','dry']
+        case: ['C4-held','C4-release','triad','escala-do-maior','arpejo-do-maior','progressoes']
+        exclude:
+          - mode: release-only
+            case: C4-held
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: node research/stage-concert-grand-ii/g2_octave_export.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-R1-passive-damper-proof
+          path: /tmp/g2-proof
+      - id: original
+        shell: bash
+        run: |
+          case "${{ matrix.case }}" in
+            C4-held|C4-release) name=G2-11-audit-60 ;;
+            triad) name=G2-11-audit-triad ;;
+            *) name=G2-11-music-${{ matrix.case }} ;;
+          esac
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.original.outputs.name }}
+          run-id: 45612682505
+          github-token: ${{ github.token }}
+          path: /tmp/g2-original
+      - run: python research/stage-concert-grand-ii/g2_damper_audio.py --case ${{ matrix.case }} --mode ${{ matrix.mode }} --original /tmp/g2-original --proof /tmp/g2-proof --out /tmp/g2-audio
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G2-R1-${{ matrix.case }}-${{ matrix.mode }}
+          path: /tmp/g2-audio/
+          if-no-files-found: warn
