@@ -7,9 +7,10 @@ from scipy.optimize import brentq
 import numpy as np
 from felt_law import params,energy,relax,frozen_force
 ROOT=Path(__file__).parent
-def impact(r,s,c,sr,speed,kind,*,stagger=False):
+def impact(r,s,c,sr,speed,kind,*,stagger=False,propagator='midpoint'):
     hm,f=params(r['key'],r['count'],s,c);m=hm['massKg'];N=r['count'];h=1/sr
     if kind not in ('rigid','elastic') or sr<=0 or speed<=0:raise ValueError('fixture domain')
+    if propagator not in ('midpoint','exact'):raise ValueError('propagator')
     if stagger and N==1:raise ValueError('stagger fixture needs multiple contacts')
     # Diagnostic oscillator at nominal f0. For a uniform simply supported string
     # first-mode port effective mass = mu*L/(2 sin^2(pi*s/L)).
@@ -17,6 +18,8 @@ def impact(r,s,c,sr,speed,kind,*,stagger=False):
     mt=r['groupVibratingMassKg']/N/(2*math.sin(math.pi*r['strikeFraction'])**2)
     kt=mt*(2*math.pi*r['nominalHz'])**2
     den=1+h*h*kt/(4*mt);g=h*h/(2*mt*den) if kind=='elastic' else 0.
+    omega=math.sqrt(kt/mt);co=math.cos(omega*h);si=math.sin(omega*h);J=si/omega
+    if kind=='elastic' and propagator=='exact':g=2*math.sin(omega*h/2)**2/(mt*omega**2)
     gh=h*h/(2*m)
     gaps=[i*30e-6 if stagger else 0. for i in range(N)]
     y=[0.]*N;u=[0.]*N;z=[0.]*N;x=0.;v=speed
@@ -29,6 +32,7 @@ def impact(r,s,c,sr,speed,kind,*,stagger=False):
             z[j],l,e=relax(d0[j],z[j],h/2,f);loss+=l;maxres=max(maxres,abs(e))
         xf=x+h*v
         yf=[y[j]+(h*u[j]-h*h*kt*y[j]/(2*mt))/den if kind=='elastic' else 0. for j in range(N)]
+        if kind=='elastic' and propagator=='exact':yf=[co*y[j]+J*u[j] for j in range(N)]
         free=[xf-yf[j]-gaps[j] for j in range(N)]
         def per(total):
             result=[]
@@ -50,6 +54,7 @@ def impact(r,s,c,sr,speed,kind,*,stagger=False):
         x1=xf-gh*total;v1=v-h*total/m
         y1=[yf[j]+g*F[j] for j in range(N)]
         u1=[2*(y1[j]-y[j])/h-u[j] if kind=='elastic' else 0. for j in range(N)]
+        if kind=='elastic' and propagator=='exact':u1=[-omega*si*y[j]+co*u[j]+J*F[j]/mt for j in range(N)]
         d1=[x1-y1[j]-gaps[j] for j in range(N)]
         for j in range(N):
             assert F[j]>=0
@@ -71,7 +76,7 @@ def impact(r,s,c,sr,speed,kind,*,stagger=False):
     assert impulseError<=1e-10 and loss>=0 and peak>0
     assert abs(sum(perImpulse)-impulse)<=1e-10
     if not stagger:assert max(perImpulse)-min(perImpulse)<=1e-10
-    return dict(key=r['key'],kind=kind,stagger=stagger,sampleRateHz=sr,speedMps=speed,contacts=N,
+    return dict(key=r['key'],kind=kind,propagator=propagator,stagger=stagger,sampleRateHz=sr,speedMps=speed,contacts=N,
         injectedJ=E0,hammerReboundJ=Eh,targetJ=Es,storedFeltJ=Ef,lossJ=loss,
         maxBalanceJ=maxbal,maxIncreaseJ=maxinc,maxRelaxResidualJ=maxres,impulseErrorNs=impulseError,
         peakForceN=peak,impulseNs=impulse,contactDurationMs=1000*contactSamples/sr,
