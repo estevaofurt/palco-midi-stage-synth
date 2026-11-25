@@ -47,15 +47,23 @@ def vertical(lam,h,s,c):
     ratio[~small]=tanh[~small]/a[~small]
     return a,den,sech,a*tanh,ratio
 
-def response(m,f,points):
+def response(m,f,points,*,solver='dense'):
+    if solver not in ('dense','schur'):raise ValueError('unknown hybrid solver')
     if f<=0:raise ValueError('positive harmonic frequency')
     s=2j*np.pi*f;p=m['prism'];h=p['height'];N=m['N'];U=m['U'];MU=m['MU'];B=p['B'];C=m['C']
     a,den,sech,d,ratio=vertical(m['lam'],h,s,p['c'])
     b=U.T@B;F=MU@(sech[:,None]*b)
-    W=(m['K']+s*s*m['M']).toarray()
-    W[:N,:N]+=(MU*d[None,:])@MU.T
-    rhs=np.column_stack([np.pad(F,((0,len(W)-N),(0,0))),C])
-    X=solve(W,rhs,assume_a='gen')
+    W=m['K']+s*s*m['M'];D=(MU*d[None,:])@MU.T
+    rhs=np.column_stack([np.pad(F,((0,W.shape[0]-N),(0,0))),C])
+    if solver=='dense':
+        W=W.toarray();W[:N,:N]+=D
+        X=solve(W,rhs,assume_a='gen')
+        solve_report=dict(solver='dense',fullDenseMatrixBytes=W.nbytes,interfaceDenseMatrixBytes=D.nbytes)
+        residual=relative(W@X,rhs)
+    else:
+        from hybrid_schur import solve_interface
+        X,solve_report=solve_interface(W,D,rhs)
+        residual=solve_report['residual']
     T=MU.T@X[:N]
     Z=rhs.T@X;nb=B.shape[1]
     Z[:nb,:nb]+=b.T@(ratio[:,None]*b)
@@ -72,7 +80,7 @@ def response(m,f,points):
     Z*=p['rho']*s;P*=p['rho']*s
     H=(Z+Z.conj().T)/2;scale=max(np.linalg.norm(Z),1e-30)
     rep=dict(reciprocity=relative(Z,Z.T),losslessRelative=float(np.linalg.norm(H)/scale),
-        residual=relative(W@X,rhs),interfaceCondition=float(min(abs(den))))
+        residual=residual,interfaceCondition=float(min(abs(den))),linearSolve=solve_report)
     rep['gate']=rep['reciprocity']<=1e-8 and rep['losslessRelative']<=1e-8 and rep['residual']<=1e-8
     return Z,P,rep
 
