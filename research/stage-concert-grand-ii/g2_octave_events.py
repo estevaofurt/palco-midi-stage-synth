@@ -14,7 +14,8 @@ def modal(group):
     nc=len(group['ports'])//2
     raw=np.zeros((group['n'],1));raw[0,0]=1
     return w2,D,U.T@np.column_stack((raw,np.asarray(group['ports'][:nc]).T))
-def run_events(model,events,sr,duration,sink=None,retain_trace=False):
+def run_events(model,events,sr,duration,sink=None,retain_trace=False,boardLossScale=1.,feltScale=1.):
+    if not all(math.isfinite(z) and z>0 for z in (boardLossScale,feltScale)):raise ValueError('positive finite physical scales')
     keys=[a['key'] for a in model['groups']];ng=len(keys)
     masses=np.array([a.get('massKg',{48:.012,60:.010,84:.006}.get(a['key'])) for a in model['groups']])
     assert np.isfinite(masses).all() and np.all(masses>0)
@@ -29,7 +30,7 @@ def run_events(model,events,sr,duration,sink=None,retain_trace=False):
     g=[Block(*modal(a),sr) for a in model['groups']]
     modes=[m for m in next(b for b in model['boards'] if b['basis']==6000)['modes'] if m['f']<6000]
     w2=np.array([m['lambda'] for m in modes])
-    b=Block(w2,2*(2+.0005*np.sqrt(w2)),np.array([m['w'] for m in modes]),sr)
+    b=Block(w2,boardLossScale*2*(2+.0005*np.sqrt(w2)),np.array([m['w'] for m in modes]),sr)
     alpha=KJ/2+CJ/h;H=b.H+np.diag([a.H[0,0] for a in g])
     inv=cho_solve(cho_factor(np.eye(ng)+alpha*H),np.eye(ng));R=alpha*inv
     x=np.zeros(ng);v=np.zeros(ng);live={};history=[];removed=0.;injected=0.;felt=0.;jl=0.;maxbal=0.;maxinc=0.;minloss=0.;maxres=0.;maxjoint=0.;peakBoard=0.;trace=[]
@@ -39,7 +40,7 @@ def run_events(model,events,sr,duration,sink=None,retain_trace=False):
         rr=rel()
         return sum(a.energy() for a in g)+b.energy()+.5*KJ*(rr@rr)
     def energy(pos):
-        return mech()+sum(.5*masses[j]*v[j]**2+sum(potential(x[j]-z,2e9/(len(pos[j])-1)) for z in pos[j][1:]) for j in live)
+        return mech()+sum(.5*masses[j]*v[j]**2+sum(potential(x[j]-z,feltScale*2e9/(len(pos[j])-1)) for z in pos[j][1:]) for j in live)
     cache={}
     for i in range(steps):
         pos=positions()
@@ -58,7 +59,7 @@ def run_events(model,events,sr,duration,sink=None,retain_trace=False):
                 start=len(owners);nc=g[j].P.shape[1]-1;owners.extend([j]*nc);local.extend(range(nc));slices[j]=slice(start,start+nc)
             n=len(owners);T=np.zeros((ng,n));C=np.zeros((n,n));ks=np.zeros(n)
             for j in active:
-                sl=slices[j];T[j,sl]=g[j].H[0,1:];C[sl,sl]=g[j].H[1:,1:]+h*h/(2*masses[j]);ks[sl]=2e9/(sl.stop-sl.start)
+                sl=slices[j];T[j,sl]=g[j].H[0,1:];C[sl,sl]=g[j].H[1:,1:]+h*h/(2*masses[j]);ks[sl]=feltScale*2e9/(sl.stop-sl.start)
             C-=T.T@R@T
             if n:assert np.min(eigh(C,eigvals_only=True))>0
             cache[active]=(owners,local,slices,T,C,ks)
