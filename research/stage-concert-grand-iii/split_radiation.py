@@ -8,6 +8,8 @@ from radiation_resistance import angular,surface,pressure
 from radiation_impedance import audit
 
 def relative(a,b):
+    a=np.asarray(a);b=np.asarray(b)
+    if a.shape!=b.shape:raise ValueError('comparison shape mismatch')
     return float(np.linalg.norm(a-b)/max(np.linalg.norm(b),1e-30))
 
 def fan_batch(poly,field,freq,rho,c,outer,inner):

@@ -26,4 +26,8 @@ class CavityTest(unittest.TestCase):
             q=assemble(poly,n,nz,.24,self.field)
             self.assertLess(q['constantResidual'],1e-9)
             self.assertAlmostEqual(q['volume'],.24*1.7810208,places=10)
+    def test_sequence_comparison(self):
+        from split_radiation import relative
+        self.assertEqual(relative([np.eye(2)],[np.eye(2)]),0.)
+        with self.assertRaises(ValueError):relative([np.eye(2)],[np.eye(3)])
 if __name__=='__main__':unittest.main()

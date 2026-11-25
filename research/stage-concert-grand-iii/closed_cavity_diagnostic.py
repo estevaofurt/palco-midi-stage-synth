@@ -35,6 +35,8 @@ def main():
     checks=[]
     for (x,u),(y,v) in zip(outputs,outputs[1:]):
         a1=relative(x,y);a2=relative(u,v);checks.append(dict(impedance=a1,pressure=a2,gate=max(a1,a2)<=.05))
+    print('G3_CAVITY_CONVERGENCE '+json.dumps(checks),flush=True)
+    path.write_text(json.dumps(dict(cases=rows,convergence=checks,complete=False),indent=2,allow_nan=False))
     # Mirror the coordinates only for a lower-side diagnostic observer; actual microphones remain upper.
     lower=mic.copy();lower[:,2]=abs(g['rimBottomZ_m'])+.12
     down=split_load(poly,field,freqs,lower,18,28,20)

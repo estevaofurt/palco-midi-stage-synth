@@ -1,0 +1,38 @@
+name: Concert Grand III distributed aperture flux
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/aperture_modes*.py','research/stage-concert-grand-iii/test_aperture_modes.py','.github/workflows/concert-grand-iii-aperture-modes.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        fraction: ['0.15','0.4']
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_aperture_modes.py
+      - run: python research/stage-concert-grand-iii/aperture_modes_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --fraction ${{ matrix.fraction }} --out /tmp/g3-aperture
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-aperture-${{ matrix.fraction }}
+          path: /tmp/g3-aperture/
+          if-no-files-found: warn
