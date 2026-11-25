@@ -89,7 +89,7 @@ def compare(a,b):
     duration=abs(a['contactDurationMs']-b['contactDurationMs'])
     return dict(relative=diffs,durationDeltaMs=duration,gate=max(diffs.values())<=.05 and duration<=.1)
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--scale',type=Path,required=True);p.add_argument('--felt',type=Path,required=True);p.add_argument('--out',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--scale',type=Path,required=True);p.add_argument('--felt',type=Path,required=True);p.add_argument('--propagator',choices=('midpoint','exact'),default='midpoint');p.add_argument('--out',type=Path,required=True);a=p.parse_args()
     scale=json.loads(a.scale.read_text());fproof=json.loads(a.felt.read_text());s=json.loads((ROOT/'physical_sources.json').read_text());c=json.loads((ROOT/'felt_hypothesis.json').read_text())
     assert scale['version']=='G3-scale-hypothesis-02' and scale['summary']['gate'] and fproof['summary']['gate']
     rows=[]
@@ -97,12 +97,12 @@ def main():
         r=scale['rows'][key-21]
         for speed in c['impactSpeedsMps']:
             for kind in ('rigid','elastic'):
-                lo=impact(r,s,c,96000,speed,kind);hi=impact(r,s,c,192000,speed,kind);conv=compare(lo,hi)
+                lo=impact(r,s,c,96000,speed,kind,propagator=a.propagator);hi=impact(r,s,c,192000,speed,kind,propagator=a.propagator);conv=compare(lo,hi)
                 rows.append(dict(lo=lo,hi=hi,convergence=conv))
         if r['count']>1:
-            lo=impact(r,s,c,96000,1.,'elastic',stagger=True);hi=impact(r,s,c,192000,1.,'elastic',stagger=True)
+            lo=impact(r,s,c,96000,1.,'elastic',stagger=True,propagator=a.propagator);hi=impact(r,s,c,192000,1.,'elastic',stagger=True,propagator=a.propagator)
             rows.append(dict(lo=lo,hi=hi,convergence=compare(lo,hi)))
-    summary=dict(pairs=len(rows),simulations=2*len(rows),passPairs=sum(r['convergence']['gate'] for r in rows),
+    summary=dict(propagator=a.propagator,pairs=len(rows),simulations=2*len(rows),passPairs=sum(r['convergence']['gate'] for r in rows),
         maxBalanceJ=max(r[q]['maxBalanceJ'] for r in rows for q in ('lo','hi')),
         maxImpulseErrorNs=max(r[q]['impulseErrorNs'] for r in rows for q in ('lo','hi')),
         maxRelative=max(v for r in rows for v in r['convergence']['relative'].values()),
