@@ -23,3 +23,10 @@ jobs:
           name: G3-physical-parameter-inventory
           path: /tmp/g3-inventory/
           if-no-files-found: error
+      - run: python research/stage-concert-grand-iii/test_scale_hypothesis.py
+      - run: python research/stage-concert-grand-iii/scale_hypothesis.py --out /tmp/g3-scale
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-scale-hypothesis-01
+          path: /tmp/g3-scale/
+          if-no-files-found: error

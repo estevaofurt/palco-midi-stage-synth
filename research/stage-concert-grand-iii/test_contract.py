@@ -11,7 +11,7 @@ class ContractTest(unittest.TestCase):
     def test_datum(self):self.bad(lambda c:c['reference']['capture']['heightAboveStringsM'].update(value=1.))
     def test_holdout(self):self.bad(lambda c:c['reference'].update(holdoutOpened=True))
     def test_phase_order(self):self.bad(lambda c:c['phases'][2].update(status='passed',evidence=[{'commit':'fixture','report':'fixture'}]))
-    def test_missing_evidence(self):self.bad(lambda c:c['phases'][0].update(status='passed'))
+    def test_missing_evidence(self):self.bad(lambda c:c['phases'][0].update(status='passed',evidence=[]))
     def test_listening(self):self.bad(lambda c:c['phases'][10].update(status='implemented'))
     def test_samples(self):self.bad(lambda c:c['requirements'].update(externalAudioInEngine=True))
     def test_unlock_synthetic(self):
