@@ -1,0 +1,45 @@
+name: Concert Grand III complex radiation impedance and string refinement
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/radiation_impedance*.py','research/stage-concert-grand-iii/test_radiation_impedance.py','research/stage-concert-grand-iii/string_structure_refinement.py','.github/workflows/concert-grand-iii-radiation-impedance.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        case: [impedance,strings]
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      G3_SCALE_REPORT: /tmp/g3-scale/scale_geometry.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - if: matrix.case == 'impedance'
+        run: |
+          python research/stage-concert-grand-iii/test_radiation_impedance.py
+          python research/stage-concert-grand-iii/radiation_impedance_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --out /tmp/g3-proof
+      - if: matrix.case == 'strings'
+        run: |
+          python research/stage-concert-grand-iii/test_string_structure.py
+          python research/stage-concert-grand-iii/string_structure_refinement.py --scale /tmp/g3-scale/scale_geometry.json --out /tmp/g3-proof
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-radiation-impedance-${{ matrix.case }}
+          path: /tmp/g3-proof/
+          if-no-files-found: warn
