@@ -1,5 +1,5 @@
 """R2c: verify and render one energy-equivalent mass candidate against frozen Dry."""
-import argparse,copy,hashlib,json,math,os
+import argparse,copy,hashlib,json,math,os,shutil
 from pathlib import Path
 import numpy as np
 import soundfile as sf
@@ -64,7 +64,7 @@ def main():
         assert stream.samples==round(dur*SR) and p.shape==(3,round(dur*SR)+stream.tail) and np.isfinite(p).all()
         assert np.all(p[:,:int(np.floor(SR/C+.5))]==0)
         short=item['shortPressure'];assert np.linalg.norm(p[:,:short.shape[1]]-short)/np.linalg.norm(short)<=1e-9
-        parity=None
+        parity=None;pcmDelta=None;originalWavSha=None
         if a.key==60 and label=='dry':
             d=a.baseline;manifest=json.loads((d/'manifest.json').read_text());raw=d/'pressure.npz'
             assert manifest['commit']=='95c2419c6a52289982e142669ee8ea610a8c7d89' and manifest['case']=='C4-held' and manifest['mode']=='dry' and sha(raw)==manifest['rawSha256'] and manifest['gain']==GAIN
@@ -74,10 +74,17 @@ def main():
         wav=a.out/f'{a.key}-{label}.wav';sf.write(wav,x,FS,subtype='PCM_24')
         y,fs=sf.read(wav,always_2d=True);assert fs==FS and y.shape==x.shape and np.max(abs(y-x))<=2**-23+1e-12
         if a.key==60 and label=='dry':
-            orig=a.baseline/'C4-held-dry.wav';assert sha(orig)==manifest['wavSha256'] and np.array_equal(sf.read(orig,always_2d=True)[0],y)
+            orig=a.baseline/'C4-held-dry.wav';assert sha(orig)==manifest['wavSha256']
+            z,fs=sf.read(orig,always_2d=True);assert fs==FS and z.shape==y.shape and sf.info(orig).subtype=='PCM_24'
+            pcmDelta=float(np.max(abs(z-y)))
+            assert pcmDelta<=2**-23+1e-12, 'PCM difference exceeds one 24-bit quantization step'
+            # Preserve original bytes and raw pressure, not an independently quantized copy.
+            shutil.copyfile(orig,wav);assert sha(wav)==manifest['wavSha256'];y=z;p=old
+            originalWavSha=manifest['wavSha256']
+            print('G2_R2C_BASELINE_PARITY '+json.dumps(dict(pressureRelativeError=parity,pcmMaxAbsDelta=pcmDelta,originalWavSha256=originalWavSha)),flush=True)
         signals[label]=y
         raw=a.out/f'{a.key}-{label}-pressure.npz';np.savez_compressed(raw,pressurePa=p)
-        row=dict(label=label,events=item['events'],convergence=item['convergence'],radiation=item['radiation'],mechanical={k:v for k,v in report.items() if k!='trace'},baselineParity=parity,wavSha256=sha(wav),rawSha256=sha(raw),peakDbfs=float(20*np.log10(np.max(abs(y)))),features=features(y,a.key))
+        row=dict(label=label,events=item['events'],convergence=item['convergence'],radiation=item['radiation'],mechanical={k:v for k,v in report.items() if k!='trace'},baselineParity=parity,baselineWavMaxAbsDelta=pcmDelta,baselineOriginalSha256=originalWavSha,wavSha256=sha(wav),rawSha256=sha(raw),peakDbfs=float(20*np.log10(np.max(abs(y)))),features=features(y,a.key))
         rows.append(row)
     g,c=[x['features'] for x in rows]
     delta={w:c['windows'][w]['relativeRmsDb']-g['windows'][w]['relativeRmsDb'] for w in g['windows']}

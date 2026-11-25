@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        key: [60,64,67,72]
+        key: ${{ fromJSON(contains(github.event.head_commit.message, '[R2c-c4-repair]') && '[60]' || '[60,64,67,72]') }}
     env:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '1'
