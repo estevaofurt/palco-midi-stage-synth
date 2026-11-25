@@ -1,0 +1,3 @@
+# F11u — frase musical contínua experimental
+
+F11t preservada. Novo renderer separado utiliza a mesma rede de 337 modos; eventos lançam martelos independentes sobre cordas já vibrando, contabilizam energia de entrada e energia retirada na separação. Amortecedores e martelos coexistem em portas distintas, com eliminação Schur. A ação de teclado, retorno e levantamento de abafadores são prescritos, não mecanismos calibrados. Sem meio pedal, mapa espacial real, 88 teclas ou tempo real. Frase original de 10 s com arpejo, reataque, dinâmica, acorde e duas trocas CC64; cinco notas distintas. Ganho fixo .35 do S50 para folga, não normalização. CI deve aprovar balanço de energia e exportação antes de escuta. F12.5 obrigatório, main intocada.
