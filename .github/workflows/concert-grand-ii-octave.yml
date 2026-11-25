@@ -1,0 +1,32 @@
+name: Concert Grand II G2.11a octave mechanical events
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_octave_*','.github/workflows/concert-grand-ii-octave.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  octave:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: node research/stage-concert-grand-ii/g2_octave_export.mjs
+      - run: python research/stage-concert-grand-ii/g2_octave_test.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-11a-octave-mechanics
+          path: /tmp/g2-shared-board/octave_report.json
+          if-no-files-found: error
