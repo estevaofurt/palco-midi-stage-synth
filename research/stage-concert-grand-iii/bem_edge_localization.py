@@ -58,17 +58,23 @@ def summarize(classes,E,T,A):
         categories=rows,elementIndicator=normalized.sum(axis=(1,2,3)).tolist(),
         sectorIndicator=normalized.sum(axis=(2,3)).tolist())
 
-def localize(t,labels,kinds,q,velocity,k,outer,inner,batch=24):
+def localize(t,labels,kinds,q,velocity,k,outer,inner,batch=24,*,exact_bands=False):
     classes,angles=inventory(t,labels,kinds)
-    y,w=edge_samples(t,outer);_,n,_=elements(t);N,Q=y.shape[:2]
-    z,_=gauss(outer);d=np.repeat(z*z,outer)
-    # Three dimensionless bands in each centroid-to-edge sector.
-    bands=np.tile(np.searchsorted([.1,.4],d,side='right'),3)
+    if exact_bands:
+        from bem_edge_bands import band_samples
+        y,w,sector,bands=band_samples(t,outer)
+    else:
+        y,w=edge_samples(t,outer)
+        z,_=gauss(outer);d=np.repeat(z*z,outer)
+        # Legacy point classification, retained to reproduce earlier meshes.
+        bands=np.tile(np.searchsorted([.1,.4],d,side='right'),3)
+        sector=np.repeat(np.arange(3),outer*outer)
+    _,n,_=elements(t);N,Q=y.shape[:2]
     x=y.reshape(-1,3);w=w.ravel();n=np.repeat(n,Q,axis=0)
     E=np.zeros((N,3,3,q.shape[1]));T=np.zeros_like(E);A=np.zeros(E.shape[:3])
     for start in range(0,len(x),batch):
         stop=min(start+batch,len(x));sl=slice(start,stop)
-        ids=np.arange(start,stop);o=ids//Q;s=(ids%Q)//(outer*outer);b=bands[ids%Q]
+        ids=np.arange(start,stop);o=ids//Q;s=sector[ids%Q];b=bands[ids%Q]
         V=np.asarray(velocity(x[sl],o));_,D=operators(t,x[sl],n[sl],o,k,inner,True)
         if V.shape!=(len(ids),q.shape[1]):raise ValueError('invalid velocity callback')
         np.add.at(E,(o,s,b),w[sl,None]*abs(-D@q-V)**2)
@@ -76,5 +82,6 @@ def localize(t,labels,kinds,q,velocity,k,outer,inner,batch=24):
         np.add.at(A,(o,s,b),w[sl])
     rep=summarize(classes,E,T,A)
     rep.update(outerOrder=outer,innerOrder=inner,bandLimits=[0.,.1,.4,1.],
-        maximumDihedralDeg=float(angles.max()),targetPoints=len(x))
+        maximumDihedralDeg=float(angles.max()),targetPoints=len(x),
+        exactBandIntegration=bool(exact_bands))
     return rep
