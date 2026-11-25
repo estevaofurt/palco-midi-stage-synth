@@ -1,0 +1,47 @@
+name: Concert Grand R8 string uniformity
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths: ['research/stage-concert-grand/f11u-r8-*.mjs','.github/workflows/concert-grand-uniformity-r8.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {mode: pedal, spread: '0.5', angle: '0.5'}
+          - {mode: pedal, spread: '0.2', angle: '0.5'}
+          - {mode: pedal, spread: '0', angle: '0.5'}
+          - {mode: pedal, spread: '0.5', angle: '0.25'}
+          - {mode: dry, spread: '0.5', angle: '0.5'}
+          - {mode: dry, spread: '0.2', angle: '0.5'}
+          - {mode: dry, spread: '0', angle: '0.5'}
+          - {mode: dry, spread: '0.5', angle: '0.25'}
+          - {mode: C3, spread: '0.5', angle: '0.5'}
+          - {mode: C3, spread: '0.2', angle: '0.5'}
+          - {mode: C3, spread: '0', angle: '0.5'}
+          - {mode: C3, spread: '0.5', angle: '0.25'}
+          - {mode: C4, spread: '0.5', angle: '0.5'}
+          - {mode: C4, spread: '0.2', angle: '0.5'}
+          - {mode: C4, spread: '0', angle: '0.5'}
+          - {mode: C4, spread: '0.5', angle: '0.25'}
+          - {mode: G4, spread: '0.5', angle: '0.5'}
+          - {mode: G4, spread: '0.2', angle: '0.5'}
+          - {mode: G4, spread: '0', angle: '0.5'}
+          - {mode: G4, spread: '0.5', angle: '0.25'}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --max-old-space-size=6144 research/stage-concert-grand/f11u-r8-demo.mjs /tmp/r8 ${{ matrix.mode }} ${{ matrix.spread }} ${{ matrix.angle }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R8-${{ matrix.mode }}-U${{ matrix.spread }}-A${{ matrix.angle }}
+          path: /tmp/r8/
+          if-no-files-found: error
