@@ -1,0 +1,19 @@
+{
+  "version": "G3-cabinet-geometry-01",
+  "status": "engineering_hypothesis",
+  "rimTopZ_m": 0.24,
+  "rimBottomZ_m": -0.18,
+  "lidAnglesDeg": [
+    0,
+    30,
+    55
+  ],
+  "limitations": [
+    "Footprint equals convex board candidate, not the actual cabinet or lid outline.",
+    "Hinge at x minimum parallel to y, illustrative; thickness and supports omitted.",
+    "Upper closed prism and lower open prism are geometric inventories, not acoustic cavity volumes or eigenfrequencies.",
+    "Uncovered plan area is not effective radiation aperture; side gaps, diffraction, lid reflections and lower soundboard radiation not solved.",
+    "No claim that reference recording uses any of these lid angles; microphones retain layout01 coordinates.",
+    "No soundboard load, acoustic filtering, pressure changes or calibration applied."
+  ]
+}
