@@ -1,0 +1,57 @@
+{
+  "version": "G3-board-contour-01",
+  "status": "engineering_hypothesis",
+  "construction": {
+    "normalizedEnvelopeAnchors": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        0.22
+      ],
+      [
+        0.88,
+        0.86
+      ],
+      [
+        0.78,
+        1
+      ],
+      [
+        0.54,
+        1
+      ],
+      [
+        0,
+        0.43
+      ]
+    ],
+    "attachmentMarginM": 0.008,
+    "status": "convex engineering envelope, not a measured grand contour"
+  },
+  "ribs": {
+    "count": 12,
+    "directionXY": [
+      0,
+      1
+    ],
+    "endClearanceM": 0.012,
+    "status": "candidate centerlines only, no rib section or stiffness assigned"
+  },
+  "material": {
+    "from": "board_interface_hypothesis.json",
+    "status": "uniform thickness and density for mass inventory only"
+  },
+  "limitations": [
+    "convex contour cannot reproduce concave grand outline or rim details",
+    "attachment margin concerns individual wire projected points, not complete bridge footprint",
+    "no crown, grain angle measurement, rim compliance or rib stiffness",
+    "not used in acoustic engine"
+  ]
+}

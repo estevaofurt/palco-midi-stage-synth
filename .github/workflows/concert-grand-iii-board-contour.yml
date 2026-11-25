@@ -1,0 +1,41 @@
+name: Concert Grand III board contour preparation
+on:
+  push:
+    branches: [research/stage-concert-grand-iii, research/g3-interface-recovery]
+    paths: ['research/stage-concert-grand-iii/board_contour*.py','research/stage-concert-grand-iii/board_contour_hypothesis.json','research/stage-concert-grand-iii/test_board_contour.py','.github/workflows/concert-grand-iii-board-contour.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_board_contour.py
+      - run: python research/stage-concert-grand-iii/board_contour.py --scale /tmp/g3-scale/scale_geometry.json --out /tmp/g3-contour
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-board-contour
+          path: /tmp/g3-contour/
+          if-no-files-found: error
+      - run: python research/stage-concert-grand-iii/test_bridge_board_interface.py
+      - run: python research/stage-concert-grand-iii/bridge_board_interface_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --out /tmp/g3-interface
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-bridge-board-interface
+          path: /tmp/g3-interface/
+          if-no-files-found: warn
