@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OPENBLAS_NUM_THREADS: '1'
+      G3_SCALE_REPORT: /tmp/g3-scale/scale_geometry.json
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

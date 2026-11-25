@@ -1,4 +1,4 @@
-import unittest,json
+import unittest,json,os
 from pathlib import Path
 import numpy as np
 from scale_hypothesis import build
@@ -10,7 +10,7 @@ from termination_diagnostic import LOAD
 ROOT=Path(__file__).parent
 class PortTest(unittest.TestCase):
     @classmethod
-    def setUpClass(cls):cls.rows=build(json.loads((ROOT/'scale_hypothesis.json').read_text()))['rows']
+    def setUpClass(cls):cls.rows=json.loads(Path(os.environ['G3_SCALE_REPORT']).read_text())['rows']
     def test_fixed_front_parity(self):
         for key in (21,60,108):
             r=self.rows[key-21];M,K,P=element(r,32)

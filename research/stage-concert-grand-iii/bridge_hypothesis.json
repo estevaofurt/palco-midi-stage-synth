@@ -1,0 +1,32 @@
+{
+  "version": "G3-bridge-beam-01",
+  "status": "engineering_hypothesis",
+  "material": {
+    "densityKgM3": 660,
+    "youngAlongPa": 10000000000,
+    "status": "maple-like working prior, not measured target"
+  },
+  "section": {
+    "bass": {
+      "widthM": 0.035,
+      "heightM": 0.025
+    },
+    "treble": {
+      "widthM": 0.025,
+      "heightM": 0.022
+    },
+    "status": "illustrative rectangular cross sections"
+  },
+  "fixture": {
+    "foundationNperM2": 2000000,
+    "massDampingPerS": 30,
+    "stiffnessDampingS": 0.00001,
+    "status": "temporary distributed ground support and numerical diagnostic losses, not soundboard"
+  },
+  "limitations": [
+    "scalar vertical bending along polyline arclength; slope is local arclength derivative, not global 3D rotation",
+    "no torsion, axial or lateral bridge motion, pin geometry, downbearing or actual soundboard",
+    "attachment polyline derived from hypothetical layout, not measured geometry",
+    "no per-wire local support masses"
+  ]
+}
