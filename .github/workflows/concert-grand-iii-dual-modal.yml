@@ -22,7 +22,6 @@ jobs:
       - run: python research/stage-concert-grand-iii/test_nested_acoustic_ports.py
   proof:
     needs: unit
-    if: github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:

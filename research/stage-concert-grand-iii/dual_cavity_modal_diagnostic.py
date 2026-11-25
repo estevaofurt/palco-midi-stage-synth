@@ -24,6 +24,21 @@ def prerequisite(doc,angle,scale):
     s=doc.get('summary',{})
     if s.get('gate') is not True or s.get('angleDeg')!=angle or doc.get('scaleSha256')!=scale or s.get('commonFreeSpaceMonopolesOnly') is not True:
         raise ValueError('integrated reference prerequisite is not approved for this angle and scale')
+    if s.get('upperApertureModes')!=36 or s.get('lowerMouthModes')!=10 or s.get('boardFields')!=4 or doc.get('frequenciesHz')!=[30.,80.,150.,200.,250.,300.]:
+        raise ValueError('incompatible prior reference fixture')
+    if s.get('radiationReady') is not False or s.get('fullCabinetReady') is not False:
+        raise ValueError('incorrect scope of prior reference')
+    for key in ('meshConvergence','quadratureConvergence'):
+        metrics=s.get(key,{})
+        for metric in ('impedance','upperPressure','lowerPressure','exteriorPressure','flow'):
+            v=metrics.get(metric)
+            if not isinstance(v,(int,float)) or isinstance(v,bool) or not np.isfinite(v) or not 0<=v<=.05:
+                raise ValueError('invalid prior convergence: '+key+'/'+metric)
+    cases=doc.get('cases',[])
+    if len(cases)!=4 or not all(c.get('gate') is True for c in cases):
+        raise ValueError('incomplete prior reference cases')
+    if any([r.get('frequencyHz') for r in c.get('reports',[])]!=doc['frequenciesHz'] for c in cases):
+        raise ValueError('incomplete prior frequency coverage')
 def main():
     p=argparse.ArgumentParser();p.add_argument('--scale',type=Path,required=True);p.add_argument('--previous',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True);p.add_argument('--angle',type=float,required=True);a=p.parse_args()
