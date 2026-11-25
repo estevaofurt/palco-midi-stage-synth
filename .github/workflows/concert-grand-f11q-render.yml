@@ -1,0 +1,40 @@
+name: Concert Grand F11q bass support transient validation
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11q-render.yml'
+      - 'research/stage-concert-grand/f11q-bass-support-trial*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11q-bass-support-trial.test.mjs
+  trials:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      matrix:
+        midi: [36,43,48]
+        variant: [K500,K750,K1000]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11q-bass-support-trial-demo.mjs /tmp/f11q ${{ matrix.midi }} 127 ${{ matrix.variant }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11Q-bass-midi${{ matrix.midi }}-variant${{ matrix.variant }}-touch127
+          path: /tmp/f11q/
+          if-no-files-found: error
