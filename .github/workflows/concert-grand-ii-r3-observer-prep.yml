@@ -1,0 +1,31 @@
+name: Concert Grand II R3 observer preparation parity
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_board_observer.py','research/stage-concert-grand-ii/g2_board_observer_test.py','.github/workflows/concert-grand-ii-r3-observer-prep.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: python research/stage-concert-grand-ii/g2_board_observer_test.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R3-observer-preparation-proof
+          path: /tmp/observer-proof.json
+          if-no-files-found: error
