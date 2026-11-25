@@ -1,0 +1,60 @@
+name: Concert Grand II R2c blinded note package
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_r2_mass_pack.py','research/stage-concert-grand-ii/g2_r2_mass_pack_test.py','research/stage-concert-grand-ii/R2C_PACK_READY.json','.github/workflows/concert-grand-ii-r2-mass-pack.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  software:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 soundfile==0.13.1
+      - run: python research/stage-concert-grand-ii/g2_r2_mass_pack_test.py
+  package:
+    needs: software
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[R2c-pack-ready]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 soundfile==0.13.1
+      - name: Check pinned source run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/actions/runs/45625084768" > /tmp/source.json
+          python -c "import json; x=json.load(open('/tmp/source.json')); assert x['status']=='completed' and x['conclusion']=='success' and x['head_sha']=='335775e31f22c54cf425975bfa102dcd4247f67e'"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-R2C-note-*
+          run-id: 45625084768
+          github-token: ${{ github.token }}
+          path: /tmp/r2c
+      - run: python research/stage-concert-grand-ii/g2_r2_mass_pack.py --root /tmp/r2c --out /tmp/listening
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R2C-escuta-cega
+          path: |
+            /tmp/listening/escuta-cega/
+            /tmp/listening/LEIA-ME.txt
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R2C-originais-gabarito
+          path: |
+            /tmp/listening/ganho-original/
+            /tmp/listening/gabarito.json
+            /tmp/listening/relatorio.json
+            /tmp/listening/LEIA-ME.txt
+          if-no-files-found: error
