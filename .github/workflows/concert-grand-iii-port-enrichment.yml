@@ -1,0 +1,34 @@
+name: Concert Grand III port enriched vibroacoustic space
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/port_enrichment*.py','research/stage-concert-grand-iii/test_port_enrichment.py','.github/workflows/concert-grand-iii-port-enrichment.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_port_enrichment.py
+      - run: python research/stage-concert-grand-iii/port_enrichment_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --out /tmp/g3-enrichment
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-port-enrichment
+          path: /tmp/g3-enrichment/
+          if-no-files-found: warn
