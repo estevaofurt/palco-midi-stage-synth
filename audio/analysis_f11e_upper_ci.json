@@ -1,0 +1,727 @@
+{
+  "runId": 45522437076,
+  "artifactId": 14981455965,
+  "diagnostics": [
+    {
+      "midi": 65,
+      "touch": 24,
+      "rms2": 0.001240550849342757,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.0000013856622897124308,
+          "horizontalWireJ": 0.000003550051295810655,
+          "boardJ": 4.42598121400456e-10,
+          "radiationLossJ": 0.0000013493736025545013,
+          "structuralLossJ": 0.000006244650828415373,
+          "stringLossJ": 0.000001207326442339758
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.0000017713873869827247,
+          "horizontalWireJ": 0.0000011759984174082438,
+          "boardJ": 4.9401439832043294e-8,
+          "radiationLossJ": 0.0000015607368313462944,
+          "structuralLossJ": 0.0000072136171624613205,
+          "stringLossJ": 0.0000018348053202961939
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 9.513174993233654e-7,
+          "horizontalWireJ": 9.527538700150957e-7,
+          "boardJ": 1.6559146308197454e-8,
+          "radiationLossJ": 0.000001668379354561809,
+          "structuralLossJ": 0.00000770842260220864,
+          "stringLossJ": 0.0000022324720791973445
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.0011335881199057505,
+          "contrastDb": 66.46797047269335
+        },
+        {
+          "rms": 4.4372580715144875e-7,
+          "contrastDb": 65.13629694252053
+        },
+        {
+          "rms": 0.0000022509822957143045,
+          "contrastDb": 85.28302931671625
+        }
+      ]
+    },
+    {
+      "midi": 65,
+      "touch": 76,
+      "rms2": 0.014312847277237606,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.00018820392293883944,
+          "horizontalWireJ": 0.00047173099649088255,
+          "boardJ": 1.0544672357102635e-7,
+          "radiationLossJ": 0.00022799802926374435,
+          "structuralLossJ": 0.0008851631529092868,
+          "stringLossJ": 0.00016681150661294235
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.00023719670492802398,
+          "horizontalWireJ": 0.00015703626513654045,
+          "boardJ": 0.000006803304054344135,
+          "radiationLossJ": 0.0002564996600100902,
+          "structuralLossJ": 0.0010146890848843498,
+          "stringLossJ": 0.0002514172116613338
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.0001276691141548324,
+          "horizontalWireJ": 0.0001274544735506909,
+          "boardJ": 0.0000021959181867450694,
+          "radiationLossJ": 0.0002710013118293259,
+          "structuralLossJ": 0.001080841119189858,
+          "stringLossJ": 0.0003048553235235536
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.013069831779625996,
+          "contrastDb": 66.45029073617582
+        },
+        {
+          "rms": 0.000006802735049868171,
+          "contrastDb": 66.70754262825898
+        },
+        {
+          "rms": 0.00019568787062583355,
+          "contrastDb": 85.3779699100065
+        }
+      ]
+    },
+    {
+      "midi": 65,
+      "touch": 127,
+      "rms2": 0.03800915808412524,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.0013525032709169125,
+          "horizontalWireJ": 0.003324317038456349,
+          "boardJ": 0.0000013096137738167837,
+          "radiationLossJ": 0.0020654556278406427,
+          "structuralLossJ": 0.006768654914127705,
+          "stringLossJ": 0.0012573054378838332
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.0016841576452932287,
+          "horizontalWireJ": 0.0011096514807900071,
+          "boardJ": 0.000046889282200911935,
+          "radiationLossJ": 0.0022718025944218835,
+          "structuralLossJ": 0.007685116060961464,
+          "stringLossJ": 0.0018628974290748573
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.0009064857177456708,
+          "horizontalWireJ": 0.0009020079667222776,
+          "boardJ": 0.00001484501521235779,
+          "radiationLossJ": 0.0023750922600985496,
+          "structuralLossJ": 0.008152786522839333,
+          "stringLossJ": 0.0022428327818012042
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.034703215568017004,
+          "contrastDb": 66.44721477721185
+        },
+        {
+          "rms": 0.000025018123039496543,
+          "contrastDb": 67.29470280962065
+        },
+        {
+          "rms": 0.0008149141884742331,
+          "contrastDb": 85.38168791910662
+        }
+      ]
+    },
+    {
+      "midi": 66,
+      "touch": 24,
+      "rms2": 0.0003196924256641432,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 5.814820808167031e-7,
+          "horizontalWireJ": 0.0000015673634975744629,
+          "boardJ": 9.859100828986228e-9,
+          "radiationLossJ": 0.0000013430371294232609,
+          "structuralLossJ": 0.000007128269600152383,
+          "stringLossJ": 4.0573416262280006e-7
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 4.177064669082294e-7,
+          "horizontalWireJ": 0.000001122726302173239,
+          "boardJ": 7.241826443134511e-9,
+          "radiationLossJ": 0.0000013688366487748309,
+          "structuralLossJ": 0.000007340765461226688,
+          "stringLossJ": 6.625678651173384e-7
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 3.004788755478786e-7,
+          "horizontalWireJ": 8.081147642036543e-7,
+          "boardJ": 5.1677212249443535e-9,
+          "radiationLossJ": 0.0000013872624380608982,
+          "structuralLossJ": 0.0000074933391371634755,
+          "stringLossJ": 8.472603071863894e-7
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.0003199059690356435,
+          "contrastDb": 68.55289526619688
+        },
+        {
+          "rms": 0.0000010351705621682625,
+          "contrastDb": 74.92403412219569
+        },
+        {
+          "rms": 0.0000014954778088345283,
+          "contrastDb": 87.24915863196308
+        }
+      ]
+    },
+    {
+      "midi": 66,
+      "touch": 76,
+      "rms2": 0.0041036330718804154,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.00009863690828879203,
+          "horizontalWireJ": 0.0002536566259223915,
+          "boardJ": 0.0000016832953719881932,
+          "radiationLossJ": 0.0002605984068895287,
+          "structuralLossJ": 0.0011871622466455517,
+          "stringLossJ": 0.00007342331081586399
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.00006893240947216682,
+          "horizontalWireJ": 0.00018242643101621942,
+          "boardJ": 0.0000011774118219420442,
+          "radiationLossJ": 0.0002662282749533889,
+          "structuralLossJ": 0.001222275440729642,
+          "stringLossJ": 0.00011657164769777965
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.000049398863025758615,
+          "horizontalWireJ": 0.0001317023689587877,
+          "boardJ": 8.262794271994534e-7,
+          "radiationLossJ": 0.00026937719284669695,
+          "structuralLossJ": 0.0012471520405864813,
+          "stringLossJ": 0.0001469481038262719
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.004076351144346218,
+          "contrastDb": 68.55361835026764
+        },
+        {
+          "rms": 0.000023924098201346567,
+          "contrastDb": 75.0633046149666
+        },
+        {
+          "rms": 0.00008349287613167722,
+          "contrastDb": 87.24689521796223
+        }
+      ]
+    },
+    {
+      "midi": 66,
+      "touch": 127,
+      "rms2": 0.011077709890961176,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.0007615045220686521,
+          "horizontalWireJ": 0.0018299280466267066,
+          "boardJ": 0.00001250285796477825,
+          "radiationLossJ": 0.002249901666102523,
+          "structuralLossJ": 0.008912570272285151,
+          "stringLossJ": 0.0006309495834263823
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.0005083532083610602,
+          "horizontalWireJ": 0.001319642835530091,
+          "boardJ": 0.000008451458284205307,
+          "radiationLossJ": 0.002308093950681126,
+          "structuralLossJ": 0.00917201986282835,
+          "stringLossJ": 0.0009591514577641415
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.00036008009327276894,
+          "horizontalWireJ": 0.0009494582342591608,
+          "boardJ": 0.0000060328286282351255,
+          "radiationLossJ": 0.002332190819492743,
+          "structuralLossJ": 0.009352305915636626,
+          "stringLossJ": 0.0011820593547275503
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.010946992520668889,
+          "contrastDb": 68.55371550456542
+        },
+        {
+          "rms": 0.00007764308368324522,
+          "contrastDb": 75.08049861951397
+        },
+        {
+          "rms": 0.00037566257536648945,
+          "contrastDb": 87.24849081109313
+        }
+      ]
+    },
+    {
+      "midi": 70,
+      "touch": 24,
+      "rms2": 0.00039753930189618397,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 1.7896309704554207e-7,
+          "horizontalWireJ": 1.726421292864041e-7,
+          "boardJ": 3.560952944169619e-8,
+          "radiationLossJ": 5.932931507479871e-7,
+          "structuralLossJ": 0.0000018481233996332048,
+          "stringLossJ": 1.3782028499166472e-7
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 5.755627293630735e-8,
+          "horizontalWireJ": 5.492479596241737e-8,
+          "boardJ": 7.32696262295755e-9,
+          "radiationLossJ": 6.461007096963911e-7,
+          "structuralLossJ": 0.0000020069846243646842,
+          "stringLossJ": 1.754618327832216e-7
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 1.9956310222422252e-8,
+          "horizontalWireJ": 1.772400961473409e-8,
+          "boardJ": 2.2049313184208115e-9,
+          "radiationLossJ": 6.620792510614961e-7,
+          "structuralLossJ": 0.0000020529110300155162,
+          "stringLossJ": 1.8809185825450852e-7
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.0003911414693038475,
+          "contrastDb": 68.51504337021306
+        },
+        {
+          "rms": 0.00004293481840378902,
+          "contrastDb": 81.3126528572787
+        },
+        {
+          "rms": 0.0000023510361008997206,
+          "contrastDb": 91.74051959767559
+        }
+      ]
+    },
+    {
+      "midi": 70,
+      "touch": 76,
+      "rms2": 0.009042280849384961,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.00009874684519778386,
+          "horizontalWireJ": 0.0000883577423558558,
+          "boardJ": 0.000018418910171134084,
+          "radiationLossJ": 0.000307064589576787,
+          "structuralLossJ": 0.0008897569144960029,
+          "stringLossJ": 0.00007528197279002006
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.00003362117063358681,
+          "horizontalWireJ": 0.000028016397969350797,
+          "boardJ": 0.000003829883583734265,
+          "radiationLossJ": 0.00033499740777052987,
+          "structuralLossJ": 0.0009715030501131149,
+          "stringLossJ": 0.00009645967205042472
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.000012270387215543925,
+          "horizontalWireJ": 0.00000907590352278051,
+          "boardJ": 0.0000012091696803405292,
+          "radiationLossJ": 0.0003438543061611817,
+          "structuralLossJ": 0.0009954125303789387,
+          "stringLossJ": 0.00010398319016116975
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.008845567818360768,
+          "contrastDb": 68.51776748548568
+        },
+        {
+          "rms": 0.001343137813023743,
+          "contrastDb": 81.34902331152094
+        },
+        {
+          "rms": 0.00014812622266975722,
+          "contrastDb": 91.86512507766287
+        }
+      ]
+    },
+    {
+      "midi": 70,
+      "touch": 127,
+      "rms2": 0.026251831713132633,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.000821974556051283,
+          "horizontalWireJ": 0.0007485754880048202,
+          "boardJ": 0.00015489036649040782,
+          "radiationLossJ": 0.0027031178092333935,
+          "structuralLossJ": 0.007588224553230018,
+          "stringLossJ": 0.0006659126586244695
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.0002744663362047715,
+          "horizontalWireJ": 0.00023735867128860547,
+          "boardJ": 0.00003203987947070056,
+          "radiationLossJ": 0.0029378331320347277,
+          "structuralLossJ": 0.008277062009019485,
+          "stringLossJ": 0.0008446727622780366
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.00009841224262719186,
+          "horizontalWireJ": 0.00007673137511731601,
+          "boardJ": 0.000010055095751388681,
+          "radiationLossJ": 0.0030109760657116387,
+          "structuralLossJ": 0.008477849963392582,
+          "stringLossJ": 0.0009062434700436325
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.025692903437482765,
+          "contrastDb": 68.51783324826187
+        },
+        {
+          "rms": 0.0035786794198801376,
+          "contrastDb": 81.34767316197285
+        },
+        {
+          "rms": 0.0004928711555462023,
+          "contrastDb": 91.84024465809132
+        }
+      ]
+    },
+    {
+      "midi": 71,
+      "touch": 24,
+      "rms2": 0.0000038690874670046,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 2.3488020946618654e-9,
+          "horizontalWireJ": 1.991773935033628e-9,
+          "boardJ": 3.3795225549224086e-9,
+          "radiationLossJ": 3.8293100587466114e-7,
+          "structuralLossJ": 0.0000014415975672098171,
+          "stringLossJ": 4.149564659110052e-8
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 1.7857436056486532e-9,
+          "horizontalWireJ": 1.4836970736186405e-9,
+          "boardJ": 1.6450526327599872e-11,
+          "radiationLossJ": 3.83651845481553e-7,
+          "structuralLossJ": 0.0000014443972081714883,
+          "stringLossJ": 4.2301452752522475e-8
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 1.4003863484731572e-9,
+          "horizontalWireJ": 1.2830748214516734e-9,
+          "boardJ": 5.545854108815229e-13,
+          "radiationLossJ": 3.8366459051882797e-7,
+          "structuralLossJ": 0.0000014444375741384414,
+          "stringLossJ": 4.284778731343342e-8
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.000002386642136921638,
+          "contrastDb": 65.689668177275
+        },
+        {
+          "rms": 0.00000346985018889846,
+          "contrastDb": 85.4885064017825
+        },
+        {
+          "rms": 9.92004662927514e-7,
+          "contrastDb": 93.86352938350396
+        }
+      ]
+    },
+    {
+      "midi": 71,
+      "touch": 76,
+      "rms2": 0.0001808998987871502,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.000002473108307150451,
+          "horizontalWireJ": 0.0000016212573599268468,
+          "boardJ": 0.0000027088827417419225,
+          "radiationLossJ": 0.0002676253968113306,
+          "structuralLossJ": 0.0010139505433001586,
+          "stringLossJ": 0.000033978547794841164
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.0000016061253085555294,
+          "horizontalWireJ": 0.0000011968087006175462,
+          "boardJ": 1.4040424270342301e-8,
+          "radiationLossJ": 0.00026834896550199965,
+          "structuralLossJ": 0.0010162488424633924,
+          "stringLossJ": 0.00003486012461617962
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.0000011962884554079946,
+          "horizontalWireJ": 0.000001034954942928892,
+          "boardJ": 4.86516432638452e-10,
+          "radiationLossJ": 0.0002683877228413951,
+          "structuralLossJ": 0.0010162944793454109,
+          "stringLossJ": 0.00003535878901781258
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.00006750997958762222,
+          "contrastDb": 66.00403238546151
+        },
+        {
+          "rms": 0.00008869034074878996,
+          "contrastDb": 85.54770739462533
+        },
+        {
+          "rms": 0.00011575120341120505,
+          "contrastDb": 93.88419295528509
+        }
+      ]
+    },
+    {
+      "midi": 71,
+      "touch": 127,
+      "rms2": 0.0012493942655305852,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.00004823755266887189,
+          "horizontalWireJ": 0.00001529000494892805,
+          "boardJ": 0.000025035612033822514,
+          "radiationLossJ": 0.002599197420491719,
+          "structuralLossJ": 0.009337089672680087,
+          "stringLossJ": 0.0003987564789287568
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.000019329085596416037,
+          "horizontalWireJ": 0.000011099970168385874,
+          "boardJ": 1.6543843850729484e-7,
+          "radiationLossJ": 0.0026116989037247625,
+          "structuralLossJ": 0.00936023144938667,
+          "stringLossJ": 0.0004201031534082502
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.000012268778747420961,
+          "horizontalWireJ": 0.000009545711187783795,
+          "boardJ": 7.3078644971648374e-9,
+          "radiationLossJ": 0.0026128240869440276,
+          "structuralLossJ": 0.009360942920688875,
+          "stringLossJ": 0.00042698798734358844
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.00020414136315160525,
+          "contrastDb": 66.04286042506315
+        },
+        {
+          "rms": 0.00029502193164718444,
+          "contrastDb": 85.56993546696525
+        },
+        {
+          "rms": 0.0005221435666124258,
+          "contrastDb": 93.88528118274803
+        }
+      ]
+    },
+    {
+      "midi": 72,
+      "touch": 24,
+      "rms2": 0.00015536119481194855,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 1.636660205937919e-7,
+          "horizontalWireJ": 2.045179502338815e-8,
+          "boardJ": 1.1421192565053534e-8,
+          "radiationLossJ": 1.9238547837108646e-7,
+          "structuralLossJ": 5.967688768534021e-7,
+          "stringLossJ": 8.495161208962694e-8
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 3.520022211673312e-8,
+          "horizontalWireJ": 2.0428476757822324e-8,
+          "boardJ": 4.564579353916087e-9,
+          "radiationLossJ": 2.1662775327068092e-7,
+          "structuralLossJ": 6.798678890346239e-7,
+          "stringLossJ": 1.0769507679721915e-7
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 1.10932845800801e-8,
+          "horizontalWireJ": 9.541403638032536e-9,
+          "boardJ": 1.1967424018836334e-9,
+          "radiationLossJ": 2.230474564775204e-7,
+          "structuralLossJ": 7.017593105367043e-7,
+          "stringLossJ": 1.149003181701001e-7
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.00014519499960521112,
+          "contrastDb": 68.320888781421
+        },
+        {
+          "rms": 0.000007081856680142397,
+          "contrastDb": 84.83239171700426
+        },
+        {
+          "rms": 4.2033370144065495e-7,
+          "contrastDb": 93.89586830511925
+        }
+      ]
+    },
+    {
+      "midi": 72,
+      "touch": 76,
+      "rms2": 0.005970330194240418,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.00024097724267894388,
+          "horizontalWireJ": 0.00002858935210780663,
+          "boardJ": 0.00001734378930030042,
+          "radiationLossJ": 0.0001745224741222393,
+          "structuralLossJ": 0.0005486325579355702,
+          "stringLossJ": 0.00012235981796869692
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.0000520900741980128,
+          "horizontalWireJ": 0.000028449694784933913,
+          "boardJ": 0.000006590171149807846,
+          "radiationLossJ": 0.00021050903272264876,
+          "structuralLossJ": 0.0006719082902730168,
+          "stringLossJ": 0.00015572314440265203
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.000016263591545998658,
+          "horizontalWireJ": 0.000013096957336191621,
+          "boardJ": 0.000001786158787610879,
+          "radiationLossJ": 0.00021996159412532575,
+          "structuralLossJ": 0.0007042437839675105,
+          "stringLossJ": 0.00016612125274662035
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.0056074815324584715,
+          "contrastDb": 68.33011420930137
+        },
+        {
+          "rms": 0.00016524358017808608,
+          "contrastDb": 84.81644784925123
+        },
+        {
+          "rms": 0.000013604185601141161,
+          "contrastDb": 93.83520228068994
+        }
+      ]
+    },
+    {
+      "midi": 72,
+      "touch": 127,
+      "rms2": 0.01880786933709491,
+      "energy": [
+        {
+          "endS": 1,
+          "verticalWireJ": 0.002397417482652582,
+          "horizontalWireJ": 0.00028252862769221005,
+          "boardJ": 0.00017165508305892895,
+          "radiationLossJ": 0.0019163498383104522,
+          "structuralLossJ": 0.005517338082838462,
+          "stringLossJ": 0.0012698127714172059
+        },
+        {
+          "endS": 2,
+          "verticalWireJ": 0.0005182644816821598,
+          "horizontalWireJ": 0.00027960578799663327,
+          "boardJ": 0.00006584574766107066,
+          "radiationLossJ": 0.0022739775979375106,
+          "structuralLossJ": 0.006736997174862193,
+          "stringLossJ": 0.001608372127279426
+        },
+        {
+          "endS": 3,
+          "verticalWireJ": 0.0001627677914993786,
+          "horizontalWireJ": 0.00012822146144588788,
+          "boardJ": 0.000016959574569514676,
+          "radiationLossJ": 0.0023677389422397154,
+          "structuralLossJ": 0.007056531040029685,
+          "stringLossJ": 0.0017130327464965906
+        }
+      ],
+      "partial2": [
+        {
+          "rms": 0.01763500725777057,
+          "contrastDb": 68.32974947785252
+        },
+        {
+          "rms": 0.0006683707762012215,
+          "contrastDb": 84.81697855449839
+        },
+        {
+          "rms": 0.00008278976161901041,
+          "contrastDb": 93.96338339975728
+        }
+      ]
+    }
+  ],
+  "scope": "chunk-end energies and acoustic RMS, partial 1-3 in CI logs; full diagnostics in artifact, correlation only"
+}
