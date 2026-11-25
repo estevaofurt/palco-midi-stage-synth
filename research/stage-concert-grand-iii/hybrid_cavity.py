@@ -10,10 +10,10 @@ from inclined_lid import build as inclined_build
 from lid_exterior import ports
 from split_radiation import relative
 
-def build(poly,n,nz,height,angle,field,count,c=343.,rho=1.204):
+def build(poly,n,nz,height,angle,field,count,c=343.,rho=1.204,*,wedge_layers=1):
     if not 0<angle<90:raise ValueError('inclined lid required')
     m=prism_build(poly,n,height,field,c,rho)
-    full,C0,report=inclined_build(poly,n,nz,height,angle,field,c,rho)
+    full,C0,report=inclined_build(poly,n,nz,height,angle,field,c,rho,wedge_layers=wedge_layers)
     N=len(m['xy']);old=N*(nz+1);rim=old-N
     np.testing.assert_allclose(full['xy'],m['xy'],atol=1e-13,rtol=0)
     tet=full['tet'][len(m['tri'])*3*nz:]-rim
