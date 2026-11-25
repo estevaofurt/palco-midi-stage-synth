@@ -1,0 +1,43 @@
+name: Concert Grand II R2.04 strike position discrimination
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_r2_strike_screen.py','.github/workflows/concert-grand-ii-r2-strike.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [60,64,67,72]
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: node research/stage-concert-grand-ii/g2_octave_export.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-R2-mass-${{ matrix.key }}
+          run-id: 45624274809
+          github-token: ${{ github.token }}
+          path: /tmp/control
+      - run: python research/stage-concert-grand-ii/g2_r2_strike_screen.py --key ${{ matrix.key }} --screen /tmp/control --out /tmp/strike
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R2-strike-${{ matrix.key }}
+          path: /tmp/strike/
+          if-no-files-found: error

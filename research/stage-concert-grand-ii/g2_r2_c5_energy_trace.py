@@ -13,7 +13,7 @@ WINDOWS=((0,.01),(.01,.02),(.02,.08),(.08,.25),(.25,.75),(.8,1.3))
 def db(x):return float(10*np.log10(max(float(x),1e-30)))
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--key',type=int,required=True);ap.add_argument('--variant',choices=['dry','mass70-energy'],required=True);ap.add_argument('--source',type=Path,required=True);ap.add_argument('--out',type=Path,required=True);a=ap.parse_args()
-    assert a.key in (60,72)
+    assert a.key in (60,64,67,72)
     a.out.mkdir(parents=True,exist_ok=True)
     m=json.loads((a.source/'manifest.json').read_text())
     assert m['key']==a.key and m['commit']==SOURCES[a.key]['commit'] and m['gate'] and m['gain']==GAIN and m['durationS']==1.5
