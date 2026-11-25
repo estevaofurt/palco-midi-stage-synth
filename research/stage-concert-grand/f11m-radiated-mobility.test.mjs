@@ -1,0 +1,16 @@
+import {radiatedResponse,scanRadiation} from './f11m-radiated-mobility.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++};
+const f=100,w=2*Math.PI*f,board={modes:[{lambda:w*w,w:2,frequencyHz:f,coeff:{dampingNsM:3}}],blocks:[{indices:[0],R:[[1]]}]};
+const bridge={wires:[{},{}],vAxis:{modes:[]},mobility:()=>({vv:[.5,0]})};
+const k={offset:0,taps:[1],rate:48000},k2={...k,taps:[2]},joint={c:2,k:0};
+const q=radiatedResponse(bridge,board,joint,[[k],[k2]],f);
+check('known pressure',Math.abs(q.stereo[0].magnitude-w*.0325)<1e-10);
+check('stereo ratio',Math.abs(q.stereo[1].magnitude/q.stereo[0].magnitude-2)<1e-12);
+check('phase',Math.abs(q.stereo[0].pressure[0])<1e-10&&q.stereo[0].pressure[1]>0);
+check('one mode coherence',q.stereo.every(s=>Math.abs(s.coherence-1)<1e-12));
+check('disconnect',radiatedResponse(bridge,board,{c:0,k:0},[[k],[k]],f).magnitude===0);
+const delayed={...k,offset:120};const d=radiatedResponse(bridge,board,joint,[[delayed],[k]],f);
+check('quarter cycle delay',Math.abs(d.stereo[0].pressure[1])<1e-10&&d.stereo[0].pressure[0]>0);
+const q2=scanRadiation(bridge,board,joint,[[k],[k]],f,100,.05);
+check('resonance scan',q2.peaks.length>0&&Math.abs(q2.peaks[0].f-f)<.1);
+console.log('F11M_RADIATION_TESTS '+n);
