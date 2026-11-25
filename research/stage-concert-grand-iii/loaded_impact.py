@@ -13,8 +13,8 @@ ROOT=Path(__file__).parent
 def compare_loaded(a,b):
     q=compare(a,b)
     for k in ('boundaryLossJ','netTargetWorkJ','loadStoredJ','stringStoredJ'):
-        q['relative'][k]=abs(a[k]-b[k])/max(abs(b[k]),1e-12)
-    q['gate']=q['gate'] and max(q['relative'].values())<=.05
+        q['relative'][k]=float(abs(a[k]-b[k])/max(abs(b[k]),1e-12))
+    q['gate']=bool(q['gate'] and max(q['relative'].values())<=.05)
     return q
 def main():
     p=argparse.ArgumentParser();p.add_argument('--scale',type=Path,required=True);p.add_argument('--out',type=Path,required=True);p.add_argument('--key',type=int,required=True);a=p.parse_args()

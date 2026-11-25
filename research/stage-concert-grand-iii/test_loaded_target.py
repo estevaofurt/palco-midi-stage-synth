@@ -26,6 +26,12 @@ class LoadedTest(unittest.TestCase):
         self.assertGreater(q['boundaryLossJ'],0)
         self.assertAlmostEqual(q['netTargetWorkJ'],q['stringStoredJ']+q['loadStoredJ']+q['boundaryLossJ'],places=11)
         self.assertLess(q['maxBalanceJ'],1e-10)
+    def test_json_gate(self):
+        from loaded_impact import compare_loaded
+        a={k:np.float64(.001) for k in ('peakForceN','impulseNs','reboundMps','lossJ','maxCompressionM','targetJ','contactDurationMs','boundaryLossJ','netTargetWorkJ','loadStoredJ','stringStoredJ')}
+        q=compare_loaded(a,a)
+        self.assertIs(type(q['gate']),bool)
+        self.assertTrue(json.loads(json.dumps(q,allow_nan=False))['gate'])
     def test_reject_spectrum(self):
         s=json.loads((ROOT/'physical_sources.json').read_text());c=json.loads((ROOT/'felt_hypothesis.json').read_text())
         with self.assertRaises(ValueError):run(self.r,s,c,self.w,self.P,192000,1.,trace=True,target_factory=lambda w,P,sr:LoadedTarget(w,P,sr,LOAD))
