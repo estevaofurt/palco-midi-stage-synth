@@ -63,13 +63,13 @@ def geometry(poly,angle,height):
     return local,origin,axes,normal
 
 def coupling(basis,origin,axes,normal,points,k,order):
-    x,w=quadrature(basis.poly,order);xyz=origin+x@axes.T
+    x,w=basis.samples(order) if hasattr(basis,'samples') else quadrature(basis.poly,order);xyz=origin+x@axes.T
     S=basis.evaluate(x)[0]
     D=normal_derivative(xyz,np.broadcast_to(normal,xyz.shape),points,k)
     return S.T@(w[:,None]*D)
 
 def far_gram(basis,origin,axes,normal,sources,coeff,k,order=28):
-    xy,w=quadrature(basis.poly,order);xyz=origin+xy@axes.T;A=w[:,None]*basis.evaluate(xy)[0]
+    xy,w=basis.samples(order) if hasattr(basis,'samples') else quadrature(basis.poly,order);xyz=origin+xy@axes.T;A=w[:,None]*basis.evaluate(xy)[0]
     mu,t=leggauss(order);phi=2*np.pi*np.arange(4*order)/(4*order);s=np.sqrt(1-mu*mu)
     dirs=np.stack([s[:,None]*np.cos(phi),s[:,None]*np.sin(phi),np.broadcast_to(mu[:,None],(order,len(phi)))],axis=-1).reshape(-1,3)
     weights=np.repeat(t*2*np.pi/len(phi),len(phi));R=np.zeros((len(sources),len(sources)),complex)
