@@ -1,0 +1,42 @@
+name: Concert Grand F11a S50 chromatic middle register
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11a-s50.yml'
+      - 'research/stage-concert-grand/f11a-s50-*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f10g-d4-loss-pilot.test.mjs
+      - run: node research/stage-concert-grand/f11a-s50-scale.test.mjs
+  chromatic:
+    needs: smoke
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        midi: [54,56,58,59,61,62,63,65,66,68,69,70,71]
+        touch: [24,76,127]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11a-s50-scale-demo.mjs /tmp/f11a ${{ matrix.midi }} ${{ matrix.touch }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11A-S50-midi${{ matrix.midi }}-touch${{ matrix.touch }}
+          path: /tmp/f11a/
+          if-no-files-found: error
