@@ -24,7 +24,7 @@ for a in data['groups']:
     raw=np.zeros((a['n'],1));raw[0,0]=1
     raw=np.column_stack((raw,np.asarray(a['ports'][:nc]).T))
     groups.append((w2,D,U.T@raw))
-def run(active,speed,sr,cut,trebleMass=6):
+def run(active,speed,sr,cut,trebleMass=6,capture=None):
     h=1/sr
     g=[Block(*a,sr) for a in groups]
     board=next(x for x in data['boards'] if x['basis']==6000)
@@ -49,6 +49,9 @@ def run(active,speed,sr,cut,trebleMass=6):
     def compression(pos):return np.array([x[j]-pos[j][l+1] for j,l in zip(owners,local)])
     def mech():r=rel();return sum(a.energy() for a in g)+b.energy()+.5*KJ*(r@r)
     def total(d):return mech()+.5*np.sum(masses*v*v)+sum(potential(di,k) for di,k in zip(d,ks))
+    if capture is not None:
+        capture['acc']=np.empty((len(modes),round(sr*.04)))
+        capture['maxDerivativeError']=0.;capture['peakAcceleration']=0.
     for i in range(round(sr*.04)):
         r0=rel();pos=positions();d0=compression(pos);old=total(d0)
         free=[a.free() for a in g];df=np.array([z[0] for z in free])-b.free()
@@ -76,7 +79,17 @@ def run(active,speed,sr,cut,trebleMass=6):
                 if ft>1e-8:
                     if first[j]<0:first[j]=i
                     last[j]=i
-        db=b.step(-jf);dr=rel()-r0;dj=CJ*(dr@dr)/h;jl+=dj
+        if capture is not None: q0=b.q.copy();v0=b.v.copy()
+        db=b.step(-jf)
+        if capture is not None:
+            delta=b.q-q0;fe=b.P@(-jf)-b.D*delta/h
+            acc=(b.v-v0)/h
+            integral=q0*b.J+v0*b.G+(h-b.J)*fe/b.w2
+            oracle=fe-b.w2*integral/h
+            capture['acc'][:,i]=acc
+            capture['maxDerivativeError']=max(capture['maxDerivativeError'],float(np.max(abs(acc-oracle))))
+            capture['peakAcceleration']=max(capture['peakAcceleration'],float(np.max(abs(acc))))
+        dr=rel()-r0;dj=CJ*(dr@dr)/h;jl+=dj
         maxjoint=max(maxjoint,float(np.max(abs(jf+KJ*(r0+dr/2)+CJ*dr/h))))
         d1=compression(positions())
         dl=sum(float(f[j])*(d1[j]-d0[j])-potential(d1[j],ks[j])+potential(d0[j],ks[j]) for j in range(n));felt+=dl
@@ -104,20 +117,21 @@ def compare(a,b):
         e[k]=float(np.linalg.norm(x[:,sl]-y[:,sl])/max(np.linalg.norm(y[:,sl]),1e-30))
     d=float(np.max(abs(np.array(a['duration'])-b['duration'])))
     return dict(errors=e,durationErrorMs=d,pass_=all(z<=.1 for z in e.values()) and d<=.1)
-rows=[];checks=[]
-def record(r):
-    rows.append(r);print('G2_SHARED_HAMMER '+json.dumps({k:v for k,v in r.items() if k!='trace'}),flush=True)
-for active,speeds in [([0],[.5,1.,2.]),([1],[.5,1.,2.]),([2],[.5,1.,2.]),([0,1,2],[1.])]:
-    for speed in speeds:
-        ref=run(active,speed,192000,6000);record(ref)
-        a=run(active,speed,96000,6000);record(a)
-        b=run(active,speed,96000,5000);record(b)
-        for tag,r,t in [('time96',a,ref),('band5k',b,a)]:
-            ck=dict(active=r['active'],speed=speed,tag=tag,**compare(r,t));checks.append(ck);print('G2_SHARED_HAMMER_CHECK '+json.dumps(ck),flush=True)
-for speed in (.5,1.,2.):record(run([2],speed,96000,6000,3))
-required=[r for r in checks if r['tag']=='time96']
-gate=all(r['pass_'] for r in required)
-report=dict(scope='nonlinear shared board, vertical joint, no acoustic radiation, no dampers',rows=rows,checks=checks,required=len(required),passed=sum(r['pass_'] for r in required),gate=gate)
-(OUT/'hammer_report.json').write_text(json.dumps(report,indent=2))
-print('G2_SHARED_HAMMER_GATE '+json.dumps({k:report[k] for k in ('required','passed','gate')}),flush=True)
-if not gate:raise SystemExit(1)
+if __name__ == '__main__':
+    rows=[];checks=[]
+    def record(r):
+        rows.append(r);print('G2_SHARED_HAMMER '+json.dumps({k:v for k,v in r.items() if k!='trace'}),flush=True)
+    for active,speeds in [([0],[.5,1.,2.]),([1],[.5,1.,2.]),([2],[.5,1.,2.]),([0,1,2],[1.])]:
+        for speed in speeds:
+            ref=run(active,speed,192000,6000);record(ref)
+            a=run(active,speed,96000,6000);record(a)
+            b=run(active,speed,96000,5000);record(b)
+            for tag,r,t in [('time96',a,ref),('band5k',b,a)]:
+                ck=dict(active=r['active'],speed=speed,tag=tag,**compare(r,t));checks.append(ck);print('G2_SHARED_HAMMER_CHECK '+json.dumps(ck),flush=True)
+    for speed in (.5,1.,2.):record(run([2],speed,96000,6000,3))
+    required=[r for r in checks if r['tag']=='time96']
+    gate=all(r['pass_'] for r in required)
+    report=dict(scope='nonlinear shared board, vertical joint, no acoustic radiation, no dampers',rows=rows,checks=checks,required=len(required),passed=sum(r['pass_'] for r in required),gate=gate)
+    (OUT/'hammer_report.json').write_text(json.dumps(report,indent=2))
+    print('G2_SHARED_HAMMER_GATE '+json.dumps({k:report[k] for k in ('required','passed','gate')}),flush=True)
+    if not gate:raise SystemExit(1)

@@ -10,6 +10,6 @@ const groups=PILOT_KEYS.map(key=>{
 });
 const boards=[4000,6000].map(basis=>{
  const b=buildBoard('control',basis),w=PATCHES.map(p=>weights(b,p));
- return {basis,residual:b.residual,orthogonality:b.orthogonality,modes:b.modes.map((m,i)=>({f:m.frequencyHz,lambda:m.lambda,w:w.map(q=>q[i])})).filter(m=>m.f<6000)};
+ return {basis,residual:b.residual,orthogonality:b.orthogonality,modes:b.modes.map((m,i)=>({f:m.frequencyHz,lambda:m.lambda,w:w.map(q=>q[i]),components:m.components.map(c=>({m:c.m,n:c.n,kx:c.kx,ky:c.ky,coefficient:c.coefficient}))})).filter(m=>m.f<8000)};
 });
 mkdirSync('/tmp/g2-shared-board',{recursive:true});writeFileSync('/tmp/g2-shared-board/model.json',JSON.stringify({groups,boards}));

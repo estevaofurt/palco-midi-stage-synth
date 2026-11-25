@@ -1,0 +1,33 @@
+name: Concert Grand II G2.09g integrated acoustic pressure
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_acoustic_integrated.py','.github/workflows/concert-grand-ii-acoustic-integrated.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  acoustic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python -m py_compile research/stage-concert-grand-ii/g2_acoustic_integrated.py research/stage-concert-grand-ii/g2_shared_hammer.py
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: python research/stage-concert-grand-ii/g2_acoustic_integrated.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G2-integrated-acoustic-numeric
+          path: /tmp/g2-shared-board/acoustic_report.json
+          if-no-files-found: error
