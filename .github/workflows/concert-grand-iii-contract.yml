@@ -42,3 +42,14 @@ jobs:
           name: G3-wound-mode-screen
           path: /tmp/g3-wound/
           if-no-files-found: error
+      - run: python research/stage-concert-grand-iii/test_scale_geometry.py
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+      - run: python research/stage-concert-grand-iii/scale_geometry.py --wound /tmp/g3-wound/wound_modes.json --out /tmp/g3-geometry
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          path: /tmp/g3-geometry/
+          if-no-files-found: error
