@@ -22,7 +22,7 @@ import {writeFileSync,mkdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 const [out='f11u',variant='K750',mode='phrase']=process.argv.slice(2);
 const id=mode==='smoke'?'smoke':'original-phrase';
-const seconds=mode==='smoke'?.24:10;
+const seconds=mode==='smoke'?.5:10;
 const notes=mode==='smoke'?[60,64]:phraseNotes;
 const events=mode==='smoke'?[{ms:0,type:'on',midi:60,velocity:76},{ms:35,type:'on',midi:64,velocity:52},{ms:60,type:'off',midi:60},{ms:100,type:'on',midi:60,velocity:88},{ms:130,type:'off',midi:64},{ms:150,type:'off',midi:60}]:phrase();
 const q=renderPhrase(hp,{notes,events,variant,seconds});
