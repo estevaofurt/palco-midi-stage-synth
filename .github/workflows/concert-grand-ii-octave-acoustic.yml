@@ -1,0 +1,114 @@
+name: Concert Grand II G2.11b-d octave acoustic and musical AB
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_octave_acoustic.py','research/stage-concert-grand-ii/g2_octave_ab.py','.github/workflows/concert-grand-ii-octave-acoustic.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        case: ['60','61','62','63','64','65','66','67','68','69','70','71','72','triad']
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: node research/stage-concert-grand-ii/g2_octave_export.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-first-audio-5s-WAV
+          run-id: 45602018373
+          github-token: ${{ github.token }}
+          path: /tmp/g2-baseline
+      - run: python research/stage-concert-grand-ii/g2_octave_acoustic.py audit --case ${{ matrix.case }} --baseline /tmp/g2-baseline --out /tmp/g2-out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G2-11-audit-${{ matrix.case }}
+          path: /tmp/g2-out/
+          if-no-files-found: warn
+  music:
+    needs: audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        case: ['escala-do-maior','arpejo-do-maior','progressoes']
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 soundfile==0.13.1
+      - run: node research/stage-concert-grand-ii/g2_shared_board_export.mjs
+      - run: node research/stage-concert-grand-ii/g2_octave_export.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-first-audio-5s-WAV
+          run-id: 45602018373
+          github-token: ${{ github.token }}
+          path: /tmp/g2-baseline
+      - run: python research/stage-concert-grand-ii/g2_octave_acoustic.py music --case ${{ matrix.case }} --baseline /tmp/g2-baseline --out /tmp/g2-out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-11-music-${{ matrix.case }}
+          path: /tmp/g2-out/
+          if-no-files-found: error
+  ab:
+    needs: music
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 soundfile==0.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-11-music-*
+          path: /tmp/g2-music
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-11-musical-reference-only
+          run-id: 45612295401
+          github-token: ${{ github.token }}
+          path: /tmp/g2-ref
+      - run: python research/stage-concert-grand-ii/g2_octave_ab.py --g2 /tmp/g2-music --ref /tmp/g2-ref --out /tmp/g2-ab
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-11-AB-musical-cego
+          path: |
+            /tmp/g2-ab/escuta_cega/
+            /tmp/g2-ab/LEIA-ME.txt
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-11-AB-musical-originais-gabarito
+          path: |
+            /tmp/g2-ab/originais/
+            /tmp/g2-ab/gabarito.json
+            /tmp/g2-ab/LEIA-ME.txt
+          if-no-files-found: error
