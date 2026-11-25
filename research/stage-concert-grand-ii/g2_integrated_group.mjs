@@ -5,9 +5,10 @@ import {PolarPort,LOADS} from './g2_polar_port.mjs';
 import {LOSS_CASES} from './g2_decay.mjs';
 import {feltPotential,feltSecant,solveContact} from '../stage-concert-grand/hammer-contact.mjs';
 export class IntegratedGroup {
- constructor(key,sr=48000,{speedMps=1,spreadCents=.5,loss=LOSS_CASES.control,load=LOADS.rotated,cutoffHz}={}){
+ constructor(key,sr=48000,{speedMps=1,spreadCents=.5,loss=LOSS_CASES.control,load=LOADS.rotated,cutoffHz,massScale=1,stiffnessScale=1}={}){
+  if(![massScale,stiffnessScale].every(v=>Number.isFinite(v)&&v>0))throw RangeError('diagnostic scale');
   const g=new GroupHammer(key,sr,{speedMps,spreadCents,...(cutoffHz===undefined?{}:{cutoffHz})});
-  this.port=new PolarPort(g,loss,load);this.h=1/sr;this.x=g.x;this.v=g.v;this.params=g.params;this.k=g.k;
+  this.port=new PolarPort(g,loss,load);this.h=1/sr;this.x=g.x;this.v=g.v;this.params={...g.params,massKg:g.params.massKg*massScale};this.k=g.k*stiffnessScale;
   this.vertical=this.port.axes[0];this.force=new Float64Array(g.strings.length);
   const h=this.h,[d00,d01,d11]=this.port.D,[H0,H1]=this.port.H;
   const a=1+d00*H0/h,b=d01*H1/h,c=d01*H0/h,d=1+d11*H1/h,det=a*d-b*c;
