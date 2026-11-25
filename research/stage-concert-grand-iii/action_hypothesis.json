@@ -1,0 +1,20 @@
+{
+  "version": "G3-action-launch-01",
+  "status": "engineering_hypothesis",
+  "travelM": 0.046,
+  "letOffM": 0.002,
+  "actionRatio": 5,
+  "gravityMps2": 9.81,
+  "impactSpeedMinMps": 0.3,
+  "impactSpeedMaxMps": 5,
+  "velocityExponent": 1.5,
+  "midiTimestamp": "first_contact",
+  "source": "https://www.speech.kth.se/music/5_lectures/askenflt/timing.html ; https://www.speech.kth.se/music/5_lectures/askenflt/motions.html",
+  "limitations": [
+    "travel and ratio within published typical values, not C5 measurements",
+    "velocity curve arbitrary monotone diagnostic, not reference calibration",
+    "effective translational gravity proxy, not pivoted mechanism",
+    "prescribed acceleration, no jack forces beyond let-off, no catcher or repetition model",
+    "no latency added before MIDI timestamp"
+  ]
+}

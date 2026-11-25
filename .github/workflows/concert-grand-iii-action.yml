@@ -1,0 +1,46 @@
+name: Concert Grand III action launch and dynamics
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/action_*.py','research/stage-concert-grand-iii/action_hypothesis.json','research/stage-concert-grand-iii/test_action_launch.py','.github/workflows/concert-grand-iii-action.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  action:
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [60,72,84,96,108]
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_action_launch.py
+      - if: matrix.key == 60
+        run: python research/stage-concert-grand-iii/action_launch.py --out /tmp/g3-launch
+      - if: matrix.key == 60
+        uses: actions/upload-artifact@v4
+        with:
+          name: G3-action-launch
+          path: /tmp/g3-launch/
+          if-no-files-found: error
+      - run: python research/stage-concert-grand-iii/action_impact.py --scale /tmp/g3-scale/scale_geometry.json --key ${{ matrix.key }} --out /tmp/g3-action
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-action-impact-${{ matrix.key }}
+          path: /tmp/g3-action/
+          if-no-files-found: warn
