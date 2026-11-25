@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {bridgePatches,portSummary} from './f11u-r6-geometry.mjs';
+const p={lengthM:1.4,widthM:1.1},notes=[48,60,64,67,72];
+const a=bridgePatches(notes,'coincident',p),b=bridgePatches(notes,'narrow',p),c=bridgePatches(notes,'wide',p);
+assert(a.every(q=>q.xM===.83&&q.yM===.46));
+assert.deepEqual(b[1],a[1]);assert.deepEqual(c[1],a[1]);
+assert(c[4].xM-c[0].xM>b[4].xM-b[0].xM);
+assert.deepEqual(bridgePatches([67],'wide',p)[0],c[3]);
+assert.throws(()=>bridgePatches([12],'wide',p));
+assert.equal(portSummary([[2,2],[2,2]]).meanAbs,1);
+assert.equal(portSummary([[2,1],[1,2]]).meanAbs,.5);
+assert.throws(()=>portSummary([[2,1],[0,2]]));
+assert.throws(()=>portSummary([[2,3],[3,2]]));
+console.log('R6_GEOMETRY_UNIT_PASS');

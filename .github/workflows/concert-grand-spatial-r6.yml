@@ -1,0 +1,37 @@
+name: Concert Grand R6 spatial bridge pure base
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths: ['research/stage-concert-grand/f11u-r6-*.mjs','.github/workflows/concert-grand-spatial-r6.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11u-r6-geometry.test.mjs
+  compare:
+    needs: unit
+    strategy:
+      fail-fast: false
+      matrix:
+        layout: [coincident,narrow,wide]
+        mode: [pedal,dry,held]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --max-old-space-size=6144 research/stage-concert-grand/f11u-r6-demo.mjs /tmp/r6 K750 ${{ matrix.mode }} ${{ matrix.layout }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R6-${{ matrix.mode }}-${{ matrix.layout }}
+          path: /tmp/r6/
+          if-no-files-found: error
