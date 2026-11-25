@@ -10,3 +10,7 @@ Preencher todos os semitons MIDI53–72 (F3–C5, 20 notas). Sete notas anterior
 
 ## Implementação
 f11a-s50-scale.mjs, .test.mjs, -demo.mjs, workflow concert-grand-f11a-s50.yml, commit f38983e3143cc0c8bc601f3e5ca20dd64fab9eb5. Escala de 20 notas implementada, 13 novas ainda sujeitas a validação. F11b: análise adjacente e extensão por registros, com modelo de cordas enroladas e transições de uníssono quando apropriado. Tampo compartilhado, pedal, 88 notas completas, CPU real 32–64 e integração pendentes. Não alterar motor de produção.
+
+## Execução
+
+CI 45518512147: smoke in_progress / sem conclusão, 0 artefatos. [CI](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45518512147). Main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536. Alterações restritas à pesquisa, CI e documentação.
