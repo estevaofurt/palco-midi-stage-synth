@@ -48,12 +48,19 @@ def vertical(lam,h,s,c):
     return a,den,sech,a*tanh,ratio
 
 def response(m,f,points,*,solver='dense'):
-    if solver not in ('dense','schur'):raise ValueError('unknown hybrid solver')
+    if solver not in ('dense','schur','schur-real'):raise ValueError('unknown hybrid solver')
     if f<=0:raise ValueError('positive harmonic frequency')
     s=2j*np.pi*f;p=m['prism'];h=p['height'];N=m['N'];U=m['U'];MU=m['MU'];B=p['B'];C=m['C']
     a,den,sech,d,ratio=vertical(m['lam'],h,s,p['c'])
+    if solver=='schur-real':
+        from hybrid_real_harmonic import real_vertical
+        if any(np.iscomplexobj(x) for x in (m['K'].data,m['M'].data,U,MU,B,C,m['lam'])):
+            raise ValueError('real harmonic solver requires lossless real model')
+        sech,d,ratio=real_vertical(m['lam'],h,2*np.pi*f,p['c'])
+        W=m['K']-(2*np.pi*f)**2*m['M']
+    else:W=m['K']+s*s*m['M']
     b=U.T@B;F=MU@(sech[:,None]*b)
-    W=m['K']+s*s*m['M'];D=(MU*d[None,:])@MU.T
+    D=(MU*d[None,:])@MU.T
     rhs=np.column_stack([np.pad(F,((0,W.shape[0]-N),(0,0))),C])
     if solver=='dense':
         W=W.toarray();W[:N,:N]+=D
@@ -64,6 +71,7 @@ def response(m,f,points,*,solver='dense'):
         from hybrid_schur import solve_interface
         X,solve_report=solve_interface(W,D,rhs)
         residual=solve_report['residual']
+        if solver=='schur-real':solve_report['solver']='schur-real'
     T=MU.T@X[:N]
     Z=rhs.T@X;nb=B.shape[1]
     Z[:nb,:nb]+=b.T@(ratio[:,None]*b)
@@ -77,7 +85,7 @@ def response(m,f,points,*,solver='dense'):
         r[~small]=(np.exp(-a[~small]*zi)-np.exp(-a[~small]*(2*h-zi)))/(a[~small]*den[~small])
         P[i]=(O[i]*ctop)@T
         P[i,:nb]+=(O[i]*r)@b
-    Z*=p['rho']*s;P*=p['rho']*s
+    Z=Z*(p['rho']*s);P*=p['rho']*s
     H=(Z+Z.conj().T)/2;scale=max(np.linalg.norm(Z),1e-30)
     rep=dict(reciprocity=relative(Z,Z.T),losslessRelative=float(np.linalg.norm(H)/scale),
         residual=residual,interfaceCondition=float(min(abs(den))),linearSolve=solve_report)
