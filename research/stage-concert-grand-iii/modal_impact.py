@@ -9,12 +9,13 @@ from modal_target import basis,Target
 from flexible_hammer import Hammer
 from felt_law import params,energy,relax,frozen_force
 ROOT=Path(__file__).parent
-def run(r,s,c,w2,P,sr,speed,stagger=False,trace=False,shaft=None):
+def run(r,s,c,w2,P,sr,speed,stagger=False,trace=False,shaft=None,target_factory=None):
     hm,f=params(r['key'],r['count'],s,c);m=hm['massKg'];N=r['count'];h=1/sr
-    targets=[Target(w2,P,sr) for _ in range(N)]
+    if target_factory is not None and trace:raise ValueError('lossless force-spectrum identity is not valid with loaded targets')
+    targets=[(Target(w2,P,sr) if target_factory is None else target_factory(w2,P,sr)) for _ in range(N)]
     gaps=np.arange(N)*30e-6 if stagger else np.zeros(N)
     z=np.zeros(N);hammer=Hammer(m,sr,speed,shaft);E0=hammer.energy();gh=hammer.H
-    loss=impulse=peak=maxbal=maxinc=maxrelax=maxport=maxforce=0.;prev=E0
+    loss=impulse=peak=maxbal=maxinc=maxrelax=maxport=maxforce=targetWork=0.;prev=E0
     forceHistory=[];ncontact=0;started=False;separated=False;maxCompression=0.;perImpulse=np.zeros(N)
     # Distinct contacts share the hammer displacement, not the state of felt or target.
     for i in range(round(.04*sr)):
@@ -40,14 +41,16 @@ def run(r,s,c,w2,P,sr,speed,stagger=False,trace=False,shaft=None):
         if trace:forceHistory.append(F.copy())
         total=float(sum(F));e=hammer.energy();work=hammer.step(-total);maxport=max(maxport,abs(hammer.energy()-e-work))
         for t,Fj in zip(targets,F):
-            e=t.energy();work=t.step(float(Fj));maxport=max(maxport,abs(t.energy()-e-work))
+            e=t.energy();oldLoss=getattr(t,'loss',0.);work=t.step(float(Fj));targetWork+=work
+            maxport=max(maxport,abs(t.energy()-e-work+getattr(t,'loss',0.)-oldLoss))
         d1=hammer.position()-np.array([t.position() for t in targets])-gaps
         for j in range(N):
             maxforce=max(maxforce,abs(F[j]-frozen_force(float(d0[j]),float(d1[j]),float(z[j]),f)))
             z[j],l,e=relax(float(d1[j]),float(z[j]),h/2,f);loss+=l;maxrelax=max(maxrelax,abs(e))
         assert np.all(F>=0) and np.all(z>=0)
         Eh=hammer.energy();Ef=sum(energy(float(d),float(q),f) for d,q in zip(d1,z));Es=sum(t.energy() for t in targets)
-        E=Eh+Ef+Es;maxbal=max(maxbal,abs(E+loss-E0));maxinc=max(maxinc,E-prev);prev=E
+        boundaryLoss=sum(getattr(t,'loss',0.) for t in targets)
+        E=Eh+Ef+Es;maxbal=max(maxbal,abs(E+loss+boundaryLoss-E0));maxinc=max(maxinc,E-prev);prev=E
         perImpulse+=h*F;impulse+=h*total;peak=max(peak,total);maxCompression=max(maxCompression,float(max(d1)))
         if total>0:ncontact+=1;started=True
         # Same first-separation criterion as the prior fixture, not a catcher model.
@@ -60,7 +63,12 @@ def run(r,s,c,w2,P,sr,speed,stagger=False,trace=False,shaft=None):
     if not stagger:assert max(perImpulse)-min(perImpulse)<=1e-10
     modal=sum(.5*(t.v*t.v+w2*t.q*t.q) for t in targets)
     assert abs(float(sum(modal))-Es)<=1e-10
-    audit={}
+    assert abs(targetWork-Es-boundaryLoss)<=max(1e-10,E0*1e-7)
+    audit=dict(boundaryLossJ=boundaryLoss,netTargetWorkJ=targetWork,netTargetFractionInput=targetWork/E0)
+    if target_factory is not None:
+        loadStored=sum(t.load_energy() for t in targets)
+        assert 0<=loadStored<=Es+1e-12
+        audit.update(loadStoredJ=loadStored,stringStoredJ=max(0.,Es-loadStored),modalEnergyScope='coupled string and diagnostic load')
     if trace:
         # Integral of piecewise constant contact force at each modal frequency.
         freq=np.sqrt(w2)/(2*np.pi);time=(np.arange(len(forceHistory))+.5)*h

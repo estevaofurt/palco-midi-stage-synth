@@ -1,0 +1,38 @@
+name: Concert Grand III loaded hammer impact
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/loaded_target.py','research/stage-concert-grand-iii/loaded_impact.py','research/stage-concert-grand-iii/test_loaded_target.py','.github/workflows/concert-grand-iii-loaded-impact.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [60,84,108]
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_loaded_target.py
+      - run: python research/stage-concert-grand-iii/loaded_impact.py --scale /tmp/g3-scale/scale_geometry.json --key ${{ matrix.key }} --out /tmp/g3-loaded
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-loaded-impact-${{ matrix.key }}
+          path: /tmp/g3-loaded/
+          if-no-files-found: warn
