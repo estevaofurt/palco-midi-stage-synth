@@ -14,13 +14,14 @@ export function wireFor(midi){
  return {midi,lengthM,diameterM,youngPa,densityKgM3,areaM2,linearDensityKgM,EI,tensionN,f1Hz,B:Math.PI**2*EI/(tensionN*lengthM**2),stressPa:tensionN/areaM2,provenance:midi===60?'G1 C4 control geometry':'G2 C6 original diagnostic geometry, not measured'};
 }
 export class StringPilot {
- constructor(midi,sr=48000){
+ constructor(midi,sr=48000,{cutoffHz=DESIGN.cutoffHz}={}){
   if(![44100,48000,96000].includes(sr))throw RangeError('rate');
-  this.sr=sr;this.wire=wireFor(midi);this.modes=[];this.weights=[];this.info=[];
+  if(!Number.isFinite(cutoffHz)||cutoffHz<=0||cutoffHz>.4*sr)throw RangeError('cutoff');
+  this.sr=sr;this.cutoffHz=cutoffHz;this.wire=wireFor(midi);this.modes=[];this.weights=[];this.info=[];
   const L=this.wire.lengthM;
   for(let n=1;n<=DESIGN.maxModes;n++){
    const m=stringMode(this.wire,n);
-   if(m.frequencyHz>=Math.min(DESIGN.cutoffHz,.4*sr))break;
+   if(m.frequencyHz>=cutoffHz)break;
    const sigma=DESIGN.sigma0PerS+DESIGN.sigma2M2PerS*m.waveNumber**2;
    this.modes.push(new PortMode({massKg:m.massKg,frequencyHz:m.frequencyHz,dampingNsM:2*m.massKg*sigma,dt:1/sr}));
    this.weights.push(spatialWeight(m,L,DESIGN.strikeFraction*L,DESIGN.widthM));this.info.push({...m,sigma});
