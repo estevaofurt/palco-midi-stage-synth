@@ -9,3 +9,11 @@ Workflow commit 46e9e0bc2c038b1f04a3c6b8ac0afcc40026e7ad. Próximo: revisar din�
 ## Execução
 
 CI 45511128271: {"success":5,"failed":0,"active":10,"queued":0}, 6 artefatos. [CI](https://github.com/estevaofurt/palco-midi-stage-synth/actions/runs/45511128271). Main reconferida em ff73ddc95e57e192ea8b65a03fae11ba132e0536; alterações apenas de pesquisa/documentação/dados/CI.
+
+## Resultado final e decisão do titular — 24/11/2026
+
+F10h CI 45511128271: 15/15 jobs aprovados (14 renders e comparação). F10g CI 45509969698: 28 checks, 13/13 renders aprovados, incluindo G4 S25 ff crossing 20s. S50 possui 21/21 renders nas sete notas, MIDI 24/76/127 com ganho comum .2757526758002555, pico máximo .820566812014095 em A3 ff, zero clipping, energia passiva (erro máximo 1.667e-13 J). Pico e RMS inicial crescem monotonicamente com intensidade em todas as sete notas. Dados em audio/analysis_f10h_d4_ci.json e audio/analysis_f10g_d4_ci.json. Comparação verificada por CI, artefato 14974604228.
+
+**O titular declarou: "gostei do s50".** Registrar D4-S50 como referência sonora preferida para continuidade da pesquisa; isto não é aprovação integral de todas as notas, intensidades, pedal ou motor de produção. Não alterar S50 original: manter tampo D4 de 337 modos (3× global, quatro modos a 8×, outros quatro a 4×), perdas constantes verticais .1 e horizontais .05, sigma2 .0002/.00012, feltro 1.5, geometria/posição da ponte/curva MIDI do piloto. Ganho de diagnóstico .36767023440034063, ganho comum de escuta das sete notas .75×. Preservar D, D4, S25 e os áudios anteriores para regressão. Não introduzir S25 na referência apenas por sustain mais longo.
+
+Próximo passo: ampliar escala de forma gradual em ramo experimental, com regressão exata das sete notas S50 e análise de dinâmica e continuidade, depois mapear geometria de graves/agudos e desenvolver tampo compartilhado/pedais e desempenho real. C4 pp merece estudo de queda relativa e escuta; não elevar volume artificialmente para satisfazer limiar de duração. A preferência do titular não comprova audibilidade de 33s ou homologação de 88 teclas e 32–64 vozes. Main segue inalterada.
