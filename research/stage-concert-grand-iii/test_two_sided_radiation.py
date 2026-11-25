@@ -7,7 +7,7 @@ class TwoSidedTest(unittest.TestCase):
         q,parts,r=combine(z,z,I,-I)
         np.testing.assert_allclose(q,2*z)
         self.assertTrue(r['gate'])
-        V,r=fixture(I,1e5*I,.4*I,q,60.)
+        V,r=fixture(I,1e5*I,.4*I,q,parts,60.)
         self.assertTrue(r['gate'],r)
         self.assertAlmostEqual(r['powerFractions']['upper'],r['powerFractions']['lower'])
         self.assertAlmostEqual(sum(r['powerFractions'].values()),1.)
