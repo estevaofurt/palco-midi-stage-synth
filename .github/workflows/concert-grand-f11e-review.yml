@@ -1,0 +1,70 @@
+name: Concert Grand F11e bass sustain and upper-register diagnostics
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11e-review.yml'
+      - 'research/stage-concert-grand/f11e-*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F11D-bass-*
+          path: /tmp/f11e-input/bass
+          run-id: 45522085368
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F11A-S50-midi*-touch*
+          path: /tmp/f11e-input/a
+          run-id: 45518512147
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F10H-S50-midi72-touch*
+          path: /tmp/f11e-input/h
+          run-id: 45511128271
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: F10G-S50-midi72-touch127
+          path: /tmp/f11e-input/g
+          run-id: 45509969698
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: node research/stage-concert-grand/f11e-bass-upper-review.mjs /tmp/f11e-input /tmp/f11e-review
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11E-bass-upper-review
+          path: /tmp/f11e-review/
+          if-no-files-found: error
+  sustain:
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        midi: [36,43,48]
+        count: [1,2]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11e-bass-long-demo.mjs /tmp/f11e-bass ${{ matrix.midi }} 127 ${{ matrix.count }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: F11E-bass-midi${{ matrix.midi }}-strings${{ matrix.count }}-touch127-long
+          path: /tmp/f11e-bass/
+          if-no-files-found: error
