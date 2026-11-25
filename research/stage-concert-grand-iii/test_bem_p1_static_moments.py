@@ -37,4 +37,12 @@ class StaticMomentTest(unittest.TestCase):
         exact=4*np.pi*.5**2*1j*1.204*343*k/(2+1j*k)
         self.assertLess(abs(Z[0,0]-exact)/abs(exact),.25)
         self.assertLess(rr['powerRelative'],.15)
+    def test_mesh_guard(self):
+        from bem_mesh_guard import signature,require_same_mesh
+        t=sphere(.5,1);labels=np.arange(len(t));s=signature(t,labels)
+        self.assertTrue(require_same_mesh(s,signature(t.copy(),labels.copy())))
+        with self.assertRaises(ValueError):require_same_mesh(s,signature(t[::-1],labels[::-1]))
+        with self.assertRaises(ValueError):require_same_mesh(s,signature(t,labels+1))
+        modified=t.copy();modified[0,0,0]+=1e-9
+        with self.assertRaises(ValueError):require_same_mesh(s,signature(modified,labels))
 if __name__=='__main__':unittest.main()

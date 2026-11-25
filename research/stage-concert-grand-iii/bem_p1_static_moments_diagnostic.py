@@ -16,6 +16,7 @@ from bem_p1_stream import audit as audit_old
 from bem_p1_static_moments import audit,operators
 from bem_weak_p1_refined import fit as fit_old
 from bem_linear_adaptive import budget_refine
+from bem_mesh_guard import signature,require_same_mesh
 from bem_p1_static_moments import fit
 from split_radiation import relative
 ROOT=Path(__file__).parent
@@ -33,7 +34,11 @@ def main():
     freq=[30.,80.,150.];rows=[];outputs=[]
     a.out.mkdir(parents=True,exist_ok=True);path=a.out/'bem_p1_static_moments.json'
     t,labels,_=triangulate(surf,1)
+    fixed_signature=None
     for step,outer,inner,check in [(0,3,4,6),(1,3,4,6),(2,4,6,8)]:
+        mesh_signature=signature(t,labels)
+        if step==1:fixed_signature=mesh_signature
+        if step==2:require_same_mesh(fixed_signature,mesh_signature)
         velocity=lambda x,o:velocities(surf,ports,x,labels[o])
         xa,na,wa,oa=audit_targets(t);Va=velocity(xa,oa)
         xm,nm,wm,om=targets(t,CHECK);Vm=velocity(xm,om)
@@ -50,18 +55,19 @@ def main():
             vals.append((Z,P));reps.append(dict(frequencyHz=f,fit=r,audit=rr,fitSeconds=elapsed,legacyAudit=old,legacyDifference=dict(impedance=relative(Z,zo),pressure=relative(P,po))))
         gr=topology(t);assert gr['gate'] and abs(gr['volume']-geo['volume'])<1e-10
         row=dict(step=step,outerRule=outer,innerOrder=inner,auditOrder=check,elements=len(t),unknowns=3*len(t),
-            geometry=gr,gate=all(r['audit']['gate'] and r['fit']['weakResidual']<=1e-8 for r in reps),reports=reps)
+            meshSha256=mesh_signature,geometry=gr,gate=all(r['audit']['gate'] and r['fit']['weakResidual']<=1e-8 for r in reps),reports=reps)
         rows.append(row);outputs.append(vals)
-        if step<2:t,labels,ref=budget_refine(t,labels,scores,[500,750][step]);row['refinement']=ref
+        if step==0:t,labels,ref=budget_refine(t,labels,scores,500);row['refinement']=ref
         path.write_text(json.dumps(dict(cases=rows,complete=False),indent=2,allow_nan=False))
         print('G3_BEM_STATIC_MOMENT_CASE '+json.dumps({**{k:v for k,v in row.items() if k!='reports'},
-            **{key:max(r['audit'][key] for r in reps) for key in ('heldoutResidual','heldoutWorstColumn','reciprocity','powerRelative')}}),flush=True)
+            **{method:{key:max(r[method][key] for r in reps) for key in ('heldoutResidual','heldoutWorstColumn','reciprocity','powerRelative')} for method in ('audit','legacyAudit')}}),flush=True)
     def compare(a,b):return dict(impedance=max(relative(x[0],y[0]) for x,y in zip(a,b)),pressure=max(relative(x[1],y[1]) for x,y in zip(a,b)))
+    require_same_mesh(rows[1]['meshSha256'],rows[2]['meshSha256'])
     mesh=compare(outputs[0],outputs[1]);quad=[compare(outputs[1],outputs[2])]
     gate=rows[-1]['gate'] and max(mesh.values())<=.05 and all(max(v.values())<=.05 for v in quad)
     summary=dict(gate=gate,angleDeg=a.angle,meshConvergence=mesh,quadratureConvergence=quad,
         sameMeshFinalQuadrature=True,elementBudget=500,analyticLinearStaticMoments=True,
         upperEnvelopeOnly=True,coupledCavityReady=False,radiationReady=False)
     path.write_text(json.dumps(dict(summary=summary,cases=rows,frequenciesHz=freq,scaleSha256=hashlib.sha256(raw).hexdigest()),indent=2,allow_nan=False))
-    print('G3_BEM_WEAK_REFINED_GATE '+json.dumps(summary),flush=True);assert gate
+    print('G3_BEM_STATIC_MOMENT_GATE '+json.dumps(summary),flush=True);assert gate
 if __name__=='__main__':main()

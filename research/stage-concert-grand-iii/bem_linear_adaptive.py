@@ -15,6 +15,9 @@ def indicator(t,q,V,k,order):
 
 def budget_refine(t,labels,scores,budget,fraction=.6,max_fraction=.25):
     if budget<=len(t):raise ValueError('budget must exceed current mesh')
+    scores=np.asarray(scores,float)
+    if scores.shape!=(len(t),) or not np.isfinite(scores).all() or np.any(scores<0) or not np.isfinite(scores.sum()) or scores.sum()<=0:
+        raise ValueError('refinement requires finite nonnegative nonzero indicators')
     mask=mark(scores,fraction,max_fraction)
     indices=np.argsort(-np.asarray(scores),kind='stable')[:int(sum(mask))]
     n=len(indices)

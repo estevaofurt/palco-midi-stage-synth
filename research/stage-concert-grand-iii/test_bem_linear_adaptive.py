@@ -21,4 +21,8 @@ class LinearAdaptiveTest(unittest.TestCase):
         self.assertAlmostEqual(topology(q)['volume'],topology(t)['volume'],places=12)
         np.testing.assert_allclose(np.bincount(l,weights=elements(q)[2]),elements(t)[2],atol=1e-12)
         self.assertGreater(r['capturedIndicator'],0.)
+    def test_reject_empty_or_invalid_indicators(self):
+        t=sphere(.5,1);labels=np.arange(len(t))
+        for s in (np.zeros(len(t)),np.full(len(t),np.nan),-np.ones(len(t)),np.ones(len(t)-1)):
+            with self.assertRaises(ValueError):budget_refine(t,labels,s,60)
 if __name__=='__main__':unittest.main()
