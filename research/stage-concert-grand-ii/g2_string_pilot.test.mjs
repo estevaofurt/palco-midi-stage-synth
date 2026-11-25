@@ -8,9 +8,10 @@ for(const key of PILOT_KEYS){
  assert(Math.abs(1200*Math.log2(stringMode(w,1).frequencyHz/w.f1Hz))<1e-8);
  assert(w.tensionN>0&&w.B>0&&w.stressPa>0);
  for(const sr of [44100,48000,96000]){
-  const s=new StringPilot(key,sr),ref=new StiffString(w,{sampleRate:sr,maxFrequencyHz:DESIGN.cutoffHz,maxModes:DESIGN.maxModes,sigma0PerS:DESIGN.sigma0PerS,sigma2M2PerS:DESIGN.sigma2M2PerS},modalCoefficients);
+  const s=new StringPilot(key,sr),ref=new StiffString(w,{sampleRate:sr,maxFrequencyHz:s.cutoffHz,maxModes:DESIGN.maxModes,sigma0PerS:DESIGN.sigma0PerS,sigma2M2PerS:DESIGN.sigma2M2PerS},modalCoefficients);
   const weights=ref.weights(w.lengthM*DESIGN.strikeFraction,DESIGN.widthM);
   assert.equal(s.modes.length,ref.modes.length);
+  assert.equal(s.modes.length,({48:67,60:38,84:13})[key]);
   let maxX=0,maxV=0,minLoss=0,peakX=0;
   for(let i=0;i<sr/4;i++){
    const f=i<.002*sr?.3:i>=.05*sr&&i<.052*sr?.15:0;

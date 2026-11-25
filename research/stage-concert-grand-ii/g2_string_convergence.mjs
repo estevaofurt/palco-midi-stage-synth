@@ -1,6 +1,6 @@
 // G2.05b — compare identical continuous prescribed force on different grids and bands.
 import assert from 'node:assert/strict';
-import {StringPilot,PILOT_KEYS} from './g2_string_pilot.mjs';
+import {StringPilot,PILOT_KEYS,pilotCutoffHz} from './g2_string_pilot.mjs';
 import {stringMode,spatialWeight} from '../stage-concert-grand/stiff-string.mjs';
 const OUT='/tmp/g2-string-convergence';
 import {mkdirSync,writeFileSync} from 'node:fs';
@@ -38,11 +38,15 @@ function compare(a,b,kind){
 const rows=[],summaries=[];
 for(const key of PILOT_KEYS){
  const a=run(key,44100,12000),b=run(key,48000,12000),c=run(key,96000,12000),d=run(key,96000,16000),e=run(key,96000,20000),f=run(key,96000,8000);
- rows.push(compare(a,c,'time'),compare(b,c,'time'),compare(c,e,'band12'),compare(d,e,'band16'),compare(f,e,'band8'));
+ rows.push(compare(a,c,'time12'),compare(b,c,'time12'),compare(c,e,'band12'),compare(d,e,'band16'),compare(f,e,'band8'));
+ const cut=pilotCutoffHz(key),selected=cut===12000?c:d;
+ const aa=cut===12000?a:run(key,44100,cut),bb=cut===12000?b:run(key,48000,cut);
+ rows.push(compare(aa,selected,'selected-time'),compare(bb,selected,'selected-time'),compare(selected,e,'selected-band'));
+ if(cut!==12000){for(const q of [aa,bb]){const {x,v,...summary}=q;summaries.push(summary);}}
  for(const q of [a,b,c,d,e,f]){const {x,v,...summary}=q;summaries.push(summary);}
 }
-const result={scope:'prescribed smooth force, single polarization, fixed supports; common 300Hz snapshots plus native-rate peak and energy; not convergence of audio or hammer contact; 20k reference is finite',limits:LIMITS,rows,summaries,requiredPass:rows.filter(r=>['time','band12'].includes(r.kind)).every(r=>r.pass)};
+const result={scope:'prescribed smooth force, single polarization, fixed supports; common 300Hz snapshots plus native-rate peak and energy; not convergence of audio or hammer contact; 20k reference is finite',limits:LIMITS,rows,summaries,requiredPass:rows.filter(r=>['selected-time','selected-band'].includes(r.kind)).every(r=>r.pass)};
 mkdirSync(OUT,{recursive:true});writeFileSync(OUT+'/report.json',JSON.stringify(result,null,2));
 for(const row of rows)console.log('G2_CONVERGENCE '+JSON.stringify(row));
-console.log('G2_CONVERGENCE_GATE '+JSON.stringify({requiredPass:result.requiredPass,required:rows.filter(r=>['time','band12'].includes(r.kind)).length,passed:rows.filter(r=>['time','band12'].includes(r.kind)&&r.pass).length}));
+console.log('G2_CONVERGENCE_GATE '+JSON.stringify({requiredPass:result.requiredPass,required:rows.filter(r=>['selected-time','selected-band'].includes(r.kind)).length,passed:rows.filter(r=>['selected-time','selected-band'].includes(r.kind)&&r.pass).length}));
 if(!result.requiredPass)process.exitCode=1;

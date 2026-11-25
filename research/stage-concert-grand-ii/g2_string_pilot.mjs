@@ -4,6 +4,10 @@ import {stringMode,spatialWeight} from '../stage-concert-grand/stiff-string.mjs'
 import {PortMode} from './g2_arch_port.mjs';
 export const PILOT_KEYS=Object.freeze([48,60,84]);
 export const DESIGN=Object.freeze({cutoffHz:12000,maxModes:128,sigma0PerS:.4,sigma2M2PerS:.0002,strikeFraction:.13,widthM:.005});
+export function pilotCutoffHz(midi){
+ if(!PILOT_KEYS.includes(midi))throw RangeError('pilot key');
+ return midi===84?16000:DESIGN.cutoffHz;
+}
 export function wireFor(midi){
  if(!PILOT_KEYS.includes(midi))throw RangeError('pilot key');
  if(midi===48)return {...bassCandidate(midi),provenance:'G1 diagnostic wound anchor; not measured'};
@@ -14,7 +18,7 @@ export function wireFor(midi){
  return {midi,lengthM,diameterM,youngPa,densityKgM3,areaM2,linearDensityKgM,EI,tensionN,f1Hz,B:Math.PI**2*EI/(tensionN*lengthM**2),stressPa:tensionN/areaM2,provenance:midi===60?'G1 C4 control geometry':'G2 C6 original diagnostic geometry, not measured'};
 }
 export class StringPilot {
- constructor(midi,sr=48000,{cutoffHz=DESIGN.cutoffHz}={}){
+ constructor(midi,sr=48000,{cutoffHz=pilotCutoffHz(midi)}={}){
   if(![44100,48000,96000].includes(sr))throw RangeError('rate');
   if(!Number.isFinite(cutoffHz)||cutoffHz<=0||cutoffHz>.4*sr)throw RangeError('cutoff');
   this.sr=sr;this.cutoffHz=cutoffHz;this.wire=wireFor(midi);this.modes=[];this.weights=[];this.info=[];
