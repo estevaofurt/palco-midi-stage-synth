@@ -1,0 +1,16 @@
+import {bassCandidate,BASS_ANCHORS,DIAGNOSTIC_TENSION_N} from './f11c-bass-candidates.mjs';
+import {stringMode} from './stiff-string.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++},rejects=f=>{try{f();return false}catch{return true}};
+const cases=BASS_ANCHORS.map(g=>bassCandidate(g.midi));
+check('three isolated anchors',cases.length===3);
+check('tension residual',cases.every(w=>Math.abs(w.tensionN-DIAGNOSTIC_TENSION_N)<1e-8));
+check('pitch residual',cases.every(w=>Math.abs(stringMode(w,1).frequencyHz-w.f1Hz)<1e-10));
+check('mass and stiffness positive',cases.every(w=>w.wrapMu>0&&w.coreMu>0&&w.B>0&&w.impedanceNsM>0));
+check('winding bracket',cases.every(w=>w.wrapDiameterM>=.00005&&w.wrapDiameterM<=.0015));
+check('core stress relation',cases.every(w=>Math.abs(w.stressPa*w.areaM2-w.tensionN)<1e-10));
+check('higher target increases wrap',bassCandidate(36,{tensionN:700}).wrapDiameterM>cases[0].wrapDiameterM);
+check('out of range',rejects(()=>bassCandidate(21)));
+check('impossible target',rejects(()=>bassCandidate(36,{tensionN:1})));
+check('invalid target',rejects(()=>bassCandidate(36,{tensionN:NaN})));
+console.log('F11C_BASS_TESTS '+n);
+console.log('F11C_BASS_CANDIDATES '+JSON.stringify(cases));
