@@ -11,18 +11,20 @@ export function resonance(sr,N,M,a,k){
 export function fitDelay(sr,period,B){
  if(!Number.isInteger(period)||period<20||!(B>0)||![48000,96000].includes(sr))throw RangeError('fit');
  const w1=TAU/period,targets=Array.from({length:8},(_,i)=>{const k=i+1;return k*sr/period*Math.sqrt((1+B*k*k)/(1+B));});
- let best=null;
+ let best=null,skippedOutsideBand=0;
  for(let M=1;M<=8;M++)for(let N=1;N<period;N++){
   const phi=(TAU-N*w1)/M;
   if(phi<=0||phi>=Math.PI)continue;
   const r=Math.tan(phi/2)/Math.tan(w1/2),a=(1-r)/(1+r);
   if(Math.abs(a)>=.995)continue;
+  // A candidate must support all eight resonances strictly below Nyquist.
+  if(phaseDelay(Math.PI,N,M,a)<=TAU*targets.length){skippedOutsideBand++;continue;}
   const errors=targets.map((f,i)=>cents(resonance(sr,N,M,a,i+1),f));
   const rms=Math.sqrt(errors.reduce((s,x)=>s+x*x,0)/errors.length),max=Math.max(...errors.map(Math.abs));
   if(!best||rms<best.rms)best={sr,period,B,N,M,a,targets,errors,rms,max};
  }
  if(!best)throw Error('no stable fit');
- return best;
+ return {...best,skippedOutsideBand};
 }
 export class DispersiveDelay {
  constructor(d,sigma=2){

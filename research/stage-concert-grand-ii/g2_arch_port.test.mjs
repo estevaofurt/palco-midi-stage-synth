@@ -6,6 +6,7 @@ let count=0;
 for(const sr of [48000,96000])for(const n of [368,184,46]){
  const d=fitDelay(sr,n*sr/48000,.000296440484);
  assert(Math.abs(d.errors[0])<1e-7);assert(Math.abs(d.a)<1);
+ assert(d.skippedOutsideBand>0);assert(d.max<=5,'predefined dispersion criterion exceeded');
  for(const sigma of [0,2]){
   const loop=new DispersiveDelay(d,sigma);loop.next(1);
   for(let i=0;i<sr/2;i++){const e=loop.norm(),x=loop.next();assert(Number.isFinite(x));assert(loop.norm()<=e+1e-12);}
