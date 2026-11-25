@@ -82,20 +82,21 @@ def compare(a,b):
     err={k:float(np.linalg.norm(x[:,sl]-y[:,sl])/max(np.linalg.norm(y[:,sl]),1e-30)) for k,sl in [('bridge',slice(0,3)),('board',slice(3,6)),('contacts',slice(6,9))]}
     for k in ['work','energy']:err[k]=abs(a[k]-b[k])/max(abs(b[k]),1e-30)
     return dict(errors=err,pass_=all(v<=.1 for v in err.values()))
-rows=[];checks=[]
-for drive in range(3):
-    op=run(4000,3000,48000,drive,True);rows.append(op)
-    ref=run(6000,6000,192000,drive);rows.append(ref)
-    for tag,basis,cut,sr in [('time96',6000,6000,96000),('time48',6000,6000,48000),('band5k',6000,5000,96000),('band3k',6000,3000,96000),('basis4k',4000,3000,96000)]:
-        r=run(basis,cut,sr,drive);rows.append(r)
-        # Separate time and band comparisons from Ritz basis comparison.
-        target=ref if tag.startswith('time') else next(z for z in rows if z['drive']==drive and z['basis']==6000 and z['sr']==96000 and z['cut']==(3000 if tag=='basis4k' else 6000))
-        ck=dict(drive=drive,tag=tag,**compare(r,target));checks.append(ck);print('G2_SHARED_CHECK '+json.dumps(ck),flush=True)
-    for r in rows:
-        if r['drive']==drive:print('G2_SHARED '+json.dumps({k:v for k,v in r.items() if k!='trace'}),flush=True)
-required=[x for x in checks if x['tag'] in ('time96','band5k','basis4k')]
-gate=all(x['pass_'] for x in required)
-report=dict(scope='linear three groups one shared board; passive joints; no hammer, radiation, or audio',rows=rows,checks=checks,required=len(required),passed=sum(x['pass_'] for x in required),gate=gate)
-(OUT/'report.json').write_text(json.dumps(report,indent=2))
-print('G2_SHARED_GATE '+json.dumps({k:report[k] for k in ('required','passed','gate')}),flush=True)
-if not gate:raise SystemExit(1)
+if __name__ == '__main__':
+    rows=[];checks=[]
+    for drive in range(3):
+        op=run(4000,3000,48000,drive,True);rows.append(op)
+        ref=run(6000,6000,192000,drive);rows.append(ref)
+        for tag,basis,cut,sr in [('time96',6000,6000,96000),('time48',6000,6000,48000),('band5k',6000,5000,96000),('band3k',6000,3000,96000),('basis4k',4000,3000,96000)]:
+            r=run(basis,cut,sr,drive);rows.append(r)
+            # Separate time and band comparisons from Ritz basis comparison.
+            target=ref if tag.startswith('time') else next(z for z in rows if z['drive']==drive and z['basis']==6000 and z['sr']==96000 and z['cut']==(3000 if tag=='basis4k' else 6000))
+            ck=dict(drive=drive,tag=tag,**compare(r,target));checks.append(ck);print('G2_SHARED_CHECK '+json.dumps(ck),flush=True)
+        for r in rows:
+            if r['drive']==drive:print('G2_SHARED '+json.dumps({k:v for k,v in r.items() if k!='trace'}),flush=True)
+    required=[x for x in checks if x['tag'] in ('time96','band5k','basis4k')]
+    gate=all(x['pass_'] for x in required)
+    report=dict(scope='linear three groups one shared board; passive joints; no hammer, radiation, or audio',rows=rows,checks=checks,required=len(required),passed=sum(x['pass_'] for x in required),gate=gate)
+    (OUT/'report.json').write_text(json.dumps(report,indent=2))
+    print('G2_SHARED_GATE '+json.dumps({k:report[k] for k in ('required','passed','gate')}),flush=True)
+    if not gate:raise SystemExit(1)
