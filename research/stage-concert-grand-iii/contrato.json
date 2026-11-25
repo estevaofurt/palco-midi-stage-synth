@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "generation": "G3",
+  "baseline": {
+    "g2Commit": "44f5d24f90fb3c42d8b427377de6593c80501748",
+    "g2Branch": "research/stage-concert-grand-ii",
+    "dryCommit": "95c2419c6a52289982e142669ee8ea610a8c7d89",
+    "preserveMain": true
+  },
+  "requirements": {
+    "midiKeys": [
+      21,
+      108
+    ],
+    "polyphony": [
+      32,
+      64
+    ],
+    "output": {
+      "sampleRateHz": 48000,
+      "channels": 2,
+      "bits": 24
+    },
+    "sustainC4": {
+      "ppSeconds": [
+        10,
+        15
+      ],
+      "ffSeconds": [
+        30,
+        35
+      ],
+      "heldRenderMinSeconds": 40
+    },
+    "f12_5": {
+      "keys": 88,
+      "velocities": [
+        24,
+        76,
+        127
+      ],
+      "minWindows": 3,
+      "maxCentsIncludingUncertainty": 5
+    },
+    "externalAudioInEngine": false,
+    "intermediateListening": false
+  },
+  "reference": {
+    "instrument": "Yamaha C5",
+    "library": "Salamander Grand Piano v3",
+    "commit": "3382bf9496bba2486f5ab0de55a264d1dfc38404",
+    "author": "Alexander Holm",
+    "license": "CC BY 3.0",
+    "mode": "raw natural FLAC",
+    "exactDevelopmentKeys": [
+      48,
+      60,
+      63,
+      66,
+      69,
+      72,
+      84
+    ],
+    "layer8PlaybackMidi": [
+      57,
+      64
+    ],
+    "capture": {
+      "heightAboveStringsM": {
+        "value": 0.12,
+        "status": "published_approximate"
+      },
+      "heightStringsAboveBoardM": {
+        "value": null,
+        "status": "unknown"
+      },
+      "spacingM": {
+        "value": null,
+        "status": "unknown"
+      },
+      "xyM": {
+        "value": null,
+        "status": "unknown"
+      },
+      "polarPattern": {
+        "value": null,
+        "status": "unknown"
+      },
+      "orientation": {
+        "value": null,
+        "status": "unknown"
+      },
+      "lid": {
+        "value": null,
+        "status": "unknown"
+      },
+      "hammerSpeedMps": {
+        "value": null,
+        "status": "unknown"
+      },
+      "room": {
+        "value": null,
+        "status": "unknown"
+      },
+      "calibratedSpl": {
+        "value": null,
+        "status": "unknown"
+      }
+    },
+    "holdoutManifest": "research/stage-concert-grand-ii/holdout_g2.json",
+    "holdoutOpened": false
+  },
+  "phases": [
+    {
+      "id": "G3.00",
+      "title": "Especificação e interfaces",
+      "depends": [],
+      "gate": "Contrato e matriz de rastreabilidade aprovados; sem parâmetros físicos inventados",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.01",
+      "title": "Identificação física e escala",
+      "depends": [
+        "G3.00"
+      ],
+      "gate": "Inventário por registro, 88 teclas, escala, tensão, B, impedância, fonte e incerteza; hipóteses explícitas",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.02",
+      "title": "Ação e martelo",
+      "depends": [
+        "G3.01"
+      ],
+      "gate": "Contato unilateral com memória passiva, dinâmica graduada, rebote, força-tempo e convergência",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.03",
+      "title": "Cordas e terminações",
+      "depends": [
+        "G3.02"
+      ],
+      "gate": "Transversais acopladas, uníssono, mecanismo longitudinal justificado, portas distintas, passividade",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.04",
+      "title": "Cavalete",
+      "depends": [
+        "G3.03"
+      ],
+      "gate": "Continuidade estrutural, mobilidade local/cruzada, força e momento recíprocos",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.05",
+      "title": "Tampo e estrutura",
+      "depends": [
+        "G3.04"
+      ],
+      "gate": "Geometria representativa, nervuras, madeira, aro, condições de contorno e modos convergidos",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.06",
+      "title": "Radiação e captação",
+      "depends": [
+        "G3.05"
+      ],
+      "gate": "Carga passiva, perdas separadas, fonte/receptor no mesmo referencial, perspectiva próxima, paridade controle",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.07",
+      "title": "Abafadores e pedais",
+      "depends": [
+        "G3.06"
+      ],
+      "gate": "Portas próprias, tecla/pedal/half, reataque e ressonância simpática sem reset",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.08",
+      "title": "Integração de 88 teclas",
+      "depends": [
+        "G3.07"
+      ],
+      "gate": "Todos mecanismos operantes juntos, curva alvo congelada, dinâmica e afinação F12.5 264 casos",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.09",
+      "title": "Validação técnica integrada",
+      "depends": [
+        "G3.08"
+      ],
+      "gate": "Energia, convergência, estabilidade, causalidade, sustain >=40s, 32/64 notas, manifesto comparativo; desempenho no alvo separado e registrado",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.10",
+      "title": "Escuta final A/B",
+      "depends": [
+        "G3.09"
+      ],
+      "gate": "Referência natural e musical separadas, originais e cegos, usuário avalia instrumento completo; holdout somente após congelamento",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "G3.11",
+      "title": "Homologação e integração Stage Synth",
+      "depends": [
+        "G3.10"
+      ],
+      "gate": "Aprovação auditiva, F12.5, desempenho real e regressão antes da promoção",
+      "status": "pending",
+      "evidence": []
+    }
+  ]
+}
