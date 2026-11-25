@@ -1,0 +1,17 @@
+import {woundWire} from './f11c-wound-wire.mjs';
+import {stringMode} from './stiff-string.mjs';
+let n=0;const check=(m,b)=>{if(!b)throw Error(m);n++},rejects=f=>{try{f();return false}catch{return true}};
+const g={lengthM:1.5,coreDiameterM:.001,wrapDiameterM:.0006,f1Hz:55},w=woundWire(g);
+check('positive SI',w.tensionN>0&&w.EI>0&&w.B>0&&w.stressPa>0);
+check('mass sum',w.linearDensityKgM===w.coreMu+w.wrapMu&&w.massKg===w.linearDensityKgM*g.lengthM);
+check('helix length',w.helixRatio>1);
+check('core EI',w.EI===200e9*Math.PI*g.coreDiameterM**4/64);
+check('fundamental',Math.abs(stringMode(w,1).frequencyHz-g.f1Hz)<1e-10);
+check('dispersion',Array.from({length:10},(_,i)=>i+1).every(k=>Math.abs(stringMode(w,k).frequencyHz/(k*g.f1Hz)-Math.sqrt((1+w.B*k*k)/(1+w.B)))<1e-12));
+check('greater winding mass',woundWire({...g,wrapDiameterM:.0008}).linearDensityKgM>w.linearDensityKgM);
+check('wider pitch lowers mass',woundWire({...g,pitchM:.0012}).linearDensityKgM<w.linearDensityKgM);
+check('invalid overlap',rejects(()=>woundWire({...g,pitchM:.0003})));
+check('invalid geometry',rejects(()=>woundWire({...g,coreDiameterM:0})));
+check('impossible tension',rejects(()=>woundWire({...g,lengthM:.01,f1Hz:1})));
+check('nonfinite',rejects(()=>woundWire({...g,wrapDensityKgM3:Infinity})));
+console.log('F11C_WOUND_TESTS '+n);
