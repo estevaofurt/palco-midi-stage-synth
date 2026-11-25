@@ -1,0 +1,3 @@
+# F11u-R — calibração de soltura
+
+Feedback do titular: G7-dry-mf_K750_release_24bit.wav continua sustentando após soltura em 1,5 s. RMS 100 ms em 1,4/1,6/1,8/2,0/2,5 s: -35,04/-38,49/-42,08/-44,06/-44,95 dBFS. Não homologar F11t. Ensaio isolado C=1,2,4,8,16 N s/m, dry e pedal, mesmos martelos, tampo, ganho, duração e eventos; sem alteração do F11t/F11u originais. A força viscosa só atua após soltura e ausência de pedal. Não pressupor que maior C seja melhor (impedância/reflexão); medir cauda e comparar escuta. Modelo ainda vertical e porta coincidente. Caso insuficiente, estudar amortecimento distribuído em ambas polarizações. Registrar RMS por janela, balanço mecânico, clipping; nenhum limiar auditivo homologado. F12.5 permanece obrigatório.
