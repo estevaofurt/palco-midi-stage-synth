@@ -49,8 +49,8 @@ def mesh(poly,n,nz,height,*,boundary_n=None,edge_grading=0.):
             tet.extend([[a,b,c,c+N],[a,b,b+N,c+N],[a,a+N,b+N,c+N]])
     return xy,tri,xyz,np.array(tet)
 
-def assemble(poly,n,nz,height,field,c=343.,rho=1.204,*,boundary_n=None):
-    xy,tri,xyz,tet=mesh(poly,n,nz,height,boundary_n=boundary_n);N=len(xyz);ii=[];jj=[];mm=[];kk=[];volume=0.
+def assemble(poly,n,nz,height,field,c=343.,rho=1.204,*,boundary_n=None,edge_grading=0.):
+    xy,tri,xyz,tet=mesh(poly,n,nz,height,boundary_n=boundary_n,edge_grading=edge_grading);N=len(xyz);ii=[];jj=[];mm=[];kk=[];volume=0.
     for ids in tet:
         t=xyz[ids];J=(t[1:]-t[0]).T;V=abs(np.linalg.det(J))/6
         assert V>0

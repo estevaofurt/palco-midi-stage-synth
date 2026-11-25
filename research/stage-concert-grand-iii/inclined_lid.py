@@ -7,12 +7,14 @@ from board_contour import properties
 from closed_cavity import assemble as closed_assemble
 from aperture_modes import response
 
-def build(poly,n,nz,height,angle,field,c=343.,rho=1.204,*,wedge_layers=1,boundary_n=None):
+def build(poly,n,nz,height,angle,field,c=343.,rho=1.204,*,wedge_layers=1,boundary_n=None,edge_grading=0.,layer_grading=0.):
     if not isinstance(wedge_layers,int) or isinstance(wedge_layers,bool) or wedge_layers<1:
         raise ValueError('positive integer wedge_layers required')
     poly=np.asarray(poly,dtype=float)
     if not np.isfinite(angle) or not 0<=angle<90: raise ValueError('lid angle')
-    m=closed_assemble(poly,n,nz,height,field,c,rho,boundary_n=boundary_n)
+    from mesh_grading import graded_fractions
+    fractions=graded_fractions(wedge_layers,layer_grading)
+    m=closed_assemble(poly,n,nz,height,field,c,rho,boundary_n=boundary_n,edge_grading=edge_grading)
     if angle==0:
         return m,np.zeros((len(m['xyz']),0)),dict(areaM2=0.,wedgeVolumeM3=0.,faces=0,ports=0,gate=True)
     xy=m['xy']; N=len(xy); old=len(m['xyz']); rim=old-N+np.arange(N)
@@ -24,7 +26,7 @@ def build(poly,n,nz,height,angle,field,c=343.,rho=1.204,*,wedge_layers=1,boundar
     # sorted triangle ordering gives conforming diagonals on shared faces.
     sections=[rim];blocks=[m['xyz']];offset=old
     for layer in range(1,wedge_layers+1):
-        f=layer/wedge_layers
+        f=layer/wedge_layers if layer_grading==0 else fractions[layer]
         points=top if layer==wedge_layers else (1-f)*m['xyz'][rim]+f*top
         ids=rim.copy();ids[moving]=offset+np.arange(sum(moving))
         sections.append(ids);blocks.append(points[moving]);offset+=int(sum(moving))
