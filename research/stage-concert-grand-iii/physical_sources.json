@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "scope": "research priors only, not Yamaha measurements or selected G3 geometry",
+  "sources": {
+    "CD2012": {
+      "title": "Physical parameters for piano modeling",
+      "authors": "Juliette Chabassier; Marc Duruflé",
+      "version": "RT-0425 v1 April 2012",
+      "url": "https://www.researchgate.net/publication/265569903_Physical_parameters_for_piano_modeling",
+      "official": "https://hal.inria.fr/hal-00688679v1",
+      "note": "Section 3 and Appendix A; equivalent material, effective lengths based on Steinway D; author-uploaded HTML transcription, official v2 PDF access denied"
+    },
+    "ST2008": {
+      "title": "Physical modelling of the piano string scale",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0003682X07001235",
+      "note": "scale continuity, wound/solid and bridge transitions, not Yamaha"
+    },
+    "BROADWOOD": {
+      "url": "https://euphonics.org/12-2-1-parameter-values-for-piano-simulations/",
+      "note": "independent instrument, measured dimensions and estimated hammer masses; no adoption"
+    },
+    "BANK2004": {
+      "url": "https://home.mit.bme.hu/~bank/publist/dafx04.pdf",
+      "note": "separate geometry and estimation from acoustic recordings; no adoption"
+    }
+  },
+  "material": {
+    "equivalentStringYoungPa": 202000000000,
+    "equivalentStringShearPa": 80000000000,
+    "source": "CD2012 section 3.2",
+    "status": "published_model"
+  },
+  "hammer": {
+    "source": "CD2012 equations 2–4",
+    "status": "published_model",
+    "massInterceptKg": 0.0112,
+    "massSlopeKg": -0.000062348,
+    "exponentCoefficients": [
+      2.337,
+      -0.007703,
+      0.00024295
+    ],
+    "log10KIntercept": 7.6425,
+    "log10KSlope": 0.053097,
+    "warning": "K units N/m^p vary with exponent; compare force at common compression, not K magnitude; no hysteretic branch selected"
+  },
+  "anchors": [
+    {
+      "key": 24,
+      "L": 2.007,
+      "dMm": 1.48,
+      "rho": 57787,
+      "T": 1722,
+      "strikeM": 0.241,
+      "fPublished": 32.78
+    },
+    {
+      "key": 42,
+      "L": 1.757,
+      "dMm": 1.108,
+      "rho": 7734,
+      "T": 791,
+      "strikeM": 0.211,
+      "fPublished": 92.71
+    },
+    {
+      "key": 60,
+      "L": 0.657,
+      "dMm": 1.006,
+      "rho": 7850,
+      "T": 741,
+      "strikeM": 0.079,
+      "fPublished": 262.22
+    },
+    {
+      "key": 64,
+      "L": 0.529,
+      "dMm": 0.977,
+      "rho": 7850,
+      "T": 720,
+      "strikeM": 0.064,
+      "fPublished": 330.36
+    },
+    {
+      "key": 72,
+      "L": 0.344,
+      "dMm": 0.932,
+      "rho": 7850,
+      "T": 696,
+      "strikeM": 0.041,
+      "fPublished": 524.48
+    },
+    {
+      "key": 90,
+      "L": 0.13,
+      "dMm": 0.866,
+      "rho": 7850,
+      "T": 691,
+      "strikeM": 0.016,
+      "fPublished": 1483.31
+    }
+  ],
+  "anchorSource": "CD2012 Appendix A; selected factual diagnostic points only"
+}

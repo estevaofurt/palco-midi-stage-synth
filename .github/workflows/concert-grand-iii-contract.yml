@@ -16,3 +16,10 @@ jobs:
           python-version: '3.12'
       - run: python research/stage-concert-grand-iii/validate_contract.py
       - run: python research/stage-concert-grand-iii/test_contract.py
+      - run: python research/stage-concert-grand-iii/test_physical_inventory.py
+      - run: python research/stage-concert-grand-iii/physical_inventory.py --out /tmp/g3-inventory
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-physical-parameter-inventory
+          path: /tmp/g3-inventory/
+          if-no-files-found: error

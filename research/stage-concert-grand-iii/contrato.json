@@ -116,8 +116,13 @@
       "title": "Especificação e interfaces",
       "depends": [],
       "gate": "Contrato e matriz de rastreabilidade aprovados; sem parâmetros físicos inventados",
-      "status": "pending",
-      "evidence": []
+      "status": "passed",
+      "evidence": [
+        {
+          "commit": "a9c0b1f1877fba129f8f4dcaaf5b10cbc5f435c1",
+          "report": "GitHub Actions run 45638576637 job 139290598713 success; ESPECIFICACAO_G3.md and contrato.json; contract only"
+        }
+      ]
     },
     {
       "id": "G3.01",
@@ -126,7 +131,7 @@
         "G3.00"
       ],
       "gate": "Inventário por registro, 88 teclas, escala, tensão, B, impedância, fonte e incerteza; hipóteses explícitas",
-      "status": "pending",
+      "status": "implemented",
       "evidence": []
     },
     {
