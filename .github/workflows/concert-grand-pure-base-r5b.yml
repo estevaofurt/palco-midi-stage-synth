@@ -1,0 +1,28 @@
+name: Concert Grand R5b pure base at close perspective
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths: ['research/stage-concert-grand/f11u-r5b-*.mjs','.github/workflows/concert-grand-pure-base-r5b.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    strategy:
+      fail-fast: false
+      matrix:
+        factor: ['1','1.5','2']
+        mode: [pedal,dry,held]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --max-old-space-size=6144 research/stage-concert-grand/f11u-r5b-demo.mjs /tmp/r5b K750 ${{ matrix.mode }} ${{ matrix.factor }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R5b-${{ matrix.mode }}-L${{ matrix.factor }}
+          path: /tmp/r5b/
+          if-no-files-found: error
