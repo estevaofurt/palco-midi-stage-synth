@@ -1,0 +1,43 @@
+name: Concert Grand III graded volumetric geometry audit
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/graded_volume*.py','research/stage-concert-grand-iii/test_graded_volume_mesh.py','.github/workflows/concert-grand-iii-graded-volume.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          test "$(gh run view 45722209678 --json conclusion --jq .conclusion)" = success
+          gh run download 45722209678 -n G3-graded-edge-trace-${{ matrix.angle }} -D /tmp/g3-graded
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_graded_volume_mesh.py
+      - run: python research/stage-concert-grand-iii/graded_volume_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-graded/graded_edge_trace.json --angle ${{ matrix.angle }} --out /tmp/g3-graded-volume
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-graded-volume-${{ matrix.angle }}
+          path: /tmp/g3-graded-volume/
+          if-no-files-found: warn

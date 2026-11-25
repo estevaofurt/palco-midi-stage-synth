@@ -7,7 +7,9 @@ from scipy.sparse import coo_matrix
 from scipy.sparse.linalg import splu
 from board_contour import properties,margins
 
-def mesh(poly,n,nz,height,*,boundary_n=None):
+def mesh(poly,n,nz,height,*,boundary_n=None,edge_grading=0.):
+    from mesh_grading import graded_fractions
+    graded_fractions(1,edge_grading)
     if boundary_n is None:boundary_n=n
     if not isinstance(boundary_n,int) or isinstance(boundary_n,bool) or boundary_n<n:
         raise ValueError('boundary_n must be an integer at least n')
@@ -21,7 +23,8 @@ def mesh(poly,n,nz,height,*,boundary_n=None):
     boundary=[];hb=max(hi-lo)/boundary_n
     for a,b in zip(poly,np.roll(poly,-1,axis=0)):
         steps=max(1,int(np.ceil(np.linalg.norm(b-a)/hb)))
-        boundary.extend(a+(b-a)*j/steps for j in range(steps))
+        if edge_grading==0:boundary.extend(a+(b-a)*j/steps for j in range(steps))
+        else:boundary.extend(a+(b-a)*f for f in graded_fractions(steps,edge_grading)[:-1])
     xy=np.vstack([boundary,grid]);tri=Delaunay(xy).simplices
     t=xy[tri];det=np.abs(np.linalg.det(t[:,1:]-t[:,:1]))
     # Qhull can emit nearly collinear triangles between boundary points. Only
