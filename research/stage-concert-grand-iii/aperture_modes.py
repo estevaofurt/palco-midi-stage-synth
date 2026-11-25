@@ -12,14 +12,14 @@ from split_radiation import split_load,relative
 
 class FluxBasis:
     def __init__(self,poly,count):
-        if count not in (1,3,6,10):raise ValueError('nested complete polynomial degrees 0 through 3')
+        if count not in (1,3,6,10,15,21):raise ValueError('nested complete polynomial degrees 0 through 5')
         self.area,self.center,_=properties(poly);self.span=np.ptp(poly,axis=0);self.count=count
         xy,w=quadrature(poly,8);Q=self.raw(xy);G=Q.T@(w[:,None]*Q)/self.area
         L=cholesky((G+G.T)/2,lower=True)
         self.T=solve_triangular(L.T,np.eye(count),lower=False)
     def raw(self,xy):
         x,y=(2*(xy-self.center)/self.span).T
-        return np.stack([np.ones(len(x)),x,y,x*x,x*y,y*y,x**3,x*x*y,x*y*y,y**3],axis=1)[:,:self.count]
+        return np.stack([x**(d-j)*y**j for d in range(6) for j in range(d+1)][:self.count],axis=1)
     def __call__(self,xy,poly=None):return self.raw(xy)@self.T/self.area
 
 def aperture_modes(model,poly,cut,count):

@@ -1,0 +1,41 @@
+name: Concert Grand III quintic aperture convergence
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/lid_exterior_quintic_diagnostic.py','research/stage-concert-grand-iii/test_quintic_flux.py','.github/workflows/concert-grand-iii-quintic.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/test_aperture_modes.py
+      - run: python research/stage-concert-grand-iii/test_lid_exterior.py
+      - run: python research/stage-concert-grand-iii/test_quintic_flux.py
+      - run: python research/stage-concert-grand-iii/lid_exterior_quintic_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --angle ${{ matrix.angle }} --out /tmp/g3-quintic
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-quintic-${{ matrix.angle }}
+          path: /tmp/g3-quintic/
+          if-no-files-found: warn
