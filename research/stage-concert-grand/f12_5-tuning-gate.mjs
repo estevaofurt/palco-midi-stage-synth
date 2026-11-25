@@ -1,3 +1,4 @@
+import {createHash} from 'node:crypto';
 // F12.5 preliminary release-gate report validator. This is not a pitch detector,
 // authentication mechanism, or an export pipeline. Review evidence must be
 // independently produced and verified against the exact candidate binary.
@@ -9,6 +10,9 @@ const isHash=x=>typeof x==='string'&&/^[a-f0-9]{64}$/.test(x);
 const nonempty=x=>typeof x==='string'&&x.trim().length>0;
 const validHz=x=>Number.isFinite(x)&&x>0;
 const cents=(f,t)=>1200*Math.log2(f/t);
+export function targetCurveDigest(targets){
+ return createHash('sha256').update(JSON.stringify([...targets].sort((a,b)=>a.midi-b.midi).map(t=>[t.midi,t.hz]))).digest('hex');
+}
 export function validateTuningReport(report,candidate){
  const issues=[],rows=[],seen=new Set,targets=new Map;
  const issue=(code,detail)=>issues.push({code,detail});
@@ -19,11 +23,13 @@ export function validateTuningReport(report,candidate){
  if(report.referenceA4Hz!==440)issue('reference','A4 must be 440 Hz');
  if(!isHash(report.targetCurveSha256)||report.targetCurveSha256!==candidate.targetCurveSha256||!isHash(candidate.targetCurveSha256))issue('curve','predeclared curve digest mismatch');
  for(const t of Array.isArray(report.targets)?report.targets:[]){
-  if(!PIANO_NOTES.includes(t.midi)||!validHz(t.hz)||targets.has(t.midi)){issue('target','invalid or duplicate target');continue;}
+  if(!t||!PIANO_NOTES.includes(t.midi)||!validHz(t.hz)||targets.has(t.midi)){issue('target','invalid or duplicate target');continue;}
   targets.set(t.midi,t.hz);
  }
+ if(targets.size===88&&targetCurveDigest([...targets].map(([midi,hz])=>({midi,hz})))!==candidate.targetCurveSha256)issue('curve','actual target values do not match digest');
  if(targets.size!==88||targets.get(69)!==440||PIANO_NOTES.some((m,i)=>i&&targets.get(m)<=targets.get(m-1)))issue('targets','complete increasing 88-note curve required');
  for(const c of Array.isArray(report.cases)?report.cases:[]){
+  if(!c||typeof c!=='object'){issue('case','invalid row');continue;}
   const key=c.midi+':'+c.touch;
   if(!PIANO_NOTES.includes(c.midi)||!AF_TOUCHES.includes(c.touch)||seen.has(key)){issue('case',key+' invalid or duplicate');continue;}
   seen.add(key);
@@ -31,9 +37,9 @@ export function validateTuningReport(report,candidate){
   if(!isHash(c.pcmSha256)||!nonempty(c.evidence))issue('evidence',key);
   // A distinct early, middle and late measured window is necessary. The actual
   // durations and estimator uncertainties remain recorded, not inferred.
-  if(w.length<3||w[0]?.startS>.5||w.some((q,i)=>!Number.isFinite(q.startS)||!Number.isFinite(q.endS)||q.startS<0||q.endS<=q.startS||i&&q.startS<w[i-1].endS))issue('windows',key);
+  if(w.length<3||w[0]?.startS>.5||w.some((q,i)=>!q||!Number.isFinite(q.startS)||!Number.isFinite(q.endS)||q.startS<0||q.endS<=q.startS||i&&(!w[i-1]||q.startS<w[i-1].endS)))issue('windows',key);
   for(const q of w){
-   if(q.status!=='reliable'||!validHz(q.fundamentalHz)||!Number.isFinite(q.uncertaintyCents)||q.uncertaintyCents<0||!validHz(target)){issue('indeterminate',key+' @ '+q.startS);continue;}
+   if(!q||q.status!=='reliable'||!validHz(q.fundamentalHz)||!Number.isFinite(q.uncertaintyCents)||q.uncertaintyCents<0||!validHz(target)){issue('indeterminate',key+' @ '+q?.startS);continue;}
    usable.push({offset:cents(q.fundamentalHz,target),uncertainty:q.uncertaintyCents});
   }
   if(usable.length!==w.length||usable.length<3)continue;
