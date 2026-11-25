@@ -24,7 +24,9 @@ def make_kernels(nx,ny):
     return result
 medium=make_kernels(128,96);fine=make_kernels(256,192)
 def render(acc,ks):
-    return np.stack([pressure(acc,k[:acc.shape[0]]) for k in ks])
+    channels=[pressure(acc,k[:acc.shape[0]]) for k in ks]
+    n=max(map(len,channels))
+    return np.stack([np.pad(p,(0,n-len(p))) for p in channels])
 def rel(a,b):
     n=max(a.shape[-1],b.shape[-1])
     a=np.pad(a,((0,0),(0,n-a.shape[-1])));b=np.pad(b,((0,0),(0,n-b.shape[-1])))

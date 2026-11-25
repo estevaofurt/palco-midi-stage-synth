@@ -1,0 +1,2 @@
+# Revisão G2.09g-C-01 — alinhamento de canais
+Antes do resultado do CI, revisão de código identificou que os receptores possuem diferentes distâncias máximas e, portanto, kernels/caudas de tamanhos diferentes. Preencher somente o final de cada canal com zeros até o máximo comprimento antes de empilhar. Não mover início, não normalizar, não truncar, não alterar mecânica ou tolerâncias. Commit anterior pode falhar por dimensões distintas; somente avaliar gate no commit corrigido.
