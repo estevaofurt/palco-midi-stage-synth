@@ -1,0 +1,22 @@
+name: Concert Grand F11b scale audit and wound-wire preparation
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths:
+      - '.github/workflows/concert-grand-f11b-audit.yml'
+      - 'research/stage-concert-grand/f11b-s50-scale-audit*.mjs'
+      - 'research/stage-concert-grand/f11c-wound-wire*.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11b-s50-scale-audit.test.mjs
+      - run: node research/stage-concert-grand/f11c-wound-wire.test.mjs
