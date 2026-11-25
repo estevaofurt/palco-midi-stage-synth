@@ -8,13 +8,13 @@ from scipy.optimize import brentq
 from modal_target import basis,Target
 from felt_law import params,energy,relax,frozen_force
 ROOT=Path(__file__).parent
-def run(r,s,c,w2,P,sr,speed,stagger=False):
+def run(r,s,c,w2,P,sr,speed,stagger=False,trace=False):
     hm,f=params(r['key'],r['count'],s,c);m=hm['massKg'];N=r['count'];h=1/sr
     targets=[Target(w2,P,sr) for _ in range(N)]
     gaps=np.arange(N)*30e-6 if stagger else np.zeros(N)
     z=np.zeros(N);x=0.;v=speed;E0=.5*m*v*v;gh=h*h/(2*m)
     loss=impulse=peak=maxbal=maxinc=maxrelax=maxport=maxforce=0.;prev=E0
-    ncontact=0;started=False;separated=False;maxCompression=0.;perImpulse=np.zeros(N)
+    forceHistory=[];ncontact=0;started=False;separated=False;maxCompression=0.;perImpulse=np.zeros(N)
     # Distinct contacts share the hammer displacement, not the state of felt or target.
     for i in range(round(.04*sr)):
         d0=x-np.array([t.position() for t in targets])-gaps
@@ -36,6 +36,7 @@ def run(r,s,c,w2,P,sr,speed,stagger=False):
             total=brentq(fun,0.,hi,xtol=1e-12) if fun(hi)>0 else hi
             F=per(total)
         else:F=np.zeros(N)
+        if trace:forceHistory.append(F.copy())
         total=float(sum(F));x=xf-gh*total;v-=h*total/m
         for t,Fj in zip(targets,F):
             e=t.energy();work=t.step(float(Fj));maxport=max(maxport,abs(t.energy()-e-work))
@@ -58,7 +59,17 @@ def run(r,s,c,w2,P,sr,speed,stagger=False):
     if not stagger:assert max(perImpulse)-min(perImpulse)<=1e-10
     modal=sum(.5*(t.v*t.v+w2*t.q*t.q) for t in targets)
     assert abs(float(sum(modal))-Es)<=1e-10
-    return dict(key=r['key'],sampleRateHz=sr,speedMps=speed,stagger=stagger,modesPerString=len(P),contactDurationMs=1000*ncontact/sr,
+    audit={}
+    if trace:
+        # Integral of piecewise constant contact force at each modal frequency.
+        freq=np.sqrt(w2)/(2*np.pi);time=(np.arange(len(forceHistory))+.5)*h
+        coeff=(np.exp(-2j*np.pi*freq[:,None]*time[None,:])@np.asarray(forceHistory))*h*np.sinc(freq*h)[:,None]
+        predicted=.5*P*P*np.sum(abs(coeff)**2,axis=1)
+        err=float(np.max(abs(predicted-modal)));assert err<=max(1e-12,E0*1e-9)
+        audit=dict(forceSpectrumEnergyJ=predicted.tolist(),forceSpectrumResidualJ=err,
+            forceFundamentalOverDC=(np.abs(coeff[0])/np.maximum(perImpulse,1e-30)).tolist(),
+            contactPeriods=ncontact*h*r['nominalHz'])
+    return dict(**audit,key=r['key'],sampleRateHz=sr,speedMps=speed,stagger=stagger,modesPerString=len(P),contactDurationMs=1000*ncontact/sr,
         injectedJ=E0,hammerReboundJ=Eh,targetJ=Es,storedFeltJ=Ef,lossJ=loss,maxBalanceJ=maxbal,maxIncreaseJ=maxinc,
         maxRelaxResidualJ=maxrelax,maxPortResidualJ=maxport,maxForceResidualN=maxforce,impulseErrorNs=ie,
         peakForceN=peak,impulseNs=impulse,maxCompressionM=maxCompression,reboundMps=-v,perImpulseNs=perImpulse.tolist(),
