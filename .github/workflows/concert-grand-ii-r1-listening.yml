@@ -1,0 +1,66 @@
+name: Concert Grand II R1 listening package
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_r1_listening_pack.py','research/stage-concert-grand-ii/g2_r1_listening_pack_test.py','research/stage-concert-grand-ii/R1_PACK_READY.json','.github/workflows/concert-grand-ii-r1-listening.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  software:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 soundfile==0.13.1
+      - run: python research/stage-concert-grand-ii/g2_r1_listening_pack_test.py
+  package:
+    needs: software
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[R1-pack-ready]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 soundfile==0.13.1
+      - name: Verify frozen render run completed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/actions/runs/45617749735" > /tmp/run.json
+          python -c "import json; x=json.load(open('/tmp/run.json')); assert x['status']=='completed' and x['conclusion']=='success' and x['head_sha']=='95c2419c6a52289982e142669ee8ea610a8c7d89'"
+      - uses: actions/download-artifact@v4
+        with:
+          name: G2-R1-passive-damper-proof
+          run-id: 45617749735
+          github-token: ${{ github.token }}
+          path: /tmp/g2-proof
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G2-R1-*
+          run-id: 45617749735
+          github-token: ${{ github.token }}
+          path: /tmp/g2-renders
+      - run: python research/stage-concert-grand-ii/g2_r1_listening_pack.py --root /tmp/g2-renders --proof /tmp/g2-proof --out /tmp/g2-listening
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R1-escuta-cega
+          path: |
+            /tmp/g2-listening/escuta-cega/
+            /tmp/g2-listening/LEIA-ME.txt
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G2-R1-originais-gabarito
+          path: |
+            /tmp/g2-listening/ganho-original/
+            /tmp/g2-listening/gabarito.json
+            /tmp/g2-listening/relatorio.json
+            /tmp/g2-listening/LEIA-ME.txt
+          if-no-files-found: error
