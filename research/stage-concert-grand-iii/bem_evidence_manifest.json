@@ -1,0 +1,87 @@
+{
+  "methods": [
+    {
+      "key": "p0",
+      "run": 45697488123,
+      "artifact": "G3-exterior-bem",
+      "file": "exterior_bem.json",
+      "audit": "audit",
+      "family": "three-point",
+      "role": "solver"
+    },
+    {
+      "key": "p0-static",
+      "run": 45697703057,
+      "artifact": "G3-bem-split",
+      "file": "bem_split.json",
+      "audit": "audit",
+      "family": "three-point",
+      "role": "solver"
+    },
+    {
+      "key": "p1",
+      "run": 45698211918,
+      "artifact": "G3-bem-linear",
+      "file": "bem_linear.json",
+      "audit": "audit",
+      "family": "six-point",
+      "role": "solver"
+    },
+    {
+      "key": "p0-adaptive",
+      "run": 45698211921,
+      "artifact": "G3-bem-adaptive",
+      "file": "bem_adaptive.json",
+      "audit": "audit",
+      "family": "six-point",
+      "role": "solver",
+      "rowKind": "adaptive"
+    },
+    {
+      "key": "p1-adaptive",
+      "run": 45698449368,
+      "artifact": "G3-bem-p1-adapt",
+      "file": "bem_linear_adaptive.json",
+      "audit": "P1",
+      "family": "six-point",
+      "role": "solver",
+      "control": "P0"
+    },
+    {
+      "key": "galerkin",
+      "run": 45698641087,
+      "artifact": "G3-bem-galerkin",
+      "file": "bem_galerkin.json",
+      "audit": "weak",
+      "family": "six-point",
+      "role": "solver",
+      "control": "collocation"
+    },
+    {
+      "key": "oversampled",
+      "run": 45698886693,
+      "artifact": "G3-bem-over",
+      "file": "bem_oversampled.json",
+      "audit": "oversampled",
+      "family": "degree-four",
+      "role": "solver",
+      "control": "collocation"
+    },
+    {
+      "key": "power-partition",
+      "run": 45699141745,
+      "artifact": "G3-bem-power",
+      "file": "bem_power_partition.json",
+      "role": "diagnostic"
+    }
+  ],
+  "angles": [
+    30,
+    55
+  ],
+  "frequenciesHz": [
+    30,
+    80,
+    150
+  ]
+}

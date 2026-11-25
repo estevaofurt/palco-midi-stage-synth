@@ -1,0 +1,45 @@
+name: Concert Grand III BEM evidence consolidation
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/bem_evidence.py','research/stage-concert-grand-iii/bem_evidence_manifest.json','research/stage-concert-grand-iii/test_bem_evidence.py','.github/workflows/concert-grand-iii-bem-evidence.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python research/stage-concert-grand-iii/test_bem_evidence.py
+      - name: Collect available immutable run artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p /tmp/g3-evidence-input
+          python - <<'PY'
+          import json, pathlib, subprocess
+          manifest=json.loads(pathlib.Path('research/stage-concert-grand-iii/bem_evidence_manifest.json').read_text())
+          for m in manifest['methods']:
+              rid=str(m['run']);root=pathlib.Path('/tmp/g3-evidence-input')/rid
+              root.mkdir(exist_ok=True)
+              j=subprocess.run(['gh','api',f'repos/{__import__("os").environ["GITHUB_REPOSITORY"]}/actions/runs/{rid}/jobs?per_page=100'],capture_output=True,text=True)
+              if j.returncode==0:(root/'jobs.json').write_text(j.stdout)
+              else:print('Jobs unavailable',rid,j.stderr)
+              for angle in manifest['angles']:
+                  name=f"{m['artifact']}-{angle}"
+                  d=root/name
+                  p=subprocess.run(['gh','run','download',rid,'--name',name,'--dir',str(d)],capture_output=True,text=True)
+                  if p.returncode:print('Artifact not yet available',rid,name,p.stderr)
+          PY
+      - run: python research/stage-concert-grand-iii/bem_evidence.py --root /tmp/g3-evidence-input --out /tmp/g3-evidence
+      - run: cat /tmp/g3-evidence/bem_evidence.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-bem-evidence
+          path: /tmp/g3-evidence/
