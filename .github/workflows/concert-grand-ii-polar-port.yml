@@ -1,0 +1,25 @@
+name: Concert Grand II G2.08b reciprocal polarization port
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_polar_port*.mjs','.github/workflows/concert-grand-ii-polar-port.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  port:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand-ii/g2_group_hammer.test.mjs
+      - run: node research/stage-concert-grand-ii/g2_polar_port.test.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G2-polar-port-numeric
+          path: /tmp/g2-polar/report.json
+          if-no-files-found: error
