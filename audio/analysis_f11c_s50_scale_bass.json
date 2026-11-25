@@ -1,0 +1,322 @@
+{
+  "scale": {
+    "runId": 45520232315,
+    "artifactId": 14977779872,
+    "valid": 60,
+    "expected": 60,
+    "flagged": [
+      {
+        "from": 55,
+        "to": 56,
+        "touch": 24,
+        "attackDb": 3.7298267268644065,
+        "tailDb": 9.27572785196462,
+        "decayDifferenceDb": 5.545901125100215,
+        "flag": true
+      },
+      {
+        "from": 56,
+        "to": 57,
+        "touch": 24,
+        "attackDb": 2.0385520448119685,
+        "tailDb": -12.768169723422954,
+        "decayDifferenceDb": -14.806721768234922,
+        "flag": true
+      },
+      {
+        "from": 58,
+        "to": 59,
+        "touch": 24,
+        "attackDb": -6.600265423795694,
+        "tailDb": 2.30460267721089,
+        "decayDifferenceDb": 8.904868101006585,
+        "flag": true
+      },
+      {
+        "from": 65,
+        "to": 66,
+        "touch": 24,
+        "attackDb": -1.7925559377369664,
+        "tailDb": -11.777644471415682,
+        "decayDifferenceDb": -9.985088533678717,
+        "flag": true
+      },
+      {
+        "from": 65,
+        "to": 66,
+        "touch": 76,
+        "attackDb": -0.7255585041523762,
+        "tailDb": -10.8511503205522,
+        "decayDifferenceDb": -10.125591816399826,
+        "flag": true
+      },
+      {
+        "from": 65,
+        "to": 66,
+        "touch": 127,
+        "attackDb": -0.5280079281681902,
+        "tailDb": -10.708765250330059,
+        "decayDifferenceDb": -10.180757322161867,
+        "flag": true
+      },
+      {
+        "from": 70,
+        "to": 71,
+        "touch": 24,
+        "attackDb": -5.258458933733193,
+        "tailDb": -40.235430459428684,
+        "decayDifferenceDb": -34.97697152569549,
+        "flag": true
+      },
+      {
+        "from": 70,
+        "to": 71,
+        "touch": 76,
+        "attackDb": -4.975581931544551,
+        "tailDb": -33.976793360707944,
+        "decayDifferenceDb": -29.00121142916339,
+        "flag": true
+      },
+      {
+        "from": 70,
+        "to": 71,
+        "touch": 127,
+        "attackDb": -4.492344150823522,
+        "tailDb": -26.449202065348068,
+        "decayDifferenceDb": -21.956857914524548,
+        "flag": true
+      },
+      {
+        "from": 71,
+        "to": 72,
+        "touch": 24,
+        "attackDb": -2.5586480902856925,
+        "tailDb": 32.074680095459804,
+        "decayDifferenceDb": 34.6333281857455,
+        "flag": true
+      },
+      {
+        "from": 71,
+        "to": 72,
+        "touch": 76,
+        "attackDb": -1.5836287080514777,
+        "tailDb": 30.371200538986876,
+        "decayDifferenceDb": 31.954829247038354,
+        "flag": true
+      },
+      {
+        "from": 71,
+        "to": 72,
+        "touch": 127,
+        "attackDb": -1.2972199702743479,
+        "tailDb": 23.552801813732607,
+        "decayDifferenceDb": 24.850021784006955,
+        "flag": true
+      }
+    ],
+    "dynamics": [
+      {
+        "midi": 53,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 54,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 55,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 56,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 57,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 58,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 59,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 60,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 61,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 62,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 63,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 64,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 65,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 66,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 67,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 68,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 69,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 70,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 71,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      },
+      {
+        "midi": 72,
+        "peakMonotonic": true,
+        "attackMonotonic": true,
+        "tailMonotonic": true
+      }
+    ],
+    "maxPeak": 0.8305203117745873
+  },
+  "bass": {
+    "runId": 45520294988,
+    "candidates": [
+      {
+        "kind": "single-wound-core-only-EI-hypothesis",
+        "lengthM": 1.5,
+        "coreDiameterM": 0.0012,
+        "wrapDiameterM": 0.00024947638049103147,
+        "pitchM": 0.00024947638049103147,
+        "outerDiameterM": 0.0016989527609820628,
+        "coreYoungPa": 200000000000,
+        "coreDensityKgM3": 7850,
+        "wrapDensityKgM3": 8960,
+        "coreMu": 0.008878140839044753,
+        "wrapMu": 0.008006434038712302,
+        "helixRatio": 18.28026006815124,
+        "linearDensityKgM": 0.016884574877757054,
+        "EI": 0.02035752039526185,
+        "tensionN": 649.9999999999999,
+        "B": 0.00013738165667578992,
+        "stressPa": 574726183.3873998,
+        "f1Hz": 65.40639132514966,
+        "areaM2": 0.0000011309733552923253,
+        "massKg": 0.02532686231663558,
+        "midi": 36,
+        "scope": "single layer homogenized winding, axial load and EI core only, diagnostic target not measured",
+        "impedanceNsM": 3.312849780859688
+      },
+      {
+        "kind": "single-wound-core-only-EI-hypothesis",
+        "lengthM": 1.15,
+        "coreDiameterM": 0.0011,
+        "wrapDiameterM": 0.000187303046915702,
+        "pitchM": 0.000187303046915702,
+        "outerDiameterM": 0.001474606093831404,
+        "coreYoungPa": 200000000000,
+        "coreDensityKgM3": 7850,
+        "wrapDensityKgM3": 8960,
+        "coreMu": 0.007460104455030663,
+        "wrapMu": 0.005336280944652404,
+        "helixRatio": 21.61479449374511,
+        "linearDensityKgM": 0.012796385399683067,
+        "EI": 0.014373768137877553,
+        "tensionN": 649.9999999999998,
+        "B": 0.00016502940849071906,
+        "stressPa": 683971656.2626904,
+        "f1Hz": 97.99885899543733,
+        "areaM2": 9.503317777109124e-7,
+        "massKg": 0.014715843209635525,
+        "midi": 43,
+        "scope": "single layer homogenized winding, axial load and EI core only, diagnostic target not measured",
+        "impedanceNsM": 2.8840337220278807
+      },
+      {
+        "kind": "single-wound-core-only-EI-hypothesis",
+        "lengthM": 0.9,
+        "coreDiameterM": 0.001,
+        "wrapDiameterM": 0.00020791439511588577,
+        "pitchM": 0.00020791439511588577,
+        "outerDiameterM": 0.0014158287902317716,
+        "coreYoungPa": 200000000000,
+        "coreDensityKgM3": 7850,
+        "wrapDensityKgM3": 8960,
+        "coreMu": 0.0061653755826699685,
+        "wrapMu": 0.00556057059609548,
+        "helixRatio": 18.278996498112665,
+        "linearDensityKgM": 0.011725946178765448,
+        "EI": 0.009817477042468105,
+        "tensionN": 649.9999999999998,
+        "B": 0.00018403535541488503,
+        "stressPa": 827605704.0778556,
+        "f1Hz": 130.8127826502993,
+        "areaM2": 7.853981633974482e-7,
+        "massKg": 0.010553351560888904,
+        "midi": 48,
+        "scope": "single layer homogenized winding, axial load and EI core only, diagnostic target not measured",
+        "impedanceNsM": 2.7607725397427325
+      }
+    ]
+  },
+  "scope": "CI summary; full cases, audit and WAVs in scale review artifact; bass geometry only"
+}
