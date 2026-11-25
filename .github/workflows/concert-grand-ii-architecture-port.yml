@@ -1,0 +1,18 @@
+name: Concert Grand II G2.04b dispersion and passive port proof
+on:
+  push:
+    branches: [research/stage-concert-grand-ii]
+    paths: ['research/stage-concert-grand-ii/g2_arch_dispersion.mjs','research/stage-concert-grand-ii/g2_arch_port*.mjs','research/stage-concert-grand-ii/g2_arch_worklet.mjs','.github/workflows/concert-grand-ii-architecture-port.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand-ii/g2_arch_port.test.mjs
