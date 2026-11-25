@@ -20,4 +20,10 @@ class CavityTest(unittest.TestCase):
         q=assemble(self.poly,4,2,.24,self.field)
         self.assertAlmostEqual(q['volume'],.3*.2*.24)
         with self.assertRaises(ValueError):response(q,10+10j,[[.5,.1,.1]])
+    def test_oblique_polygon(self):
+        poly=np.array([.035,.3])+np.array([[0,0],[1,0],[1,.22],[.88,.86],[.78,1],[.54,1],[0,.43]])*np.array([1.42,1.6])
+        for n,nz in [(8,3),(12,4),(18,6)]:
+            q=assemble(poly,n,nz,.24,self.field)
+            self.assertLess(q['constantResidual'],1e-9)
+            self.assertAlmostEqual(q['volume'],.24*1.7810208,places=10)
 if __name__=='__main__':unittest.main()

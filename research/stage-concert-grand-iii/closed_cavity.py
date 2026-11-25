@@ -12,14 +12,29 @@ def mesh(poly,n,nz,height):
     assert n>=2 and nz>=1 and height>0
     x,y=np.meshgrid(*[np.linspace(a,b,n+1) for a,b in zip(lo,hi)])
     grid=np.stack([x.ravel(),y.ravel()],axis=1)
-    grid=grid[margins(poly,grid)>1e-9]
-    boundary=[]
     h=max(hi-lo)/n
+    # Avoid tiny cut triangles between interior grid points and perimeter nodes.
+    grid=grid[margins(poly,grid)>.15*h]
+    boundary=[]
     for a,b in zip(poly,np.roll(poly,-1,axis=0)):
         steps=max(1,int(np.ceil(np.linalg.norm(b-a)/h)))
         boundary.extend(a+(b-a)*j/steps for j in range(steps))
     xy=np.vstack([boundary,grid]);tri=Delaunay(xy).simplices
+    t=xy[tri];det=np.abs(np.linalg.det(t[:,1:]-t[:,:1]))
+    # Qhull can emit nearly collinear triangles between boundary points. Only
+    # discard roundoff-area triangles and require intact perimeter and volume.
+    bad=det<=1e-12*h*h
+    if np.any(bad):
+        assert np.all(tri[bad]<len(boundary)), 'degenerate interior triangle'
+        tri=tri[~bad];det=det[~bad]
     assert len(np.unique(tri))==len(xy)
+    assert min(det)/h**2>=1e-4, 'poor planar element quality'
+    edges=np.sort(np.vstack([tri[:,[0,1]],tri[:,[1,2]],tri[:,[2,0]]]),axis=1)
+    e,count=np.unique(edges,axis=0,return_counts=True)
+    expected=np.sort(np.c_[np.arange(len(boundary)),np.roll(np.arange(len(boundary)),-1)],axis=1)
+    assert np.all(count<=2) and set(map(tuple,e[count==1]))==set(map(tuple,expected)), 'boundary topology'
+    assert abs(sum(det)/2-properties(poly)[0])<1e-10
+    print('G3_CAVITY_MESH '+str(dict(n=n,nz=nz,discarded=int(sum(bad)),minimumPlanarAreaRatio=float(min(det)/h**2))),flush=True)
     N=len(xy);xyz=np.concatenate([np.c_[xy,np.full(N,z)] for z in np.linspace(0,height,nz+1)])
     tet=[]
     for k in range(nz):
@@ -47,8 +62,10 @@ def assemble(poly,n,nz,height,field,c=343.,rho=1.204):
         B[ids]+=lam.T@((jac*weights)[:,None]*field(lam@t))
     A,_,_=properties(np.asarray(poly));assert abs(volume-A*height)<1e-10 and abs(surface-A)<1e-10
     assert abs(float(np.ones(N)@(M@np.ones(N)))*c*c-volume)<1e-10
-    assert np.linalg.norm(K@np.ones(N))<1e-9
-    return dict(M=M,K=K,B=B,xyz=xyz,tet=tet,volume=volume,area=A,rho=rho,c=c)
+    constant=float(np.linalg.norm(K@np.ones(N)))
+    print('G3_CAVITY_CONSTANT '+str(dict(n=n,nz=nz,residual=constant)),flush=True)
+    assert constant<1e-9
+    return dict(M=M,K=K,B=B,xyz=xyz,tet=tet,xy=xy,tri=tri,volume=volume,area=A,rho=rho,c=c,constantResidual=constant)
 
 def observer(model,points):
     xyz=model['xyz'];tet=model['tet'];t=xyz[tet]
