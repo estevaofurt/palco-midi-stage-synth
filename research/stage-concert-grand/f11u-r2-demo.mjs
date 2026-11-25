@@ -1,0 +1,38 @@
+import {solidWire} from '../c3x-physical/c4-wire-consistency.mjs';
+import {makeDesign} from './c4-design.mjs';
+import {stringMode,spatialWeight} from './stiff-string.mjs';
+import {plateDesign,plateModes,patchWeight} from './orthotropic-plate.mjs';
+import {ribDesign,generalizedEigen} from './ribbed-plate.mjs';
+import {mindlinModes} from './mindlin-plate.mjs';
+import {PolarizedBridge,PolarizedHammer} from './polarized-bridge.mjs';
+import {BoardCoupledBridge} from './board-coupling.mjs';
+import {radiationGrid,surfaceShape,radiationKernel} from './surface-radiation.mjs';
+import {ResistiveBoard} from './radiation-loading.mjs';
+import {relaxMemory} from './felt-memory.mjs';
+import {fft,waveBytes} from './f8-render.mjs';
+const hp={fft,solidWire,makeDesign,stringMode,spatialWeight,plateDesign,plateModes,patchWeight,ribDesign,generalizedEigen,mindlinModes,PolarizedBridge,PolarizedHammer,BoardCoupledBridge,radiationGrid,surfaceShape,radiationKernel,ResistiveBoard,relaxMemory};
+
+import {renderDistributedTrial} from './f11u-r2-render.mjs';
+import {chordProgram,validateChordProgram} from './f11p-chord-program.mjs';
+import {S50_REFERENCE} from './f11a-s50-scale.mjs';
+import {wave24} from './f9-wave24.mjs';
+import {inspectPair} from './f9-soft-pcm-audit.mjs';
+import {writeFileSync,mkdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const [out='f11t',id='G7-pedal-mf',variant='K750',strengthArg='25',axis='both']=process.argv.slice(2);
+const program=chordProgram();validateChordProgram(program);
+const c=program.find(x=>x.id==='G7-pedal-mf');
+if(!c||!['G7-dry-mf','G7-pedal-mf'].includes(id)||!['K750','K1000'].includes(variant))throw Error('F11t pilot scope');
+const events=c.events.filter(e=>e.type!=='on'&&(id==='G7-pedal-mf'||e.type!=='pedal'));
+const seconds=3,q=renderDistributedTrial(hp,{notes:c.notes,midiVelocity:c.velocity,variant,seconds,events,strength:Number(strengthArg),both:axis==='both'});
+// Fixed shared listening headroom across all candidates, not per-chord normalization.
+const gain=S50_REFERENCE.gain*.5;
+const y=q.channels.map(x=>{let N=1;while(N<x.length)N*=2;const re=new Float64Array(N),im=new Float64Array(N);re.set(x);hp.fft(re,im);for(let i=0;i<N;i++){const f=Math.min(i,N-i)*48000/N,w=f<=8000?1:f>=12000?0:.5*(1+Math.cos(Math.PI*(f-8000)/4000));re[i]*=w;im[i]*=w;}hp.fft(re,im,true);return re.slice(0,x.length);});
+const hi=wave24(y,48000,gain),lo=waveBytes(y,48000,gain),pair=inspectPair(lo.bytes,hi.bytes);
+if(hi.clipped||lo.clipped||hi.peak>.85||pair.frames!==Math.round(seconds*48000)+239)throw Error('chord export gate');
+const rms=(a,b)=>{let sum=0,count=0;for(const ch of y)for(let i=Math.round(a*48000);i<Math.round(b*48000);i++){sum+=(ch[i]*gain)**2;count++;}return 10*Math.log10(Math.max(sum/count,1e-30));};
+const releaseRms={before:rms(1.3,1.5),after100:rms(1.6,1.7),after300:rms(1.8,1.9),after500:rms(2,2.1),after1000:rms(2.5,2.6),afterPedal:rms(2.8,2.9)};
+const sha=createHash('sha256').update(hi.bytes).digest('hex'),result={...q.meta,releaseRms,caseId:id,gain,peak:hi.peak,clipped:hi.clipped,pair,sha256:sha,scope:'distributed modal damping after release, diagnostic not calibrated felt; same S50 gain'};
+mkdirSync(out,{recursive:true});const stem=out+'/'+id+'_'+variant+'_'+axis+'_R'+strengthArg+'_release';
+writeFileSync(stem+'_24bit.wav',hi.bytes,{flag:'wx'});writeFileSync(stem+'.wav',lo.bytes,{flag:'wx'});writeFileSync(stem+'.json',JSON.stringify(result,null,2),{flag:'wx'});
+const {boardSignature,...small}=result;console.log('F11U_R2_RESULT '+JSON.stringify(small));

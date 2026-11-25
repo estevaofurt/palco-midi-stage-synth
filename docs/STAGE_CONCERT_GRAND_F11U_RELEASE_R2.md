@@ -1,0 +1,3 @@
+# F11u-R2
+
+R1 run 45534789166: 10/10 success, dry RMS +1000 ms C1/C2/C4/C8/C16 = -44.95/-43.83/-43.36/-43.30/-43.50 dBFS. Reject increased single-port coefficient. R2 uses distributed modal damping split step after mechanical integration, on vertical and optionally horizontal axes; preserves bridge momentum and dissipates energy with implicit midpoint. No changes to held/pedal-down state, no gain envelope, no board damping. Diagnostic approximation, not measured felt geometry. Rates 10/25/50 s^-1, compare vertical-only 25 and pedal control 25. Existing models preserved. Require energy and WAV gates, listening before selection, F12.5 mandatory.

@@ -1,0 +1,41 @@
+name: Concert Grand R2 distributed release damping
+on:
+  push:
+    branches: [research/stage-concert-grand]
+    paths: ['research/stage-concert-grand/f11u-r2-*.mjs','.github/workflows/concert-grand-release-r2.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11u-r2-distributed.test.mjs
+  sweep:
+    needs: unit
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {strength: 10, axis: both, caseId: G7-dry-mf}
+          - {strength: 25, axis: both, caseId: G7-dry-mf}
+          - {strength: 50, axis: both, caseId: G7-dry-mf}
+          - {strength: 25, axis: vertical, caseId: G7-dry-mf}
+          - {strength: 25, axis: both, caseId: G7-pedal-mf}
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand/f11u-r2-demo.mjs /tmp/r2 ${{ matrix.caseId }} K750 ${{ matrix.strength }} ${{ matrix.axis }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: R2-${{ matrix.caseId }}-${{ matrix.axis }}-${{ matrix.strength }}
+          path: /tmp/r2/
+          if-no-files-found: error
