@@ -131,8 +131,13 @@
         "G3.00"
       ],
       "gate": "Inventário por registro, 88 teclas, escala, tensão, B, impedância, fonte e incerteza; hipóteses explícitas",
-      "status": "implemented",
-      "evidence": []
+      "status": "passed",
+      "evidence": [
+        {
+          "commit": "196db923728f847f2d9fe48cf86867cfb116c7cd",
+          "report": "run 45641844957 job 139302299054 success; 36 checks; scale geometry 15035198779 and spatial layout 15036490306; engineering hypothesis only; physical identification inventory gate, not geometry/final tuning approval"
+        }
+      ]
     },
     {
       "id": "G3.02",
@@ -141,7 +146,7 @@
         "G3.01"
       ],
       "gate": "Contato unilateral com memória passiva, dinâmica graduada, rebote, força-tempo e convergência",
-      "status": "pending",
+      "status": "implemented",
       "evidence": []
     },
     {

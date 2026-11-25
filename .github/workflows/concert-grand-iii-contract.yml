@@ -64,3 +64,10 @@ jobs:
           name: G3-spatial-layout-01
           path: /tmp/g3-layout/
           if-no-files-found: error
+      - run: python research/stage-concert-grand-iii/test_felt_law.py
+      - run: python research/stage-concert-grand-iii/felt_law.py --scale /tmp/g3-geometry/scale_geometry.json --out /tmp/g3-felt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-felt-law-01
+          path: /tmp/g3-felt/
+          if-no-files-found: error

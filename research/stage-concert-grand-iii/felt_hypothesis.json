@@ -1,0 +1,23 @@
+{
+  "version": "G3-felt-memory-01",
+  "status": "engineering_hypothesis",
+  "sourceMassPowerK": "CD2012 equations 2–4 (published proposed curves, not measured Yamaha)",
+  "sourceMemory": "Stulov 2004 dynamic felt experiments motivate memory; G1 felt-memory.mjs passive precedent; not same constitutive law or fitted parameters",
+  "compressionReferenceM": 0.001,
+  "equilibriumFraction": 0.7,
+  "memoryFraction": 0.3,
+  "recoveryStiffnessFactor": 1,
+  "freeRecoveryTimeS": 0.001,
+  "impactSpeedsMps": [
+    0.5,
+    1,
+    2
+  ],
+  "velocityStatus": "diagnostic physical speeds only; no MIDI equivalence",
+  "contactSplit": "divide total elastic prior and recovery/viscosity by number of wires; equal compression reproduces total instantaneous force; independent memory states",
+  "notes": [
+    "fractions and recovery time not fitted; do not equate free recovery time to Stulov hereditary kernel",
+    "flexible string force/impact and action mapping pending",
+    "fixed reference compression normalizes units, not actual compression or maximum"
+  ]
+}
