@@ -1,0 +1,5 @@
+# G3.12b — resistência de radiação da superfície enriquecida
+
+G3.12a run 45737081748 aprovado: 72 campos, validação 1.1866017069844976e-7, energia 7.512329701589095e-14, estados 4.4865237462788623e-13. Núcleo seco 48k mediana 10.64435 us/amostra p99 53.30% sem overruns; 96k mediana 10.65382 us/amostra p99 117.51%, 200/200 overruns. Densificação 2/4 lotes concluídos (30°).
+
+Reconstituir formas de superfície a partir do levantamento físico congelado e mapa ortonormal. Quadratura alinhada spline ordens 6/8, angular 12/16, 30/150/300 Hz, dois pontos de pressão hipotéticos acima da tábua. Gram angular PSD sem clipping, comparar convergência espacial/angular/pressão <=1e-6, reciprocidade e balanço potência <=1e-8. Unitário compara Gram com kernel suave direto em superfície pequena. Acoplamento harmônico resistivo isolado para prova de potência, não usar como carga completa. Exportar R, pressão, mobilidade e observação com hashes. Baffle infinito unilateral, sem reatância, tampa, cavidades ou causalidade temporal. Não usar quatro campos anteriores nem promover ao motor. Main preservada.
