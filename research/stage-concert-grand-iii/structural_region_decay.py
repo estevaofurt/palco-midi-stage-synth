@@ -38,7 +38,7 @@ def project_regions(D,V,sizes):
     if error>1e-10 or min(mins)<-1e-10:raise ValueError('projected loss partition')
     return G,dict(reconstructionRelative=error,minimumEigenvalueRelative=mins)
 
-def rebuild(scale,surface,archive,wires):
+def rebuild(scale,surface,archive,wires,surface_sink=None):
     old,sha=load_source(surface,scale);raw=scale.read_bytes();sc=json.loads(raw)
     rows={v['key']:v for v in sc['rows']}
     l=layout_build(sc,read('layout_hypothesis.json'));mat=read('board_interface_hypothesis.json')
@@ -70,6 +70,7 @@ def rebuild(scale,surface,archive,wires):
     if max(v['maximum'] for v in replays)>1e-5:raise ValueError('local wire transfer replay')
     G,partition=project_regions(D,A,[q['plateDofs'],q['rimDofs'],sum(q['bridgeDofs'])])
     if relative(G.sum(axis=0),d)>1e-10:raise ValueError('structural damping replay')
+    if surface_sink is not None:surface_sink(plate,poly,A[:q['plateDofs']])
     return k,d,P,B,ww,G,A,dict(base=audit,massRelative=mass,transferReplay=replays,partition=partition,
         plateDofs=q['plateDofs'],rimDofs=q['rimDofs'],bridgeDofs=q['bridgeDofs'],surfaceSourceSha256=sha)
 

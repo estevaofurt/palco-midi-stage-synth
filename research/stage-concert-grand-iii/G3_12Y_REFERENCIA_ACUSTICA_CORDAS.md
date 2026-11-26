@@ -1,0 +1,5 @@
+# G3.12y — referência acústica co-coordenada com cordas
+
+G3.12x run 45774543300: testes unitários aprovados, prova física ainda em execução na inspeção. G3.12w prova sintética aprovada; fit físico antigo 72 campos não aprovado nem compatível com a base 80.
+
+Reconstruir estrutura local por G3.12v, expor placa/lift via callback opcional, sem alterar cálculo existente. Obter Gram e campos ortonormais na mesma montagem. Calcular resistência angular e reatância Rayleigh FFT 120/240, quadratura 8/12, resistência 6/8 espacial 12/16 angular; pressão 2 microfones. 7 pontos 30/150/250/261.4/261.63/261.86/300 Hz. Cinco hipóteses predeterminadas de afinação/amortecimento, 35 respostas com 128 interiores por corda por condensação e comparação com 32 interiores por solução densa. Auditar potência, passividade e reciprocidade, medir fração de energia irradiada na excitação harmônica C4 e erro da redução. Não selecionar parâmetros por esses pontos. Modelo ideal de baffle de um lado; sem caixa/tampa, sem fit causal, sem duração audível. Main preservada.
