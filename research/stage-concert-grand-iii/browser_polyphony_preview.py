@@ -3,7 +3,7 @@ import argparse,contextlib,http.server,threading,json
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--site',type=Path,required=True);p.add_argument('--voices',type=int,choices=[128,192],default=128);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--site',type=Path,required=True);p.add_argument('--voices',type=int,choices=[128,192],default=128);p.add_argument('--engine',choices=['modal','physicalLegacy','physical','hybrid'],default='modal');a=p.parse_args()
     handler=lambda *args,**kw:http.server.SimpleHTTPRequestHandler(*args,directory=str(a.site),**kw)
     with http.server.ThreadingHTTPServer(('127.0.0.1',0),handler) as server:
         thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
@@ -18,11 +18,12 @@ def main():
             with page.expect_navigation():page.locator('#polyphony-limit').select_option(str(a.voices))
             page.wait_for_function('window.__palcoTest!==undefined')
             assert page.locator('#polyphony-limit').input_value()==str(a.voices)
-            page.evaluate("""()=>{const s=window.__palcoTest.state;s.mask=1;s.patches.piano.values.soundEngine='modal';}""")
+            page.evaluate("""engine=>{const s=window.__palcoTest.state;s.mask=1;s.patches.piano.values.soundEngine=engine;s.patches.piano.values.physicalQuality='studio';s.patches.piano.values.mechanicalModel='on';}""",a.engine)
             page.locator('#power').click()
-            page.wait_for_function("window.__palcoTest.getStage()?.instruments.piano.modal",timeout=30000)
-            result=page.evaluate("""async(requested)=>{
-              const s=window.__palcoTest.getStage(),p=s.instruments.piano.modal.port;
+            node={'modal':'modal','physicalLegacy':'legacyPhysical','physical':'physical','hybrid':'hybrid'}[a.engine]
+            page.wait_for_function('(node)=>Boolean(window.__palcoTest.getStage()?.instruments.piano[node])',arg=node,timeout=30000)
+            result=page.evaluate("""async({requested,node})=>{
+              const s=window.__palcoTest.getStage(),p=s.instruments.piano[node].port;
               const probe=()=>new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('probe timeout')),5000);
                 const listen=e=>{if(e.data?.type==='polyphony-probe'){clearTimeout(timer);p.removeEventListener('message',listen);resolve(e.data)}};
                 p.addEventListener('message',listen);p.postMessage({type:'polyphony-probe'});});
@@ -46,7 +47,7 @@ def main():
               s.state.mask=3;s.startNote('proof',0,60,.8,3);
               const reduced=s.voiceStats();
               return {sampleRate:s.ctx.sampleRate,cap,initial,actual,stage,layerLimit,stolen,reduced,signal,n,polls,nonzero,progress,sustained};
-            }""",a.voices)
+            }""",dict(requested=a.voices,node=node))
             assert result['cap']==(a.voices if result['sampleRate']<=48000 else 64),result
             assert result['initial']['capacity']==result['cap'],result
             assert result['actual']['active']==result['n'],result
@@ -60,7 +61,7 @@ def main():
             assert result['polls']==40 and result['nonzero']>=36,result
             assert result['progress']>0.8,result
             assert not errors,errors
-            print('G3_APP_POLYPHONY_PROBE '+json.dumps(result),flush=True)
+            print('G3_APP_POLYPHONY_PROBE '+json.dumps(dict(engine=a.engine,**result)),flush=True)
             browser.close()
         server.shutdown()
 if __name__=='__main__':main()

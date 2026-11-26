@@ -25,6 +25,9 @@ jobs:
       - run: pip install playwright && python -m playwright install --with-deps chromium
       - run: python research/stage-concert-grand-iii/browser_polyphony_preview.py --site /tmp/g3-app-preview --voices 128
       - run: python research/stage-concert-grand-iii/browser_polyphony_preview.py --site /tmp/g3-app-preview --voices 192
+      - run: python research/stage-concert-grand-iii/browser_polyphony_preview.py --site /tmp/g3-app-preview --voices 128 --engine physicalLegacy
+      - run: python research/stage-concert-grand-iii/browser_polyphony_preview.py --site /tmp/g3-app-preview --voices 128 --engine physical
+      - run: python research/stage-concert-grand-iii/browser_polyphony_preview.py --site /tmp/g3-app-preview --voices 128 --engine hybrid
       - uses: actions/upload-artifact@v4
         with:
           name: G3-app-polyphony-preview
