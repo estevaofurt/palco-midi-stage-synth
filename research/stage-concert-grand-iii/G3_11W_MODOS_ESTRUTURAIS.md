@@ -1,0 +1,5 @@
+# G3.11w — exportação modal estrutural seca
+
+G3.11v run 45735004457: extração de pressão aprovada, ajuste temporal reprovado. 30° validação 1.0631657031695245; 55° 1.0200928820040343. Nenhuma promoção. Densificação pendente.
+
+Reutilizar malha estrutural de modal_string_radiation_diagnostic (placa spline 30/14, pontes 2, aro 8), massa normalizada e 256 modos. Exportar rigidez diagonal, amortecimento completo, portos e projeção L2 nos quatro campos 1,x,y,xy. Comparar 64/128/192/256 modos com solução seca de coordenadas completas em 32 pontos 30–500 Hz; comparar D completo vs diagonal sem escolher aproximação a priori. Medir erro máximo por frequência (5%) e resíduo de superfície por modo (5%), separado do gate algébrico/exportação. Quadratura 30/42; rejeitar divergência de mapa >1e-5 ou equações normais >1e-8. Exportar hashes e resultados mesmo se aproximações reprovadas. Parâmetros físicos são hipóteses não calibradas. Quatro campos não certificados para representar a vibração real; não conectar carga rejeitada. Sem cordas, áudio ou polifonia. Main preservada.
