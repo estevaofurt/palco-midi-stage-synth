@@ -1,0 +1,42 @@
+name: Concert Grand III acoustic hammer and damper interface
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/acoustic_contact.py','.github/workflows/concert-grand-iii-acoustic-contact.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-port-enrichment
+          run-id: 45742331448
+          github-token: ${{ github.token }}
+          path: /tmp/g3-wire
+      - run: python research/stage-concert-grand-iii/acoustic_contact.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --out /tmp/g3-acoustic-contact
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-acoustic-contact
+          path: /tmp/g3-acoustic-contact/
