@@ -1,0 +1,5 @@
+# G3.13h — WAVs produzidos, correção de manifesto
+
+Run 45793619773 concluiu todas as quatro renderizações e gravou 16 WAVs, artefato 15103268854 (65.889.885 bytes). Job falhou somente ao calcular SHA256 do manifesto joint: variável raw inicialmente bytes foi sobrescrita por booleano no laço de exportação. Corrigir nomes joint_raw / physical_units. Não confundir artefato existente de execução incompleta com gate final aprovado. Adicionar leitura de retorno de cada WAV, igualdade de amostras, taxa, canais, dtype, finitude e ausência de clipping; novo teste unitário PCM16 e float32.
+
+Auditoria autocontida: transferência seca erro 2.5941594300010445e-8; kernel local 2.8009015818251867e-7; pressão independente máx 2.573825174891854e-8; partição D 4.359287053648033e-11. Ataques replay zero; diferença energética G3.12x máxima 4.7874361142064e-9; balanço máximo 4.243201168705784e-12. C4 pressão -60dB ref comum forte nominal microfone1: nominal .3/3m/s 3.95/6.75s; ±1 cent x.25 13.35/35.5s; mic2 3.9/6.4 e 13.45/35.6. Passa-baixas 500Hz mic1 4.15/6.1 e 16.35/36.05s. Não audibilidade nem reação acústica; banda acima 500Hz diagnóstico. Main preservada.

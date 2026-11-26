@@ -4,7 +4,7 @@ Common gain for all audition files; preserve raw pressure separately."""
 import argparse,copy,hashlib,json
 from pathlib import Path
 import numpy as np
-from scipy.io.wavfile import write
+from scipy.io.wavfile import write,read as read_wav
 from scipy.signal import butter,sosfilt
 from wire_physical_midpoint import load,CoupledWire
 from compiled_wire_midpoint import Compiled
@@ -155,12 +155,24 @@ def pcm(y,gain):
     if not np.isfinite(x).all() or np.max(abs(x))>1.:raise ValueError('clipping')
     return np.rint(x*32767).astype(np.int16)
 
+def export_wav(path,signal,gain,physical_units=False):
+    payload=signal.astype(np.float32) if physical_units else pcm(signal,gain)
+    write(path,RATE,payload)
+    rate,check=read_wav(path)
+    if rate!=RATE or check.shape!=payload.shape or check.dtype!=payload.dtype or not np.array_equal(check,payload):
+        raise ValueError('WAV round-trip mismatch: '+path.name)
+    if not np.isfinite(check).all() or not np.any(check):raise ValueError('empty WAV: '+path.name)
+    if not physical_units and np.max(abs(check.astype(np.int32)))>=32767:raise ValueError('clipped PCM')
+    return dict(file=path.name,sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+        sampleRate=rate,samples=len(check),channels=check.shape[1],dtype=str(check.dtype),
+        peak=float(np.max(abs(check.astype(np.float64)))),roundTripExact=True)
+
 def main():
     p=argparse.ArgumentParser()
     for k in ('scale','source','reference','pressure','joint','out'):p.add_argument('--'+k,type=Path,required=True)
     a=p.parse_args();archive,wires,sha=load(a.source,a.scale);ref,rh=read_reference(a.reference,sha)
     z,coord,ph=pressure_source(a.pressure,sha,ref,archive,wires)
-    raw=(a.joint/'physical_joint_decay.json').read_bytes();d=json.loads(raw)
+    joint_raw=(a.joint/'physical_joint_decay.json').read_bytes();d=json.loads(joint_raw)
     if d['sourceFrozenSha256']!=sha or any(d['summary'].get(k)!=v for k,v in dict(gate=True,cases=42,fullAttackRecomputed=True,acousticLoadIncluded=False).items()):
         raise ValueError('joint source')
     root=Path(__file__).parent;spec=json.loads((root/'physical_sources.json').read_text());felt=json.loads((root/'felt_hypothesis.json').read_text())
@@ -187,15 +199,14 @@ def main():
     for y,b,rms,band,row in renders:
         name=('nominal' if row['spreadCents']==0. else 'unison1_damping25')+('_weak' if row['hammerSpeedMps']==.3 else '_strong')
         files={}
-        for suffix,signal,raw in [('pressure_pa',y,True),('audition_40s',y,False),('audition_5s',y[:5*RATE],False),('lowpass500_5s',b[:5*RATE],False)]:
+        for suffix,signal,physical_units in [('pressure_pa',y,True),('audition_40s',y,False),('audition_5s',y[:5*RATE],False),('lowpass500_5s',b[:5*RATE],False)]:
             path=a.out/(name+'_'+suffix+'.wav')
-            write(path,RATE,signal.astype(np.float32) if raw else pcm(signal,gain))
-            files[suffix]=dict(file=path.name,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+            files[suffix]=export_wav(path,signal,gain,physical_units)
         row.update(files=files,commonPressureThresholds=[crossings(rms[:,i],ref[i]) for i in range(2)],
             commonLowpassThresholds=[crossings(band[:,i],bref[i]) for i in range(2)])
         cases.append(row)
         print('G3_DRY_PRESSURE_RENDER_RESULT '+json.dumps(row,allow_nan=False),flush=True)
-    summary=dict(gate=True,cases=len(cases),diagnosticOnly=True,physicalHypothesis=True,calibratedParameters=False,
+    summary=dict(gate=True,wavFiles=sum(len(v['files']) for v in cases),wavRoundTripExact=True,cases=len(cases),diagnosticOnly=True,physicalHypothesis=True,calibratedParameters=False,
         sampleRate=RATE,partials=PARTIALS,structureRank=80,wires=10,key=60,commonAuditionGain=gain,
         noEnvelope=True,acousticFeedbackIncluded=False,oneSidedIdealBaffle=True,validatedObserverBandHz=[30,500],
         fullBandDiagnosticOnly=True,lowpass500IsNotBrickwall=True,audibleSustainMeasured=False,
@@ -204,6 +215,6 @@ def main():
         maximumEnergyError=max(max(v['startupBalance'],v['tailBalance']) for v in cases),
         maximumAttackReplay=max(v['attackReplayRelative'] for v in cases),timeDomainReady=False,radiationReady=False,polyphonyValidated=False)
     (a.out/'dry_pressure_render.json').write_text(json.dumps(dict(summary=summary,cases=cases,coordinateReplay=coord,
-        sourceFrozenSha256=sha,referenceManifestSha256=rh,pressureManifestSha256=ph,jointManifestSha256=hashlib.sha256(raw).hexdigest()),indent=2,allow_nan=False))
+        sourceFrozenSha256=sha,referenceManifestSha256=rh,pressureManifestSha256=ph,jointManifestSha256=hashlib.sha256(joint_raw).hexdigest()),indent=2,allow_nan=False))
     print('G3_DRY_PRESSURE_RENDER_GATE '+json.dumps(summary),flush=True)
 if __name__=='__main__':main()

@@ -1,8 +1,10 @@
 import unittest
+import tempfile
+from pathlib import Path
 import numpy as np
 from types import SimpleNamespace
 from compiled_wire_midpoint import Compiled
-from dry_pressure_render import common_gain,pcm,align_coordinates
+from dry_pressure_render import common_gain,pcm,align_coordinates,export_wav
 from wire_baffle_reference import FREQ
 from causal_pressure_observer import TRAIN,HIGH
 class RenderTest(unittest.TestCase):
@@ -30,6 +32,15 @@ class RenderTest(unittest.TestCase):
         self.assertLess(max(align_coordinates(loc,ref)['errors'].values()),1e-12)
         bad=dict(loc,wirePorts=loc['wirePorts']+1.)
         with self.assertRaises(ValueError):align_coordinates(bad,ref)
+    def test_wav_round_trip(self):
+        y=np.array([[0.,0.],[.2,-.1],[.4,.3]],dtype=float)
+        with tempfile.TemporaryDirectory() as root:
+            for units in (False,True):
+                p=Path(root)/('test_'+str(units)+'.wav')
+                r=export_wav(p,y,.5,units)
+                self.assertEqual((r['samples'],r['channels'],r['sampleRate']),(3,2,48000))
+                self.assertTrue(r['roundTripExact'])
+                self.assertEqual(r['dtype'],'float32' if units else 'int16')
     def test_gain(self):
         a=np.array([.1,.2]);b=np.array([1.,-2.]);g=common_gain([a,b])
         self.assertAlmostEqual(g,.4);self.assertEqual(pcm(b,g).dtype,np.int16)
