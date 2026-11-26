@@ -1,0 +1,5 @@
+# G3.11z — redução híbrida com preservação de ressonâncias
+
+G3.11x2 aprovado (run 45736078044), energia 2.2876568825992996e-13, estados 5.71997893749594e-13, ledger 7.66483967258133e-13. Blocos de 8 reprovados na validação 7.82–8.63%. G3.11y run 45736078157: 1386→64, treino 0.004327319382860594, validação 0.6125440104199862; reprovado. Não promover.
+
+Base híbrida: 32/64/96 modos naturais inferiores mais 0/8/16/32/48/64/96 vetores de resposta residual, SVD real em métrica de energia. Congruência preserva M/K/D, ortogonalidade verificada. Treino 63 pontos (32 originais e 31 da validação anterior, agora explicitamente desenvolvimento); seleção em 31 pontos a 1/4 dos intervalos logarítmicos; prova externa distinta a 3/4, somente depois de congelar modelo. Escolher menor rank passando 5% treino e seleção, sem usar prova externa. Até 21 candidatos, 125 frequências no total. Sem calibração, apenas 4 portos secos, sem cordas/ar. Densificação: lote 30°,1 concluído, demais pendentes. Main preservada.
