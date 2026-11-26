@@ -108,7 +108,7 @@ def probe(k,D,A,wires,groups,masses,felts,rate,n,speeds,duration=.035):
     for i,w in enumerate(ww):w.port=i
     a=Impact(Schur(Compiled(k,D,P,A,ww,rate,n)),groups,masses,felts,speeds)
     b=Impact(Dense(CoupledWire(k,D,P,A,ww,rate,n)),groups,masses,felts,speeds,True)
-    balance=state=force=peak=contact=work=0.;sweeps=0;concurrent=0;counts=np.zeros(len(ww),int)
+    balance=state=legacy_state=force=peak=contact=work=0.;sweeps=0;concurrent=0;counts=np.zeros(len(ww),int)
     peaks=np.zeros(len(ww));mismatch=0
     for t in range(round(duration*rate)):
         F,c,w,s=a.step();R,d,v,j=b.step()
@@ -116,14 +116,20 @@ def probe(k,D,A,wires,groups,masses,felts,rate,n,speeds,duration=.035):
         force=max(force,float(np.max(abs(F-R))));concurrent=max(concurrent,int(np.count_nonzero(F)))
         contact=max(contact,c,d);work=max(work,w,v);sweeps=max(sweeps,s,j)
         q,u=a.a.state();qr,ur=b.a.state()
-        state=max(state,relative(q,qr),relative(u,ur))
+        legacy_state=max(legacy_state,relative(q,qr),relative(u,ur))
+        # An instantaneous component norm can vanish at the beginning of
+        # weak contact. Measure the error in the same physical energy
+        # norm as the integrator, normalized by injected hammer energy.
+        dq=q-qr;dv=u-ur
+        error_energy=.5*float(dq@b.a.K@dq+dv@b.a.M@dv)
+        state=max(state,np.sqrt(max(0.,error_energy)/a.initial))
         balance=max(balance,abs(a.storage()+a.loss+a.feltloss+a.captureloss-a.initial)/a.initial,
             abs(b.storage()+b.loss+b.feltloss+b.captureloss-b.initial)/b.initial)
         mismatch+=int(not np.array_equal(a.active,b.active))
     captured=int((~a.active).sum());nh=len(masses)
     result=dict(rate=rate,partials=n,hammers=nh,wires=len(ww),speedsMps=list(speeds),captured=captured,
         maximumConcurrentContacts=concurrent,peakForcesN=peaks.tolist(),contactDurationsMs=(1000*counts/rate).tolist(),
-        energyRelative=balance,stateRelative=state,forceRelative=force/max(peak,1e-30),maximumSweeps=sweeps,
+        energyRelative=balance,stateRelative=state,legacyInstantaneousStateRelative=legacy_state,forceRelative=force/max(peak,1e-30),maximumSweeps=sweeps,
         contactResidualM=contact,workResidualJ=work,captureMismatchSteps=mismatch,
         initialEnergyJ=a.initial,targetEnergyJ=a.a.energy(),feltLossJ=a.feltloss,captureLossJ=a.captureloss,mechanicalLossJ=a.loss)
     result['gate']=bool(captured==nh and mismatch==0 and np.all(peaks>0) and a.feltloss>0 and a.a.energy()>0

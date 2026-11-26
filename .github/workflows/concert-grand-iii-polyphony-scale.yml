@@ -1,0 +1,42 @@
+name: Concert Grand III extended polyphony feasibility
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/polyphony_scale.py','research/stage-concert-grand-iii/modal_polyphony_bench.mjs','research/stage-concert-grand-iii/polyphony_policy.mjs','research/stage-concert-grand-iii/test_polyphony_policy.mjs','.github/workflows/concert-grand-iii-polyphony-scale.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  physical-proxy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/polyphony_scale.py --out /tmp/g3-scale-poly
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-polyphony-scale
+          path: /tmp/g3-scale-poly/
+  modal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test research/stage-concert-grand-iii/test_polyphony_policy.mjs
+      - run: node research/stage-concert-grand-iii/modal_polyphony_bench.mjs /tmp/g3-modal
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-modal-polyphony
+          path: /tmp/g3-modal/
