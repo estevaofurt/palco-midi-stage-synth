@@ -1,0 +1,50 @@
+name: Concert Grand III fixed acoustic projection validation
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/fixed_acoustic_projection.py','research/stage-concert-grand-iii/test_fixed_acoustic_projection.py','.github/workflows/concert-grand-iii-fixed-acoustic-projection.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_fixed_acoustic_projection.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-port-enrichment
+          run-id: 45742331448
+          github-token: ${{ github.token }}
+          path: /tmp/g3-wire
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-hybrid-surface
+          run-id: 45737081748
+          github-token: ${{ github.token }}
+          path: /tmp/g3-surface
+      - run: python research/stage-concert-grand-iii/fixed_acoustic_projection.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --surface /tmp/g3-surface --out /tmp/g3-fixed-acoustic
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-fixed-acoustic-projection
+          path: /tmp/g3-fixed-acoustic/
+          if-no-files-found: warn
