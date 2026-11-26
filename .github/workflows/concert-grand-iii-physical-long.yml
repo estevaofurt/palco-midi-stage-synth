@@ -10,7 +10,7 @@ permissions:
 jobs:
   proof:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     strategy:
       fail-fast: false
       matrix:
@@ -24,7 +24,13 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
-      - run: python research/stage-concert-grand-iii/test_physical_acoustic_long.py
+      - run: python research/stage-concert-grand-iii/test_physical_acoustic_long.py && python research/stage-concert-grand-iii/test_physical_cq_offline.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-fixed-acoustic-projection
+          run-id: 45850147440
+          github-token: ${{ github.token }}
+          path: /tmp/g3-projection
       - uses: actions/download-artifact@v4
         with:
           name: G3-physical-cq-offline
@@ -49,7 +55,7 @@ jobs:
           run-id: 45737081748
           github-token: ${{ github.token }}
           path: /tmp/g3-surface
-      - run: python research/stage-concert-grand-iii/physical_acoustic_long.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --surface /tmp/g3-surface --cq /tmp/g3-cq --speed ${{ matrix.speed }} --out /tmp/g3-long
+      - run: python research/stage-concert-grand-iii/physical_cq_offline.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --surface /tmp/g3-surface --projection /tmp/g3-projection --long-prior /tmp/g3-cq --long-speed ${{ matrix.speed }} --out /tmp/g3-long
       - uses: actions/upload-artifact@v4
         if: always()
         with:

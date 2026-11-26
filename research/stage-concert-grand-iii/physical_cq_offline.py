@@ -67,6 +67,8 @@ def main():
     p=argparse.ArgumentParser()
     for key in ('scale','source','surface','projection','out'):p.add_argument('--'+key,type=Path,required=True)
     p.add_argument('--audition',action='store_true')
+    p.add_argument('--long-prior',type=Path)
+    p.add_argument('--long-speed',type=float,choices=(.3,3.))
     a=p.parse_args();archive,wires,sha=load(a.source,a.scale);d,s=approved(a.projection,sha)
     a.out.mkdir(parents=True,exist_ok=True)
     if s['screeningGate'] is not True:
@@ -150,4 +152,8 @@ def main():
     if a.audition and passed:
         from physical_acoustic_audition import audition
         audition(a.out/'audition',k,D,A,wires,rows,U,L.expand(W),geom,rate,refs,sha,localHash)
+    if a.long_prior is not None and passed:
+        if a.long_speed is None:raise ValueError('missing long speed')
+        from physical_acoustic_long import same_basis_long
+        same_basis_long(a.out/'long',a.long_prior,k,D,A,wires,rows,U,L.expand(W),geom,rate,refs,sha,localHash,a.out,a.long_speed)
 if __name__=='__main__':main()

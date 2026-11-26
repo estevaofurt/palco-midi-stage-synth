@@ -84,4 +84,52 @@ def main():
         audibleSustainMeasured=False,above500HzDiagnosticOnly=True,wholeEngineRealtimeValidated=False)
     (a.out/'physical_long_decay.json').write_text(json.dumps(dict(summary=summary,cases=results),indent=2,allow_nan=False))
     print('G3_PHYSICAL_LONG_GATE '+json.dumps(summary,allow_nan=False),flush=True)
+def same_basis_long(out,prior,k,D,A,wires,rows,U,W,geom,rate,refs,sourceHash,projectionHash,cqRoot,speed):
+    # Never read prior mechanical matrices into the current reconstruction.
+    # Compare only physical pressure outputs at the shared microphones.
+    from dual_cavity_spatial_diagnostic import save_matrices
+    if rate!=RATE:raise ValueError('rate')
+    raw=(cqRoot/'physical_cq.json').read_bytes();s=json.loads(raw)['summary'];sha=sourceHash
+    priorCQ=json.loads((prior/'physical_cq.json').read_text())['summary']
+    if any(v.get('screeningGate') is not True or v.get('sourceFrozenSha256')!=sha for v in (s,priorCQ)):raise ValueError('CQ scope')
+    if s['localProjectionFrozenSha256']!=projectionHash:raise ValueError('local projection identity')
+    B,_,quad,_,mic,_=geom;xy,w,S=quad[3:];S=S@B
+    K,support,_=build_kernel(xy,w,S,mic,RATE,3);proof=stream_proof(K,RATE,support)
+    harm=harmonic_proof(K,RATE,xy,w,S,mic,FREQ)
+    band=max(max(v['accelerationRelative'],v['velocityRelative']) for v in harm)
+    if not proof['gate'] or band>.005:raise ValueError('pressure observer')
+    out.mkdir(parents=True,exist_ok=True)
+    pressureEntry=save_matrices(out,'same_basis_pressure',frequencies=FREQ,kernel=K,support=support,microphones=mic)
+    print('G3_PHYSICAL_LONG_OBSERVER '+json.dumps(dict(archive=pressureEntry,projectionFrozenSha256=projectionHash,bandMaximum=band),allow_nan=False),flush=True)
+    folder=prior/'audition';aud=json.loads((folder/'physical_audition.json').read_text());sm=aud['summary']
+    if any(sm.get(key)!=v for key,v in dict(gate=True,cases=4,seconds=5,rate=RATE,rank=64,noOutputEQ=True,
+        sourceFrozenSha256=sha,projectionFrozenSha256=priorCQ['localProjectionFrozenSha256']).items()):raise ValueError('audition prerequisite')
+    gain=sm['commonGain'];out.mkdir(parents=True,exist_ok=True)
+    # The prior 5s strong dry reference provides the same absolute peak
+    # for weak and strong, as in the earlier nominal sustain comparison.
+    strong=next(v for v in aud['cases'] if v['speed']==3. and not v['wet'])
+    ref=checked(folder,strong['native'],5)
+    # analyze() needs ten seconds; zero-padding does not alter its 1s
+    # windows or the maximum across the existing first five.
+    strongRef=analyze(np.pad(ref,((0,5*RATE),(0,0))),RATE,60)
+    results=[]
+    for wet in (False,True):
+        old=next(v for v in aud['cases'] if v['speed']==speed and v['wet']==wet)
+        original=checked(folder,old['native'],5)
+        y,row=render(k,D,A,wires,rows,U,W,K,RATE,speed,wet,seconds=40.)
+        err=relative(y[:5*RATE],original)
+        if err>1e-6:raise ValueError('5s audition replay '+str(err))
+        metrics=thresholds(y,strongRef);row.update(metrics);row['firstFiveSecondsReplayRelative']=err
+        label='C4_'+('weak' if speed==.3 else 'strong')+'_'+('wet' if wet else 'dry')
+        row['listen']=write_checked(out/(label+'_40s.wav'),y,RATE,False,gain)
+        row['native']=write_checked(out/(label+'_pressure_40s.wav'),y,RATE,True,gain)
+        results.append(row)
+        print('G3_PHYSICAL_LONG_CASE '+json.dumps({k:v for k,v in row.items() if k not in ('spectrum','pressureEnvelope','hammerContacts','attackBands')},allow_nan=False),flush=True)
+    summary=dict(gate=True,diagnosticOnly=True,seconds=40,rate=RATE,speed=speed,cases=2,
+        sourceFrozenSha256=sha,cqManifestSha256=hashlib.sha256(raw).hexdigest(),sameBasis=True,pressureArchive=pressureEntry,
+        pressureBandMaximum=band,commonGain=gain,commonThresholdReference='first 5s strong dry',
+        attackPreviouslyRejected=True,noOutputEQ=True,physicalFeedbackAccepted=False,
+        audibleSustainMeasured=False,above500HzDiagnosticOnly=True,wholeEngineRealtimeValidated=False)
+    (out/'physical_long_decay.json').write_text(json.dumps(dict(summary=summary,cases=results),indent=2,allow_nan=False))
+    print('G3_PHYSICAL_LONG_GATE '+json.dumps(summary,allow_nan=False),flush=True)
 if __name__=='__main__':main()
