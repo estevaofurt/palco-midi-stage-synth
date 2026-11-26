@@ -1,0 +1,5 @@
+# G3.12k — martelos compartilhados e contatos individuais
+
+G3.12j run 45770043436 aprovado: energia 1.9269426483593828e-12, estado 7.61818236851766e-14, 14/16 configurações sem overruns. 16 modos 48k bloco64 5.1474375 us/amostra, anteriormente 71.159453125; 96k 5.11996875. 128 modos 96k 7/17 overruns nos blocos 64/128. Núcleo de quatro notas e dez cordas, sem contato ou áudio.
+
+Novo piloto com quatro massas de martelo da hipótese física, dez contatos por corda com feltro dividido pelo número de uníssonos, memória independente. Forças individuais, sem duplicar porta agregada. Compliance exata via Schur, matriz G=h*(C+h/2 B diag(1/m) B^T), conserva acoplamento de massa compartilhada. Relaxação passiva e secante; captura somente após contato e recuo de todos os contatos da nota. Comparação com montagem densa e solução reversa, 16/32 interiores, 48/96k, duas combinações de velocidades, 8 casos. Gate energia/estado/força <=1e-8, deslocamento <=1e-12, trabalho <=1e-10, captura idêntica. Sem repetição MIDI, pedal, calibração de velocidades, carga acústica ou áudio. Não medir tempo real por extrapolação. Main preservada.

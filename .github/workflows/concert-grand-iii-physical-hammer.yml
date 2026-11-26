@@ -1,0 +1,48 @@
+name: Concert Grand III physical shared hammer contact
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/physical_hammer_contact.py','research/stage-concert-grand-iii/test_physical_hammer_contact.py','.github/workflows/concert-grand-iii-physical-hammer.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_physical_hammer_contact.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-port-enrichment
+          run-id: 45742331448
+          github-token: ${{ github.token }}
+          path: /tmp/g3-wire
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-compiled-wire
+          run-id: 45770043436
+          github-token: ${{ github.token }}
+          path: /tmp/g3-compiled
+      - run: python research/stage-concert-grand-iii/physical_hammer_contact.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --compiled /tmp/g3-compiled --out /tmp/g3-hammer
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-physical-hammer
+          path: /tmp/g3-hammer/
+          if-no-files-found: warn
