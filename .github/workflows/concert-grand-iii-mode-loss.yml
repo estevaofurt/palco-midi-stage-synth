@@ -1,0 +1,72 @@
+name: Concert Grand III mode selective physical loss
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/mode_loss_render.py','research/stage-concert-grand-iii/test_mode_selective_loss.py','.github/workflows/concert-grand-iii-mode-loss.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [45,48,60,64]
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_mode_selective_loss.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-port-enrichment
+          run-id: 45742331448
+          github-token: ${{ github.token }}
+          path: /tmp/g3-wire
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-baffle-reference
+          run-id: 45774796464
+          github-token: ${{ github.token }}
+          path: /tmp/g3-baffle
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-causal-pressure-observer
+          run-id: 45775031314
+          github-token: ${{ github.token }}
+          path: /tmp/g3-pressure
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-felt-loss-${{ matrix.key }}-release_pedal
+          run-id: 45822265854
+          github-token: ${{ github.token }}
+          path: /tmp/g3-nominal
+      - run: python research/stage-concert-grand-iii/mode_loss_render.py --key ${{ matrix.key }} --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --reference /tmp/g3-baffle --pressure /tmp/g3-pressure --nominal /tmp/g3-nominal --out /tmp/g3-mode-loss
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-mode-loss-listen-${{ matrix.key }}
+          path: /tmp/g3-mode-loss/listen/
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-mode-loss-pressure-${{ matrix.key }}
+          path: /tmp/g3-mode-loss/physical/
+          if-no-files-found: warn
