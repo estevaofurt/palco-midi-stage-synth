@@ -68,6 +68,11 @@ def rebuild_base(M,K,D,P,archive,train):
     replay=comparison(Y,ref)['maximum']
     return A,dict(massRelative=mass,mobilityReplayMaximum=replay,gate=bool(mass<=1e-8 and replay<=1e-6))
 
+def development_grids():
+    base=np.geomspace(30,500,16)
+    lo,hi=base[:-1],base[1:]
+    return np.sort(np.r_[base,np.sqrt(lo*hi)]),lo**.75*hi**.25,lo**.25*hi**.75
+
 def main():
     p=argparse.ArgumentParser()
     for k in ('scale','source','out'):p.add_argument('--'+k,type=Path,required=True)
@@ -91,9 +96,11 @@ def main():
     if not replay['gate']:raise ValueError('frozen hybrid response replay failed')
     keys=[45,48,60,64];P,wires,labels=setup(q,centers,rows,keys,2,128)
     rear=sorted(set(w.rear for w in wires));F=np.zeros((len(M),len(rear)));F[rear,np.arange(len(rear))]=1.
-    train=np.geomspace(30,500,16);valid=np.sqrt(train[:-1]*train[1:])
+    train,inner,valid=development_grids()
     full,fa,fr=reference(M,K,D,P,wires,train)
     if not fa['gate']:raise ValueError('full wire reference failed')
+    fulli,ia,ir=reference(M,K,D,P,wires,inner)
+    if not ia['gate']:raise ValueError('inner reference failed')
     s=1/np.sqrt(np.diag(M));L=cholesky((K+(2*np.pi*100)**2*M)*(s[:,None]*s[None,:]),lower=True)
     T,_=np.linalg.qr(L.T@(lift/s[:,None]),mode='reduced')
     m,k,d,f=normalized(M,K,D,F);S=response_columns(m,k,d,f,train)
@@ -103,18 +110,20 @@ def main():
         physical=s[:,None]*solve_triangular(L.T,V,lower=False)
         md,A,mass=model(M,K,D,P,physical)
         Y,audit=evaluate(md,A,wires,train);err=comparison(Y,full)
-        row=dict(extra=extra,rank=len(md['M']),training=err,massRelative=mass,algebra=audit)
+        Yi,ai=evaluate(md,A,wires,inner);ei=comparison(Yi,fulli)
+        row=dict(extra=extra,rank=len(md['M']),training=err,inner=ei,massRelative=mass,algebra=audit,innerAlgebra=ai)
         cases.append(row);models[extra]=(md,A)
-        print('G3_WIRE_PORT_CASE '+json.dumps(dict(extra=extra,rank=row['rank'],maximumTraining=err['maximum'])),flush=True)
-    eligible=[v for v in cases if v['training']['maximum']<=.05]
-    chosen=min(eligible,key=lambda v:(v['rank'],v['extra'])) if eligible else min(cases,key=lambda v:v['training']['maximum'])
+        print('G3_WIRE_PORT_CASE '+json.dumps(dict(extra=extra,rank=row['rank'],maximumTraining=err['maximum'],maximumInner=ei['maximum'])),flush=True)
+    worst=lambda v:max(v['training']['maximum'],v['inner']['maximum'])
+    eligible=[v for v in cases if worst(v)<=.05]
+    chosen=min(eligible,key=lambda v:(v['rank'],worst(v),v['extra'])) if eligible else min(cases,key=lambda v:(worst(v),v['rank']))
     md,A=models[chosen['extra']];a.out.mkdir(parents=True,exist_ok=True)
     # Export the new coordinate map; it is NOT interchangeable with the
     # archived 72-field acoustic data even if the rank happens to match.
     archive=save_matrices(a.out,'wire_port_model',frequencies=train,stiffness=np.diag(md['K']),damping=md['D'],ports=md['P'],
         physicalLift=A,wirePorts=np.stack([A[w.rear] for w in wires]))
     frozen=dict(selectedExtra=chosen['extra'],selectedRank=chosen['rank'],archive=archive,sourceFrozenSha256=sha,
-        scaleSha256=hashlib.sha256(raw).hexdigest(),keys=keys,wireIds=[w.id for w in wires],trainingHz=train.tolist(),plannedValidationHz=valid.tolist())
+        scaleSha256=hashlib.sha256(raw).hexdigest(),keys=keys,wireIds=[w.id for w in wires],trainingHz=train.tolist(),innerHz=inner.tolist(),plannedValidationHz=valid.tolist(),priorValidationReusedAsTraining=True)
     data=json.dumps(frozen,indent=2,allow_nan=False).encode();(a.out/'frozen_wire_ports.json').write_bytes(data)
     fullv,va,vr=reference(M,K,D,P,wires,valid)
     if not va['gate']:raise ValueError('full validation reference failed')
@@ -122,11 +131,11 @@ def main():
     base,baseLift=models[0];Y0,_=evaluate(base,baseLift,wires,valid);baseerr=comparison(Y0,fullv)
     summary=dict(gate=True,diagnosticOnly=True,physicalHypothesis=True,calibratedParameters=False,keys=keys,wires=len(wires),
         selectedRank=chosen['rank'],selectedExtra=chosen['extra'],fullStructuralCoordinates=len(M),trainingMaximum=chosen['training']['maximum'],
-        validationMaximum=err['maximum'],frozen72ValidationMaximum=baseerr['maximum'],
-        reductionGate=bool(max(chosen['training']['maximum'],err['maximum'])<=.05),selectionUsedValidation=False,
+        innerMaximum=chosen['inner']['maximum'],validationMaximum=err['maximum'],frozen72ValidationMaximum=baseerr['maximum'],
+        reductionGate=bool(max(worst(chosen),err['maximum'])<=.05),selectionUsedValidation=False,priorValidationReusedAsTraining=True,
         localCoordinateReconstruction=True,baseMobilityReplayMaximum=replay['mobilityReplayMaximum'],oldAcousticOperatorsCompatible=False,fixedFront=True,verticalPolarizationOnly=True,acousticLoadIncluded=False,
         timeDomainReady=False,radiationReady=False,polyphonyValidated=False)
     (a.out/'wire_port_enrichment.json').write_text(json.dumps(dict(summary=summary,cases=cases,validation=err,baseValidation=baseerr,
-        validationAlgebra=ya,referenceTraining=fa,referenceValidation=va,frozenSha256=hashlib.sha256(data).hexdigest()),indent=2,allow_nan=False))
+        validationAlgebra=ya,referenceTraining=fa,referenceInner=ia,referenceValidation=va,frozenSha256=hashlib.sha256(data).hexdigest()),indent=2,allow_nan=False))
     print('G3_WIRE_PORT_GATE '+json.dumps(summary),flush=True)
 if __name__=='__main__':main()

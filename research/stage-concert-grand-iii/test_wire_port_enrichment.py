@@ -1,7 +1,11 @@
 import unittest
 import numpy as np
-from wire_port_enrichment import enrich_basis,model,comparison
+from wire_port_enrichment import enrich_basis,model,comparison,development_grids
 class WirePortTest(unittest.TestCase):
+    def test_grids(self):
+        a,b,c=development_grids()
+        self.assertEqual((len(a),len(b),len(c)),(31,15,15))
+        self.assertEqual(len(set(np.r_[a,b,c])),61)
     def test_preserve(self):
         T=np.eye(8)[:,:3];S=np.random.default_rng(4).normal(size=(8,10))
         V=enrich_basis(T,S,4)

@@ -46,7 +46,7 @@ jobs:
           github-token: ${{ github.token }}
           path: /tmp/g3-scale
       - run: |
-          if [ "${{ inputs.dense }}" = true ]; then
+          if [ "${{ github.event_name }}" = push ] || [ "${{ inputs.dense }}" = true ]; then
             test "$(gh run view 45730538297 --json conclusion --jq .conclusion)" = success
             gh run download 45730538297 -n G3-dense-reference-${{ matrix.angle }} -D /tmp/g3-input
             mode=dense
