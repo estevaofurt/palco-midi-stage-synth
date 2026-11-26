@@ -12,10 +12,11 @@ def build(out):
     for f in ROOT.iterdir():
         if f.is_file() and f.suffix in ('.js','.mjs','.html','.css','.txt'):shutil.copy2(f,out/f.name)
     shutil.copy2(ROOT/'package.json',out/'package.json')
-    for name in ('polyphony_policy.mjs','polyphony_preview.mjs'):shutil.copy2(Path(__file__).with_name(name),out/name)
+    for name in ('polyphony_policy.mjs','polyphony_preview.mjs','device_polyphony_logic.mjs','device_polyphony_worker.mjs','device_polyphony_ui.mjs','device_polyphony.html'):shutil.copy2(Path(__file__).with_name(name),out/name)
     def patch(name,fn):
         f=out/name;f.write_text(fn(f.read_text()))
     patch('index.html',lambda s:replace(s,'<option value="full">Completo · computador</option></select></label>','<option value="full">Completo · computador</option></select></label><label class="profile-selector">Polifonia experimental <select id="polyphony-limit" aria-label="Polifonia máxima"><option value="auto">Automática</option><option value="32">32</option><option value="64">64</option><option value="88">88</option><option value="96">96</option><option value="128">128</option><option value="192">192</option><option value="256">256 (teste, limitada)</option></select></label>').replace('Stage Synth · Palco MIDI v1.12.10','Stage Synth · PROTÓTIPO DE POLIFONIA').replace('v1.12.10</span>','G3.12m · experimental</span>'))
+    patch('index.html',lambda s:replace(s,'<p id="profile-note" class="profile-note" role="status"></p>','<p id="profile-note" class="profile-note" role="status"></p><p class="profile-note"><a href="./device_polyphony.html">Avaliar capacidade de polifonia do dispositivo</a></p>'))
     def app(s):
         s=replace(s,"import {getProfile,PROFILE_STORAGE_KEY} from './audio-profile.js';","import {getProfile,PROFILE_STORAGE_KEY} from './audio-profile.js';\nimport {parsePolyphony,STORAGE_KEY} from './polyphony_policy.mjs';")
         s=replace(s,'const mobileLite=profile===\'lite\';',"""const mobileLite=profile==='lite';

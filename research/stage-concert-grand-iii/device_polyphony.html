@@ -1,0 +1,11 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stage Synth | Avaliação de polifonia</title><style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#171719;color:#eee}main{max-width:680px;margin:32px auto;padding:16px}label{display:block;margin:12px 0}select,button{font:inherit;padding:8px;border-radius:6px;border:1px solid #666;background:#29292d;color:#eee}button:disabled{opacity:.45}table{width:100%;border-collapse:collapse;margin:20px 0}th,td{padding:8px;text-align:right;border-bottom:1px solid #444}th:first-child,td:first-child{text-align:left}small{color:#bbb}a{color:#a9c5df}
+</style></head><body><main><a href="./index.html">Voltar ao Stage Synth</a><h1>Avaliação de polifonia</h1><p>Teste local sem som. Encerre a sessão de áudio antes de iniciar. A recomendação mede somente o DSP isolado; efeitos, camadas, driver e latência não são certificados.</p>
+<label>Motor <select id="engine"><option value="modal">A · Modal</option><option value="physicalLegacy">B · Físico anterior</option><option value="physical">C · Mecânico</option><option value="hybrid">D · Híbrido</option></select></label>
+<label>Qualidade <select id="quality"><option value="eco">Econômica</option><option value="balanced">Balanced</option><option value="studio" selected>Studio</option></select></label>
+<label>Perfil <select id="profile"><option value="lite">Leve</option><option value="full" selected>Completo</option></select></label>
+<label>Taxa de amostragem <select id="rate"><option value="44100">44,1 kHz</option><option value="48000" selected>48 kHz</option><option value="96000">96 kHz</option></select></label>
+<button id="start">Iniciar teste</button> <button id="cancel" disabled>Cancelar</button>
+<p id="status" role="status">Pronto para avaliar.</p><table><thead><tr><th>Vozes</th><th>Tentativa</th><th>p99</th><th>Atrasos</th><th>Resultado</th></tr></thead><tbody id="rows"></tbody></table>
+<button id="apply" disabled>Salvar recomendação como preferência</button><p><small>A preferência será limitada pelas regras do motor e do perfil em uso. O teste não altera automaticamente o timbre, o perfil ou o motor.</small></p>
+<script type="module" src="./device_polyphony_ui.mjs"></script></main></body></html>
