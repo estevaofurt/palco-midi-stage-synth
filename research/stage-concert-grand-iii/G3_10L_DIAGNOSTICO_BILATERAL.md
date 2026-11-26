@@ -1,0 +1,5 @@
+# G3.10l — extensão bilateral e diagnóstico aritmético independente
+
+Evidência 45725732251: disjoint 30° 5/16, 55° 6/16. Suave e contato ambos aprovados. Superior 55° 374 modos, captura mínima .9731742763053502 e estabilidade aprovada. Superior 30°, self e refinamento espacial ainda em execução na consulta.
+
+Estender o refinamento 56/64/72 a 55° em workflow separado, sem repetir a execução 30° 45726550890. Em paralelo, selecionar os dois blocos disjuntos com maior erro em cada ângulo e comparar ordem fixa 48: reprodução padrão, acumulação compensada e orientação reversa com bloco diferente. Registrar erros por subbloco e escala relativa ao bloco completo. O gate significa diagnóstico completo, nunca certificação de quadratura. Se diferenças entre ordens forem muito maiores que entre métodos de soma, investigar integração; se comparáveis, investigar precisão e cancelamento. Não relaxar 1e-8, não alterar base ou parâmetros. A consolidação espacial fica condicionada às execuções 45726103993 e 45726475505. Main preservada.
