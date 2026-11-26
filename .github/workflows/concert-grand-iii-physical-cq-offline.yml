@@ -1,0 +1,56 @@
+name: Concert Grand III gated offline physical CQ
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/physical_cq_offline.py','research/stage-concert-grand-iii/test_physical_cq_offline.py','.github/workflows/concert-grand-iii-physical-cq-offline.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      OMP_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_physical_cq_offline.py
+      - run: timeout 35m gh run watch 45850147440 --repo "$GITHUB_REPOSITORY" --exit-status --interval 20
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-fixed-acoustic-projection
+          run-id: 45850147440
+          github-token: ${{ github.token }}
+          path: /tmp/g3-projection
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-port-enrichment
+          run-id: 45742331448
+          github-token: ${{ github.token }}
+          path: /tmp/g3-wire
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-hybrid-surface
+          run-id: 45737081748
+          github-token: ${{ github.token }}
+          path: /tmp/g3-surface
+      - run: python research/stage-concert-grand-iii/physical_cq_offline.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --surface /tmp/g3-surface --projection /tmp/g3-projection --out /tmp/g3-physical-cq
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-physical-cq-offline
+          path: /tmp/g3-physical-cq/
+          if-no-files-found: warn
