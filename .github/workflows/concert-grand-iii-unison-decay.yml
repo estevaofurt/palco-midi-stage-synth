@@ -1,0 +1,48 @@
+name: Concert Grand III physical unison detuning decay
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/physical_unison_decay.py','research/stage-concert-grand-iii/test_physical_unison_decay.py','.github/workflows/concert-grand-iii-unison-decay.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_physical_unison_decay.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-port-enrichment
+          run-id: 45742331448
+          github-token: ${{ github.token }}
+          path: /tmp/g3-wire
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-physical-long-decay
+          run-id: 45773240858
+          github-token: ${{ github.token }}
+          path: /tmp/g3-decay
+      - run: python research/stage-concert-grand-iii/physical_unison_decay.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --decay /tmp/g3-decay --out /tmp/g3-unison
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-physical-unison-decay
+          path: /tmp/g3-unison/
+          if-no-files-found: warn
