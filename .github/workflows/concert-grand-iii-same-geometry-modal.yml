@@ -1,0 +1,56 @@
+name: Concert Grand III same geometry modal comparison
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/same_geometry_modal_comparison.py','research/stage-concert-grand-iii/test_same_geometry_modal_comparison.py','.github/workflows/concert-grand-iii-same-geometry-modal.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_same_geometry_modal_comparison.py
+  proof:
+    needs: unit
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 140
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          gh run watch 45726901223 --interval 60
+          gh run download 45726901223 -n G3-verified-coupled-${{ matrix.angle }} -D /tmp/g3-coupled
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45725732251 -n G3-enriched-upper-${{ matrix.angle }} -D /tmp/g3-upper
+          gh run download 45725732251 -n G3-enriched-smooth-${{ matrix.angle }} -D /tmp/g3-smooth
+          gh run download 45726104119 -n G3-graded-common-allocation -D /tmp/g3-common
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/same_geometry_modal_comparison.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high --smooth /tmp/g3-smooth --upper /tmp/g3-upper --coupled /tmp/g3-coupled --common /tmp/g3-common/graded_common_allocation.json --angle ${{ matrix.angle }} --out /tmp/g3-modal
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-same-geometry-modal-${{ matrix.angle }}
+          path: /tmp/g3-modal/
+          if-no-files-found: warn

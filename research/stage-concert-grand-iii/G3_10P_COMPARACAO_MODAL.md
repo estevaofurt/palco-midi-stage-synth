@@ -1,0 +1,3 @@
+# G3.10p — comparação modal na mesma geometria
+
+Preparar 355/385/429 usando exclusivamente a geometria e operadores enriquecidos validados, sem repetir FEM/BEM. 355 fixado a priori pela seleção comum G3.10h; verificar subconjunto aninhado e dimensões, reproduzir 429 arquivado (hashes, seis frequências, estabilidade), repetir 385/429 e comparar 355/385 e 355/429. Gate 5% em cada métrica, sem promover em caso de falha. Separar esta prova da transferência espacial G3.10j. Requer acoplamento aprovado 45726901223; ausência de artefato bloqueia. Ainda não representa convergência absoluta, faixa audível completa ou motor em tempo real. Main preservada.
