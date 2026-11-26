@@ -112,12 +112,18 @@ def timing(k,D,P,rate,b,blocks=200):
     return dict(modes=len(k),block=b,sampleRate=rate,medianUsPerSample=float(np.median(times)/64),p99BudgetFraction=float(np.percentile(times,99)/budget),
         overruns=sum(x>budget for x in times),energyRelative=energy,gate=bool(np.isfinite(energy) and energy<=1e-9))
 
+def require_grid(freq):
+    freq=np.asarray(freq)
+    if freq.shape!=(32,) or not np.isfinite(freq).all() or not np.allclose(freq,np.geomspace(30,500,32),rtol=1e-14,atol=0):raise ValueError('invalid source frequency grid')
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--out',type=Path,required=True);a=p.parse_args()
     raw=(a.source/'dry_structural_modal.json').read_bytes();d=json.loads(raw);s=d['summary'];freq=np.asarray(d['frequencyHz'])
     expected=dict(gate=True,diagnosticOnly=True,physicalHypothesis=True,calibratedParameters=False,eigenGate=True,knotAlignedQuadrature=True,
         fullDampingPreserved=True,maximumModes=256,acousticFitAccepted=False,timeDomainReady=False,radiationReady=False)
-    if any(s.get(k)!=v for k,v in expected.items()) or not np.array_equal(freq,np.geomspace(30,500,32)):raise ValueError('invalid source')
+    for k,v in expected.items():
+        if s.get(k)!=v:raise ValueError('invalid source field '+k)
+    require_grid(freq)
     data=read_npz(a.source,d['archive'],dict(modalHz=(256,),stiffness=(256,),damping=(256,256),ports=(256,4),fourFieldMap=(4,256),dryReference=(32,4,4)),freq)
     valid=np.sqrt(freq[:-1]*freq[1:]);rows=[];proofs=[];bench=[]
     for n in (64,128,256):
