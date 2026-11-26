@@ -1,0 +1,5 @@
+# G3.12s — decaimento mecânico de longa duração
+
+G3.12r run 45772814404, prova e upload concluídos: 12/12, 96 ataques/capturas, energia 2.2938311983228007e-13, estado 2.3881164359977965e-12, força 4.164607947078526e-12. Tendência pedal aprovada 4/4. 48k 16 modos energia aos 65ms 3.9136/7.8512/27.6208 mJ (0/0.5/1). Parâmetros hipotéticos.
+
+G3.12s C4 (MIDI60) isolado em estrutura 80 e dez cordas, ataque a .3/1/3 m/s, liberação tecla 20ms, transição 5ms e captura, iniciar cauda 30ms. Pedal 0/.5/1 mantido durante 40s. 16/32 modos, 48/96k, 36 casos. Estados normalizados pela energia via Cholesky. Propagador midpoint fixo elevado a blocos 50ms por quadratura de formas quadráticas (duplicação binária); identidade energia e dissipação auditada por passo e bloco, teste independente passo a passo. RMS velocidade média dos pontos de martelo C4 e porta tábua, relativos ao pico de cada cauda. Limiar -20/-40/-60 dB última janela acima, censura à direita. Não medir SPL nem audibilidade. Sem ajuste de perdas, sem carga acústica, sem extrapolação ao sustain de referência pp/ff ou aprovação de banda alta. Main preservada.
