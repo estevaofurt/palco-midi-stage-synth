@@ -30,10 +30,14 @@ def main():
               const n=Math.min(128,cap);
               for(let i=0;i<n;i++)s.startNote('proof',0,36+i%36,.8,1);
               const actual=await probe(),stage=s.voiceStats();
+              const data=new Float32Array(s.meter.fftSize);let signal=0;
+              for(let i=0;i<12;i++){await new Promise(r=>setTimeout(r,20));s.meter.getFloatTimeDomainData(data);for(const v of data){if(!Number.isFinite(v))throw Error('nonfinite audio');signal=Math.max(signal,Math.abs(v));}}
               const layerLimit=s.activeVoiceLimit(3);
               s.startNote('proof',0,60,.8,1);
               const stolen=await probe();
-              return {sampleRate:s.ctx.sampleRate,cap,initial,actual,stage,layerLimit,stolen,n};
+              s.state.mask=3;s.startNote('proof',0,60,.8,3);
+              const reduced=s.voiceStats();
+              return {sampleRate:s.ctx.sampleRate,cap,initial,actual,stage,layerLimit,stolen,reduced,signal,n};
             }""")
             assert result['cap']==(128 if result['sampleRate']<=48000 else 64),result
             assert result['initial']['capacity']==result['cap'],result
@@ -41,6 +45,9 @@ def main():
             assert result['stage']['active']==result['n'],result
             assert result['layerLimit']==64,result
             assert result['stolen']['active']==result['n'],result
+            assert len(set(result['actual']['ids']))==result['n'],result
+            assert result['reduced']['active']<=64,result
+            assert result['signal']>1e-7,result
             assert not errors,errors
             print('G3_APP_POLYPHONY_PROBE '+json.dumps(result),flush=True)
             browser.close()

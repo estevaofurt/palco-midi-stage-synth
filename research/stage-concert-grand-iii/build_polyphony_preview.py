@@ -11,10 +11,11 @@ def build(out):
     out.mkdir(parents=True,exist_ok=False)
     for f in ROOT.iterdir():
         if f.is_file() and f.suffix in ('.js','.mjs','.html','.css','.txt'):shutil.copy2(f,out/f.name)
+    shutil.copy2(ROOT/'package.json',out/'package.json')
     for name in ('polyphony_policy.mjs','polyphony_preview.mjs'):shutil.copy2(Path(__file__).with_name(name),out/name)
     def patch(name,fn):
         f=out/name;f.write_text(fn(f.read_text()))
-    patch('index.html',lambda s:replace(s,'</select></label>','</select></label><label class="profile-selector">Polifonia experimental <select id="polyphony-limit" aria-label="Polifonia máxima"><option value="auto">Automática</option><option value="32">32</option><option value="64">64</option><option value="88">88</option><option value="96">96</option><option value="128">128</option><option value="192">192</option><option value="256">256 (teste, limitada)</option></select></label>').replace('Stage Synth · Palco MIDI v1.12.10','Stage Synth · PROTÓTIPO DE POLIFONIA').replace('v1.12.10</span>','G3.12m · experimental</span>'))
+    patch('index.html',lambda s:replace(s,'<option value="full">Completo · computador</option></select></label>','<option value="full">Completo · computador</option></select></label><label class="profile-selector">Polifonia experimental <select id="polyphony-limit" aria-label="Polifonia máxima"><option value="auto">Automática</option><option value="32">32</option><option value="64">64</option><option value="88">88</option><option value="96">96</option><option value="128">128</option><option value="192">192</option><option value="256">256 (teste, limitada)</option></select></label>').replace('Stage Synth · Palco MIDI v1.12.10','Stage Synth · PROTÓTIPO DE POLIFONIA').replace('v1.12.10</span>','G3.12m · experimental</span>'))
     def app(s):
         s=replace(s,"import {getProfile,PROFILE_STORAGE_KEY} from './audio-profile.js';","import {getProfile,PROFILE_STORAGE_KEY} from './audio-profile.js';\nimport {parsePolyphony,STORAGE_KEY} from './polyphony_policy.mjs';")
         s=replace(s,'const mobileLite=profile===\'lite\';',"""const mobileLite=profile==='lite';
@@ -43,7 +44,7 @@ polySelect.onchange=()=>{try{storage?.setItem(STORAGE_KEY,polySelect.value)}catc
         s=replace(s,"constructor(sampleRate) {","constructor(sampleRate,capacity=MAX_VOICES) {\n    if(![32,64,88,96,128,192].includes(capacity))capacity=MAX_VOICES;")
         s=replace(s,"length: MAX_VOICES","length: capacity")
         s=replace(s,"constructor() {\n      super();\n      this.engine = new PianoEngine(sampleRate);","constructor(options) {\n      super();\n      this.engine = new PianoEngine(sampleRate,options?.processorOptions?.voices);")
-        s=replace(s,"else if (m.type === 'stop') this.engine.stopAll();","else if (m.type === 'stop') this.engine.stopAll();\n        else if(m.type==='polyphony-probe')this.port.postMessage({type:'polyphony-probe',capacity:this.engine.voices.length,active:this.engine.voices.filter(v=>v.active).length});")
+        s=replace(s,"else if (m.type === 'stop') this.engine.stopAll();","else if (m.type === 'stop') this.engine.stopAll();\n        else if(m.type==='polyphony-probe')this.port.postMessage({type:'polyphony-probe',capacity:this.engine.voices.length,active:this.engine.voices.filter(v=>v.active).length,ids:this.engine.voices.filter(v=>v.active).map(v=>v.id)});")
         return s
     patch('piano-worklet.js',worklet)
     # Preview must run on an isolated localhost origin; no deployment.
