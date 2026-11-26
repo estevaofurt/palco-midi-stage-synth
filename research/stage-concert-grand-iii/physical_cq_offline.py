@@ -66,6 +66,7 @@ def approved(root,sha):
 def main():
     p=argparse.ArgumentParser()
     for key in ('scale','source','surface','projection','out'):p.add_argument('--'+key,type=Path,required=True)
+    p.add_argument('--audition',action='store_true')
     a=p.parse_args();archive,wires,sha=load(a.source,a.scale);d,s=approved(a.projection,sha)
     a.out.mkdir(parents=True,exist_ok=True)
     if s['screeningGate'] is not True:
@@ -146,4 +147,7 @@ def main():
         passivityCertified=False,physicalFeedbackAccepted=False,audibleSustainMeasured=False,wholeEngineRealtimeValidated=False)
     (a.out/'physical_cq.json').write_text(json.dumps(dict(summary=summary,reports=reports),indent=2,allow_nan=False))
     print('G3_PHYSICAL_CQ_GATE '+json.dumps(summary,allow_nan=False),flush=True)
+    if a.audition and passed:
+        from physical_acoustic_audition import audition
+        audition(a.out/'audition',k,D,A,wires,rows,U,L.expand(W),geom,rate,refs,sha,localHash)
 if __name__=='__main__':main()

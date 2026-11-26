@@ -2,7 +2,7 @@ name: Concert Grand III gated offline physical CQ
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/physical_cq_offline.py','research/stage-concert-grand-iii/test_physical_cq_offline.py','.github/workflows/concert-grand-iii-physical-cq-offline.yml']
+    paths: ['research/stage-concert-grand-iii/physical_acoustic_audition.py','research/stage-concert-grand-iii/test_physical_acoustic_audition.py','research/stage-concert-grand-iii/physical_cq_offline.py','research/stage-concert-grand-iii/test_physical_cq_offline.py','.github/workflows/concert-grand-iii-physical-cq-offline.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
-      - run: python research/stage-concert-grand-iii/test_physical_cq_offline.py
+      - run: python research/stage-concert-grand-iii/test_physical_cq_offline.py && python research/stage-concert-grand-iii/test_physical_acoustic_audition.py
       - run: timeout 35m gh run watch 45850147440 --repo "$GITHUB_REPOSITORY" --exit-status --interval 20
       - uses: actions/download-artifact@v4
         with:
@@ -47,7 +47,7 @@ jobs:
           run-id: 45737081748
           github-token: ${{ github.token }}
           path: /tmp/g3-surface
-      - run: python research/stage-concert-grand-iii/physical_cq_offline.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --surface /tmp/g3-surface --projection /tmp/g3-projection --out /tmp/g3-physical-cq
+      - run: python research/stage-concert-grand-iii/physical_cq_offline.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --surface /tmp/g3-surface --projection /tmp/g3-projection --out /tmp/g3-physical-cq --audition
       - uses: actions/upload-artifact@v4
         if: always()
         with:
