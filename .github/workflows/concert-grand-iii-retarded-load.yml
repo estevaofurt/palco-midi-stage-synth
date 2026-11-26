@@ -2,7 +2,7 @@ name: Concert Grand III geometry derived retarded acoustic load
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/retarded_coordinates.py','research/stage-concert-grand-iii/test_retarded_coordinates.py','research/stage-concert-grand-iii/retarded_load.py','research/stage-concert-grand-iii/test_retarded_load.py','.github/workflows/concert-grand-iii-retarded-load.yml']
+    paths: ['research/stage-concert-grand-iii/retarded_local_reference.py','research/stage-concert-grand-iii/test_retarded_local_reference.py','research/stage-concert-grand-iii/retarded_coordinates.py','research/stage-concert-grand-iii/test_retarded_coordinates.py','research/stage-concert-grand-iii/retarded_load.py','research/stage-concert-grand-iii/test_retarded_load.py','.github/workflows/concert-grand-iii-retarded-load.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -10,7 +10,7 @@ permissions:
 jobs:
   proof:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     env:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '1'
@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
-      - run: python research/stage-concert-grand-iii/test_retarded_coordinates.py && python research/stage-concert-grand-iii/test_retarded_load.py
+      - run: python research/stage-concert-grand-iii/test_retarded_local_reference.py && python research/stage-concert-grand-iii/test_retarded_coordinates.py && python research/stage-concert-grand-iii/test_retarded_load.py
       - uses: actions/download-artifact@v4
         with:
           name: G3-scale-geometry-02

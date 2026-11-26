@@ -18,7 +18,7 @@ from polygon_radiation import SurfaceModes
 from surface_reactive_fft import cell_integrals
 from dual_cavity_spatial_diagnostic import save_matrices
 from split_radiation import relative
-from retarded_coordinates import align
+from retarded_local_reference import geometry,local_group
 
 RHO=1.204
 C=343.
@@ -109,12 +109,20 @@ def main():
     local={}
     def sink(plate,poly,lift):local.update(plate=plate,poly=poly,lift=lift)
     k,D,P,A,wires,G,lift,_=rebuild(a.scale,a.surface,archive,wires,surface_sink=sink)
-    Q,ca=align(dict(stiffness=k,damping=D,ports=P,wirePorts=A,physicalLift=lift,regionalDamping=G),z)
-    field=SurfaceModes(local['plate'],local['lift']@Q.T)
-    groups=[('original',FREQ,z)];hashes={}
+    B,normalized,quad,grids,mic,ca=geometry(local['plate'],local['poly'],local['lift'])
+    # Build both load and reference in the current structural coordinates.
+    field=SurfaceModes(local['plate'],local['lift'])
+    model=dict(stiffness=k,damping=D,ports=P,wirePorts=A,fieldMap=B)
+    ctx=contexts(model,wires,{v['key']:v for v in json.loads(a.scale.read_text())['rows']})
+    archived=[('original',FREQ,z)];hashes={};groups=[];external=[]
     for role,fs in [('development',DEVELOPMENT),('reserved',RESERVED),('extension',EXTENSION)]:
-        d,h=read_group(a.grid,role,fs,sha,rh);groups.append((role,fs,d));hashes[role]=h
-    ctx=contexts(z,wires,{v['key']:v for v in json.loads(a.scale.read_text())['rows']})
+        d,h=read_group(a.grid,role,fs,sha,rh);archived.append((role,fs,d));hashes[role]=h
+    for role,fs,d in archived:
+        ref,audit=local_group(fs,grids,quad,mic,B,A,ctx,d)
+        groups.append((role,fs,ref));external.extend(dict(role=role,**v) for v in audit)
+        print('G3_RETARDED_LOCAL_REFERENCE '+json.dumps(dict(role=role,maximum=max(v['externalMaximum'] for v in audit))),flush=True)
+    externalMax=max(v['externalMaximum'] for v in external)
+    z=model
     rates=(48000,96000);cases=[];matrices={}
     for n in (60,120):
         B,dx,dy,area=cell_integrals(local['poly'],field,n)
@@ -139,7 +147,7 @@ def main():
             responseMax=max((v['maximumResponse'] for v in responseRows if v['role']!='extension'),default=None)
             row=dict(grid=n,rate=rate,taps=len(K),passivity=pa,matrixMaximum=band,
                 responseMaximum=responseMax,responseCoverage=len(responseRows),frequencies=rows,responses=responseRows,
-                screeningGate=bool(pa['sampledGate'] and len(responseRows)==26 and band<=.05 and responseMax is not None and responseMax<=.05))
+                screeningGate=bool(externalMax<=.05 and pa['sampledGate'] and len(responseRows)==26 and band<=.05 and responseMax is not None and responseMax<=.05))
             cases.append(row);matrices[f'kernel_{n}_{rate}']=K
             print('G3_RETARDED_LOAD_CASE '+json.dumps({k:v for k,v in row.items() if k not in ('frequencies','responses')},allow_nan=False),flush=True)
     a.out.mkdir(parents=True,exist_ok=True)
@@ -147,7 +155,7 @@ def main():
     summary=dict(gate=True,diagnosticOnly=True,screeningPassed=sum(v['screeningGate'] for v in cases),
         configurations=len(cases),geometryDerived=True,causalDelayKernel=True,physicalAcousticFitAccepted=False,
         feedbackIntegrated=False,passivityCertified=False,continuousFrequencyValidated=False,timeDomainReady=False,
-        sourceFrozenSha256=sha,referenceManifestSha256=rh,gridManifestSha256=hashes,coordinateReplay=ca)
-    (a.out/'retarded_load.json').write_text(json.dumps(dict(summary=summary,cases=cases,archive=entry),indent=2,allow_nan=False))
+        sourceFrozenSha256=sha,referenceManifestSha256=rh,gridManifestSha256=hashes,localGeometryAudit=ca,externalReferenceMaximum=externalMax,externalReferenceGate=bool(externalMax<=.05),independentCoordinatesMixed=False)
+    (a.out/'retarded_load.json').write_text(json.dumps(dict(summary=summary,cases=cases,archive=entry,externalReference=external),indent=2,allow_nan=False))
     print('G3_RETARDED_LOAD_GATE '+json.dumps(summary,allow_nan=False),flush=True)
 if __name__=='__main__':main()

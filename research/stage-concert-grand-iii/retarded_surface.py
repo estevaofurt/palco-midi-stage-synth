@@ -19,7 +19,9 @@ from modal_string_radiation import response
 from unison_profiles import KEYS,profiles_for_key,detune_profile
 from mode_selective_loss import mode_loss
 from split_radiation import relative
-from retarded_coordinates import align
+from retarded_local_reference import geometry
+from structural_passive_fit import contexts as original_contexts
+from surface_reactive_fft import reactive
 from dual_cavity_spatial_diagnostic import save_matrices
 
 RHO=1.204
@@ -80,21 +82,16 @@ def main():
     local={}
     def sink(plate,poly,lift):local.update(plate=plate,poly=poly,lift=lift)
     k,D,P,A,wires,G,lift,replay=rebuild(a.scale,a.surface,archive,wires,surface_sink=sink)
-    Q,ca=align(dict(stiffness=k,damping=D,ports=P,wirePorts=A,physicalLift=lift,regionalDamping=G),z)
     plate,poly=local['plate'],local['poly']
-    field=SurfaceModes(plate,local['lift']@Q.T@z['fieldVectors']/np.sqrt(z['fieldEigenvalues'])[None,:])
-    xy,w,S=samples(plate,field,8);grids={}
-    for n in (120,240):
-        B,dx,dy,area=cell_integrals(poly,field,n)
-        if abs(area-plate['areaM2'])/plate['areaM2']>1e-9:raise ValueError('cell area')
-        grids[n]=(B,dx,dy)
-    center=poly.mean(0);mic=np.array([[*center,.5],[center[0]+.25,center[1],1.5]])
-    rows={v['key']:v for v in json.loads(a.scale.read_text())['rows']};B=z['fieldMap']
+    B,field,quad,grids,mic,ca=geometry(plate,poly,local['lift'])
+    xy,w,S=quad[3:]
+    rows={v['key']:v for v in json.loads(a.scale.read_text())['rows']}
     contexts=[]
     for key in KEYS:
         ww,_=detune_profile(wires,rows,profiles_for_key(key)[0][1]);ww=mode_loss(ww,4.,2. if key==64 else 4.)
         contexts.append(ww)
-    md=dict(M=np.eye(80),K=np.diag(z['stiffness']),D=z['damping'],P=z['ports']);A=z['wirePorts']
+    md=dict(M=np.eye(80),K=np.diag(k),D=D,P=P)
+    oldctx=original_contexts(dict(stiffness=k,damping=D,ports=P),wires,rows)
     records=[];matrices=[];reference=[]
     for f in FREQUENCIES:
         s=2j*np.pi*f;Z0=impedance(*grids[120],s);Z=impedance(*grids[240],s)
@@ -103,10 +100,15 @@ def main():
         # Independent angular resistance; established cell reactance at archived points.
         row=dict(frequencyHz=f,grid=errors(Z0,Z),quadrature=errors(Z12,Z),
             angularResistanceRelative=relative(Z.real,R),passivity=audit(Z))
+        X=reactive(*grids[240],f,8)
+        row['independentReactanceRelative']=relative(Z.imag,X)
         if f in FREQ:
-            ref=z['impedance'][FREQ.index(f)];row['archivedReplay']=errors(Z,ref)
+            i=FREQ.index(f);row['externalReplay']=[]
+            for j,(m,ww) in enumerate(oldctx):
+                yy,pp,aa=response(m,A,ww,B.T@(R+1j*X)@B,H@B,f)
+                row['externalReplay'].append(dict(mobility=relative(yy,z['mobility'][j,i]),pressure=relative(pp,z['observation'][j,i]),gate=aa['gate']))
         # Compare both formulations with identical mechanics, observer and reactance.
-        target=R+1j*Z.imag;cases=[]
+        target=R+1j*X;cases=[]
         for j,ww in enumerate(contexts):
             yy,pp,aa=response(md,A,ww,B.T@Z@B,H@B,f)
             yr,pr,ar=response(md,A,ww,B.T@target@B,H@B,f)
@@ -116,7 +118,8 @@ def main():
         row['gate']=bool(max(row['grid'].values())<=.01 and max(row['quadrature'].values())<=1e-5
             and row['angularResistanceRelative']<=.01 and row['passivity']['gate']
             and all(v['powerGate'] and max(v['mobility'],v['pressure'])<=.05 for v in cases)
-            and max(row.get('archivedReplay',{'complex':0.}).values())<=.01)
+            and row['independentReactanceRelative']<=1e-8
+            and all(v['gate'] and max(v['mobility'],v['pressure'])<=.05 for v in row.get('externalReplay',[])))
         records.append(row);matrices.append(Z);reference.append(target)
         print('G3_RETARDED_SURFACE_CASE '+json.dumps(row,allow_nan=False),flush=True)
     positive=[]
@@ -128,7 +131,7 @@ def main():
         idealBaffleOnly=True,physicalTravelTime=True,rationalFitUsed=False,frequencyPoints=len(records),
         positiveRealSamples=len(positive),continuousPassivityProven=False,discreteFeedbackAccepted=False,
         timeDomainReady=False,polyphonyValidated=False,sourceFrozenSha256=sha,referenceManifestSha256=rh,
-        coordinateReplay=ca,maximumGridError=max(max(v['grid'].values()) for v in records),
+        localGeometryAudit=ca,independentCoordinatesMixed=False,maximumGridError=max(max(v['grid'].values()) for v in records),
         maximumAngularResistanceError=max(v['angularResistanceRelative'] for v in records))
     a.out.mkdir(parents=True,exist_ok=True)
     entry=save_matrices(a.out,'retarded_surface_impedance',frequencies=FREQUENCIES,impedance=np.stack(matrices),reference=np.stack(reference))
