@@ -1,0 +1,29 @@
+name: Concert Grand III mechanical observer diagnostic
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/mechanical_observer.py','research/stage-concert-grand-iii/test_mechanical_observer.py','.github/workflows/concert-grand-iii-mechanical-observer.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_mechanical_observer.py
+      - run: python research/stage-concert-grand-iii/mechanical_observer.py --out /tmp/g3-observer
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-mechanical-observer
+          path: /tmp/g3-observer/
+          if-no-files-found: warn
