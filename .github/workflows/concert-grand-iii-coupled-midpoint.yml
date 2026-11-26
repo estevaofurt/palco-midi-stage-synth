@@ -1,0 +1,29 @@
+name: Concert Grand III coupled modal midpoint synthetic diagnostic
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/coupled_modal_midpoint.py','research/stage-concert-grand-iii/test_coupled_modal_midpoint.py','.github/workflows/concert-grand-iii-coupled-midpoint.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_coupled_modal_midpoint.py
+      - run: python research/stage-concert-grand-iii/coupled_modal_midpoint.py --out /tmp/g3-coupled
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-coupled-modal-midpoint
+          path: /tmp/g3-coupled/
+          if-no-files-found: warn
