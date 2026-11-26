@@ -1,0 +1,29 @@
+name: Concert Grand III synthetic string board Schur coupling
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/string_board_schur.py','research/stage-concert-grand-iii/test_string_board_schur.py','.github/workflows/concert-grand-iii-string-board.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_string_board_schur.py
+      - run: python research/stage-concert-grand-iii/string_board_schur.py --out /tmp/g3-strings
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-string-board-schur
+          path: /tmp/g3-strings/
+          if-no-files-found: warn

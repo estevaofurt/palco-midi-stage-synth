@@ -1,0 +1,5 @@
+# G3.11l — acoplamento temporal de parciais sintéticas
+
+G3.11k ainda em execução; usar estrutura matemática G3.11i aprovada. G3.11d/g continuam pendentes. Não utilizar ajuste físico rejeitado.
+
+Introduzir osciladores de corda independentes ligados reciprocamente a quatro campos da tábua por mola e amortecedor relativos. Eliminar velocidades de ponto médio das cordas por complemento de Schur diagonal; contribuição efetiva PSD G^T diag(c*base/(base+c)) G ao sistema auxiliar de 4 dimensões. Recuperar velocidades das cordas após resolver tábua. Referência densa independente monta M,K,D completos, incluindo energia de ligação uma única vez. Verificar balanço, dissipação e estados/ledger contra solução densa. 32/64 excitações sintéticas, 1/4 parciais por voz (até 256 DOFs), 64 modos da tábua, 44.1/48/96 kHz. Tolerâncias 1e-9 energia e 1e-8 estados/ledger. Testar desacoplamento e rejeição de parâmetros negativos. Não é modelo físico de corda medido, não é motor MIDI, não é polifonia real; sem martelo, pedal, observadores ou áudio. Implementação Python para prova matemática antes de compilar. Main preservada.
