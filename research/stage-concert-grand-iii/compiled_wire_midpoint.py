@@ -11,7 +11,7 @@ from split_radiation import relative
 
 @njit(cache=True)
 def kernel(h,k,D,A,P,ports,hammer,m0,k0,d0,mi,ki,di,ks,ds,C,invHi,J,
-           q,v,x,u,rv,rq,rm,ri,rb,vm,um,forces,obs,ledger):
+           q,v,x,u,rv,rq,rm,ri,rb,vm,um,forces,obs,ledger,board_acceleration=None):
     n=len(q);nw=len(x);ns=x.shape[1];np_=P.shape[1];a=2/h
     for t in range(len(forces)):
         F=forces[t]
@@ -57,6 +57,7 @@ def kernel(h,k,D,A,P,ports,hammer,m0,k0,d0,mi,ki,di,ks,ds,C,invHi,J,
         for i in range(np_):work+=F[i]*obs[t,i]
         ledger[t,0]=h*work;ledger[t,1]=h*loss
         for j in range(n):
+            if board_acceleration is not None:board_acceleration[t,j]=2*(vm[j]-v[j])/h
             q[j]+=h*vm[j];v[j]=2*vm[j]-v[j]
         for w in range(nw):
             for i in range(ns):
@@ -77,7 +78,7 @@ class Compiled(CoupledWire):
         self.ri=np.zeros_like(self.x);self.um=np.zeros_like(self.x)
         self.rb=np.zeros(n);self.vm=np.zeros(n)
         self.one=np.zeros((1,self.P.shape[1]));self.ob=np.zeros_like(self.one);self.le=np.zeros((1,2))
-    def process(self,forces,obs,ledger):
+    def process(self,forces,obs,ledger,board_acceleration=None):
         p=self.P.shape[1];n=len(forces)
         for a,shape in ((forces,(n,p)),(obs,(n,p)),(ledger,(n,2))):
             if not isinstance(a,np.ndarray) or a.shape!=shape or a.dtype!=np.float64 or not a.flags.c_contiguous:raise ValueError('contiguous float64 buffers required')
@@ -87,9 +88,14 @@ class Compiled(CoupledWire):
                 if np.shares_memory(a,b):raise ValueError('alias')
             for b in (self.q,self.v,self.x,self.u,self.J,self.P,self.A,self.ri,self.um,self.rb,self.vm):
                 if np.shares_memory(a,b):raise ValueError('state alias')
+        if board_acceleration is not None:
+            a=board_acceleration
+            if not isinstance(a,np.ndarray) or a.shape!=(n,self.n) or a.dtype!=np.float64 or not a.flags.c_contiguous or not a.flags.writeable:raise ValueError('acceleration buffer')
+            for b in (forces,obs,ledger,self.q,self.v,self.x,self.u,self.J,self.P,self.A,self.ri,self.um,self.rb,self.vm):
+                if np.shares_memory(a,b):raise ValueError('acceleration alias')
         kernel(self.h,self.k,self.D,self.A,self.P,self.ports,self.hammer,self.m0,self.k0,self.d0,
             self.mi,self.ki,self.di,self.ks,self.ds,self.C,self.invHi,self.J,self.q,self.v,self.x,self.u,
-            self.rv,self.rq,self.rm,self.ri,self.rb,self.vm,self.um,forces,obs,ledger)
+            self.rv,self.rq,self.rm,self.ri,self.rb,self.vm,self.um,forces,obs,ledger,board_acceleration)
     def step(self,F):
         self.one[0]=F;self.process(self.one,self.ob,self.le)
         return self.ob[0].copy(),float(self.le[0,0]),float(self.le[0,1])
