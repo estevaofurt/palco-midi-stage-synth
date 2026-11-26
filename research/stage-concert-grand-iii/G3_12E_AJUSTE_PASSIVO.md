@@ -1,0 +1,5 @@
+# G3.12e — ajuste passivo dos 72 campos (piloto)
+
+G3.12d run 45741036520 ainda em execução quando implementado; não iniciar ajuste completo antes de ambos os jobs aprovados. Densificação antiga 2/4. Workflow push só testes unitários, full manual condicionado a sucesso da referência.
+
+Z(s) = s M + soma W s/(s+a) + soma Q s/(s²+2gamma s+omega²), todos coeficientes PSD, polos positivos/amortecidos, Z(0)=0. Sem mola de DC ou resistência constante. Quatro dicionários candidatos. ADMM com regressão real normalizada por resistência e reatância separadamente, ridge 1e-6, projeção PSD, residual primal/dual <=1e-6, até 2000 iterações. Três folds internos nos 12 pontos; congelar coeficientes e hash antes de abrir seis pontos reservados. Exigir erro <=5% em cada matriz de impedância/R/X, mobilidade e pressão com observador de referência, e passividade/otimizador/energia. A pressão usa H harmônico arquivado, não é ajuste causal de observador. Resultado pode reprovar. Verificar sintético com parâmetros conhecidos, DC, rejeição de entrada não passiva. Não afirmar adequação fora de 30–300 Hz, carga causal completa, áudio, caixa ou tempo real. Main preservada.

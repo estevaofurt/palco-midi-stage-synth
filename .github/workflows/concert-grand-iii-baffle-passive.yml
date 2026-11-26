@@ -1,0 +1,74 @@
+name: Concert Grand III enriched passive impedance pilot
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/baffle_passive_fit.py','research/stage-concert-grand-iii/test_baffle_passive_fit.py','.github/workflows/concert-grand-iii-baffle-passive.yml']
+  workflow_dispatch:
+    inputs:
+      full:
+        description: Run only after both G3.12d grid jobs passed
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_baffle_passive_fit.py
+  fit:
+    if: github.event_name == 'workflow_dispatch' && inputs.full
+    needs: unit
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - run: test "$(gh run view 45741036520 --json conclusion --jq .conclusion)" = success
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-hybrid-surface
+          run-id: 45737081748
+          github-token: ${{ github.token }}
+          path: /tmp/g3-surface
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-baffle-grid-training
+          run-id: 45741036520
+          github-token: ${{ github.token }}
+          path: /tmp/g3-train
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-baffle-grid-validation
+          run-id: 45741036520
+          github-token: ${{ github.token }}
+          path: /tmp/g3-valid
+      - run: python research/stage-concert-grand-iii/baffle_passive_fit.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-surface --training /tmp/g3-train --validation /tmp/g3-valid --out /tmp/g3-fit
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-baffle-passive
+          path: /tmp/g3-fit/
+          if-no-files-found: warn
