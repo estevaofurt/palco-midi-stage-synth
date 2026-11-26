@@ -1,0 +1,48 @@
+name: Concert Grand III surface reactive FFT diagnostic
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/surface_reactive_fft.py','research/stage-concert-grand-iii/test_surface_reactive_fft.py','.github/workflows/concert-grand-iii-surface-reactive.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_surface_reactive_fft.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-hybrid-surface
+          run-id: 45737081748
+          github-token: ${{ github.token }}
+          path: /tmp/g3-surface
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-enriched-baffle
+          run-id: 45739339872
+          github-token: ${{ github.token }}
+          path: /tmp/g3-baffle
+      - run: python research/stage-concert-grand-iii/surface_reactive_fft.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-surface --baffle /tmp/g3-baffle --out /tmp/g3-reactive
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-surface-reactive
+          path: /tmp/g3-reactive/
+          if-no-files-found: warn
