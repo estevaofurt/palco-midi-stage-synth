@@ -1,0 +1,5 @@
+# G3.11p — martelo com feltro passivo no sistema acoplado
+
+G3.11o aprovado: balanço 1.365613828720114e-13, estados 5.896556809728807e-12, ledger 1.7391336236004255e-12. 18/24 benchmarks sem ultrapassagens. G3.11d/d2 completo: 120 modos erro máximo 0.015089065871449966/0.009600145117737035 (30/55); 168 modos 0.010070366459146132/0.006622755962542992. Densificação pendente.
+
+Reusar felt_law (gradiente discreto e relaxação de variável interna) e sistema StringBoard validado. Resposta de ponto médio livre e compliance do porto de contato calculadas sem avançar estados. Resolver força unilateral escalar com Brent, atualizar martelo e cordas por trabalho conjugado; relaxação simétrica do feltro. Comparação Schur/denso, energia total incluindo feltro, impulso, compressão e rebote. 0.3/1/3 m/s, 4/8 parciais, 48/96/192 kHz, 18 casos. Convergência 96/192 separada do gate algébrico; limite 5% e 0.1 ms. Parâmetros sintéticos (massa .01 kg, feltro expoente 2.5) não calibrados, um martelo, fim na primeira separação, sem mecanismo de captura, sem pedal variável simultâneo, sem som. Main preservada.

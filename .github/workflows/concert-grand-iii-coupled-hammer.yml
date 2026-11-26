@@ -1,0 +1,29 @@
+name: Concert Grand III coupled hammer contact diagnostic
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/coupled_hammer_contact.py','research/stage-concert-grand-iii/test_coupled_hammer_contact.py','.github/workflows/concert-grand-iii-coupled-hammer.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_coupled_hammer_contact.py
+      - run: python research/stage-concert-grand-iii/coupled_hammer_contact.py --out /tmp/g3-hammer
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-coupled-hammer
+          path: /tmp/g3-hammer/
+          if-no-files-found: warn
