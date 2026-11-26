@@ -1,0 +1,33 @@
+name: Concert Grand III partitioned acoustic memory
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/partitioned_acoustic_memory.py','research/stage-concert-grand-iii/test_partitioned_acoustic_memory.py','.github/workflows/concert-grand-iii-partitioned-memory.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        rate: [48000, 96000]
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_partitioned_acoustic_memory.py
+      - run: python research/stage-concert-grand-iii/partitioned_acoustic_memory.py --rate ${{ matrix.rate }} --out /tmp/g3-partitioned
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-partitioned-memory-${{ matrix.rate }}
+          path: /tmp/g3-partitioned/
