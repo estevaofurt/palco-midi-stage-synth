@@ -1,0 +1,60 @@
+name: Concert Grand III response weighted passive fit
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/response_weighted_fit.py','research/stage-concert-grand-iii/test_response_weighted_fit.py','.github/workflows/concert-grand-iii-response-weighted.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/stage-concert-grand-iii
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_response_weighted_fit.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-port-enrichment
+          run-id: 45742331448
+          github-token: ${{ github.token }}
+          path: /tmp/g3-wire
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-baffle-reference
+          run-id: 45774796464
+          github-token: ${{ github.token }}
+          path: /tmp/g3-baffle
+      - name: Require successful upstream reference
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: timeout 25m gh run watch 45775653803 --exit-status --interval 20
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-new-baffle-grid
+          run-id: 45775653803
+          github-token: ${{ github.token }}
+          path: /tmp/g3-grid
+      - run: python research/stage-concert-grand-iii/response_weighted_fit.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --reference /tmp/g3-baffle --grid /tmp/g3-grid --out /tmp/g3-weighted
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-response-weighted-fit
+          path: /tmp/g3-weighted/
+          if-no-files-found: warn

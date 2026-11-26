@@ -1,0 +1,5 @@
+# G3.13c — ponderação da resposta física
+
+G3.12x run 45774543300 aprovado 42/42, balanço 1.0471176692213603e-10, replay nominal 0. 48k, C4, ref comum -60dB tábua fraco/forte: nominal 3.3/5.4s, ±1 cent x.25 12.85/30s (primeira janela forte 1.502978x), ±1 x.1 18.9/34.9s, ±2 x.25 15.85/33.85s. Hipóteses secas, sem audibilidade. G3.13b ainda executando na inspeção; novo workflow exige sucesso do run 45775653803 e manifestos aprovados.
+
+Treino: 7 pontos anteriores + 8 desenvolvimento novos. Construir Gram de direções de velocidade estrutural exatas sob forças unitárias nas sete portas e cinco hipóteses; normalizar colunas individualmente. Congruência T=(I+strength G/lambdaMax)^1/2 com 0/3/15, ajuste PSD na base ponderada e retorno por inversa, preservando passividade. Dois dicionários predeterminados, seis candidatos. Seleção pelo máximo de erros de matriz R/X e respostas físicas, sem abrir os sete pontos reservados até congelar coeficientes. Reserva já examinada pelo modelo anterior: não é validação externa totalmente cega. Aguardar upstream dentro do workflow, não alterar main. Nenhum parâmetro físico selecionado, nenhuma promoção acústica ou áudio.
