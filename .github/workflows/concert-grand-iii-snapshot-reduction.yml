@@ -1,0 +1,56 @@
+name: Concert Grand III provisional snapshot reduction
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/snapshot_reduction.py','research/stage-concert-grand-iii/test_snapshot_reduction.py','.github/workflows/concert-grand-iii-snapshot-reduction.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_snapshot_reduction.py
+  proof:
+    needs: unit
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          for r in 45717196561 45723509912 45725159589; do
+            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
+          done
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45723509912 -n G3-consolidated-exterior-${{ matrix.angle }} -D /tmp/g3-ext
+          gh run download 45725159589 -n G3-graded-cavity-${{ matrix.angle }} -D /tmp/g3-graded
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/snapshot_reduction.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high --consolidated /tmp/g3-ext --graded /tmp/g3-graded --angle ${{ matrix.angle }} --out /tmp/g3-rom
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-snapshot-reduction-${{ matrix.angle }}
+          path: /tmp/g3-rom/
+          if-no-files-found: warn
