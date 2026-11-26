@@ -23,3 +23,17 @@ test('actual preallocated pool, defaults and invalid input',()=>{
     const id=a.done[0];assert.equal(a.find(id),null);
   }
 });
+
+test('physical preview pools and quality changes',async()=>{
+  for(const [file,name] of [['physical-piano.js','PhysicalPianoEngine'],['physical-piano-legacy.js','PhysicalPianoEngine'],['physical-piano-hybrid.js','HybridPianoEngine']]){
+    const E=(await import(pathToFileURL(resolve(root,file))))[name];
+    assert.equal(new E(48000,'studio').maxVoices,64);
+    const a=new E(48000,'studio',128);assert.equal(a.maxVoices,128);
+    for(let i=1;i<=128;i++)a.noteOn({id:i,key:36+i%36,speed:.7,hardness:.5});
+    assert.equal(a.voices.filter(v=>v.active).length,128);
+    a.setQuality('eco');assert.equal(a.maxVoices,32);assert.equal(a.voices.filter(v=>v.active).length,32);
+    a.setQuality('balanced');assert.equal(a.maxVoices,128);
+    const L=new Float32Array(128),R=new Float32Array(128),S=new Float32Array(128);
+    a.render(L,R,S,128);assert.ok(L.every(Number.isFinite)&&R.every(Number.isFinite));
+  }
+});

@@ -30,12 +30,12 @@ polySelect.onchange=()=>{try{storage?.setItem(STORAGE_KEY,polySelect.value)}catc
         s=replace(s,"import {profilePolyphony} from './audio-profile.js';","import {profilePolyphony} from './audio-profile.js';\nimport {candidateModalCapacity,candidateVoiceLimit,physicalOverride,physicalLimit} from './polyphony_preview.mjs';")
         s=replace(s,"this.voiceLimit=profilePolyphony(options.profile);","this.voiceLimit=profilePolyphony(options.profile);this.polyphony=options.polyphony??'auto';this.modalCapacity=candidateModalCapacity(this.polyphony,options.profile,ctx.sampleRate);this.physicalOverride=physicalOverride(this.polyphony,options.profile,ctx.sampleRate);")
         s=replace(s,"piano:new Acoustic(ctx,this.buses.piano,bank,{lite:this.lite}),","piano:new Acoustic(ctx,this.buses.piano,bank,{lite:this.lite,modalCapacity:this.modalCapacity,physicalOverride:this.physicalOverride}),")
-        s=replace(s,"    return this.voiceLimit;","    const piano=this.state.patches.piano.values,inst=this.instruments.piano;
+        s=replace(s,"    return this.voiceLimit;","""    const piano=this.state.patches.piano.values,inst=this.instruments.piano;
     const node={modal:inst.modal,physical:inst.physical,physicalLegacy:inst.legacyPhysical,hybrid:inst.hybrid}[piano.soundEngine];
     const solo=_mask===engines.piano.bit&&Boolean(node)&&[...this.voices.values()].every(v=>v.parts.size===1&&v.parts.has('piano'));
     const physical=['physical','physicalLegacy','hybrid'].includes(piano.soundEngine);
     const cap=physical?physicalLimit(this.physicalOverride,piano.physicalQuality):this.modalCapacity;
-    return candidateVoiceLimit(this.polyphony,this.voiceLimit,cap,solo);")
+    return candidateVoiceLimit(this.polyphony,this.voiceLimit,cap,solo);""")
         s=replace(s,"    if(playing.length>=this.activeVoiceLimit(mask)){\n      const steal=playing.find(v=>!v.held) || playing[0];\n      this.stopVoice(steal,true);this.voices.delete(steal.id);\n    }","    const limit=this.activeVoiceLimit(mask);\n    while(playing.length>=limit){\n      const steal=playing.find(v=>!v.held) || playing[0];\n      this.stopVoice(steal,true);this.voices.delete(steal.id);playing.splice(playing.indexOf(steal),1);\n    }")
         return s
     patch('stage.js',stage)
@@ -45,7 +45,7 @@ polySelect.onchange=()=>{try{storage?.setItem(STORAGE_KEY,polySelect.value)}catc
         s=replace(s,"const node=new AudioWorkletNode(this.ctx,'palco-piano',{\n          numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]","const node=new AudioWorkletNode(this.ctx,'palco-piano',{\n          processorOptions:{voices:this.modalCapacity},numberOfInputs:0,numberOfOutputs:2,outputChannelCount:[2,1]")
         for processor in ('palco-physical-piano','palco-physical-piano-legacy','palco-piano-hybrid'):
             anchor=f"const node=new AudioWorkletNode(this.ctx,'{processor}',{{"
-            s=replace(s,anchor,anchor+"\\n          processorOptions:{voices:this.physicalOverride},")
+            s=replace(s,anchor,anchor+"\n          processorOptions:{voices:this.physicalOverride},")
         return s
     patch('acoustic.js',acoustic)
     def worklet(s):
