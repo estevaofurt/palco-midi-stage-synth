@@ -1,0 +1,45 @@
+name: Concert Grand III pressure observer sparse pilot
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/pressure_observer_pilot.py','research/stage-concert-grand-iii/test_pressure_observer_pilot.py','.github/workflows/concert-grand-iii-pressure-observer.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_pressure_observer_pilot.py
+      - run: |
+          gh run download 45643063220 -n G3-scale-geometry-02 -D /tmp/g3-scale
+          gh run download 45729376812 -n G3-common-snapshot-transfer-${{ matrix.angle }} -D /tmp/g3-120
+          gh run download 45729177312 -n G3-fixed-snapshot-${{ matrix.angle }} -D /tmp/g3-168
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45723509912 -n G3-consolidated-exterior-${{ matrix.angle }} -D /tmp/g3-ext
+          gh run download 45726103993 -n G3-graded-combined-${{ matrix.angle }} -D /tmp/g3-fine
+          gh run download 45729588927 -n G3-new-frequency-${{ matrix.angle }} -D /tmp/g3-new
+          python research/stage-concert-grand-iii/pressure_observer_pilot.py extract --scale /tmp/g3-scale/scale_geometry.json --basis120 /tmp/g3-120 --basis168 /tmp/g3-168 --archive /tmp/g3-high --consolidated /tmp/g3-ext --fine /tmp/g3-fine --angle ${{ matrix.angle }} --out /tmp/g3-obs/fine
+          python research/stage-concert-grand-iii/pressure_observer_pilot.py extract --scale /tmp/g3-scale/scale_geometry.json --basis120 /tmp/g3-120 --basis168 /tmp/g3-168 --new /tmp/g3-new --angle ${{ matrix.angle }} --out /tmp/g3-obs/new
+          python research/stage-concert-grand-iii/pressure_observer_pilot.py pilot --fine /tmp/g3-obs/fine --new /tmp/g3-obs/new --out /tmp/g3-obs/pilot
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-pressure-observer-${{ matrix.angle }}
+          path: /tmp/g3-obs/
+          if-no-files-found: warn
