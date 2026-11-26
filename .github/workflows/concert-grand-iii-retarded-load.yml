@@ -2,7 +2,7 @@ name: Concert Grand III geometry derived retarded acoustic load
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/retarded_load.py','research/stage-concert-grand-iii/test_retarded_load.py','.github/workflows/concert-grand-iii-retarded-load.yml']
+    paths: ['research/stage-concert-grand-iii/retarded_coordinates.py','research/stage-concert-grand-iii/test_retarded_coordinates.py','research/stage-concert-grand-iii/retarded_load.py','research/stage-concert-grand-iii/test_retarded_load.py','.github/workflows/concert-grand-iii-retarded-load.yml']
   workflow_dispatch:
 permissions:
   contents: read

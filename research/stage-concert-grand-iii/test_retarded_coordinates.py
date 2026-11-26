@@ -7,6 +7,8 @@ class CoordinateTest(unittest.TestCase):
         Q=np.array([[0.,-1.],[1.,0.]])
         L=dict(physicalLift=R['physicalLift']@Q,stiffness=np.diag(Q.T@np.diag(R['stiffness'])@Q),damping=Q.T@R['damping']@Q,ports=Q.T@R['ports'],wirePorts=R['wirePorts']@Q,regionalDamping=np.array([Q.T@R['regionalDamping'][0]@Q]))
         q,e=align(L,R);np.testing.assert_allclose(q,Q,atol=1e-12)
-        L['stiffness']+=1.
+        self.assertLess(max(e.values()),1e-12)
+        np.testing.assert_allclose(L['physicalLift']@q.T,R['physicalLift'],atol=1e-12)
+        L['stiffness']=L['stiffness']+1.
         with self.assertRaises(ValueError):align(L,R)
 if __name__=='__main__':unittest.main()
