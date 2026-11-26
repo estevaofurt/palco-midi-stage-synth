@@ -1,0 +1,58 @@
+name: Concert Grand III bridge damping audition
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/bridge_damping_audition.py','research/stage-concert-grand-iii/test_bridge_damping_audition.py','.github/workflows/concert-grand-iii-bridge-audition.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        speed: ['0.3','3.0']
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_bridge_damping_audition.py
+      - run: timeout 150m gh run watch 45866003726 --repo "$GITHUB_REPOSITORY" --exit-status --interval 30
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-frozen-regional-loss-${{ matrix.speed }}
+          run-id: 45866003726
+          github-token: ${{ github.token }}
+          path: /tmp/g3-loss
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-physical-long-${{ matrix.speed }}
+          run-id: 45865381764
+          github-token: ${{ github.token }}
+          path: /tmp/g3-bundle
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-port-enrichment
+          run-id: 45742331448
+          github-token: ${{ github.token }}
+          path: /tmp/g3-wire
+      - run: python research/stage-concert-grand-iii/bridge_damping_audition.py --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --bundle /tmp/g3-bundle --loss /tmp/g3-loss --out /tmp/g3-bridge-audition
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-bridge-audition-${{ matrix.speed }}
+          path: /tmp/g3-bridge-audition/
