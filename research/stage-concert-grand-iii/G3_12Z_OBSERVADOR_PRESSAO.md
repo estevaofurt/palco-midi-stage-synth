@@ -1,0 +1,5 @@
+# G3.12z — observador causal de pressão por retardos físicos
+
+G3.12x run 45774543300 e G3.12y run 45774796464: unitários aprovados, provas completas ainda em execução na inspeção. Não antecipar resultados nem aplicar o fit acústico 72 campos reprovado.
+
+Reconstruir localmente a base 80 via G3.12v/callback da G3.12y. Rayleigh ideal unilateral p(t)=rho/(2pi) integral a(x,t-r/c)/r dS. Quadratura de superfície 6/8, dois microfones; atraso fracionário interpolado por Lagrange linear/cúbico, suporte causal positivo. Kernel de aceleração em coordenadas modais, também entrada velocidade via BDF2 causal. Comparar transferência discreta com pressão harmônica independente (9 frequências 30–500 Hz; 6 pontos acima até 8 kHz exclusivamente diagnóstico). 48/96k, 4 configurações; erro banda <=0.005, quadratura <=1e-6, silêncio exato, impulso e partição de blocos <=1e-10; DC de velocidade zero. Exportar kernel e modelo estrutural na mesma base. Interpolação/FFT pode produzir arredondamento anterior à chegada, limitado numericamente; não confundir com propagação física. Não inclui feedback acústico, não aprova timbre, tempo real, caixa/tampa ou sustain audível. Main preservada.
