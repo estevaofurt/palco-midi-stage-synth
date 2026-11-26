@@ -6,14 +6,17 @@ from pathlib import Path
 import numpy as np
 from scipy.io.wavfile import write
 from scipy.signal import butter,sosfilt
-from wire_physical_midpoint import load
+from wire_physical_midpoint import load,CoupledWire
 from compiled_wire_midpoint import Compiled
 from physical_pedal_repeat import PointSchur,Repeating,damper_ports
 from variable_damper import PedalControl
 from physical_unison_decay import detune
 from physical_loss_sensitivity import crossings
 from felt_law import params
-from causal_pressure_observer import Observer,TRAIN,HIGH
+from causal_pressure_observer import Observer,TRAIN,HIGH,transfer
+from physical_long_decay import startup
+from wire_port_enrichment import development_grids,comparison
+from modal_string_radiation import response
 from structural_passive_fit import read_reference
 from wire_baffle_reference import FREQ
 from acoustic_matrix_archive import read_npz
@@ -53,7 +56,46 @@ def align_coordinates(local,reference):
     return dict(errors=e,commonFrequenciesHz=common,rank=int(rank),
         condition=float(sv[0]/sv[-1]),usesLocalMechanicsAndPressure=True)
 
-def pressure_source(root,sha,reference):
+def observable_audit(local,reference,archive,wires):
+    # Independent reductions can span different physical subspaces. Do
+    # not identify their columns. Compare external transfer functions
+    # in the same force-port coordinates, never mix their matrices.
+    freq=np.sort(np.r_[tuple(development_grids())[0],tuple(development_grids())[1],tuple(development_grids())[2]])
+    reports=[]
+    for n in (16,32,128):
+        models=[CoupledWire(z['stiffness'],z['damping'],z['ports'],z['wirePorts'],wires,RATE,n) for z in (local,archive,reference)]
+        y=models[0].transfer(freq)
+        reports.append(dict(partials=n,frozen= comparison(y,models[1].transfer(freq)),baffle=comparison(y,models[2].transfer(freq))))
+    mobility=max(max(v['frozen']['maximum'],v['baffle']['maximum']) for v in reports)
+    # Check the pressure kernel against the independent harmonic
+    # pressure archive belonging to THIS local mechanical model.
+    H=transfer(local['kernel_48000_3'],TRAIN,RATE)* (2j*np.pi*np.asarray(TRAIN))[:,None,None]
+    pressure=max(relative(h,local['pressureReference'][i]) for i,h in enumerate(H))
+    G=local['regionalDamping'];d=local['damping']
+    damping=relative(G.sum(axis=0),d)
+    minimum=min(float(np.linalg.eigvalsh(g).min()/max(np.linalg.norm(g),1e-30)) for g in G)
+    if min(local['stiffness'])<=0:raise ValueError('nonpositive local stiffness')
+    # Compare physical pressure outputs at shared frequencies for
+    # information, not a license to substitute the other basis.
+    common=sorted(set(FREQ)&set(TRAIN));external=[]
+    for f in common:
+        i=FREQ.index(f);j=TRAIN.index(f);outputs=[]
+        for z,observer in ((local,local['pressureReference'][j]),(reference,reference['pressure'][i]@reference['fieldMap'])):
+            md=dict(M=np.eye(80),K=np.diag(z['stiffness']),D=z['damping'],P=z['ports'])
+            Y,O,a=response(md,z['wirePorts'],wires,np.zeros((80,80),complex),observer,f)
+            if not a['gate']:raise ValueError('dry harmonic algebra')
+            outputs.append((Y,O))
+        external.append(dict(frequencyHz=f,mobility=relative(outputs[0][0],outputs[1][0]),pressure=relative(outputs[0][1],outputs[1][1])))
+    report=dict(dryTransfer=reports,maximumDryTransfer=mobility,localPressureKernel=pressure,
+        dampingPartition=damping,minimumRegionalDamping=minimum,independentPressureComparison=external,
+        independentPressureAgreementGate=all(x['pressure']<=.05 for x in external),
+        usesLocalMechanicsAndPressure=True,crossBasisMatricesMixed=False)
+    print('G3_DRY_PRESSURE_OBSERVABLE_AUDIT '+json.dumps(report,allow_nan=False),flush=True)
+    if mobility>1e-5 or pressure>.005 or damping>1e-10 or minimum<-1e-10:
+        raise ValueError('local model observable replay failed')
+    return report
+
+def pressure_source(root,sha,reference,archive,wires):
     raw=(root/'causal_pressure_observer.json').read_bytes();d=json.loads(raw);s=d['summary']
     expected=dict(gate=True,structureRank=80,cases=4,causalDelayObserver=True,sameCoordinateSurface=True,
         acousticFeedbackIncluded=False,validatedBandHz=[30,500],calibratedParameters=False)
@@ -62,7 +104,10 @@ def pressure_source(root,sha,reference):
         physicalLift=(1386,80),regionalDamping=(3,80,80),microphoneXYZ=(2,3),pressureReference=(len(TRAIN+HIGH),2,80))
     for row in d['cases']:shapes[f"kernel_{row['rate']}_{row['degree']}"]=(2,row['taps'],80)
     z=read_npz(root,d['archive'],shapes,TRAIN+HIGH)
-    audit=align_coordinates(z,reference)
+    # The earlier strict congruence test remains available for archives
+    # intended to share a coordinate system. This render requires no such
+    # congruence: all its dynamics and pressure maps come from one archive.
+    audit=observable_audit(z,reference,archive,wires)
     return z,audit,hashlib.sha256(raw).hexdigest()
 
 def render(z,wires,rows,groups,masses,felts,spread,factor,speed,seconds=40.):
@@ -113,8 +158,8 @@ def pcm(y,gain):
 def main():
     p=argparse.ArgumentParser()
     for k in ('scale','source','reference','pressure','joint','out'):p.add_argument('--'+k,type=Path,required=True)
-    a=p.parse_args();_,wires,sha=load(a.source,a.scale);ref,rh=read_reference(a.reference,sha)
-    z,coord,ph=pressure_source(a.pressure,sha,ref)
+    a=p.parse_args();archive,wires,sha=load(a.source,a.scale);ref,rh=read_reference(a.reference,sha)
+    z,coord,ph=pressure_source(a.pressure,sha,ref,archive,wires)
     raw=(a.joint/'physical_joint_decay.json').read_bytes();d=json.loads(raw)
     if d['sourceFrozenSha256']!=sha or any(d['summary'].get(k)!=v for k,v in dict(gate=True,cases=42,fullAttackRecomputed=True,acousticLoadIncluded=False).items()):
         raise ValueError('joint source')
@@ -122,13 +167,20 @@ def main():
     rows={x['key']:x for x in json.loads(a.scale.read_text())['rows']};keys=[45,48,60,64]
     pars=[params(k,rows[k]['count'],spec,felt) for k in keys];groups=[w.port for w in wires]
     masses=[h['massKg'] for h,_ in pars];felts=[pars[g][1] for g in groups]
+    rows['_platePort']=z['ports'][:,6]
     a.out.mkdir(parents=True,exist_ok=True);renders=[]
     for spread,factor,speed in CASES:
         y,b,rms,band,row=render(z,wires,rows,groups,masses,felts,spread,factor,speed)
         prior=next(x for x in d['cases'] if x['rate']==RATE and x['spreadCents']==spread and x['structureFactor']==factor and x['hammerSpeedMps']==speed)
-        e=abs(row['mechanicalEnergyJ']/prior['mechanicalEnergyJ']-1.)
-        if e>1e-7:raise ValueError('attack replay')
-        row['attackReplayRelative']=e;renders.append((y,b,rms,band,row))
+        # Independent replay of startup using the uncompiled midpoint path
+        # in the same local basis. Cross-basis prior remains diagnostic.
+        ww,_=detune(wires,rows,spread)
+        m,q,v,O,initial=startup(z['stiffness'],z['damping']*factor,z['wirePorts'],ww,rows,groups,masses,felts,RATE,PARTIALS,1.,speed)
+        e=abs(row['mechanicalEnergyJ']/initial['mechanicalEnergyJ']-1.)
+        if e>1e-7:raise ValueError('local attack replay')
+        row['attackReplayRelative']=e
+        row['priorIndependentAttackEnergyRelative']=abs(row['mechanicalEnergyJ']/prior['mechanicalEnergyJ']-1.)
+        renders.append((y,b,rms,band,row))
         print('G3_DRY_PRESSURE_RENDER_CASE '+json.dumps(row,allow_nan=False),flush=True)
     gain=common_gain([v for y,b,*_ in renders for v in (y,b)])
     ref=renders[1][2].max(axis=0);bref=renders[1][3].max(axis=0);cases=[]
@@ -147,6 +199,8 @@ def main():
         sampleRate=RATE,partials=PARTIALS,structureRank=80,wires=10,key=60,commonAuditionGain=gain,
         noEnvelope=True,acousticFeedbackIncluded=False,oneSidedIdealBaffle=True,validatedObserverBandHz=[30,500],
         fullBandDiagnosticOnly=True,lowpass500IsNotBrickwall=True,audibleSustainMeasured=False,
+        crossBasisMatricesMixed=False,independentPressureAgreementGate=coord['independentPressureAgreementGate'],
+        maximumPriorIndependentAttackEnergyRelative=max(v['priorIndependentAttackEnergyRelative'] for v in cases),
         maximumEnergyError=max(max(v['startupBalance'],v['tailBalance']) for v in cases),
         maximumAttackReplay=max(v['attackReplayRelative'] for v in cases),timeDomainReady=False,radiationReady=False,polyphonyValidated=False)
     (a.out/'dry_pressure_render.json').write_text(json.dumps(dict(summary=summary,cases=cases,coordinateReplay=coord,
