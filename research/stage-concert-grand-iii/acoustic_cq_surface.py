@@ -101,8 +101,13 @@ def main():
         sourceFrozenSha256=sha,gridMaximum=grid,angularMaximum=max(angular),correlationAlgebra=algebra,
         aliasRelative=alias,tailRelative=tail,reconstructionRelative=reconstruction,bandMaximum=band,
         directPassivity=dp,kernelPassivity=rp,minimumWorkRelative=minWork)
+    # Keep physical coordinates from this exact reconstruction.
+    from projected_board_cq import screen
+    coupled=screen(k,D,A,wires,U,W,a.rate,local) if gate else None
+    if coupled is not None:
+        print('G3_CQ_BOARD_GATE '+json.dumps({key:value for key,value in coupled.items() if key not in ('harmonic','cases')},allow_nan=False),flush=True)
     a.out.mkdir(parents=True,exist_ok=True)
     entry=save_matrices(a.out,'cq_projected_surface',frequencies=f,projection=U,weights=W,reference=ref)
-    (a.out/'cq_projected_surface.json').write_text(json.dumps(dict(summary=summary,archive=entry),indent=2,allow_nan=False))
+    (a.out/'cq_projected_surface.json').write_text(json.dumps(dict(summary=summary,archive=entry,boardScreen=coupled),indent=2,allow_nan=False))
     print('G3_CQ_PROJECTED_GATE '+json.dumps(summary,allow_nan=False),flush=True)
 if __name__=='__main__':main()

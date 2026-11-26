@@ -2,7 +2,7 @@ name: Concert Grand III projected physical surface CQ
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/acoustic_cq_pilot.py','research/stage-concert-grand-iii/acoustic_cq_surface.py','research/stage-concert-grand-iii/test_acoustic_cq_surface.py','.github/workflows/concert-grand-iii-acoustic-cq-surface.yml']
+    paths: ['research/stage-concert-grand-iii/projected_board_cq.py','research/stage-concert-grand-iii/test_projected_board_cq.py','research/stage-concert-grand-iii/acoustic_cq_pilot.py','research/stage-concert-grand-iii/acoustic_cq_surface.py','research/stage-concert-grand-iii/test_acoustic_cq_surface.py','.github/workflows/concert-grand-iii-acoustic-cq-surface.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
-      - run: python research/stage-concert-grand-iii/test_acoustic_cq_surface.py
+      - run: python research/stage-concert-grand-iii/test_acoustic_cq_surface.py && python research/stage-concert-grand-iii/test_projected_board_cq.py
       - uses: actions/download-artifact@v4
         with:
           name: G3-scale-geometry-02
