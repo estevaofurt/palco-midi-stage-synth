@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 from acoustic_cq_surface import ProjectedLoad,cq,passivity
 from retarded_surface import impedance
+from acoustic_cq_pilot import harmonic_symbol,symbol
 class ProjectedTest(unittest.TestCase):
     def test_correlation(self):
         B=np.random.default_rng(5).normal(size=(3,3,2))
@@ -12,6 +13,13 @@ class ProjectedTest(unittest.TestCase):
         w,e=cq(lambda s:np.array([[s]]),48000,128)
         np.testing.assert_allclose(w[:3,0,0],[72000.,-96000.,24000.],rtol=1e-10)
         self.assertLess(e,1e-10)
+    def test_harmonic_symbol(self):
+        for rate in (48000,96000):
+            f=np.r_[0.,np.geomspace(.001,rate/2,1000)]
+            s=harmonic_symbol(f,rate)
+            self.assertGreaterEqual(s.real.min(),0.)
+            self.assertEqual(s[0],0.)
+            np.testing.assert_allclose(s,symbol(np.exp(-2j*np.pi*f/rate),rate),atol=1e-10,rtol=1e-12)
     def test_dc_scale(self):
         z=np.array([[[1e-12]],[[1.]],[[2.]]])
         self.assertEqual(passivity(z)['minimumLocalNonDC'],1.)

@@ -2,7 +2,7 @@ name: Concert Grand III projected physical surface CQ
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/acoustic_cq_surface.py','research/stage-concert-grand-iii/test_acoustic_cq_surface.py','.github/workflows/concert-grand-iii-acoustic-cq-surface.yml']
+    paths: ['research/stage-concert-grand-iii/acoustic_cq_pilot.py','research/stage-concert-grand-iii/acoustic_cq_surface.py','research/stage-concert-grand-iii/test_acoustic_cq_surface.py','.github/workflows/concert-grand-iii-acoustic-cq-surface.yml']
   workflow_dispatch:
 permissions:
   contents: read

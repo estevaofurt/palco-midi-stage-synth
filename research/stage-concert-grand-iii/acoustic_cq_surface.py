@@ -10,7 +10,7 @@ from polygon_radiation import SurfaceModes
 from surface_reactive_fft import cell_integrals
 from retarded_surface import delay_kernel,impedance,RHO
 from retarded_load import folded_correlation
-from acoustic_cq_pilot import symbol,transfer,convolve
+from acoustic_cq_pilot import symbol,harmonic_symbol,transfer,convolve
 from enriched_baffle import samples,resistance
 from split_radiation import relative
 from dual_cavity_spatial_diagnostic import save_matrices
@@ -82,7 +82,7 @@ def main():
     n=1024 if a.rate==48000 else 2048
     W,e=cq(L,a.rate,n);W2,e2=cq(L,a.rate,2*n)
     fs=np.unique(np.r_[0.,f,np.geomspace(1.,a.rate/2,200),np.linspace(0,a.rate/2,257)])
-    direct=np.stack([L(s) for s in symbol(np.exp(-2j*np.pi*fs/a.rate),a.rate)])
+    direct=np.stack([L(s) for s in harmonic_symbol(fs,a.rate)])
     recon=transfer(W,fs,a.rate)
     dp=passivity(direct);rp=passivity(recon)
     alias=relative(W,W2[:n]);tail=float(np.linalg.norm(W2[n:])/max(np.linalg.norm(W2),1e-30))

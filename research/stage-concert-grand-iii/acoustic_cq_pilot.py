@@ -14,6 +14,13 @@ def symbol(z,rate):
     if not np.isfinite(z).all() or np.any(abs(z)>1+1e-12):raise ValueError('unit disk')
     return rate*((1-z)+(1-z)**2/2)
 
+def harmonic_symbol(f,rate):
+    """Exact unit-circle BDF2 identity, avoiding cancellation near DC."""
+    f=np.asarray(f,float)
+    if not np.isfinite(rate) or rate<=0 or not np.isfinite(f).all() or np.any(abs(f)>rate/2):raise ValueError('frequency')
+    theta=2*np.pi*f/rate
+    return rate*(4*np.sin(theta/2)**4+1j*np.sin(theta)*(2-np.cos(theta)))
+
 def coefficients(load,rate,n,radius):
     if n<16 or n%2 or not 0<radius<1:raise ValueError('contour')
     z=radius*np.exp(-2j*np.pi*np.arange(n)/n)
@@ -46,7 +53,7 @@ def case(rate,n,radius,B,dx,dy):
     alias=relative(W,W2[:n]);tail=float(np.linalg.norm(W2[n:])/max(np.linalg.norm(W2),1e-30))
     f=np.unique(np.r_[0.,np.geomspace(20.,500.,26),np.geomspace(501.,rate/2,48)])
     z=np.exp(-2j*np.pi*f/rate)
-    direct=np.stack([load(s) for s in symbol(z,rate)])
+    direct=np.stack([load(s) for s in harmonic_symbol(f,rate)])
     ideal=np.stack([load(2j*np.pi*x) for x in f])
     recon=transfer(W,f,rate)
     den=max(np.linalg.norm(direct,axis=(1,2)).max(),1e-30)
