@@ -1,0 +1,35 @@
+name: Concert Grand III medium resonance audit
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/middle_tail.py','research/stage-concert-grand-iii/test_middle_tail.py','.github/workflows/concert-grand-iii-middle-tail.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        key: [45,48,60,64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_middle_tail.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-felt-loss-${{ matrix.key }}-release_pedal
+          run-id: 45822265854
+          github-token: ${{ github.token }}
+          path: /tmp/g3-source
+      - run: python research/stage-concert-grand-iii/middle_tail.py --key ${{ matrix.key }} --source /tmp/g3-source --out /tmp/g3-middle
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-middle-tail-${{ matrix.key }}
+          path: /tmp/g3-middle/

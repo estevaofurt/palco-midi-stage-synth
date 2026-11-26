@@ -10,7 +10,7 @@ class BrightnessTest(unittest.TestCase):
         v=attack_compare(b,a);self.assertFalse(v['gate'])
         self.assertAlmostEqual(v['maximumSignificantBandChangeDb'],6.020599913,places=7)
     def test_threshold(self):
-        s=dict(channels=[dict(windows=[dict(timeS=0,fundamentalRmsPa=1.,spectralRmsPa=1.),dict(timeS=1,fundamentalRmsPa=.001,spectralRmsPa=.01)])])
+        s=dict(channels=[dict(channel=1,windows=[dict(timeS=0,fundamentalRmsPa=1.,spectralRmsPa=1.),dict(timeS=1,fundamentalRmsPa=.001,spectralRmsPa=.01)])])
         r=dict(channels=[dict(peakFundamentalRmsPa=10.,peakSpectralRmsPa=10.)])
         a=fixed_thresholds(s,r)[0]
         self.assertEqual(a['fundamental']['-60']['lastWindowEndS'],1)
