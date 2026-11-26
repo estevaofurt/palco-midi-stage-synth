@@ -2,7 +2,9 @@ import unittest
 import numpy as np
 from types import SimpleNamespace
 from compiled_wire_midpoint import Compiled
-from dry_pressure_render import common_gain,pcm
+from dry_pressure_render import common_gain,pcm,align_coordinates
+from wire_baffle_reference import FREQ
+from causal_pressure_observer import TRAIN,HIGH
 class RenderTest(unittest.TestCase):
     def test_acceleration(self):
         M=np.array([[.5,.1],[.1,1.]])
@@ -16,6 +18,18 @@ class RenderTest(unittest.TestCase):
             old=b.v.copy();b.step(F[j])
             np.testing.assert_allclose(A[j],(b.v-old)*48000,rtol=1e-10,atol=1e-9)
         np.testing.assert_array_equal(a.v,b.v)
+    def test_coordinate_alignment(self):
+        rng=np.random.default_rng(31);L=rng.normal(size=(9,3));P=rng.normal(size=(3,4))
+        A=rng.normal(size=(2,3));D=np.diag([1.,2.,3.]);k=np.array([20.,30.,40.])
+        Q=np.eye(3)[:,[2,0,1]]@np.diag([-1.,1.,-1.]);H=rng.normal(size=(2,3))
+        ref=dict(physicalLift=L,stiffness=k,damping=D,ports=P,wirePorts=A,regionalDamping=np.stack([D,.2*D,.3*D]),
+            pressure=np.repeat(H[None],len(FREQ),axis=0),fieldMap=np.eye(3))
+        loc=dict(physicalLift=L@Q,stiffness=np.diag(Q.T@np.diag(k)@Q),damping=Q.T@D@Q,ports=Q.T@P,
+            wirePorts=A@Q,regionalDamping=np.stack([Q.T@g@Q for g in ref['regionalDamping']]),
+            pressureReference=np.repeat((H@Q)[None],len(TRAIN+HIGH),axis=0))
+        self.assertLess(max(align_coordinates(loc,ref)['errors'].values()),1e-12)
+        bad=dict(loc,wirePorts=loc['wirePorts']+1.)
+        with self.assertRaises(ValueError):align_coordinates(bad,ref)
     def test_gain(self):
         a=np.array([.1,.2]);b=np.array([1.,-2.]);g=common_gain([a,b])
         self.assertAlmostEqual(g,.4);self.assertEqual(pcm(b,g).dtype,np.int16)

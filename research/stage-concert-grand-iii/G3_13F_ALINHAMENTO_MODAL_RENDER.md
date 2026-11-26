@@ -1,0 +1,5 @@
+# G3.13f — corrigir identidade modal da renderização
+
+Run 45792463810 falhou antes de renderizar em coordinate_audit (identidade de colunas de duas reconstruções). Unitários e downloads aprovados; run 45792463771 motor compilado aprovado; fundação aprovada. Nenhum WAV criado. O teste rígido protege contra mistura de bases. Não desativar.
+
+Derivar T por mínimos quadrados com equilibration de linhas dos lifts físicos; obter transformação ortogonal polar Q. Verificar rank, ortogonalidade, lift, rigidez, dissipação, portas, mapas de cordas, perdas regionais, mapas complexos de pressão em frequências comuns, tolerância 1e-7. Não transformar nem misturar dados durante render: dinâmica e kernel do próprio arquivo G3.12z. Manter replay de energia do ataque G3.12x e balanço da cauda. Teste permutação/sinais e rejeição de portas incompatíveis. Se congruência falhar, registrar erros e interromper; não gerar áudio inválido. Workflow original reexecuta por push. Sem feedback, sem mudança do motor estável.

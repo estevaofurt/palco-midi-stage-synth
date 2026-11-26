@@ -15,13 +15,43 @@ from physical_loss_sensitivity import crossings
 from felt_law import params
 from causal_pressure_observer import Observer,TRAIN,HIGH
 from structural_passive_fit import read_reference
-from new_baffle_grid import coordinate_audit
+from wire_baffle_reference import FREQ
 from acoustic_matrix_archive import read_npz
 from split_radiation import relative
 
 RATE=48000
 PARTIALS=32
 CASES=[(0.,1.,.3),(0.,1.,3.),(1.,.25,.3),(1.,.25,3.)]
+
+def align_coordinates(local,reference):
+    # q_reference = T @ q_local. Derive T from the *physical* lift,
+    # not from modal index or individual eigenvector sign assumptions.
+    L=reference['physicalLift'];R=local['physicalLift']
+    if L.shape!=R.shape or L.ndim!=2 or not np.isfinite(L).all() or not np.isfinite(R).all():
+        raise ValueError('physical lift dimensions')
+    scale=np.maximum(np.maximum(np.linalg.norm(L,axis=1),np.linalg.norm(R,axis=1)),1e-12*np.max(abs(L)))
+    T,_,rank,sv=np.linalg.lstsq(L/scale[:,None],R/scale[:,None],rcond=1e-12)
+    n=L.shape[1]
+    if rank!=n:raise ValueError('physical lift rank')
+    U,_,V=np.linalg.svd(T,full_matrices=False);Q=U@V
+    e=dict(rawOrthogonality=relative(T.T@T,np.eye(n)),orthogonalCorrection=relative(T,Q),
+        physicalLift=relative(L@Q,R),stiffness=relative(Q.T@np.diag(reference['stiffness'])@Q,np.diag(local['stiffness'])),
+        damping=relative(Q.T@reference['damping']@Q,local['damping']),
+        ports=relative(Q.T@reference['ports'],local['ports']),
+        wirePorts=relative(reference['wirePorts']@Q,local['wirePorts']),
+        regionalDamping=relative(np.stack([Q.T@g@Q for g in reference['regionalDamping']]),local['regionalDamping']))
+    # Compare the complex pressure maps at every common archived frequency.
+    common=sorted(set(FREQ)&set(TRAIN+HIGH))
+    if not common:raise ValueError('no common pressure reference')
+    e['pressure']=max(relative(reference['pressure'][FREQ.index(f)]@reference['fieldMap']@Q,
+        local['pressureReference'][(TRAIN+HIGH).index(f)]) for f in common)
+    print('G3_DRY_PRESSURE_COORDINATE_AUDIT '+json.dumps(dict(errors=e,rank=int(rank),
+        condition=float(sv[0]/sv[-1]),commonFrequenciesHz=common),allow_nan=False),flush=True)
+    if max(e.values())>1e-7:raise ValueError('physical coordinate congruence failed: '+str(e))
+    # The renderer uses ONLY local mechanics and local pressure kernels.
+    # Q is an audit, not a modification of either archive.
+    return dict(errors=e,commonFrequenciesHz=common,rank=int(rank),
+        condition=float(sv[0]/sv[-1]),usesLocalMechanicsAndPressure=True)
 
 def pressure_source(root,sha,reference):
     raw=(root/'causal_pressure_observer.json').read_bytes();d=json.loads(raw);s=d['summary']
@@ -32,7 +62,7 @@ def pressure_source(root,sha,reference):
         physicalLift=(1386,80),regionalDamping=(3,80,80),microphoneXYZ=(2,3),pressureReference=(len(TRAIN+HIGH),2,80))
     for row in d['cases']:shapes[f"kernel_{row['rate']}_{row['degree']}"]=(2,row['taps'],80)
     z=read_npz(root,d['archive'],shapes,TRAIN+HIGH)
-    audit=coordinate_audit(z,reference)
+    audit=align_coordinates(z,reference)
     return z,audit,hashlib.sha256(raw).hexdigest()
 
 def render(z,wires,rows,groups,masses,felts,spread,factor,speed,seconds=40.):
