@@ -1,0 +1,22 @@
+name: Concert Grand III existing engine polyphony feasibility
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/existing_engine_polyphony.mjs','.github/workflows/concert-grand-iii-existing-engine-scale.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node research/stage-concert-grand-iii/existing_engine_polyphony.mjs /tmp/g3-engine-scale
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-existing-engine-scale
+          path: /tmp/g3-engine-scale/

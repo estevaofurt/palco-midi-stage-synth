@@ -23,7 +23,8 @@ jobs:
       - run: node --check /tmp/g3-app-preview/app.js && node --check /tmp/g3-app-preview/stage.js && node --check /tmp/g3-app-preview/piano-worklet.js && node --check /tmp/g3-app-preview/acoustic.js
       - run: G3_PREVIEW_SITE=/tmp/g3-app-preview node --test research/stage-concert-grand-iii/test_preview_worklet.mjs
       - run: pip install playwright && python -m playwright install --with-deps chromium
-      - run: python research/stage-concert-grand-iii/browser_polyphony_preview.py --site /tmp/g3-app-preview
+      - run: python research/stage-concert-grand-iii/browser_polyphony_preview.py --site /tmp/g3-app-preview --voices 128
+      - run: python research/stage-concert-grand-iii/browser_polyphony_preview.py --site /tmp/g3-app-preview --voices 192
       - uses: actions/upload-artifact@v4
         with:
           name: G3-app-polyphony-preview
