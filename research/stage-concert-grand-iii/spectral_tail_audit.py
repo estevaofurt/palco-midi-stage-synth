@@ -23,7 +23,7 @@ def analyze(y,rate,key):
     if y.ndim!=2 or y.shape[1]!=2 or len(y)<rate*10 or not np.isfinite(y).all():raise ValueError('pressure signal')
     f0=440*2**((key-69)/12);f=np.fft.rfftfreq(rate,1/rate);w=np.hanning(rate)
     masks=[abs(f-j*f0)<=max(5.,.008*j*f0) for j in range(1,13)]
-    narrow=abs(f-1838)<=5.;reports=[]
+    narrow=abs(f-1838)<=5.;upper=f>=max(500.,2.5*f0);reports=[]
     for ch in range(2):
         segments=[]
         for t in range(len(y)//rate):
@@ -36,24 +36,27 @@ def analyze(y,rate,key):
                 fundamentalRmsPa=float(np.sqrt(h[0])),fundamentalFraction=h[0]/max(total,1e-300),
                 harmonicFractions=[v/max(total,1e-300) for v in h],
                 harmonicRmsPa=[float(np.sqrt(v)) for v in h],fraction1838=float(p[narrow].sum()/max(total,1e-300)),
-                dominantHz=peakHz,dominantLineFraction=line/max(total,1e-300)))
+                dominantHz=peakHz,dominantLineFraction=line/max(total,1e-300),upperBandFraction=float(p[upper].sum()/max(total,1e-300))))
         ref=max(v['spectralRmsPa'] for v in segments);ref0=max(v['fundamentalRmsPa'] for v in segments)
         if min(ref,ref0)<=0:raise ValueError('no fundamental')
         for v in segments:
             v['totalDbOwnPeak']=db(v['spectralRmsPa']/ref)
             v['fundamentalDbOwnPeak']=db(v['fundamentalRmsPa']/ref0)
             v['upperLineDominates']=bool(v['timeS']>=1 and v['dominantHz']>=2*f0 and v['dominantLineFraction']>=.8 and v['totalDbOwnPeak']>=-80)
+        for v in segments:
+            v['combinedUpperDominates']=bool(v['timeS']>=1 and v['upperBandFraction']>=.7 and v['totalDbOwnPeak']>=-80)
         flags=[v for v in segments if v['upperLineDominates']]
+        combined=[v for v in segments if v['combinedUpperDominates']]
         def last(field,limit):
             x=[v['timeS']+1 for v in segments if v[field]>=limit]
             return dict(lastWindowEndS=max(x,default=0),rightCensored=bool(x and max(x)==len(segments)))
         reports.append(dict(channel=ch+1,peakSpectralRmsPa=ref,peakFundamentalRmsPa=ref0,
             upperDominanceFirstS=flags[0]['timeS'] if flags else None,
             upperDominantFrequenciesHz=sorted(set(v['dominantHz'] for v in flags)),
-            upperDominanceWindows=len(flags),fundamentalThresholds={str(k):last('fundamentalDbOwnPeak',k) for k in (-20,-40,-60,-80)},
+            upperDominanceWindows=len(flags),combinedUpperDominanceWindows=len(combined),combinedUpperDominanceFirstS=combined[0]['timeS'] if combined else None,fundamentalThresholds={str(k):last('fundamentalDbOwnPeak',k) for k in (-20,-40,-60,-80)},
             totalThresholds={str(k):last('totalDbOwnPeak',k) for k in (-20,-40,-60,-80)},windows=segments))
     return dict(key=key,nominalFundamentalHz=f0,channels=reports,
-        upperDominanceDetected=any(v['upperDominanceWindows'] for v in reports))
+        upperDominanceDetected=any(v['upperDominanceWindows'] for v in reports),combinedUpperDominanceDetected=any(v['combinedUpperDominanceWindows'] for v in reports))
 
 def publish_row(row):
     compact=dict(row)
