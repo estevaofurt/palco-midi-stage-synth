@@ -28,10 +28,10 @@ class PointSchur(Schur):
         self.V,self.U=super().solve(B,I)
         C=B.T@self.V+np.einsum('wip,wiq->pq',I,self.U)
         if relative(C,C.T)>1e-10 or np.linalg.eigvalsh((C+C.T)/2).min()<-1e-10*max(np.linalg.norm(C),1e-30):raise ValueError('damper compliance')
-        self.C=(C+C.T)/2;self.loss=0.;self.set_levels(np.zeros(a.nw))
+        self.C=(C+C.T)/2;self.loss=0.;self.set_levels(np.zeros(B.shape[1]))
     def set_levels(self,d):
         self.d=np.asarray(d,float).copy()
-        if self.d.shape!=(self.a.nw,) or not np.isfinite(self.d).all() or np.any(self.d<0):raise ValueError('damper coefficients')
+        if self.d.shape!=(self.B.shape[1],) or not np.isfinite(self.d).all() or np.any(self.d<0):raise ValueError('damper coefficients')
         self.s=np.sqrt(self.d);self.small=cho_factor(np.eye(len(d))+(self.s[:,None]*self.C)*self.s)
     def solve(self,b,i):
         v,u=super().solve(b,i)
@@ -54,11 +54,11 @@ class PointSchur(Schur):
 
 class PointDense(Dense):
     def __init__(self,a,B,I):
-        super().__init__(a);self.Q=np.vstack([B,I.reshape(-1,a.nw)])
-        self.baseD=self.D.copy();self.loss=0.;self.set_levels(np.zeros(a.nw))
+        super().__init__(a);self.Q=np.vstack([B,I.reshape(-1,B.shape[1])])
+        self.baseD=self.D.copy();self.loss=0.;self.set_levels(np.zeros(B.shape[1]))
     def set_levels(self,d):
         self.d=np.asarray(d,float).copy()
-        if self.d.shape!=(self.a.nw,) or not np.isfinite(self.d).all() or np.any(self.d<0):raise ValueError('damper coefficients')
+        if self.d.shape!=(self.Q.shape[1],) or not np.isfinite(self.d).all() or np.any(self.d<0):raise ValueError('damper coefficients')
         self.D=self.baseD+(self.Q*self.d)@self.Q.T
         H=2*self.M/self.h+self.D+self.h*self.K/2
         self.fac=cho_factor(H*(self.s[:,None]*self.s[None,:]))
