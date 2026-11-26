@@ -1,0 +1,54 @@
+name: Concert Grand III joint acoustic evidence
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/joint_acoustic_evidence.py','research/stage-concert-grand-iii/test_joint_acoustic_evidence.py','.github/workflows/concert-grand-iii-joint-acoustic-evidence.yml']
+  workflow_dispatch:
+    inputs:
+      long_run:
+        description: Completed long decay run
+        default: '45865381764'
+        required: true
+      audition_run:
+        description: Completed bridge audition run
+        default: '45866808355'
+        required: true
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python research/stage-concert-grand-iii/test_joint_acoustic_evidence.py
+  consolidate:
+    if: github.event_name == 'workflow_dispatch'
+    needs: unit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G3-physical-long-*
+          run-id: ${{ inputs.long_run }}
+          github-token: ${{ github.token }}
+          path: /tmp/g3-long
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G3-bridge-audition-*
+          run-id: ${{ inputs.audition_run }}
+          github-token: ${{ github.token }}
+          path: /tmp/g3-audition
+      - run: python research/stage-concert-grand-iii/joint_acoustic_evidence.py --long /tmp/g3-long --audition /tmp/g3-audition --out /tmp/g3-joint
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-joint-acoustic-evidence
+          path: /tmp/g3-joint/
