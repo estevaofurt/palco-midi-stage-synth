@@ -1,0 +1,5 @@
+# G3.12w — realização causal mista passiva
+
+Inspeção: G3.12u 45773754395 e G3.12v 45773996558 unitários aprovados, provas completas em execução. G3.12e ajuste acústico anterior reprovado (validação 16.35%, limite 5%); não usar coeficientes reprovados como carga física.
+
+Prova independente de integração da família Z(s)=s M + sum R R^T s/(s+a) + sum B B^T s/(s²+2 gamma s+w²). Inertância incorporada uma vez na massa; relaxação xdot=R^T A v-a x, força R xdot, energia a x²/2, perda xdot²; oscilador ydot=u, udot=B^T A v-2 gamma u-w² y, força B u, perda 2 gamma u². Midpoint elimina estados acústicos para resolver velocidade mecânica. Referência independente ODE de primeira ordem em coordenadas energéticas, transformação de Cayley. Comparar estado, observação, trabalho e perdas <=1e-7, silêncio exato, passividade. 4 cenários 16/32 modos por corda, 48/96k, 1024 passos, estrutura 80 e 10 cordas. Três direções diagnósticas normalizadas de portas estruturais, coeficientes PSD sintéticos, não campos radiantes reais. Nenhum áudio, pressão, calibração ou benchmark de tempo real. Main preservada.
