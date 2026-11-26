@@ -1,32 +1,25 @@
-name: Concert Grand III 429-mode smooth exterior audit
+name: Concert Grand III 429-mode staged acoustic reference
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/enriched_aperture_reference.py','research/stage-concert-grand-iii/enriched_smooth_diagnostic.py','research/stage-concert-grand-iii/test_enriched_aperture_reference.py','.github/workflows/concert-grand-iii-enriched-smooth.yml']
+    paths: ['research/stage-concert-grand-iii/enriched_*.py','research/stage-concert-grand-iii/test_enriched_*.py','.github/workflows/concert-grand-iii-enriched-smooth.yml']
   workflow_dispatch:
 permissions:
   contents: read
   actions: read
 jobs:
-  proof:
+  smooth:
     strategy:
       fail-fast: false
       matrix:
         angle: ['30','55']
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     env:
       OPENBLAS_NUM_THREADS: '2'
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          for r in 45717196561 45723509912 45722209678; do
-            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
-          done
-          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
-          gh run download 45723509912 -n G3-consolidated-exterior-${{ matrix.angle }} -D /tmp/g3-ext
-          gh run download 45722209678 -n G3-graded-edge-trace-${{ matrix.angle }} -D /tmp/g3-trace
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -37,6 +30,13 @@ jobs:
           run-id: 45643063220
           github-token: ${{ github.token }}
           path: /tmp/g3-scale
+      - run: |
+          for r in 45717196561 45723509912 45722209678; do
+            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
+          done
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45723509912 -n G3-consolidated-exterior-${{ matrix.angle }} -D /tmp/g3-ext
+          gh run download 45722209678 -n G3-graded-edge-trace-${{ matrix.angle }} -D /tmp/g3-trace
       - run: python research/stage-concert-grand-iii/test_enriched_aperture_reference.py
       - run: python research/stage-concert-grand-iii/enriched_smooth_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high --consolidated /tmp/g3-ext --trace /tmp/g3-trace/graded_edge_trace.json --angle ${{ matrix.angle }} --out /tmp/g3-enriched-smooth
       - uses: actions/upload-artifact@v4
@@ -44,4 +44,134 @@ jobs:
         with:
           name: G3-enriched-smooth-${{ matrix.angle }}
           path: /tmp/g3-enriched-smooth/
+          if-no-files-found: warn
+  reactive:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+        kind: ['self','contact','disjoint']
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: |
+          for r in 45717196561 45723509912 45722209678; do
+            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
+          done
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45723509912 -n G3-consolidated-exterior-${{ matrix.angle }} -D /tmp/g3-ext
+          gh run download 45722209678 -n G3-graded-edge-trace-${{ matrix.angle }} -D /tmp/g3-trace
+      - run: python research/stage-concert-grand-iii/test_enriched_aperture_reference.py
+      - run: python research/stage-concert-grand-iii/test_enriched_reactive.py
+      - run: python research/stage-concert-grand-iii/enriched_reactive_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high --consolidated /tmp/g3-ext --trace /tmp/g3-trace/graded_edge_trace.json --angle ${{ matrix.angle }} --kind ${{ matrix.kind }} --out /tmp/g3-reactive
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-enriched-reactive-${{ matrix.angle }}-${{ matrix.kind }}
+          path: /tmp/g3-reactive/
+          if-no-files-found: warn
+  upper:
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: |
+          for r in 45717196561 45723509912 45722209678; do
+            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
+          done
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45723509912 -n G3-consolidated-exterior-${{ matrix.angle }} -D /tmp/g3-ext
+          gh run download 45722209678 -n G3-graded-edge-trace-${{ matrix.angle }} -D /tmp/g3-trace
+      - run: |
+          test "$(gh run view 45723901615 --json conclusion --jq .conclusion)" = success
+          gh run download 45723901615 -n G3-graded-volume-${{ matrix.angle }} -D /tmp/g3-geo
+      - run: python research/stage-concert-grand-iii/test_graded_cavity_replay.py
+      - run: python research/stage-concert-grand-iii/enriched_upper_diagnostic.py --scale /tmp/g3-scale/scale_geometry.json --consolidated /tmp/g3-ext/consolidated_exterior.json --geometry /tmp/g3-geo/graded_volume.json --trace /tmp/g3-trace/graded_edge_trace.json --angle ${{ matrix.angle }} --out /tmp/g3-upper
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-enriched-upper-${{ matrix.angle }}
+          path: /tmp/g3-upper/
+          if-no-files-found: warn
+  couple:
+    needs: [smooth, reactive, upper]
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OPENBLAS_NUM_THREADS: '2'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-enriched-smooth-${{ matrix.angle }}
+          path: /tmp/g3-smooth
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-enriched-upper-${{ matrix.angle }}
+          path: /tmp/g3-upper
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-enriched-reactive-${{ matrix.angle }}-self
+          path: /tmp/g3-self
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-enriched-reactive-${{ matrix.angle }}-contact
+          path: /tmp/g3-contact
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-enriched-reactive-${{ matrix.angle }}-disjoint
+          path: /tmp/g3-disjoint
+      - run: python research/stage-concert-grand-iii/enriched_coupling_replay.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high --smooth /tmp/g3-smooth --self /tmp/g3-self --contact /tmp/g3-contact --disjoint /tmp/g3-disjoint --upper /tmp/g3-upper --angle ${{ matrix.angle }} --out /tmp/g3-coupled
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-enriched-coupled-${{ matrix.angle }}
+          path: /tmp/g3-coupled/
           if-no-files-found: warn

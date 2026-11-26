@@ -24,7 +24,7 @@ def require_sources(ext,trace,angle,sha):
         if d.get('scaleSha256')!=sha or any(s.get(k)!=v for k,v in dict(gate=True,angleDeg=angle,diagnosticOnly=True,radiationReady=False,**keys).items()):
             raise ValueError('invalid enrichment source')
     rows=[v for v in trace['cases'] if (v['boundaryN'],v['wedgeLayers'],v['edgeGrading'],v['layerGrading'],v['width'])==(160,24,.5,.5,.06)]
-    if len(rows)!=1 or not rows[0]['screenGate'] or rows[0]['minimumCapture']<.95 or rows[0]['totalUpperModes']!=374:
+    if len(rows)!=1 or not rows[0]['screenGate'] or rows[0]['minimumCapture']<.95 or len(rows[0]['panels'])!=6 or sum(v['full']['modes'] for v in rows[0]['panels'])!=374:
         raise ValueError('missing approved trace')
     return rows[0]
 

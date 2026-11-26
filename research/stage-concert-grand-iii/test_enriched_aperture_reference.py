@@ -16,6 +16,15 @@ class EnrichedReferenceTest(unittest.TestCase):
         for a,b in zip(old,pp):
             x,_,_,_=a.samples(12)
             np.testing.assert_allclose(a.basis(x),b.basis(x)[:,:55],rtol=1e-13,atol=1e-12)
+    def test_graded_report_schema(self):
+        shared=dict(gate=True,angleDeg=30,diagnosticOnly=True,radiationReady=False)
+        ex=dict(scaleSha256='a'*64,summary=dict(**shared,approvedBlocks=28,sampledBlockQuadratureApproved=True,resistanceUnchanged=True,observerMapUnchanged=True))
+        row=dict(boundaryN=160,wedgeLayers=24,edgeGrading=.5,layerGrading=.5,width=.06,screenGate=True,minimumCapture=.973,
+            panels=[dict(full=dict(modes=n)) for n in [61,61,63,63,63,63]])
+        tr=dict(scaleSha256='a'*64,summary=dict(**shared,surfaceOnly=True,screeningMinimumEnergy=.95),cases=[row])
+        self.assertIs(require_sources(ex,tr,30,'a'*64),row)
+        row['panels'][0]['full']['modes']=60
+        with self.assertRaises(ValueError):require_sources(ex,tr,30,'a'*64)
     def test_invalid(self):
         with self.assertRaises(ValueError):enrich([])
         with self.assertRaises(ValueError):require_sources({}, {},30,'a'*64)
