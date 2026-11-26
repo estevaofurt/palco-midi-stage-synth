@@ -19,7 +19,7 @@ from sustain_brightness import attack_bands,attack_compare,fixed_thresholds,nomi
 from distributed_felt_loss import measures
 from middle_tail import analyze as middle_analyze
 from split_radiation import relative
-from unison_profiles import KEYS,PROFILES,detune_profile
+from unison_profiles import KEYS,profiles_for_key,detune_profile
 
 SECONDS=40.
 def render(z,wires,rows,groups,masses,felts,key,speed,cfg):
@@ -99,7 +99,8 @@ def main():
     rows={x['key']:x for x in json.loads(a.scale.read_text())['rows']}
     pars=[params(k,rows[k]['count'],spec,felt) for k in KEYS];groups=[w.port for w in wires]
     masses=[h['massKg'] for h,_ in pars];felts=[pars[g][1] for g in groups]
-    profiles=[(name,profile,*detune_profile(wires,rows,profile)) for name,profile in PROFILES]
+    definitions=profiles_for_key(a.key)
+    profiles=[(name,profile,*detune_profile(wires,rows,profile)) for name,profile in definitions]
     a.out.mkdir(parents=True,exist_ok=True);renders=[];replays=[]
     for speed in (.3,3.):
         approved,ah=approved_source(a.approved,a.key,sha,ph,rh,speed);base=None
@@ -110,7 +111,7 @@ def main():
             if base is None:
                 base=row;err=relative(y[:96000],approved.astype(float))
                 if err>1e-6:raise ValueError('approved attack replay '+str(err))
-                replays.append(dict(speed=speed,relative=err,manifestSha256=ah))
+                replays.append(dict(speed=speed,relative=err,manifestSha256=ah,profile=list(profile)))
             row['spectrum']=analyze(y,48000,a.key);row['attackBands']=attack_bands(y)
             row['middle']=middle_analyze(y,48000,a.key,None if row is base else base['middle'])
             row['comparison']=measures(row,base);row['attackComparison']=attack_compare(row['attackBands'],base['attackBands'])
@@ -124,7 +125,7 @@ def main():
         row['wav5']=write_checked(a.out/(label+'_5s.wav'),y[:240000],48000,False,gain)
         results.append(row)
     candidates=[]
-    for name,profile in PROFILES[1:]:
+    for name,profile in definitions[1:]:
         cases=[v for v in results if v['variant']==name]
         candidates.append(dict(profile=name,passedBothAttacks=all(v['screening']['candidateGate'] for v in cases),
             longerBothAttacks=all(v['screening']['longerBothChannels'] for v in cases)))

@@ -1,11 +1,19 @@
 import unittest
-from unison_profiles import PROFILES,KEYS
+from unison_profiles import profiles_for_key,KEYS
+from attack_flutter import variants
 from nominal_unison import screen
 class NominalTest(unittest.TestCase):
     def test_profiles(self):
-        self.assertEqual(len(PROFILES),6)
-        self.assertEqual(PROFILES[0][1],(0.,0.,1.,0.))
-        self.assertTrue(all(len(p)==len(KEYS) and min(p)>=0 for _,p in PROFILES))
+        for key in KEYS:
+            with self.subTest(key=key):
+                profiles=profiles_for_key(key)
+                self.assertEqual(len(profiles),6)
+                approved=dict(variants(key))['nominal_structure']
+                s=approved['spread']
+                self.assertEqual(profiles[0][1],(0.,0.,s,0.))
+                self.assertTrue(all(p[2]==s for _,p in profiles[:4]))
+                self.assertTrue(all(len(p)==len(KEYS) and min(p)>=0 for _,p in profiles))
+        with self.assertRaises(ValueError):profiles_for_key(61)
     def test_preservation(self):
         def row(r,t,m=1.):
             return dict(comparison=[dict(fundamentalCommonT60S=t,lateUpperEnergyPa2S=1.,upperDominanceWindowsCommon=0)],
