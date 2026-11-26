@@ -1,0 +1,29 @@
+name: Concert Grand III sample addressed event coupling
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/event_coupling.py','research/stage-concert-grand-iii/test_event_coupling.py','.github/workflows/concert-grand-iii-event-coupling.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_event_coupling.py
+      - run: python research/stage-concert-grand-iii/event_coupling.py --out /tmp/g3-events
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-event-coupling
+          path: /tmp/g3-events/
+          if-no-files-found: warn
