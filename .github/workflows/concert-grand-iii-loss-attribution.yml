@@ -1,0 +1,30 @@
+name: Concert Grand III dry loss attribution
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/loss_attribution.py','research/stage-concert-grand-iii/test_loss_attribution.py','.github/workflows/concert-grand-iii-loss-attribution.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python research/stage-concert-grand-iii/test_loss_attribution.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G3-bridge-energy-*
+          run-id: 45839155745
+          github-token: ${{ github.token }}
+          path: /tmp/g3-bridge
+      - run: python research/stage-concert-grand-iii/loss_attribution.py --bridge /tmp/g3-bridge --out /tmp/g3-loss-attribution
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-loss-attribution
+          path: /tmp/g3-loss-attribution/
