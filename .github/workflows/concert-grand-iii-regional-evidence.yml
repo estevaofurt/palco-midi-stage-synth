@@ -1,0 +1,53 @@
+name: Concert Grand III regional evidence
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/regional_evidence.py','research/stage-concert-grand-iii/test_regional_evidence.py','.github/workflows/concert-grand-iii-regional-evidence.yml']
+  workflow_dispatch:
+    inputs:
+      unison_run:
+        description: Completed nominal unison run ID
+        required: true
+        default: '45838809515'
+      bridge_run:
+        description: Completed bridge energy run ID
+        required: true
+        default: '45839155745'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python research/stage-concert-grand-iii/test_regional_evidence.py
+  consolidate:
+    if: github.event_name == 'workflow_dispatch'
+    needs: unit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G3-nominal-unison-*
+          run-id: ${{ inputs.unison_run }}
+          github-token: ${{ github.token }}
+          path: /tmp/g3-unison
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G3-bridge-energy-*
+          run-id: ${{ inputs.bridge_run }}
+          github-token: ${{ github.token }}
+          path: /tmp/g3-bridge
+      - run: python research/stage-concert-grand-iii/regional_evidence.py --unison /tmp/g3-unison --bridge /tmp/g3-bridge --out /tmp/g3-regional
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-regional-evidence
+          path: /tmp/g3-regional/
