@@ -1,0 +1,42 @@
+name: Concert Grand III physical audition comparison
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/physical_attack_comparison.py','research/stage-concert-grand-iii/test_physical_attack_comparison.py','.github/workflows/concert-grand-iii-physical-attack-comparison.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_physical_attack_comparison.py
+      - run: timeout 85m gh run watch 45857841823 --repo "$GITHUB_REPOSITORY" --exit-status --interval 30
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-physical-cq-offline
+          run-id: 45857841823
+          github-token: ${{ github.token }}
+          path: /tmp/g3-cq
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-attack-flutter-60
+          run-id: 45833548484
+          github-token: ${{ github.token }}
+          path: /tmp/g3-approved
+      - run: python research/stage-concert-grand-iii/physical_attack_comparison.py --cq /tmp/g3-cq --approved /tmp/g3-approved --out /tmp/g3-attack-compare
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-physical-attack-comparison
+          path: /tmp/g3-attack-compare/
