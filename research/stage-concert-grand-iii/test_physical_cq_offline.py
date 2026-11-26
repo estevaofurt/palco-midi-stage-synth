@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 from physical_cq_offline import PackedLoad,packed_weights,transfer
 from retarded_surface import impedance
+from fixed_acoustic_projection import freeze_projection
 from acoustic_cq_surface import cq
 class PackedTest(unittest.TestCase):
     def test_packed(self):
@@ -12,4 +13,11 @@ class PackedTest(unittest.TestCase):
         expected,_=cq(lambda s:impedance(B,.02,.03,s),48000,64)
         np.testing.assert_allclose(L.expand(w),expected,rtol=1e-6,atol=1e-6)
         np.testing.assert_allclose(L.expand(transfer(w,[100,200],48000)),np.einsum('ft,tij->fij',np.exp(-2j*np.pi*np.array([100,200])[:,None]/48000)**np.arange(64),expected),rtol=1e-8,atol=1e-6)
+    def test_local_projection_rotation(self):
+        # An orthogonal change of internal basis must not require copying
+        # eigenvector columns to reproduce the selected projector.
+        Z=np.stack([np.diag(np.arange(1.,9.))+1j*np.diag(np.arange(1.,9.)**2)])
+        Q,_=np.linalg.qr(np.random.default_rng(2).normal(size=(8,8)))
+        U=freeze_projection(Z,4);V=freeze_projection(Q.T@Z@Q,4)
+        np.testing.assert_allclose(U@U.T,Q@V@V.T@Q.T,atol=1e-12)
 if __name__=='__main__':unittest.main()

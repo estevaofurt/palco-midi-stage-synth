@@ -6,10 +6,10 @@ import numpy as np
 from scipy.fft import rfft2
 from wire_physical_midpoint import load
 from structural_region_decay import rebuild
-from fixed_acoustic_projection import RANK,TRAIN,CHECK,NOVEL
+from fixed_acoustic_projection import RANK,TRAIN,CHECK,NOVEL,freeze_projection,eligible
 from acoustic_matrix_archive import read_npz
 from retarded_local_reference import geometry
-from acoustic_port_rank import reference
+from acoustic_port_rank import reference,assess,summarize
 from projected_board_cq import bridge_ports
 from unison_profiles import KEYS,profiles_for_key,detune_profile
 from mode_selective_loss import mode_loss
@@ -77,9 +77,39 @@ def main():
     local={}
     def sink(plate,poly,lift):local.update(plate=plate,poly=poly,lift=lift)
     k,D,P,A,wires,G,lift,replay=rebuild(a.scale,a.surface,archive,wires,surface_sink=sink)
-    checks={key:relative(v,z[key]) for key,v in dict(stiffness=k,damping=D,ports=P,wirePorts=A,physicalLift=lift,regionalDamping=G).items()}
-    if [w.id for w in wires]!=d['wireIds'] or max(checks.values())>1e-7:raise ValueError('local coordinate replay '+str(checks))
-    U=z['projection'];field=SurfaceModes(local['plate'],local['lift']@U)
+    if [w.id for w in wires]!=d['wireIds']:raise ValueError('wire identity')
+    # Archived matrices were integrity-checked, not imported into this basis.
+    # Recreate the exact frozen selection rule and revalidate all three groups.
+    # In particular, do not compare or copy individual eigenvector columns.
+    del z
+    geom=geometry(local['plate'],local['poly'],local['lift'])
+    B=bridge_ports(A,wires);rows={v['key']:v for v in json.loads(a.scale.read_text())['rows']}
+    ctx=[]
+    for key in KEYS:
+        ww,_=detune_profile(wires,rows,profiles_for_key(key)[0][1]);ctx.append(mode_loss(ww,4.,2. if key==64 else 4.))
+    train=[reference(f,k,D,P,A,B,ctx,geom) for f in TRAIN]
+    U=freeze_projection(np.stack([v['Z'] for v in train]))
+    # Save the local basis before checking any other frequencies.
+    entry=save_matrices(a.out,'local_cq_projection',frequencies=list(TRAIN),projection=U,
+        stiffness=k,damping=D,ports=P,wirePorts=A,physicalLift=lift,regionalDamping=G,fieldMap=geom[0])
+    localFrozen=dict(rank=RANK,method='impedance',archive=entry,trainingHz=TRAIN,sourceFrozenSha256=sha,
+        priorProjectionFrozenSha256=s['frozenSha256'],wireIds=[w.id for w in wires])
+    raw=json.dumps(localFrozen,indent=2,allow_nan=False).encode()
+    (a.out/'local_cq_projection.json').write_bytes(raw)
+    localHash=hashlib.sha256(raw).hexdigest()
+    refs={f:v for f,v in zip(TRAIN,train)};checks={}
+    for name,group in [('training',TRAIN),('priorCheck',CHECK),('additionalCheck',NOVEL)]:
+        for f in group:
+            if f not in refs:refs[f]=reference(f,k,D,P,A,B,ctx,geom)
+        checks[name]=summarize([assess(refs[f],U,k,D,P,A,B,ctx) for f in group])
+        print('G3_PHYSICAL_CQ_LOCAL_PROJECTION '+json.dumps(dict(group=name,**checks[name]),allow_nan=False),flush=True)
+    # Both the independently archived and local projections must pass the
+    # unchanged screening limits; matching their coordinates is not required.
+    if not all(eligible(v) for v in checks.values()):
+        report=dict(gate=True,screeningGate=False,blockedBy='local rank64 harmonic screening',weightsGenerated=False,
+            localProjection=checks,localProjectionFrozenSha256=localHash,physicalFeedbackAccepted=False)
+        (a.out/'physical_cq.json').write_text(json.dumps(dict(summary=report),indent=2));print('G3_PHYSICAL_CQ_GATE '+json.dumps(report),flush=True);return
+    field=SurfaceModes(local['plate'],local['lift']@U)
     cells,dx,dy,area=cell_integrals(local['poly'],field,120)
     if abs(area-local['plate']['areaM2'])/local['plate']['areaM2']>1e-9:raise ValueError('area')
     L=PackedLoad(cells,dx,dy)
@@ -90,18 +120,13 @@ def main():
     direct=L.expand(L.evaluate(harmonic_symbol(fs,rate)));rec=L.expand(transfer(W,fs,rate))
     dp=passivity(direct);rp=passivity(rec)
     err=max(relative(x,y) for x,y in zip(rec[1:],direct[1:]))
-    # Check harmonic response on the complete mechanics, not the projected impedance alone.
-    geom=geometry(local['plate'],local['poly'],local['lift'])
-    B=bridge_ports(A,wires);rows={v['key']:v for v in json.loads(a.scale.read_text())['rows']}
-    ctx=[]
-    for key in KEYS:
-        ww,_=detune_profile(wires,rows,profiles_for_key(key)[0][1]);ctx.append(mode_loss(ww,4.,2. if key==64 else 4.))
+    # Reuse the locally validated references, never archived coordinate columns.
     freqs=np.array([*TRAIN,*CHECK,*NOVEL]);wet=L.expand(transfer(W,freqs,rate));reports=[]
     md=dict(M=np.eye(80),K=np.diag(k),D=D,P=P)
     sampled=bool(min(dp['minimumLocalNonDC'],rp['minimumLocalNonDC'])>=-1e-8)
     if sampled:
         for f,Z in zip(freqs,wet):
-            ref=reference(f,k,D,P,A,B,ctx,geom)
+            ref=refs[float(f)]
             target=U.T@ref['Z']@U;actual=U@Z@U.T
             cases=[]
             for j,ww in enumerate(ctx):
@@ -115,7 +140,7 @@ def main():
     entry=save_matrices(a.out,'physical_cq_weights',frequencies=freqs,weights=L.expand(W),projection=U,
         stiffness=k,damping=D,ports=P,wirePorts=A,physicalLift=lift)
     summary=dict(gate=True,screeningGate=passed,diagnosticOnly=True,rate=rate,rank=RANK,weightsGenerated=True,
-        sourceFrozenSha256=sha,projectionFrozenSha256=s['frozenSha256'],archive=entry,coordinateReplay=checks,
+        sourceFrozenSha256=sha,projectionFrozenSha256=s['frozenSha256'],archive=entry,localProjection=checks,localProjectionFrozenSha256=localHash,independentCoordinatesMixed=False,
         aliasRelative=alias,tailRelative=tail,reconstructionRelative=err,directPassivity=dp,kernelPassivity=rp,
         responseCases=len(reports),maximumResponse=max((v['maximumResponse'] for v in reports),default=None),
         passivityCertified=False,physicalFeedbackAccepted=False,audibleSustainMeasured=False,wholeEngineRealtimeValidated=False)
