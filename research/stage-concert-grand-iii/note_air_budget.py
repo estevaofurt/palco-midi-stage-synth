@@ -30,11 +30,15 @@ def powers(md,A,wires,Z,f,j,Y):
     air=float(np.vdot(v,Z.real@v).real)
     losses=[]
     for a,b,iv,ip,F in local:
-        q=np.r_[a@x,ip*F-iv*(a@x)]
+        q=wire_displacement(b,a@x,F,iv,ip)
         u=1j*w*q
         losses.append(float(np.vdot(u,b.D@u).real))
     total=float(Y[j,j].real)
     return power_budget(total,board,air,losses)
+
+def wire_displacement(wire,rear,force,iv,ip):
+    # Restore physical coordinates before evaluating the physical damping matrix.
+    return wire.recover(np.asarray([rear]),np.asarray([force]),iv,ip)[:,0]
 
 def power_budget(total,board,air,wires):
     vals=np.asarray([board,air,*wires],float)
