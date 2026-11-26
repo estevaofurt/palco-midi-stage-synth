@@ -1,0 +1,5 @@
+# G3.11d — frequências independentes da base congelada
+
+G3.11b base fixa 168 aprovada nos dois ângulos: fine modal .008195394506442463 (30°), .007367939810066436 (55°); combinado .026509568477457012 / .022355331530312213. 355 também aprovado, fine .0410377130744497 / .037639610604759524. Refinamento disjunto 429 Float64 falhou: 5/16 e 7/16. Não promover 429.
+
+Fixar 168 modos previamente aprovados, não usar seleção G3.11c ainda em execução. Testar 55,175,275 Hz em cada ângulo, nenhum usado para treinamento. Recalcular referência 385 com malha superior 50/200/32, inferior 72, 28 blocos reativos com Duffy/correções de contato e controle suave independente. Usar rotina de auditoria reativa existente em base polinomial (somente subbloco 00; 1e-8 disjunto, 1% contato/self), verificar quadratura antes de acoplar. Não interpolar matrizes nem retreinar. Exportar operadores, relatório e hash da base. Gate 5% nas seis métricas. Se houver falha em quadratura ou polo, interromper e diagnosticar, sem afrouxar tolerâncias. Novos pontos continuam dentro de 30–300 Hz; não abrangem toda a faixa audível nem provam resposta contínua. Main preservada.
