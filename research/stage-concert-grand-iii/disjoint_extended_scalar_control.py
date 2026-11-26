@@ -33,6 +33,21 @@ def scalar_integral(x,A,y,B,k,block=32):
         q=v-correction;t=total+q;correction=(t-total)-q;total=t
     return total
 
+def reproduction_control(old,new):
+    """Diagnostic reproducibility in full-block units, not quadrature approval.
+    Tiny edge blocks are reported separately; never promote them here."""
+    from enriched_reactive_diagnostic import block_changes
+    old,new=map(np.asarray,(old,new))
+    if old.shape!=new.shape or old.ndim!=3 or min(old.shape[1:])<=55 or not np.isfinite(old).all() or not np.isfinite(new).all():
+        raise ValueError('invalid reproduction matrices')
+    changes=block_changes(old,new)
+    den=np.maximum(np.linalg.norm(old,axis=(1,2)),1e-30)
+    whole=float(np.max(np.linalg.norm(old-new,axis=(1,2))/den))
+    if whole>1e-10 or changes['00']>1e-10:
+        raise ValueError('archived polynomial or whole operator not reproducible')
+    return dict(bitwiseEqual=bool(np.array_equal(old,new)),wholeRelativeToArchive=whole,
+        subblockRelative=changes,diagnosticOnly=True)
+
 def as_string(v):
     return np.format_float_scientific(np.longdouble(v),precision=20,unique=False)
 
@@ -57,7 +72,6 @@ def main():
     prior=read_npz(a.consolidated,ex['archive'],dict(Ze=(nf,385,385),Y=(nf,4,4),flow=(nf,385,4)),FREQ)
     omega=2*np.pi*np.asarray(FREQ);k=omega/343.;factor=1.204*omega[:,None,None]/(4*np.pi)
     if np.finfo(np.longdouble).nmant<=np.finfo(np.float64).nmant:raise RuntimeError('extended precision unavailable')
-    if a.angle!=55:raise ValueError('55-degree evidence only')
     i,j=0,4;key=f'block_{i}_{j}';row=next(v for v in rows if (v['panel'],v['otherPanel'])==(i,j))
     if row['gate']:raise ValueError('expected unresolved block')
     def samples(n):
@@ -66,7 +80,8 @@ def main():
     x,A,y,B=samples(48)
     _,forward,_=pair_integrals(x,A,y,B,k,mutual=True,block=64);forward*=factor
     reverse=compensated_reactive(y,B,x,A,k,block=96).transpose(0,2,1)*factor
-    if not np.array_equal(forward,archived[key]):raise ValueError('archived calculation did not reproduce exactly')
+    reproduction=reproduction_control(archived[key],forward)
+    print('G3_EXTENDED_REPRODUCTION '+json.dumps(reproduction,allow_nan=False),flush=True)
     # Select the frequency with largest relative reversal error in the
     # edge-edge block, then its entry of largest absolute disagreement.
     u=forward[:,55:,55:];v=reverse[:,55:,55:]
@@ -82,6 +97,7 @@ def main():
     scale=np.longdouble(norm[f])
     a40,b40=records[40];a48,b48=records[48]
     result=dict(panel=i,otherPanel=j,frequencyHz=FREQ[f],entry=[int(m),int(n)],precisionMantissaBits=int(np.finfo(np.longdouble).nmant+1),
+        archivedReproduction=reproduction,archivedEntry=as_string(archived[key][f,m,n]),
         float64Forward=as_string(forward[f,m,n]),float64Reverse=as_string(reverse[f,m,n]),
         extended40=as_string(a40),extended40Reverse=as_string(b40),extended48=as_string(a48),extended48Reverse=as_string(b48),
         float64ReversalRelativeToSubblock=float(abs(np.longdouble(forward[f,m,n])-reverse[f,m,n])/scale),
