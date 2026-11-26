@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
-      - run: python research/stage-concert-grand-iii/test_retarded_surface.py
+      - run: python research/stage-concert-grand-iii/test_retarded_coordinates.py && python research/stage-concert-grand-iii/test_retarded_surface.py
       - uses: actions/download-artifact@v4
         with:
           name: G3-scale-geometry-02

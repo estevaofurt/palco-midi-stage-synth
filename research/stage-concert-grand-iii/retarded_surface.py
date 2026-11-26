@@ -19,6 +19,7 @@ from modal_string_radiation import response
 from unison_profiles import KEYS,profiles_for_key,detune_profile
 from mode_selective_loss import mode_loss
 from split_radiation import relative
+from retarded_coordinates import align
 from dual_cavity_spatial_diagnostic import save_matrices
 
 RHO=1.204
@@ -79,9 +80,9 @@ def main():
     local={}
     def sink(plate,poly,lift):local.update(plate=plate,poly=poly,lift=lift)
     k,D,P,A,wires,G,lift,replay=rebuild(a.scale,a.surface,archive,wires,surface_sink=sink)
-    ca=coordinate_audit(dict(stiffness=k,damping=D,ports=P,wirePorts=A,physicalLift=lift,regionalDamping=G),z)
+    Q,ca=align(dict(stiffness=k,damping=D,ports=P,wirePorts=A,physicalLift=lift,regionalDamping=G),z)
     plate,poly=local['plate'],local['poly']
-    field=SurfaceModes(plate,local['lift']@z['fieldVectors']/np.sqrt(z['fieldEigenvalues'])[None,:])
+    field=SurfaceModes(plate,local['lift']@Q.T@z['fieldVectors']/np.sqrt(z['fieldEigenvalues'])[None,:])
     xy,w,S=samples(plate,field,8);grids={}
     for n in (120,240):
         B,dx,dy,area=cell_integrals(poly,field,n)
@@ -93,7 +94,7 @@ def main():
     for key in KEYS:
         ww,_=detune_profile(wires,rows,profiles_for_key(key)[0][1]);ww=mode_loss(ww,4.,2. if key==64 else 4.)
         contexts.append(ww)
-    md=dict(M=np.eye(80),K=np.diag(k),D=D,P=P)
+    md=dict(M=np.eye(80),K=np.diag(z['stiffness']),D=z['damping'],P=z['ports']);A=z['wirePorts']
     records=[];matrices=[];reference=[]
     for f in FREQUENCIES:
         s=2j*np.pi*f;Z0=impedance(*grids[120],s);Z=impedance(*grids[240],s)

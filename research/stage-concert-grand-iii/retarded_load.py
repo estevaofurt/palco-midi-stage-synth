@@ -18,6 +18,7 @@ from polygon_radiation import SurfaceModes
 from surface_reactive_fft import cell_integrals
 from dual_cavity_spatial_diagnostic import save_matrices
 from split_radiation import relative
+from retarded_coordinates import align
 
 RHO=1.204
 C=343.
@@ -108,8 +109,8 @@ def main():
     local={}
     def sink(plate,poly,lift):local.update(plate=plate,poly=poly,lift=lift)
     k,D,P,A,wires,G,lift,_=rebuild(a.scale,a.surface,archive,wires,surface_sink=sink)
-    ca=coordinate_audit(dict(stiffness=k,damping=D,ports=P,wirePorts=A,physicalLift=lift,regionalDamping=G),z)
-    field=SurfaceModes(local['plate'],local['lift'])
+    Q,ca=align(dict(stiffness=k,damping=D,ports=P,wirePorts=A,physicalLift=lift,regionalDamping=G),z)
+    field=SurfaceModes(local['plate'],local['lift']@Q.T)
     groups=[('original',FREQ,z)];hashes={}
     for role,fs in [('development',DEVELOPMENT),('reserved',RESERVED),('extension',EXTENSION)]:
         d,h=read_group(a.grid,role,fs,sha,rh);groups.append((role,fs,d));hashes[role]=h
