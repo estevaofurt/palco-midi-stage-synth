@@ -1,0 +1,29 @@
+name: Concert Grand III isolated app polyphony preview
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/build_polyphony_preview.py','research/stage-concert-grand-iii/polyphony_preview.mjs','research/stage-concert-grand-iii/test_polyphony_preview.mjs','research/stage-concert-grand-iii/browser_polyphony_preview.py','.github/workflows/concert-grand-iii-app-polyphony.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: node --test research/stage-concert-grand-iii/test_polyphony_preview.mjs
+      - run: python research/stage-concert-grand-iii/build_polyphony_preview.py --out /tmp/g3-app-preview
+      - run: node --check /tmp/g3-app-preview/app.js && node --check /tmp/g3-app-preview/stage.js && node --check /tmp/g3-app-preview/piano-worklet.js && node --check /tmp/g3-app-preview/acoustic.js
+      - run: pip install playwright && python -m playwright install --with-deps chromium
+      - run: python research/stage-concert-grand-iii/browser_polyphony_preview.py --site /tmp/g3-app-preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-app-polyphony-preview
+          path: /tmp/g3-app-preview/
