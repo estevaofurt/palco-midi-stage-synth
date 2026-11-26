@@ -1,0 +1,5 @@
+# G3.11x — amortecimento estrutural não diagonal
+
+G3.11w2 run 45735499371 aprovado na exportação: quadratura 7.747174272351914e-16, área 1.2467266239958066e-15. Modelo 256 modos falha erro máximo 0.06183642139291237 contra coordenadas completas; diagonal falha 0.10408258471548194; quatro campos resíduo agregado 0.9915248243480955, máximo 0.9999935980793843. Não usar esses atalhos como aprovados.
+
+Integrador seco de ponto médio com massa modal unitária, rigidez diagonal e D completo ou blocos principais (PSD). Cholesky pré-calculado, solução triangular compilada sem fastmath, balanço de trabalho e perda D independentes. Comparar com solve denso para a mesma D. Triagem blocos 1/4/8/16/32/64/128/n em 32 frequências 30–500 Hz, escolher menor que passa 5% no treino; avaliar 31 frequências geométricas intercaladas sem reescolher. Referência da aproximação é D completo de mesma dimensão, não modelo físico completo; nem aproximação nem 256 modos ficam promovidos. Benchmark 64/128/256, 48/96 kHz, 200 blocos de 64 amostras; sem cordas, ar, martelos ou callback. Fonte hash verificada. Densificação pendente. Main preservada.
