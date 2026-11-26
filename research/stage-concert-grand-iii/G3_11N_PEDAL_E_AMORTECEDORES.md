@@ -1,0 +1,5 @@
+# G3.11n — amortecimento variável e pedal
+
+G3.11m unitários aprovados, prova extensa ainda pendente no início desta etapa. G3.11d/g aguardam referência acústica. Usar somente G3.11l já aprovado, parâmetros sintéticos.
+
+Controle por nota pressionada, posição contínua de pedal 0..1 e máscara de notas sem abafador. Transição linear de 5 ms, coeficiente adicional sintético 160*m. Pedal não cria energia: altera somente dissipação, preserva todos os estados, não zera cordas, não altera massa/rigidez. Atualizar complemento de Schur e fatoração quando coeficiente mudar; referência densa independente atualiza diagonal de dissipação. Separar parcela do amortecedor no ledger sem contá-la duas vezes. Testar note-on/off, pedal integral, meio pedal, retirada e reataque; 32/64 vozes, 1/4 parciais, 44.1/48/96 kHz. Energia <=1e-9, estados e ledger <=1e-8, mudança instantânea de energia <=1e-12. Não é calibração de sustain, não é MIDI nem renderização. Próxima etapa: otimizar atualização dinâmica após aprovação; não incorporar coeficientes rejeitados. Main preservada.
