@@ -1,0 +1,5 @@
+# G3.12d — referência de impedância enriquecida em 18 frequências
+
+G3.12c run 45740774374 aprovado: erro final 0.003720299283786414; kernel 2.5547416253598317e-13. Alteração da mobilidade resistiva ao incluir reatância em 30/150/300 Hz = 11.58/27.76/57.39%. Não é certificação causal nem de cavidades.
+
+Novo arquivo de referência com 12 pontos de desenvolvimento (30,45,80,95,135,150,185,200,235,250,285,300) e 6 de validação (65,115,160,215,260,295). Dois jobs, artefatos separados, split explícito. Recalcular todos os operadores, auditar grades 60/120/240 e kernel 8/12 em cada frequência, resistência espacial/angular e pressão, passividade e potência. Reproduzir 3 pontos anteriores a 1e-8. Gate final <=0.005 para reatância, <=1e-6 para kernel/pressão/resistência e <=1e-8 para potência/reciprocidade. Não ajustar coeficientes nesta etapa. Fonte congelada e hashes obrigatórios. Futuro ajuste causal deve congelar seleção sem acesso às seis respostas de validação. Baffle ideal unilateral, não piano completo; 72 campos, sem calibração ou tempo real. Densificação de quatro campos 2/4 concluída; não confundir as duas referências. Main preservada.
