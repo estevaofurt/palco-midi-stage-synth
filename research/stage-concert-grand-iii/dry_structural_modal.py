@@ -31,6 +31,27 @@ def projection(fields,shapes,w):
         aggregateResidual=float(np.sqrt(residual.sum()/max(total.sum(),1e-30))),
         capturedEnergyByMode=(1-residual/np.maximum(total,1e-30)).tolist())
 
+def patch_projection(basis,field,poly,order):
+    """Integrate each knot cell separately. Cubic tensor splines are
+    polynomial on each clipped cell; never integrate across knot lines."""
+    gram=np.zeros((4,4));rhs=None;total=None;area=0.
+    for xy,w,_ in basis.patches(order):
+        x,y=(2*(xy-poly.min(0))/np.ptp(poly,axis=0)-1).T
+        F=np.stack([np.ones(len(x)),x,y,x*y],axis=1);S=field(xy)
+        if rhs is None:rhs=np.zeros((4,S.shape[1]));total=np.zeros(S.shape[1])
+        gram+=F.T@(w[:,None]*F);rhs+=F.T@(w[:,None]*S);total+=np.sum(w[:,None]*S*S,axis=0);area+=float(w.sum())
+    if rhs is None or np.any(total<=0):raise ValueError('empty surface or zero mode')
+    A=solve(gram,rhs,assume_a='pos')
+    # Direct residual, not cancellation of two nearly equal energies.
+    residual=np.zeros_like(total)
+    for xy,w,_ in basis.patches(order):
+        x,y=(2*(xy-poly.min(0))/np.ptp(poly,axis=0)-1).T
+        F=np.stack([np.ones(len(x)),x,y,x*y],axis=1)
+        defect=field(xy)-F@A;residual+=np.sum(w[:,None]*defect*defect,axis=0)
+    return A,dict(normalResidual=relative(gram@A,rhs),maximumModeResidual=float(np.sqrt(np.max(residual/total))),
+        aggregateResidual=float(np.sqrt(residual.sum()/total.sum())),capturedEnergyByMode=(1-residual/total).tolist(),
+        quadratureAreaM2=area,order=order)
+
 def mobility(k,D,P,freq):
     Y=[]
     for f in freq:
@@ -63,12 +84,18 @@ def main():
     eig=bool(q['massError']<=1e-5 and q['scaledEigenResidual']<=1e-8 and q['originalEigenResidual']<=1e-5)
     if not eig:raise ValueError('eigenbasis failed')
     field=SurfaceModes(m,q['U'][:z['plateDofs']]);maps=[];reports=[]
-    for order in (30,42):
-        xy,w=quadrature(poly,order);x,y=(2*(xy-poly.min(0))/np.ptp(poly,axis=0)-1).T
-        F=np.stack([np.ones(len(x)),x,y,x*y],axis=1)
-        A,report=projection(F,field(xy),w);maps.append(A);reports.append(report)
+    a.out.mkdir(parents=True,exist_ok=True)
+    for order in (8,12):
+        A,report=patch_projection(m['basis'],field,poly,order);maps.append(A);reports.append(report)
     drift=relative(maps[0],maps[1])
-    if max(r['normalResidual'] for r in reports)>1e-8 or drift>1e-5:raise ValueError('projection quadrature failed')
+    areaError=max(abs(r['quadratureAreaM2']-m['areaM2'])/m['areaM2'] for r in reports)
+    residualDrift=abs(reports[0]['aggregateResidual']-reports[1]['aggregateResidual'])
+    quadratureGate=bool(max(r['normalResidual'] for r in reports)<=1e-8 and drift<=1e-5 and areaError<=1e-10 and residualDrift<=1e-8)
+    diagnostic=dict(gate=quadratureGate,orders=[8,12],knotAligned=True,mapRelative=drift,areaRelative=areaError,
+        aggregateResidualDrift=residualDrift,reports=reports)
+    (a.out/'projection_quadrature.json').write_text(json.dumps(diagnostic,indent=2,allow_nan=False))
+    print('G3_DRY_PROJECTION_GATE '+json.dumps({k:v for k,v in diagnostic.items() if k!='reports'}),flush=True)
+    if not quadratureGate:raise ValueError('projection quadrature failed')
     rows=[]
     for n in (64,128,192,256):
         Dm=q['D'][:n,:n];k=np.diag(q['K'])[:n];Pm=q['P'][:n]
@@ -80,7 +107,7 @@ def main():
     archive=save_matrices(a.out,'dry_structural_modal',frequencies=freq,modalHz=q['Hz'],stiffness=np.diag(q['K']),damping=q['D'],ports=q['P'],fourFieldMap=maps[-1],dryReference=reference)
     summary=dict(gate=True,diagnosticOnly=True,physicalHypothesis=True,calibratedParameters=False,eigenGate=eig,
         massError=q['massError'],scaledEigenResidual=q['scaledEigenResidual'],originalEigenResidual=q['originalEigenResidual'],
-        fourFieldQuadratureRelative=drift,fourFieldAggregateResidual=reports[-1]['aggregateResidual'],
+        fourFieldQuadratureRelative=drift,knotAlignedQuadrature=True,quadratureAreaRelative=areaError,fourFieldAggregateResidual=reports[-1]['aggregateResidual'],
         fourFieldMaximumModeResidual=reports[-1]['maximumModeResidual'],fourFieldApproximationGate=reports[-1]['maximumModeResidual']<=.05,
         fullDampingPreserved=True,maximumModes=256,acousticFitAccepted=False,timeDomainReady=False,radiationReady=False,polyphonyValidated=False)
     (a.out/'dry_structural_modal.json').write_text(json.dumps(dict(summary=summary,scaleSha256=hashlib.sha256(raw).hexdigest(),
