@@ -12,7 +12,7 @@ class MultiTest(unittest.TestCase):
         self.assertTrue(np.all(a>0))
     def test_no_contact(self):
         f=Felt(1.5e8,.5e8,3000.,3.,2.5)
-        a,_,_=solve_contacts(np.zeros(2),-np.ones(2),np.eye(2),np.zeros(2),[f,f])
+        a,_,_=solve_contacts(np.zeros(2),-np.ones(2),np.zeros(2),np.eye(2),[f,f])
         np.testing.assert_array_equal(a,np.zeros(2))
     def test_reference(self):
         self.assertTrue(probe(2,4,48000)['gate'])
