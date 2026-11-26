@@ -1,0 +1,73 @@
+name: Concert Grand III verified 429 coupling replay
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/verified_disjoint_archive.py','research/stage-concert-grand-iii/test_verified_disjoint_archive.py','.github/workflows/concert-grand-iii-verified-429.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_verified_disjoint_archive.py
+  couple:
+    needs: unit
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - angle: '30'
+            refined_run: '45726550890'
+          - angle: '55'
+            refined_run: '45726759436'
+    runs-on: ubuntu-latest
+    timeout-minutes: 130
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          gh run watch "${{ matrix.refined_run }}" --exit-status --interval 60
+          # Original overall conclusion may be failure due to the disjoint jobs.
+          # The individual archived manifests are checked by the coupling code.
+          gh run watch 45725732251 --interval 60
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45723509912 -n G3-consolidated-exterior-${{ matrix.angle }} -D /tmp/g3-ext
+          gh run download 45725732251 -n G3-enriched-reactive-${{ matrix.angle }}-disjoint -D /tmp/g3-prev
+          gh run download "${{ matrix.refined_run }}" -n G3-disjoint-refinement-${{ matrix.angle }} -D /tmp/g3-refine
+          gh run download 45725732251 -n G3-enriched-smooth-${{ matrix.angle }} -D /tmp/g3-smooth
+          gh run download 45725732251 -n G3-enriched-upper-${{ matrix.angle }} -D /tmp/g3-upper
+          gh run download 45725732251 -n G3-enriched-reactive-${{ matrix.angle }}-self -D /tmp/g3-self
+          gh run download 45725732251 -n G3-enriched-reactive-${{ matrix.angle }}-contact -D /tmp/g3-contact
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: python research/stage-concert-grand-iii/verified_disjoint_archive.py --scale /tmp/g3-scale/scale_geometry.json --previous /tmp/g3-prev --refined /tmp/g3-refine --consolidated /tmp/g3-ext --angle ${{ matrix.angle }} --out /tmp/g3-verified
+      - run: python research/stage-concert-grand-iii/enriched_coupling_replay.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high --smooth /tmp/g3-smooth --self /tmp/g3-self --contact /tmp/g3-contact --disjoint /tmp/g3-verified --upper /tmp/g3-upper --angle ${{ matrix.angle }} --out /tmp/g3-coupled
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-verified-disjoint-${{ matrix.angle }}
+          path: /tmp/g3-verified/
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-verified-coupled-${{ matrix.angle }}
+          path: /tmp/g3-coupled/
+          if-no-files-found: warn
