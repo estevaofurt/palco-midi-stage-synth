@@ -1,0 +1,5 @@
+# G3.12j — núcleo compilado de cordas físicas
+
+G3.12i run 45742874773 aprovado: 80 estrutura + 10×16 interiores =240 coordenadas, treino 0.04586809269857971, validação 0.04286197579096811, replay 128 2.6745533179326325e-15; energia 6.465820631227677e-14, estados 4.822927856834518e-13. Python 48/96k 71.159/71.388 us/amostra, 32/32 overruns. Faixa 30–500 Hz apenas.
+
+Compilar midpoint em Numba sem fastmath, buffers prealocados, exploração das contribuições de massa/rigidez da ponte por portas e interiores diagonais. Inversa do Schur fixa pré-calculada com Cholesky, auditar HJ-I <=1e-8; preservar termos cruzados e ledger físico. Prova 16/32/64/128 interiores a 48/96k, contra Python, particionamento bitwise, silêncio exato, estado/observador/ledger/energia <=1e-8, prova densa adicional 16. Benchmark 200 blocos de 64/128, JIT excluído; publicar mediana, p99, overruns, sem gate de desempenho artificial. Sem carga acústica ou contato, sem certificação de banda superior ou polifonia. Main preservada.
