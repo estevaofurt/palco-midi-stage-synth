@@ -1,0 +1,30 @@
+name: Concert Grand III intermediate decay evidence
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/middle_decay_evidence.py','research/stage-concert-grand-iii/test_middle_decay_evidence.py','.github/workflows/concert-grand-iii-middle-decay.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python research/stage-concert-grand-iii/test_middle_decay_evidence.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G3-physical-long-*
+          run-id: 45865381764
+          github-token: ${{ github.token }}
+          path: /tmp/g3-long
+      - run: python research/stage-concert-grand-iii/middle_decay_evidence.py --long /tmp/g3-long --out /tmp/g3-middle
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-middle-decay
+          path: /tmp/g3-middle/
