@@ -1,0 +1,88 @@
+name: Concert Grand III dense reference prespecified split
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/dense_frequency_batch.py','research/stage-concert-grand-iii/dense_board_reference.py','research/stage-concert-grand-iii/test_dense_board_reference.py','.github/workflows/concert-grand-iii-dense-reference.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_dense_board_reference.py
+  batch:
+    needs: unit
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        angle: ['30','55']
+        batch: ['0','1']
+    runs-on: ubuntu-latest
+    timeout-minutes: 170
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: |
+          gh run download 45726103993 -n G3-graded-combined-${{ matrix.angle }} -D /tmp/g3-fine
+          gh run download 45729376812 -n G3-common-snapshot-transfer-${{ matrix.angle }} -D /tmp/g3-basis
+      - run: python research/stage-concert-grand-iii/dense_frequency_batch.py --scale /tmp/g3-scale/scale_geometry.json --fine /tmp/g3-fine --basis /tmp/g3-basis --angle ${{ matrix.angle }} --batch ${{ matrix.batch }} --out /tmp/g3-dense
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-dense-batch-${{ matrix.angle }}-${{ matrix.batch }}
+          path: /tmp/g3-dense/
+          if-no-files-found: warn
+  assemble:
+    needs: batch
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G3-dense-batch-${{ matrix.angle }}-*
+          path: /tmp/g3-batches
+      - run: |
+          gh run download 45726103993 -n G3-graded-combined-${{ matrix.angle }} -D /tmp/g3-fine
+          gh run download 45729376812 -n G3-common-snapshot-transfer-${{ matrix.angle }} -D /tmp/g3-basis
+      - run: python research/stage-concert-grand-iii/dense_board_reference.py --scale /tmp/g3-scale/scale_geometry.json --fine /tmp/g3-fine --basis /tmp/g3-basis --batch0 /tmp/g3-batches/G3-dense-batch-${{ matrix.angle }}-0 --batch1 /tmp/g3-batches/G3-dense-batch-${{ matrix.angle }}-1 --angle ${{ matrix.angle }} --out /tmp/g3-dense-ref
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-dense-reference-${{ matrix.angle }}
+          path: /tmp/g3-dense-ref/

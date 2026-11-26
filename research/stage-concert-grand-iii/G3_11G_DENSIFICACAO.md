@@ -1,0 +1,5 @@
+# G3.11g — densificação física com separação antecipada
+
+G3.11f aprovado nos dois ângulos: balanço máximo 2.52586467e-13 / 2.52233844e-13; transferência discreta 4.09335528e-14 / 1.61277671e-14 (30/55). Integrador matemático aprovado, ajuste físico reprovado. Não promover.
+
+Adicionar doze frequências por ângulo, em dois lotes de seis, sem interpolar. Treino futuro: seis pontos originais + 45,95,135,185,235,285 Hz. Validação congelada: 65,115,160,215,260,295 Hz. Manter 55,175,275 Hz (G3.11d) separados para avaliação adicional. Reusar metodologia de cálculo G3.11d na malha 50/200/32, inferior 72, 28 blocos reativos auditados e controle suave antes do acoplamento. Verificar base 120 sem retreinar; reprovação modal não invalida referência completa se o acoplamento físico passou. Arquivar operadores e métricas, consolidar 18 impedâncias 4x4 com hash e split definido. Limitar dois jobs simultâneos. Sem ajustar o modelo dinâmico neste workflow. Amostragem ainda discreta, restrita 30–300 Hz; não certifica banda contínua nem realismo do piano. Nenhuma alteração em main.
