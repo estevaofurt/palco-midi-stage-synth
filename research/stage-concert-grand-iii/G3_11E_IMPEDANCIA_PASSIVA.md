@@ -1,0 +1,5 @@
+# G3.11e — piloto de impedância positiva-real
+
+Benchmark 45729776387: medianas entre frequências (ms) 30° 4.1263295/0.464355/0.201266 (385/168/120), 55° 4.0610425/0.458681/0.1973675; aceleração 120 de 20.50x/20.58x. Matrizes pré-projetadas, fatoração + quatro RHS, uma thread; não é benchmark de áudio.
+
+Iniciar ajuste diagnóstico da impedância 4x4 da tábua usando Y arquivado da referência refinada 385 (não ajuste do fluxo de 120). Forma Z(s)=R+sM+K/s+sum Wj*s/(s²+2 gamma s+Omega_j²), coeficientes reais simétricos PSD. Grade fixa 20–400 Hz em passos de 10 Hz, gamma 5 Hz numérico, não amortecimento calibrado. Ajuste por gradiente projetado acelerado com normalização por frequência e ridge 1e-8. Registrar resíduo de otimização, PSD, reciprocidade, amostragem positiva-real e erro treino/leave-one-out. Gate de ajuste 5% separado da execução e passividade. Se falhar, não promover; seis frequências não caracterizam polos ou banda contínua. Modelo não contém observadores, cordas, integração temporal ou validação da referência enriquecida. Nenhuma alteração da main. Não usar para áudio até validação independente e estabilidade temporal.
