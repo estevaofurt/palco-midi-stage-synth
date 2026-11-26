@@ -7,7 +7,7 @@ from compiled_wire_midpoint import Compiled
 
 @njit(cache=True)
 def fixed_kernel(h,k,D,A,P,ports,hammer,m0,k0,d0,mi,ki,di,ks,ds,C,invHi,J,
-           q,v,x,u,rv,rq,rm,ri,rb,vm,um,forces,obs,ledger,board_acceleration,B,I,V,U,small,levels,y,t):
+           q,v,x,u,rv,rq,rm,ri,rb,vm,um,forces,obs,ledger,board_acceleration,B,I,V,U,small,levels,contact_y,contact_t):
     n=len(q);nw=len(x);ns=x.shape[1];np_=P.shape[1];a=2/h
     for t in range(len(forces)):
         F=forces[t]
@@ -42,16 +42,16 @@ def fixed_kernel(h,k,D,A,P,ports,hammer,m0,k0,d0,mi,ki,di,ks,ds,C,invHi,J,
             for j in range(n):s+=B[j,c]*vm[j]
             for w in range(nw):
                 for i in range(ns):s+=I[w,i,c]*um[w,i]
-            y[c]=s
+            contact_y[c]=s
         for c in range(len(levels)):
             s=0.
-            for d in range(len(levels)):s+=small[c,d]*y[d]
-            t[c]=s
+            for d in range(len(levels)):s+=small[c,d]*contact_y[d]
+            contact_t[c]=s
         for j in range(n):
-            for c in range(len(levels)):vm[j]-=V[j,c]*t[c]
+            for c in range(len(levels)):vm[j]-=V[j,c]*contact_t[c]
         for w in range(nw):
             for i in range(ns):
-                for c in range(len(levels)):um[w,i]-=U[w,i,c]*t[c]
+                for c in range(len(levels)):um[w,i]-=U[w,i,c]*contact_t[c]
         loss=0.
         for c in range(len(levels)):
             s=0.

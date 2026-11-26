@@ -15,13 +15,16 @@ class FixedContactTest(unittest.TestCase):
         make=lambda:Compiled(np.array([200.,500.]),np.eye(2),np.ones((2,1)),np.array([[.8,.2]]),[w],48000,1)
         for width in (0.,.005,.020):
             for level in (0.,.5,2.):
-                a,b,c=make(),make(),make()
+                a,b,c,e=make(),make(),make(),make()
                 B,I,wt=contact(a,{60:dict(lengthM=.5)},width)
-                d=damping_levels([level],wt);A=PointSchur(a,B,I);R=PointSchur(b,B,I);Q=PointDense(c,B,I)
-                for z in (A,R,Q):z.set_levels(d)
+                d=damping_levels([level],wt);A=PointSchur(a,B,I);R=PointSchur(b,B,I);Q=PointDense(c,B,I);E=PointSchur(e,B,I)
+                for z in (A,R,Q,E):z.set_levels(d)
                 f=np.random.default_rng(42).normal(size=(513,1));f[200:]=0
                 o=np.zeros_like(f);l=np.zeros((len(f),2));acc=np.zeros((len(f),2))
                 fixed=FixedContacts(A);fixed.process(f,o,l,acc)
+                part=FixedContacts(E);po=np.zeros_like(o);pl=np.zeros_like(l);pa=np.zeros_like(acc)
+                for i in range(0,len(f),37):part.process(f[i:i+37],po[i:i+37],pl[i:i+37],pa[i:i+37])
+                for x,y in ((o,po),(l,pl),(acc,pa),(np.asarray(A.state()),np.asarray(E.state()))):np.testing.assert_array_equal(x,y)
                 ref=[];led=[];ar=[]
                 for F in f:
                     old=b.v.copy();y,work,loss=R.step(F);ref.append(y);led.append([work,loss]);ar.append((b.v-old)/b.h)

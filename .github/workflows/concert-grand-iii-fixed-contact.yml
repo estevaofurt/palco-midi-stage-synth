@@ -2,7 +2,7 @@ name: Concert Grand III compiled fixed damper contacts
 on:
   push:
     branches: [research/stage-concert-grand-iii]
-    paths: ['research/stage-concert-grand-iii/fixed_contact_midpoint.py','research/stage-concert-grand-iii/test_fixed_contact_midpoint.py','research/stage-concert-grand-iii/fixed_contact_benchmark.py','.github/workflows/concert-grand-iii-fixed-contact.yml']
+    paths: ['research/stage-concert-grand-iii/fixed_contact_midpoint.py','research/stage-concert-grand-iii/test_fixed_contact_midpoint.py','research/stage-concert-grand-iii/fixed_contact_benchmark.py','research/stage-concert-grand-iii/combined_contact_render.py','.github/workflows/concert-grand-iii-fixed-contact.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -38,3 +38,50 @@ jobs:
         with:
           name: G3-fixed-contact-midpoint
           path: /tmp/g3-fixed/
+  combined:
+    needs: proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        control: ['held_no_pedal','release_no_pedal']
+        speed: ['0.3','3.0']
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-port-enrichment
+          run-id: 45742331448
+          github-token: ${{ github.token }}
+          path: /tmp/g3-wire
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-wire-baffle-reference
+          run-id: 45774796464
+          github-token: ${{ github.token }}
+          path: /tmp/g3-baffle
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-causal-pressure-observer
+          run-id: 45775031314
+          github-token: ${{ github.token }}
+          path: /tmp/g3-pressure
+      - run: python research/stage-concert-grand-iii/combined_contact_render.py --control '${{ matrix.control }}' --speed '${{ matrix.speed }}' --scale /tmp/g3-scale/scale_geometry.json --source /tmp/g3-wire --reference /tmp/g3-baffle --pressure /tmp/g3-pressure --out /tmp/g3-combined
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-combined-contact-${{ matrix.control }}-${{ matrix.speed }}
+          path: /tmp/g3-combined/
