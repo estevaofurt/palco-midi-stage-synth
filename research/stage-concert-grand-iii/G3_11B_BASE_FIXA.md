@@ -1,0 +1,5 @@
+# G3.11b — base fixa por ângulo e transferência espacial
+
+G3.11a 55° aprovado retrospectivamente em validação leave-one-frequency-out: rank 24, 168 modos, pior erro .012621529078046879; rank 16/112 falhou pressão inferior .05629230348352952. Rank 32/224 também aprovado. 30° pendente na consulta.
+
+Selecionar exclusivamente o menor rank aprovado por ângulo no arquivo G3.11a, verificando folds, métricas e proveniência. Treinar uma base real fixa por painel usando os seis snapshots da malha graduada 40/160/24. Não reajustar na malha 50/200/32. Comparar cinco pares: redução na malha de treino, redução na malha refinada, diferença espacial completa, diferença espacial reduzida e candidato coarse contra referência fine. Limite 5% em seis métricas. Exportar Tu/Tl e áreas com hash, marcar diagnóstico mesmo em caso de reprovação. O workflow aguarda somente o job correspondente ao ângulo. Sem nova FEM. Não equivale a validação em frequência contínua, nova geometria física, modelo causal ou motor em tempo real. Main preservada.
