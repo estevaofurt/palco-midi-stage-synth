@@ -1,0 +1,5 @@
+# G3.11f — integrador temporal de estrutura passiva (não físico)
+
+G3.11e terminou, estrutura passiva aprovada; ajuste reprovado: treino 0.005611943/0.003115439, máximo leave-one-out 2.032507/1.513324 (30/55), otimizador não convergiu no critério. Não usar coeficientes para áudio. Necessária densificação de frequências, não apenas mais iterações.
+
+Implementar ponto médio implícito para R+sM+K/s+osciladores PSD. Entrada velocidade nos extremos; força média conjugada ao trabalho h*u_mid·f; energia inclui massa, mola e estados oscilatórios, dissipação R e gamma. Clipping exclusivamente de autovalores negativos de arredondamento; recusar negativos materiais. Testar sintético e coeficientes rejeitados exclusivamente como stress test da estrutura. Verificar fechamento de energia <=1e-9 em 44.1/48/96 kHz; verificar transferência discreta contra s=2i/h*tan(pi*f*h), tolerância 1e-5, com regressão incluindo DC. Não confundir equivalência discreta com fidelidade física. Nenhuma integração com cordas, nenhuma promoção ou áudio. Main intacta.

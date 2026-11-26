@@ -1,0 +1,50 @@
+name: Concert Grand III passive midpoint structural diagnostic
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/passive_midpoint.py','research/stage-concert-grand-iii/test_passive_midpoint.py','.github/workflows/concert-grand-iii-passive-midpoint.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_passive_midpoint.py
+  proof:
+    needs: unit
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: gh run download 45729966465 -n G3-passive-board-${{ matrix.angle }} -D /tmp/g3-fit
+      - run: python research/stage-concert-grand-iii/passive_midpoint.py --scale /tmp/g3-scale/scale_geometry.json --fit /tmp/g3-fit --angle ${{ matrix.angle }} --out /tmp/g3-midpoint
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-passive-midpoint-${{ matrix.angle }}
+          path: /tmp/g3-midpoint/
+          if-no-files-found: warn
