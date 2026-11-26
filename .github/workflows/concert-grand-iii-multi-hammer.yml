@@ -1,0 +1,29 @@
+name: Concert Grand III simultaneous hammer diagnostic
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/multi_hammer_contact.py','research/stage-concert-grand-iii/test_multi_hammer_contact.py','.github/workflows/concert-grand-iii-multi-hammer.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3 numba==0.61.2
+      - run: python research/stage-concert-grand-iii/test_multi_hammer_contact.py
+      - run: python research/stage-concert-grand-iii/multi_hammer_contact.py --out /tmp/g3-multi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-multi-hammer
+          path: /tmp/g3-multi/
+          if-no-files-found: warn

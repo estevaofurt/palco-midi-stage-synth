@@ -1,0 +1,5 @@
+# G3.11q — contatos simultâneos
+
+G3.11p run 45733858155 aprovado: energia 9.99875336847743e-15, estados 2.904379714134188e-13, força 9.21584891592937e-15. Convergência 96/192 kHz máximo 0.0007544284051907606, duração delta 0.005208333333334 ms. Não é calibração física.
+
+Montar compliance recíproca conjunta P^T H^-1 P e adicionar diagonal da massa dos martelos. Preservar termos cruzados com sinal; resolver forças unilaterais por raízes coordenadas com residual conjunto e limite de 80 varreduras; sem avanço até convergir. Feltro com relaxação simétrica e trabalho conjugado. Referência densa independente e ordem inversa de solução. Testar 2/4/8 martelos, 4/8 parciais, 48/96 kHz, 12 casos, velocidades diferentes 0.3/1/3/0.7 m/s. Sem desligar martelos individualmente; diagnóstico termina na separação conjunta, podendo ocorrer recolisão. Verificar energia, força, impulso, estados e trabalho. Não inclui catcher, eventos MIDI, pedal simultâneo ou renderização. Parâmetros sintéticos. Densificação G3.11g pendente. Main preservada.
