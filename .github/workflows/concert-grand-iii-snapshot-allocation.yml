@@ -1,0 +1,120 @@
+name: Concert Grand III common snapshot rank allocation
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths: ['research/stage-concert-grand-iii/snapshot_allocation.py','research/stage-concert-grand-iii/test_snapshot_allocation.py','research/stage-concert-grand-iii/common_snapshot_transfer.py','.github/workflows/concert-grand-iii-snapshot-allocation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - run: python research/stage-concert-grand-iii/test_snapshot_allocation.py
+  allocation:
+    needs: unit
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - run: |
+          for r in 45717196561 45723509912 45725159589; do
+            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
+          done
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45723509912 -n G3-consolidated-exterior-${{ matrix.angle }} -D /tmp/g3-ext
+          gh run download 45725159589 -n G3-graded-cavity-${{ matrix.angle }} -D /tmp/g3-graded
+      - run: python research/stage-concert-grand-iii/snapshot_allocation.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high --consolidated /tmp/g3-ext --graded /tmp/g3-graded --angle ${{ matrix.angle }} --out /tmp/g3-alloc
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-snapshot-allocation-${{ matrix.angle }}
+          path: /tmp/g3-alloc/
+  common:
+    needs: allocation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G3-snapshot-allocation-*
+          path: /tmp/g3-ranks
+      - run: python research/stage-concert-grand-iii/snapshot_allocation.py common --scale /tmp/g3-scale/scale_geometry.json --angle30 /tmp/g3-ranks/G3-snapshot-allocation-30/snapshot_allocation.json --angle55 /tmp/g3-ranks/G3-snapshot-allocation-55/snapshot_allocation.json --out /tmp/g3-common
+      - uses: actions/upload-artifact@v4
+        with:
+          name: G3-snapshot-common-allocation
+          path: /tmp/g3-common/
+  transfer:
+    needs: common
+    strategy:
+      fail-fast: false
+      matrix:
+        angle: ['30','55']
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy==2.2.6 scipy==1.15.3
+      - uses: actions/download-artifact@v4
+        with:
+          name: G3-scale-geometry-02
+          run-id: 45643063220
+          github-token: ${{ github.token }}
+          path: /tmp/g3-scale
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: G3-snapshot-allocation-*
+          path: /tmp/g3-ranks
+      - run: |
+          for r in 45717196561 45723509912 45725159589 45726103993; do
+            test "$(gh run view "$r" --json conclusion --jq .conclusion)" = success
+          done
+          gh run download 45717196561 -n G3-high-modal-${{ matrix.angle }} -D /tmp/g3-high
+          gh run download 45723509912 -n G3-consolidated-exterior-${{ matrix.angle }} -D /tmp/g3-ext
+          gh run download 45725159589 -n G3-graded-cavity-${{ matrix.angle }} -D /tmp/g3-graded
+          gh run download 45726103993 -n G3-graded-combined-${{ matrix.angle }} -D /tmp/g3-fine
+      - run: python research/stage-concert-grand-iii/common_snapshot_transfer.py --scale /tmp/g3-scale/scale_geometry.json --archive /tmp/g3-high --consolidated /tmp/g3-ext --graded /tmp/g3-graded --fine /tmp/g3-fine --angle30 /tmp/g3-ranks/G3-snapshot-allocation-30/snapshot_allocation.json --angle55 /tmp/g3-ranks/G3-snapshot-allocation-55/snapshot_allocation.json --angle ${{ matrix.angle }} --out /tmp/g3-transfer
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: G3-common-snapshot-transfer-${{ matrix.angle }}
+          path: /tmp/g3-transfer/
+          if-no-files-found: warn

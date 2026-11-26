@@ -1,0 +1,5 @@
+# G3.11c — alocação comum de rank por painel
+
+G3.10i aprovado nos dois ângulos: 30° pior .02650933688544463; 55° .022353974027706065; captura mínima .998053. G3.10q 55° subbloco 11, par 0/4, 80 Hz: duas mudanças consecutivas <=1e-8; 30° pendente. G3.11b 55° base fixa 168 modos aprovada: erro modal fine .007367939810066436, combinado .022355331530312213. Não equivale a convergência modal absoluta.
+
+Avaliar 128 distribuições binárias 16/24 por painel em cada ângulo, seis folds de frequência por distribuição. Reutilizar SVD rank 24 por fold e truncar prefixo; sem recalcular FEM. Selecionar por menor total, menor pior erro e ordem lexicográfica. Exigir 5% em todas as métricas dos dois ângulos. A seleção é retrospectiva e não usa a malha fine. Congelar ranks comuns; treinar uma base por ângulo na malha coarse e transferir sem reajuste para fine. Cinco comparações, mesmos gates de G3.11b. Exportar base com hash e proveniência; não promover em caso de falha. Ranks iguais não implicam coordenadas iguais entre ângulos. Nenhuma validação contínua, causal ou de tempo real. Main preservada.
