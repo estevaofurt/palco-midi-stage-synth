@@ -7,7 +7,8 @@ import numpy as np
 from scipy.linalg import cholesky,solve_triangular,eigh,svd
 from enriched_baffle import load_source
 from dry_snapshot_reduction import normalized,read
-from dry_hybrid_reduction import response_columns
+from dry_hybrid_reduction import response_columns,hybrid_basis
+from dry_structural_modal import mobility
 from spatial_layout import build as layout_build
 from board_contour import build as contour_build
 from bridge_strings import centerline
@@ -51,6 +52,22 @@ def comparison(Y,ref):
     e=[relative(x,y) for x,y in zip(Y,ref)]
     return dict(maximum=max(e),aggregate=relative(Y,ref),perFrequency=e)
 
+def rebuild_base(M,K,D,P,archive,train):
+    # Physical coordinates include the spline mass-orthogonalization.
+    # Recreate the frozen hybrid subspace in this assembly, not the
+    # coefficient columns of a separately generated spline basis.
+    m,k,d,p=normalized(M,K,D,P)
+    S=response_columns(m,k,d,p,train)
+    V,_,keep=hybrid_basis(m,k,S,64)
+    if keep<8:raise ValueError('insufficient frozen residual rank')
+    s=1/np.sqrt(np.diag(M));L=cholesky((K+(2*np.pi*100)**2*M)*(s[:,None]*s[None,:]),lower=True)
+    lift=s[:,None]*solve_triangular(L.T,V[:,:72],lower=False)
+    md,A,mass=model(M,K,D,P,lift)
+    Y=mobility(np.diag(md['K']),md['D'],md['P'],train)
+    ref=mobility(archive['stiffness'],archive['damping'],archive['ports'],train)
+    replay=comparison(Y,ref)['maximum']
+    return A,dict(massRelative=mass,mobilityReplayMaximum=replay,gate=bool(mass<=1e-8 and replay<=1e-6))
+
 def main():
     p=argparse.ArgumentParser()
     for k in ('scale','source','out'):p.add_argument('--'+k,type=Path,required=True)
@@ -62,9 +79,16 @@ def main():
     plate=assemble(poly,c['ribs'],mat['plate'],rib,30,14,False)
     q=structure(plate,centers,read('bridge_hypothesis.json'),mat,read('rim_structure_hypothesis.json'),2,8,14,True)
     M=q['M'];K=q['K']+q['Jrim']+q['Jbridge'];D=q['D']
-    lift=z['physicalLift']
-    if lift.shape!=(len(M),72) or relative(lift.T@M@lift,np.eye(72))>1e-7 or relative(lift.T@q['P'][:,[0,2,4,5]],z['ports'])>1e-6:
-        raise ValueError('physical lift mismatch')
+    old=z['physicalLift'];P0=q['P'][:,[0,2,4,5]]
+    if old.shape!=(len(M),72):raise ValueError('physical lift shape mismatch')
+    oldaudit=dict(massRelative=relative(old.T@M@old,np.eye(72)),portsRelative=relative(old.T@P0,z['ports']),
+        stiffnessRelative=relative(old.T@K@old,np.diag(z['stiffness'])),dampingRelative=relative(old.T@D@old,z['damping']))
+    f=json.loads((a.source/'frozen_surface.json').read_text());grid=np.asarray(f['trainingHz'])
+    lift,replay=rebuild_base(M,K,D,P0,z,grid)
+    a.out.mkdir(parents=True,exist_ok=True)
+    (a.out/'wire_coordinate_replay.json').write_text(json.dumps(dict(archivedDirect=oldaudit,reconstructed=replay),indent=2,allow_nan=False))
+    print('G3_WIRE_COORDINATE_GATE '+json.dumps(dict(archivedDirect=oldaudit,reconstructed=replay)),flush=True)
+    if not replay['gate']:raise ValueError('frozen hybrid response replay failed')
     keys=[45,48,60,64];P,wires,labels=setup(q,centers,rows,keys,2,128)
     rear=sorted(set(w.rear for w in wires));F=np.zeros((len(M),len(rear)));F[rear,np.arange(len(rear))]=1.
     train=np.geomspace(30,500,16);valid=np.sqrt(train[:-1]*train[1:])
@@ -100,7 +124,7 @@ def main():
         selectedRank=chosen['rank'],selectedExtra=chosen['extra'],fullStructuralCoordinates=len(M),trainingMaximum=chosen['training']['maximum'],
         validationMaximum=err['maximum'],frozen72ValidationMaximum=baseerr['maximum'],
         reductionGate=bool(max(chosen['training']['maximum'],err['maximum'])<=.05),selectionUsedValidation=False,
-        oldAcousticOperatorsCompatible=False,fixedFront=True,verticalPolarizationOnly=True,acousticLoadIncluded=False,
+        localCoordinateReconstruction=True,baseMobilityReplayMaximum=replay['mobilityReplayMaximum'],oldAcousticOperatorsCompatible=False,fixedFront=True,verticalPolarizationOnly=True,acousticLoadIncluded=False,
         timeDomainReady=False,radiationReady=False,polyphonyValidated=False)
     (a.out/'wire_port_enrichment.json').write_text(json.dumps(dict(summary=summary,cases=cases,validation=err,baseValidation=baseerr,
         validationAlgebra=ya,referenceTraining=fa,referenceValidation=va,frozenSha256=hashlib.sha256(data).hexdigest()),indent=2,allow_nan=False))

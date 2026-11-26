@@ -1,0 +1,5 @@
+# G3.12g — replay coordenado das cordas e ativação do piloto passivo
+
+G3.12d ambos jobs aprovados (45741036520): treino 12 pontos, reatância 0.003720299283786414, kernel 2.7520161587197233e-13, pressão 2.84850444669256e-15; validação 6 pontos 0.0037050761719855914, 2.7452452250368297e-13, 2.600671999369062e-15. Ativar fit G3.12e no push agora que ambos aprovados; preflight de sucesso e hashes permanece. Não alterar seleção ou critérios.
+
+G3.12f run 45741368613: dois testes passaram, falha física genérica de lift. Diagnosticar separadamente massa, rigidez, damping e portos do mapa arquivado. A hipótese de diferença nas coordenadas spline ainda precisa de confirmação. Reconstruir subespaço híbrido 64+8 na montagem local pela mesma receita e grade congelada; normalizar e auditar mobilidade contra matrizes arquivadas <=1e-6 e massa <=1e-8. Não usar mapa de outro assembly diretamente. Não reduzir tolerâncias. Teste de invariância de mobilidade por congruência. Sem aprovação de acoplamento até nova prova; novo mapa não é intercambiável com operadores acústicos. Main preservada.

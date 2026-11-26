@@ -8,6 +8,12 @@ class WirePortTest(unittest.TestCase):
         self.assertEqual(V.shape,(8,7))
         np.testing.assert_array_equal(V[:,:3],T)
         np.testing.assert_allclose(V.T@V,np.eye(7),atol=1e-12)
+    def test_congruence_transfer(self):
+        from dry_structural_modal import mobility
+        M=np.eye(6);K=np.diag(np.arange(1.,7.));D=np.eye(6)+np.ones((6,6));P=np.eye(6)[:,:2]
+        R,_=np.linalg.qr(np.random.default_rng(31).normal(size=(6,6)))
+        m,V,e=model(M,K,D,P,R)
+        np.testing.assert_allclose(mobility(np.diag(m['K']),m['D'],m['P'],[1.,2.]),mobility(np.diag(K),D,P,[1.,2.]),rtol=1e-10,atol=1e-12)
     def test_model(self):
         M=np.eye(6);K=np.diag(np.arange(1.,7.));D=np.eye(6)+np.ones((6,6));P=np.eye(6)[:,:2]
         m,V,e=model(M,K,D,P,np.eye(6)[:,:4])
