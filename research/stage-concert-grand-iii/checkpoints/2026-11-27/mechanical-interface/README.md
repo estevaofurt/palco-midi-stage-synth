@@ -1,0 +1,9 @@
+# G3 — Interface mecânica bidirecional
+
+Continuação de 3f22894. Acústica física arquivada de 369 portas e 127.825 estados; mecânica sintética de oito coordenadas, não o tampo original. 25 entradas de insumos conferidas. Escalas superiores recuperadas a partir de T e área, erro 6,42472e-16 frente às 24 escalas arquivadas. M,K,D e lift precisam pertencer à base mecânica original verificada.
+
+Integração implícita midpoint: S=diag(s)*lift, u0=sqrt(8)*S*v, F=S.T*y0/sqrt(8); trabalho conjugado. Tampo constante durante o bloco (d1 embutido), abertura d3 ou d7. Seis ensaios de 64 blocos (384 blocos, 3072 subpassos), ruído, pulso e seno 2 kHz. Três controles de resolução simultânea por ensaio. Resíduos máximos mecânico 1,02370e-14, conjugação de trabalho 8,79880e-18, cavidade 1,47684e-18, total 1,02447e-14, continuidade projetada 1,73499e-15 e solução simultânea 1,29190e-15. Mínimo acumulado exterior zero. Repetição de d3/d7 concluída; d8 interrompido por timeout. Sem validação de ataque, observadores ou áudio. Kernel limitado aos lags alcançáveis no prefixo, não truncado dentro dele.
+
+Gate de proveniência retorna 2: seis arquivos ausentes dos pacotes G3_Reconstrucao_Estrutural.zip, G3_Reacao_Acustica.zip, G3_Terminacoes_das_Cordas.zip. A tentativa de recuperar bytes originais via Projeto falhou. Não misturar bases. Parâmetros sintéticos definidos nesta etapa, não representam o piano. Nenhuma promoção, sem alteração da main. O ZIP local G3_Interface_Mecanica.zip contém o runner, módulos auxiliares, logs, NPZ e 24 arquivos verificados. Este commit publica a interface, gate, manifesto necessário e resumo, não os binários ou o runner completo.
+
+Próximo: recuperar matrizes mecânicas originais, provar correspondência de coordenadas, montar tampo e validar d8, depois cordas e martelos. Ainda há 12 dependências de regeneração pendentes.
