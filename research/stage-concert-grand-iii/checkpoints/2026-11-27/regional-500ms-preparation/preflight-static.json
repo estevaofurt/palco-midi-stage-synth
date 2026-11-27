@@ -1,0 +1,26 @@
+{
+  "status": "static-only",
+  "source_commit": "750400edac818a4af56e791ffa13a79c0098006c",
+  "checks": {
+    "continuous_only_cli_changes": true,
+    "restart_only_cli_changes": true,
+    "archived_launch_steps_match": true,
+    "archived_command_steps_match": true,
+    "stop_inside_repeat_contact": true,
+    "later_stops_after_last_command": true,
+    "total_steps": true,
+    "ten_windows": true,
+    "ten_archived_hashes": true,
+    "full_gate_requires_all_prefixes": true
+  },
+  "planned_steps_per_run": 192000,
+  "planned_total_steps": 576000,
+  "stops": [
+    22000,
+    96000,
+    153600
+  ],
+  "physical_execution": false,
+  "python_runtime_tests": false,
+  "reason": "Local Python/container unavailable in this session."
+}

@@ -1,0 +1,10 @@
+cf0340df794a0e68f9a72c6c7408290eb352db4e1c974092a2aee5f710732141  long-250ms-refined-384000-mixed-pedal/compression.npy
+38d8653b939c579d9add2f0bf59670e263ab6b933efa8a7a25b8df95422fffbf  long-250ms-refined-384000-mixed-pedal/flow.npy
+df173a5a43feece4c996220ec7fd6895b84bf36dadab6bf5981a8204a6bedf0d  long-250ms-refined-384000-mixed-pedal/force.npy
+91dabea1d8fe63be8b4ed2bd9e6e27935ff411f294cdb5f8d5b8b62c56f83bf2  long-250ms-refined-384000-mixed-pedal/ledger.npy
+809083e5470b7a45d8c45d06e22b2189350e5b3512848189d9443e281bd0c4fc  long-250ms-refined-384000-mixed-pedal/velocity.npy
+0d555b0549786d4246039b474746ef2e88a2adaca8448df8ffc4f7ad9c04df18  long-250ms-refined-384000-uniform-pedal/compression.npy
+54dbcf87a4e669bbc87f8af33e659daf59cd3614afa661cc46c708c11c821d49  long-250ms-refined-384000-uniform-pedal/flow.npy
+9a90ec1c6c4d4a580ddd9044f2f5481f31ec0b2974d5b1077eeea942d4c5c2e0  long-250ms-refined-384000-uniform-pedal/force.npy
+a2a2edce725965f3f1c76f19084c25d37a94129e67811bd02bfad3cf33d40193  long-250ms-refined-384000-uniform-pedal/ledger.npy
+a9ab880b141f58524a0437c28c29255788db7f14c836a33e79e0a868a316b0d4  long-250ms-refined-384000-uniform-pedal/velocity.npy
