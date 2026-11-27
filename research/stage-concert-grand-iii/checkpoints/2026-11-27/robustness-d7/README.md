@@ -1,0 +1,10 @@
+# G3 — Robustez d7 em 320 intervalos
+Continuação de f0038e6. 132 entradas de manifestos verificadas. 369 portas, 127.825 estados, 48/384 kHz, tampo d3, abertura d6/mista/d7, d8 referência. Seleção fixa de 144 direções idêntica à anterior. RingFine preserva 2398 lags; cinco snapshots de duas portas contra kernel arquivado antes/depois da volta do anel: erro máximo 7,4245e-15. Regressão de 64 subpassos em circuito fechado idêntica ao arquivo.
+Novo caso seed 271134, 320 blocos, 106 de ruído espacialmente correlacionado e filtrado nos coeficientes (300–11000 Hz) e 214 de fluxo superior zero. Referência d8 e três aproximações concluídas, todas com volta do anel e controles de conservação: energia 2,0181e-16, trabalho 3,1274e-15, continuidade projetada 1,507e-15, fina d8 8,7452e-15; nenhum trabalho acumulado negativo.
+| Modelo | Pressão fina combinada % | Pior receptor fino % | Pior receptor projetado % | Pior receptor no prefixo fino % |
+|---|---:|---:|---:|---:|
+|d6|1,457716|1,603231|0,135491|1,203672|
+|mista|0,968178|1,101763|0,047674|0,732401|
+|d7|0,964020|1,097371|0,046577|0,728246|
+O critério anterior de 1% individual na convolução completa não foi satisfeito por nenhuma aproximação. No prefixo efetivamente simulado, mista e d7 passam. Após a janela, a convolução pressupõe fluxo zero e não representa cauda física. Erro combinado pós-janela 6,1061/5,0181/5,0062%. Não relaxar critério. Tempo de loop único 9,493/9,438/9,199 s para 320 blocos, d8 66,939 s, exclui preparação e compilação; sem ganho misto demonstrado. Continuidade fina projetada não reavaliada. Parâmetros definidos nesta etapa.
+Pacote local G3_Robustez_D7.zip, 29 entradas verificadas. Reproduzir com robust.py, ring_test.py e pressure_windows.py, Python 3.13.5/NumPy 2.3.5/SciPy 1.17.0/Numba 0.65.1, uma thread, manifestos verificados e pacotes irmãos. O commit publica RingFine e relatório, não todos os scripts e binários. Manter d7 referência projetada, mista alternativa e d8 referência fina. Próximo: ampliar evolução livre e avaliar pressão por banda e janela; integração mecânica pendente. Geometria piloto, 12 dependências de regeneração pendentes. Sem render ou promoção.
