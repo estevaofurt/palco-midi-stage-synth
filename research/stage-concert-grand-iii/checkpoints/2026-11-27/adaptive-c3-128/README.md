@@ -1,0 +1,12 @@
+# G3 — Dó3: referência de 128 modos e resolução adaptativa
+Continuação de a87f828. 175 entradas de manifestos verificadas, 55 arquivos locais íntegros. Dois impactos fortes Dó3 (3 m/s), 12 ms, 384 kHz, abertura integral, 369 portas, 127825 estados acústicos, 10 cordas e 80 coordenadas do tampo. Parâmetros históricos inalterados. Referência uniforme 128 modos por corda (limite da base interna existente, não convergência espacial contínua); candidata 64/128/64/64 para MIDI45/48/60/64, reduz 1360 para 848 coordenadas (-37,6471%). Seleção de submatrizes principais reproduz exatamente cinco matrizes das montagens uniformes 64/96/128. Cholesky M/K/D passa. Frequências naturais secas do Dó3: maior diferença 6,07968e-7 cent. Não prova afinação.
+Ambos capturados passo1296, pico29,57815546 N, contato3,34375 ms. 9216 subpassos, máximos balanço1,306421e-13, continuidade1,973804e-15, compressão3,361027e-18 m, trabalho relativo8,287132e-16. Mínimo trabalho exterior acumulado zero. Loop local uniforme70,615 s vs adaptativo55,458 s (1,2733x, redução21,46%); execução única, não benchmark nem tempo real.
+| Caso vs 128/384 | Fino causal mic1/mic2 % | Filtrado causal mic1/mic2 % | Maior banda dB |
+|---|---|---|---:|
+|64/192|1,914593/1,171542|1,774973/0,711984|0,234121|
+|64/384|1,975194/0,741581|1,858252/0,732772|0,250999|
+|96/384|0,517506/0,195880|0,486881/0,193177|0,066640|
+|adaptativa/384|0,000123660/0,000011231|0,000081778/0,000007899|0,000038911|
+Todas passam 1 dB global/3 dB banda; só 96/384 e adaptativa passam 1% fino causal e completo nos dois receptores. Kaiser617 taps, atraso0,802ms, bandas significativas >=1e-4 da norma quadrática espectral 0–20kHz. Checagem direta7,546235e-17, pré-chegada1,027846e-15. Parseval: >99,88% do erro modal 64/96 vs128 a384kHz abaixo24kHz. Após janela pressupõe fluxo zero, não cauda física.
+Candidata validada apenas Dó3 forte, 128 nas cordas excitadas e 64 nas demais. Não validar solo Lá2, outras dinâmicas ou acordes. 96 uniforme passa mas não testado mapa adaptativo de 96 no Dó3. Próximo: ataque fraco, simultâneo e ressonâncias com carga acústica; otimização exterior. Sem render, EQ, normalização individual ou promoção. Parâmetros de teste definidos nesta etapa; main preservada.
+Pacote G3_Do3_Referencia_128.zip: 55 arquivos SHA256 verificados, ZIP íntegro. Reprodução no CHECKPOINT.md, com dependências históricas e anteriores. Publicação parcial de adaptive.py, relatório e hashes; demais códigos e binários locais.
