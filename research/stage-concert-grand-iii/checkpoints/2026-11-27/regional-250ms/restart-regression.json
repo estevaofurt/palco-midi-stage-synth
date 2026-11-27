@@ -1,0 +1,72 @@
+{
+  "gate": true,
+  "checkpoints": [
+    1200,
+    3200
+  ],
+  "reference_steps": 6912,
+  "signals": {
+    "force": {
+      "shape": [
+        6912,
+        8
+      ],
+      "exact": true,
+      "sha256": "154b6daa2d6d947da5ac8032601bf24ee294b2d93bb0db8c72b8eeb5c53b1452"
+    },
+    "compression": {
+      "shape": [
+        6912,
+        8
+      ],
+      "exact": true,
+      "sha256": "f23817c0ba190acf6ff2a85b25c19da8f3c225a8d6e9a7a31f984be29259821b"
+    },
+    "velocity": {
+      "shape": [
+        6912,
+        1360
+      ],
+      "exact": true,
+      "sha256": "8f59b796a3b5c60c2cb35a1c452192621ddce253dad8ecb83673e407bb82f649"
+    },
+    "flow": {
+      "shape": [
+        6912,
+        1,
+        369
+      ],
+      "exact": true,
+      "sha256": "edb3245ba9cefd40561dc19d127b18cc544f4c0923e832babf44007e0c2728f2"
+    },
+    "ledger": {
+      "shape": [
+        6912,
+        11
+      ],
+      "exact": true,
+      "sha256": "b4e6791e4d0b6c8f6f92474c7034725c50c4f7ac6149fd6642d310af3b24348e"
+    }
+  },
+  "metadata": {
+    "launches": true,
+    "captures": true,
+    "energy_error": true,
+    "continuity": true,
+    "work_error": true,
+    "compression_residual": true,
+    "force_residual": true,
+    "minimum_exterior_work": true,
+    "injected_energy": true,
+    "final_mechanical_energy": true,
+    "final_cavity_energy": true,
+    "peak_force": true,
+    "impulse": true,
+    "felt_loss": true,
+    "catch_loss": true,
+    "mechanical_loss": true,
+    "cavity_loss": true,
+    "exterior_work": true
+  },
+  "scope": "Actual 18 ms interrupted integration; snapshots include mechanical, felt and hammer states, cavity modes, exterior history/ring, exact time index and energy ledger. Not yet tested for long-window resume."
+}

@@ -1,0 +1,149 @@
+{
+  "duration_ms": 200,
+  "cases": {
+    "mixed": {
+      "steps": 76800,
+      "coordinates": 1360,
+      "energy_reconstruction": 1.5723359943219947e-15,
+      "loss_reconstruction": 3.965021203072857e-15,
+      "ledger_balance": 6.078787678917903e-13,
+      "final_mechanical": 0.0014589316759851677,
+      "final_cavity": 1.7311573760751895e-07,
+      "injected": 0.050750781120000005,
+      "direct": 3.697622832244918e-17,
+      "prearrival": 2.513270319517556e-15,
+      "arrivals": [
+        559,
+        1679
+      ]
+    },
+    "uniform": {
+      "steps": 76800,
+      "coordinates": 2384,
+      "energy_reconstruction": 2.6661349468938173e-15,
+      "loss_reconstruction": 7.178055626252585e-15,
+      "ledger_balance": 6.754208532131003e-13,
+      "final_mechanical": 0.0014585757081710007,
+      "final_cavity": 1.7311376246789728e-07,
+      "injected": 0.050750781120000005,
+      "direct": 1.7282989914501343e-17,
+      "prearrival": 2.924035501333094e-15,
+      "arrivals": [
+        559,
+        1679
+      ]
+    }
+  },
+  "comparison": {
+    "causal_fine": [
+      0.0012590300928878415,
+      0.0011324243241515963
+    ],
+    "causal_filtered": [
+      0.0012588996985624114,
+      0.0011326198788666586
+    ],
+    "spectral": [
+      {
+        "level_db": 0.0018305937031051049,
+        "max_band_db": 0.0035320887577871326,
+        "gate": true,
+        "bands": [
+          {
+            "lo": 0,
+            "hi": 300,
+            "reference_fraction": 0.06005259295066811,
+            "significant": true,
+            "level_db": -0.00042555894892509495
+          },
+          {
+            "lo": 300,
+            "hi": 1000,
+            "reference_fraction": 0.8323010622120314,
+            "significant": true,
+            "level_db": 0.0017728912446931043
+          },
+          {
+            "lo": 1000,
+            "hi": 3000,
+            "reference_fraction": 0.10763783722120676,
+            "significant": true,
+            "level_db": 0.0035320887577871326
+          },
+          {
+            "lo": 3000,
+            "hi": 8000,
+            "reference_fraction": 7.244005154110803e-06,
+            "significant": false,
+            "level_db": null
+          },
+          {
+            "lo": 8000,
+            "hi": 16000,
+            "reference_fraction": 9.984787453630588e-07,
+            "significant": false,
+            "level_db": null
+          },
+          {
+            "lo": 16000,
+            "hi": 20000,
+            "reference_fraction": 2.6513219429861173e-07,
+            "significant": false,
+            "level_db": null
+          }
+        ]
+      },
+      {
+        "level_db": 0.0012970238460334616,
+        "max_band_db": 0.011802015694172038,
+        "gate": true,
+        "bands": [
+          {
+            "lo": 0,
+            "hi": 300,
+            "reference_fraction": 0.0647740262826962,
+            "significant": true,
+            "level_db": -0.0004923480419288243
+          },
+          {
+            "lo": 300,
+            "hi": 1000,
+            "reference_fraction": 0.9232588276689252,
+            "significant": true,
+            "level_db": 0.0012828068759323987
+          },
+          {
+            "lo": 1000,
+            "hi": 3000,
+            "reference_fraction": 0.011889715033871978,
+            "significant": true,
+            "level_db": 0.011802015694172038
+          },
+          {
+            "lo": 3000,
+            "hi": 8000,
+            "reference_fraction": 7.093491655169113e-05,
+            "significant": false,
+            "level_db": null
+          },
+          {
+            "lo": 8000,
+            "hi": 16000,
+            "reference_fraction": 5.125729705638984e-06,
+            "significant": false,
+            "level_db": null
+          },
+          {
+            "lo": 16000,
+            "hi": 20000,
+            "reference_fraction": 1.370368249264885e-06,
+            "significant": false,
+            "level_db": null
+          }
+        ]
+      }
+    ],
+    "causal_gate": true
+  },
+  "scope": "Flushed causal prefix; no claim of full 250 ms, no post-window gate on unfinished runs."
+}

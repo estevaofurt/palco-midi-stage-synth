@@ -1,0 +1,1026 @@
+{
+  "cases": {
+    "long-250ms-refined-384000-mixed-pedal": {
+      "rate": 384000,
+      "steps": 96000,
+      "coordinates": 1360,
+      "energy_error": 6.091092917134336e-13,
+      "continuity": 2.0144605470145803e-15,
+      "work_error": 2.3446178719679203e-16,
+      "minimum_exterior_work": 0.0,
+      "compression_residual": 7.047314121155779e-19,
+      "seconds": 600.764306948,
+      "captures": [
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        },
+        {
+          "id": 1,
+          "key": 60,
+          "step": 6663
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 12232
+        },
+        {
+          "id": 3,
+          "key": 48,
+          "step": 22544
+        },
+        {
+          "id": 4,
+          "key": 60,
+          "step": 47028
+        },
+        {
+          "id": 5,
+          "key": 64,
+          "step": 62413
+        }
+      ],
+      "launches": [
+        {
+          "id": 0,
+          "key": 48,
+          "step": 0,
+          "speed": 0.3,
+          "energy": 0.00042544151999999996,
+          "memory": [
+            0.0,
+            0.0
+          ],
+          "gap": 0.0001
+        },
+        {
+          "id": 1,
+          "key": 60,
+          "step": 5760,
+          "speed": 1.0,
+          "energy": 0.00435304,
+          "memory": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap": 0.0001
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 11520,
+          "speed": 3.0,
+          "energy": 0.038055096000000004,
+          "memory": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap": 0.0001
+        },
+        {
+          "id": 3,
+          "key": 48,
+          "step": 21120,
+          "speed": 1.0,
+          "energy": 0.004727128,
+          "memory": [
+            1.92083083185242e-17,
+            1.9194984060198507e-17
+          ],
+          "gap": 0.00010000000000000002
+        },
+        {
+          "id": 4,
+          "key": 60,
+          "step": 46080,
+          "speed": 0.7,
+          "energy": 0.0021329896,
+          "memory": [
+            1.918035846628788e-17,
+            1.9166102524931475e-17,
+            1.9201832564622714e-17
+          ],
+          "gap": 0.0001
+        },
+        {
+          "id": 5,
+          "key": 64,
+          "step": 61440,
+          "speed": 0.5,
+          "energy": 0.001057086,
+          "memory": [
+            1.9176764533267504e-17,
+            1.916344663067639e-17,
+            1.9200147615779365e-17
+          ],
+          "gap": 0.0001
+        }
+      ],
+      "energy_reconstruction": 1.5723359943219947e-15,
+      "loss_reconstruction": 3.965021203072857e-15,
+      "ledger_balance": 6.091092917134336e-13,
+      "final_mechanical": 0.0001971415322771373,
+      "final_cavity": 6.463194596658269e-08,
+      "notes": {
+        "33": {
+          "rms_50ms_windows": [
+            0.005968025692579341,
+            0.017445981524426068,
+            0.029705534252970754,
+            0.030313398050042756,
+            0.023413374592356463
+          ],
+          "participation_max": 8.234510643499906e-05,
+          "participation_final": 3.477166201033262e-05,
+          "damper_loss": 2.1860195196545404e-05
+        },
+        "45": {
+          "rms_50ms_windows": [
+            0.021658298429589808,
+            0.11343989600753802,
+            0.0924981458155346,
+            0.11152171517655367,
+            0.041450185160330576
+          ],
+          "participation_max": 0.0004960161794597315,
+          "participation_final": 4.601780565850745e-06,
+          "damper_loss": 0.0010658157343314842
+        },
+        "55": {
+          "rms_50ms_windows": [
+            0.03832959473322569,
+            0.07607836654375409,
+            0.03806806130193382,
+            0.040946801097967896,
+            0.020375780142365272
+          ],
+          "participation_max": 0.00010434484552662491,
+          "participation_final": 6.862196169843553e-07,
+          "damper_loss": 9.958346822681597e-05
+        },
+        "72": {
+          "rms_50ms_windows": [
+            0.05368201311870946,
+            0.06296434492656154,
+            0.040792000581106005,
+            0.06201112079400642,
+            0.009115656344815403
+          ],
+          "participation_max": 0.00014358068595086008,
+          "participation_final": 2.2898822624381238e-07,
+          "damper_loss": 6.387023298898741e-05
+        }
+      },
+      "energy_checkpoints": [
+        {
+          "ms": 50.0,
+          "energy_mechanical": 0.019680416340886287,
+          "energy_cavity": 4.6773213739465795e-07,
+          "injection": 0.042833577520000006,
+          "balance": 2.229982614555803e-13
+        },
+        {
+          "ms": 100.0,
+          "energy_mechanical": 0.004027759418012063,
+          "energy_cavity": 6.110465440982554e-07,
+          "injection": 0.04756070552,
+          "balance": 4.960378249913215e-13
+        },
+        {
+          "ms": 150.0,
+          "energy_mechanical": 0.002227165907840718,
+          "energy_cavity": 2.1955853022225385e-07,
+          "injection": 0.049693695120000006,
+          "balance": 5.657675082177751e-13
+        },
+        {
+          "ms": 200.0,
+          "energy_mechanical": 0.0014589316759851677,
+          "energy_cavity": 1.7311573760751895e-07,
+          "injection": 0.050750781120000005,
+          "balance": 6.078787678917903e-13
+        },
+        {
+          "ms": 250.0,
+          "energy_mechanical": 0.0001971415322771373,
+          "energy_cavity": 6.463194596658269e-08,
+          "injection": 0.050750781120000005,
+          "balance": 6.091092917134336e-13
+        }
+      ],
+      "final_dampers_closed": true,
+      "direct": 1.3396684049500435e-17,
+      "prearrival": 2.5831860095223045e-15,
+      "arrivals": [
+        559,
+        1679
+      ],
+      "filter_prefix": 0.0
+    },
+    "long-250ms-refined-384000-uniform-pedal": {
+      "rate": 384000,
+      "steps": 96000,
+      "coordinates": 2384,
+      "energy_error": 6.826672712738887e-13,
+      "continuity": 2.0735841824438494e-15,
+      "work_error": 3.263238086041912e-16,
+      "minimum_exterior_work": 0.0,
+      "compression_residual": 8.673617379884035e-19,
+      "seconds": 606.9142487259996,
+      "captures": [
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        },
+        {
+          "id": 1,
+          "key": 60,
+          "step": 6664
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 12232
+        },
+        {
+          "id": 3,
+          "key": 48,
+          "step": 22545
+        },
+        {
+          "id": 4,
+          "key": 60,
+          "step": 47028
+        },
+        {
+          "id": 5,
+          "key": 64,
+          "step": 62413
+        }
+      ],
+      "launches": [
+        {
+          "id": 0,
+          "key": 48,
+          "step": 0,
+          "speed": 0.3,
+          "energy": 0.00042544151999999996,
+          "memory": [
+            0.0,
+            0.0
+          ],
+          "gap": 0.0001
+        },
+        {
+          "id": 1,
+          "key": 60,
+          "step": 5760,
+          "speed": 1.0,
+          "energy": 0.00435304,
+          "memory": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap": 0.0001
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 11520,
+          "speed": 3.0,
+          "energy": 0.038055096000000004,
+          "memory": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "gap": 0.0001
+        },
+        {
+          "id": 3,
+          "key": 48,
+          "step": 21120,
+          "speed": 1.0,
+          "energy": 0.004727128,
+          "memory": [
+            1.920830831852436e-17,
+            1.9194984060198507e-17
+          ],
+          "gap": 0.00010000000000000002
+        },
+        {
+          "id": 4,
+          "key": 60,
+          "step": 46080,
+          "speed": 0.7,
+          "energy": 0.0021329896,
+          "memory": [
+            1.9164228885757877e-17,
+            1.9199950631576603e-17,
+            1.9185665401363497e-17
+          ],
+          "gap": 0.0001
+        },
+        {
+          "id": 5,
+          "key": 64,
+          "step": 61440,
+          "speed": 0.5,
+          "energy": 0.001057086,
+          "memory": [
+            1.9199422628623372e-17,
+            1.9186103516556952e-17,
+            1.917280262176962e-17
+          ],
+          "gap": 0.0001
+        }
+      ],
+      "energy_reconstruction": 2.6661349468938173e-15,
+      "loss_reconstruction": 7.178055626252585e-15,
+      "ledger_balance": 6.825305464048172e-13,
+      "final_mechanical": 0.00019713854233278366,
+      "final_cavity": 6.463500853669725e-08,
+      "notes": {
+        "33": {
+          "rms_50ms_windows": [
+            0.005966969189575737,
+            0.017446474318496392,
+            0.02970702281127209,
+            0.03031676592755456,
+            0.02340943167777794
+          ],
+          "participation_max": 8.236430512375807e-05,
+          "participation_final": 3.476584020662726e-05,
+          "damper_loss": 2.185755688894894e-05
+        },
+        "45": {
+          "rms_50ms_windows": [
+            0.021654536105611605,
+            0.11343216476654505,
+            0.09246918866611546,
+            0.11151668740199222,
+            0.04145056235473961
+          ],
+          "participation_max": 0.0004959925982530055,
+          "participation_final": 4.598837543799698e-06,
+          "damper_loss": 0.0010656210597457512
+        },
+        "55": {
+          "rms_50ms_windows": [
+            0.03831344828164009,
+            0.07606637416550611,
+            0.038062500972339965,
+            0.04093410726976936,
+            0.020365378086785086
+          ],
+          "participation_max": 0.00010430074701534054,
+          "participation_final": 6.854381683042704e-07,
+          "damper_loss": 9.952442034476311e-05
+        },
+        "72": {
+          "rms_50ms_windows": [
+            0.053619769877437495,
+            0.06287022271523977,
+            0.040741041203306065,
+            0.061914751057830196,
+            0.009098776261252954
+          ],
+          "participation_max": 0.00014328880071804286,
+          "participation_final": 2.2850638588449718e-07,
+          "damper_loss": 6.367278791785253e-05
+        }
+      },
+      "energy_checkpoints": [
+        {
+          "ms": 50.0,
+          "energy_mechanical": 0.01966870436637206,
+          "energy_cavity": 4.675325324271345e-07,
+          "injection": 0.042833577520000006,
+          "balance": 2.3188537794522634e-13
+        },
+        {
+          "ms": 100.0,
+          "energy_mechanical": 0.004027923868458555,
+          "energy_cavity": 6.109412992427358e-07,
+          "injection": 0.04756070552,
+          "balance": 5.481300001075545e-13
+        },
+        {
+          "ms": 150.0,
+          "energy_mechanical": 0.002226648119081017,
+          "energy_cavity": 2.1952322764156727e-07,
+          "injection": 0.049693695120000006,
+          "balance": 6.282507733834405e-13
+        },
+        {
+          "ms": 200.0,
+          "energy_mechanical": 0.0014585757081710007,
+          "energy_cavity": 1.7311376246789728e-07,
+          "injection": 0.050750781120000005,
+          "balance": 6.754208532131003e-13
+        },
+        {
+          "ms": 250.0,
+          "energy_mechanical": 0.00019713854233278366,
+          "energy_cavity": 6.463500853669725e-08,
+          "injection": 0.050750781120000005,
+          "balance": 6.826672712738887e-13
+        }
+      ],
+      "final_dampers_closed": true,
+      "direct": 1.787155383684416e-17,
+      "prearrival": 2.5257498844132264e-15,
+      "arrivals": [
+        559,
+        1679
+      ],
+      "filter_prefix": 0.0
+    }
+  },
+  "comparisons": [
+    {
+      "duration_ms": 50.0,
+      "causal_fine": [
+        0.0011983207925543161,
+        0.0010735649749196443
+      ],
+      "causal_filtered": [
+        0.0012032986820167005,
+        0.0011213696927832423
+      ],
+      "spectral": [
+        {
+          "level_db": 0.0016296951640710894,
+          "max_band_db": 0.004001528898975623,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.09405852454954133,
+              "significant": true,
+              "level_db": 1.892200877069802e-06
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.7766052587864151,
+              "significant": true,
+              "level_db": 0.0014328528215629454
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.1292810224300404,
+              "significant": true,
+              "level_db": 0.004001528898975623
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 4.71386114054458e-05,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 6.511217589287971e-06,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 1.5444050083447743e-06,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        },
+        {
+          "level_db": 0.001509180255413226,
+          "max_band_db": 0.011924738178233326,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.09318721989397179,
+              "significant": true,
+              "level_db": -0.00017163335221329615
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8867346316385036,
+              "significant": true,
+              "level_db": 0.001453093048138141
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.018437519700405185,
+              "significant": true,
+              "level_db": 0.011924738178233326
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.001161943578960957,
+              "significant": true,
+              "level_db": 0.011343067071433205
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.000377427143361119,
+              "significant": true,
+              "level_db": 0.006986601995482906
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 0.00010125804479720522,
+              "significant": true,
+              "level_db": 0.007022993256266425
+            }
+          ]
+        }
+      ],
+      "causal_gate": true
+    },
+    {
+      "duration_ms": 100.0,
+      "causal_fine": [
+        0.0011781214003993964,
+        0.001108236205454493
+      ],
+      "causal_filtered": [
+        0.001176673291160869,
+        0.0011088448920301129
+      ],
+      "spectral": [
+        {
+          "level_db": 0.00151292883229709,
+          "max_band_db": 0.0023965738032058932,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.046880997920789445,
+              "significant": true,
+              "level_db": -0.0013843699224996779
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8216115645853201,
+              "significant": true,
+              "level_db": 0.0015374204308561763
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.13139676171478562,
+              "significant": true,
+              "level_db": 0.0023965738032058932
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 7.826997350953941e-05,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 2.5551763674534346e-05,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 6.854041920893195e-06,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        },
+        {
+          "level_db": 0.001584279310533971,
+          "max_band_db": 0.01125842467905828,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.04586687965193375,
+              "significant": true,
+              "level_db": 0.0005107175264954923
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.9382584764084582,
+              "significant": true,
+              "level_db": 0.0014961235694849128
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.015423755139332794,
+              "significant": true,
+              "level_db": 0.009968079874854343
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.0003345351071973494,
+              "significant": true,
+              "level_db": 0.01125842467905828
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 9.173992094312078e-05,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 2.461377213513265e-05,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        }
+      ],
+      "causal_gate": true
+    },
+    {
+      "duration_ms": 150.0,
+      "causal_fine": [
+        0.001197959889444077,
+        0.0010846437907282023
+      ],
+      "causal_filtered": [
+        0.0011979075697408355,
+        0.0010830943519590719
+      ],
+      "spectral": [
+        {
+          "level_db": 0.0015451217302483553,
+          "max_band_db": 0.0033326814820746785,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.059146922138295616,
+              "significant": true,
+              "level_db": -0.0008595911979294091
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8232356082020038,
+              "significant": true,
+              "level_db": 0.001460258319831534
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.11749994943962605,
+              "significant": true,
+              "level_db": 0.0033326814820746785
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 8.393612391050461e-05,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 2.650788919799358e-05,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 7.076206965931234e-06,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        },
+        {
+          "level_db": 0.0011726322029011955,
+          "max_band_db": 0.011441025453197706,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.06052560413535471,
+              "significant": true,
+              "level_db": -0.0005445379566683234
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.9268084761893989,
+              "significant": true,
+              "level_db": 0.001141291127914387
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.012581037998930573,
+              "significant": true,
+              "level_db": 0.011441025453197706
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 7.768277121789335e-05,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 5.683745520176904e-06,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 1.515159577804063e-06,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        }
+      ],
+      "causal_gate": true
+    },
+    {
+      "duration_ms": 200.0,
+      "causal_fine": [
+        0.0012590300928878191,
+        0.001132424324151641
+      ],
+      "causal_filtered": [
+        0.0012588996985624,
+        0.0011326198788667123
+      ],
+      "spectral": [
+        {
+          "level_db": 0.0018305937031041406,
+          "max_band_db": 0.003532088757785206,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.060052592950668136,
+              "significant": true,
+              "level_db": -0.00042555894892075505
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8323010622120312,
+              "significant": true,
+              "level_db": 0.0017728912446931043
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.10763783722120686,
+              "significant": true,
+              "level_db": 0.003532088757785206
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 7.244005154110663e-06,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 9.98478745363053e-07,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 2.651321942986079e-07,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        },
+        {
+          "level_db": 0.001297023846034426,
+          "max_band_db": 0.011802015694169152,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.06477402628269635,
+              "significant": true,
+              "level_db": -0.0004923480419312354
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.9232588276689249,
+              "significant": true,
+              "level_db": 0.0012828068759343266
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.011889715033871987,
+              "significant": true,
+              "level_db": 0.011802015694169152
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 7.093491655169147e-05,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 5.125729705638953e-06,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 1.3703682492649e-06,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        }
+      ],
+      "causal_gate": true
+    },
+    {
+      "duration_ms": 250.0,
+      "causal_fine": [
+        0.0012759387996875333,
+        0.0011396958686360436
+      ],
+      "causal_filtered": [
+        0.0012758175014335605,
+        0.0011396519952252863
+      ],
+      "spectral": [
+        {
+          "level_db": 0.0019199994207006648,
+          "max_band_db": 0.003598321471936822,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.06397370922925169,
+              "significant": true,
+              "level_db": -0.0003230453267598129
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8320994216117598,
+              "significant": true,
+              "level_db": 0.0018825301383089028
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.10392268997911802,
+              "significant": true,
+              "level_db": 0.003598321471936822
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 4.135038854322372e-06,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 3.4950877707007426e-08,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 9.19013838791869e-09,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        },
+        {
+          "level_db": 0.0013199094297343035,
+          "max_band_db": 0.011829591137206849,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.06661323754373148,
+              "significant": true,
+              "level_db": -0.00040661265545246107
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.9216570243943281,
+              "significant": true,
+              "level_db": 0.001307476408712888
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.011673958227502532,
+              "significant": true,
+              "level_db": 0.011829591137206849
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 5.566747971824771e-05,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 9.071021224702699e-08,
+              "significant": false,
+              "level_db": null
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 2.1644507443071025e-08,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        }
+      ],
+      "causal_gate": true
+    }
+  ],
+  "full_finite": [
+    0.0012761589176184624,
+    0.0011388716831217307
+  ],
+  "final_gate": true,
+  "all_prefix_gates": true,
+  "peak_force_relative": [
+    6.980793857358503e-05,
+    0.0008758592451068026,
+    0.0008817802952838516
+  ],
+  "impulse_relative": [
+    4.643757268496529e-06,
+    0.00020008033538154724,
+    0.00014841799109710507
+  ],
+  "filter_taps": 617,
+  "scope": "Seven-note regional model, 384 kHz, candidate coefficients; finite post-window assumes zero flow; reference uniform 128 is not spatial continuum; no audio render."
+}
