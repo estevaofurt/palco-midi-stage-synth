@@ -1,0 +1,148 @@
+{
+  "rate": 384000,
+  "subdivision": 64,
+  "radius": 0.0002046831306897538,
+  "dx": 0.04733333333333334,
+  "dy": 0.05333333333333333,
+  "depth": 0.1,
+  "exterior_lags": 2398,
+  "exterior": [
+    {
+      "face": 0,
+      "first": 0,
+      "last": 2395,
+      "last_analytic_bound": 2395,
+      "dc_relative_peak": 2.3758467129737367e-16
+    },
+    {
+      "face": 1,
+      "first": 111,
+      "last": 2397,
+      "last_analytic_bound": 2397,
+      "dc_relative_peak": 8.437627989499292e-16
+    }
+  ],
+  "receiver_storage_lags": 2439,
+  "receivers": [
+    {
+      "receiver": 1,
+      "first": 559,
+      "last": 1473,
+      "last_analytic_bound": 1473,
+      "dc_relative_peak": 3.562448146932345e-15
+    },
+    {
+      "receiver": 2,
+      "first": 1679,
+      "last": 2354,
+      "last_analytic_bound": 2354,
+      "dc_relative_peak": 4.637902989816289e-15
+    }
+  ],
+  "probes": [
+    {
+      "face": 0,
+      "i": 0,
+      "j": 0,
+      "relative_error": 0.0
+    },
+    {
+      "face": 1,
+      "i": 0,
+      "j": 0,
+      "relative_error": 0.0
+    },
+    {
+      "face": 0,
+      "i": 0,
+      "j": 29,
+      "relative_error": 0.0
+    },
+    {
+      "face": 1,
+      "i": 0,
+      "j": 29,
+      "relative_error": 0.0
+    },
+    {
+      "face": 0,
+      "i": 29,
+      "j": 0,
+      "relative_error": 0.0
+    },
+    {
+      "face": 1,
+      "i": 29,
+      "j": 0,
+      "relative_error": 0.0
+    },
+    {
+      "face": 0,
+      "i": 29,
+      "j": 29,
+      "relative_error": 0.0
+    },
+    {
+      "face": 1,
+      "i": 29,
+      "j": 29,
+      "relative_error": 0.0
+    },
+    {
+      "face": 0,
+      "i": 15,
+      "j": 15,
+      "relative_error": 0.0
+    },
+    {
+      "face": 1,
+      "i": 15,
+      "j": 15,
+      "relative_error": 0.0
+    },
+    {
+      "face": 0,
+      "i": 7,
+      "j": 23,
+      "relative_error": 0.0
+    },
+    {
+      "face": 1,
+      "i": 7,
+      "j": 23,
+      "relative_error": 0.0
+    }
+  ],
+  "modal_terms": 63913,
+  "zero_terms": 1,
+  "gamma": 31.41592653589793,
+  "homogeneous_envelopes": [
+    {
+      "ms": 100,
+      "oscillatory_pole_radius_power": 0.20787957635076193,
+      "zero_mode_velocity_pole_power": 0.04321391826377225
+    },
+    {
+      "ms": 250,
+      "oscillatory_pole_radius_power": 0.019702872986617114,
+      "zero_mode_velocity_pole_power": 0.00038820320392676637
+    },
+    {
+      "ms": 500,
+      "oscillatory_pole_radius_power": 0.00038820320392676637,
+      "zero_mode_velocity_pole_power": 1.5070172753900654e-07
+    },
+    {
+      "ms": 1000,
+      "oscillatory_pole_radius_power": 1.5070172753900654e-07,
+      "zero_mode_velocity_pole_power": 2.2711010683240965e-14
+    }
+  ],
+  "scope": "finite geometric support only for archived free-space shell and observer kernels; no physical calibration or room/cabinet reflections; modal states retained separately",
+  "source_sha256": {
+    "expand.py": "c26aad3aa34a3acef4bad5e68d7bae4db17eb50d5d36ebb8250aa8247237b8de",
+    "n30-b64-critical.json": "36ed24c2c8d71fd51eaf99cdd6023b7be0c1de14640d28f0f0cd5937e735d0a5",
+    "observer.py": "3e57341082b79c03f7bd3b437dacd284a20b6f84f6a1198961f50f728c5bb947",
+    "shells.py": "d7137922d6ea7601bdc454086104c6f890a59a7d76633922e1e65278afd4826c"
+  }
+}

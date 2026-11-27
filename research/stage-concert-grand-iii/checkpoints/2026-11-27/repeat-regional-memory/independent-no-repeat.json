@@ -1,0 +1,22 @@
+{
+  "pedal": {
+    "mechanical_reconstruction": 1.7414634449381078e-15,
+    "ledger_balance": 6.165590578078547e-13,
+    "mechanical_loss_reconstruction": 4.0499149882281576e-17,
+    "force_min": 0.0,
+    "steps": 38400,
+    "all_captured": true,
+    "final_mechanical": 0.0026899468748351266,
+    "a2_damper_loss": 0.0008137159672301178
+  },
+  "a2-closed": {
+    "mechanical_reconstruction": 1.2959727962330104e-15,
+    "ledger_balance": 5.127192375096848e-13,
+    "mechanical_loss_reconstruction": 4.0499149882281576e-17,
+    "force_min": 0.0,
+    "steps": 38400,
+    "all_captured": true,
+    "final_mechanical": 0.002773462292692092,
+    "a2_damper_loss": 0.00062557267958897
+  }
+}

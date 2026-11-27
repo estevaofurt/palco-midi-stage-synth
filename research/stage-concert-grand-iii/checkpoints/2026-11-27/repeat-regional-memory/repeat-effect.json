@@ -1,0 +1,251 @@
+{
+  "pedal": {
+    "repeat": {
+      "injected": 0.04756070552,
+      "energy_error": 6.36688052996131e-13,
+      "continuity": 2.4084972640011294e-15,
+      "compression_residual": 6.505213034913027e-19,
+      "work_error": 3.2445368638591305e-16,
+      "seconds": 210.89265654500014,
+      "captures": [
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        },
+        {
+          "id": 1,
+          "key": 60,
+          "step": 6663
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 12232
+        },
+        {
+          "id": 3,
+          "key": 48,
+          "step": 22538
+        }
+      ],
+      "final_mechanical": 0.003968254308796865,
+      "a2_participation_final": 8.370174430890854e-05,
+      "a2_participation_peak": 0.0004827399043761074,
+      "a2_rms_windows": {
+        "0-55": 0.029407438990013347,
+        "55-65": 0.10139760485584905,
+        "65-75": 0.13683766894102103,
+        "75-85": 0.13706102269747636,
+        "85-100": 0.09397223262029418
+      },
+      "mechanical_loss": 0.02176307685646776,
+      "cavity_loss": 1.1954384918324735e-06,
+      "exterior_work": 0.00021248745402626426,
+      "final_cavity_energy": 6.280960437511412e-07
+    },
+    "no_repeat": {
+      "injected": 0.042833577520000006,
+      "energy_error": 6.167210544073838e-13,
+      "continuity": 2.005807349451636e-15,
+      "compression_residual": 6.505213034913027e-19,
+      "work_error": 3.6026050417744425e-16,
+      "seconds": 224.88760960900072,
+      "captures": [
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        },
+        {
+          "id": 1,
+          "key": 60,
+          "step": 6663
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 12232
+        }
+      ],
+      "final_mechanical": 0.002689946874835124,
+      "a2_participation_final": 8.696855389372692e-05,
+      "a2_participation_peak": 0.00047566284652554624,
+      "a2_rms_windows": {
+        "0-55": 0.029407438990013347,
+        "55-65": 0.10142081044223666,
+        "65-75": 0.14169702111211976,
+        "75-85": 0.1421727702065471,
+        "85-100": 0.09347585902873025
+      },
+      "mechanical_loss": 0.020207623347709095,
+      "cavity_loss": 1.1667227727102289e-06,
+      "exterior_work": 0.00020245845324975883,
+      "final_cavity_energy": 5.563026726413029e-07
+    },
+    "prefix_steps": 21120,
+    "prefix_hashes": {
+      "force": "69853eb866b37e0d0ddc4625aa941ff6528601ecc701bf0770304ad55d5149c7",
+      "compression": "83752a6239bc9913d1edd547b3f807c94b6f732cc18a31f71999911557ce720c",
+      "velocity": "3c75f900b7f83c2512147ef0e3684ef652cb3ce8f4a49abbef44fd75ab69cd38",
+      "flow": "669696a6c85e91d6524848e3123985b812be0ccb3a773f7abc37055536a23298"
+    },
+    "commands_exact": true,
+    "first_different_flow_step": 21163,
+    "causal_first_possible_steps": [
+      21722,
+      22842
+    ],
+    "causal_delta_relative": [
+      5.893232807657881e-16,
+      5.133645949993369e-16
+    ],
+    "pressure_prefix_relative": [
+      2.2175221774236842e-15,
+      2.91257355066065e-15
+    ],
+    "delta_convolution_match": [
+      1.0209781819456855e-14,
+      1.246574023843239e-14
+    ],
+    "direct_max": 4.921502420298893e-17,
+    "pressure_difference_0_100ms": [
+      0.2149789510507599,
+      0.20931563898459032
+    ],
+    "pressure_difference_55_100ms": [
+      0.3522252768997451,
+      0.30479783510465164
+    ]
+  },
+  "a2-closed": {
+    "repeat": {
+      "injected": 0.04756070552,
+      "energy_error": 5.246402929821465e-13,
+      "continuity": 2.120388136042532e-15,
+      "compression_residual": 7.047314121155779e-19,
+      "work_error": 4.0349229985504696e-16,
+      "seconds": 212.52548176500022,
+      "captures": [
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        },
+        {
+          "id": 1,
+          "key": 60,
+          "step": 6663
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 12232
+        },
+        {
+          "id": 3,
+          "key": 48,
+          "step": 22539
+        }
+      ],
+      "final_mechanical": 0.00403831228465703,
+      "a2_participation_final": 8.379614126034204e-05,
+      "a2_participation_peak": 0.0001906290728199355,
+      "a2_rms_windows": {
+        "0-55": 0.021405041034487156,
+        "55-65": 0.05425415305162363,
+        "65-75": 0.05962126133666077,
+        "75-85": 0.08189833316942574,
+        "85-100": 0.08103543711185328
+      },
+      "mechanical_loss": 0.021694524955807325,
+      "cavity_loss": 1.2160818605178382e-06,
+      "exterior_work": 0.00021141537351037653,
+      "final_cavity_energy": 6.535999009448066e-07
+    },
+    "no_repeat": {
+      "injected": 0.042833577520000006,
+      "energy_error": 5.127192375096848e-13,
+      "continuity": 2.120388136042532e-15,
+      "compression_residual": 7.047314121155779e-19,
+      "work_error": 4.480218455727399e-16,
+      "seconds": 231.48729361000005,
+      "captures": [
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        },
+        {
+          "id": 1,
+          "key": 60,
+          "step": 6663
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 12232
+        }
+      ],
+      "final_mechanical": 0.0027734622926920824,
+      "a2_participation_final": 8.337691624980675e-05,
+      "a2_participation_peak": 0.00015318241114432664,
+      "a2_rms_windows": {
+        "0-55": 0.021405041034487156,
+        "55-65": 0.054272210361407835,
+        "65-75": 0.06326449790531966,
+        "75-85": 0.08289039398436322,
+        "85-100": 0.07980657742572644
+      },
+      "mechanical_loss": 0.020124072388639905,
+      "cavity_loss": 1.1882109879734406e-06,
+      "exterior_work": 0.00020193420177418506,
+      "final_cavity_energy": 5.802015237247258e-07
+    },
+    "prefix_steps": 21120,
+    "prefix_hashes": {
+      "force": "cbc7311bb729f0576ddc079b6524e94145734bc9da5783112edc23503aab77c3",
+      "compression": "c2112ac42b7ae17c023d215ca5021d1432230abc6d47dbb72e2e13b67a30c145",
+      "velocity": "6a10d5b56bdef3d37b30d375d08239e4892aa9a12d0e0489e50b75578d3a39d0",
+      "flow": "41e1f53af2e775263d5b2a6530ef601caf8a55a98745cc7aa8d7ee0338f95824"
+    },
+    "commands_exact": true,
+    "first_different_flow_step": 21163,
+    "causal_first_possible_steps": [
+      21722,
+      22842
+    ],
+    "causal_delta_relative": [
+      6.622389816292348e-16,
+      4.566666889586885e-16
+    ],
+    "pressure_prefix_relative": [
+      1.817129494376953e-15,
+      3.0456199928685984e-15
+    ],
+    "delta_convolution_match": [
+      8.193070164144314e-15,
+      1.260024580545829e-14
+    ],
+    "direct_max": 4.1245090658821346e-17,
+    "pressure_difference_0_100ms": [
+      0.21685334454741273,
+      0.21250276160387185
+    ],
+    "pressure_difference_55_100ms": [
+      0.36285433184668364,
+      0.31619312719173004
+    ]
+  },
+  "interaction": {
+    "pressure_l2_norm": [
+      0.24752104698781155,
+      0.12342551074874705
+    ],
+    "relative_to_pedal_repeat_effect": [
+      0.01217428916376508,
+      0.013824025755769296
+    ],
+    "interpretation": "difference of repeat contrasts; not additive decomposition of nonlinear hammer dynamics or audibility"
+  }
+}

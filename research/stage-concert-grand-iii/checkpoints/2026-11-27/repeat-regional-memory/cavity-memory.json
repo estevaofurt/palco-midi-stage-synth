@@ -1,0 +1,779 @@
+{
+  "modes": 24,
+  "cases": 96,
+  "one_step_max": 2.8808198148167404e-13,
+  "long_relative_max": 1.4428085248429666e-07,
+  "long_absolute_max": 1.8267773113932056e-09,
+  "gate_1e_10": false,
+  "rows": [
+    {
+      "index": 0,
+      "frequency_hz": 0.0,
+      "ms": 100,
+      "one_step": 0.0,
+      "long_relative": 5.781641591544811e-14,
+      "long_absolute": 5.787037515858628e-14
+    },
+    {
+      "index": 0,
+      "frequency_hz": 0.0,
+      "ms": 250,
+      "one_step": 0.0,
+      "long_relative": 1.2996872563344447e-15,
+      "long_absolute": 1.2996873542669984e-15
+    },
+    {
+      "index": 0,
+      "frequency_hz": 0.0,
+      "ms": 500,
+      "one_step": 0.0,
+      "long_relative": 1.0090544681962756e-18,
+      "long_absolute": 1.009054468196287e-18
+    },
+    {
+      "index": 0,
+      "frequency_hz": 0.0,
+      "ms": 1000,
+      "one_step": 0.0,
+      "long_relative": 3.0414058884252978e-25,
+      "long_absolute": 3.0414058884252978e-25
+    },
+    {
+      "index": 131,
+      "frequency_hz": 4487.816590938878,
+      "ms": 100,
+      "one_step": 9.813479273870155e-18,
+      "long_relative": 2.8323794235501682e-12,
+      "long_absolute": 8.32680474727227e-13
+    },
+    {
+      "index": 131,
+      "frequency_hz": 4487.816590938878,
+      "ms": 250,
+      "one_step": 9.813479273870155e-18,
+      "long_relative": 1.359343316494725e-11,
+      "long_absolute": 3.7876838546891444e-13
+    },
+    {
+      "index": 131,
+      "frequency_hz": 4487.816590938878,
+      "ms": 500,
+      "one_step": 9.813479273870155e-18,
+      "long_relative": 2.718715925549504e-11,
+      "long_absolute": 1.492581260502847e-14
+    },
+    {
+      "index": 131,
+      "frequency_hz": 4487.816590938878,
+      "ms": 1000,
+      "one_step": 9.813479273870155e-18,
+      "long_relative": 5.4373686670052e-11,
+      "long_absolute": 1.1588363827941343e-17
+    },
+    {
+      "index": 3847,
+      "frequency_hz": 7399.525324294402,
+      "ms": 100,
+      "one_step": 7.911879931393473e-17,
+      "long_relative": 4.405490175171391e-12,
+      "long_absolute": 1.295152959407309e-12
+    },
+    {
+      "index": 3847,
+      "frequency_hz": 7399.525324294402,
+      "ms": 250,
+      "one_step": 7.911879931393473e-17,
+      "long_relative": 1.1012315404878293e-11,
+      "long_absolute": 3.068479455969722e-13
+    },
+    {
+      "index": 3847,
+      "frequency_hz": 7399.525324294402,
+      "ms": 500,
+      "one_step": 7.911879931393473e-17,
+      "long_relative": 2.2024712132190804e-11,
+      "long_absolute": 1.209161757832008e-14
+    },
+    {
+      "index": 3847,
+      "frequency_hz": 7399.525324294402,
+      "ms": 1000,
+      "one_step": 7.911879931393473e-17,
+      "long_relative": 4.404948719486285e-11,
+      "long_absolute": 9.388021741906353e-18
+    },
+    {
+      "index": 5745,
+      "frequency_hz": 8005.637521247314,
+      "ms": 100,
+      "one_step": 8.092402320248222e-17,
+      "long_relative": 6.4167237810162166e-12,
+      "long_absolute": 1.886427731140934e-12
+    },
+    {
+      "index": 5745,
+      "frequency_hz": 8005.637521247314,
+      "ms": 250,
+      "one_step": 8.092402320248222e-17,
+      "long_relative": 9.167383205452421e-12,
+      "long_absolute": 2.554406163975573e-13
+    },
+    {
+      "index": 5745,
+      "frequency_hz": 8005.637521247314,
+      "ms": 500,
+      "one_step": 8.092402320248222e-17,
+      "long_relative": 1.833435229714338e-11,
+      "long_absolute": 1.0065601216149384e-14
+    },
+    {
+      "index": 5745,
+      "frequency_hz": 8005.637521247314,
+      "ms": 1000,
+      "one_step": 8.092402320248222e-17,
+      "long_relative": 3.6668868909440145e-11,
+      "long_absolute": 7.815032112348974e-18
+    },
+    {
+      "index": 10392,
+      "frequency_hz": 6719.611512653719,
+      "ms": 100,
+      "one_step": 8.151688111488555e-17,
+      "long_relative": 6.562164755704873e-11,
+      "long_absolute": 1.9291853462596233e-11
+    },
+    {
+      "index": 10392,
+      "frequency_hz": 6719.611512653719,
+      "ms": 250,
+      "one_step": 8.151688111488555e-17,
+      "long_relative": 1.3669477844320882e-11,
+      "long_absolute": 3.8088730753451583e-13
+    },
+    {
+      "index": 10392,
+      "frequency_hz": 6719.611512653719,
+      "ms": 500,
+      "one_step": 8.151688111488555e-17,
+      "long_relative": 2.7339204484599874e-11,
+      "long_absolute": 1.5009286225631927e-14
+    },
+    {
+      "index": 10392,
+      "frequency_hz": 6719.611512653719,
+      "ms": 1000,
+      "one_step": 8.151688111488555e-17,
+      "long_relative": 5.4678181049413614e-11,
+      "long_absolute": 1.165325666866819e-17
+    },
+    {
+      "index": 17603,
+      "frequency_hz": 130917.39396237297,
+      "ms": 100,
+      "one_step": 1.3461289439532899e-15,
+      "long_relative": 7.631028982747562e-11,
+      "long_absolute": 2.243416574013488e-11
+    },
+    {
+      "index": 17603,
+      "frequency_hz": 130917.39396237297,
+      "ms": 250,
+      "one_step": 1.3461289439532899e-15,
+      "long_relative": 1.709921723132723e-11,
+      "long_absolute": 4.764537893328262e-13
+    },
+    {
+      "index": 17603,
+      "frequency_hz": 130917.39396237297,
+      "ms": 500,
+      "one_step": 1.3461289439532899e-15,
+      "long_relative": 3.4198467736396425e-11,
+      "long_absolute": 1.877503525927133e-14
+    },
+    {
+      "index": 17603,
+      "frequency_hz": 130917.39396237297,
+      "ms": 1000,
+      "one_step": 1.3461289439532899e-15,
+      "long_relative": 6.839681749892219e-11,
+      "long_absolute": 1.4577032537000823e-17
+    },
+    {
+      "index": 18657,
+      "frequency_hz": 57262.55793320684,
+      "ms": 100,
+      "one_step": 1.1102684391344762e-16,
+      "long_relative": 2.540447366590525e-11,
+      "long_absolute": 7.468562561571569e-12
+    },
+    {
+      "index": 18657,
+      "frequency_hz": 57262.55793320684,
+      "ms": 250,
+      "one_step": 1.1102684391344762e-16,
+      "long_relative": 7.732143842280286e-11,
+      "long_absolute": 2.1544899900803924e-12
+    },
+    {
+      "index": 18657,
+      "frequency_hz": 57262.55793320684,
+      "ms": 500,
+      "one_step": 1.1102684391344762e-16,
+      "long_relative": 1.5464273334999427e-10,
+      "long_absolute": 8.489920652603587e-14
+    },
+    {
+      "index": 18657,
+      "frequency_hz": 57262.55793320684,
+      "ms": 1000,
+      "one_step": 1.1102684391344762e-16,
+      "long_relative": 3.092854803427041e-10,
+      "long_absolute": 6.59162907603219e-17
+    },
+    {
+      "index": 26081,
+      "frequency_hz": 11186.062914252261,
+      "ms": 100,
+      "one_step": 7.850783419218571e-17,
+      "long_relative": 1.3124972697954709e-11,
+      "long_absolute": 3.8585598228467616e-12
+    },
+    {
+      "index": 26081,
+      "frequency_hz": 11186.062914252261,
+      "ms": 250,
+      "one_step": 7.850783419218571e-17,
+      "long_relative": 1.3635693787085613e-11,
+      "long_absolute": 3.799459290248941e-13
+    },
+    {
+      "index": 26081,
+      "frequency_hz": 11186.062914252261,
+      "ms": 500,
+      "one_step": 7.850783419218571e-17,
+      "long_relative": 2.7271196666564293e-11,
+      "long_absolute": 1.4971947975211622e-14
+    },
+    {
+      "index": 26081,
+      "frequency_hz": 11186.062914252261,
+      "ms": 1000,
+      "one_step": 7.850783419218571e-17,
+      "long_relative": 5.454241135268391e-11,
+      "long_absolute": 1.1624320249328059e-17
+    },
+    {
+      "index": 26244,
+      "frequency_hz": 195273.84788545273,
+      "ms": 100,
+      "one_step": 9.281004326434654e-16,
+      "long_relative": 7.705081758816418e-10,
+      "long_absolute": 2.2651870633069306e-10
+    },
+    {
+      "index": 26244,
+      "frequency_hz": 195273.84788545273,
+      "ms": 250,
+      "one_step": 9.281004326434654e-16,
+      "long_relative": 2.354556332955483e-10,
+      "long_absolute": 6.560752292588131e-12
+    },
+    {
+      "index": 26244,
+      "frequency_hz": 195273.84788545273,
+      "ms": 500,
+      "one_step": 9.281004326434654e-16,
+      "long_relative": 4.709107561898605e-10,
+      "long_absolute": 2.5853105797035883e-13
+    },
+    {
+      "index": 26244,
+      "frequency_hz": 195273.84788545273,
+      "ms": 1000,
+      "one_step": 9.281004326434654e-16,
+      "long_relative": 9.418217001835411e-10,
+      "long_absolute": 2.0072520998497014e-16
+    },
+    {
+      "index": 29120,
+      "frequency_hz": 38881.71123984858,
+      "ms": 100,
+      "one_step": 1.5701566841503953e-16,
+      "long_relative": 1.5782600140241323e-11,
+      "long_absolute": 4.639865333796673e-12
+    },
+    {
+      "index": 29120,
+      "frequency_hz": 38881.71123984858,
+      "ms": 250,
+      "one_step": 1.5701566841503953e-16,
+      "long_relative": 3.6000002187022924e-10,
+      "long_absolute": 1.0031065891381419e-11
+    },
+    {
+      "index": 29120,
+      "frequency_hz": 38881.71123984858,
+      "ms": 500,
+      "one_step": 1.5701566841503953e-16,
+      "long_relative": 7.199999340637844e-10,
+      "long_absolute": 3.952815749894435e-13
+    },
+    {
+      "index": 29120,
+      "frequency_hz": 38881.71123984858,
+      "ms": 1000,
+      "one_step": 1.5701566841503953e-16,
+      "long_relative": 1.4399997931100178e-09,
+      "long_absolute": 3.068991323724447e-16
+    },
+    {
+      "index": 31190,
+      "frequency_hz": 438970.97220033006,
+      "ms": 100,
+      "one_step": 2.8049718693497282e-14,
+      "long_relative": 5.241860961586069e-09,
+      "long_absolute": 1.5410343539289552e-09
+    },
+    {
+      "index": 31190,
+      "frequency_hz": 438970.97220033006,
+      "ms": 250,
+      "one_step": 2.8049718693497282e-14,
+      "long_relative": 6.680867018659795e-10,
+      "long_absolute": 1.8615614745459014e-11
+    },
+    {
+      "index": 31190,
+      "frequency_hz": 438970.97220033006,
+      "ms": 500,
+      "one_step": 2.8049718693497282e-14,
+      "long_relative": 1.3361733644218086e-09,
+      "long_absolute": 7.335621636959658e-13
+    },
+    {
+      "index": 31190,
+      "frequency_hz": 438970.97220033006,
+      "ms": 1000,
+      "one_step": 2.8049718693497282e-14,
+      "long_relative": 2.6723468229151322e-09,
+      "long_absolute": 5.695423837343141e-16
+    },
+    {
+      "index": 33255,
+      "frequency_hz": 658133.5595882437,
+      "ms": 100,
+      "one_step": 9.901192713467593e-15,
+      "long_relative": 4.9049860857061786e-11,
+      "long_absolute": 1.441997809474038e-11
+    },
+    {
+      "index": 33255,
+      "frequency_hz": 658133.5595882437,
+      "ms": 250,
+      "one_step": 9.901192713467593e-15,
+      "long_relative": 1.1063410290826416e-08,
+      "long_absolute": 3.082716443554996e-10
+    },
+    {
+      "index": 33255,
+      "frequency_hz": 658133.5595882437,
+      "ms": 500,
+      "one_step": 9.901192713467593e-15,
+      "long_relative": 2.2126820412785065e-08,
+      "long_absolute": 1.2147674149975669e-11
+    },
+    {
+      "index": 33255,
+      "frequency_hz": 658133.5595882437,
+      "ms": 1000,
+      "one_step": 9.901192713467593e-15,
+      "long_relative": 4.425364027268304e-08,
+      "long_absolute": 9.431532141250782e-15
+    },
+    {
+      "index": 35207,
+      "frequency_hz": 2582875.1130113155,
+      "ms": 100,
+      "one_step": 4.003547404210011e-14,
+      "long_relative": 6.233823764508259e-10,
+      "long_absolute": 1.8326576369968175e-10
+    },
+    {
+      "index": 35207,
+      "frequency_hz": 2582875.1130113155,
+      "ms": 250,
+      "one_step": 4.003547404210011e-14,
+      "long_relative": 3.6070215071449284e-08,
+      "long_absolute": 1.005063040981713e-09
+    },
+    {
+      "index": 35207,
+      "frequency_hz": 2582875.1130113155,
+      "ms": 500,
+      "one_step": 4.003547404210011e-14,
+      "long_relative": 7.214042877304559e-08,
+      "long_absolute": 3.960525955706318e-11
+    },
+    {
+      "index": 35207,
+      "frequency_hz": 2582875.1130113155,
+      "ms": 1000,
+      "one_step": 4.003547404210011e-14,
+      "long_relative": 1.4428085248429666e-07,
+      "long_absolute": 3.074977844520255e-14
+    },
+    {
+      "index": 38321,
+      "frequency_hz": 102826.00325199706,
+      "ms": 100,
+      "one_step": 2.4237505886013214e-16,
+      "long_relative": 6.867170955973371e-10,
+      "long_absolute": 2.0188529205430038e-10
+    },
+    {
+      "index": 38321,
+      "frequency_hz": 102826.00325199706,
+      "ms": 250,
+      "one_step": 2.4237505886013214e-16,
+      "long_relative": 1.5291051868274e-10,
+      "long_absolute": 4.2607094255760166e-12
+    },
+    {
+      "index": 38321,
+      "frequency_hz": 102826.00325199706,
+      "ms": 500,
+      "one_step": 2.4237505886013214e-16,
+      "long_relative": 3.0582131683246324e-10,
+      "long_absolute": 1.6789658669385715e-13
+    },
+    {
+      "index": 38321,
+      "frequency_hz": 102826.00325199706,
+      "ms": 1000,
+      "one_step": 2.4237505886013214e-16,
+      "long_relative": 6.11642873632173e-10,
+      "long_absolute": 1.3035603687123288e-16
+    },
+    {
+      "index": 42215,
+      "frequency_hz": 8693.876087633947,
+      "ms": 100,
+      "one_step": 2.775671096657792e-17,
+      "long_relative": 4.72732082202145e-12,
+      "long_absolute": 1.3897667369838286e-12
+    },
+    {
+      "index": 42215,
+      "frequency_hz": 8693.876087633947,
+      "ms": 250,
+      "one_step": 2.775671096657792e-17,
+      "long_relative": 1.7179284217924506e-11,
+      "long_absolute": 4.786847828517661e-13
+    },
+    {
+      "index": 42215,
+      "frequency_hz": 8693.876087633947,
+      "ms": 500,
+      "one_step": 2.775671096657792e-17,
+      "long_relative": 3.43585275633506e-11,
+      "long_absolute": 1.8862908682743622e-14
+    },
+    {
+      "index": 42215,
+      "frequency_hz": 8693.876087633947,
+      "ms": 1000,
+      "one_step": 2.775671096657792e-17,
+      "long_relative": 6.871681319148852e-11,
+      "long_absolute": 1.4645232034780325e-17
+    },
+    {
+      "index": 43549,
+      "frequency_hz": 20814.48613378635,
+      "ms": 100,
+      "one_step": 8.777442701396363e-17,
+      "long_relative": 2.5943142193439196e-12,
+      "long_absolute": 7.626923626986575e-13
+    },
+    {
+      "index": 43549,
+      "frequency_hz": 20814.48613378635,
+      "ms": 250,
+      "one_step": 8.777442701396363e-17,
+      "long_relative": 3.871354523551439e-10,
+      "long_absolute": 1.0787169498126355e-11
+    },
+    {
+      "index": 43549,
+      "frequency_hz": 20814.48613378635,
+      "ms": 500,
+      "one_step": 8.777442701396363e-17,
+      "long_relative": 7.742707316942225e-10,
+      "long_absolute": 4.250763693817039e-13
+    },
+    {
+      "index": 43549,
+      "frequency_hz": 20814.48613378635,
+      "ms": 1000,
+      "one_step": 8.777442701396363e-17,
+      "long_relative": 1.5485410575597747e-09,
+      "long_absolute": 3.3003192606479923e-16
+    },
+    {
+      "index": 44836,
+      "frequency_hz": 69664.73693245453,
+      "ms": 100,
+      "one_step": 1.9230413469564492e-16,
+      "long_relative": 4.012715589527145e-11,
+      "long_absolute": 1.1796826716341821e-11
+    },
+    {
+      "index": 44836,
+      "frequency_hz": 69664.73693245453,
+      "ms": 250,
+      "one_step": 1.9230413469564492e-16,
+      "long_relative": 1.3064891556497427e-10,
+      "long_absolute": 3.6404105586414e-12
+    },
+    {
+      "index": 44836,
+      "frequency_hz": 69664.73693245453,
+      "ms": 500,
+      "one_step": 1.9230413469564492e-16,
+      "long_relative": 2.612978849538234e-10,
+      "long_absolute": 1.434531232245161e-13
+    },
+    {
+      "index": 44836,
+      "frequency_hz": 69664.73693245453,
+      "ms": 1000,
+      "one_step": 1.9230413469564492e-16,
+      "long_relative": 5.225957170598011e-10,
+      "long_absolute": 1.1137791292767407e-16
+    },
+    {
+      "index": 50972,
+      "frequency_hz": 348444.7671755645,
+      "ms": 100,
+      "one_step": 4.619303836320731e-15,
+      "long_relative": 2.5789740157883116e-10,
+      "long_absolute": 7.581825549206071e-11
+    },
+    {
+      "index": 50972,
+      "frequency_hz": 348444.7671755645,
+      "ms": 250,
+      "one_step": 4.619303836320731e-15,
+      "long_relative": 9.7146721283139e-09,
+      "long_absolute": 2.7069030875178777e-10
+    },
+    {
+      "index": 50972,
+      "frequency_hz": 348444.7671755645,
+      "ms": 500,
+      "one_step": 4.619303836320731e-15,
+      "long_relative": 1.9429344125425663e-08,
+      "long_absolute": 1.0666753575506158e-11
+    },
+    {
+      "index": 50972,
+      "frequency_hz": 348444.7671755645,
+      "ms": 1000,
+      "one_step": 4.619303836320731e-15,
+      "long_relative": 3.885868780475013e-08,
+      "long_absolute": 8.281735893170857e-15
+    },
+    {
+      "index": 52327,
+      "frequency_hz": 233803.7270539784,
+      "ms": 100,
+      "one_step": 3.0144452676412233e-14,
+      "long_relative": 9.04714595858944e-11,
+      "long_absolute": 2.659735303109036e-11
+    },
+    {
+      "index": 52327,
+      "frequency_hz": 233803.7270539784,
+      "ms": 250,
+      "one_step": 3.0144452676412233e-14,
+      "long_relative": 3.297231326533611e-10,
+      "long_absolute": 9.187428510377247e-12
+    },
+    {
+      "index": 52327,
+      "frequency_hz": 233803.7270539784,
+      "ms": 500,
+      "one_step": 3.0144452676412233e-14,
+      "long_relative": 6.594467563835395e-10,
+      "long_absolute": 3.6203774352376873e-13
+    },
+    {
+      "index": 52327,
+      "frequency_hz": 233803.7270539784,
+      "ms": 1000,
+      "one_step": 3.0144452676412233e-14,
+      "long_relative": 1.318893616355574e-09,
+      "long_absolute": 2.8108844585727564e-16
+    },
+    {
+      "index": 55690,
+      "frequency_hz": 1017733.8651413028,
+      "ms": 100,
+      "one_step": 2.8808198148167404e-13,
+      "long_relative": 5.98444100811949e-10,
+      "long_absolute": 1.759342568646655e-10
+    },
+    {
+      "index": 55690,
+      "frequency_hz": 1017733.8651413028,
+      "ms": 250,
+      "one_step": 2.8808198148167404e-13,
+      "long_relative": 4.503358413946459e-10,
+      "long_absolute": 1.2548189490407844e-11
+    },
+    {
+      "index": 55690,
+      "frequency_hz": 1017733.8651413028,
+      "ms": 500,
+      "one_step": 2.8808198148167404e-13,
+      "long_relative": 9.006718804197386e-10,
+      "long_absolute": 4.944708757577359e-13
+    },
+    {
+      "index": 55690,
+      "frequency_hz": 1017733.8651413028,
+      "ms": 1000,
+      "one_step": 2.8808198148167404e-13,
+      "long_relative": 1.801343965217802e-09,
+      "long_absolute": 3.839103996444646e-16
+    },
+    {
+      "index": 58021,
+      "frequency_hz": 5782.092574372318,
+      "ms": 100,
+      "one_step": 8.441874071537961e-17,
+      "long_relative": 9.432705490350182e-12,
+      "long_absolute": 2.7730849376335595e-12
+    },
+    {
+      "index": 58021,
+      "frequency_hz": 5782.092574372318,
+      "ms": 250,
+      "one_step": 8.441874071537961e-17,
+      "long_relative": 1.3392178675666045e-11,
+      "long_absolute": 3.7316060813329956e-13
+    },
+    {
+      "index": 58021,
+      "frequency_hz": 5782.092574372318,
+      "ms": 500,
+      "one_step": 8.441874071537961e-17,
+      "long_relative": 2.6784522028198018e-11,
+      "long_absolute": 1.4704762705611055e-14
+    },
+    {
+      "index": 58021,
+      "frequency_hz": 5782.092574372318,
+      "ms": 1000,
+      "one_step": 8.441874071537961e-17,
+      "long_relative": 5.3569315654322516e-11,
+      "long_absolute": 1.141693033870743e-17
+    },
+    {
+      "index": 60617,
+      "frequency_hz": 28311.7879056025,
+      "ms": 100,
+      "one_step": 3.925391709992887e-17,
+      "long_relative": 1.1354108058729674e-11,
+      "long_absolute": 3.3379501523942872e-12
+    },
+    {
+      "index": 60617,
+      "frequency_hz": 28311.7879056025,
+      "ms": 250,
+      "one_step": 3.925391709992887e-17,
+      "long_relative": 4.158225378994634e-11,
+      "long_absolute": 1.1586508394038828e-12
+    },
+    {
+      "index": 60617,
+      "frequency_hz": 28311.7879056025,
+      "ms": 500,
+      "one_step": 3.925391709992887e-17,
+      "long_relative": 8.316452010837441e-11,
+      "long_absolute": 4.565750762348117e-14
+    },
+    {
+      "index": 60617,
+      "frequency_hz": 28311.7879056025,
+      "ms": 1000,
+      "one_step": 3.925391709992887e-17,
+      "long_relative": 1.663292702649906e-10,
+      "long_absolute": 3.544883066682372e-17
+    },
+    {
+      "index": 62001,
+      "frequency_hz": 15086.035332676784,
+      "ms": 100,
+      "one_step": 8.994202320954225e-17,
+      "long_relative": 1.0324206121125658e-11,
+      "long_absolute": 3.035173291093516e-12
+    },
+    {
+      "index": 62001,
+      "frequency_hz": 15086.035332676784,
+      "ms": 250,
+      "one_step": 8.994202320954225e-17,
+      "long_relative": 2.32339168881912e-11,
+      "long_absolute": 6.473914911287693e-13
+    },
+    {
+      "index": 62001,
+      "frequency_hz": 15086.035332676784,
+      "ms": 500,
+      "one_step": 8.994202320954225e-17,
+      "long_relative": 4.646775392585988e-11,
+      "long_absolute": 2.5510900812443835e-14
+    },
+    {
+      "index": 62001,
+      "frequency_hz": 15086.035332676784,
+      "ms": 1000,
+      "one_step": 8.994202320954225e-17,
+      "long_relative": 9.293580594618568e-11,
+      "long_absolute": 1.9806890410865058e-17
+    },
+    {
+      "index": 63007,
+      "frequency_hz": 832401.1968429097,
+      "ms": 100,
+      "one_step": 2.481487221569927e-14,
+      "long_relative": 6.2138216714197754e-09,
+      "long_absolute": 1.8267773113932056e-09
+    },
+    {
+      "index": 63007,
+      "frequency_hz": 832401.1968429097,
+      "ms": 250,
+      "one_step": 2.481487221569927e-14,
+      "long_relative": 1.2217183842793426e-09,
+      "long_absolute": 3.404204677751435e-11
+    },
+    {
+      "index": 63007,
+      "frequency_hz": 832401.1968429097,
+      "ms": 500,
+      "one_step": 2.481487221569927e-14,
+      "long_relative": 2.443437073603515e-09,
+      "long_absolute": 1.341452413558806e-12
+    },
+    {
+      "index": 63007,
+      "frequency_hz": 832401.1968429097,
+      "ms": 1000,
+      "one_step": 2.481487221569927e-14,
+      "long_relative": 4.886874308230341e-09,
+      "long_absolute": 1.0415122815124872e-15
+    }
+  ],
+  "scope": "homogeneous archived cavity transitions only, not coupled forced response, no recalibration"
+}

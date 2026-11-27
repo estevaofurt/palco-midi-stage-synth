@@ -1,0 +1,82 @@
+{
+  "original_bitwise": true,
+  "ranks": {
+    "33": 64,
+    "45": 64,
+    "48": 128,
+    "60": 64,
+    "64": 64,
+    "55": 64,
+    "72": 64
+  },
+  "spread": {
+    "33": 0.0,
+    "45": 0.0,
+    "48": 0.5,
+    "60": 1.0,
+    "64": 1.0,
+    "55": 0.0,
+    "72": 0.0
+  },
+  "shift": {
+    "33": 0.0,
+    "45": 0.0,
+    "48": 5.5,
+    "60": 0.0,
+    "64": 0.0,
+    "55": 0.0,
+    "72": 0.0
+  },
+  "notes": 7,
+  "wires": 18,
+  "coordinates": 1360,
+  "tests": [
+    {
+      "held": [],
+      "pedal": 0,
+      "mass_action": 2.1235195001799284e-16,
+      "stiffness_action": 1.9263055591862338e-20,
+      "damping_action": 4.068820814808531e-16,
+      "solve": 3.0676856823632875e-16,
+      "residual": 3.662086420086356e-16
+    },
+    {
+      "held": [
+        48,
+        60,
+        64
+      ],
+      "pedal": 0,
+      "mass_action": 2.1235195001799284e-16,
+      "stiffness_action": 1.9263055591862338e-20,
+      "damping_action": 3.934844116154789e-16,
+      "solve": 2.993315047129994e-16,
+      "residual": 2.9396665546667067e-16
+    },
+    {
+      "held": [
+        48
+      ],
+      "pedal": 0.5,
+      "mass_action": 2.1235195001799284e-16,
+      "stiffness_action": 1.9263055591862338e-20,
+      "damping_action": 3.704617705404961e-16,
+      "solve": 3.0652631301789137e-16,
+      "residual": 3.4513954580256333e-16
+    },
+    {
+      "held": [
+        48,
+        60,
+        64
+      ],
+      "pedal": 1,
+      "mass_action": 2.1235195001799284e-16,
+      "stiffness_action": 1.9263055591862338e-20,
+      "damping_action": 1.0100981638218471e-16,
+      "solve": 3.0538724550033066e-16,
+      "residual": 2.447510086345149e-16
+    }
+  ],
+  "scope": "algebraic assembly only; new unison offsets nominal zero, no calibration; not acoustic convergence"
+}

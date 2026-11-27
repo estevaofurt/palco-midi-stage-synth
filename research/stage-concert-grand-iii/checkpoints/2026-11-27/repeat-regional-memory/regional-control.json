@@ -1,0 +1,135 @@
+{
+  "coordinates": 1360,
+  "wires": 18,
+  "cases": {
+    "regional-pedal": {
+      "energy_error": 1.822461744702671e-13,
+      "continuity": 1.0584143293274326e-15,
+      "compression_residual": 5.963111948670274e-19,
+      "work_error": 3.6338495031094057e-16,
+      "seconds": 41.93190078899988,
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "injected": 0.042833577520000006,
+      "final_mechanical": 0.01409836337153536,
+      "energy_reconstruction": 8.909812974101948e-16,
+      "loss_reconstruction": 2.0249574941140788e-17,
+      "ledger_balance": 1.822461744702671e-13,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.007043290646828427,
+          "participation_final": 5.1728270961467644e-06,
+          "participation_peak": 1.028082026451283e-05,
+          "damper_loss": 6.20943309027492e-08
+        },
+        "45": {
+          "rms_15_18": 0.0392715669382482,
+          "participation_final": 3.117968417607631e-05,
+          "participation_peak": 3.3210821842789225e-05,
+          "damper_loss": 2.954878755610013e-06
+        },
+        "55": {
+          "rms_15_18": 0.06763338625320925,
+          "participation_final": 5.6301015368128525e-05,
+          "participation_peak": 7.517926711307755e-05,
+          "damper_loss": 2.009255194417235e-05
+        },
+        "72": {
+          "rms_15_18": 0.04270272481431443,
+          "participation_final": 3.886312136509402e-05,
+          "participation_peak": 5.191738668619651e-05,
+          "damper_loss": 2.6408248331517258e-05
+        }
+      }
+    },
+    "regional-added-closed": {
+      "energy_error": 1.7949223227827196e-13,
+      "continuity": 9.947333246730602e-16,
+      "compression_residual": 7.047314121155779e-19,
+      "work_error": 3.307957906400421e-16,
+      "seconds": 40.69117528900006,
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "injected": 0.042833577520000006,
+      "final_mechanical": 0.014057271750349177,
+      "energy_reconstruction": 1.2959727962330104e-15,
+      "loss_reconstruction": 4.0499149882281576e-17,
+      "ledger_balance": 1.7933023567874283e-13,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.006608176851419347,
+          "participation_final": 5.02067617943597e-06,
+          "participation_peak": 1.0182068965014284e-05,
+          "damper_loss": 1.7545988423980645e-07
+        },
+        "45": {
+          "rms_15_18": 0.03927678489635557,
+          "participation_final": 3.1095834227307906e-05,
+          "participation_peak": 3.329362492515892e-05,
+          "damper_loss": 2.9553601270408257e-06
+        },
+        "55": {
+          "rms_15_18": 0.0560548114579181,
+          "participation_final": 4.156818432167792e-05,
+          "participation_peak": 5.854288772526629e-05,
+          "damper_loss": 4.312596158227883e-05
+        },
+        "72": {
+          "rms_15_18": 0.027164067672359134,
+          "participation_final": 1.5116013046190653e-05,
+          "participation_peak": 3.498312269241663e-05,
+          "damper_loss": 5.1415332187045884e-05
+        }
+      }
+    }
+  },
+  "exact_prefix_steps": 960,
+  "first_differing_flow": 960,
+  "arrivals": [
+    559,
+    1679
+  ],
+  "causal_delta_relative": [
+    5.839836172371527e-16,
+    1.3559136821587483e-15
+  ],
+  "delta_convolution_match": [
+    1.1145579887222511e-13,
+    1.5361374152226552e-13
+  ],
+  "pressure_difference_0_18ms": [
+    0.014793994538912896,
+    0.009784671453801396
+  ],
+  "scope": "aggregate control of three added dampers; no isolation of each note, no convergence or audibility claim"
+}
