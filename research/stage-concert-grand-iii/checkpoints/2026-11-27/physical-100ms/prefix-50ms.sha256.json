@@ -1,0 +1,14 @@
+{
+  "pedal": {
+    "force": "ffdc9f18915c0e6c75092014d4adee0f1501610ce95de101e9a21c801d7c23c5",
+    "compression": "5044ecca99a3cfceb2754a10e8f56d90634a01c23e94b8da0be978f4ca4c7ac4",
+    "velocity": "8937ae73b6f424431f1c52a9d896a230fd1a642a46e2afbc5c5ea6fb284430f1",
+    "flow": "cf9e0232df4c64eac302d64aac6e153e269c41e261aaca399130870f9767785f"
+  },
+  "a2-closed": {
+    "force": "3339c206328a390e970553bb94372e032648fa810eab5be88173eb5dec7afd0b",
+    "compression": "ad7d801535b1fbd96c2266b2fc93f3dde60daa5ddf2d028625cb4f8f73358ff5",
+    "velocity": "fdcb339950a9c809eea27c36972b35739d545ab489f21e6bebdb2cacdf474602",
+    "flow": "530714acf066a4663702ed69051ee6dbe0975b55a83fb004cfa01f92a4c1099d"
+  }
+}
