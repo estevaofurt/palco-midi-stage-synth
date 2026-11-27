@@ -1,0 +1,14 @@
+# G3 — Convergência polifônica: referência uniforme e mapa adaptativo
+
+Continuação de 7ab9820. 64 entradas do checkpoint anterior e 111 entradas dos insumos verificadas. Primeira checagem de insumos executada no diretório errado, repetida corretamente e sem divergências. Dois novos ensaios MIDI48/60/64, velocidades 0,3/1/3 m/s, 12 ms, 384 kHz, abertura integral, 369 portas, 127825 estados acústicos, 10 cordas (8 excitadas), tampo 80 coordenadas. Uniforme 128 modos por corda: 1360 coordenadas; adaptativo 64/128/64/64 para MIDI45/48/60/64: 848 (-37,6471%). Parâmetros físicos preservados. 9216 subpassos novos, três martelos capturados em ambos nos passos 1686/903/713. Máximos balanço 9,412002e-14, continuidade 1,106264e-15, compressão 7,589415e-19 m, força 1,041678e-11 N, trabalho relativo 4,010365e-16. Trabalho exterior acumulado mínimo zero. Loop local 72,454248 vs 57,343173 s (20,8560% menos; 1,26352x), uma execução por configuração, não benchmark ou tempo real.
+
+| Caso | Fino causal mic1/mic2 % | Fino completo mic1/mic2 % | Filtrado causal mic1/mic2 % | Maior banda dB |
+|---|---|---|---|---:|
+|Adaptativo 384 vs uniforme 384|0,113195/0,103598|0,106465/0,091214|0,107563/0,106620|0,023237|
+|Adaptativo 192 vs adaptativo 384|0,798900/1,096178|0,706553/0,887896|0,221433/0,138807|0,083605|
+|Adaptativo 192 vs uniforme 384|0,790391/1,097060|0,696674/0,885475|0,197001/0,140615|0,103766|
+
+Todas passam 1 dB global/3 dB banda causal e 1% fino completo; quatro de seis comparações por receptor passam 1% fino causal. Adaptativo 384 passa em ambos receptores, 192 falha no segundo. Checagem direta máxima 5,097478e-17, pré-chegada 9,349357e-16, prefixo filtrado idêntico. FIR Kaiser 617 taps, atraso 0,802 ms, DFT retangular, bandas significativas >=1e-4 da norma quadrática 0–20 kHz. Frações quadráticas causais uniforme 56,0403/25,2581% da convolução finita. Parseval: 88,5907/97,8105% do erro quadrático acima de 96 kHz adaptativo 192 vs 384; somente 0,007275/0,001151% para erro modal adaptativo vs uniforme a 384. Pico força adaptativo vs uniforme máximo 0,08783%, impulso 0,02104%. Não relaxar limite histórico de 1%. Pós-janela pressupõe fluxo zero, não cauda natural.
+
+Aprovação restrita ao acorde, não validação geral de polifonia. Lançamento simultâneo, abafadores estacionários, velocidades e mapa escolhidos experimentalmente, captura simplificada. Base de 128 é máximo da base interna existente, não convergência espacial contínua. Próximo: afinação e uníssono com carga acústica, decaimento, ataques alternados e pedal. Sem render, EQ, normalização individual ou promoção. Main preservada.
+Pacote local G3_Polifonia_Referencia.zip, 56 entradas SHA256SUMS verificadas, ZIP íntegro. Reprodução no CHECKPOINT.md, scripts e binários no pacote. Este commit publica relatório e hashes, não todos os scripts ou binários.
