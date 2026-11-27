@@ -1,0 +1,3 @@
+# Referência experimental — memória causal particionada
+
+Cópia dos módulos stream.py, helpers.py e verify.py do pacote G3_Memoria_Causal_Particionada.zip identificado em ../ARCHIVES.sha256. Não é integração no motor nem aprovação de tempo real. Para reproduzir, restaure os arquivos físicos com ../restore.py. Python 3.13.5, NumPy 2.3.5, SciPy 1.17.0 no ensaio histórico; BLAS/OMP 1 thread. Rode python verify.py /caminho/da/raiz/restaurada (gera results.json local). A versão histórica registrou 138 verificações aprovadas; este commit não representa nova execução do modelo físico. Preserve o ZIP original e os logs.
