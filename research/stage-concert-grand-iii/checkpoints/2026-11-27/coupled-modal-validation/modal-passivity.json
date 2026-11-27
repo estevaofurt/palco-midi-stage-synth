@@ -1,0 +1,22 @@
+{
+  "historic": {
+    "all_modes": 63913,
+    "zero_frequency": 1,
+    "zero_residue": 0,
+    "minimum_homogeneous_dissipation": 0.0,
+    "minimum_work_minus_energy_quadratic_eigenvalue": -4.273601552662807e-16,
+    "max_absolute_loss_identity_error": 1.550354896545647e-15,
+    "minimum_feedthrough": 4.319192476658512e-34,
+    "gate": true
+  },
+  "refined": {
+    "all_modes": 63913,
+    "zero_frequency": 1,
+    "zero_residue": 0,
+    "minimum_homogeneous_dissipation": 0.0,
+    "minimum_work_minus_energy_quadratic_eigenvalue": -4.713838493435897e-16,
+    "max_absolute_loss_identity_error": 1.176305147038148e-15,
+    "minimum_feedthrough": 4.319192476658518e-34,
+    "gate": true
+  }
+}

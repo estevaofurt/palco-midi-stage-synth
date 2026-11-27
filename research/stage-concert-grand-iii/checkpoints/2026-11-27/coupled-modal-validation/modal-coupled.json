@@ -1,0 +1,991 @@
+{
+  "cases": {
+    "regional-pedal": {
+      "rate": 384000,
+      "coordinates": 1360,
+      "energy_error": 1.822461744702671e-13,
+      "continuity": 1.0584143293274326e-15,
+      "work_error": 3.6338495031094057e-16,
+      "minimum_exterior_work": 0.0,
+      "compression_residual": 5.963111948670274e-19,
+      "seconds": 41.93190078899988,
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "energy_reconstruction": 8.909812974101948e-16,
+      "loss_reconstruction": 2.0249574941140788e-17,
+      "ledger_balance": 1.822461744702671e-13,
+      "final_mechanical": 0.01409836337153536,
+      "direct": 2.5402530599939277e-17,
+      "prearrival": 7.343566359651943e-16,
+      "filter_prefix": 0.0,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.007043290646828427,
+          "participation_final": 5.1728270961467644e-06
+        },
+        "45": {
+          "rms_15_18": 0.0392715669382482,
+          "participation_final": 3.117968417607631e-05
+        },
+        "55": {
+          "rms_15_18": 0.06763338625320925,
+          "participation_final": 5.6301015368128525e-05
+        },
+        "72": {
+          "rms_15_18": 0.04270272481431443,
+          "participation_final": 3.886312136509402e-05
+        }
+      }
+    },
+    "regional-added-closed": {
+      "rate": 384000,
+      "coordinates": 1360,
+      "energy_error": 1.7949223227827196e-13,
+      "continuity": 9.947333246730602e-16,
+      "work_error": 3.307957906400421e-16,
+      "minimum_exterior_work": 0.0,
+      "compression_residual": 7.047314121155779e-19,
+      "seconds": 40.69117528900006,
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "energy_reconstruction": 1.2959727962330104e-15,
+      "loss_reconstruction": 4.0499149882281576e-17,
+      "ledger_balance": 1.7933023567874283e-13,
+      "final_mechanical": 0.014057271750349177,
+      "direct": 3.5564226706913126e-17,
+      "prearrival": 9.541121559987179e-16,
+      "filter_prefix": 0.0,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.006608176851419347,
+          "participation_final": 5.02067617943597e-06
+        },
+        "45": {
+          "rms_15_18": 0.03927678489635557,
+          "participation_final": 3.1095834227307906e-05
+        },
+        "55": {
+          "rms_15_18": 0.0560548114579181,
+          "participation_final": 4.156818432167792e-05
+        },
+        "72": {
+          "rms_15_18": 0.027164067672359134,
+          "participation_final": 1.5116013046190653e-05
+        }
+      }
+    },
+    "refined-384000-mixed-pedal": {
+      "rate": 384000,
+      "coordinates": 1360,
+      "energy_error": 1.8694407585661175e-13,
+      "continuity": 1.1026278404287874e-15,
+      "work_error": 3.6670714619972147e-16,
+      "minimum_exterior_work": 0.0,
+      "compression_residual": 5.963111948670274e-19,
+      "seconds": 50.31559442300022,
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "energy_reconstruction": 1.3769710959975737e-15,
+      "loss_reconstruction": 8.099829976456315e-17,
+      "ledger_balance": 1.8694407585661175e-13,
+      "final_mechanical": 0.014098363371535465,
+      "direct": 3.716434661970463e-17,
+      "prearrival": 4.979296214593301e-16,
+      "filter_prefix": 0.0,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.007043290646828188,
+          "participation_final": 5.172827096146715e-06
+        },
+        "45": {
+          "rms_15_18": 0.039271566938247765,
+          "participation_final": 3.1179684176075326e-05
+        },
+        "55": {
+          "rms_15_18": 0.06763338625320937,
+          "participation_final": 5.630101536812826e-05
+        },
+        "72": {
+          "rms_15_18": 0.042702724814314336,
+          "participation_final": 3.886312136509405e-05
+        }
+      }
+    },
+    "refined-384000-mixed-closed": {
+      "rate": 384000,
+      "coordinates": 1360,
+      "energy_error": 1.7819625948203893e-13,
+      "continuity": 1.084247505862252e-15,
+      "work_error": 3.0026322842410325e-16,
+      "minimum_exterior_work": 0.0,
+      "compression_residual": 6.505213034913027e-19,
+      "seconds": 51.638388705999205,
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "energy_reconstruction": 1.2554736463507289e-15,
+      "loss_reconstruction": 4.0499149882281576e-17,
+      "ledger_balance": 1.7819625948203893e-13,
+      "final_mechanical": 0.014057271750349102,
+      "direct": 4.2439673729756587e-17,
+      "prearrival": 9.25631196118177e-16,
+      "filter_prefix": 0.0,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.006608176851419446,
+          "participation_final": 5.020676179436121e-06
+        },
+        "45": {
+          "rms_15_18": 0.039276784896355596,
+          "participation_final": 3.10958342273082e-05
+        },
+        "55": {
+          "rms_15_18": 0.05605481145791801,
+          "participation_final": 4.156818432167882e-05
+        },
+        "72": {
+          "rms_15_18": 0.0271640676723591,
+          "participation_final": 1.5116013046190703e-05
+        }
+      }
+    },
+    "refined-384000-uniform-pedal": {
+      "rate": 384000,
+      "coordinates": 2384,
+      "energy_error": 1.9309994663871856e-13,
+      "continuity": 1.0175478720873724e-15,
+      "work_error": 3.0532562215938847e-16,
+      "minimum_exterior_work": 0.0,
+      "compression_residual": 7.047314121155779e-19,
+      "seconds": 52.17558844499945,
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "energy_reconstruction": 1.7819625948203896e-15,
+      "loss_reconstruction": 4.0499149882281576e-17,
+      "ledger_balance": 1.9293795003918944e-13,
+      "final_mechanical": 0.014092328553652157,
+      "direct": 3.8013798576325136e-17,
+      "prearrival": 6.304337369554313e-16,
+      "filter_prefix": 0.0,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.007044341351284022,
+          "participation_final": 5.170780987348189e-06
+        },
+        "45": {
+          "rms_15_18": 0.03927209965531611,
+          "participation_final": 3.117052860897222e-05
+        },
+        "55": {
+          "rms_15_18": 0.06759251678760873,
+          "participation_final": 5.627655327761775e-05
+        },
+        "72": {
+          "rms_15_18": 0.04264457535599506,
+          "participation_final": 3.877265829415355e-05
+        }
+      }
+    },
+    "refined-192000-mixed-pedal": {
+      "rate": 192000,
+      "coordinates": 1360,
+      "energy_error": 5.475485064084469e-14,
+      "continuity": 2.0043670575827566e-15,
+      "work_error": 2.7210366327157933e-16,
+      "minimum_exterior_work": 0.0,
+      "compression_residual": 5.963111948670274e-19,
+      "seconds": 34.24229796199961,
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 644
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 741
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 843
+        }
+      ],
+      "energy_reconstruction": 1.6199659952912631e-15,
+      "loss_reconstruction": 4.0499149882281576e-17,
+      "ledger_balance": 5.459285404131557e-14,
+      "final_mechanical": 0.014100423265188244,
+      "direct": 3.85725758233335e-17,
+      "prearrival": 7.934947731847851e-16,
+      "filter_prefix": 0.0,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.007043154905974663,
+          "participation_final": 5.1730376497669154e-06
+        },
+        "45": {
+          "rms_15_18": 0.03927217433135549,
+          "participation_final": 3.117213153610723e-05
+        },
+        "55": {
+          "rms_15_18": 0.06765049839183872,
+          "participation_final": 5.634329750711965e-05
+        },
+        "72": {
+          "rms_15_18": 0.04269751125872844,
+          "participation_final": 3.880609295695786e-05
+        }
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "case": "refined-384000-mixed-pedal",
+      "reference": "regional-pedal",
+      "kind": "coefficient",
+      "causal_fine": [
+        2.7538039618908366e-14,
+        2.6284232408570312e-14
+      ],
+      "full_finite": [
+        2.5459879847140787e-14,
+        2.0671081269319722e-14
+      ],
+      "causal_filtered": [
+        2.632418862618683e-14,
+        2.3816357658847186e-14
+      ],
+      "spectral": [
+        {
+          "level_db": 2.1215204264172265e-14,
+          "max_band_db": 9.836140158843417e-14,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.07117916079462262,
+              "significant": true,
+              "level_db": 8.29321621235819e-14
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.7129336640636188,
+              "significant": true,
+              "level_db": 1.5429239464852566e-14
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.21066681149836852,
+              "significant": true,
+              "level_db": 1.92865493310657e-14
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.00374592865876511,
+              "significant": true,
+              "level_db": 9.836140158843417e-14
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.001163136386485257,
+              "significant": true,
+              "level_db": 4.9180700794217364e-14
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 0.0003112985981396619,
+              "significant": true,
+              "level_db": 4.2430408528344423e-14
+            }
+          ]
+        },
+        {
+          "level_db": 4.2430408528344423e-14,
+          "max_band_db": 2.4301052157143516e-13,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.1213356422568786,
+              "significant": true,
+              "level_db": 5.1109355727323916e-14
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8574667350947421,
+              "significant": true,
+              "level_db": 4.2430408528344423e-14
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.020346351331227114,
+              "significant": true,
+              "level_db": -1.0318303892120295e-13
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.0005902426844667818,
+              "significant": true,
+              "level_db": 1.9768713064341938e-13
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.00020514314286202657,
+              "significant": true,
+              "level_db": -2.4301052157143516e-13
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 5.588548982374834e-05,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        }
+      ],
+      "peak_force_relative": [
+        0.0,
+        0.0,
+        3.3306690738754696e-16
+      ],
+      "impulse_relative": [
+        2.220446049250313e-16,
+        4.440892098500626e-16,
+        1.1102230246251565e-16
+      ],
+      "signal_relative": {
+        "force": 1.4689884724927166e-15,
+        "compression": 1.253274556091826e-15,
+        "velocity": 1.1867784792917074e-14,
+        "flow": 1.9519883242661936e-14,
+        "ledger": 7.242886901586167e-14
+      },
+      "gate": true,
+      "captures_equal": true
+    },
+    {
+      "case": "refined-384000-mixed-closed",
+      "reference": "regional-added-closed",
+      "kind": "coefficient",
+      "causal_fine": [
+        2.3383177561671602e-14,
+        2.9036159156192186e-14
+      ],
+      "full_finite": [
+        2.475101425582284e-14,
+        2.211031696845846e-14
+      ],
+      "causal_filtered": [
+        2.2979637147625744e-14,
+        2.8045758218256183e-14
+      ],
+      "spectral": [
+        {
+          "level_db": 7.714619732426289e-15,
+          "max_band_db": 6.846725012528284e-14,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.0712056106235666,
+              "significant": true,
+              "level_db": 4.339473599489771e-14
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.7132614832116757,
+              "significant": true,
+              "level_db": 8.678947198979575e-15
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.21046241669009713,
+              "significant": true,
+              "level_db": -8.196783465702948e-15
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.0036360970520728886,
+              "significant": true,
+              "level_db": 6.846725012528284e-14
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.0011314879621751707,
+              "significant": true,
+              "level_db": -5.303801066043082e-15
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 0.00030290446041262187,
+              "significant": true,
+              "level_db": 2.2179531730725548e-14
+            }
+          ]
+        },
+        {
+          "level_db": 8.678947198979575e-15,
+          "max_band_db": 1.2054093331915922e-13,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.12177099838083909,
+              "significant": true,
+              "level_db": 8.678947198979575e-15
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8568290292854405,
+              "significant": true,
+              "level_db": 3.857309866213147e-15
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.020563916716666897,
+              "significant": true,
+              "level_db": 1.2054093331915922e-13
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.0005793880425655737,
+              "significant": true,
+              "level_db": -7.473537865788039e-14
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.0002016964490414785,
+              "significant": true,
+              "level_db": 2.025087679761898e-14
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 5.4971125446424196e-05,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        }
+      ],
+      "peak_force_relative": [
+        0.0,
+        0.0,
+        8.881784197001252e-16
+      ],
+      "impulse_relative": [
+        0.0,
+        0.0,
+        2.220446049250313e-16
+      ],
+      "signal_relative": {
+        "force": 1.5411937682823506e-15,
+        "compression": 1.2429536629235638e-15,
+        "velocity": 1.2336156685724297e-14,
+        "flow": 1.798307564064839e-14,
+        "ledger": 1.7694333959062947e-14
+      },
+      "gate": true,
+      "captures_equal": true
+    },
+    {
+      "case": "refined-384000-mixed-pedal",
+      "reference": "refined-384000-uniform-pedal",
+      "kind": "rank",
+      "causal_fine": [
+        0.0011276210592520092,
+        0.0011148015131645008
+      ],
+      "full_finite": [
+        0.0010038321794944684,
+        0.0008266252041417656
+      ],
+      "causal_filtered": [
+        0.0011099932946973601,
+        0.001112936044783029
+      ],
+      "spectral": [
+        {
+          "level_db": 0.0010392735652243225,
+          "max_band_db": 0.0017561164571775376,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.07116915860985265,
+              "significant": true,
+              "level_db": 0.0016495924897235712
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.712815997531934,
+              "significant": true,
+              "level_db": 0.0017561164571775376
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.2107921381778937,
+              "significant": true,
+              "level_db": -0.0015435965814025354
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.0037473603403573924,
+              "significant": true,
+              "level_db": -0.0006202685209822226
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.0011638529475952696,
+              "significant": true,
+              "level_db": -0.0016354146363955103
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 0.000311492392366937,
+              "significant": true,
+              "level_db": -0.001663519748390724
+            }
+          ]
+        },
+        {
+          "level_db": 0.001244097023090394,
+          "max_band_db": 0.01325745543217441,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.12134369359458842,
+              "significant": true,
+              "level_db": 0.0009559265014240262
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8574838829920405,
+              "significant": true,
+              "level_db": 0.0011572462753820973
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.02031937734175858,
+              "significant": true,
+              "level_db": 0.007005536387957629
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.0005911494439192264,
+              "significant": true,
+              "level_db": -0.005422625980553354
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.00020582928243943288,
+              "significant": true,
+              "level_db": -0.01325745543217441
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 5.606734525430654e-05,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        }
+      ],
+      "peak_force_relative": [
+        4.0023540037736893e-13,
+        0.0008713693552151458,
+        0.0008783046176747966
+      ],
+      "impulse_relative": [
+        8.37374614093278e-12,
+        0.00021042507625290696,
+        0.00017092342828650686
+      ],
+      "gate": true
+    },
+    {
+      "case": "refined-192000-mixed-pedal",
+      "reference": "refined-384000-mixed-pedal",
+      "kind": "rate",
+      "causal_fine": [
+        0.008025262284849153,
+        0.012111694102858773
+      ],
+      "full_finite": [
+        0.007053530445102595,
+        0.009441430092812356
+      ],
+      "causal_filtered": [
+        0.003675818550446146,
+        0.0023327786911255147
+      ],
+      "spectral": [
+        {
+          "level_db": -0.002513093771279496,
+          "max_band_db": 0.03182290353491786,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.07117916079462364,
+              "significant": true,
+              "level_db": 0.0009294623812286988
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.7129336640636178,
+              "significant": true,
+              "level_db": -0.002340379740587947
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.21066681149836844,
+              "significant": true,
+              "level_db": -0.005079990689127595
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.003745928658765177,
+              "significant": true,
+              "level_db": 0.03182290353491786
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.0011631363864852645,
+              "significant": true,
+              "level_db": 0.025926814426821383
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 0.00031129859813966345,
+              "significant": true,
+              "level_db": 0.029526274239270303
+            }
+          ]
+        },
+        {
+          "level_db": -0.00033936905379295496,
+          "max_band_db": 0.07437006837401475,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.12133564225687885,
+              "significant": true,
+              "level_db": 0.0004992077304358444
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8574667350947421,
+              "significant": true,
+              "level_db": -0.00042595101703186386
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.020346351331226434,
+              "significant": true,
+              "level_db": 0.0010517764190901395
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.0005902426844668029,
+              "significant": true,
+              "level_db": -0.07437006837401475
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.0002051431428620131,
+              "significant": true,
+              "level_db": -0.0442708432341414
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 5.588548982374274e-05,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        }
+      ],
+      "peak_force_relative": [
+        1.212025882624257e-05,
+        4.350524443841319e-05,
+        0.00029240217687753756
+      ],
+      "impulse_relative": [
+        3.83780582868809e-07,
+        8.142473744143786e-07,
+        1.817960559513665e-05
+      ],
+      "gate": false
+    },
+    {
+      "case": "refined-192000-mixed-pedal",
+      "reference": "refined-384000-uniform-pedal",
+      "kind": "combined",
+      "causal_fine": [
+        0.007876684502057758,
+        0.012086054950381116
+      ],
+      "full_finite": [
+        0.0068863278562539786,
+        0.009413119563531682
+      ],
+      "causal_filtered": [
+        0.0033901779128039755,
+        0.002221067032350483
+      ],
+      "spectral": [
+        {
+          "level_db": -0.0014738202060554538,
+          "max_band_db": 0.03120263501393579,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.07116915860985265,
+              "significant": true,
+              "level_db": 0.0025790548709524103
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.712815997531934,
+              "significant": true,
+              "level_db": -0.0005842632834102186
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.2107921381778937,
+              "significant": true,
+              "level_db": -0.006623587270530517
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.0037473603403573924,
+              "significant": true,
+              "level_db": 0.03120263501393579
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.0011638529475952696,
+              "significant": true,
+              "level_db": 0.024291399790426015
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 0.000311492392366937,
+              "significant": true,
+              "level_db": 0.027862754490879493
+            }
+          ]
+        },
+        {
+          "level_db": 0.0009047279692968878,
+          "max_band_db": 0.07979269435456848,
+          "gate": true,
+          "bands": [
+            {
+              "lo": 0,
+              "hi": 300,
+              "reference_fraction": 0.12134369359458842,
+              "significant": true,
+              "level_db": 0.0014551342318602889
+            },
+            {
+              "lo": 300,
+              "hi": 1000,
+              "reference_fraction": 0.8574838829920405,
+              "significant": true,
+              "level_db": 0.0007312952583501454
+            },
+            {
+              "lo": 1000,
+              "hi": 3000,
+              "reference_fraction": 0.02031937734175858,
+              "significant": true,
+              "level_db": 0.00805731280704788
+            },
+            {
+              "lo": 3000,
+              "hi": 8000,
+              "reference_fraction": 0.0005911494439192264,
+              "significant": true,
+              "level_db": -0.07979269435456848
+            },
+            {
+              "lo": 8000,
+              "hi": 16000,
+              "reference_fraction": 0.00020582928243943288,
+              "significant": true,
+              "level_db": -0.057528298666315446
+            },
+            {
+              "lo": 16000,
+              "hi": 20000,
+              "reference_fraction": 5.606734525430654e-05,
+              "significant": false,
+              "level_db": null
+            }
+          ]
+        }
+      ],
+      "peak_force_relative": [
+        1.212025922647797e-05,
+        0.000827826201639903,
+        0.0011709636127346101
+      ],
+      "impulse_relative": [
+        3.8378895683699454e-07,
+        0.00021123915228926649,
+        0.0001527469300117712
+      ],
+      "gate": false
+    }
+  ],
+  "refined_control": {
+    "first_delta": 960,
+    "causal": [
+      6.885776979365533e-16,
+      1.2419713559282916e-15
+    ],
+    "match": [
+      1.087871744835024e-13,
+      1.5106171295124658e-13
+    ],
+    "reference_difference": [
+      0.014756020322451649,
+      0.00978556076777662
+    ]
+  },
+  "filter_taps": 617,
+  "scope": "18 ms, seven notes, fixed physical parameters; 192 kHz mechanical blocks with two acoustic substeps at 384 kHz. Finite post-window assumes zero flow; no audio rendering. Uniform 128 is a finite reference, not continuous convergence."
+}
