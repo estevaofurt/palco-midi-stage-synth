@@ -1,0 +1,9 @@
+# G3 — Recuperação das dependências originais
+
+Continuação de 99b7dc5. Usuário enviou 14 ZIPs complementares e structure(1).npz; recuperados da biblioteca os ZIPs de transferência e validação de tensão Dó3. 16 ZIPs, 835 entradas (incluindo diretórios), teste de integridade ZIP sem erros. Dez entradas SHA256SUMS.txt do pacote de transferência confirmadas. Recuperados insumos/scale, insumos/wire e insumos/surface. scale_geometry.json extraído de insumos/scale.zip: SHA256 85a57d1552dc44cf2d8595cc91b2e0321b3c5f5835970187bb1bb38b8b048ab5, corresponde ao esperado. Hipótese de engenharia G3-scale-hypothesis-02: 88 teclas, 226 cordas, 904 portas, scaleReady=false, geometryReady=false. Não é escala calibrada.
+
+structure.npz: SHA256 8a9a0fa4679e4d533054a39a718775897bc1fe88ceeab71099ea0145e772d4ff, 1386 coordenadas. Todas as 12 dependências do manifesto histórico MISSING.sha256 verificadas; nenhuma divergência. 409 entradas dos manifestos internos de 18 diretórios físicos verificadas sem falhas. Os arquivos históricos sem manifesto foram conferidos quanto à integridade ZIP, não reexecutados.
+
+Projeção da matriz integral na base física arquivada de 80 coordenadas: erro relativo massa 1,9730843350945258e-15; rigidez 2,2464297339001725e-10; amortecimento 3,2747645119197005e-11; coordenadas dos cavaletes exatamente iguais. Cholesky da massa integral bem-sucedida; menor diagonal 1,3087350311677714e-05. Menor autovalor do amortecimento reduzido 10,123639441757255. Nenhum parâmetro alterado. Ainda não se valida a adequação acústica da redução, nem a integração cordas/martelos.
+
+Próximo: usar escala recuperada e portas físicas verificadas para integrar cordas e martelos, preservar as terminações anteriores (novas hipóteses reprovadas), comparar com a referência d8 e controles históricos. Não há render, nova aprovação de modelo, mudança de main ou publicação dos binários neste checkpoint. Relatório detalhado local G3_historico_recuperado/recovery.json.
