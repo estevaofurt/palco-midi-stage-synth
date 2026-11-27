@@ -1,0 +1,6 @@
+causal-match regional-closed-33 [3.0166514317862323e-16, 1.6301847471450484e-16] [1.9983978795676406e-10, 2.3961146556471447e-10]
+Traceback (most recent call last):
+  File "/mnt/data/g3_individual/G3_Controle_Repeticao/audit_individual.py", line 39, in <module>
+    U=(R['flow']-S['flow']).reshape(N,369);first=int(np.flatnonzero(np.any(U!=0,axis=1))[0]);assert first>=j0;delta=pressure(U);pclosed=pressure(S['flow'].reshape(N,369));causal=[float(np.max(abs(delta[:first+r,i]))/np.max(abs(delta[:,i]))) for i,r in enumerate(arrivals)];match=[rel(p[:,i]-pclosed[:,i],delta[:,i]) for i in range(2)];print("causal-match",case,causal,match,flush=True);assert max(causal+match)<1e-10
+                                                                                                                                                                                                                                                                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

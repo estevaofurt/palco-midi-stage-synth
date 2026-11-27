@@ -1,0 +1,264 @@
+{
+  "cases": {
+    "33": {
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "energy_error": 1.6701849411452923e-13,
+      "continuity": 1.0153777680551608e-15,
+      "energy_reconstruction": 1.7819625948203896e-15,
+      "loss_reconstruction": 4.0499149882281576e-17,
+      "ledger_balance": 1.668564975150001e-13,
+      "seconds": 45.524187677000555,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.006609069051737274,
+          "participation_final": 5.062244092518296e-06,
+          "participation_peak": 1.0272833024900844e-05,
+          "damper_loss": 1.7612272419876883e-07
+        },
+        "45": {
+          "rms_15_18": 0.0392715669099151,
+          "participation_final": 3.1179724755923076e-05,
+          "participation_peak": 3.321092436776723e-05,
+          "damper_loss": 2.9548787537968155e-06
+        },
+        "55": {
+          "rms_15_18": 0.0676333864039547,
+          "participation_final": 5.630103886402698e-05,
+          "participation_peak": 7.51792708022535e-05,
+          "damper_loss": 2.009255195392614e-05
+        },
+        "72": {
+          "rms_15_18": 0.04270272579179959,
+          "participation_final": 3.886315505691139e-05,
+          "participation_peak": 5.191738668619794e-05,
+          "damper_loss": 2.6408248362658132e-05
+        }
+      },
+      "prefix_steps": 960,
+      "first_flow_difference": 960,
+      "causal_delta_relative": [
+        3.0166514317862323e-16,
+        1.6301847471450484e-16
+      ],
+      "delta_convolution_match": [
+        1.9983978795676406e-10,
+        2.3961146556471447e-10
+      ],
+      "binary64_subtraction_gate": false,
+      "extended_subtraction_match": [
+        6.894163396117012e-14,
+        8.753414170396323e-14
+      ],
+      "delta_extended_match": [
+        9.559320819279088e-16,
+        1.387521301296836e-15
+      ],
+      "direct_max": 1.1492288916290294e-19,
+      "pressure_difference": [
+        2.0963213004901348e-07,
+        2.0047868345735678e-08
+      ]
+    },
+    "55": {
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "energy_error": 2.0298173920999526e-13,
+      "continuity": 1.171088164736594e-15,
+      "energy_reconstruction": 8.504821475279131e-16,
+      "loss_reconstruction": 4.0499149882281576e-17,
+      "ledger_balance": 2.0298173920999526e-13,
+      "seconds": 44.84793180199995,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.007044357230940752,
+          "participation_final": 5.162374331264575e-06,
+          "participation_peak": 1.0310651105628919e-05,
+          "damper_loss": 6.209644429588033e-08
+        },
+        "45": {
+          "rms_15_18": 0.03927837432717573,
+          "participation_final": 3.118080936158687e-05,
+          "participation_peak": 3.3337461526363875e-05,
+          "damper_loss": 2.9556352449137343e-06
+        },
+        "55": {
+          "rms_15_18": 0.056427178113396856,
+          "participation_final": 4.153148492085741e-05,
+          "participation_peak": 5.836845622879742e-05,
+          "damper_loss": 4.305786034175942e-05
+        },
+        "72": {
+          "rms_15_18": 0.042953180325125496,
+          "participation_final": 3.965688297199378e-05,
+          "participation_peak": 5.191731763334657e-05,
+          "damper_loss": 2.6404998194481594e-05
+        }
+      },
+      "prefix_steps": 960,
+      "first_flow_difference": 960,
+      "causal_delta_relative": [
+        6.711495876519431e-16,
+        7.180845105652555e-16
+      ],
+      "delta_convolution_match": [
+        2.1112153156389196e-13,
+        3.365780739570947e-13
+      ],
+      "binary64_subtraction_gate": true,
+      "extended_subtraction_match": [
+        7.262073832174434e-17,
+        1.3442124812234153e-16
+      ],
+      "delta_extended_match": [
+        1.259815863137016e-15,
+        1.8102764470290928e-15
+      ],
+      "direct_max": 9.304602645859193e-20,
+      "pressure_difference": [
+        0.006068465893965972,
+        0.004365586000681411
+      ]
+    },
+    "72": {
+      "captures": [
+        {
+          "id": 1,
+          "key": 60,
+          "step": 1287
+        },
+        {
+          "id": 2,
+          "key": 64,
+          "step": 1481
+        },
+        {
+          "id": 0,
+          "key": 48,
+          "step": 1686
+        }
+      ],
+      "energy_error": 1.7430834109333992e-13,
+      "continuity": 1.037275554278922e-15,
+      "energy_reconstruction": 9.71979597174758e-16,
+      "loss_reconstruction": 4.0499149882281576e-17,
+      "ledger_balance": 1.7430834109333992e-13,
+      "seconds": 44.28598695099936,
+      "notes": {
+        "33": {
+          "rms_15_18": 0.0070407278860621595,
+          "participation_final": 5.141378729371334e-06,
+          "participation_peak": 1.016102973866174e-05,
+          "damper_loss": 6.197421622324605e-08
+        },
+        "45": {
+          "rms_15_18": 0.039270834063513074,
+          "participation_final": 3.1092086446022805e-05,
+          "participation_peak": 3.316422559097113e-05,
+          "damper_loss": 2.9546009133790115e-06
+        },
+        "55": {
+          "rms_15_18": 0.0672423457409638,
+          "participation_final": 5.639883887644143e-05,
+          "participation_peak": 7.531592814807561e-05,
+          "damper_loss": 2.024547171573354e-05
+        },
+        "72": {
+          "rms_15_18": 0.02694089196956603,
+          "participation_final": 1.468866001263195e-05,
+          "participation_peak": 3.49831207671735e-05,
+          "damper_loss": 5.1255751180475986e-05
+        }
+      },
+      "prefix_steps": 960,
+      "first_flow_difference": 960,
+      "causal_delta_relative": [
+        3.829628314475923e-16,
+        1.1613336342914992e-15
+      ],
+      "delta_convolution_match": [
+        7.406350143252828e-14,
+        1.455877275648098e-13
+      ],
+      "binary64_subtraction_gate": true,
+      "extended_subtraction_match": [
+        5.3680672908222515e-17,
+        1.1905428401114437e-16
+      ],
+      "delta_extended_match": [
+        1.101929774327587e-15,
+        2.694873060894471e-15
+      ],
+      "direct_max": 2.66234148990993e-19,
+      "pressure_difference": [
+        0.017637505922864054,
+        0.012131976543916269
+      ]
+    }
+  },
+  "reference_notes": {
+    "33": {
+      "rms_15_18": 0.007043290646828427,
+      "participation_final": 5.1728270961467644e-06,
+      "participation_peak": 1.028082026451283e-05,
+      "damper_loss": 6.20943309027492e-08
+    },
+    "45": {
+      "rms_15_18": 0.0392715669382482,
+      "participation_final": 3.117968417607631e-05,
+      "participation_peak": 3.3210821842789225e-05,
+      "damper_loss": 2.954878755610013e-06
+    },
+    "55": {
+      "rms_15_18": 0.06763338625320925,
+      "participation_final": 5.6301015368128525e-05,
+      "participation_peak": 7.517926711307755e-05,
+      "damper_loss": 2.009255194417235e-05
+    },
+    "72": {
+      "rms_15_18": 0.04270272481431443,
+      "participation_final": 3.886312136509402e-05,
+      "participation_peak": 5.191738668619651e-05,
+      "damper_loss": 2.6408248331517258e-05
+    }
+  },
+  "arrivals": [
+    559,
+    1679
+  ],
+  "interaction_residual_relative_to_joint": [
+    0.0033059162851381825,
+    0.0016297466238585617
+  ],
+  "scope": "Individual controls versus archived pedal reference. Joint contrast minus sum is an interaction residual, not a decomposition of emitted sound or audibility. Pressure after N assumes zero flow."
+}
