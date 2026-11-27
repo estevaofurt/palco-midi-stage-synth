@@ -114,7 +114,11 @@ def run_stage(dst,spec,env,run=subprocess.run):
         receipt_check(dst,stage,outputs,read_json(receipt));return 'verified'
     # Do not destroy partial data or silently rerun an interrupted stage.
     require(not log.exists(),'Interrupted stage '+stage+'; preserve logs and inspect before retry')
-    require(not any(checked_path(dst,n).exists() for n in outputs),'Unreceipted output: '+stage)
+    # The final restart deliberately reuses the preallocated NPY arrays
+    # and progress record created by the three preceding checkpoint stages.
+    reusable=set(case_outputs(RESTART)[1:]) if stage=='restart-final' else set()
+    require(all(checked_path(dst,n).is_file() for n in reusable),'Missing preallocated restart signals')
+    require(not any(checked_path(dst,n).exists() for n in outputs if n not in reusable),'Unreceipted output: '+stage)
     if stage in ('mixed','uniform','restart-22000'):
         case={'mixed':MIXED,'uniform':UNIFORM,'restart-22000':RESTART}[stage]
         require(not (dst/case).exists(),'Unreceipted case directory: '+case)

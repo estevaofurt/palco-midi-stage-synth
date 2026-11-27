@@ -25,6 +25,15 @@ class Journal(unittest.TestCase):
             with self.assertRaises(ValueError):m.run_stage(root,spec,{},run=fail)
             with self.assertRaisesRegex(RuntimeError,'Interrupted stage'):m.run_stage(root,spec,{},run=fail)
             self.assertEqual((root/'out.dat').read_bytes(),b'partial')
+    def test_final_restart_reuses_preallocated_arrays(self):
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);spec=next(s for s in m.stage_plan() if s[0]=='restart-final')
+            for n in spec[3][1:]:
+                f=root/n;f.parent.mkdir(parents=True,exist_ok=True);f.write_bytes(b'prefix')
+            def fake(*a,**kw):
+                for n in spec[3]:(root/n).write_bytes(b'complete')
+            self.assertEqual(m.run_stage(root,spec,{},run=fake),'executed')
+            self.assertEqual(m.run_stage(root,spec,{},run=fake),'verified')
     def test_unsafe_path(self):
         with tempfile.TemporaryDirectory() as t:
             with self.assertRaisesRegex(RuntimeError,'escapes'):m.checked_path(Path(t),'../escape')
