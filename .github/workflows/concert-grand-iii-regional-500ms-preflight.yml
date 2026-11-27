@@ -1,0 +1,30 @@
+name: Concert Grand III 500 ms verification utilities
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths:
+      - 'research/stage-concert-grand-iii/checkpoints/2026-11-27/regional-500ms-preparation/**'
+      - '.github/workflows/concert-grand-iii-regional-500ms-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verification-utilities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      PYTHONOPTIMIZE: '0'
+    defaults:
+      run:
+        working-directory: research/stage-concert-grand-iii/checkpoints/2026-11-27/regional-500ms-preparation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy==2.2.6
+      - run: python -m compileall -q .
+      - run: python test_verification_utilities.py
+      - run: python reproduzir_500ms.py --help
