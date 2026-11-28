@@ -1,0 +1,75 @@
+{
+  "source_commit": "733391f4067845f9e679b5f6e10b75ed0acfcf94",
+  "status": "recalculation_of_archived_json_only",
+  "initial_gap_m": 0.0001,
+  "comparison_count": 48,
+  "all_between": true,
+  "cases": {
+    "107-24": {
+      "launch_to_capture_ms": {
+        "original": 2.5572916666666665,
+        "graduado": 1.3125,
+        "intermediario": 1.8385416666666667
+      },
+      "nominal_free_flight_ms": 0.15002614622777272,
+      "nominal_post_gap_ms": {
+        "original": 2.407265520438894,
+        "graduado": 1.1624738537722272,
+        "intermediario": 1.688515520438894
+      },
+      "impulse_excess_vs_graded_percent": 0.05902030298390315,
+      "band_comparisons": 12,
+      "all_between": true
+    },
+    "107-76": {
+      "launch_to_capture_ms": {
+        "original": 1.2994791666666667,
+        "graduado": 0.7630208333333334,
+        "intermediario": 0.9895833333333334
+      },
+      "nominal_free_flight_ms": 0.04067669828771171,
+      "nominal_post_gap_ms": {
+        "original": 1.258802468378955,
+        "graduado": 0.7223441350456217,
+        "intermediario": 0.9489066350456217
+      },
+      "impulse_excess_vs_graded_percent": 0.1896960099080358,
+      "band_comparisons": 12,
+      "all_between": true
+    },
+    "108-24": {
+      "launch_to_capture_ms": {
+        "original": 2.6223958333333335,
+        "graduado": 1.3046875,
+        "intermediario": 1.8567708333333333
+      },
+      "nominal_free_flight_ms": 0.15002614622777272,
+      "nominal_post_gap_ms": {
+        "original": 2.472369687105561,
+        "graduado": 1.1546613537722272,
+        "intermediario": 1.7067446871055605
+      },
+      "impulse_excess_vs_graded_percent": 0.04716077999227242,
+      "band_comparisons": 12,
+      "all_between": true
+    },
+    "108-76": {
+      "launch_to_capture_ms": {
+        "original": 1.3203125,
+        "graduado": 0.7526041666666666,
+        "intermediario": 0.9895833333333334
+      },
+      "nominal_free_flight_ms": 0.04067669828771171,
+      "nominal_post_gap_ms": {
+        "original": 1.2796358017122882,
+        "graduado": 0.7119274683789549,
+        "intermediario": 0.9489066350456217
+      },
+      "impulse_excess_vs_graded_percent": 0.1364728030102791,
+      "band_comparisons": 12,
+      "all_between": true
+    }
+  },
+  "new_physical_steps": 0,
+  "python_tests_executed": false
+}

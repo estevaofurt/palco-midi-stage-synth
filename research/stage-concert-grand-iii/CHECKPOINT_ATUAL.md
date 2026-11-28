@@ -55,3 +55,7 @@ O motor offline recebe MIDI e gera áudio em sete notas da escala regional. A G3
 4. Ao concluir cada etapa, registre nesta branch a evidência, os limites, a próxima etapa e instruções de retomada. Vincule artefatos grandes aos pacotes versionados. Preserve a branch `main`.
 
 Para iniciar em um novo chat, indique a branch `research/stage-concert-grand-iii` e este arquivo. Os links de arquivo exigem acesso à conta do projeto.
+
+### Auditoria complementar de contato
+
+[Definição de contato e convergência 64/128](G3_02_AUDITORIA_CONTATO_INTERMEDIARIO.md): o intervalo histórico de lançamento até captura inclui folga inicial. Recalcular força efetiva por fio antes de comparar literatura. Comparador disponível em `feltro_intermediario/convergencia.py`; não executado nesta sessão. O próximo ensaio continua sendo os quatro casos intermediários com 128 parciais. G3.02 aberta.
