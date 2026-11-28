@@ -17,14 +17,16 @@ Atualizado em 28/11/2026. Este índice acompanha a evolução da branch de pesqu
 
 - [Pressão simulada no ataque forte de C8, 30 ms](https://chatgpt.com/library?file_id=libfile_9d45e51808ac8191b6cd4938ab8f08a6&account_id=personal)
 
+- [Pressão simulada de C8 leve e médio, 60 ms](https://chatgpt.com/library?file_id=libfile_dd4145c8d7108191b10caffffb058f4a&account_id=personal)
+
 ## Estado técnico
 
-O motor offline recebe MIDI e gera áudio em sete notas da escala regional. A G3.02 segue aberta. O feltro graduado em C8 é um candidato experimental. A simulação demonstrou mudança no espectro da força durante o contato. O ensaio de pressão simulada de C8 forte em 30 ms encontrou +0,74 e +0,39 dB de energia de pressão no total, com +3,51 e +14,05 dB nos primeiros 5 ms (graduado sobre original). A cauda mais longa e a validação física continuam pendentes. Integração de 88 teclas e desempenho em tempo real seguem no planejamento.
+O motor offline recebe MIDI e gera áudio em sete notas da escala regional. A G3.02 segue aberta. O feltro graduado em C8 é um candidato experimental. A simulação demonstrou mudança no espectro da força durante o contato. O ensaio de pressão simulada de C8 forte em 30 ms encontrou +0,74 e +0,39 dB de energia de pressão no total, com +3,51 e +14,05 dB nos primeiros 5 ms (graduado sobre original). Em 60 ms, o ataque leve marcou +3,18/+2,98 dB e o médio +1,08/+0,77 dB. Na janela 30–60 ms, o efeito permaneceu nos dois observadores. Repetir o ataque médio com 128 modos mudou o contraste em menos de 0,00018 dB. A cauda além de 60 ms e a validação física continuam pendentes. Integração de 88 teclas e desempenho em tempo real seguem no planejamento.
 
 ## Retomada
 
 1. Abra primeiro os checkpoints de espectro e de curvas acopladas. Confira os hashes e preserve os dados de referência.
-2. Estenda o ensaio de pressão de C8 para ataques leve e médio com velocidade física pareada. Verifique a robustez ao ampliar a janela temporal e a resolução modal, com os mesmos observadores e ganho.
+2. Verifique se o efeito dos feltros se repete em notas vizinhas e prolongue a janela de decaimento além de 60 ms, mantendo ganho, velocidade e observadores pareados.
 3. Confronte os candidatos com curvas experimentais comparáveis quando disponíveis. Mantenha a G3.02 aberta até reunir evidência suficiente para o critério do contrato.
 4. Ao concluir cada etapa, registre nesta branch a evidência, os limites, a próxima etapa e instruções de retomada. Vincule artefatos grandes aos pacotes versionados. Preserve a branch `main`.
 
