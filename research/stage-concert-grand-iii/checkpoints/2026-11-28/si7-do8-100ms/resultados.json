@@ -1,0 +1,362 @@
+{
+  "cases": {
+    "107-24": {
+      "rate_hz": 384000,
+      "steps": 38400,
+      "key": 107,
+      "impact_speed_mps": 0.6665504814619312,
+      "midi": 24,
+      "partials": 64,
+      "windows": [
+        {
+          "start_ms": 0,
+          "end_ms": 5,
+          "pressure_energy_db": [
+            11.390441395005945,
+            27.302902218159993
+          ]
+        },
+        {
+          "start_ms": 5,
+          "end_ms": 15,
+          "pressure_energy_db": [
+            3.2448464051525288,
+            4.420444665346208
+          ]
+        },
+        {
+          "start_ms": 15,
+          "end_ms": 30,
+          "pressure_energy_db": [
+            2.8109632900559207,
+            2.6590182596042107
+          ]
+        },
+        {
+          "start_ms": 30,
+          "end_ms": 60,
+          "pressure_energy_db": [
+            2.829216768520158,
+            2.594484402901824
+          ]
+        },
+        {
+          "start_ms": 60,
+          "end_ms": 100,
+          "pressure_energy_db": [
+            2.840838129779941,
+            2.2132396762334867
+          ]
+        },
+        {
+          "start_ms": 0,
+          "end_ms": 60,
+          "pressure_energy_db": [
+            3.0955065514422735,
+            2.8867112927022305
+          ]
+        },
+        {
+          "start_ms": 0,
+          "end_ms": 100,
+          "pressure_energy_db": [
+            3.0621986816278812,
+            2.838085919476241
+          ]
+        }
+      ],
+      "cases": {
+        "original": {
+          "capture_step": 982,
+          "force_trace_error": null,
+          "energy_residual": 5.186741790772288e-13,
+          "continuity": 1.275269299630725e-15,
+          "flow_l2": 0.004624758736256442,
+          "impulse_Ns": 0.007627712930100961
+        },
+        "graduado": {
+          "capture_step": 504,
+          "force_trace_error": null,
+          "energy_residual": 8.43331428346488e-14,
+          "continuity": 1.1247935795642966e-15,
+          "flow_l2": 0.006177437104200595,
+          "impulse_Ns": 0.007649038340461665
+        }
+      }
+    },
+    "107-76": {
+      "rate_hz": 384000,
+      "steps": 38400,
+      "key": 107,
+      "impact_speed_mps": 2.4584099548268807,
+      "midi": 76,
+      "partials": 64,
+      "windows": [
+        {
+          "start_ms": 0,
+          "end_ms": 5,
+          "pressure_energy_db": [
+            4.839046705859429,
+            17.415270845905304
+          ]
+        },
+        {
+          "start_ms": 5,
+          "end_ms": 15,
+          "pressure_energy_db": [
+            1.2973887414487753,
+            0.975121855905532
+          ]
+        },
+        {
+          "start_ms": 15,
+          "end_ms": 30,
+          "pressure_energy_db": [
+            0.22963808166607835,
+            0.7116668105601431
+          ]
+        },
+        {
+          "start_ms": 30,
+          "end_ms": 60,
+          "pressure_energy_db": [
+            0.5654972213583829,
+            0.6722969737632406
+          ]
+        },
+        {
+          "start_ms": 60,
+          "end_ms": 100,
+          "pressure_energy_db": [
+            0.7243354059418295,
+            0.5585065238098574
+          ]
+        },
+        {
+          "start_ms": 0,
+          "end_ms": 60,
+          "pressure_energy_db": [
+            0.9916880633422789,
+            0.7455726136722972
+          ]
+        },
+        {
+          "start_ms": 0,
+          "end_ms": 100,
+          "pressure_energy_db": [
+            0.958488831800792,
+            0.7332464430285199
+          ]
+        }
+      ],
+      "cases": {
+        "original": {
+          "capture_step": 499,
+          "force_trace_error": null,
+          "energy_residual": 4.214160427851368e-14,
+          "continuity": 1.1484965231137388e-15,
+          "flow_l2": 0.022432135395432495,
+          "impulse_Ns": 0.02782429555877547
+        },
+        "graduado": {
+          "capture_step": 293,
+          "force_trace_error": null,
+          "energy_residual": 9.54149530834272e-15,
+          "continuity": 1.1348406400420978e-15,
+          "flow_l2": 0.024274981320967382,
+          "impulse_Ns": 0.027940341789353448
+        }
+      }
+    },
+    "108-24": {
+      "rate_hz": 384000,
+      "steps": 38400,
+      "key": 108,
+      "impact_speed_mps": 0.6665504814619312,
+      "midi": 24,
+      "partials": 64,
+      "windows": [
+        {
+          "start_ms": 0,
+          "end_ms": 5,
+          "pressure_energy_db": [
+            12.412380042045775,
+            28.510240123729602
+          ]
+        },
+        {
+          "start_ms": 5,
+          "end_ms": 15,
+          "pressure_energy_db": [
+            3.6658049907151113,
+            4.742896068399303
+          ]
+        },
+        {
+          "start_ms": 15,
+          "end_ms": 30,
+          "pressure_energy_db": [
+            2.265355278782084,
+            2.7364385398800395
+          ]
+        },
+        {
+          "start_ms": 30,
+          "end_ms": 60,
+          "pressure_energy_db": [
+            2.9740700798432123,
+            2.7653769720349204
+          ]
+        },
+        {
+          "start_ms": 60,
+          "end_ms": 100,
+          "pressure_energy_db": [
+            2.998119724488854,
+            2.1965021325528262
+          ]
+        },
+        {
+          "start_ms": 0,
+          "end_ms": 60,
+          "pressure_energy_db": [
+            3.18460686785752,
+            2.9842262587479724
+          ]
+        },
+        {
+          "start_ms": 0,
+          "end_ms": 100,
+          "pressure_energy_db": [
+            3.1574619051428665,
+            2.929334457368413
+          ]
+        }
+      ],
+      "cases": {
+        "original": {
+          "capture_step": 1007,
+          "force_trace_error": 3.519542548064006e-16,
+          "energy_residual": 5.716593380457928e-13,
+          "continuity": 1.2957415579777292e-15,
+          "flow_l2": 0.005260045448058088,
+          "impulse_Ns": 0.0075400167568481615
+        },
+        "graduado": {
+          "capture_step": 501,
+          "force_trace_error": 4.315783337596988e-16,
+          "energy_residual": 9.072059429238374e-14,
+          "continuity": 1.180755797040174e-15,
+          "flow_l2": 0.0069679405315055285,
+          "impulse_Ns": 0.007565069650955577
+        }
+      }
+    },
+    "108-76": {
+      "rate_hz": 384000,
+      "steps": 38400,
+      "key": 108,
+      "impact_speed_mps": 2.4584099548268807,
+      "midi": 76,
+      "partials": 64,
+      "windows": [
+        {
+          "start_ms": 0,
+          "end_ms": 5,
+          "pressure_energy_db": [
+            5.756898513278529,
+            16.16912777421272
+          ]
+        },
+        {
+          "start_ms": 5,
+          "end_ms": 15,
+          "pressure_energy_db": [
+            1.231588958532146,
+            0.9463006076080311
+          ]
+        },
+        {
+          "start_ms": 15,
+          "end_ms": 30,
+          "pressure_energy_db": [
+            0.22377705557874628,
+            0.7574789802529303
+          ]
+        },
+        {
+          "start_ms": 30,
+          "end_ms": 60,
+          "pressure_energy_db": [
+            0.7050205357346455,
+            0.7151847147381308
+          ]
+        },
+        {
+          "start_ms": 60,
+          "end_ms": 100,
+          "pressure_energy_db": [
+            0.7321681863476663,
+            0.6594722935182236
+          ]
+        },
+        {
+          "start_ms": 0,
+          "end_ms": 60,
+          "pressure_energy_db": [
+            1.0778796557158108,
+            0.7719367345406367
+          ]
+        },
+        {
+          "start_ms": 0,
+          "end_ms": 100,
+          "pressure_energy_db": [
+            1.0299444052085451,
+            0.7648104699108681
+          ]
+        }
+      ],
+      "cases": {
+        "original": {
+          "capture_step": 507,
+          "force_trace_error": 7.09637869158371e-16,
+          "energy_residual": 4.521383524624039e-14,
+          "continuity": 1.1169346679092937e-15,
+          "flow_l2": 0.02517834887793536,
+          "impulse_Ns": 0.02749118957119742
+        },
+        "graduado": {
+          "capture_step": 289,
+          "force_trace_error": 5.719177843720159e-16,
+          "energy_residual": 1.225797311120295e-14,
+          "continuity": 1.1286608841588348e-15,
+          "flow_l2": 0.02722826504366251,
+          "impulse_Ns": 0.027647854837310318
+        }
+      }
+    }
+  },
+  "c8_prefix_relative": {
+    "108-24": {
+      "original": [
+        2.05617111536822e-15,
+        3.8309621914956635e-15
+      ],
+      "graduado": [
+        1.926491041640665e-15,
+        3.5485694526509703e-15
+      ]
+    },
+    "108-76": {
+      "original": [
+        1.88232494990317e-15,
+        3.544928067971424e-15
+      ],
+      "graduado": [
+        1.8505179033038413e-15,
+        3.608177119919127e-15
+      ]
+    }
+  }
+}
