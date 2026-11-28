@@ -21,14 +21,16 @@ Atualizado em 28/11/2026. Este índice acompanha a evolução da branch de pesqu
 
 - [Pressão de Si7 e Dó8 leve e médio, 100 ms](https://chatgpt.com/library?file_id=libfile_acd0031b0ef8819197d219dcfbc83ec2&account_id=personal)
 
+- [Decomposição por bandas do decaimento de Si7 e Dó8](https://chatgpt.com/library?file_id=libfile_1ab16a9cb82c8191969441e07e229599&account_id=personal)
+
 ## Estado técnico
 
-O motor offline recebe MIDI e gera áudio em sete notas da escala regional. A G3.02 segue aberta. O feltro graduado em C8 é um candidato experimental. A simulação demonstrou mudança no espectro da força durante o contato. O ensaio de pressão simulada de C8 forte em 30 ms encontrou +0,74 e +0,39 dB de energia de pressão no total, com +3,51 e +14,05 dB nos primeiros 5 ms (graduado sobre original). Em 60 ms, o ataque leve marcou +3,18/+2,98 dB e o médio +1,08/+0,77 dB. Na janela 30–60 ms, o efeito permaneceu nos dois observadores. Repetir o ataque médio com 128 modos mudou o contraste em menos de 0,00018 dB. Em 100 ms, o aumento da energia de pressão se repetiu em Si7 e persistiu de 60 a 100 ms para Si7 e Dó8. A validação física e a percepção de timbre continuam pendentes. Integração de 88 teclas e desempenho em tempo real seguem no planejamento.
+O motor offline recebe MIDI e gera áudio em sete notas da escala regional. A G3.02 segue aberta. O feltro graduado em C8 é um candidato experimental. A simulação demonstrou mudança no espectro da força durante o contato. O ensaio de pressão simulada de C8 forte em 30 ms encontrou +0,74 e +0,39 dB de energia de pressão no total, com +3,51 e +14,05 dB nos primeiros 5 ms (graduado sobre original). Em 60 ms, o ataque leve marcou +3,18/+2,98 dB e o médio +1,08/+0,77 dB. Na janela 30–60 ms, o efeito permaneceu nos dois observadores. Repetir o ataque médio com 128 modos mudou o contraste em menos de 0,00018 dB. Em 100 ms, o aumento da energia de pressão se repetiu em Si7 e persistiu de 60 a 100 ms para Si7 e Dó8. Entre 60 e 100 ms, 92,22–99,21% da diferença líquida ficou em 300–650 Hz na análise retangular. A origem da resposta abaixo da fundamental nominal, a validação física e a percepção do timbre continuam pendentes. Integração de 88 teclas e desempenho em tempo real seguem no planejamento.
 
 ## Retomada
 
 1. Abra primeiro os checkpoints de espectro e de curvas acopladas. Confira os hashes e preserve os dados de referência.
-2. Analise o decaimento por banda entre 60 e 100 ms para distinguir a contribuição da fundamental e dos parciais superiores. Preserve o pareamento de velocidade, ganho e observadores.
+2. Decomponha a pressão entre 300 e 650 Hz por grupos de portas, verificando recomposição e termos de interferência. Preserve ganho e observadores.
 3. Confronte os candidatos com curvas experimentais comparáveis quando disponíveis. Mantenha a G3.02 aberta até reunir evidência suficiente para o critério do contrato.
 4. Ao concluir cada etapa, registre nesta branch a evidência, os limites, a próxima etapa e instruções de retomada. Vincule artefatos grandes aos pacotes versionados. Preserve a branch `main`.
 
