@@ -6,7 +6,7 @@ Três grupos de frequências nominais do tampo, 300–400, 400–500 e 500–650
 
 A G3.02 permanece aberta para validação experimental. Consulte RETOMADA.md para reproduzir.
 
-No segundo observador, 400–500 Hz foi o grupo do tampo com maior contribuição nas seis análises de cada caso. No primeiro observador, a liderança alternou entre 400–500 e 500–650 Hz conforme a janela. Na janela de Hann de 60–100 ms, 500–650 Hz liderou no primeiro observador em todos os três casos.
+No segundo observador, 400–500 Hz liderou em 17 das 18 análises. A exceção foi Dó8 médio em Hann de 70–100 ms, com 30,6% em 300–400 Hz e 30,4% em 400–500 Hz. No primeiro observador, a liderança alternou entre 400–500 e 500–650 Hz conforme a janela. Na janela de Hann de 60–100 ms, 500–650 Hz liderou no primeiro observador em todos os três casos.
 
 | Caso | Parcela de 400–500 Hz no segundo observador, seis análises | Parcela em 60–100 ms com Hann | Contraste total em Hann, observadores 1 e 2 |
 |---|---:|---:|---:|
