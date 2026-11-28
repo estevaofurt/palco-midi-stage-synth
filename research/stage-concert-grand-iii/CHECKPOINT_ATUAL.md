@@ -1,0 +1,29 @@
+# Concert Grand III — checkpoint de continuidade
+
+Atualizado em 28/11/2026. Este índice acompanha a evolução da branch de pesquisa desde o [executor de retomada](https://github.com/estevaofurt/palco-midi-stage-synth/commit/19fb3673bfd1c2578931ec01a47cb528e81d6dff). O [contrato de engenharia](contrato.json) e a [especificação](ESPECIFICACAO_G3.md) definem a sequência de aprovação. Resultados, scripts e instruções detalhadas estão nos pacotes abaixo.
+
+- [Sustentação com pedal aberto, 500 ms](https://chatgpt.com/library?file_id=libfile_28f7ae536de08191ace83b6f54413fe2&account_id=personal)
+- [Soltura do pedal, 850 ms](https://chatgpt.com/library?file_id=libfile_8037b0a706408191b540073aa1aa74d9&account_id=personal)
+- [Soltura gradual, 850 ms](https://chatgpt.com/library?file_id=libfile_a26e9d918e488191a1fc3d728accb35c&account_id=personal)
+- [Motor físico regional](https://chatgpt.com/library?file_id=libfile_c345c938ad9c8191ba13718cdcaad3a4&account_id=personal)
+- [Renderização MIDI offline](https://chatgpt.com/library?file_id=libfile_1b5c633aa3408191a15c2e8cdedeefa3&account_id=personal)
+- [Auditoria do martelo](https://chatgpt.com/library?file_id=libfile_b476eedcbf7c8191bbbc291416d9b3ca&account_id=personal)
+- [Curvas força–tempo com estrutura compartilhada](https://chatgpt.com/library?file_id=libfile_2754aa8703c0819198070a5e01c4370f&account_id=personal)
+- [Curvas com carga vibroacústica](https://chatgpt.com/library?file_id=libfile_51913da56e40819195e3380a6bfc0bf8&account_id=personal)
+- [Confronto experimental em C4](https://chatgpt.com/library?file_id=libfile_eba499acacc48191b78a314c579725cc&account_id=personal)
+- [Referência de contato nos agudos](https://chatgpt.com/library?file_id=libfile_a6669561e41c8191a7bf782c071d34b0&account_id=personal)
+- [Comparador de curvas força–tempo](https://chatgpt.com/library?file_id=libfile_46ba6fb43de88191b5891e22df631a52&account_id=personal)
+- [Espectro da força do martelo](https://chatgpt.com/library?file_id=libfile_5717bb5e912881919221fa8f3ea0a61c&account_id=personal)
+
+## Estado técnico
+
+O motor offline recebe MIDI e gera áudio em sete notas da escala regional. A G3.02 segue aberta. O feltro graduado em C8 é um candidato experimental. A simulação demonstrou mudança no espectro da força durante o contato. A confirmação na pressão radiada e em dados físicos continua pendente. Integração de 88 teclas e desempenho em tempo real seguem no planejamento.
+
+## Retomada
+
+1. Abra primeiro os checkpoints de espectro e de curvas acopladas. Confira os hashes e preserve os dados de referência.
+2. Meça o efeito dos dois feltros sobre o fluxo das portas e a pressão simulada de C8 com a mesma velocidade física, parâmetros, observadores e ganho. Registre condições, duração, métricas e limites.
+3. Confronte os candidatos com curvas experimentais comparáveis quando disponíveis. Mantenha a G3.02 aberta até reunir evidência suficiente para o critério do contrato.
+4. Ao concluir cada etapa, registre nesta branch a evidência, os limites, a próxima etapa e instruções de retomada. Vincule artefatos grandes aos pacotes versionados. Preserve a branch `main`.
+
+Para iniciar em um novo chat, indique a branch `research/stage-concert-grand-iii` e este arquivo. Os links de arquivo exigem acesso à conta do projeto.
