@@ -1,0 +1,178 @@
+{
+  "source_commit": "310296fa0cad4c2c0b66d96d718bdcf99f8d7d57",
+  "source_files": {
+    "physical_sources.json": "add6e615ad634eadec15742bec2fc388311783da",
+    "g3-02-feltro-intermediario.json": "38f36c29720ee9b3a02efdc834cd3c673a5bd855",
+    "physical_hammer_contact.py": "e893b89f998b5d5baa71e4e18f08eefeadfc3899"
+  },
+  "status": "derived_from_archived_physical_metrics",
+  "formula": {
+    "mass": "massInterceptKg + massSlopeKg*(key-20)",
+    "rebound": "v_in - J/m (sum of all wire forces; no other hammer forces before capture in current Impact)",
+    "capture_energy": "0.5*m*v_rebound^2",
+    "non_capture": "E_initial-E_capture, includes all non-capture stores and losses, not energy in strings alone",
+    "rectangular_width": "J / peak_total_force; lower bound on sampled positive force duration, not measured contact span"
+  },
+  "cases": {
+    "107-24": {
+      "mass_kg": 0.005775724,
+      "impact_speed_mps": 0.6665504814619312,
+      "initial_energy_J": 0.0012830468920885195,
+      "candidates": {
+        "original": {
+          "impulse_Ns": 0.007627712930100961,
+          "inferred_pre_capture_velocity_mps": -0.6541000430612214,
+          "inferred_capture_loss_J": 0.0012355627071012597,
+          "kinetic_rebound_fraction": 0.9629910759458168,
+          "non_capture_fraction": 0.03700892405418321,
+          "non_capture_energy_J": 0.00004748418498725982
+        },
+        "graduado": {
+          "impulse_Ns": 0.007649038340461665,
+          "inferred_pre_capture_velocity_mps": -0.6577922919222654,
+          "inferred_capture_loss_J": 0.0012495510282975527,
+          "kinetic_rebound_fraction": 0.973893499919989,
+          "non_capture_fraction": 0.02610650008001103,
+          "non_capture_energy_J": 0.00003349586379096684
+        },
+        "intermediario": {
+          "impulse_Ns": 0.0076535528260655615,
+          "inferred_pre_capture_velocity_mps": -0.6585739230396623,
+          "inferred_capture_loss_J": 0.0012525223864610032,
+          "kinetic_rebound_fraction": 0.9762093608458619,
+          "non_capture_fraction": 0.02379063915413815,
+          "non_capture_energy_J": 0.0000305245056275164
+        }
+      },
+      "intermediate_peak_N": 11.802667714944839,
+      "equivalent_rectangular_width_ms": 0.6484595695576889,
+      "lower_bound_positive_force_duration_ms": 0.6484595695576889,
+      "launch_to_capture_ms": 1.8385416666666667,
+      "nominal_gap_time_ms": 0.15002614622777274,
+      "nominal_hz": 3951.066410048992,
+      "equivalent_width_over_half_period": 5.124213647108425
+    },
+    "107-76": {
+      "mass_kg": 0.005775724,
+      "impact_speed_mps": 2.4584099548268807,
+      "initial_energy_J": 0.017453601171732797,
+      "candidates": {
+        "original": {
+          "impulse_Ns": 0.02782429555877547,
+          "inferred_pre_capture_velocity_mps": -2.359045927548293,
+          "inferred_capture_loss_J": 0.01607123414027797,
+          "kinetic_rebound_fraction": 0.9207976040100161,
+          "non_capture_fraction": 0.07920239598998391,
+          "non_capture_energy_J": 0.0013823670314548281
+        },
+        "graduado": {
+          "impulse_Ns": 0.027940341789353448,
+          "inferred_pre_capture_velocity_mps": -2.3791379940282664,
+          "inferred_capture_loss_J": 0.016346158332220043,
+          "kinetic_rebound_fraction": 0.9365493213339647,
+          "non_capture_fraction": 0.06345067866603527,
+          "non_capture_energy_J": 0.0011074428395127544
+        },
+        "intermediario": {
+          "impulse_Ns": 0.02799334350288252,
+          "inferred_pre_capture_velocity_mps": -2.388314629464633,
+          "inferred_capture_loss_J": 0.016472499911326943,
+          "kinetic_rebound_fraction": 0.9437880325812182,
+          "non_capture_fraction": 0.05621196741878176,
+          "non_capture_energy_J": 0.0009811012604058551
+        }
+      },
+      "intermediate_peak_N": 69.6368571041784,
+      "equivalent_rectangular_width_ms": 0.4019903348165729,
+      "lower_bound_positive_force_duration_ms": 0.4019903348165729,
+      "launch_to_capture_ms": 0.9895833333333334,
+      "nominal_gap_time_ms": 0.04067669828771171,
+      "nominal_hz": 3951.066410048992,
+      "equivalent_width_over_half_period": 3.1765810181162184
+    },
+    "108-24": {
+      "mass_kg": 0.005713376000000001,
+      "impact_speed_mps": 0.6665504814619312,
+      "initial_energy_J": 0.001269196609833354,
+      "candidates": {
+        "original": {
+          "impulse_Ns": 0.0075400167568481615,
+          "inferred_pre_capture_velocity_mps": -0.6531625493009943,
+          "inferred_capture_loss_J": 0.0012187239934168487,
+          "kinetic_rebound_fraction": 0.960232625878876,
+          "non_capture_fraction": 0.039767374121123966,
+          "non_capture_energy_J": 0.000050472616416505195
+        },
+        "graduado": {
+          "impulse_Ns": 0.007565069650955577,
+          "inferred_pre_capture_velocity_mps": -0.6575475038545571,
+          "inferred_capture_loss_J": 0.0012351425335004646,
+          "kinetic_rebound_fraction": 0.9731687934957842,
+          "non_capture_fraction": 0.026831206504215777,
+          "non_capture_energy_J": 0.0000340540763328893
+        },
+        "intermediario": {
+          "impulse_Ns": 0.007568637396809927,
+          "inferred_pre_capture_velocity_mps": -0.6581719587922943,
+          "inferred_capture_loss_J": 0.0012374896098296371,
+          "kinetic_rebound_fraction": 0.9750180549191035,
+          "non_capture_fraction": 0.02498194508089646,
+          "non_capture_energy_J": 0.00003170700000371682
+        }
+      },
+      "intermediate_peak_N": 11.628057033709982,
+      "equivalent_rectangular_width_ms": 0.6508944163989123,
+      "lower_bound_positive_force_duration_ms": 0.6508944163989123,
+      "launch_to_capture_ms": 1.8567708333333333,
+      "nominal_gap_time_ms": 0.15002614622777274,
+      "nominal_hz": 4186.009044809578,
+      "equivalent_width_over_half_period": 5.449299828523798
+    },
+    "108-76": {
+      "mass_kg": 0.005713376000000001,
+      "impact_speed_mps": 2.4584099548268807,
+      "initial_energy_J": 0.017265192389413007,
+      "candidates": {
+        "original": {
+          "impulse_Ns": 0.02749118957119742,
+          "inferred_pre_capture_velocity_mps": -2.3533142466255383,
+          "inferred_capture_loss_J": 0.015820589370771833,
+          "kinetic_rebound_fraction": 0.916328588407332,
+          "non_capture_fraction": 0.083671411592668,
+          "non_capture_energy_J": 0.0014446030186411748
+        },
+        "graduado": {
+          "impulse_Ns": 0.027647854837310318,
+          "inferred_pre_capture_velocity_mps": -2.3807350335845796,
+          "inferred_capture_loss_J": 0.016191419915909683,
+          "kinetic_rebound_fraction": 0.937807094801807,
+          "non_capture_fraction": 0.06219290519819298,
+          "non_capture_energy_J": 0.0010737724735033261
+        },
+        "intermediario": {
+          "impulse_Ns": 0.02768558663977901,
+          "inferred_pre_capture_velocity_mps": -2.387339150391996,
+          "inferred_capture_loss_J": 0.01628137393254261,
+          "kinetic_rebound_fraction": 0.9430172317411492,
+          "non_capture_fraction": 0.05698276825885085,
+          "non_capture_energy_J": 0.0009838184568703968
+        }
+      },
+      "intermediate_peak_N": 69.43249829324563,
+      "equivalent_rectangular_width_ms": 0.39874104087181106,
+      "lower_bound_positive_force_duration_ms": 0.39874104087181106,
+      "launch_to_capture_ms": 0.9895833333333334,
+      "nominal_gap_time_ms": 0.04067669828771171,
+      "nominal_hz": 4186.009044809578,
+      "equivalent_width_over_half_period": 3.338267207252373
+    }
+  },
+  "limitations": [
+    "No raw force arrays inspected this session",
+    "No direct ledger capture-loss comparison; inferred from archived integrated impulse and exact model recurrence up to floating point summation",
+    "No new coupled integration or physical calibration",
+    "Cannot compare rebound ratio to coefficient of restitution of a moving string without relative contact velocities",
+    "Literature range is qualitative, not a calibrated target"
+  ],
+  "new_physical_steps": 0
+}

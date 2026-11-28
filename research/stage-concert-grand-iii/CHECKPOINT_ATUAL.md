@@ -59,3 +59,7 @@ Para iniciar em um novo chat, indique a branch `research/stage-concert-grand-iii
 ### Auditoria complementar de contato
 
 [Definição de contato e convergência 64/128](G3_02_AUDITORIA_CONTATO_INTERMEDIARIO.md): o intervalo histórico de lançamento até captura inclui folga inicial. Recalcular força efetiva por fio antes de comparar literatura. Comparador disponível em `feltro_intermediario/convergencia.py`; não executado nesta sessão. O próximo ensaio continua sendo os quatro casos intermediários com 128 parciais. G3.02 aberta.
+
+### Auditoria de impulso e energia de captura
+
+[Auditoria de energia do feltro intermediário](G3_02_ENERGIA_CAPTURA_INTERMEDIARIO.md): reconstrução do rebote pelo impulso dos quatro ensaios arquivados; 94,30–97,62% da energia cinética inicial retorna ao martelo no candidato intermediário. J/Fpico é somente limite inferior de duração da força. Verificar perda de captura direta e balanço separado nos quatro novos casos de 128 parciais. Nenhum novo passo físico executado; G3.02 aberta.
