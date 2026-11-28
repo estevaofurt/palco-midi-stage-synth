@@ -1,0 +1,76 @@
+{
+  "cases": {
+    "board": {
+      "state": "board",
+      "steps": 15360,
+      "rate_hz": 384000,
+      "initial_J": 1.0000000000000008e-06,
+      "board_index": 49,
+      "board_hz": 443.42103685089006,
+      "cavity_index": 1041,
+      "cavity_hz": 528.5270946525952,
+      "balance_relative": 1.6894072132987006e-12,
+      "continuity": 6.9691408690601804e-15
+    },
+    "cavity": {
+      "state": "cavity",
+      "steps": 15360,
+      "rate_hz": 384000,
+      "initial_J": 1e-06,
+      "board_index": 49,
+      "board_hz": 443.42103685089006,
+      "cavity_index": 1041,
+      "cavity_hz": 528.5270946525952,
+      "balance_relative": 3.0704944337968387e-13,
+      "continuity": 4.628155502832925e-15
+    },
+    "sum": {
+      "state": "sum",
+      "steps": 15360,
+      "rate_hz": 384000,
+      "initial_J": 2.0000000000000008e-06,
+      "board_index": 49,
+      "board_hz": 443.42103685089006,
+      "cavity_index": 1041,
+      "cavity_hz": 528.5270946525952,
+      "balance_relative": 8.955255834846087e-13,
+      "continuity": 2.615162352694965e-15
+    }
+  },
+  "superposition_relative": [
+    4.84532453887871e-14,
+    6.198853841913911e-14
+  ],
+  "peak_hz_300_650": {
+    "board": [
+      450.0,
+      450.0
+    ],
+    "cavity": [
+      525.0,
+      525.0
+    ],
+    "sum": [
+      450.0,
+      450.0
+    ]
+  },
+  "cavity_over_board_db_at_bins": {
+    "400": [
+      -39.821176766448446,
+      -37.09018818461544
+    ],
+    "450": [
+      -42.5386078515552,
+      -42.59250298612752
+    ],
+    "525": [
+      38.439364096499354,
+      17.503293458938025
+    ]
+  },
+  "cavity_over_board_band_db": [
+    -4.115128240260601,
+    -15.742753819183175
+  ]
+}
