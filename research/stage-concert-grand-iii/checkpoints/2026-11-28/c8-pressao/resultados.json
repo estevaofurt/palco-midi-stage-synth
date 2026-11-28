@@ -1,0 +1,54 @@
+{
+  "rate_hz": 384000,
+  "steps": 11520,
+  "key": 108,
+  "impact_speed_mps": 5,
+  "windows": [
+    {
+      "start_ms": 0,
+      "end_ms": 5,
+      "pressure_energy_db": [
+        3.511606414975546,
+        14.04711310614314
+      ]
+    },
+    {
+      "start_ms": 5,
+      "end_ms": 15,
+      "pressure_energy_db": [
+        0.6474655944853545,
+        0.547222241608175
+      ]
+    },
+    {
+      "start_ms": 15,
+      "end_ms": 30,
+      "pressure_energy_db": [
+        -0.11047108103080452,
+        0.3486627424161853
+      ]
+    },
+    {
+      "start_ms": 0,
+      "end_ms": 30,
+      "pressure_energy_db": [
+        0.7358177568754621,
+        0.393889802177489
+      ]
+    }
+  ],
+  "cases": {
+    "original": {
+      "capture_step": 367,
+      "force_trace_error": 6.39382234621525e-16,
+      "energy_residual": 1.2436477763061631e-14,
+      "continuity": 1.036581598462477e-15
+    },
+    "graduado": {
+      "capture_step": 234,
+      "force_trace_error": 8.588519646469474e-16,
+      "energy_residual": 9.715998252391898e-15,
+      "continuity": 1.0119516509956644e-15
+    }
+  }
+}
