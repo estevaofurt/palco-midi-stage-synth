@@ -1,0 +1,24 @@
+name: Concert Grand III treble energy accounting
+on:
+  push:
+    branches: [research/stage-concert-grand-iii]
+    paths:
+      - 'research/stage-concert-grand-iii/feltro_intermediario/**'
+      - '.github/workflows/concert-grand-iii-treble-energy-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  accounting:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: research/stage-concert-grand-iii/feltro_intermediario
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m compileall -q .
+      - run: python test_energy_audit.py

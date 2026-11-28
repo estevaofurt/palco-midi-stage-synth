@@ -63,3 +63,7 @@ Para iniciar em um novo chat, indique a branch `research/stage-concert-grand-iii
 ### Auditoria de impulso e energia de captura
 
 [Auditoria de energia do feltro intermediário](G3_02_ENERGIA_CAPTURA_INTERMEDIARIO.md): reconstrução do rebote pelo impulso dos quatro ensaios arquivados; 94,30–97,62% da energia cinética inicial retorna ao martelo no candidato intermediário. J/Fpico é somente limite inferior de duração da força. Verificar perda de captura direta e balanço separado nos quatro novos casos de 128 parciais. Nenhum novo passo físico executado; G3.02 aberta.
+
+### Instrumentação de energia direta
+
+[Auditoria instrumentada](G3_02_INSTRUMENTACAO_ENERGIA.md): o driver intermediário registra a captura e o estado final com perdas separadas, sem alterar as equações físicas. Testes aritméticos em CI não substituem ensaio acoplado. Próximo: regressão 64 parciais e quatro ensaios de 128; ambiente local indisponível nesta sessão.

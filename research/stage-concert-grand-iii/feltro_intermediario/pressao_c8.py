@@ -13,7 +13,8 @@ from contato import KEYS
 from action_launch import launch
 from assembly_rank import SPREAD
 from compact_mechanics import CompactWet
-from felt_law import params
+from felt_law import params, energy as felt_energy
+from energy_audit import audit_partition
 from physical_hammer_contact import Impact
 from regional_compact import assemble_regional
 from voicing_candidate import candidate, REF
@@ -40,11 +41,16 @@ class TraceTarget(AcousticTarget):
     def __init__(self, engine, projection):
         super().__init__(engine, projection)
         self.flows = []
+        self.loss_terms = dict(mechanical=0., cavity=0., exterior_work=0.)
+        self.last_energies = None
         self.cavity_state = engine.c.obj.c
 
     def step(self, force):
         result = self.engine.step(self.P @ force)
         self.cavity = result['Ei']
+        self.last_energies = dict(mechanical=float(result['Em']), cavity=float(result['Ei']))
+        for name, field in (('mechanical','dm'), ('cavity','dc'), ('exterior_work','we')):
+            self.loss_terms[name] += float(result[field])
         self.continuity = max(self.continuity, result['continuity'])
         self.flows.append(result['u'].ravel())
         if len(self.flows) == round(.060 * RATE):
@@ -98,6 +104,14 @@ def main():
     model = Impact(target,np.zeros(P.shape[1],int),[hammer['massKg']],
                    [material]*P.shape[1],[speed])
     force, capture, balance = [], None, 0.
+    energy_capture = None
+    def partition(impulse):
+        stores = dict(target.last_energies)
+        stores['hammer_kinetic'] = .5*float(model.mass @ (model.v*model.v))
+        stores['felt'] = float(sum(felt_energy(d, z, law) for d,z,law in zip(model.compression(),model.z,model.felts)))
+        return audit_partition(float(model.initial),float(hammer['massKg']),float(speed),float(impulse),
+                               stores,dict(target.loss_terms),float(model.feltloss),float(model.captureloss),
+                               float(model.loss),float(model.storage()))
     for i in range(steps):
         f,*_ = model.step()
         force.append(f)
@@ -105,9 +119,13 @@ def main():
                                   model.captureloss-model.initial)/model.initial)
         if capture is None and not model.active[0]:
             capture = i+1
+            energy_capture = partition(np.asarray(force).sum()/RATE)
     f = np.asarray(force)
     assert capture is not None and np.all(f[capture:]==0)
     assert balance < 1e-8 and target.continuity < 1e-10
+    energy_final = partition(f.sum()/RATE)
+    assert energy_capture is not None
+    assert energy_final['loss_J']['capture']==energy_capture['loss_J']['capture']
     flow = np.asarray(target.flows)
     y = observe(flow, observer)
     for t in (600, steps//2, steps-1):
@@ -122,7 +140,8 @@ def main():
     args.output.mkdir()
     np.savez_compressed(args.output/'sinais.npz', pressure=y[:steps], force=f[:capture])
     result = dict(rate_hz=RATE, steps=steps, key=args.key, impact_speed_mps=speed,
-                  midi=args.midi, partials=args.partials, voicing=voicing, **metrics)
+                  midi=args.midi, partials=args.partials, voicing=voicing,
+                  energy_audit=dict(capture=energy_capture, final=energy_final), **metrics)
     (args.output/'resultados.json').write_text(json.dumps(result, indent=2, allow_nan=False)+'\n')
     print(result, flush=True)
 
